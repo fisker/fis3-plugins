@@ -15,7 +15,6 @@ $ npm i -g <%= pkg.name %>
 
 <%= info.readme %>
 
-
 ## links
 <%
 _.forEach(info.links, function(link, name) {
@@ -23,6 +22,18 @@ _.forEach(info.links, function(link, name) {
   <%= name %> [<%= link%>](<%= link%>)
 <%
 })
+%>
+<%
+if (!_.isEmpty(info.options)) {
+%>
+
+## default options
+```json
+<%= JSON.stringify(info.options, null, 2) %>
+```
+** NOTICE: this might change in future **
+<%
+}
 %>
 
 ## license

@@ -66,7 +66,7 @@ function getConfig(root) {
     snippetOptions: {
       rule: {
         match: /<\/body>|<!--\s*browser-sync-script\s*-->/i,
-        fn: function(snippet, match) {
+        fn: function fn(snippet, match) {
           return snippet + match
         }
       }

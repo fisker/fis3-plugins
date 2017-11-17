@@ -1,3 +1,5 @@
+'use strict'
+
 var path = require('path')
 var args = process.argv.join('|')
 var DOCUMENT_ROOT = path.resolve(

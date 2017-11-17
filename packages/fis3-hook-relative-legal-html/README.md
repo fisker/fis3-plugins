@@ -61,10 +61,10 @@ console.log(message.ret);
 fex-team/fis3-hook-relative 中间过程会生成类似
 `src=__relative___<<<'some/file.ext'>>>`的代码 导致postprocess等插件在处理文件的时候可能出错
 
-
 ## links
 
   fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+
 
 
 ## license

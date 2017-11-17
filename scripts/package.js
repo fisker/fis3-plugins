@@ -84,6 +84,9 @@ class Package {
     file = path.join(this.dest, file)
     mkdirp(path.dirname(file))
     if (/\.js$/.test(file)) {
+      content = babel.transform(content, {
+        presets: ['env']
+      }).code
       content = prettier.format(content, prettierConfig)
     }
     try {
@@ -102,9 +105,13 @@ class Package {
   }
 
   copyFile(srcFile, distFile = srcFile) {
+    if (/\.js$/.test(distFile)) {
+      return this.writeFile(distFile, this.readFile(srcFile))
+    }
     distFile = path.join(this.dest, distFile)
     srcFile = path.join(this.src, srcFile)
     mkdirp(path.dirname(distFile))
+
     try {
       return fs.writeFileSync(distFile, fs.readFileSync(srcFile))
     } catch (err) {
@@ -113,15 +120,8 @@ class Package {
   }
 
   build() {
-    this.writeFile('package.json', stringify(this.pkg, {space: 2}))
-
     let code = this.readFile('processor.js')
-    this.writeFile(
-      'processor.js',
-      babel.transform(code, {
-        presets: ['env']
-      }).code
-    )
+    this.writeFile('processor.js', code)
 
     this.writeFile('index.js', template('index.tmpl')(this))
     this.writeFile('README.md', template('readme.tmpl')(this))
@@ -130,6 +130,8 @@ class Package {
     this.info.files.forEach(file => {
       this.copyFile(file)
     })
+
+    this.writeFile('package.json', stringify(this.pkg, {space: 2}))
   }
 }
 

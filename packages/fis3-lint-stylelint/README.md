@@ -57,7 +57,6 @@ options: [http://stylelint.io/user-guide/node-api/#options]
 rules: [http://stylelint.io/user-guide/rules/]
 
 
-
 ## links
 
   fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
@@ -65,6 +64,7 @@ rules: [http://stylelint.io/user-guide/rules/]
   stylelint [http://stylelint.io/](http://stylelint.io/)
 
   stylefmt [https://github.com/morishitter/stylefmt](https://github.com/morishitter/stylefmt)
+
 
 
 ## license

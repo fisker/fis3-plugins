@@ -32,12 +32,22 @@ fis.match('*.{pug,jade}', {
 [more options](https://pugjs.org/api/reference.html)
 
 
-
 ## links
 
   fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
 
   pug [https://pugjs.org/](https://pugjs.org/)
+
+
+
+## default options
+```json
+{
+  "pretty": "  ",
+  "doctype": "html"
+}
+```
+** NOTICE: this might change in future **
 
 
 ## license

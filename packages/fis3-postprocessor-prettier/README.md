@@ -30,12 +30,12 @@ https://github.com/prettier/prettier#options
 both options && Configuration File are supported.
 
 
-
 ## links
 
   fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
 
   prettier [https://github.com/prettier/prettier](https://github.com/prettier/prettier)
+
 
 
 ## license
