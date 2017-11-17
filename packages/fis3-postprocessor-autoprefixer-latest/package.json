@@ -1,0 +1,36 @@
+{
+  "author": {
+    "email": "lionkay@gmail.com",
+    "name": "fisker Cheung",
+    "url": "https://github.com/fisker"
+  },
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "dependencies": {
+    "autoprefixer": "latest",
+    "postcss": "latest"
+  },
+  "description": "latest version autoprefixer for fis3.",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.js",
+    "package.json",
+    "processor.js"
+  ],
+  "keywords": [
+    "fis",
+    "fis3",
+    "postprocessor",
+    "autoprefixer-latest",
+    "fis3-postprocessor-autoprefixer-latest",
+    "autoprefixer"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "fis3-postprocessor-autoprefixer-latest",
+  "readmeFilename": "README.md",
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-autoprefixer-latest",
+  "version": "1.0.1"
+}
