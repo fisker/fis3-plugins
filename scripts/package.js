@@ -41,7 +41,8 @@ class Package {
       readme: this.readFile('README.md'),
       links: _.assign({}, links, this.info.links),
       options: this.info.options || {},
-      keywords: this.info.keywords || []
+      keywords: this.info.keywords || [],
+      files: this.info.files || []
     })
 
     this.pkg = this.getPackageInfo()
@@ -74,31 +75,44 @@ class Package {
       {
         repository: repository,
         keywords: keywords,
-        files: files
+        files: files.concat(info.files)
       }
     )
   }
 
   writeFile(file, content) {
+    file = path.join(this.dest, file)
+    mkdirp(path.dirname(file))
     if (/\.js$/.test(file)) {
       content = prettier.format(content, prettierConfig)
     }
-    fs.writeFileSync(path.join(this.dest, file), content)
+    try {
+      return fs.writeFileSync(file, content)
+    } catch (err) {
+      return false
+    }
   }
 
   readFile(file) {
-    return fs.readFileSync(path.join(this.src, file), 'utf-8')
+    try {
+      return fs.readFileSync(path.join(this.src, file), 'utf-8')
+    } catch (err) {
+      return ''
+    }
   }
 
   copyFile(srcFile, distFile = srcFile) {
-    fs.writeFileSync(
-      path.join(this.dest, distFile),
-      fs.readFileSync(path.join(this.src, srcFile))
-    )
+    distFile = path.join(this.dest, distFile)
+    srcFile = path.join(this.src, srcFile)
+    mkdirp(path.dirname(distFile))
+    try {
+      return fs.writeFileSync(distFile, fs.readFileSync(srcFile))
+    } catch (err) {
+      return false
+    }
   }
 
   build() {
-    mkdirp(this.dest)
     this.writeFile('package.json', stringify(this.pkg, {space: 2}))
 
     let code = this.readFile('processor.js')
@@ -112,6 +126,10 @@ class Package {
     this.writeFile('index.js', template('index.tmpl')(this))
     this.writeFile('README.md', template('readme.tmpl')(this))
     this.copyFile('../../../../LICENSE', 'LICENSE')
+
+    this.info.files.forEach(file => {
+      this.copyFile(file)
+    })
   }
 }
 

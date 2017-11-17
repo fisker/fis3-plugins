@@ -1,0 +1,47 @@
+{
+  "author": {
+    "email": "lionkay@gmail.com",
+    "name": "fisker Cheung",
+    "url": "https://github.com/fisker"
+  },
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "dependencies": {
+    "browser-sync": "^2.18.13",
+    "filesize": "^3.5.11",
+    "lodash.merge": "^4.6.0",
+    "serve-directory": "^1.2.1"
+  },
+  "description": "a browser sync server for fis3.",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.js",
+    "package.json",
+    "processor.js",
+    "app.js",
+    "lib/browser-sync-config.js",
+    "lib/serve-directory.js",
+    "public/directory.html",
+    "public/style.css",
+    "public/icon/directory.svg",
+    "public/icon/file.svg",
+    "public/icon/media.svg"
+  ],
+  "keywords": [
+    "fis",
+    "fis3",
+    "server",
+    "browsersync",
+    "fis3-server-browsersync",
+    "browser-sync",
+    "livereload"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "fis3-server-browsersync",
+  "readmeFilename": "README.md",
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-server-browsersync",
+  "version": "1.3.19"
+}
