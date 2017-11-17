@@ -1,0 +1,21 @@
+# <%= pkg.name %>
+
+> <%= pkg.description %>
+
+## install
+
+```sh
+$ npm i -g <%= pkg.name %>
+```
+
+<%= info.readme %>
+
+
+## links
+<%
+_.forEach(info.links, function(link, name) {
+%>
+  <%= name %> [<%= link%>]
+<%
+})
+%>

@@ -1,0 +1,8 @@
+.npmignore
+.gitignore
+.editorconfig
+npm-publish.bat
+npm-publish.cmd
+npm-publish.sh
+node_modules
+npm-debug.log

@@ -1,0 +1,35 @@
+{
+  "name": "fis3-plugins",
+  "version": "1.0.0",
+  "description": "plugins for fi3",
+  "keywords": [
+    "fis",
+    "fis3"
+  ],
+  "main": "index.js",
+  "repository": "https://github.com/fisker/fis3-plugins",
+  "author": {
+    "name": "fisker Cheung",
+    "email": "lionkay@gmail.com",
+    "url": "https://github.com/fisker"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "readmeFilename": "README.md",
+  "scripts": {
+    "build": "cd scripts && sh build.sh"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "json-stable-stringify": "^1.0.1",
+    "lodash": "^4.17.4",
+    "mkdirp": "^0.5.1",
+    "prettier": "^1.8.2"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0"
+  }
+}
