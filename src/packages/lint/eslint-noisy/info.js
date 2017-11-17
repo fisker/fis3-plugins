@@ -5,7 +5,6 @@ module.exports = {
   dependencies: {
     eslint: '^4.11.0'
   },
-  type: 'lint',
   options: {
     envs: ['browser'],
     fix: false,

@@ -7,10 +7,7 @@
   "bugs": {
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
-  "dependencies": {
-    "eslint": "^4.11.0"
-  },
-  "description": "a js linter plugin of fis3 based on eslint.",
+  "description": "fis3 relative path support",
   "files": [
     "LICENSE",
     "README.md",
@@ -21,16 +18,15 @@
   "keywords": [
     "fis",
     "fis3",
-    "lint",
-    "eslint-noisy",
-    "fis3-lint-eslint-noisy",
-    "eslint",
-    "linter"
+    "hook",
+    "relative-legal-html",
+    "fis3-hook-relative-legal-html",
+    "relative"
   ],
   "license": "MIT",
   "main": "index.js",
-  "name": "fis3-lint-eslint-noisy",
+  "name": "fis3-hook-relative-legal-html",
   "readmeFilename": "README.md",
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-eslint-noisy",
-  "version": "2.0.3"
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-hook-relative-legal-html",
+  "version": "1.0.5"
 }

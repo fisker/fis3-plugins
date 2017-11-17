@@ -27,24 +27,35 @@ const template = _.memoize(function(file) {
 })
 
 class Package {
-  constructor(name) {
-    this.src = path.join(SOURCE_DIR, 'packages', name)
+  constructor(type, name) {
+    const packageName = `fis3-${type}-${name}`
+
+    this.src = path.join(SOURCE_DIR, 'packages', type, name)
+    this.dest = path.join(DEST_DIR, packageName)
+
+    this.type = type
+    this.name = name
     this.info = require(path.join(this.src, 'info.js'))
     _.assign(this.info, {
-      name: `fis3-${this.info.type}-${name}`,
+      name: packageName,
       readme: this.readFile('README.md'),
-      links: _.assign({}, links, this.info.links)
+      links: _.assign({}, links, this.info.links),
+      options: this.info.options || {},
+      keywords: this.info.keywords || []
     })
 
     this.pkg = this.getPackageInfo()
-    this.dest = path.join(DEST_DIR, this.pkg.name)
   }
 
   getPackageInfo() {
     const info = this.info
 
     const keywords = _.uniq(
-      _.concat(globalPackage.keywords, [info.name], info.keywords)
+      _.concat(
+        globalPackage.keywords,
+        [this.type, this.name, this.info.name],
+        info.keywords
+      )
     )
 
     const repository = `${globalPackage.repository}/tree/master/packages/${
@@ -100,7 +111,7 @@ class Package {
 
     this.writeFile('index.js', template('index.tmpl')(this))
     this.writeFile('README.md', template('readme.tmpl')(this))
-    this.copyFile('../../../LICENSE', 'LICENSE')
+    this.copyFile('../../../../LICENSE', 'LICENSE')
   }
 }
 

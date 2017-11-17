@@ -8,9 +8,13 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "eslint": "^4.11.0"
+    "es6-shim": "^0.35.3",
+    "postcss": "^6.0.1",
+    "promise-synchronizer": "^1.0.5",
+    "stylefmt": "^6.0.0",
+    "stylelint": "^8.0.0"
   },
-  "description": "a js linter plugin of fis3 based on eslint.",
+  "description": "a css linter plugin of fis3 based on stylelint.",
   "files": [
     "LICENSE",
     "README.md",
@@ -22,15 +26,14 @@
     "fis",
     "fis3",
     "lint",
-    "eslint-noisy",
-    "fis3-lint-eslint-noisy",
-    "eslint",
+    "stylelint",
+    "fis3-lint-stylelint",
     "linter"
   ],
   "license": "MIT",
   "main": "index.js",
-  "name": "fis3-lint-eslint-noisy",
+  "name": "fis3-lint-stylelint",
   "readmeFilename": "README.md",
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-eslint-noisy",
-  "version": "2.0.3"
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-stylelint",
+  "version": "2.0.2"
 }
