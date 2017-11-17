@@ -119,7 +119,11 @@ class Package {
     } else {
       let code = this.readFile('index.js')
       code += '\n'
-      code += `module.exports.defaultOptions = ${JSON.stringify(this.info.options)}`
+      code += `module.exports.defaultOptions = ${JSON.stringify(
+        this.info.options,
+        null,
+        2
+      )}`
       this.writeFile('index.js', code)
     }
 
