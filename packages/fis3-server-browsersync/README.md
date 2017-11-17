@@ -29,12 +29,12 @@ fis3 server start --type browsersync --bs-config path/to/bs-config.js
 
 see https://browsersync.io/docs/options
 
+
 ## links
 
   fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
 
   browsersync [https://browsersync.io/](https://browsersync.io/)
-
 
 
 ## license

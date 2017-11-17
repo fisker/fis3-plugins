@@ -14,15 +14,6 @@ $ npm i -g <%= pkg.name %>
 ```
 
 <%= info.readme %>
-
-## links
-<%
-_.forEach(info.links, function(link, name) {
-%>
-  <%= name %> [<%= link%>](<%= link%>)
-<%
-})
-%>
 <%
 if (!_.isEmpty(info.options)) {
 %>
@@ -34,6 +25,15 @@ if (!_.isEmpty(info.options)) {
 ** NOTICE: this might change in future **
 <%
 }
+%>
+
+## links
+<%
+_.forEach(info.links, function(link, name) {
+%>
+  <%= name %> [<%= link%>](<%= link%>)
+<%
+})
 %>
 
 ## license

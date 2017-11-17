@@ -59,13 +59,6 @@ var eslintConf = {
 ```
 
 
-## links
-
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
-
-  eslint [http://eslint.org/](http://eslint.org/)
-
-
 
 ## default options
 ```json
@@ -78,6 +71,13 @@ var eslintConf = {
 }
 ```
 ** NOTICE: this might change in future **
+
+
+## links
+
+  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+
+  eslint [http://eslint.org/](http://eslint.org/)
 
 
 ## license
