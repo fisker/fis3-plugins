@@ -19,7 +19,9 @@
   },
   "readmeFilename": "README.md",
   "scripts": {
-    "build": "cd scripts && sh build.sh"
+    "build": "cd ./scripts && sh ./build.sh",
+    "publish": "cd ./scripts && sh ./publish.sh",
+    "release": "npm run build && npm run publish"
   },
   "devDependencies": {
     "babel": "^6.23.0",

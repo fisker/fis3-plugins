@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const SOURCE_DIR = path.join(__dirname, '..', 'src')
-const DEST_DIR = path.join(__dirname, '..', 'dist')
+const DEST_DIR = path.join(__dirname, '..', 'packages')
 const globalPackage = require('../package.json')
 const _ = require('lodash')
 const mkdirp = require('mkdirp').sync
