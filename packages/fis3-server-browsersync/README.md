@@ -13,15 +13,6 @@
 $ npm i -g fis3-server-browsersync
 ```
 
-## fis3-server-browsersync
-
-fis3 debug server based on browser-sync.
-
-## install
-```sh
-npm i -g fis3-server-browsersync
-```
-
 ## ustage
 ```sh
 fis3 server start --type browsersync
