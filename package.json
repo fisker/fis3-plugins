@@ -24,14 +24,12 @@
     "release": "npm run build && npm run publish"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "json-stable-stringify": "^1.0.1",
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
     "prettier": "^1.8.2"
-  },
-  "dependencies": {
-    "babel-core": "^6.26.0"
   }
 }
