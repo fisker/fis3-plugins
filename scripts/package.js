@@ -9,13 +9,7 @@ const prettier = require('prettier')
 const prettierConfig = require('../prettier.config.js')
 const stringify = require('json-stable-stringify')
 const babel = require('babel-core')
-const files = [
-  'LICENSE',
-  'README.md',
-  'index.js',
-  'package.json',
-  'processor.js'
-]
+const files = ['LICENSE', 'README.md', 'index.js', 'package.json']
 const links = {
   fis3: 'http://fis.baidu.com/'
 }
@@ -122,10 +116,12 @@ class Package {
   build() {
     if (_.isEmpty(this.info.options)) {
       this.copyFile('processor.js', 'index.js')
-      this.pkg.files = _.filter(this.pkg.files, file => file !== 'processor.js')
     } else {
-      this.copyFile('processor.js')
-      this.writeFile('index.js', template('index.tmpl')(this))
+      let code = this.readFile('processor.js')
+      code += `module.exports.defaultOptions = ${JSON.stringify(
+        this.info.options
+      )}`
+      this.writeFile('index.js', code)
     }
 
     this.writeFile('README.md', template('readme.tmpl')(this))
