@@ -2,6 +2,11 @@
 
 > a js linter plugin of fis3 based on eslint.
 
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![npm](https://img.shields.io/npm/v/fis3-lint-eslint-noisy.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-eslint-noisy)
+[![npm](https://img.shields.io/npm/dt/fis3-lint-eslint-noisy.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-eslint-noisy)
+[![npm](https://img.shields.io/npm/dm/fis3-lint-eslint-noisy.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-eslint-noisy)
+
 ## install
 
 ```sh
@@ -57,7 +62,10 @@ var eslintConf = {
 
 ## links
 
-  fis3 [http://fis.baidu.com/]
+  fis3 http://fis.baidu.com/[http://fis.baidu.com/]
 
-  eslint [http://eslint.org/]
+  eslint http://eslint.org/[http://eslint.org/]
 
+
+## license
+MIT © [fisker Cheung](https://github.com/fisker)

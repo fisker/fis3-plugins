@@ -2,6 +2,11 @@
 
 > <%= pkg.description %>
 
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![npm](https://img.shields.io/npm/v/<%= pkg.name %>.svg?style=flat-square)](https://www.npmjs.com/package/<%= pkg.name %>)
+[![npm](https://img.shields.io/npm/dt/<%= pkg.name %>.svg?style=flat-square)](https://www.npmjs.com/package/<%= pkg.name %>)
+[![npm](https://img.shields.io/npm/dm/<%= pkg.name %>.svg?style=flat-square)](https://www.npmjs.com/package/<%= pkg.name %>)
+
 ## install
 
 ```sh
@@ -15,7 +20,10 @@ $ npm i -g <%= pkg.name %>
 <%
 _.forEach(info.links, function(link, name) {
 %>
-  <%= name %> [<%= link%>]
+  <%= name %> <%= link%>[<%= link%>]
 <%
 })
 %>
+
+## license
+<%= pkg.license %> © [<%= pkg.author.name %>](<%= pkg.author.url %>)
