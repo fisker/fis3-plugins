@@ -26,6 +26,7 @@ module.exports = function(content, file, conf) {
     }
   }
 }
+
 module.exports.defaultOptions = {
   envs: ['browser'],
   fix: false,

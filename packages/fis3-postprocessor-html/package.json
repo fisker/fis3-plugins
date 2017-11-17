@@ -1,0 +1,37 @@
+{
+  "author": {
+    "email": "lionkay@gmail.com",
+    "name": "fisker Cheung",
+    "url": "https://github.com/fisker"
+  },
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "dependencies": {
+    "js-beautify": "^1.6.4"
+  },
+  "description": "a html formatter of fis3 based on js-beautify",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.js",
+    "package.json"
+  ],
+  "keywords": [
+    "fis",
+    "fis3",
+    "postprocessor",
+    "html",
+    "fis3-postprocessor-html",
+    "js-beautify",
+    "beautify",
+    "format",
+    "formatter"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "fis3-postprocessor-html",
+  "readmeFilename": "README.md",
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-html",
+  "version": "1.0.1"
+}

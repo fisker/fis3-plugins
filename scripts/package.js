@@ -115,12 +115,11 @@ class Package {
 
   build() {
     if (_.isEmpty(this.info.options)) {
-      this.copyFile('processor.js', 'index.js')
+      this.copyFile('index.js')
     } else {
-      let code = this.readFile('processor.js')
-      code += `module.exports.defaultOptions = ${JSON.stringify(
-        this.info.options
-      )}`
+      let code = this.readFile('index.js')
+      code += '\n'
+      code += `module.exports.defaultOptions = ${JSON.stringify(this.info.options)}`
       this.writeFile('index.js', code)
     }
 
