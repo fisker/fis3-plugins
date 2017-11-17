@@ -60,11 +60,11 @@ rules: [http://stylelint.io/user-guide/rules/]
 
 ## links
 
-  fis3 http://fis.baidu.com/[http://fis.baidu.com/]
+  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  stylelint http://stylelint.io/[http://stylelint.io/]
+  stylelint [http://stylelint.io/](http://stylelint.io/)
 
-  stylefmt https://github.com/morishitter/stylefmt[https://github.com/morishitter/stylefmt]
+  stylefmt [https://github.com/morishitter/stylefmt](https://github.com/morishitter/stylefmt)
 
 
 ## license

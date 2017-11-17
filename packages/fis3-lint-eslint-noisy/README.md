@@ -62,9 +62,9 @@ var eslintConf = {
 
 ## links
 
-  fis3 http://fis.baidu.com/[http://fis.baidu.com/]
+  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  eslint http://eslint.org/[http://eslint.org/]
+  eslint [http://eslint.org/](http://eslint.org/)
 
 
 ## license

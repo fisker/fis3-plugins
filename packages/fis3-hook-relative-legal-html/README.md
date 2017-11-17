@@ -64,7 +64,7 @@ fex-team/fis3-hook-relative 中间过程会生成类似
 
 ## links
 
-  fis3 http://fis.baidu.com/[http://fis.baidu.com/]
+  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
 
 
 ## license
