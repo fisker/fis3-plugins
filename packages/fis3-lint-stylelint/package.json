@@ -19,8 +19,7 @@
     "LICENSE",
     "README.md",
     "index.js",
-    "package.json",
-    "processor.js"
+    "package.json"
   ],
   "keywords": [
     "fis",

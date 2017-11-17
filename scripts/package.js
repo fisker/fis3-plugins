@@ -74,8 +74,8 @@ class Package {
       _.pick(info, ['name', 'version', 'description', 'dependencies']),
       {
         repository: repository,
-        keywords: keywords,
-        files: files.concat(info.files)
+        keywords: _.sortedUniq(keywords),
+        files: _.sortedUniq(files.concat(info.files))
       }
     )
   }
@@ -120,10 +120,14 @@ class Package {
   }
 
   build() {
-    let code = this.readFile('processor.js')
-    this.writeFile('processor.js', code)
+    if (_.isEmpty(this.info.options)) {
+      this.copyFile('processor.js', 'index.js')
+      this.pkg.files = _.filter(this.pkg.files, file => file !== 'processor.js')
+    } else {
+      this.copyFile('processor.js')
+      this.writeFile('index.js', template('index.tmpl')(this))
+    }
 
-    this.writeFile('index.js', template('index.tmpl')(this))
     this.writeFile('README.md', template('readme.tmpl')(this))
     this.copyFile('../../../../LICENSE', 'LICENSE')
 

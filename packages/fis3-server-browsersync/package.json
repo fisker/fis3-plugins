@@ -19,7 +19,6 @@
     "README.md",
     "index.js",
     "package.json",
-    "processor.js",
     "app.js",
     "lib/browser-sync-config.js",
     "lib/serve-directory.js",
