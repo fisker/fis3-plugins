@@ -1,7 +1,7 @@
 module.exports = {
   version: '',
   description: '',
-  keywords: [''],
+  keywords: [],
   dependencies: {},
   options: {},
   links: {}

@@ -1,0 +1,36 @@
+{
+  "author": {
+    "email": "lionkay@gmail.com",
+    "name": "fisker Cheung",
+    "url": "https://github.com/fisker"
+  },
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "dependencies": {
+    "pug": "^2.0.0-rc.4"
+  },
+  "description": "a fis plugin to parse pug(aka jade).",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.js",
+    "package.json",
+    "processor.js"
+  ],
+  "keywords": [
+    "fis",
+    "fis3",
+    "parser",
+    "pug",
+    "fis3-parser-pug",
+    "jade",
+    "html"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "fis3-parser-pug",
+  "readmeFilename": "README.md",
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-pug",
+  "version": "1.0.0"
+}
