@@ -1,7 +1,7 @@
 #!bin/sh
 
 cd ..
-ncu -r https://registry.npm.taobao.org --loglevel warn --newest
+ncu -r https://registry.npm.taobao.org
 
 cd packages
 
@@ -10,7 +10,7 @@ do
   if test -d $file
   then
     cd $file
-    ncu --registry https://registry.npm.taobao.org --loglevel warn --newest
+    ncu --registry https://registry.npm.taobao.org
     cd ..
   fi
 done
