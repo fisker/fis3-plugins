@@ -1,12 +1,12 @@
 module.exports = {
-  version: '1.4.0',
+  version: '1.4.1',
   description: 'a browser sync server for fis3.',
   keywords: ['browser-sync', 'livereload'],
   dependencies: {
     'browser-sync': '^2.18.13',
     filesize: '^3.5.11',
     'lodash.merge': '^4.6.0',
-    'serve-directory': '^1.2.1'
+    'serve-directory': '^1.2.4'
   },
   options: {},
   links: {

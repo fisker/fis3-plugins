@@ -1,9 +1,9 @@
 module.exports = {
-  version: '1.0.2',
+  version: '1.0.3',
   description: 'a html formatter of fis3 based on js-beautify',
   keywords: ['js-beautify', 'beautify', 'format', 'formatter'],
   dependencies: {
-    'js-beautify': '^1.6.4'
+    'js-beautify': '^1.7.4'
   },
   options: {
     indent_size: 2,
