@@ -1,10 +1,10 @@
-var path = require('path')
-var args = process.argv.join('|')
-var DOCUMENT_ROOT = path.resolve(
+const path = require('path')
+const args = process.argv.join('|')
+const DOCUMENT_ROOT = path.resolve(
   /\-\-root\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : process.cwd()
 )
-var bs = require('browser-sync').create()
-var getBsConfig = require('./lib/browser-sync-config.js')
+const bs = require('browser-sync').create()
+const getBsConfig = require('./lib/browser-sync-config.js')
 
 function now() {
   var d = new Date()
