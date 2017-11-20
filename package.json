@@ -19,7 +19,7 @@
   },
   "readmeFilename": "README.md",
   "scripts": {
-    "prepack": "echo 'fis3-plugins is not a npm package.' && exit 1",
+    "prepack": "echo fis3-plugins is not a npm package. && exit 1",
     "check-updates": "cd ./scripts && sh ./check-updates.sh",
     "build-packages": "cd ./scripts && sh ./build-packages.sh",
     "publish-npm": "cd ./scripts && sh ./publish-npm.sh",
