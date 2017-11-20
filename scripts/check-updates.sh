@@ -10,7 +10,7 @@ do
   if test -d $file
   then
     cd $file
-    ncu -r https://registry.npm.taobao.org
+    npm-check-updates -r https://registry.npm.taobao.org
     cd ..
   fi
 done
