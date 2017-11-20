@@ -1,7 +1,7 @@
 #!bin/sh
 
 cd ..
-ncu -r https://registry.npm.taobao.org
+ncu -r https://registry.npm.taobao.org --loglevel warn --newest
 
 cd packages
 
