@@ -19,12 +19,12 @@
     "package.json"
   ],
   "keywords": [
+    "autoprefixer",
+    "autoprefixer-latest",
     "fis",
     "fis3",
-    "postprocessor",
-    "autoprefixer-latest",
     "fis3-postprocessor-autoprefixer-latest",
-    "autoprefixer"
+    "postprocessor"
   ],
   "license": "MIT",
   "main": "index.js",

@@ -20,16 +20,16 @@
     "package.json"
   ],
   "keywords": [
+    "beautify",
     "fis",
     "fis3",
-    "postprocessor",
-    "posthtml-beautify",
     "fis3-postprocessor-posthtml-beautify",
-    "posthtml",
-    "beautify",
-    "html",
     "format",
-    "formatter"
+    "formatter",
+    "html",
+    "posthtml",
+    "posthtml-beautify",
+    "postprocessor"
   ],
   "license": "MIT",
   "main": "index.js",

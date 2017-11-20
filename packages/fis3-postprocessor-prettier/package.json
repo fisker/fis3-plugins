@@ -18,14 +18,14 @@
     "package.json"
   ],
   "keywords": [
+    "beautify",
     "fis",
     "fis3",
-    "postprocessor",
-    "prettier",
     "fis3-postprocessor-prettier",
-    "beautify",
     "format",
-    "formatter"
+    "formatter",
+    "postprocessor",
+    "prettier"
   ],
   "license": "MIT",
   "main": "index.js",

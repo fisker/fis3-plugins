@@ -18,12 +18,12 @@
     "package.json"
   ],
   "keywords": [
+    "eslint",
+    "eslint-noisy",
     "fis",
     "fis3",
-    "lint",
-    "eslint-noisy",
     "fis3-lint-eslint-noisy",
-    "eslint",
+    "lint",
     "linter"
   ],
   "license": "MIT",

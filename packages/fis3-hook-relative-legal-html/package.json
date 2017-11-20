@@ -17,10 +17,10 @@
   "keywords": [
     "fis",
     "fis3",
-    "hook",
-    "relative-legal-html",
     "fis3-hook-relative-legal-html",
-    "relative"
+    "hook",
+    "relative",
+    "relative-legal-html"
   ],
   "license": "MIT",
   "main": "index.js",

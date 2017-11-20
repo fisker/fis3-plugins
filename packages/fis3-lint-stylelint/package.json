@@ -24,10 +24,10 @@
   "keywords": [
     "fis",
     "fis3",
-    "lint",
-    "stylelint",
     "fis3-lint-stylelint",
-    "linter"
+    "lint",
+    "linter",
+    "stylelint"
   ],
   "license": "MIT",
   "main": "index.js",

@@ -20,11 +20,11 @@
   "keywords": [
     "fis",
     "fis3",
-    "parser",
-    "pug",
     "fis3-parser-pug",
+    "html",
     "jade",
-    "html"
+    "parser",
+    "pug"
   ],
   "license": "MIT",
   "main": "index.js",

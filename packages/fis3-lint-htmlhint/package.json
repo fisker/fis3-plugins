@@ -20,11 +20,11 @@
   "keywords": [
     "fis",
     "fis3",
-    "lint",
-    "htmlhint",
     "fis3-lint-htmlhint",
-    "linter",
-    "html"
+    "html",
+    "htmlhint",
+    "lint",
+    "linter"
   ],
   "license": "MIT",
   "main": "index.js",

@@ -17,25 +17,25 @@
   "files": [
     "LICENSE",
     "README.md",
-    "index.js",
-    "package.json",
     "app.js",
+    "index.js",
     "lib/browser-sync-config.js",
     "lib/serve-directory.js",
+    "package.json",
     "public/directory.html",
-    "public/style.css",
     "public/icon/directory.svg",
     "public/icon/file.svg",
-    "public/icon/media.svg"
+    "public/icon/media.svg",
+    "public/style.css"
   ],
   "keywords": [
+    "browser-sync",
+    "browsersync",
     "fis",
     "fis3",
-    "server",
-    "browsersync",
     "fis3-server-browsersync",
-    "browser-sync",
-    "livereload"
+    "livereload",
+    "server"
   ],
   "license": "MIT",
   "main": "index.js",

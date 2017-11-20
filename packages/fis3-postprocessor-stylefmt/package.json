@@ -23,9 +23,9 @@
   "keywords": [
     "fis",
     "fis3",
+    "fis3-postprocessor-stylefmt",
     "postprocessor",
-    "stylefmt",
-    "fis3-postprocessor-stylefmt"
+    "stylefmt"
   ],
   "license": "MIT",
   "main": "index.js",

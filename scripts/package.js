@@ -68,8 +68,8 @@ class Package {
       _.pick(info, ['name', 'version', 'description', 'dependencies']),
       {
         repository: repository,
-        keywords: _.sortedUniq(keywords),
-        files: _.sortedUniq(files.concat(info.files))
+        keywords: _.uniq(keywords.sort()),
+        files: _.uniq(files.concat(info.files).sort())
       }
     )
   }
