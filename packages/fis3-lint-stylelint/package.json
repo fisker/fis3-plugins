@@ -34,5 +34,5 @@
   "name": "fis3-lint-stylelint",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-stylelint",
-  "version": "2.0.3"
+  "version": "2.0.4"
 }

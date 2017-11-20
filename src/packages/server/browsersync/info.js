@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.3.19',
+  version: '1.4.0',
   description: 'a browser sync server for fis3.',
   keywords: ['browser-sync', 'livereload'],
   dependencies: {
