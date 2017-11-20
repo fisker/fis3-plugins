@@ -7,7 +7,7 @@ do
   if test -d $file
   then
     cd $file
-    npm --registry=https://registry.npmjs.org/ publish
+    npm publish --registry=https://registry.npmjs.org/
     cd ..
   fi
 done
