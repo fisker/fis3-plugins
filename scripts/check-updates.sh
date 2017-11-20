@@ -10,7 +10,7 @@ do
   if test -d $file
   then
     cd $file
-    npm-check-updates -r https://registry.npm.taobao.org
+    ncu --registry https://registry.npm.taobao.org --loglevel warn --newest
     cd ..
   fi
 done
