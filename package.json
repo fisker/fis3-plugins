@@ -2,7 +2,10 @@
   "name": "fis3-plugins",
   "version": "1.0.0",
   "description": "plugins for fi3",
-  "keywords": ["fis", "fis3"],
+  "keywords": [
+    "fis",
+    "fis3"
+  ],
   "main": "index.js",
   "repository": "https://github.com/fisker/fis3-plugins",
   "author": {
@@ -17,7 +20,7 @@
   "readmeFilename": "README.md",
   "scripts": {
     "prepack": "echo fis3-plugins is not a npm package. && exit 1",
-    "check-updates": "cd ./scripts && sh ./check-updates.sh",
+    "update-dependencies": "yarn upgrade --latest",
     "build-packages": "cd ./scripts && sh ./build-packages.sh",
     "publish-npm": "cd ./scripts && sh ./publish-npm.sh",
     "release-packages": "npm run build-packages && npm run publish-npm"
@@ -30,26 +33,25 @@
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.7.2",
-    "npm-check-updates": "^2.13.0",
     "prettier": "^1.8.2"
   },
   "dependencies": {
+    "browser-sync": "^2.18.13",
     "es6-shim": "^0.35.3",
     "eslint": "^4.11.0",
+    "filesize": "^3.5.11",
     "htmlhint": "^0.9.13",
     "js-beautify": "^1.7.4",
+    "lodash.merge": "^4.6.0",
     "postcss": "^6.0.14",
-    "promise-synchronizer": "^1.0.6",
-    "pug": "^2.0.0-rc.4",
-    "standard": "^10.0.3",
-    "stylefmt": "^6.0.0",
-    "stylelint": "^8.2.0",
-    "posthtml": "^0.9.2",
+    "posthtml": "^0.10.1",
     "posthtml-beautify": "^0.1.8",
     "prettier": "^1.8.2",
-    "browser-sync": "^2.18.13",
-    "filesize": "^3.5.11",
-    "lodash.merge": "^4.6.0",
-    "serve-directory": "^1.2.4"
+    "promise-synchronizer": "^1.0.6",
+    "pug": "^2.0.0-rc.4",
+    "serve-directory": "^1.2.4",
+    "standard": "^10.0.3",
+    "stylefmt": "^6.0.0",
+    "stylelint": "^8.2.0"
   }
 }
