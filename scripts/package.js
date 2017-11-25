@@ -20,6 +20,27 @@ const template = _.memoize(function(file) {
   return _.template(source)
 })
 
+function parseDependencies(pkgs) {
+  const dependencies = {}
+  _.forEach(pkgs, function(pkg) {
+    const pkgArr = pkg.split('@')
+    const pkgName = pkgArr[0]
+    let pkgVersion = pkgArr[1]
+
+    if (!pkgVersion) {
+      pkgVersion = globalPackage.dependencies[pkgName]
+    }
+
+    if (!pkgVersion) {
+      throw Error('dependency [%s] is not in package.json.', name)
+    }
+
+    dependencies[pkgName] = pkgVersion
+  })
+
+  return dependencies
+}
+
 class Package {
   constructor(type, name) {
     const packageName = `fis3-${type}-${name}`
@@ -36,7 +57,8 @@ class Package {
       links: _.assign({}, links, this.info.links),
       options: this.info.options || {},
       keywords: this.info.keywords || [],
-      files: this.info.files || []
+      files: this.info.files || [],
+      dependencies: parseDependencies(this.info.dependencies)
     })
 
     this.pkg = this.getPackageInfo()
