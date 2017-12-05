@@ -20,7 +20,7 @@
   "readmeFilename": "README.md",
   "scripts": {
     "prepack": "echo fis3-plugins is not a npm package. && exit 1",
-    "update-dependencies": "yarn upgrade --latest",
+    "update-dependencies": "yarn upgrade-interactive",
     "build-packages": "cd ./scripts && sh ./build-packages.sh",
     "publish-npm": "cd ./scripts && sh ./publish-npm.sh",
     "release-packages": "npm run build-packages && npm run publish-npm"
