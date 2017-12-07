@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.0.6',
+  version: '1.0.7',
   description: 'a code formatter of fis3 based on prettier.',
   keywords: ['prettier', 'css', 'format', 'formatter'],
   dependencies: ['prettier'],
