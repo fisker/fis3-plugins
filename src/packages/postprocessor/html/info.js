@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.0.3',
+  version: '1.0.4',
   description: 'a html formatter of fis3 based on js-beautify',
   keywords: ['js-beautify', 'beautify', 'format', 'formatter'],
   dependencies: ['js-beautify'],
