@@ -3,7 +3,6 @@
 var path = require('path')
 var bsDefaultConfig = require(path.join(
   path.dirname(require.resolve('browser-sync')),
-  'lib',
   'default-config.js'
 ))
 var serveDirectory = require('./serve-directory.js')
