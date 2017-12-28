@@ -4,7 +4,7 @@ var quotes = {
   '"': 'QUOTE_DOUBLE'
 }
 
-var rUrl = /['"]__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___['"]/g
+var rUrl = /("|'|)__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
 var path = require('path')
 var rFile = /\.[^\.]+$/
 
@@ -37,7 +37,7 @@ function getRelativeUrl(file, host) {
 }
 
 function convert(content, file, host) {
-  return content.replace(rUrl, function(all, quoteStyle, value) {
+  return content.replace(rUrl, function(all, _, quoteStyle, value) {
     var info = fis.project.lookup(value)
 
     if (!info.file) {
