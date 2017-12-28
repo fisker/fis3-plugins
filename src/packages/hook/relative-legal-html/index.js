@@ -4,7 +4,7 @@ var quotes = {
   '"': 'QUOTE_DOUBLE'
 }
 
-var rUrl = /("|'|)__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
+var rUrl = /("|')?__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
 var path = require('path')
 var rFile = /\.[^\.]+$/
 
