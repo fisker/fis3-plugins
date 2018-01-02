@@ -1,5 +1,5 @@
 module.exports = {
-  version: '2.0.6',
+  version: '2.0.7',
   description: 'a css linter plugin of fis3 based on stylelint.',
   keywords: ['linter'],
   dependencies: [

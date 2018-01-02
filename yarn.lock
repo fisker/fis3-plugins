@@ -3914,6 +3914,14 @@ postcss@^6.0.1, postcss@^6.0.14, postcss@^6.0.3, postcss@^6.0.6, postcss@^6.0.8:
     source-map "^0.6.1"
     supports-color "^4.4.0"
 
+postcss@^6.0.15:
+  version "6.0.15"
+  resolved "http://registry.npm.taobao.org/postcss/download/postcss-6.0.15.tgz#f460cd6269fede0d1bf6defff0b934a9845d974d"
+  dependencies:
+    chalk "^2.3.0"
+    source-map "^0.6.1"
+    supports-color "^5.1.0"
+
 posthtml-beautify@^0.1.8:
   version "0.1.8"
   resolved "http://registry.npm.taobao.org/posthtml-beautify/download/posthtml-beautify-0.1.8.tgz#40ff7d67eca79854f4da016ba220fa99df1aeef4"
@@ -5097,6 +5105,12 @@ supports-color@^3.2.3:
 supports-color@^4.0.0, supports-color@^4.4.0:
   version "4.5.0"
   resolved "http://registry.npm.taobao.org/supports-color/download/supports-color-4.5.0.tgz#be7a0de484dec5c5cddf8b3d59125044912f635b"
+  dependencies:
+    has-flag "^2.0.0"
+
+supports-color@^5.1.0:
+  version "5.1.0"
+  resolved "http://registry.npm.taobao.org/supports-color/download/supports-color-5.1.0.tgz#058a021d1b619f7ddf3980d712ea3590ce7de3d5"
   dependencies:
     has-flag "^2.0.0"
 
