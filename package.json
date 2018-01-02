@@ -36,7 +36,7 @@
     "prettier": "^1.9.1"
   },
   "dependencies": {
-    "browser-sync": "^2.21.0",
+    "browser-sync": "^2.23.2",
     "es6-shim": "^0.35.3",
     "eslint": "^4.14.0",
     "filesize": "^3.5.11",
