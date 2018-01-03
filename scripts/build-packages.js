@@ -8,7 +8,8 @@ const pluginTypes = [
   'optimizer',
   'postprocessor',
   'server',
-  'parser'
+  'parser',
+  'command'
 ]
 
 pluginTypes.forEach(function(type) {

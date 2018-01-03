@@ -91,6 +91,7 @@ class Package {
       {
         repository: repository,
         keywords: _.uniq(keywords.sort()),
+        scripts: info.scripts,
         files: _.uniq(files.concat(info.files).sort())
       }
     )
