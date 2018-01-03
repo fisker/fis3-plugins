@@ -33,6 +33,7 @@ function parseDependencies(pkgs) {
 
     if (!pkgVersion) {
       throw Error('dependency [%s] is not in package.json.', name)
+      procees.exit(1)
     }
 
     dependencies[pkgName] = pkgVersion

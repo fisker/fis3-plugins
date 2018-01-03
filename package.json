@@ -36,6 +36,7 @@
     "prettier": "^1.9.1"
   },
   "dependencies": {
+    "autoprefixer": "^7.2.4",
     "browser-sync": "^2.23.2",
     "es6-shim": "^0.35.3",
     "eslint": "^4.14.0",

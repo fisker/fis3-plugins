@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.0.0',
+  version: '1.0.1',
   description: 'fis3 build command.',
   keywords: ['release'],
   dependencies: ['fis3-command-release'],
