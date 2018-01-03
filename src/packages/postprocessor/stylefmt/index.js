@@ -14,7 +14,9 @@ var stylefmt = require('stylefmt').process
 module.exports = function(content, file, conf) {
   try {
     content = sync(
-      stylefmt(content, {}).then(function(result) {
+      stylefmt(content, {
+        from: conf.filename
+      }).then(function(result) {
         if (result && result.css) {
           return result.css
         }
