@@ -4686,9 +4686,9 @@ send@0.15.2:
     range-parser "~1.2.0"
     statuses "~1.3.1"
 
-serve-directory@^1.2.4:
-  version "1.2.4"
-  resolved "http://registry.npm.taobao.org/serve-directory/download/serve-directory-1.2.4.tgz#e61af576508d1d8936727929b3f564af811683f3"
+serve-directory@^1.9.1:
+  version "1.9.1"
+  resolved "http://registry.npm.taobao.org/serve-directory/download/serve-directory-1.9.1.tgz#fdaff19a003dc697af3d1ba729f0f44b2894fdad"
   dependencies:
     accepts "~1.3.4"
     debug "^3.0.1"

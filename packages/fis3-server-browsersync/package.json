@@ -11,7 +11,7 @@
     "browser-sync": "^2.23.2",
     "filesize": "^3.5.11",
     "lodash.merge": "^4.6.0",
-    "serve-directory": "^1.2.4"
+    "serve-directory": "^1.9.1"
   },
   "description": "a browser sync server for fis3.",
   "files": [
@@ -42,5 +42,5 @@
   "name": "fis3-server-browsersync",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-server-browsersync",
-  "version": "1.4.4"
+  "version": "1.4.5"
 }
