@@ -51,7 +51,7 @@
     "promise-synchronizer": "^1.0.7",
     "pug": "^2.0.0-rc.4",
     "serve-directory": "^2.0.1",
-    "serve-directory-theme-octicons": "^1.0.3",
+    "serve-directory-theme-octicons": "^1.0.4",
     "standard": "^10.0.3",
     "stylefmt": "^6.0.0",
     "stylelint": "^8.4.0"
