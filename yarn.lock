@@ -4692,9 +4692,9 @@ send@0.15.2:
     range-parser "~1.2.0"
     statuses "~1.3.1"
 
-serve-directory-theme-octicons@^1.0.2:
-  version "1.0.2"
-  resolved "http://registry.npm.taobao.org/serve-directory-theme-octicons/download/serve-directory-theme-octicons-1.0.2.tgz#1dad52af0f7e920d6ac78d6512b79df3eba7acdd"
+serve-directory-theme-octicons@^1.0.3:
+  version "1.0.3"
+  resolved "http://registry.npm.taobao.org/serve-directory-theme-octicons/download/serve-directory-theme-octicons-1.0.3.tgz#05d0d6a86684cded0f67c99efd62f63e4f8ed637"
   dependencies:
     filesize "^3.5.11"
     node-sass "^4.7.2"
