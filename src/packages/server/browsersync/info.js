@@ -1,8 +1,8 @@
 module.exports = {
-  version: '1.4.5',
+  version: '1.5.0',
   description: 'a browser sync server for fis3.',
   keywords: ['browser-sync', 'livereload'],
-  dependencies: ['browser-sync', 'filesize', 'lodash.merge', 'serve-directory'],
+  dependencies: ['browser-sync', 'lodash.merge', 'serve-directory', 'serve-directory-theme-octicons'],
   options: {},
   links: {
     browsersync: 'https://browsersync.io/'
@@ -10,11 +10,6 @@ module.exports = {
   files: [
     'app.js',
     'lib/browser-sync-config.js',
-    'lib/serve-directory.js',
-    'public/directory.html',
-    'public/style.css',
-    'public/icon/directory.svg',
-    'public/icon/file.svg',
-    'public/icon/media.svg'
+    'lib/serve-directory.js'
   ]
 }

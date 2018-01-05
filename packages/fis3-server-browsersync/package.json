@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "browser-sync": "^2.23.2",
-    "filesize": "^3.5.11",
     "lodash.merge": "^4.6.0",
-    "serve-directory": "^1.9.1"
+    "serve-directory": "^2.0.1",
+    "serve-directory-theme-octicons": "^1.0.2"
   },
   "description": "a browser sync server for fis3.",
   "files": [
@@ -21,12 +21,7 @@
     "index.js",
     "lib/browser-sync-config.js",
     "lib/serve-directory.js",
-    "package.json",
-    "public/directory.html",
-    "public/icon/directory.svg",
-    "public/icon/file.svg",
-    "public/icon/media.svg",
-    "public/style.css"
+    "package.json"
   ],
   "keywords": [
     "browser-sync",
@@ -42,5 +37,5 @@
   "name": "fis3-server-browsersync",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-server-browsersync",
-  "version": "1.4.5"
+  "version": "1.5.0"
 }
