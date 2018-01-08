@@ -853,9 +853,9 @@ browser-sync-ui@v1.0.1:
     socket.io-client "2.0.4"
     stream-throttle "^0.1.3"
 
-browser-sync@^2.23.2:
-  version "2.23.2"
-  resolved "http://registry.npm.taobao.org/browser-sync/download/browser-sync-2.23.2.tgz#fb3e7e5f18d9da75c1892bc5183bcdf15c96b53d"
+browser-sync@^2.23.3:
+  version "2.23.3"
+  resolved "http://registry.npm.taobao.org/browser-sync/download/browser-sync-2.23.3.tgz#0ad79c6a9ac67115d575ba4de88a9111121b177e"
   dependencies:
     browser-sync-ui v1.0.1
     bs-recipes "1.3.4"
@@ -1878,9 +1878,9 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/eslint-visitor-keys/download/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@^4.14.0:
-  version "4.14.0"
-  resolved "http://registry.npm.taobao.org/eslint/download/eslint-4.14.0.tgz#96609768d1dd23304faba2d94b7fefe5a5447a82"
+eslint@^4.15.0:
+  version "4.15.0"
+  resolved "http://registry.npm.taobao.org/eslint/download/eslint-4.15.0.tgz#89ab38c12713eec3d13afac14e4a89e75ef08145"
   dependencies:
     ajv "^5.3.0"
     babel-code-frame "^6.22.0"
@@ -3581,7 +3581,7 @@ oauth-sign@~0.8.1, oauth-sign@~0.8.2:
   version "0.8.2"
   resolved "http://registry.npm.taobao.org/oauth-sign/download/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
-object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
+object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
   resolved "http://registry.npm.taobao.org/object-assign/download/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
@@ -3611,12 +3611,6 @@ object.omit@^2.0.0:
   dependencies:
     for-own "^0.1.4"
     is-extendable "^0.1.1"
-
-octicons@^7.0.1:
-  version "7.0.1"
-  resolved "http://registry.npm.taobao.org/octicons/download/octicons-7.0.1.tgz#2f8f8d71547213c50525b26684192d5e6be257fb"
-  dependencies:
-    object-assign "^4.1.1"
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -4011,6 +4005,14 @@ postcss@^6.0.1, postcss@^6.0.14, postcss@^6.0.3, postcss@^6.0.6, postcss@^6.0.8:
 postcss@^6.0.15:
   version "6.0.15"
   resolved "http://registry.npm.taobao.org/postcss/download/postcss-6.0.15.tgz#f460cd6269fede0d1bf6defff0b934a9845d974d"
+  dependencies:
+    chalk "^2.3.0"
+    source-map "^0.6.1"
+    supports-color "^5.1.0"
+
+postcss@^6.0.16:
+  version "6.0.16"
+  resolved "http://registry.npm.taobao.org/postcss/download/postcss-6.0.16.tgz#112e2fe2a6d2109be0957687243170ea5589e146"
   dependencies:
     chalk "^2.3.0"
     source-map "^0.6.1"
@@ -4692,13 +4694,11 @@ send@0.15.2:
     range-parser "~1.2.0"
     statuses "~1.3.1"
 
-serve-directory-theme-octicons@^1.0.4:
-  version "1.0.4"
-  resolved "http://registry.npm.taobao.org/serve-directory-theme-octicons/download/serve-directory-theme-octicons-1.0.4.tgz#d83d2ae7f6f5a6b3b1af655a20f1e6cf30b1cf31"
+serve-directory-theme-octicons@^1.0.6:
+  version "1.0.6"
+  resolved "http://registry.npm.taobao.org/serve-directory-theme-octicons/download/serve-directory-theme-octicons-1.0.6.tgz#c430bee024d098e981dd0479330c5491ef8fe7f9"
   dependencies:
     filesize "^3.5.11"
-    node-sass "^4.7.2"
-    octicons "^7.0.1"
 
 serve-directory@^2.0.1:
   version "2.0.1"
