@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.0.4',
+  version: '1.0.5',
   description: 'latest version autoprefixer for fis3.',
   keywords: ['autoprefixer'],
   dependencies: ['postcss', 'autoprefixer'],
