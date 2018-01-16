@@ -4006,10 +4006,11 @@ postcss@^6.0.16:
     source-map "^0.6.1"
     supports-color "^5.1.0"
 
-posthtml-beautify@^0.1.9:
-  version "0.1.9"
-  resolved "http://registry.npm.taobao.org/posthtml-beautify/download/posthtml-beautify-0.1.9.tgz#f5387b17315d952712cb5526e3339fefe04f53e5"
+posthtml-beautify@^0.1.10:
+  version "0.1.10"
+  resolved "http://registry.npm.taobao.org/posthtml-beautify/download/posthtml-beautify-0.1.10.tgz#c216f28cad072d1a373c98b8fa489dd46603fde7"
   dependencies:
+    babel-runtime "^6.26.0"
     deepmerge "^2.0.1"
     posthtml-parser "^0.3.1"
     posthtml-render "1.0.6"
