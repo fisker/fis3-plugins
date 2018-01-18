@@ -13,24 +13,22 @@ const pluginTypes = [
   'command'
 ]
 
-const readmeTemplate = _.template(`
-## <%= pkg.name %>
-[![npm](https://img.shields.io/npm/v/<%= pkg.name %>.svg?style=flat-square)](https://www.npmjs.com/package/<%= pkg.name %>)
-[![npm](https://img.shields.io/npm/dt/<%= pkg.name %>.svg?style=flat-square)](https://www.npmjs.com/package/<%= pkg.name %>)
-[![npm](https://img.shields.io/npm/dm/<%= pkg.name %>.svg?style=flat-square)](https://www.npmjs.com/package/<%= pkg.name %>)
-`.trim())
-let readmeText = '# status\n\n'
+const packages = []
 
-pluginTypes.forEach(function(type) {
+pluginTypes.forEach(function (type) {
   try {
     fs
       .readdirSync(path.join(SOURCE_DIR, 'packages', type))
-      .forEach(function(name) {
+      .forEach(function (name) {
         const pkg = new Package(type, name)
         pkg.build()
-        readmeText += readmeTemplate(pkg) + '\n\n'
+        packages.push(pkg.pkg)
       })
   } catch (err) {}
-
-  fs.writeFileSync(path.join(__dirname, '..', 'packages', 'README.md'), readmeText.trim())
 })
+
+;(function (packages) {
+  const template = fs.readFileSync(path.join(SOURCE_DIR, 'templates', 'npm-status.tmpl'), 'utf-8')
+  const render = _.template(template)
+  fs.writeFileSync(path.join(__dirname, '..', 'packages', 'README.md'), render({packages: packages}).trim())
+})(packages)
