@@ -8,8 +8,8 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "browser-sync": "^2.23.5",
-    "lodash.merge": "^4.6.0",
+    "browser-sync": "^2.23.6",
+    "lodash.merge": "^4.6.1",
     "serve-directory": "^2.1.0",
     "serve-directory-theme-octicons": "^1.0.7"
   },
@@ -37,5 +37,5 @@
   "name": "fis3-server-browsersync",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-server-browsersync",
-  "version": "1.5.5"
+  "version": "1.5.6"
 }

@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.0.10',
+  version: '1.0.11',
   description: 'a css formatter of fis3 based on stylefmt.',
   keywords: [],
   dependencies: ['es6-shim', 'postcss', 'promise-synchronizer', 'stylefmt'],
