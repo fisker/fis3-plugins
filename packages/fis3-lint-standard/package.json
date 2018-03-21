@@ -8,8 +8,8 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "eslint": "^4.18.2",
-    "standard": "^11.0.0"
+    "eslint": "^4.19.0",
+    "standard": "^11.0.1"
   },
   "description": "a js linter plugin of fis3 based on standard.",
   "files": [
@@ -31,5 +31,5 @@
   "name": "fis3-lint-standard",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-standard",
-  "version": "1.0.7"
+  "version": "1.0.8"
 }

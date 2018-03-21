@@ -9,10 +9,10 @@
   },
   "dependencies": {
     "es6-shim": "^0.35.3",
-    "postcss": "^6.0.19",
+    "postcss": "^6.0.20",
     "promise-synchronizer": "^1.0.7",
     "stylefmt": "^6.0.0",
-    "stylelint": "^9.1.1"
+    "stylelint": "^9.1.3"
   },
   "description": "a css linter plugin of fis3 based on stylelint.",
   "files": [
@@ -34,5 +34,5 @@
   "name": "fis3-lint-stylelint",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-stylelint",
-  "version": "2.0.10"
+  "version": "2.0.11"
 }
