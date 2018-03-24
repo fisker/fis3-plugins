@@ -20,7 +20,7 @@ $ npm i -g fis3-postprocessor-autoprefixer-latest
 var options = {};
 
 fis.match('*.js', {
-  postprocessor: fis.plugin('prettier', options)
+  postprocessor: fis.plugin('autoprefixer-latest', options)
 });
 ```
 
