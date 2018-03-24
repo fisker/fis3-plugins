@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.0.2',
+  version: '1.0.3',
   description: 'a fis plugin to parse pug(aka jade).',
   keywords: ['jade', 'html'],
   dependencies: ['pug'],

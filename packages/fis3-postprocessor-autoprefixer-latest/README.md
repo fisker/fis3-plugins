@@ -17,17 +17,17 @@ $ npm i -g fis3-postprocessor-autoprefixer-latest
 
 ```
 // fis-conf.js
-var options = {};
+var options = {
+  browsers: ['last 2 versions']
+}
 
 fis.match('*.js', {
-  postprocessor: fis.plugin('prettier', options)
-});
+  postprocessor: fis.plugin('autoprefixer-latest', options)
+})
 ```
 
 ## config
-https://github.com/prettier/prettier#options
-
-both options && Configuration File are supported.
+https://github.com/postcss/autoprefixer
 
 
 

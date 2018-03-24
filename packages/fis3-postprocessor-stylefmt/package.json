@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "es6-shim": "^0.35.3",
-    "postcss": "^6.0.20",
+    "postcss": "^6.0.21",
     "promise-synchronizer": "^1.0.7",
     "stylefmt": "^6.0.0"
   },
@@ -32,5 +32,5 @@
   "name": "fis3-postprocessor-stylefmt",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-stylefmt",
-  "version": "1.0.12"
+  "version": "1.0.13"
 }
