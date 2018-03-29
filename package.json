@@ -47,7 +47,7 @@
     "posthtml": "^0.11.3",
     "posthtml-beautify": "^0.2.0",
     "prettier": "^1.11.1",
-    "promise-synchronizer": "^1.0.7",
+    "promise-synchronizer": "^1.0.8",
     "pug": "^2.0.3",
     "serve-directory": "^2.1.0",
     "serve-directory-theme-octicons": "^1.0.7",

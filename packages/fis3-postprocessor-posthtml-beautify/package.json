@@ -10,7 +10,7 @@
   "dependencies": {
     "posthtml": "^0.11.3",
     "posthtml-beautify": "^0.2.0",
-    "promise-synchronizer": "^1.0.7"
+    "promise-synchronizer": "^1.0.8"
   },
   "description": "a html formatter of fis3 based on posthtml-beautify.",
   "files": [
@@ -36,5 +36,5 @@
   "name": "fis3-postprocessor-posthtml-beautify",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-posthtml-beautify",
-  "version": "1.0.13"
+  "version": "1.1.0"
 }
