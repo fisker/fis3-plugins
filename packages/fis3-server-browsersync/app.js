@@ -5,8 +5,13 @@ var args = process.argv.join('|')
 var DOCUMENT_ROOT = path.resolve(
   /\-\-root\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : process.cwd()
 )
+var scriptTag = path.join(__dirname, 'templates/script-tags.tmpl')
 var bs = require('browser-sync').create()
+
 var getBsConfig = require('./lib/browser-sync-config.js')
+
+// replace scriptTag template with mine
+bs.instance.config.templates.scriptTag = scriptTag
 
 function now() {
   var d = new Date()

@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.5.6',
+  version: '1.5.7',
   description: 'a browser sync server for fis3.',
   keywords: ['browser-sync', 'livereload'],
   dependencies: [
@@ -12,5 +12,10 @@ module.exports = {
   links: {
     browsersync: 'https://browsersync.io/'
   },
-  files: ['app.js', 'lib/browser-sync-config.js', 'lib/serve-directory.js']
+  files: [
+    'app.js',
+    'lib/browser-sync-config.js',
+    'lib/serve-directory.js',
+    'templates/script-tags.tmpl'
+  ]
 }

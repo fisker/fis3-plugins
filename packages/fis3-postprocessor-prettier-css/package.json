@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "prettier": "^1.11.1"
+    "prettier": "^1.12.0"
   },
   "description": "a code formatter of fis3 based on prettier.",
   "files": [
@@ -33,5 +33,5 @@
   "name": "fis3-postprocessor-prettier-css",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-prettier-css",
-  "version": "1.0.9"
+  "version": "1.0.10"
 }
