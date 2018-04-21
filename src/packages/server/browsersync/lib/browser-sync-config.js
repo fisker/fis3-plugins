@@ -1,20 +1,23 @@
 'use strict'
 
-var path = require('path')
-var bsDefaultConfig = require(path.join(
+import path from 'path'
+import serveDirectory from './serve-directory.js'
+import merge from 'lodash.merge'
+import browserSync from 'browser-sync'
+
+const bsDefaultConfig = require(path.join(
   path.dirname(require.resolve('browser-sync')),
   'default-config.js'
 ))
-var serveDirectory = require('./serve-directory.js')
-var merge = require('lodash.merge')
-var args = process.argv.join('|')
-var context = /\-\-context\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : ''
-var bsConfigFile = /\-\-bs\-config\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : ''
-var bs = require('browser-sync').create()
-var port = /\-\-port\|(\d+)(?:\||$)/.test(args) ? ~~RegExp.$1 : 8080
-var https = /\-\-https\|(true)(?:\||$)/.test(args) ? !!RegExp.$1 : false
 
-var userConfigFile = path.resolve(
+const args = process.argv.join('|')
+const context = /\-\-context\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : ''
+const bsConfigFile = /\-\-bs\-config\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : ''
+const bs = browserSync.create()
+const port = /\-\-port\|(\d+)(?:\||$)/.test(args) ? ~~RegExp.$1 : 8080
+const https = /\-\-https\|(true)(?:\||$)/.test(args) ? !!RegExp.$1 : false
+
+const userConfigFile = path.resolve(
   context,
   bsConfigFile || bs.instance.config.userFile
 )
@@ -24,7 +27,7 @@ function getType(obj) {
 }
 
 function getUserConfig(path) {
-  var config = {}
+  let config = {}
   try {
     config = require(path)
 
@@ -41,7 +44,7 @@ function getUserConfig(path) {
 }
 
 function getConfig(root) {
-  var defaultConfig = {
+  const defaultConfig = {
     server: {
       directory: true
     },
@@ -52,11 +55,9 @@ function getConfig(root) {
     online: false
   }
 
-  var userConfig = getUserConfig(userConfigFile)
+  const userConfig = getUserConfig(userConfigFile)
 
-  var config = merge({}, bsDefaultConfig, defaultConfig, userConfig)
-
-  config = merge(config, {
+  const config = merge({}, bsDefaultConfig, defaultConfig, userConfig, {
     server: {
       baseDir: root
     },
@@ -77,7 +78,7 @@ function getConfig(root) {
   }
 
   if (config.server.directory) {
-    var type = getType(config.middleware)
+    const type = getType(config.middleware)
 
     if (type !== 'Array') {
       if (type === 'Boolean') {
@@ -94,4 +95,4 @@ function getConfig(root) {
   return config
 }
 
-module.exports = getConfig
+export default getConfig

@@ -1,20 +1,42 @@
 'use strict'
 
-var path = require('path')
-var bsDefaultConfig = require(path.join(
-  path.dirname(require.resolve('browser-sync')),
+Object.defineProperty(exports, '__esModule', {
+  value: true
+})
+
+var _path = require('path')
+
+var _path2 = _interopRequireDefault(_path)
+
+var _serveDirectory = require('./serve-directory.js')
+
+var _serveDirectory2 = _interopRequireDefault(_serveDirectory)
+
+var _lodash = require('lodash.merge')
+
+var _lodash2 = _interopRequireDefault(_lodash)
+
+var _browserSync = require('browser-sync')
+
+var _browserSync2 = _interopRequireDefault(_browserSync)
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj}
+}
+
+var bsDefaultConfig = require(_path2.default.join(
+  _path2.default.dirname(require.resolve('browser-sync')),
   'default-config.js'
 ))
-var serveDirectory = require('./serve-directory.js')
-var merge = require('lodash.merge')
+
 var args = process.argv.join('|')
 var context = /\-\-context\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : ''
 var bsConfigFile = /\-\-bs\-config\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : ''
-var bs = require('browser-sync').create()
+var bs = _browserSync2.default.create()
 var port = /\-\-port\|(\d+)(?:\||$)/.test(args) ? ~~RegExp.$1 : 8080
 var https = /\-\-https\|(true)(?:\||$)/.test(args) ? !!RegExp.$1 : false
 
-var userConfigFile = path.resolve(
+var userConfigFile = _path2.default.resolve(
   context,
   bsConfigFile || bs.instance.config.userFile
 )
@@ -54,23 +76,27 @@ function getConfig(root) {
 
   var userConfig = getUserConfig(userConfigFile)
 
-  var config = merge({}, bsDefaultConfig, defaultConfig, userConfig)
-
-  config = merge(config, {
-    server: {
-      baseDir: root
-    },
-    port: port,
-    open: false,
-    snippetOptions: {
-      rule: {
-        match: /<\/body>|<!--\s*browser-sync-script\s*-->/i,
-        fn: function fn(snippet, match) {
-          return snippet + match
+  var config = (0, _lodash2.default)(
+    {},
+    bsDefaultConfig,
+    defaultConfig,
+    userConfig,
+    {
+      server: {
+        baseDir: root
+      },
+      port: port,
+      open: false,
+      snippetOptions: {
+        rule: {
+          match: /<\/body>|<!--\s*browser-sync-script\s*-->/i,
+          fn: function fn(snippet, match) {
+            return snippet + match
+          }
         }
       }
     }
-  })
+  )
 
   if (!https) {
     config.https = false
@@ -87,11 +113,12 @@ function getConfig(root) {
       }
     }
 
-    config.middleware.push(serveDirectory(root))
+    config.middleware.push((0, _serveDirectory2.default)(root))
     config.server.directory = false
   }
 
   return config
 }
 
-module.exports = getConfig
+exports.default = getConfig
+module.exports = exports['default']

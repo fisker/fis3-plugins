@@ -1,9 +1,24 @@
 'use strict'
 
-var path = require('path')
+Object.defineProperty(exports, '__esModule', {
+  value: true
+})
+
+var _path = require('path')
+
+var _path2 = _interopRequireDefault(_path)
+
+var _fs = require('fs')
+
+var _fs2 = _interopRequireDefault(_fs)
+
+var _child_process = require('child_process')
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj}
+}
+
 var util = fis.require('command-server/lib/util.js')
-var spawn = require('child_process').spawn
-var fs = require('fs')
 
 // 每 0.2 秒读取子进程的输出文件。
 //
@@ -13,7 +28,7 @@ var fs = require('fs')
 // master 每隔一段时间去读文件，获取子进程输出。
 function watchOnFile(filepath, callback) {
   var lastIndex = 0
-  var timer
+  var timer = void 0
 
   function read() {
     var stat = fs.statSync(filepath)
@@ -44,18 +59,18 @@ function watchOnFile(filepath, callback) {
 }
 
 function start(opt, callback) {
-  var script = path.join(opt.root, 'server.js')
+  var script = _path2.default.join(opt.root, 'server.js')
 
   if (!fis.util.exists(script)) {
-    script = path.join(__dirname, 'app.js')
+    script = _path2.default.join(__dirname, 'app.js')
   }
 
   var timeout = Math.max(opt.timeout * 1000, 5000)
-  var timeoutTimer
+  var timeoutTimer = void 0
   var args = [script]
 
   if (opt['bs-config']) {
-    var bsConfig = path.join(process.cwd(), opt['bs-config'])
+    var bsConfig = _path2.default.join(process.cwd(), opt['bs-config'])
     if (fis.util.exists(bsConfig)) {
       opt['bs-config'] = bsConfig
     } else {
@@ -71,9 +86,9 @@ function start(opt, callback) {
   })
 
   process.stdout.write('\n Starting fis-server .')
-  var logFile = path.join(opt.root, 'server.log')
-  var server = spawn(process.execPath, args, {
-    cwd: path.dirname(script),
+  var logFile = _path2.default.join(opt.root, 'server.log')
+  var server = (0, _child_process.spawn)(process.execPath, args, {
+    cwd: _path2.default.dirname(script),
     detached: opt.daemon,
     stdio: [
       0,
@@ -85,7 +100,7 @@ function start(opt, callback) {
   var log = ''
   var started = false
   var error = false
-  var stoper
+  var stoper = void 0
 
   var onData = function onData(chunk) {
     if (started) {
@@ -154,6 +169,5 @@ function start(opt, callback) {
   }
 }
 
-module.exports = {
-  start: start
-}
+exports.default = {start: start}
+module.exports = exports['default']

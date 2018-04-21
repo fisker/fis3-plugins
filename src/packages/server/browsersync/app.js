@@ -1,20 +1,22 @@
-const path = require('path')
+import path from 'path'
+import browserSync from 'browser-sync'
+import getBsConfig from './lib/browser-sync-config.js'
+
+
 const args = process.argv.join('|')
 const DOCUMENT_ROOT = path.resolve(
   /\-\-root\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : process.cwd()
 )
 const scriptTag = path.join(__dirname, 'templates/script-tags.tmpl')
-const bs = require('browser-sync').create()
 
-const getBsConfig = require('./lib/browser-sync-config.js')
+const bs = browserSync.create()
 
 // replace scriptTag template with mine
 bs.instance.config.templates.scriptTag = scriptTag
 
 function now() {
-  var d = new Date()
-  var str
-  str = [d.getHours(), d.getMinutes(), d.getSeconds()]
+  const d = new Date()
+  let str = [d.getHours(), d.getMinutes(), d.getSeconds()]
     .join(':')
     .replace(/\b\d\b/g, '0$&')
 
@@ -23,7 +25,7 @@ function now() {
 }
 
 function startServer() {
-  var bsConfig = getBsConfig(DOCUMENT_ROOT)
+  const bsConfig = getBsConfig(DOCUMENT_ROOT)
 
   bs.exit()
   bs.init(bsConfig, function() {

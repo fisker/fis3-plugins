@@ -1,9 +1,9 @@
 'use strict'
 
-var fs = require('fs')
-var path = require('path')
-var serveDirectory = require('serve-directory')
-var serveDirectoryThemeOcticons = require('serve-directory-theme-octicons')
+import path from 'path'
+import fs from 'fs'
+import serveDirectory from 'serve-directory'
+import serveDirectoryThemeOcticons from 'serve-directory-theme-octicons'
 
 function getServeDirectoryMiddleWare(root) {
   return {
@@ -13,4 +13,4 @@ function getServeDirectoryMiddleWare(root) {
   }
 }
 
-module.exports = getServeDirectoryMiddleWare
+export default getServeDirectoryMiddleWare

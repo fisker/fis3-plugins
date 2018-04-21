@@ -1,22 +1,35 @@
 'use strict'
 
-var path = require('path')
+var _path = require('path')
+
+var _path2 = _interopRequireDefault(_path)
+
+var _browserSync = require('browser-sync')
+
+var _browserSync2 = _interopRequireDefault(_browserSync)
+
+var _browserSyncConfig = require('./lib/browser-sync-config.js')
+
+var _browserSyncConfig2 = _interopRequireDefault(_browserSyncConfig)
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj}
+}
+
 var args = process.argv.join('|')
-var DOCUMENT_ROOT = path.resolve(
+var DOCUMENT_ROOT = _path2.default.resolve(
   /\-\-root\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : process.cwd()
 )
-var scriptTag = path.join(__dirname, 'templates/script-tags.tmpl')
-var bs = require('browser-sync').create()
+var scriptTag = _path2.default.join(__dirname, 'templates/script-tags.tmpl')
 
-var getBsConfig = require('./lib/browser-sync-config.js')
+var bs = _browserSync2.default.create()
 
 // replace scriptTag template with mine
 bs.instance.config.templates.scriptTag = scriptTag
 
 function now() {
   var d = new Date()
-  var str
-  str = [d.getHours(), d.getMinutes(), d.getSeconds()]
+  var str = [d.getHours(), d.getMinutes(), d.getSeconds()]
     .join(':')
     .replace(/\b\d\b/g, '0$&')
 
@@ -25,7 +38,7 @@ function now() {
 }
 
 function startServer() {
-  var bsConfig = getBsConfig(DOCUMENT_ROOT)
+  var bsConfig = (0, _browserSyncConfig2.default)(DOCUMENT_ROOT)
 
   bs.exit()
   bs.init(bsConfig, function() {
@@ -37,7 +50,7 @@ function startServer() {
   })
 
   bs.watch(DOCUMENT_ROOT, function(event, file) {
-    var relativePath = path.relative(DOCUMENT_ROOT, file)
+    var relativePath = _path2.default.relative(DOCUMENT_ROOT, file)
     if (
       !relativePath ||
       relativePath === 'server.log' ||

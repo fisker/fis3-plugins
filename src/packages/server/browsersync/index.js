@@ -1,7 +1,8 @@
-var path = require('path')
-var util = fis.require('command-server/lib/util.js')
-var spawn = require('child_process').spawn
-var fs = require('fs')
+import path from 'path'
+import ds from 'fs'
+import {spawn} from 'child_process'
+
+const util = fis.require('command-server/lib/util.js')
 
 // 每 0.2 秒读取子进程的输出文件。
 //
@@ -10,19 +11,19 @@ var fs = require('fs')
 // 解决办法是，让子进程的输出直接指向文件指针。
 // master 每隔一段时间去读文件，获取子进程输出。
 function watchOnFile(filepath, callback) {
-  var lastIndex = 0
-  var timer
+  let lastIndex = 0
+  let timer
 
   function read() {
-    var stat = fs.statSync(filepath)
+    const stat = fs.statSync(filepath)
 
     if (stat.size != lastIndex) {
-      var fd = fs.openSync(filepath, 'r')
-      var buffer = new Buffer(stat.size - lastIndex)
+      const fd = fs.openSync(filepath, 'r')
+      const buffer = new Buffer(stat.size - lastIndex)
 
       try {
         fs.readSync(fd, buffer, lastIndex, stat.size - lastIndex)
-        var content = buffer.toString('utf8')
+        const content = buffer.toString('utf8')
         lastIndex = stat.size
 
         callback(content)
@@ -42,18 +43,18 @@ function watchOnFile(filepath, callback) {
 }
 
 function start(opt, callback) {
-  var script = path.join(opt.root, 'server.js')
+  let script = path.join(opt.root, 'server.js')
 
   if (!fis.util.exists(script)) {
     script = path.join(__dirname, 'app.js')
   }
 
-  var timeout = Math.max(opt.timeout * 1000, 5000)
-  var timeoutTimer
-  var args = [script]
+  const timeout = Math.max(opt.timeout * 1000, 5000)
+  let timeoutTimer
+  const args = [script]
 
   if (opt['bs-config']) {
-    var bsConfig = path.join(process.cwd(), opt['bs-config'])
+    const bsConfig = path.join(process.cwd(), opt['bs-config'])
     if (fis.util.exists(bsConfig)) {
       opt['bs-config'] = bsConfig
     } else {
@@ -69,8 +70,8 @@ function start(opt, callback) {
   })
 
   process.stdout.write('\n Starting fis-server .')
-  var logFile = path.join(opt.root, 'server.log')
-  var server = spawn(process.execPath, args, {
+  const logFile = path.join(opt.root, 'server.log')
+  const server = spawn(process.execPath, args, {
     cwd: path.dirname(script),
     detached: opt.daemon,
     stdio: [
@@ -80,10 +81,10 @@ function start(opt, callback) {
     ]
   })
 
-  var log = ''
-  var started = false
-  var error = false
-  var stoper
+  let log = ''
+  let started = false
+  let error = false
+  let stoper
 
   var onData = function(chunk) {
     if (started) {
@@ -152,6 +153,4 @@ function start(opt, callback) {
   }
 }
 
-module.exports = {
-  start: start
-}
+export default {start}
