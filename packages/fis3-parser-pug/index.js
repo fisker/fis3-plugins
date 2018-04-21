@@ -1,12 +1,17 @@
 'use strict'
 
-var render = require('pug').render
+Object.defineProperty(exports, '__esModule', {
+  value: true
+})
 
-module.exports = function(content, file, conf) {
-  return content ? render(content, conf) : ''
+exports.default = function(content, file, conf) {
+  return content ? (0, _pug.render)(content, conf) : ''
 }
+
+var _pug = require('pug')
 
 module.exports.defaultOptions = {
   pretty: '  ',
   doctype: 'html'
 }
+module.exports = exports['default']

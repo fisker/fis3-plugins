@@ -1,5 +1,5 @@
-const render = require('pug').render
+import {render} from 'pug'
 
-module.exports = function(content, file, conf) {
+export default function(content, file, conf) {
   return content ? render(content, conf) : ''
 }
