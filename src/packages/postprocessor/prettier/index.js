@@ -4,7 +4,7 @@ const log = global.fis.log
 const assign = Object.assign || global.fis.util.assign
 const rcConfig = prettier.resolveConfig.sync('prettier')
 
-export default function(content, file, conf) {
+module.exports = function(content, file, conf) {
   delete conf.filename
   content = prettier.format(content, assign({}, rcConfig, conf))
 

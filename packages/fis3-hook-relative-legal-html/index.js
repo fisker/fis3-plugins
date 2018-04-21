@@ -1,18 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-})
-
-exports.default = function(fis, opts) {
-  fis.on('process:end', onProcessEnd)
-  fis.on('standard:restore:uri', onStandardRestoreUri)
-  fis.on('pack:file', onPackFile)
-
-  // 给其他插件用的
-  fis.on('plugin:relative:fetch', onFetchRelativeUrl)
-}
-
 var quotes = {
   '': 'QUOTE_NONE',
   "'": 'QUOTE_SINGLE',
@@ -149,4 +136,11 @@ function onFetchRelativeUrl(message) {
   message.ret = getRelativeUrl(target, host)
 }
 
-module.exports = exports['default']
+module.exports = function(fis, opts) {
+  fis.on('process:end', onProcessEnd)
+  fis.on('standard:restore:uri', onStandardRestoreUri)
+  fis.on('pack:file', onPackFile)
+
+  // 给其他插件用的
+  fis.on('plugin:relative:fetch', onFetchRelativeUrl)
+}

@@ -1,14 +1,10 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-})
+var _jsBeautify = require('js-beautify')
 
-exports.default = function(content, file, conf) {
+module.exports = function(content, file, conf) {
   return content ? (0, _jsBeautify.html)(content, conf) : ''
 }
-
-var _jsBeautify = require('js-beautify')
 
 module.exports.defaultOptions = {
   indent_size: 2,
@@ -32,4 +28,3 @@ module.exports.defaultOptions = {
   wrap_attributes_indent_size: 4,
   end_with_newline: false
 }
-module.exports = exports['default']

@@ -31,5 +31,5 @@
   "name": "fis3-lint-eslint-noisy",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-eslint-noisy",
-  "version": "2.1.0"
+  "version": "2.1.1"
 }

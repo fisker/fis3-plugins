@@ -153,4 +153,4 @@ function start(opt, callback) {
   }
 }
 
-export {start}
+module.exports = {start}

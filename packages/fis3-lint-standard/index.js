@@ -1,10 +1,19 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-})
+var _eslint = require('eslint')
 
-exports.default = function(content, file, conf) {
+var _standard = require('standard')
+
+var _standard2 = _interopRequireDefault(_standard)
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj}
+}
+
+var formatter = _eslint.CLIEngine.getFormatter()
+var log = global.fis.log
+
+module.exports = function(content, file, conf) {
   content = content.replace(/\n\s+$/, '')
   var results = []
 
@@ -24,18 +33,3 @@ exports.default = function(content, file, conf) {
     }
   }
 }
-
-var _eslint = require('eslint')
-
-var _standard = require('standard')
-
-var _standard2 = _interopRequireDefault(_standard)
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {default: obj}
-}
-
-var formatter = _eslint.CLIEngine.getFormatter()
-var log = global.fis.log
-
-module.exports = exports['default']

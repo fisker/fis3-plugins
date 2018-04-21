@@ -1,10 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-})
-exports.start = undefined
-
 var _path = require('path')
 
 var _path2 = _interopRequireDefault(_path)
@@ -170,4 +165,4 @@ function start(opt, callback) {
   }
 }
 
-exports.start = start
+module.exports = {start: start}

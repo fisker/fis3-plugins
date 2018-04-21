@@ -1,10 +1,41 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-})
+require('es6-shim')
 
-exports.default = function(content, file, conf) {
+var _promiseSynchronizer = require('promise-synchronizer')
+
+var _promiseSynchronizer2 = _interopRequireDefault(_promiseSynchronizer)
+
+var _postcss = require('postcss')
+
+var _postcss2 = _interopRequireDefault(_postcss)
+
+var _stylelint = require('stylelint')
+
+var _stylelint2 = _interopRequireDefault(_stylelint)
+
+var _stylefmt = require('stylefmt')
+
+var _stylefmt2 = _interopRequireDefault(_stylefmt)
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj}
+}
+
+var log =
+  global.fis
+    .log /*
+                           * fis3-lint-stylelint
+                           * fisker Cheung<lionkay@gmail.com>
+                           */
+
+var syntax = {
+  '.scss': 'scss',
+  '.less': 'less',
+  '.sss': 'sugarss'
+}
+
+module.exports = function(content, file, conf) {
   if (!content) {
     return
   }
@@ -84,40 +115,3 @@ exports.default = function(content, file, conf) {
     process.exit(1)
   }
 }
-
-require('es6-shim')
-
-var _promiseSynchronizer = require('promise-synchronizer')
-
-var _promiseSynchronizer2 = _interopRequireDefault(_promiseSynchronizer)
-
-var _postcss = require('postcss')
-
-var _postcss2 = _interopRequireDefault(_postcss)
-
-var _stylelint = require('stylelint')
-
-var _stylelint2 = _interopRequireDefault(_stylelint)
-
-var _stylefmt = require('stylefmt')
-
-var _stylefmt2 = _interopRequireDefault(_stylefmt)
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {default: obj}
-}
-
-var log =
-  global.fis
-    .log /*
-                           * fis3-lint-stylelint
-                           * fisker Cheung<lionkay@gmail.com>
-                           */
-
-var syntax = {
-  '.scss': 'scss',
-  '.less': 'less',
-  '.sss': 'sugarss'
-}
-
-module.exports = exports['default']

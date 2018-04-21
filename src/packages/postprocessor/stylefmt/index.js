@@ -3,7 +3,7 @@ import {
   process as stylefmt
 } from 'stylefmt'
 
-export default function(content, file, conf) {
+module.exports = function(content, file, conf) {
   try {
     content = sync(
       stylefmt(content, {

@@ -1,10 +1,16 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-})
+var _promiseSynchronizer = require('promise-synchronizer')
 
-exports.default = function(content, file, conf) {
+var _promiseSynchronizer2 = _interopRequireDefault(_promiseSynchronizer)
+
+var _stylefmt = require('stylefmt')
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj}
+}
+
+module.exports = function(content, file, conf) {
   try {
     content = (0, _promiseSynchronizer2.default)(
       (0, _stylefmt.process)(content, {
@@ -18,15 +24,3 @@ exports.default = function(content, file, conf) {
   } catch (err) {}
   return content
 }
-
-var _promiseSynchronizer = require('promise-synchronizer')
-
-var _promiseSynchronizer2 = _interopRequireDefault(_promiseSynchronizer)
-
-var _stylefmt = require('stylefmt')
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {default: obj}
-}
-
-module.exports = exports['default']

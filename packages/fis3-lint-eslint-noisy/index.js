@@ -1,10 +1,11 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-})
+var _eslint = require('eslint')
 
-exports.default = function(content, file, conf) {
+var formatter = _eslint.CLIEngine.getFormatter()
+var log = global.fis.log
+
+module.exports = function(content, file, conf) {
   if (!content) {
     return
   }
@@ -27,14 +28,8 @@ exports.default = function(content, file, conf) {
   }
 }
 
-var _eslint = require('eslint')
-
-var formatter = _eslint.CLIEngine.getFormatter()
-var log = global.fis.log
-
 module.exports.defaultOptions = {
   envs: ['browser'],
   fix: false,
   useEslintrc: true
 }
-module.exports = exports['default']
