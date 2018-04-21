@@ -5239,9 +5239,9 @@ send@0.15.2:
     range-parser "~1.2.0"
     statuses "~1.3.1"
 
-serve-directory-theme-octicons@^1.1.1:
-  version "1.1.1"
-  resolved "http://registry.npm.taobao.org/serve-directory-theme-octicons/download/serve-directory-theme-octicons-1.1.1.tgz#c050fe8230b3d3efd3dab93dd39339a739d31df2"
+serve-directory-theme-octicons@^1.1.3:
+  version "1.1.3"
+  resolved "http://registry.npm.taobao.org/serve-directory-theme-octicons/download/serve-directory-theme-octicons-1.1.3.tgz#582e938d87dc1a8c13c7f02a4fce4299f285e7c3"
   dependencies:
     lodash.uniq "^4.5.0"
     pretty-bytes "^4.0.2"
