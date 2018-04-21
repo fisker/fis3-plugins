@@ -32,14 +32,14 @@ function watchOnFile(filepath, callback) {
   var timer = void 0
 
   function read() {
-    var stat = fs.statSync(filepath)
+    var stat = _fs2.default.statSync(filepath)
 
     if (stat.size != lastIndex) {
-      var fd = fs.openSync(filepath, 'r')
+      var fd = _fs2.default.openSync(filepath, 'r')
       var buffer = new Buffer(stat.size - lastIndex)
 
       try {
-        fs.readSync(fd, buffer, lastIndex, stat.size - lastIndex)
+        _fs2.default.readSync(fd, buffer, lastIndex, stat.size - lastIndex)
         var content = buffer.toString('utf8')
         lastIndex = stat.size
 
@@ -93,8 +93,8 @@ function start(opt, callback) {
     detached: opt.daemon,
     stdio: [
       0,
-      opt.daemon ? fs.openSync(logFile, 'w') : 'pipe',
-      opt.daemon ? fs.openSync(logFile, 'w+') : 'pipe'
+      opt.daemon ? _fs2.default.openSync(logFile, 'w') : 'pipe',
+      opt.daemon ? _fs2.default.openSync(logFile, 'w+') : 'pipe'
     ]
   })
 

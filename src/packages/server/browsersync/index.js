@@ -1,5 +1,5 @@
 import path from 'path'
-import ds from 'fs'
+import fs from 'fs'
 import {spawn} from 'child_process'
 
 const util = fis.require('command-server/lib/util.js')

@@ -24,8 +24,8 @@ var path = require('path')
 var rFile = /\.[^\.]+$/
 
 function wrap(value) {
-  var str = fis.util.stringQuote(value).rest
-  return '"__relative___' + quotes[info.quote] + '-' + str + '___"'
+  var info = fis.util.stringQuote(value)
+  return '"__relative___' + quotes[info.quote] + '-' + info.rest + '___"'
 }
 
 function getRelativeUrl(file, host) {

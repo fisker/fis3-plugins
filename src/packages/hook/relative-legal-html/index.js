@@ -9,8 +9,8 @@ const path = require('path')
 const rFile = /\.[^\.]+$/
 
 function wrap(value) {
-  const str = fis.util.stringQuote(value).rest
-  return `"__relative___${quotes[info.quote]}-${str}___"`
+  const info = fis.util.stringQuote(value)
+  return `"__relative___${quotes[info.quote]}-${info.rest}___"`
 }
 
 function getRelativeUrl(file, host) {
