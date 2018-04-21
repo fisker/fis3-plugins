@@ -33,5 +33,5 @@
   "name": "fis3-postprocessor-prettier-css",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-prettier-css",
-  "version": "1.0.11"
+  "version": "1.1.0"
 }
