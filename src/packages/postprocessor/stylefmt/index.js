@@ -1,17 +1,21 @@
 // colors.js bug
 // es6-shim `bold` breaks colors.js
-var getter = String.prototype.__lookupGetter__('bold')
-require('es6-shim')
+const getter = String.prototype.__lookupGetter__('bold')
+
+import 'es6-shim'
+
 if (getter) {
   String.prototype.__defineGetter__('bold', function() {
     return this
   })
 }
 
-var sync = require('promise-synchronizer')
-var stylefmt = require('stylefmt').process
+import sync from 'promise-synchronizer'
+import {
+  process as stylefmt
+} from 'stylefmt'
 
-module.exports = function(content, file, conf) {
+export default function(content, file, conf) {
   try {
     content = sync(
       stylefmt(content, {

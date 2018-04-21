@@ -1,5 +1,41 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {
+  value: true
+})
+
+exports.default = function(content, file, conf) {
+  if (!content) {
+    return
+  }
+
+  var ruleset =
+    conf.rules ||
+    htmlhintrcConfig ||
+    (htmlhintrcConfig = readConfig('.htmlhintrc') || {})
+
+  var results = _htmlhint.HTMLHint.verify(content, ruleset)
+  var errorType = 'warning'
+
+  results.forEach(function(msg) {
+    if (msg.type === 'error') {
+      errorType = 'error'
+    }
+  })
+
+  if (results.length) {
+    log.warn(
+      '[%s] lint failed with %s: \n\n %s',
+      file.id,
+      errorType,
+      _htmlhint.HTMLHint.format(results, {indent: 2}).join('\n')
+    )
+    if (errorType === 'error') {
+      process.exit(1)
+    }
+  }
+}
+
 var _htmlhint = require('htmlhint')
 
 var _fs = require('fs')
@@ -46,34 +82,4 @@ function readConfig(filename) {
 
 var htmlhintrcConfig = {}
 
-module.exports = function(content, file, conf) {
-  if (!content) {
-    return
-  }
-
-  var ruleset =
-    conf.rules ||
-    htmlhintrcConfig ||
-    (htmlhintrcConfig = readConfig('.htmlhintrc') || {})
-
-  var results = _htmlhint.HTMLHint.verify(content, ruleset)
-  var errorType = 'warning'
-
-  results.forEach(function(msg) {
-    if (msg.type === 'error') {
-      errorType = 'error'
-    }
-  })
-
-  if (results.length) {
-    log.warn(
-      '[%s] lint failed with %s: \n\n %s',
-      file.id,
-      errorType,
-      _htmlhint.HTMLHint.format(results, {indent: 2}).join('\n')
-    )
-    if (errorType === 'error') {
-      process.exit(1)
-    }
-  }
-}
+module.exports = exports['default']

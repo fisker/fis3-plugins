@@ -5,8 +5,9 @@
 
 'use strict'
 
-var standard = require('standard')
-var log = global.fis.log
+import standard from 'standard'
+
+const log = global.fis.log
 
 module.exports = function(content, file, conf) {
   content = content.replace(/\n\s+$/, '')

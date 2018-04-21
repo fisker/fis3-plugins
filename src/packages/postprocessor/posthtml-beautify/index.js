@@ -1,6 +1,7 @@
-const posthtml = require('posthtml')
-const beautify = require('posthtml-beautify')
-const sync = require('promise-synchronizer')
+import posthtml from 'posthtml'
+import beautify from 'posthtml-beautify'
+import sync from 'promise-synchronizer'
+
 const log = global.fis.log
 
 module.exports = function(content, file, conf) {
@@ -13,7 +14,7 @@ module.exports = function(content, file, conf) {
     '"__relative_fn2_start__$1__relative_fn2_end__"'
   )
 
-  let promise = posthtml()
+  const promise = posthtml()
     .use(
       beautify({
         rules: conf.rules

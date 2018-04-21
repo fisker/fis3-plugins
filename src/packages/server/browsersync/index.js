@@ -153,4 +153,4 @@ function start(opt, callback) {
   }
 }
 
-export default {start}
+export {start}

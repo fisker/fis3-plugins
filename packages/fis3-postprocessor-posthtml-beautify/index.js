@@ -1,8 +1,21 @@
 'use strict'
 
-var posthtml = require('posthtml')
-var beautify = require('posthtml-beautify')
-var sync = require('promise-synchronizer')
+var _posthtml = require('posthtml')
+
+var _posthtml2 = _interopRequireDefault(_posthtml)
+
+var _posthtmlBeautify = require('posthtml-beautify')
+
+var _posthtmlBeautify2 = _interopRequireDefault(_posthtmlBeautify)
+
+var _promiseSynchronizer = require('promise-synchronizer')
+
+var _promiseSynchronizer2 = _interopRequireDefault(_promiseSynchronizer)
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj}
+}
+
 var log = global.fis.log
 
 module.exports = function(content, file, conf) {
@@ -15,9 +28,9 @@ module.exports = function(content, file, conf) {
     '"__relative_fn2_start__$1__relative_fn2_end__"'
   )
 
-  var promise = posthtml()
+  var promise = (0, _posthtml2.default)()
     .use(
-      beautify({
+      (0, _posthtmlBeautify2.default)({
         rules: conf.rules
       })
     )
@@ -27,7 +40,7 @@ module.exports = function(content, file, conf) {
     })
 
   try {
-    content = sync(promise)
+    content = (0, _promiseSynchronizer2.default)(promise)
   } catch (err) {
     log.warn('%s might not processed due to:\n %s', file.id, err)
     process.exit(1)

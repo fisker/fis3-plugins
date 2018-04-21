@@ -1,9 +1,10 @@
-var prettier = require('prettier')
-var log = global.fis.log
-var assign = Object.assign || global.fis.util.assign
-var rcConfig = prettier.resolveConfig.sync('prettier')
+import prettier from 'prettier'
 
-module.exports = function(content, file, conf) {
+const log = global.fis.log
+const assign = Object.assign || global.fis.util.assign
+const rcConfig = prettier.resolveConfig.sync('prettier')
+
+export default function(content, file, conf) {
   delete conf.filename
   content = prettier.format(content, assign({}, rcConfig, conf))
 

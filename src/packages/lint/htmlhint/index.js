@@ -32,7 +32,7 @@ function readConfig(filename) {
 
 let htmlhintrcConfig = {}
 
-module.exports = function(content, file, conf) {
+export default function(content, file, conf) {
   if (!content) {
     return
   }

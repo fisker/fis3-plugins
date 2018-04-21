@@ -3,6 +3,7 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 })
+exports.start = undefined
 
 var _path = require('path')
 
@@ -169,5 +170,4 @@ function start(opt, callback) {
   }
 }
 
-exports.default = {start: start}
-module.exports = exports['default']
+exports.start = start

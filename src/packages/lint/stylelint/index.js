@@ -16,7 +16,7 @@ const syntax = {
   '.sss': 'sugarss'
 }
 
-module.exports = function(content, file, conf) {
+export default function(content, file, conf) {
   if (!content) {
     return
   }
