@@ -1,11 +1,12 @@
-var CLIEngine = require('eslint').CLIEngine
-var formatter = CLIEngine.getFormatter()
-var standard = require('standard')
-var log = global.fis.log
+import {CLIEngine} from 'eslint'
+import standard from 'standard'
+
+const formatter = CLIEngine.getFormatter()
+const log = global.fis.log
 
 module.exports = function(content, file, conf) {
   content = content.replace(/\n\s+$/, '')
-  var results
+  let results = []
 
   try {
     results = standard.lintTextSync(content, {}).results

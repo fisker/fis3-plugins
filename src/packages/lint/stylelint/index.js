@@ -2,14 +2,15 @@
  * fis3-lint-stylelint
  * fisker Cheung<lionkay@gmail.com>
  */
-require('es6-shim')
-var sync = require('promise-synchronizer')
-var postcss = require('postcss')
-var stylelint = require('stylelint')
-var stylefmt = require('stylefmt')
-var log = global.fis.log
+import 'es6-shim'
+import sync from 'promise-synchronizer'
+import postcss from 'postcss'
+import stylelint from 'stylelint'
+import stylefmt from 'stylefmt'
 
-var syntax = {
+const log = global.fis.log
+
+const syntax = {
   '.scss': 'scss',
   '.less': 'less',
   '.sss': 'sugarss'
@@ -20,7 +21,7 @@ module.exports = function(content, file, conf) {
     return
   }
 
-  var config = Object.assign({}, conf, {
+  const config = Object.assign({}, conf, {
     formatter: 'string',
     files: file.realpath,
     extractStyleTagsFromHtml: false
@@ -48,7 +49,7 @@ module.exports = function(content, file, conf) {
   }
   delete config.fix
 
-  var promise = postcss([stylelint])
+  const promise = postcss([stylelint])
     .process(content, config)
     .then(function(result) {
       var messages = result.messages || []

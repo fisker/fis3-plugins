@@ -1,15 +1,33 @@
 'use strict'
 
-/*
- * fis3-lint-stylelint
- * fisker Cheung<lionkay@gmail.com>
- */
 require('es6-shim')
-var sync = require('promise-synchronizer')
-var postcss = require('postcss')
-var stylelint = require('stylelint')
-var stylefmt = require('stylefmt')
-var log = global.fis.log
+
+var _promiseSynchronizer = require('promise-synchronizer')
+
+var _promiseSynchronizer2 = _interopRequireDefault(_promiseSynchronizer)
+
+var _postcss = require('postcss')
+
+var _postcss2 = _interopRequireDefault(_postcss)
+
+var _stylelint = require('stylelint')
+
+var _stylelint2 = _interopRequireDefault(_stylelint)
+
+var _stylefmt = require('stylefmt')
+
+var _stylefmt2 = _interopRequireDefault(_stylefmt)
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj}
+}
+
+var log =
+  global.fis
+    .log /*
+                           * fis3-lint-stylelint
+                           * fisker Cheung<lionkay@gmail.com>
+                           */
 
 var syntax = {
   '.scss': 'scss',
@@ -37,8 +55,8 @@ module.exports = function(content, file, conf) {
 
   if (config.fix) {
     try {
-      sync(
-        postcss([stylefmt])
+      ;(0, _promiseSynchronizer2.default)(
+        (0, _postcss2.default)([_stylefmt2.default])
           .process(content, config)
           .then(function(result) {
             if (result && result.css) {
@@ -50,7 +68,7 @@ module.exports = function(content, file, conf) {
   }
   delete config.fix
 
-  var promise = postcss([stylelint])
+  var promise = (0, _postcss2.default)([_stylelint2.default])
     .process(content, config)
     .then(function(result) {
       var messages = result.messages || []
@@ -91,7 +109,7 @@ module.exports = function(content, file, conf) {
     })
 
   try {
-    return sync(promise)
+    return (0, _promiseSynchronizer2.default)(promise)
   } catch (err) {
     log.warn('[%s] lint failed with %s: \n\n %s', file.id, 'error', err)
     process.exit(1)

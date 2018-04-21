@@ -1,4 +1,5 @@
-const CLIEngine = require('eslint').CLIEngine
+import {CLIEngine} from 'eslint'
+
 const formatter = CLIEngine.getFormatter()
 const log = global.fis.log
 

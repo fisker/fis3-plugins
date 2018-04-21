@@ -23,8 +23,8 @@ var log =
 
 function readConfig(filename) {
   var currentFolder = process.cwd()
-  var currentFile = void 0
-  var parentFolder = void 0
+  var currentFile = ''
+  var parentFolder = ''
 
   do {
     currentFolder = parentFolder || currentFolder
