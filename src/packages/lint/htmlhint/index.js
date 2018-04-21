@@ -3,15 +3,16 @@
  * fisker Cheung<lionkay@gmail.com>
  */
 
-var HTMLHint = require('htmlhint').HTMLHint
-var log = global.fis.log
+import {HTMLHint} from 'htmlhint'
+import fs from 'fs'
+import path from 'path'
+
+const log = global.fis.log
 
 function readConfig(filename) {
-  var fs = require('fs')
-  var path = require('path')
-  var currentFolder = process.cwd()
-  var currentFile
-  var parentFolder
+  let currentFolder = process.cwd()
+  let currentFile = ''
+  let parentFolder = ''
 
   do {
     currentFolder = parentFolder || currentFolder
@@ -29,20 +30,20 @@ function readConfig(filename) {
   } while (parentFolder !== currentFolder)
 }
 
-var htmlhintrcConfig
+let htmlhintrcConfig = {}
 
 module.exports = function(content, file, conf) {
   if (!content) {
     return
   }
 
-  var ruleset =
+  const ruleset =
     conf.rules ||
     htmlhintrcConfig ||
     (htmlhintrcConfig = readConfig('.htmlhintrc') || {})
 
-  var results = HTMLHint.verify(content, ruleset)
-  var errorType = 'warning'
+  const results = HTMLHint.verify(content, ruleset)
+  let errorType = 'warning'
 
   results.forEach(function(msg) {
     if (msg.type === 'error') {
