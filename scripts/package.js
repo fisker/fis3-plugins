@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const SOURCE_DIR = path.join(__dirname, '..', 'src')
 const DEST_DIR = path.join(__dirname, '..', 'packages')
+const CHARSET = 'utf-8'
 const globalPackage = require('../package.json')
 const _ = require('lodash')
 const mkdirp = require('mkdirp').sync
@@ -9,6 +10,7 @@ const prettier = require('prettier')
 const prettierConfig = require('../prettier.config.js')
 const stringify = require('json-stable-stringify')
 const babel = require('babel-core')
+const babelConfig = JSON.parse(fs.readFileSync('../.babelrc', CHARSET))
 const files = ['LICENSE', 'README.md', 'index.js', 'package.json']
 const links = {
   fis3: 'http://fis.baidu.com/'
@@ -102,9 +104,7 @@ class Package {
     file = path.join(this.dest, file)
     mkdirp(path.dirname(file))
     if (/\.js$/.test(file)) {
-      content = babel.transform(content, {
-        presets: ['env']
-      }).code
+      content = babel.transform(content, babelConfig).code
       content = prettier.format(content, prettierConfig)
     }
     try {
@@ -151,7 +151,7 @@ class Package {
       this.writeFile('index.js', code)
     }
 
-    this.writeFile('README.md', template('readme.tmpl')(this))
+    this.writeFile('README.md', template('readme.ejs')(this))
     this.copyFile('../../../../LICENSE', 'LICENSE')
 
     this.info.files.forEach(file => {

@@ -28,7 +28,7 @@ pluginTypes.forEach(function (type) {
 })
 
 ;(function (packages) {
-  const template = fs.readFileSync(path.join(SOURCE_DIR, 'templates', 'npm-status.tmpl'), 'utf-8')
+  const template = fs.readFileSync(path.join(SOURCE_DIR, 'templates', 'npm-status.ejs'), 'utf-8')
   const render = _.template(template)
   fs.writeFileSync(path.join(__dirname, '..', 'packages', 'README.md'), render({packages: packages}).trim())
 })(packages)

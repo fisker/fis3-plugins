@@ -2,7 +2,7 @@ const CLIEngine = require('eslint').CLIEngine
 const formatter = CLIEngine.getFormatter()
 const log = global.fis.log
 
-module.exports = function(content, file, conf) {
+export default function(content, file, conf) {
   if (!content) {
     return
   }

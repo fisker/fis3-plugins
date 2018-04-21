@@ -577,6 +577,10 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
+babel-plugin-add-module-exports@^0.2.1:
+  version "0.2.1"
+  resolved "http://registry.npm.taobao.org/babel-plugin-add-module-exports/download/babel-plugin-add-module-exports-0.2.1.tgz#9ae9a1f4a8dc67f0cdec4f4aeda1e43a5ff65e25"
+
 babel-plugin-check-es2015-constants@^6.22.0:
   version "6.22.0"
   resolved "http://registry.npm.taobao.org/babel-plugin-check-es2015-constants/download/babel-plugin-check-es2015-constants-6.22.0.tgz#35157b101426fd2ffd3da3f75c7d1e91835bbf8a"
@@ -5239,16 +5243,16 @@ send@0.15.2:
     range-parser "~1.2.0"
     statuses "~1.3.1"
 
-serve-directory-theme-octicons@^1.1.3:
-  version "1.1.3"
-  resolved "http://registry.npm.taobao.org/serve-directory-theme-octicons/download/serve-directory-theme-octicons-1.1.3.tgz#582e938d87dc1a8c13c7f02a4fce4299f285e7c3"
+serve-directory-theme-octicons@^1.1.5:
+  version "1.1.5"
+  resolved "http://registry.npm.taobao.org/serve-directory-theme-octicons/download/serve-directory-theme-octicons-1.1.5.tgz#abddbae4bc1541df9a8e147bd20d217653328f8c"
   dependencies:
     lodash.uniq "^4.5.0"
     pretty-bytes "^4.0.2"
 
-serve-directory@^2.1.1:
-  version "2.1.1"
-  resolved "http://registry.npm.taobao.org/serve-directory/download/serve-directory-2.1.1.tgz#8e21a766b36d6d971da2eab9cbb85fcb1a128dc2"
+serve-directory@^2.1.2:
+  version "2.1.2"
+  resolved "http://registry.npm.taobao.org/serve-directory/download/serve-directory-2.1.2.tgz#5e583c46f58ea53596b7611df2f6a0e7ec6abc85"
   dependencies:
     accepts "^1.3.5"
     debug "^3.0.1"

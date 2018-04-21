@@ -1,5 +1,13 @@
 {
+  "plugins": "add-module-exports",
   "presets": [
-    "env"
+    [
+      "env",
+      {
+        "targets": {
+          "node": "0.8"
+        }
+      }
+    ]
   ]
 }

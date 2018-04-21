@@ -1,5 +1,18 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {
+  value: true
+})
+
+exports.default = function(fis, opts) {
+  fis.on('process:end', onProcessEnd)
+  fis.on('standard:restore:uri', onStandardRestoreUri)
+  fis.on('pack:file', onPackFile)
+
+  // 给其他插件用的
+  fis.on('plugin:relative:fetch', onFetchRelativeUrl)
+}
+
 var quotes = {
   '': 'QUOTE_NONE',
   "'": 'QUOTE_SINGLE',
@@ -11,17 +24,17 @@ var path = require('path')
 var rFile = /\.[^\.]+$/
 
 function wrap(value) {
-  var info = fis.util.stringQuote(value)
-  return '"__relative___' + quotes[info.quote] + '-' + info.rest + '___"'
+  var str = fis.util.stringQuote(value).rest
+  return '"__relative___' + quotes[info.quote] + '-' + str + '___"'
 }
 
 function getRelativeUrl(file, host) {
-  var url
+  var url = ''
 
   if (typeof file === 'string') {
     url = file
   } else {
-    var url = file.getUrl()
+    url = file.getUrl()
 
     if (file.domain) {
       return url
@@ -122,8 +135,7 @@ function onPackFile(message) {
     return
   }
 
-  content = convert(file.relativeBody, file, pkg)
-  message.content = content
+  message.content = convert(file.relativeBody, file, pkg)
 }
 
 function onFetchRelativeUrl(message) {
@@ -137,11 +149,4 @@ function onFetchRelativeUrl(message) {
   message.ret = getRelativeUrl(target, host)
 }
 
-module.exports = function(fis, opts) {
-  fis.on('process:end', onProcessEnd)
-  fis.on('standard:restore:uri', onStandardRestoreUri)
-  fis.on('pack:file', onPackFile)
-
-  // 给其他插件用的
-  fis.on('plugin:relative:fetch', onFetchRelativeUrl)
-}
+module.exports = exports['default']
