@@ -61,7 +61,7 @@ function start(opt, callback) {
     script = _path2.default.join(__dirname, 'app.js')
   }
 
-  var timeout = Math.max(opt.timeout * 1000, 5000)
+  var timeout = Math.max(opt.timeout * 1000, 60000)
   var timeoutTimer = void 0
   var args = [script]
 
