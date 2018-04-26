@@ -1,0 +1,36 @@
+{
+  "author": {
+    "email": "lionkay@gmail.com",
+    "name": "fisker Cheung",
+    "url": "https://github.com/fisker"
+  },
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "dependencies": {
+    "node-sass": "^4.9.0"
+  },
+  "description": "",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.js",
+    "package.json"
+  ],
+  "keywords": [
+    "fis",
+    "fis3",
+    "fis3-parser-node-sass-latest",
+    "node-sass",
+    "node-sass-latest",
+    "parser",
+    "sass",
+    "scss"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "fis3-parser-node-sass-latest",
+  "readmeFilename": "README.md",
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-node-sass-latest",
+  "version": "1.0.0"
+}

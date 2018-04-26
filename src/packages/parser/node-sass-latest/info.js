@@ -1,0 +1,20 @@
+module.exports = {
+  version: '1.0.0',
+  description: '',
+  keywords: [
+    'scss',
+    'sass',
+    'node-sass'
+  ],
+  dependencies: ['node-sass'],
+  options: {
+    outputStyle: 'expanded',
+    sourceMapContents: true,
+    sourceMap: false,
+    omitSourceMapUrl: false
+  },
+  links: {
+    sass: 'http://sass-lang.com/',
+    'node-sass': 'https://github.com/sass/node-sass'
+  }
+}

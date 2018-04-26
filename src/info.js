@@ -1,8 +1,8 @@
-export default {
+module.exports = {
   version: '',
   description: '',
   keywords: [],
-  dependencies: {},
+  dependencies: [],
   options: {},
   links: {}
 }
