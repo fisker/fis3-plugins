@@ -1,6 +1,6 @@
 # fis3-parser-node-sass-latest
 
-> 
+> A fis plugin to parse sass with latest node-sass.
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![npm](https://img.shields.io/npm/v/fis3-parser-node-sass-latest.svg?style=flat-square)](https://www.npmjs.com/package/fis3-parser-node-sass-latest)

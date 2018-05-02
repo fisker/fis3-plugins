@@ -10,7 +10,7 @@
   "dependencies": {
     "node-sass": "^4.9.0"
   },
-  "description": "",
+  "description": "A fis plugin to parse sass with latest node-sass.",
   "files": [
     "LICENSE",
     "README.md",
@@ -32,5 +32,5 @@
   "name": "fis3-parser-node-sass-latest",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-node-sass-latest",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
