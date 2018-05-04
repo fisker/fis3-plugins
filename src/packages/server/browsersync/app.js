@@ -6,6 +6,7 @@ import getBsConfig from './lib/browser-sync-config.js'
 import yargs from 'yargs'
 
 const argv = (function(argv) {
+  argv.root = argv.root || process.cwd()
   argv.context = argv.context || ''
   argv.port = argv.port || 8080
   argv.https = typeof argv.https !== 'undefined' && argv.https !== 'false'
