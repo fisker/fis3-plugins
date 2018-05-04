@@ -1,12 +1,15 @@
 module.exports = {
-  version: '1.6.5',
+  version: '1.7.0',
   description: 'a browser sync server for fis3.',
   keywords: ['browser-sync', 'livereload'],
   dependencies: [
+    'body-parser',
     'browser-sync',
     'lodash.merge',
+    'morgan',
     'serve-directory',
-    'serve-directory-theme-octicons'
+    'serve-directory-theme-octicons',
+    'yog-devtools'
   ],
   options: {},
   links: {
@@ -15,7 +18,7 @@ module.exports = {
   files: [
     'app.js',
     'lib/browser-sync-config.js',
-    'lib/serve-directory.js',
+    'lib/middleware.js',
     'templates/script-tags.tmpl'
   ]
 }

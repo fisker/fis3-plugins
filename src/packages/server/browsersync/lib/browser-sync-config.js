@@ -1,26 +1,36 @@
 'use strict'
 
 import path from 'path'
-import serveDirectory from './serve-directory.js'
 import merge from 'lodash.merge'
-import browserSync from 'browser-sync'
+import bsDefaultConfig from 'browser-sync/dist/default-config.js'
+import {
+  mock,
+  logger,
+  directory
+} from './middleware.js'
 
-const bsDefaultConfig = require(path.join(
-  path.dirname(require.resolve('browser-sync')),
-  'default-config.js'
-))
+const defaultOptions = merge({}, bsDefaultConfig, {
+  server: {
+    directory: true
+  },
+  watchEvents: ['change', 'add', 'addDir', 'unlink', 'unlinkDir'],
+  ghostMode: false,
+  reloadDebounce: 500,
+  notify: false,
+  online: false
+})
 
-const args = process.argv.join('|')
-const context = /\-\-context\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : ''
-const bsConfigFile = /\-\-bs\-config\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : ''
-const bs = browserSync.create()
-const port = /\-\-port\|(\d+)(?:\||$)/.test(args) ? ~~RegExp.$1 : 8080
-const https = /\-\-https\|(true)(?:\||$)/.test(args) ? !!RegExp.$1 : false
-
-const userConfigFile = path.resolve(
-  context,
-  bsConfigFile || bs.instance.config.userFile
-)
+const overrideOptions = {
+  open: false,
+  snippetOptions: {
+    rule: {
+      match: /<\/body>|<!--\s*browser-sync-script\s*-->/i,
+      fn: function(snippet, match) {
+        return snippet + match
+      }
+    }
+  }
+}
 
 function getType(obj) {
   return Object.prototype.toString.call(obj).slice(8, -1)
@@ -43,54 +53,48 @@ function getUserConfig(path) {
   return config
 }
 
-function getConfig(root) {
-  const defaultConfig = {
-    server: {
-      directory: true
-    },
-    watchEvents: ['change', 'add', 'addDir', 'unlink', 'unlinkDir'],
-    ghostMode: false,
-    reloadDebounce: 500,
-    notify: false,
-    online: false
+function parseMiddleware(middleware) {
+  const type = getType(middleware)
+
+  if (type !== 'Array') {
+    if (type === 'Boolean') {
+      return []
+    } else {
+      return [middleware]
+    }
   }
 
-  const userConfig = getUserConfig(userConfigFile)
+  return middleware
+}
 
-  const config = merge({}, bsDefaultConfig, defaultConfig, userConfig, {
+function getConfig(bs, argv) {
+
+  const userConfig = getUserConfig(path.resolve(
+    argv.context,
+    argv.bsConfig || bs.instance.config.userFile
+  ))
+
+  const config = merge({}, defaultOptions, userConfig, overrideOptions, {
     server: {
-      baseDir: root
+      baseDir: argv.root
     },
-    port: port,
-    open: false,
-    snippetOptions: {
-      rule: {
-        match: /<\/body>|<!--\s*browser-sync-script\s*-->/i,
-        fn: function(snippet, match) {
-          return snippet + match
-        }
-      }
-    }
+    port: argv.port,
+    https: argv.https
   })
 
-  if (!https) {
-    config.https = false
-  }
+  config.middleware = parseMiddleware(config.middleware)
 
-  if (config.server.directory) {
-    const type = getType(config.middleware)
+  // logger
+  config.middleware.push(logger('short'))
 
-    if (type !== 'Array') {
-      if (type === 'Boolean') {
-        config.middleware = []
-      } else {
-        config.middleware = [config.middleware]
-      }
-    }
-
-    config.middleware.push(serveDirectory(root))
+  // serveDirectory
+  if (config.server && config.server.directory) {
+    config.middleware.push(directory(argv.root))
     config.server.directory = false
   }
+
+  // mock
+  config.middleware.push(mock(argv.root))
 
   return config
 }

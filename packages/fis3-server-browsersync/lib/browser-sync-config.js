@@ -8,38 +8,42 @@ var _path = require('path')
 
 var _path2 = _interopRequireDefault(_path)
 
-var _serveDirectory = require('./serve-directory.js')
-
-var _serveDirectory2 = _interopRequireDefault(_serveDirectory)
-
 var _lodash = require('lodash.merge')
 
 var _lodash2 = _interopRequireDefault(_lodash)
 
-var _browserSync = require('browser-sync')
+var _defaultConfig = require('browser-sync/dist/default-config.js')
 
-var _browserSync2 = _interopRequireDefault(_browserSync)
+var _defaultConfig2 = _interopRequireDefault(_defaultConfig)
+
+var _middleware = require('./middleware.js')
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var bsDefaultConfig = require(_path2.default.join(
-  _path2.default.dirname(require.resolve('browser-sync')),
-  'default-config.js'
-))
+var defaultOptions = (0, _lodash2.default)({}, _defaultConfig2.default, {
+  server: {
+    directory: true
+  },
+  watchEvents: ['change', 'add', 'addDir', 'unlink', 'unlinkDir'],
+  ghostMode: false,
+  reloadDebounce: 500,
+  notify: false,
+  online: false
+})
 
-var args = process.argv.join('|')
-var context = /\-\-context\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : ''
-var bsConfigFile = /\-\-bs\-config\|(.*?)(?:\||$)/.test(args) ? RegExp.$1 : ''
-var bs = _browserSync2.default.create()
-var port = /\-\-port\|(\d+)(?:\||$)/.test(args) ? ~~RegExp.$1 : 8080
-var https = /\-\-https\|(true)(?:\||$)/.test(args) ? !!RegExp.$1 : false
-
-var userConfigFile = _path2.default.resolve(
-  context,
-  bsConfigFile || bs.instance.config.userFile
-)
+var overrideOptions = {
+  open: false,
+  snippetOptions: {
+    rule: {
+      match: /<\/body>|<!--\s*browser-sync-script\s*-->/i,
+      fn: function fn(snippet, match) {
+        return snippet + match
+      }
+    }
+  }
+}
 
 function getType(obj) {
   return Object.prototype.toString.call(obj).slice(8, -1)
@@ -62,60 +66,55 @@ function getUserConfig(path) {
   return config
 }
 
-function getConfig(root) {
-  var defaultConfig = {
-    server: {
-      directory: true
-    },
-    watchEvents: ['change', 'add', 'addDir', 'unlink', 'unlinkDir'],
-    ghostMode: false,
-    reloadDebounce: 500,
-    notify: false,
-    online: false
+function parseMiddleware(middleware) {
+  var type = getType(middleware)
+
+  if (type !== 'Array') {
+    if (type === 'Boolean') {
+      return []
+    } else {
+      return [middleware]
+    }
   }
 
-  var userConfig = getUserConfig(userConfigFile)
+  return middleware
+}
+
+function getConfig(bs, argv) {
+  var userConfig = getUserConfig(
+    _path2.default.resolve(
+      argv.context,
+      argv.bsConfig || bs.instance.config.userFile
+    )
+  )
 
   var config = (0, _lodash2.default)(
     {},
-    bsDefaultConfig,
-    defaultConfig,
+    defaultOptions,
     userConfig,
+    overrideOptions,
     {
       server: {
-        baseDir: root
+        baseDir: argv.root
       },
-      port: port,
-      open: false,
-      snippetOptions: {
-        rule: {
-          match: /<\/body>|<!--\s*browser-sync-script\s*-->/i,
-          fn: function fn(snippet, match) {
-            return snippet + match
-          }
-        }
-      }
+      port: argv.port,
+      https: argv.https
     }
   )
 
-  if (!https) {
-    config.https = false
-  }
+  config.middleware = parseMiddleware(config.middleware)
 
-  if (config.server.directory) {
-    var type = getType(config.middleware)
+  // logger
+  config.middleware.push((0, _middleware.logger)('short'))
 
-    if (type !== 'Array') {
-      if (type === 'Boolean') {
-        config.middleware = []
-      } else {
-        config.middleware = [config.middleware]
-      }
-    }
-
-    config.middleware.push((0, _serveDirectory2.default)(root))
+  // serveDirectory
+  if (config.server && config.server.directory) {
+    config.middleware.push((0, _middleware.directory)(argv.root))
     config.server.directory = false
   }
+
+  // mock
+  config.middleware.push((0, _middleware.mock)(argv.root))
 
   return config
 }

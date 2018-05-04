@@ -66,7 +66,7 @@ function start(opt, callback) {
   var args = [script]
 
   if (opt['bs-config']) {
-    var bsConfig = _path2.default.join(process.cwd(), opt['bs-config'])
+    var bsConfig = _path2.default.join(process.cwd(), '' + opt['bs-config'])
     if (fis.util.exists(bsConfig)) {
       opt['bs-config'] = bsConfig
     } else {
@@ -98,7 +98,7 @@ function start(opt, callback) {
   var error = false
   var stoper = void 0
 
-  var onData = function onData(chunk) {
+  function onData(chunk) {
     if (started) {
       return
     }

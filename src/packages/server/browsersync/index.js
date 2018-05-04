@@ -54,7 +54,7 @@ function start(opt, callback) {
   const args = [script]
 
   if (opt['bs-config']) {
-    const bsConfig = path.join(process.cwd(), opt['bs-config'])
+    const bsConfig = path.join(process.cwd(), '' + opt['bs-config'])
     if (fis.util.exists(bsConfig)) {
       opt['bs-config'] = bsConfig
     } else {
@@ -86,7 +86,7 @@ function start(opt, callback) {
   let error = false
   let stoper
 
-  var onData = function(chunk) {
+  function onData(chunk) {
     if (started) {
       return
     }
@@ -103,8 +103,8 @@ function start(opt, callback) {
       error = true
       process.stdout.write(' fail.\n')
 
-      var match = chunk.match(/Error:?\s+([^\r\n]+)/i)
-      var errMsg = 'unknown'
+      const match = chunk.match(/Error:?\s+([^\r\n]+)/i)
+      let errMsg = 'unknown'
 
       if (~chunk.indexOf('EADDRINUSE')) {
         log = ''
