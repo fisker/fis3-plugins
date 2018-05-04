@@ -14,7 +14,7 @@ const argv = (function(argv) {
   return argv
 })(yargs.argv)
 
-const scriptTag = path.join(__dirname, 'templates/script-tags.tmpl')
+startServer(argv)
 
 function now() {
   const d = new Date()
@@ -27,12 +27,7 @@ function now() {
 }
 
 function logEvent(event, path) {
-  console.log(
-    '%s %s: %s',
-    now(),
-    ('         ' + event).slice(-9),
-    path
-  )
+  console.log('%s %s: %s', now(), ('         ' + event).slice(-9), path)
 }
 
 function onInit(config) {
@@ -62,14 +57,17 @@ function watch(bs, root) {
 
 function signalTerminate(bs) {
   process.on('SIGTERM', function() {
-    console.log(' Recive quit signal in worker %s.', process.pid)
+    console.log('Recive quit signal in worker %s.', process.pid)
     bs.exit()
   })
 }
 
 function replaceScriptTag(bs) {
   // replace scriptTag template with mine
-  bs.instance.config.templates.scriptTag = scriptTag
+  bs.instance.config.templates.scriptTag = path.join(
+    __dirname,
+    'templates/script-tags.tmpl'
+  )
 }
 
 function startServer(argv) {
@@ -83,5 +81,3 @@ function startServer(argv) {
   replaceScriptTag(bs)
   signalTerminate(bs)
 }
-
-startServer(argv)
