@@ -31,8 +31,6 @@ var argv = (function(argv) {
 
 var scriptTag = _path2.default.join(__dirname, 'templates/script-tags.tmpl')
 
-var bs = _browserSync2.default.create()
-
 function now() {
   var d = new Date()
   var str = [d.getHours(), d.getMinutes(), d.getSeconds()]
@@ -57,39 +55,43 @@ function onInit(config) {
   }
 }
 
-function watch(event, file) {
-  var relativePath = _path2.default.relative(argv.root, file)
-  if (
-    !relativePath ||
-    relativePath === 'server.log' ||
-    /(^|[\/\\])[\._]./.test(relativePath)
-  ) {
-    return
+function watch(bs, root) {
+  return function(event, file) {
+    var relativePath = _path2.default.relative(root, file)
+    if (
+      !relativePath ||
+      relativePath === 'server.log' ||
+      /(^|[\/\\])[\._]./.test(relativePath)
+    ) {
+      return
+    }
+    bs.reload(file)
+    logEvent(event, relativePath)
   }
-  bs.reload(file)
-  logEvent(event, relativePath)
 }
 
-function signalTerminate() {
+function signalTerminate(bs) {
   process.on('SIGTERM', function() {
     console.log(' Recive quit signal in worker %s.', process.pid)
     bs.exit()
   })
 }
 
-function replaceScriptTag() {
+function replaceScriptTag(bs) {
   // replace scriptTag template with mine
   bs.instance.config.templates.scriptTag = scriptTag
 }
 
-function startServer() {
+function startServer(argv) {
+  var bs = _browserSync2.default.create()
   var bsConfig = (0, _browserSyncConfig2.default)(bs, argv)
 
+  bs.exit()
+
   bs.init(bsConfig, onInit(bsConfig))
-  bs.watch(argv.root, watch)
-  replaceScriptTag()
-  signalTerminate()
+  bs.watch(argv.root, watch(bs, argv.root))
+  replaceScriptTag(bs)
+  signalTerminate(bs)
 }
 
-bs.exit()
-startServer()
+startServer(argv)
