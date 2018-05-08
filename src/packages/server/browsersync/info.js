@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.7.2',
+  version: '1.7.3',
   description: 'a browser sync server for fis3.',
   keywords: ['browser-sync', 'livereload'],
   dependencies: [
@@ -9,6 +9,7 @@ module.exports = {
     'morgan',
     'serve-directory',
     'serve-directory-theme-octicons',
+    'yargs',
     'yog-devtools'
   ],
   options: {},
