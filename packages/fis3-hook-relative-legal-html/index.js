@@ -12,7 +12,15 @@ var rFile = /\.[^\.]+$/
 
 function wrap(value) {
   var info = fis.util.stringQuote(value)
-  return '"__relative___' + quotes[info.quote] + '-' + info.rest + '___"'
+  return (
+    info.quote +
+    '__relative___' +
+    quotes[info.quote] +
+    '-' +
+    info.rest +
+    '___' +
+    info.quote
+  )
 }
 
 function getRelativeUrl(file, host) {
