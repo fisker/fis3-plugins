@@ -3,11 +3,7 @@
 import path from 'path'
 import merge from 'lodash.merge'
 import bsDefaultConfig from 'browser-sync/dist/default-config.js'
-import {
-  mock,
-  logger,
-  directory
-} from './middleware.js'
+import {mock, logger, directory} from './middleware.js'
 
 const defaultOptions = merge({}, bsDefaultConfig, {
   server: {
@@ -68,11 +64,9 @@ function parseMiddleware(middleware) {
 }
 
 function getConfig(bs, argv) {
-
-  const userConfig = getUserConfig(path.resolve(
-    argv.context,
-    argv.bsConfig || bs.instance.config.userFile
-  ))
+  const userConfig = getUserConfig(
+    path.resolve(argv.context, argv.bsConfig || bs.instance.config.userFile)
+  )
 
   const config = merge({}, defaultOptions, userConfig, overrideOptions, {
     server: {
