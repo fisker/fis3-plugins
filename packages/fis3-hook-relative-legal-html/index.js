@@ -10,14 +10,14 @@ var rUrl = /("|')?__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
 var path = require('path')
 var rFile = /\.[^\.]+$/
 
-function wrap(value) {
-  var info = fis.util.stringQuote(value)
+function wrap(info) {
+  var rest = info.file.subpath + info.query + info.hash
   return (
     info.quote +
     '__relative___' +
     quotes[info.quote] +
     '-' +
-    info.rest +
+    rest +
     '___' +
     info.quote
   )
@@ -105,7 +105,7 @@ function onStandardRestoreUri(message) {
     return
   }
 
-  message.ret = wrap(info.quote + info.file.subpath + info.query + info.quote)
+  message.ret = wrap(info)
 }
 
 function onProcessEnd(file) {
