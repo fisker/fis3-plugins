@@ -56,7 +56,7 @@
     "serve-directory-theme-octicons": "^1.1.5",
     "standard": "^11.0.1",
     "stylefmt": "^6.0.0",
-    "stylelint": "^9.2.0",
+    "stylelint": "^9.2.1",
     "yargs": "^11.0.0",
     "yog-devtools": "^0.1.1"
   }
