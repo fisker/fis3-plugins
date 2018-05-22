@@ -10,7 +10,7 @@
   "dependencies": {
     "es6-shim": "^0.35.3",
     "postcss": "^6.0.22",
-    "promise-synchronizer": "^1.0.8",
+    "promise-synchronizer": "^1.0.9",
     "stylefmt": "^6.0.0",
     "stylelint": "^9.2.1"
   },
@@ -34,5 +34,5 @@
   "name": "fis3-lint-stylelint",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-stylelint",
-  "version": "2.2.3"
+  "version": "2.2.4"
 }
