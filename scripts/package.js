@@ -155,19 +155,18 @@ class Package {
       this.writeFile('index.js', code)
     }
 
-    this.writeFile('README.md', template('readme.ejs')(this))
-    this.copyFile('../../../../LICENSE', 'LICENSE')
-
-    if (!isDeprecated) {
-      this.info.files.forEach(file => {
-        this.copyFile(file)
-      })
-    }
-
     if (isDeprecated) {
       this.pkg.scripts = this.pkg.scripts || {}
       this.pkg.scripts.postinstall = 'echo `' + this.pkg.name + '` is deprecated.'
+      this.writeFile('README.md', template('readme-deprecated.ejs')(this))
+    } else {
+      this.info.files.forEach(file => {
+        this.copyFile(file)
+      })
+      this.writeFile('README.md', template('readme.ejs')(this))
     }
+
+    this.copyFile('../../../../LICENSE', 'LICENSE')
 
     this.writeFile('package.json', stringify(this.pkg, {space: 2}))
   }

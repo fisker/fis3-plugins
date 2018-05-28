@@ -8,7 +8,6 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "prettier": "^1.13.0"
   },
   "description": "a code formatter of fis3 based on prettier.",
   "files": [
@@ -36,5 +35,5 @@
   "scripts": {
     "postinstall": "echo `fis3-postprocessor-prettier-css` is deprecated."
   },
-  "version": "1.2"
+  "version": "1.2.1"
 }
