@@ -10,15 +10,30 @@ function _interopRequireDefault(obj) {
 
 var log = global.fis.log
 var assign = Object.assign || global.fis.util.assign
-var rcConfig = _prettier2.default.resolveConfig.sync('prettier')
 
 module.exports = function(content, file, conf) {
-  delete conf.filename
-  content = _prettier2.default.format(content, assign({}, rcConfig, conf))
+  var fileFakePath = file.realpathNoExt + file.rExt
 
-  // remove inline file final newline
-  if (file.cache.isInline) {
-    content.replace(/\s*$/, '')
+  var config = _prettier2.default.resolveConfig.sync(fileFakePath, {
+    editorconfig: true
+  })
+
+  config = assign(config, conf, {
+    filepath: fileFakePath
+  })
+
+  delete config.filename
+
+  var parsed = _prettier2.default.format(content, config)
+
+  // fix inline indent
+  if (file.isInline) {
+    parsed = parsed.trim()
+
+    if (parsed.indexOf('\n') !== -1) {
+      parsed = '\n' + parsed + '\n'
+    }
   }
-  return content
+
+  return parsed
 }

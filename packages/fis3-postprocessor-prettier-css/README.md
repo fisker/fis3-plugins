@@ -13,31 +13,12 @@
 $ npm i -g fis3-postprocessor-prettier-css
 ```
 
-## usage
-```js
-// fis-conf.js
-var options = {};
+# [Deprecated]
 
-fis.match('*.css', {
-  postprocessor: fis.plugin('prettier-css', options)
-});
-```
+use `fis3-postprocessor-prettier` instead
 
-## config
-https://github.com/prettier/prettier#options
+https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-prettier
 
-both options && Configuration File are supported.
-
-
-
-## default options
-```json
-{
-  "parser": "css",
-  "singleQuote": false
-}
-```
-** NOTICE: this might change in future **
 
 
 ## links

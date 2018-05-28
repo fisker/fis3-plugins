@@ -1,14 +1,5 @@
-## usage
-```js
-// fis-conf.js
-var options = {};
+# [Deprecated]
 
-fis.match('*.css', {
-  postprocessor: fis.plugin('prettier-css', options)
-});
-```
+use `fis3-postprocessor-prettier` instead
 
-## config
-https://github.com/prettier/prettier#options
-
-both options && Configuration File are supported.
+https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-prettier

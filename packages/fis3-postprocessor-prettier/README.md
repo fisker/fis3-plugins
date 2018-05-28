@@ -19,7 +19,7 @@ $ npm i -g fis3-postprocessor-prettier
 // fis-conf.js
 var options = {};
 
-fis.match('*.js', {
+fis.match('*.{js,css,json,less,sass,md}', {
   postprocessor: fis.plugin('prettier', options)
 });
 ```

@@ -138,7 +138,11 @@ class Package {
   }
 
   build() {
-    if (_.isEmpty(this.info.options)) {
+    const isDeprecated = this.info.deprecated
+
+    if (isDeprecated) {
+      this.writeFile('index.js', '')
+    } else if (_.isEmpty(this.info.options)) {
       this.copyFile('index.js')
     } else {
       let code = this.readFile('index.js')
@@ -154,9 +158,16 @@ class Package {
     this.writeFile('README.md', template('readme.ejs')(this))
     this.copyFile('../../../../LICENSE', 'LICENSE')
 
-    this.info.files.forEach(file => {
-      this.copyFile(file)
-    })
+    if (!isDeprecated) {
+      this.info.files.forEach(file => {
+        this.copyFile(file)
+      })
+    }
+
+    if (isDeprecated) {
+      this.pkg.scripts = this.pkg.scripts || {}
+      this.pkg.scripts.postinstall = 'echo `' + this.pkg.name + '` is deprecated.'
+    }
 
     this.writeFile('package.json', stringify(this.pkg, {space: 2}))
   }
