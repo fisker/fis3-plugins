@@ -141,7 +141,10 @@ class Package {
     const isDeprecated = this.info.deprecated
 
     if (isDeprecated) {
-      this.writeFile('index.js', '')
+      this.writeFile(
+        'index.js',
+        `throw new Error('\`${this.pkg.name}\` is Deprecated.')`
+      )
     } else if (_.isEmpty(this.info.options)) {
       this.copyFile('index.js')
     } else {
@@ -157,7 +160,6 @@ class Package {
 
     if (isDeprecated) {
       this.pkg.scripts = this.pkg.scripts || {}
-      this.pkg.scripts.postinstall = 'echo `' + this.pkg.name + '` is deprecated.'
       this.writeFile('README.md', template('readme-deprecated.ejs')(this))
     } else {
       this.info.files.forEach(file => {
@@ -168,7 +170,12 @@ class Package {
 
     this.copyFile('../../../../LICENSE', 'LICENSE')
 
-    this.writeFile('package.json', stringify(this.pkg, {space: 2}))
+    this.writeFile(
+      'package.json',
+      stringify(this.pkg, {
+        space: 2
+      })
+    )
   }
 }
 

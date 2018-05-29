@@ -10,7 +10,9 @@ const rFile = /\.[^\.]+$/
 
 function wrap(info) {
   var rest = info.file.subpath + info.query + info.hash
-  return `${info.quote}__relative___${quotes[info.quote]}-${rest}___${info.quote}`
+  return `${info.quote}__relative___${quotes[info.quote]}-${rest}___${
+    info.quote
+  }`
 }
 
 function getRelativeUrl(file, host) {
@@ -37,7 +39,7 @@ function getRelativeUrl(file, host) {
 }
 
 function convert(content, file, host) {
-  return content.replace(rUrl, function (all, _, quoteStyle, value) {
+  return content.replace(rUrl, function(all, _, quoteStyle, value) {
     const info = fis.project.lookup(value)
 
     if (!info.file) {
@@ -134,7 +136,7 @@ function onFetchRelativeUrl(message) {
   message.ret = getRelativeUrl(target, host)
 }
 
-module.exports = function (fis, opts) {
+module.exports = function(fis, opts) {
   fis.on('process:end', onProcessEnd)
   fis.on('standard:restore:uri', onStandardRestoreUri)
   fis.on('pack:file', onPackFile)

@@ -1,7 +1,5 @@
 import sync from 'promise-synchronizer'
-import {
-  process as stylefmt
-} from 'stylefmt'
+import {process as stylefmt} from 'stylefmt'
 
 module.exports = function(content, file, conf) {
   try {

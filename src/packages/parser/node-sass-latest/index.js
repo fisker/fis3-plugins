@@ -80,7 +80,8 @@ function fixSourcePath(content, file) {
     var info = fis.uri(value, file.dirname)
 
     if (info.file && info.file.subpath) {
-      value = info.quote + info.file.subpath + info.query + info.hash + info.quote
+      value =
+        info.quote + info.file.subpath + info.query + info.hash + info.quote
     }
 
     return value
@@ -118,7 +119,6 @@ module.exports = function(content, file, conf) {
     backups[id] = raw
     return "'__scss_backup_" + id + "'"
   })
-
 
   var opts = fis.util.clone(conf)
 

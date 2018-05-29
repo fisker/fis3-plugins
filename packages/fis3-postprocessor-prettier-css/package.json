@@ -33,7 +33,6 @@
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-prettier-css",
   "scripts": {
-    "postinstall": "echo `fis3-postprocessor-prettier-css` is deprecated."
   },
-  "version": "1.2.1"
+  "version": "1.2.2"
 }
