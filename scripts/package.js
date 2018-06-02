@@ -7,7 +7,6 @@ const globalPackage = require('../package.json')
 const _ = require('lodash')
 const mkdirp = require('mkdirp').sync
 const prettier = require('prettier')
-const prettierConfig = require('../prettier.config.js')
 const stringify = require('json-stable-stringify')
 const babel = require('babel-core')
 const babelConfig = JSON.parse(fs.readFileSync('../.babelrc', CHARSET))
@@ -104,6 +103,9 @@ class Package {
     file = path.join(this.dest, file)
     mkdirp(path.dirname(file))
     if (/\.js$/.test(file)) {
+      const prettierConfig = prettier.resolveConfig.sync(file, {
+        editorconfig: true
+      })
       content = babel.transform(content, babelConfig).code
       content = prettier.format(content, prettierConfig)
     }

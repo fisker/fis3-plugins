@@ -2,7 +2,10 @@
   "name": "fis3-plugins",
   "version": "1.0.0",
   "description": "plugins for fi3",
-  "keywords": ["fis", "fis3"],
+  "keywords": [
+    "fis",
+    "fis3"
+  ],
   "main": "index.js",
   "repository": "https://github.com/fisker/fis3-plugins",
   "author": {
@@ -33,7 +36,7 @@
     "mkdirp": "^0.5.1"
   },
   "dependencies": {
-    "autoprefixer": "^8.5.1",
+    "autoprefixer": "^8.5.2",
     "body-parser": "^1.18.3",
     "browser-sync": "^2.24.4",
     "es6-shim": "^0.35.3",
@@ -47,7 +50,7 @@
     "postcss": "^6.0.22",
     "posthtml": "^0.11.3",
     "posthtml-beautify": "^0.2.0",
-    "prettier": "^1.13.0",
+    "prettier": "^1.13.4",
     "promise-synchronizer": "^1.0.9",
     "pug": "^2.0.3",
     "serve-directory": "^2.1.3",
