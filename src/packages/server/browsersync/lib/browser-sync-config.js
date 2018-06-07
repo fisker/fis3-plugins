@@ -81,14 +81,14 @@ function getConfig(bs, argv) {
   // logger
   config.middleware.push(logger('short'))
 
+  // mock
+  config.middleware.push(mock(argv.root))
+
   // serveDirectory
   if (config.server && config.server.directory) {
     config.middleware.push(directory(argv.root))
     config.server.directory = false
   }
-
-  // mock
-  config.middleware.push(mock(argv.root))
 
   return config
 }
