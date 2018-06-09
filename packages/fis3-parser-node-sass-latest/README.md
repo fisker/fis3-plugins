@@ -15,7 +15,7 @@ $ npm i -g fis3-parser-node-sass-latest
 
 ## usage
 
-```
+```js
 // fis-conf.js
 
 var sassConf = {

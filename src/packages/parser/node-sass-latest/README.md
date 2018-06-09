@@ -1,6 +1,6 @@
 ## usage
 
-```
+```js
 // fis-conf.js
 
 var sassConf = {

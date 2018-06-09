@@ -65,6 +65,11 @@
 [![npm](https://img.shields.io/npm/dt/fis3-server-browsersync.svg?style=flat-square)](https://www.npmjs.com/package/fis3-server-browsersync)
 [![npm](https://img.shields.io/npm/dm/fis3-server-browsersync.svg?style=flat-square)](https://www.npmjs.com/package/fis3-server-browsersync)
 
+## fis3-parser-ejs
+[![npm](https://img.shields.io/npm/v/fis3-parser-ejs.svg?style=flat-square)](https://www.npmjs.com/package/fis3-parser-ejs)
+[![npm](https://img.shields.io/npm/dt/fis3-parser-ejs.svg?style=flat-square)](https://www.npmjs.com/package/fis3-parser-ejs)
+[![npm](https://img.shields.io/npm/dm/fis3-parser-ejs.svg?style=flat-square)](https://www.npmjs.com/package/fis3-parser-ejs)
+
 ## fis3-parser-node-sass-latest
 [![npm](https://img.shields.io/npm/v/fis3-parser-node-sass-latest.svg?style=flat-square)](https://www.npmjs.com/package/fis3-parser-node-sass-latest)
 [![npm](https://img.shields.io/npm/dt/fis3-parser-node-sass-latest.svg?style=flat-square)](https://www.npmjs.com/package/fis3-parser-node-sass-latest)
