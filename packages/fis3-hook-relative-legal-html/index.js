@@ -6,21 +6,15 @@ var quotes = {
   '"': 'QUOTE_DOUBLE'
 }
 
-var rUrl = /("|')?__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
+var rUrl = /(["']?)__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
 var path = require('path')
 var rFile = /\.[^\.]+$/
 
 function wrap(info) {
-  var rest = info.file.subpath + info.query + info.hash
-  return (
-    info.quote +
-    '__relative___' +
-    quotes[info.quote] +
-    '-' +
-    rest +
-    '___' +
-    info.quote
-  )
+  var path = info.file.subpath + info.query + info.hash
+  var quote = info.quote
+  var quoteStyle = quotes[quote]
+  return quote + '__relative___' + quoteStyle + '-' + path + '___' + quote
 }
 
 function getRelativeUrl(file, host) {
@@ -47,8 +41,8 @@ function getRelativeUrl(file, host) {
 }
 
 function convert(content, file, host) {
-  return content.replace(rUrl, function(all, _, quoteStyle, value) {
-    var info = fis.project.lookup(value)
+  return content.replace(rUrl, function(all, _, quoteStyle, path) {
+    var info = fis.project.lookup(path)
 
     if (!info.file) {
       return info.origin
@@ -59,10 +53,7 @@ function convert(content, file, host) {
 
     var query = info.query
     var hash = info.hash || info.file.hash
-    var url = /*/__sprite/.test(info.origin) ? info.file.getUrl() : */ getRelativeUrl(
-      info.file,
-      host || file
-    )
+    var url = getRelativeUrl(info.file, host || file)
 
     var parts = url.split('?')
 
@@ -82,16 +73,6 @@ function convert(content, file, host) {
 
     return quoteChr + url + hash + quoteChr
   })
-}
-
-function combineQuery(query1, query2) {
-  query1 = query1.replace(/^\?/, '')
-  query2 = query2.replace(/^\?/, '')
-  var arr = []
-  query1 && arr.push(query1)
-  query2 && arr.push(query2)
-  var query = arr.join('&')
-  return query ? '?' + query : ''
 }
 
 function onStandardRestoreUri(message) {

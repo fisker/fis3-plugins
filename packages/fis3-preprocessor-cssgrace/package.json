@@ -8,8 +8,9 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
+    "cssgrace": "^3.0.0"
   },
-  "description": "fis3 relative path support",
+  "description": "cssgrace for fis3.",
   "files": [
     "LICENSE",
     "README.md",
@@ -17,17 +18,16 @@
     "package.json"
   ],
   "keywords": [
+    "cssgrace",
     "fis",
     "fis3",
-    "fis3-hook-relative-legal-html",
-    "hook",
-    "relative",
-    "relative-legal-html"
+    "fis3-preprocessor-cssgrace",
+    "preprocessor"
   ],
   "license": "MIT",
   "main": "index.js",
-  "name": "fis3-hook-relative-legal-html",
+  "name": "fis3-preprocessor-cssgrace",
   "readmeFilename": "README.md",
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-hook-relative-legal-html",
-  "version": "2.1.5"
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-preprocessor-cssgrace",
+  "version": "1.0.1"
 }

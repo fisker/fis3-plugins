@@ -25,6 +25,11 @@
 [![npm](https://img.shields.io/npm/dt/fis3-hook-relative-legal-html.svg?style=flat-square)](https://www.npmjs.com/package/fis3-hook-relative-legal-html)
 [![npm](https://img.shields.io/npm/dm/fis3-hook-relative-legal-html.svg?style=flat-square)](https://www.npmjs.com/package/fis3-hook-relative-legal-html)
 
+## fis3-preprocessor-cssgrace
+[![npm](https://img.shields.io/npm/v/fis3-preprocessor-cssgrace.svg?style=flat-square)](https://www.npmjs.com/package/fis3-preprocessor-cssgrace)
+[![npm](https://img.shields.io/npm/dt/fis3-preprocessor-cssgrace.svg?style=flat-square)](https://www.npmjs.com/package/fis3-preprocessor-cssgrace)
+[![npm](https://img.shields.io/npm/dm/fis3-preprocessor-cssgrace.svg?style=flat-square)](https://www.npmjs.com/package/fis3-preprocessor-cssgrace)
+
 ## fis3-postprocessor-autoprefixer-latest
 [![npm](https://img.shields.io/npm/v/fis3-postprocessor-autoprefixer-latest.svg?style=flat-square)](https://www.npmjs.com/package/fis3-postprocessor-autoprefixer-latest)
 [![npm](https://img.shields.io/npm/dt/fis3-postprocessor-autoprefixer-latest.svg?style=flat-square)](https://www.npmjs.com/package/fis3-postprocessor-autoprefixer-latest)

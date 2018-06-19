@@ -4,15 +4,15 @@ const quotes = {
   '"': 'QUOTE_DOUBLE'
 }
 
-const rUrl = /("|')?__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
+const rUrl = /(["']?)__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
 const path = require('path')
 const rFile = /\.[^\.]+$/
 
 function wrap(info) {
-  var rest = info.file.subpath + info.query + info.hash
-  return `${info.quote}__relative___${quotes[info.quote]}-${rest}___${
-    info.quote
-  }`
+  let path = info.file.subpath + info.query + info.hash
+  let quote = info.quote
+  let quoteStyle = quotes[quote]
+  return `${quote}__relative___${quoteStyle}-${path}___${quote}`
 }
 
 function getRelativeUrl(file, host) {
@@ -39,8 +39,8 @@ function getRelativeUrl(file, host) {
 }
 
 function convert(content, file, host) {
-  return content.replace(rUrl, function(all, _, quoteStyle, value) {
-    const info = fis.project.lookup(value)
+  return content.replace(rUrl, function(all, _, quoteStyle, path) {
+    const info = fis.project.lookup(path)
 
     if (!info.file) {
       return info.origin
@@ -51,7 +51,7 @@ function convert(content, file, host) {
 
     const query = info.query
     const hash = info.hash || info.file.hash
-    let url = /*/__sprite/.test(info.origin) ? info.file.getUrl() : */ getRelativeUrl(
+    let url = getRelativeUrl(
       info.file,
       host || file
     )
@@ -74,16 +74,6 @@ function convert(content, file, host) {
 
     return quoteChr + url + hash + quoteChr
   })
-}
-
-function combineQuery(query1, query2) {
-  query1 = query1.replace(/^\?/, '')
-  query2 = query2.replace(/^\?/, '')
-  const arr = []
-  query1 && arr.push(query1)
-  query2 && arr.push(query2)
-  const query = arr.join('&')
-  return query ? '?' + query : ''
 }
 
 function onStandardRestoreUri(message) {

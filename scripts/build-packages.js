@@ -7,6 +7,7 @@ const pluginTypes = [
   'lint',
   'hook',
   'optimizer',
+  'preprocessor',
   'postprocessor',
   'server',
   'parser',
