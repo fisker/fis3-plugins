@@ -177,7 +177,7 @@ module.exports = function(content, file, conf) {
 
     // 如果已经在里面
     var idx = stacks.indexOf(dirname)
-    if (~idx) {
+    if (idx !== -1) {
       stacks.splice(idx, 1)
     }
     stacks.unshift(dirname)
@@ -202,7 +202,10 @@ module.exports = function(content, file, conf) {
     if (!target.subpath) {
       target.subpath = _path2.default.relative(PROJECT_ROOT, target.realpath)
     }
-    ~sources.indexOf(target.subpath) || sources.push(target.subpath)
+
+    if (sources.includes(target.subpath)) {
+      sources.push(target.subpath)
+    }
 
     return {
       file: target.subpath,

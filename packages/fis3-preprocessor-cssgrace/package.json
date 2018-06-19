@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "cssgrace": "^3.0.0"
+    "cssgrace-lite": "^1.0.1"
   },
   "description": "cssgrace for fis3.",
   "files": [
@@ -29,5 +29,5 @@
   "name": "fis3-preprocessor-cssgrace",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-preprocessor-cssgrace",
-  "version": "1.0.1"
+  "version": "1.0.3"
 }

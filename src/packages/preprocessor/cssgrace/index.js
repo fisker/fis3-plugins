@@ -1,8 +1,5 @@
-import {pack as cssgrace} from 'cssgrace'
+import {pack as cssgrace} from 'cssgrace-lite'
 
 module.exports = function(content, file, conf) {
-  const options = {
-    from: file.realpath
-  }
-  return cssgrace(content, options)
+  return cssgrace(content, conf)
 }

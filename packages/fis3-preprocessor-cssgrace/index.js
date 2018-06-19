@@ -1,10 +1,7 @@
 'use strict'
 
-var _cssgrace = require('cssgrace')
+var _cssgraceLite = require('cssgrace-lite')
 
 module.exports = function(content, file, conf) {
-  var options = {
-    from: file.realpath
-  }
-  return (0, _cssgrace.pack)(content, options)
+  return (0, _cssgraceLite.pack)(content, conf)
 }

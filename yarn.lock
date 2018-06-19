@@ -1539,6 +1539,12 @@ css-tokenize@^1.0.1:
     inherits "^2.0.1"
     readable-stream "^1.0.33"
 
+cssgrace-lite@^1.0.1:
+  version "1.0.1"
+  resolved "http://registry.npm.taobao.org/cssgrace-lite/download/cssgrace-lite-1.0.1.tgz#4b6ee770bf03c0efff3ede246f226a8d7d18f8de"
+  dependencies:
+    postcss "^6.0.22"
+
 cssgrace@^3.0.0:
   version "3.0.0"
   resolved "http://registry.npm.taobao.org/cssgrace/download/cssgrace-3.0.0.tgz#4dd9b5cc849eb7404f80a9ab38640a1458c60332"
