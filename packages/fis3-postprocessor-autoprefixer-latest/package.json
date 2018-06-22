@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "autoprefixer": "^8.6.3",
-    "postcss": "^6.0.22"
+    "postcss": "^6.0.23"
   },
   "description": "latest version autoprefixer for fis3.",
   "files": [

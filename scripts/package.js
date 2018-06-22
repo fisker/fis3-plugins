@@ -23,7 +23,7 @@ const template = _.memoize(function(file) {
 
 function parseDependencies(pkgs) {
   const dependencies = {}
-  _.forEach(pkgs, function(pkg) {
+  _.forEach(pkgs || [], function(pkg) {
     const pkgArr = pkg.split('@')
     const pkgName = pkgArr[0]
     let pkgVersion = pkgArr[1]
@@ -33,7 +33,7 @@ function parseDependencies(pkgs) {
     }
 
     if (!pkgVersion) {
-      throw Error('dependency [%s] is not in package.json.', name)
+      throw Error(`dependency [${pkgName}] is not in package.json.`)
       procees.exit(1)
     }
 
@@ -53,15 +53,20 @@ class Package {
     this.type = type
     this.name = name
     this.info = require(path.join(this.src, 'info.js'))
-    _.assign(this.info, {
-      name: packageName,
-      readme: this.readFile('README.md'),
-      links: _.assign({}, links, this.info.links),
-      options: this.info.options || {},
-      keywords: this.info.keywords || [],
-      files: this.info.files || [],
-      dependencies: parseDependencies(this.info.dependencies)
-    })
+    try {
+      _.assign(this.info, {
+        name: packageName,
+        readme: this.readFile('README.md'),
+        links: _.assign({}, links, this.info.links),
+        options: this.info.options || {},
+        keywords: this.info.keywords || [],
+        files: this.info.files || [],
+        dependencies: parseDependencies(this.info.dependencies)
+      })
+    } catch (err) {
+      console.log('[%s] build error: %s', packageName, err)
+      process.exit(1)
+    }
 
     this.pkg = this.getPackageInfo()
   }

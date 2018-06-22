@@ -1,7 +1,5 @@
 'use strict'
 
-require('es6-shim')
-
 var _promiseSynchronizer = require('promise-synchronizer')
 
 var _promiseSynchronizer2 = _interopRequireDefault(_promiseSynchronizer)
@@ -13,10 +11,6 @@ var _postcss2 = _interopRequireDefault(_postcss)
 var _stylelint = require('stylelint')
 
 var _stylelint2 = _interopRequireDefault(_stylelint)
-
-var _stylefmt = require('stylefmt')
-
-var _stylefmt2 = _interopRequireDefault(_stylefmt)
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
@@ -43,7 +37,8 @@ module.exports = function(content, file, conf) {
   var config = Object.assign({}, conf, {
     formatter: 'string',
     files: file.realpath,
-    extractStyleTagsFromHtml: false
+    extractStyleTagsFromHtml: false,
+    from: config.filename
   })
   delete config.filename
   delete config.code
@@ -52,21 +47,6 @@ module.exports = function(content, file, conf) {
   if (!config.syntax && syntax[file.ext]) {
     config.syntax = syntax[file.ext]
   }
-
-  if (config.fix) {
-    try {
-      ;(0, _promiseSynchronizer2.default)(
-        (0, _postcss2.default)([_stylefmt2.default])
-          .process(content, config)
-          .then(function(result) {
-            if (result && result.css) {
-              content = result.css
-            }
-          })
-      )
-    } catch (err) {}
-  }
-  delete config.fix
 
   var promise = (0, _postcss2.default)([_stylelint2.default])
     .process(content, config)

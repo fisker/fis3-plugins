@@ -8,10 +8,6 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "es6-shim": "^0.35.3",
-    "postcss": "^6.0.22",
-    "promise-synchronizer": "^1.0.9",
-    "stylefmt": "^6.0.0"
   },
   "description": "a css formatter of fis3 based on stylefmt.",
   "files": [
@@ -32,5 +28,5 @@
   "name": "fis3-postprocessor-stylefmt",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-stylefmt",
-  "version": "1.2.4"
+  "version": "1.2.5"
 }

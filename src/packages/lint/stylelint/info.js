@@ -1,16 +1,13 @@
 module.exports = {
-  version: '2.2.5',
+  version: '2.2.6',
   description: 'a css linter plugin of fis3 based on stylelint.',
   keywords: ['linter'],
   dependencies: [
-    'es6-shim',
     'postcss',
     'promise-synchronizer',
-    'stylefmt',
     'stylelint'
   ],
   links: {
-    stylelint: 'http://stylelint.io/',
-    stylefmt: 'https://github.com/morishitter/stylefmt'
+    stylelint: 'http://stylelint.io/'
   }
 }
