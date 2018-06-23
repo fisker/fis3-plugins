@@ -1,7 +1,5 @@
 'use strict'
 
-import path from 'path'
-
 import morgan from 'morgan'
 
 import bodyParser from 'body-parser'
@@ -12,14 +10,11 @@ import ydScript from 'yog-devtools/lib/script'
 import serveDirectory from 'serve-directory'
 import serveDirectoryThemeOcticons from 'serve-directory-theme-octicons'
 
-function mock(root) {
+function mock(rewrite, data) {
   const options = {
     view_path: '', // 避免报错。
-    rewrite_file: [
-      path.join(root, 'config', 'server.conf'),
-      path.join(root, 'mock', 'server.conf')
-    ],
-    data_path: [path.join(root, 'test'), path.join(root, 'mock')]
+    rewrite_file: rewrite,
+    data_path: data
   }
 
   return function(req, res, next) {

@@ -3,7 +3,11 @@
 import path from 'path'
 import merge from 'lodash.merge'
 import bsDefaultConfig from 'browser-sync/dist/default-config.js'
-import {mock, logger, directory} from './middleware.js'
+import {
+  mock,
+  logger,
+  directory
+} from './middleware.js'
 
 const defaultOptions = merge({}, bsDefaultConfig, {
   server: {
@@ -21,7 +25,7 @@ const overrideOptions = {
   snippetOptions: {
     rule: {
       match: /<\/body>|<!--\s*browser-sync-script\s*-->/i,
-      fn: function(snippet, match) {
+      fn: function (snippet, match) {
         return snippet + match
       }
     }
@@ -82,7 +86,16 @@ function getConfig(bs, argv) {
   config.middleware.push(logger('short'))
 
   // mock
-  config.middleware.push(mock(argv.root))
+  config.middleware.push(mock(
+    [
+      path.join(argv.context, 'server.conf'),
+      path.join(argv.context, 'config', 'server.conf'),
+      path.join(argv.context, 'mock', 'server.conf')
+    ], [
+      path.join(argv.root, 'test'),
+      path.join(argv.root, 'mock')
+    ]
+  ))
 
   // serveDirectory
   if (config.server && config.server.directory) {
