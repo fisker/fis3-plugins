@@ -42,7 +42,7 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-function mock(rewrite, data) {
+function mock(root) {
   var options = {
     view_path: '', // 避免报错。
     rewrite_file: [

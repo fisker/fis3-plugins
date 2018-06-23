@@ -12,7 +12,7 @@ import ydScript from 'yog-devtools/lib/script'
 import serveDirectory from 'serve-directory'
 import serveDirectoryThemeOcticons from 'serve-directory-theme-octicons'
 
-function mock(rewrite, data) {
+function mock(root) {
   const options = {
     view_path: '', // 避免报错。
     rewrite_file: [
