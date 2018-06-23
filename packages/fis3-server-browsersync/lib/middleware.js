@@ -4,6 +4,10 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 })
 
+var _path = require('path')
+
+var _path2 = _interopRequireDefault(_path)
+
 var _morgan = require('morgan')
 
 var _morgan2 = _interopRequireDefault(_morgan)
@@ -41,8 +45,15 @@ function _interopRequireDefault(obj) {
 function mock(rewrite, data) {
   var options = {
     view_path: '', // 避免报错。
-    rewrite_file: rewrite,
-    data_path: data
+    rewrite_file: [
+      _path2.default.join(root, 'server.conf'),
+      _path2.default.join(root, 'config', 'server.conf'),
+      _path2.default.join(root, 'mock', 'server.conf')
+    ],
+    data_path: [
+      _path2.default.join(root, 'test'),
+      _path2.default.join(root, 'mock')
+    ]
   }
 
   return function(req, res, next) {

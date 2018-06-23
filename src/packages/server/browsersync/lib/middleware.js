@@ -1,5 +1,7 @@
 'use strict'
 
+import path from 'path'
+
 import morgan from 'morgan'
 
 import bodyParser from 'body-parser'
@@ -13,8 +15,15 @@ import serveDirectoryThemeOcticons from 'serve-directory-theme-octicons'
 function mock(rewrite, data) {
   const options = {
     view_path: '', // 避免报错。
-    rewrite_file: rewrite,
-    data_path: data
+    rewrite_file: [
+      path.join(root, 'server.conf'),
+      path.join(root, 'config', 'server.conf'),
+      path.join(root, 'mock', 'server.conf')
+    ],
+    data_path: [
+      path.join(root, 'test'),
+      path.join(root, 'mock')
+    ]
   }
 
   return function(req, res, next) {

@@ -108,19 +108,7 @@ function getConfig(bs, argv) {
   config.middleware.push((0, _middleware.logger)('short'))
 
   // mock
-  config.middleware.push(
-    (0, _middleware.mock)(
-      [
-        _path2.default.join(argv.context, 'server.conf'),
-        _path2.default.join(argv.context, 'config', 'server.conf'),
-        _path2.default.join(argv.context, 'mock', 'server.conf')
-      ],
-      [
-        _path2.default.join(argv.root, 'test'),
-        _path2.default.join(argv.root, 'mock')
-      ]
-    )
-  )
+  config.middleware.push((0, _middleware.mock)(argv.root))
 
   // serveDirectory
   if (config.server && config.server.directory) {
