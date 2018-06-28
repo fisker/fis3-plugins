@@ -3,6 +3,6 @@ import autoprefixer from 'autoprefixer'
 
 module.exports = function(content, file, conf) {
   return postcss([autoprefixer(conf)]).process(content, {
-    from: config.filename
+    from: conf.filename
   }).css
 }

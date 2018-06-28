@@ -16,7 +16,7 @@ module.exports = function(content, file, conf) {
   return (0, _postcss2.default)([(0, _autoprefixer2.default)(conf)]).process(
     content,
     {
-      from: config.filename
+      from: conf.filename
     }
   ).css
 }
