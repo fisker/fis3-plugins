@@ -1,16 +1,16 @@
-# fis3-optimizer-uglify-js-latest
+# fis3-optimizer-uglifyjs
 
 > 
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![npm](https://img.shields.io/npm/v/fis3-optimizer-uglify-js-latest.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-uglify-js-latest)
-[![npm](https://img.shields.io/npm/dt/fis3-optimizer-uglify-js-latest.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-uglify-js-latest)
-[![npm](https://img.shields.io/npm/dm/fis3-optimizer-uglify-js-latest.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-uglify-js-latest)
+[![npm](https://img.shields.io/npm/v/fis3-optimizer-uglifyjs.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-uglifyjs)
+[![npm](https://img.shields.io/npm/dt/fis3-optimizer-uglifyjs.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-uglifyjs)
+[![npm](https://img.shields.io/npm/dm/fis3-optimizer-uglifyjs.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-uglifyjs)
 
 ## install
 
 ```sh
-$ npm i -g fis3-optimizer-uglify-js-latest
+$ npm i -g fis3-optimizer-uglifyjs
 ```
 
 ## usage
@@ -21,7 +21,7 @@ $ npm i -g fis3-optimizer-uglify-js-latest
 var uglifyJSConf = {};
 
 fis.match('*.js', {
-  optimizer: fis.plugin('uglify-js-latest', uglifyJSConf)
+  optimizer: fis.plugin('uglifyjs', uglifyJSConf)
 });
 ```
 

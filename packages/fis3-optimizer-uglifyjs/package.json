@@ -21,16 +21,16 @@
     "es5",
     "fis",
     "fis3",
-    "fis3-optimizer-uglify-js-latest",
+    "fis3-optimizer-uglifyjs",
     "javascript",
     "optimizer",
     "uglify",
-    "uglify-js-latest"
+    "uglifyjs"
   ],
   "license": "MIT",
   "main": "index.js",
-  "name": "fis3-optimizer-uglify-js-latest",
+  "name": "fis3-optimizer-uglifyjs",
   "readmeFilename": "README.md",
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-uglify-js-latest",
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-uglifyjs",
   "version": "1.0.0"
 }
