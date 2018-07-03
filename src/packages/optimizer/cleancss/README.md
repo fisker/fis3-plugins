@@ -6,7 +6,7 @@
 var cleanCSSConf = {};
 
 fis.match('*.css', {
-  optimizer: fis.plugin('clean-css', cleanCSSConf)
+  optimizer: fis.plugin('cleancss', cleanCSSConf)
 });
 ```
 

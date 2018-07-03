@@ -18,18 +18,18 @@
     "package.json"
   ],
   "keywords": [
-    "clean-css",
+    "cleancss",
     "fis",
     "fis3",
-    "fis3-optimizer-clean-css",
+    "fis3-optimizer-cleancss",
     "minifer",
     "minify",
     "optimizer"
   ],
   "license": "MIT",
   "main": "index.js",
-  "name": "fis3-optimizer-clean-css",
+  "name": "fis3-optimizer-cleancss",
   "readmeFilename": "README.md",
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-clean-css",
-  "version": "1.0.1"
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-cleancss",
+  "version": "1.0.0"
 }
