@@ -1,0 +1,36 @@
+{
+  "author": {
+    "email": "lionkay@gmail.com",
+    "name": "fisker Cheung",
+    "url": "https://github.com/fisker"
+  },
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "dependencies": {
+    "uglify-js": "^3.4.2"
+  },
+  "description": "",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.js",
+    "package.json"
+  ],
+  "keywords": [
+    "es5",
+    "fis",
+    "fis3",
+    "fis3-optimizer-uglify-js-latest",
+    "javascript",
+    "optimizer",
+    "uglify",
+    "uglify-js-latest"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "fis3-optimizer-uglify-js-latest",
+  "readmeFilename": "README.md",
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-uglify-js-latest",
+  "version": "1.0.0"
+}
