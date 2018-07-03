@@ -8,9 +8,9 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "uglify-js": "^3.4.2"
+    "clean-css": "^4.1.11"
   },
-  "description": "js minifer for fis based on uglifyjs.",
+  "description": "css minifer for fis based on clean-css.",
   "files": [
     "LICENSE",
     "README.md",
@@ -18,21 +18,18 @@
     "package.json"
   ],
   "keywords": [
-    "es5",
+    "clean-css",
     "fis",
     "fis3",
-    "fis3-optimizer-uglifyjs",
-    "javascript",
+    "fis3-optimizer-clean-css",
     "minifer",
     "minify",
-    "optimizer",
-    "uglify",
-    "uglifyjs"
+    "optimizer"
   ],
   "license": "MIT",
   "main": "index.js",
-  "name": "fis3-optimizer-uglifyjs",
+  "name": "fis3-optimizer-clean-css",
   "readmeFilename": "README.md",
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-uglifyjs",
-  "version": "1.0.1"
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-clean-css",
+  "version": "1.0.0"
 }

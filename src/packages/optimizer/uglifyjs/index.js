@@ -3,6 +3,7 @@
  * fisker Cheung<lionkay@gmail.com>
  */
 import {minify} from 'uglify-js'
+const log = global.fis.log
 
 function getUglifyJSOptions(file, conf) {
   const options = Object.assign({}, conf)
@@ -45,6 +46,15 @@ function deriveSourceMap(file, sourceMap) {
 module.exports = function(content, file, conf) {
   const options = getUglifyJSOptions(file, conf)
   const result = minify(content, options)
+
+  if (result.warnings) {
+    log.warn(result.warnings)
+  }
+
+  if (result.errors) {
+    log.warn(result.errors)
+    process.exit(1)
+  }
 
   deriveSourceMap(file, result.map)
 

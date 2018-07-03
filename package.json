@@ -39,6 +39,7 @@
     "autoprefixer": "^8.6.4",
     "body-parser": "^1.18.3",
     "browser-sync": "^2.24.5",
+    "clean-css": "^4.1.11",
     "cssgrace": "^3.0.0",
     "cssgrace-lite": "^1.0.1",
     "ejs": "^2.6.1",

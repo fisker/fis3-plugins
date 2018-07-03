@@ -2,6 +2,13 @@
 
 var _uglifyJs = require('uglify-js')
 
+var log =
+  global.fis
+    .log /*
+                           * fis3-optimizer-uglify-js-latest
+                           * fisker Cheung<lionkay@gmail.com>
+                           */
+
 function getUglifyJSOptions(file, conf) {
   var options = Object.assign({}, conf)
   delete options.filename
@@ -26,10 +33,7 @@ function getUglifyJSOptions(file, conf) {
       sourceMap.url = filename + '.map'
     }
   }
-} /*
-   * fis3-optimizer-uglify-js-latest
-   * fisker Cheung<lionkay@gmail.com>
-   */
+}
 
 function deriveSourceMap(file, sourceMap) {
   if (!sourceMap) {
@@ -50,6 +54,15 @@ function deriveSourceMap(file, sourceMap) {
 module.exports = function(content, file, conf) {
   var options = getUglifyJSOptions(file, conf)
   var result = (0, _uglifyJs.minify)(content, options)
+
+  if (result.warnings) {
+    log.warn(result.warnings)
+  }
+
+  if (result.errors) {
+    log.warn(result.errors)
+    process.exit(1)
+  }
 
   deriveSourceMap(file, result.map)
 
