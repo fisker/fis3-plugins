@@ -1,6 +1,6 @@
 module.exports = {
   version: '1.0.0',
-  description: '',
+  description: 'js optimizer for fis based on uglifyjs.',
   keywords: [
     'uglify',
     'javascript',
