@@ -1,6 +1,22 @@
 import CleanCSS from 'clean-css'
 const log = global.fis.log
 
+function deriveSourceMap(file, sourceMap) {
+  if (!sourceMap) {
+    return
+  }
+
+  const mapping = global.fis.file.wrap(
+    file.dirname + '/' + file.filename + file.rExt + '.map'
+  )
+
+  mapping.setContent(sourceMap)
+
+  file.extras = file.extras || {}
+  file.extras.derived = file.extras.derived || []
+  file.extras.derived.push(mapping)
+}
+
 module.exports = function(content, file, conf) {
   const options = Object.assign({}, conf)
   delete options.filename
@@ -19,6 +35,8 @@ module.exports = function(content, file, conf) {
     log.warn(result.errors)
     process.exit(1)
   }
+
+  deriveSourceMap(file, result.sourceMap)
 
   return result.styles
 }
