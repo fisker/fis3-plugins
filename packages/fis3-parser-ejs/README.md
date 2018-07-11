@@ -30,7 +30,7 @@ var ejsConf = {
 }
 
 fis.match('*.ejs', {
-  parser: fis.plugin('node-sass-latest', ejsConf);
+  parser: fis.plugin('ejs', ejsConf);
 });
 ```
 
