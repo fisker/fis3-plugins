@@ -12,18 +12,16 @@ function makeRequireFunction(context) {
   }
 }
 
-module.exports = function (content, file, conf) {
+module.exports = function(content, file, conf) {
   const data = conf.data
   const options = conf.options
   const filename = conf.filename
   const dirname = path.dirname(filename)
-  const variable = options.variable || 'obj'
 
   options.imports = {
     require: makeRequireFunction(dirname),
     __dirname: dirname,
     __filename: filename,
-    [variable]: data,
     ...options.imports
   }
 
@@ -33,3 +31,5 @@ module.exports = function (content, file, conf) {
 
   return content
 }
+
+module.exports.lodash = _

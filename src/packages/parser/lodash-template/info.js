@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.0.1',
+  version: '1.0.2',
   description: 'a fis plugin to parse lodash template.',
   keywords: ['jst', 'html'],
   dependencies: ['lodash'],

@@ -26,20 +26,6 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    })
-  } else {
-    obj[key] = value
-  }
-  return obj
-}
-
 var re = /^[.\\/]/i
 function makeRequireFunction(context) {
   return function(mod) {
@@ -56,18 +42,13 @@ module.exports = function(content, file, conf) {
   var options = conf.options
   var filename = conf.filename
   var dirname = _path2.default.dirname(filename)
-  var variable = options.variable || 'obj'
 
   options.imports = _extends(
-    _defineProperty(
-      {
-        require: makeRequireFunction(dirname),
-        __dirname: dirname,
-        __filename: filename
-      },
-      variable,
-      data
-    ),
+    {
+      require: makeRequireFunction(dirname),
+      __dirname: dirname,
+      __filename: filename
+    },
     options.imports
   )
 
@@ -77,3 +58,5 @@ module.exports = function(content, file, conf) {
 
   return content
 }
+
+module.exports.lodash = _lodash2.default
