@@ -1,9 +1,26 @@
 import _ from 'lodash'
 import path from 'path'
 
+const PROJECT_ROOT = fis.project.getProjectPath()
+const root = path.normalize(PROJECT_ROOT)
+
+
 const re = /^[.\\/]/i
+
+function cleanRequireCache() {
+  Object.keys(require.cache)
+    .filter(function (id) {
+      return path.normalize(id).startsWith(root)
+    })
+    .forEach(function (id) {
+      delete require.cache[id]
+    })
+}
+
 function makeRequireFunction(context) {
-  return function(mod) {
+  return function (mod) {
+    cleanRequireCache()
+
     if (re.test(mod)) {
       mod = path.resolve(context, mod)
     }
@@ -12,7 +29,7 @@ function makeRequireFunction(context) {
   }
 }
 
-module.exports = function(content, file, conf) {
+module.exports = function (content, file, conf) {
   const data = conf.data
   const options = conf.options
   const filename = conf.filename

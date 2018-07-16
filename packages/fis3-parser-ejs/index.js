@@ -27,10 +27,24 @@ function _interopRequireDefault(obj) {
 }
 
 var PROJECT_ROOT = fis.project.getProjectPath()
+var root = _path2.default.normalize(PROJECT_ROOT)
 
 var re = /^[.\\/]/i
+
+function cleanRequireCache() {
+  Object.keys(require.cache)
+    .filter(function(id) {
+      return _path2.default.normalize(id).startsWith(root)
+    })
+    .forEach(function(id) {
+      delete require.cache[id]
+    })
+}
+
 function makeRequireFunction(context) {
   return function(mod) {
+    cleanRequireCache()
+
     if (re.test(mod)) {
       mod = _path2.default.resolve(context, mod)
     }
