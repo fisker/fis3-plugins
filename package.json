@@ -36,7 +36,7 @@
     "mkdirp": "^0.5.1"
   },
   "dependencies": {
-    "autoprefixer": "^8.6.5",
+    "autoprefixer": "^9.0.0",
     "body-parser": "^1.18.3",
     "browser-sync": "^2.24.5",
     "clean-css": "^4.1.11",
@@ -50,7 +50,7 @@
     "lodash.merge": "^4.6.1",
     "morgan": "^1.9.0",
     "node-sass": "^4.9.2",
-    "postcss": "^6.0.23",
+    "postcss": "^7.0.0",
     "posthtml": "^0.11.3",
     "posthtml-beautify": "^0.2.0",
     "prettier": "^1.13.7",
