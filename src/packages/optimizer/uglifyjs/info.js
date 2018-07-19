@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.0.2',
+  version: '1.0.3',
   description: 'js minifer for fis based on uglifyjs.',
   keywords: [
     'minifer',

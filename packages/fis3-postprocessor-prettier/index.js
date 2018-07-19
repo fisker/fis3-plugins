@@ -27,7 +27,7 @@ module.exports = function(content, file, conf) {
   var parsed = _prettier2.default.format(content, config)
 
   // fix inline indent
-  if (file.isInline || file.filename[0] === '.') {
+  if (file.isInline) {
     parsed = parsed.trim()
 
     if (parsed.indexOf('\n') !== -1) {
