@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "clean-css": "^4.1.11"
+    "clean-css": "^4.2.0"
   },
   "description": "css minifer for fis based on clean-css.",
   "files": [
@@ -31,5 +31,5 @@
   "name": "fis3-optimizer-cleancss",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-cleancss",
-  "version": "1.0.1"
+  "version": "1.0.2"
 }

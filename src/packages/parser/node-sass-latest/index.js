@@ -88,20 +88,6 @@ function fixSourcePath(content, file) {
   })
 }
 
-// function fixImport(content) {
-
-//     var reg = /((?:\/\/.*?\n)|(?:\/\*[\s\S]*?\*\/))|(?:@import\s([\s\S]*?)(?:\n|$)(?!\s+[^{@]*\n))/ig;
-
-//     return content.replace(reg, function(all, comments, value) {
-
-//         if (!comments && value && value.trim() && !/;$/.test(value)) {
-//             all += ';';
-//         }
-
-//         return all;
-//     });
-// }
-
 module.exports = function(content, file, conf) {
   // 不处理空文件，处理空文件有人反馈报错。
   if (!content || !content.trim() || file.basename[0] === '_') {
