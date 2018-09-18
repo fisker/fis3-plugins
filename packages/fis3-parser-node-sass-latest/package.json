@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "node-sass": "^4.9.2"
+    "node-sass": "^4.9.3"
   },
   "description": "A fis plugin to parse sass with latest node-sass.",
   "files": [
@@ -32,5 +32,5 @@
   "name": "fis3-parser-node-sass-latest",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-node-sass-latest",
-  "version": "1.0.4"
+  "version": "1.0.5"
 }

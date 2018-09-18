@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.11"
   },
   "description": "a fis plugin to parse lodash template.",
   "files": [
@@ -31,5 +31,5 @@
   "name": "fis3-parser-lodash-template",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-lodash-template",
-  "version": "1.0.3"
+  "version": "1.0.4"
 }
