@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.0.2',
+  version: '1.0.3',
   description: 'a code formatter of fis3 based on prettyhtml.',
   keywords: ['beautify', 'format', 'formatter'],
   dependencies: ['@starptech/prettyhtml'],
