@@ -65,6 +65,11 @@
 [![npm](https://img.shields.io/npm/dt/fis3-postprocessor-prettier-css.svg?style=flat-square)](https://www.npmjs.com/package/fis3-postprocessor-prettier-css)
 [![npm](https://img.shields.io/npm/dm/fis3-postprocessor-prettier-css.svg?style=flat-square)](https://www.npmjs.com/package/fis3-postprocessor-prettier-css)
 
+## fis3-postprocessor-prettyhtml
+[![npm](https://img.shields.io/npm/v/fis3-postprocessor-prettyhtml.svg?style=flat-square)](https://www.npmjs.com/package/fis3-postprocessor-prettyhtml)
+[![npm](https://img.shields.io/npm/dt/fis3-postprocessor-prettyhtml.svg?style=flat-square)](https://www.npmjs.com/package/fis3-postprocessor-prettyhtml)
+[![npm](https://img.shields.io/npm/dm/fis3-postprocessor-prettyhtml.svg?style=flat-square)](https://www.npmjs.com/package/fis3-postprocessor-prettyhtml)
+
 ## fis3-postprocessor-standard
 [![npm](https://img.shields.io/npm/v/fis3-postprocessor-standard.svg?style=flat-square)](https://www.npmjs.com/package/fis3-postprocessor-standard)
 [![npm](https://img.shields.io/npm/dt/fis3-postprocessor-standard.svg?style=flat-square)](https://www.npmjs.com/package/fis3-postprocessor-standard)
