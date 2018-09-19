@@ -29,13 +29,14 @@
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
-    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-add-module-exports": "^1.0.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "json-stable-stringify": "^1.0.1",
     "mkdirp": "^0.5.1"
   },
   "dependencies": {
+    "@starptech/prettyhtml": "^0.0.60",
     "autoprefixer": "^9.1.5",
     "body-parser": "^1.18.3",
     "browser-sync": "^2.24.7",

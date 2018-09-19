@@ -24,9 +24,16 @@ const template = _.memoize(function(file) {
 function parseDependencies(pkgs) {
   const dependencies = {}
   _.forEach(pkgs || [], function(pkg) {
-    const pkgArr = pkg.split('@')
-    const pkgName = pkgArr[0]
-    let pkgVersion = pkgArr[1]
+    let pkgArr = pkg.split('@')
+    let pkgName
+    let pkgVersion
+    if (pkgArr[0] === '') {
+      pkgName = pkgArr.slice(0, 2).join('@')
+      pkgVersion = pkgArr[2]
+    } else {
+      pkgName = pkgArr[0]
+      pkgVersion = pkgArr[1]
+    }
 
     if (!pkgVersion) {
       pkgVersion = globalPackage.dependencies[pkgName]
