@@ -1,3 +1,5 @@
+import path from 'path'
+
 const quotes = {
   '': 'QUOTE_NONE',
   "'": 'QUOTE_SINGLE',
@@ -5,7 +7,6 @@ const quotes = {
 }
 
 const rUrl = /(["']?)__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
-const path = require('path')
 const rFile = /\.[^\.]+$/
 
 function wrap(info) {

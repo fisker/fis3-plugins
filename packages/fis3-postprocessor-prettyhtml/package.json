@@ -32,5 +32,5 @@
   "name": "fis3-postprocessor-prettyhtml",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-prettyhtml",
-  "version": "1.0.3"
+  "version": "1.0.4"
 }

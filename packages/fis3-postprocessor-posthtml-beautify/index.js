@@ -1,16 +1,12 @@
 'use strict'
 
-var _posthtml = require('posthtml')
+var _posthtml = _interopRequireDefault(require('posthtml'))
 
-var _posthtml2 = _interopRequireDefault(_posthtml)
+var _posthtmlBeautify = _interopRequireDefault(require('posthtml-beautify'))
 
-var _posthtmlBeautify = require('posthtml-beautify')
-
-var _posthtmlBeautify2 = _interopRequireDefault(_posthtmlBeautify)
-
-var _promiseSynchronizer = require('promise-synchronizer')
-
-var _promiseSynchronizer2 = _interopRequireDefault(_promiseSynchronizer)
+var _promiseSynchronizer = _interopRequireDefault(
+  require('promise-synchronizer')
+)
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
@@ -27,10 +23,9 @@ module.exports = function(content, file, conf) {
     /__relative<<<"(.*?)">>>/g,
     '"__relative_fn2_start__$1__relative_fn2_end__"'
   )
-
-  var promise = (0, _posthtml2.default)()
+  var promise = (0, _posthtml.default)()
     .use(
-      (0, _posthtmlBeautify2.default)({
+      (0, _posthtmlBeautify.default)({
         rules: conf.rules
       })
     )
@@ -40,7 +35,7 @@ module.exports = function(content, file, conf) {
     })
 
   try {
-    content = (0, _promiseSynchronizer2.default)(promise)
+    content = (0, _promiseSynchronizer.default)(promise)
   } catch (err) {
     log.warn('%s might not processed due to:\n %s', file.id, err)
     process.exit(1)
@@ -50,12 +45,10 @@ module.exports = function(content, file, conf) {
     /"__relative_fn2_start__(.*?)__relative_fn2_end__"/g,
     '__relative<<<"$1">>>'
   )
-
   content = content.replace(
     /"__relative_fn1_start__(.*?)__relative_fn1_end__"/g,
     '__relative("$1")'
   )
-
   return content
 }
 

@@ -8,8 +8,8 @@ const _ = require('lodash')
 const mkdirp = require('mkdirp').sync
 const prettier = require('prettier')
 const stringify = require('json-stable-stringify')
-const babel = require('babel-core')
-const babelConfig = JSON.parse(fs.readFileSync('../.babelrc', CHARSET))
+const babel = require('@babel/core')
+const babelConfig = require('../babel.config')
 const files = ['LICENSE', 'README.md', 'index.js', 'package.json']
 const links = {
   fis3: 'http://fis.baidu.com/'

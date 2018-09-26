@@ -2,17 +2,15 @@
 
 var _uglifyJs = require('uglify-js')
 
-var log =
-  global.fis
-    .log /*
-                           * fis3-optimizer-uglify-js-latest
-                           * fisker Cheung<lionkay@gmail.com>
-                           */
+/*
+ * fis3-optimizer-uglify-js-latest
+ * fisker Cheung<lionkay@gmail.com>
+ */
+var log = global.fis.log
 
 function getUglifyJSOptions(file, conf) {
   var options = Object.assign({}, conf)
   delete options.filename
-
   var filename = file.filename + file.rExt
 
   if (file.isInline) {
@@ -25,6 +23,7 @@ function getUglifyJSOptions(file, conf) {
     if (sourceMap.filename && typeof sourceMap.filename === 'string') {
       sourceMap.filename = filename
     }
+
     if (
       sourceMap.url &&
       sourceMap.url !== 'inline' &&
@@ -43,9 +42,7 @@ function deriveSourceMap(file, sourceMap) {
   var mapping = global.fis.file.wrap(
     file.dirname + '/' + file.filename + file.rExt + '.map'
   )
-
   mapping.setContent(sourceMap)
-
   file.extras = file.extras || {}
   file.extras.derived = file.extras.derived || []
   file.extras.derived.push(mapping)
@@ -65,6 +62,5 @@ module.exports = function(content, file, conf) {
   }
 
   deriveSourceMap(file, result.map)
-
   return result.code
 }

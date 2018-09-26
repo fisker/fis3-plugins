@@ -1,8 +1,6 @@
 'use strict'
 
-var _cleanCss = require('clean-css')
-
-var _cleanCss2 = _interopRequireDefault(_cleanCss)
+var _cleanCss = _interopRequireDefault(require('clean-css'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
@@ -18,9 +16,7 @@ function deriveSourceMap(file, sourceMap) {
   var mapping = global.fis.file.wrap(
     file.dirname + '/' + file.filename + file.rExt + '.map'
   )
-
   mapping.setContent(sourceMap)
-
   file.extras = file.extras || {}
   file.extras.derived = file.extras.derived || []
   file.extras.derived.push(mapping)
@@ -34,7 +30,7 @@ module.exports = function(content, file, conf) {
     options.returnPromise = false
   }
 
-  var result = new _cleanCss2.default(conf).minify(content)
+  var result = new _cleanCss.default(conf).minify(content)
 
   if (result.warnings && result.warnings.length) {
     log.warn(result.warnings)
@@ -46,6 +42,5 @@ module.exports = function(content, file, conf) {
   }
 
   deriveSourceMap(file, result.sourceMap)
-
   return result.styles
 }

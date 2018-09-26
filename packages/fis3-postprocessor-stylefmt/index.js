@@ -1,8 +1,8 @@
 'use strict'
 
-var _promiseSynchronizer = require('promise-synchronizer')
-
-var _promiseSynchronizer2 = _interopRequireDefault(_promiseSynchronizer)
+var _promiseSynchronizer = _interopRequireDefault(
+  require('promise-synchronizer')
+)
 
 var _stylefmt = require('stylefmt')
 
@@ -12,7 +12,7 @@ function _interopRequireDefault(obj) {
 
 module.exports = function(content, file, conf) {
   try {
-    content = (0, _promiseSynchronizer2.default)(
+    content = (0, _promiseSynchronizer.default)(
       (0, _stylefmt.process)(content, {
         from: conf.filename
       }).then(function(result) {
@@ -22,5 +22,6 @@ module.exports = function(content, file, conf) {
       })
     )
   } catch (err) {}
+
   return content
 }

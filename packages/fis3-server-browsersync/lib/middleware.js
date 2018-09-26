@@ -3,39 +3,24 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 })
+exports.default = void 0
 
-var _path = require('path')
+var _path = _interopRequireDefault(require('path'))
 
-var _path2 = _interopRequireDefault(_path)
+var _morgan = _interopRequireDefault(require('morgan'))
 
-var _morgan = require('morgan')
+var _bodyParser = _interopRequireDefault(require('body-parser'))
 
-var _morgan2 = _interopRequireDefault(_morgan)
+var _rewrite = _interopRequireDefault(require('yog-devtools/lib/rewrite'))
 
-var _bodyParser = require('body-parser')
+var _preview = _interopRequireDefault(require('yog-devtools/lib/preview'))
 
-var _bodyParser2 = _interopRequireDefault(_bodyParser)
+var _script = _interopRequireDefault(require('yog-devtools/lib/script'))
 
-var _rewrite = require('yog-devtools/lib/rewrite')
+var _serveDirectory = _interopRequireDefault(require('serve-directory'))
 
-var _rewrite2 = _interopRequireDefault(_rewrite)
-
-var _preview = require('yog-devtools/lib/preview')
-
-var _preview2 = _interopRequireDefault(_preview)
-
-var _script = require('yog-devtools/lib/script')
-
-var _script2 = _interopRequireDefault(_script)
-
-var _serveDirectory = require('serve-directory')
-
-var _serveDirectory2 = _interopRequireDefault(_serveDirectory)
-
-var _serveDirectoryThemeOcticons = require('serve-directory-theme-octicons')
-
-var _serveDirectoryThemeOcticons2 = _interopRequireDefault(
-  _serveDirectoryThemeOcticons
+var _serveDirectoryThemeOcticons = _interopRequireDefault(
+  require('serve-directory-theme-octicons')
 )
 
 function _interopRequireDefault(obj) {
@@ -44,25 +29,27 @@ function _interopRequireDefault(obj) {
 
 function mock(root) {
   var options = {
-    view_path: '', // 避免报错。
+    view_path: '',
+    // 避免报错。
     rewrite_file: [
-      _path2.default.join(root, 'server.conf'),
-      _path2.default.join(root, 'config', 'server.conf'),
-      _path2.default.join(root, 'mock', 'server.conf')
+      _path.default.join(root, 'server.conf'),
+      _path.default.join(root, 'config', 'server.conf'),
+      _path.default.join(root, 'mock', 'server.conf')
     ],
     data_path: [
-      _path2.default.join(root, 'test'),
-      _path2.default.join(root, 'mock')
+      _path.default.join(root, 'test'),
+      _path.default.join(root, 'mock')
     ]
   }
-
   return function(req, res, next) {
     ;[
-      (0, _rewrite2.default)(options),
-      _bodyParser2.default.urlencoded({extended: false}),
-      _bodyParser2.default.json(),
-      (0, _preview2.default)(options),
-      (0, _script2.default)(options)
+      (0, _rewrite.default)(options),
+      _bodyParser.default.urlencoded({
+        extended: false
+      }),
+      _bodyParser.default.json(),
+      (0, _preview.default)(options),
+      (0, _script.default)(options)
     ].reduceRight(function(next, middlewave) {
       return function() {
         middlewave(req, res, next)
@@ -76,19 +63,19 @@ function getMiddleware(name, handler) {
     return {
       route: '',
       handle: handler.apply(null, arguments),
-      id: 'Browsersync ' + name + ' Middleware'
+      id: 'Browsersync '.concat(name, ' Middleware')
     }
   }
 }
 
-exports.default = {
-  logger: getMiddleware('Logger', _morgan2.default),
+var _default = {
+  logger: getMiddleware('Logger', _morgan.default),
   mock: getMiddleware('Mock', mock),
   directory: function directory(root) {
-    return getMiddleware('Server Directory', _serveDirectory2.default)(
+    return getMiddleware('Server Directory', _serveDirectory.default)(
       root,
-      _serveDirectoryThemeOcticons2.default
+      _serveDirectoryThemeOcticons.default
     )
   }
 }
-module.exports = exports.default
+exports.default = _default

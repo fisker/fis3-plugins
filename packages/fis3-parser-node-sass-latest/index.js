@@ -1,25 +1,18 @@
-/*
- * fork from https://github.com/fex-team/fis-parser-node-sass
- */
-
 'use strict'
 
-var _path = require('path')
+var _path = _interopRequireDefault(require('path'))
 
-var _path2 = _interopRequireDefault(_path)
+var _nodeSass = _interopRequireDefault(require('node-sass'))
 
-var _nodeSass = require('node-sass')
-
-var _nodeSass2 = _interopRequireDefault(_nodeSass)
-
-var _util = require('util')
-
-var _util2 = _interopRequireDefault(_util)
+var _util = _interopRequireDefault(require('util'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
+/*
+ * fork from https://github.com/fex-team/fis-parser-node-sass
+ */
 var PROJECT_ROOT = fis.project.getProjectPath()
 
 function resolve_and_load(filename, dir) {
@@ -29,20 +22,19 @@ function resolve_and_load(filename, dir) {
   // (3) underscore + given + extension
   // (4) given + extension
   //
+  var basename = _path.default.basename(filename)
 
-  var basename = _path2.default.basename(filename)
-  var dirname = _path2.default.dirname(filename)
+  var dirname = _path.default.dirname(filename)
+
   var files = [
-    _path2.default.join(dirname, basename),
-    _path2.default.join(dirname, '_' + basename),
-    _path2.default.join(dirname, '_' + basename + '.scss'),
-    _path2.default.join(dirname, '_' + basename + '.sass'),
-    _path2.default.join(dirname, basename + '.scss'),
-    _path2.default.join(dirname, basename + '.sass')
+    _path.default.join(dirname, basename),
+    _path.default.join(dirname, '_' + basename),
+    _path.default.join(dirname, '_' + basename + '.scss'),
+    _path.default.join(dirname, '_' + basename + '.sass'),
+    _path.default.join(dirname, basename + '.scss'),
+    _path.default.join(dirname, basename + '.sass')
   ]
-
   var found = null
-
   files.every(function(url) {
     var file = fis.util(dir, url)
 
@@ -53,15 +45,13 @@ function resolve_and_load(filename, dir) {
 
     return true
   })
-
   return found
 }
 
 function find(filename, paths) {
   var found = null
-
   paths.every(function(dir) {
-    var file = void 0
+    var file
 
     if ((file = resolve_and_load(filename, dir))) {
       found = file
@@ -70,14 +60,12 @@ function find(filename, paths) {
 
     return true
   })
-
   return found
 }
 
 function fixSourcePath(content, file) {
   // 处理，解决资源引用路径问题。
   content = fis.compile.extCss(content)
-
   return content.replace(fis.compile.lang.reg, function(
     all,
     type,
@@ -104,42 +92,35 @@ module.exports = function(content, file, conf) {
   // 不处理空文件，处理空文件有人反馈报错。
   if (!content || !content.trim() || file.basename[0] === '_') {
     return content
-  }
+  } // sass 对 unicode 字符处理有 bug, 所以这里先用这种方法 解决下。
 
-  // sass 对 unicode 字符处理有 bug, 所以这里先用这种方法 解决下。
   var backups = {}
-  var backupId = 0
-
-  // content = fixImport(content);
+  var backupId = 0 // content = fixImport(content);
 
   content = content.replace(/('|")\\\w{4}\1/g, function(raw) {
     var id = backupId++
     backups[id] = raw
     return "'__scss_backup_" + id + "'"
   })
+  var opts = fis.util.clone(conf) // 读取私有配置。
 
-  var opts = fis.util.clone(conf)
-
-  // 读取私有配置。
   if (file.sass) {
     fis.util.map(fis.sass, opts, true)
   }
 
-  opts.includePaths = opts.include_paths || opts.includePaths || []
-  // file.dirname !== root && opts.includePaths.unshift(file.dirname);
-  opts.includePaths.push(PROJECT_ROOT)
+  opts.includePaths = opts.include_paths || opts.includePaths || [] // file.dirname !== root && opts.includePaths.unshift(file.dirname);
 
+  opts.includePaths.push(PROJECT_ROOT)
   opts.includePaths = opts.includePaths.map(function(dir) {
     if (
-      _path2.default.resolve(dir) != _path2.default.normalize(dir) ||
-      fis.util.exists(_path2.default.join(PROJECT_ROOT, dir))
+      _path.default.resolve(dir) != _path.default.normalize(dir) ||
+      fis.util.exists(_path.default.join(PROJECT_ROOT, dir))
     ) {
-      dir = _path2.default.join(PROJECT_ROOT, dir)
+      dir = _path.default.join(PROJECT_ROOT, dir)
     }
 
     return dir
   })
-
   opts.file = file.subpath
   opts.data = content
 
@@ -153,22 +134,24 @@ module.exports = function(content, file, conf) {
 
   opts.importer = function(url, prev, done) {
     prev = prev.replace(/^\w+\:/, '') // windows 里面莫名加个盘符。
+
     var prevFile = find(prev, stacks.concat(includePaths))
 
     if (!prevFile) {
       return new Error("Can't find `" + prev + '`')
     }
 
-    var dirname = prevFile.dirname
+    var dirname = prevFile.dirname // 如果已经在里面
 
-    // 如果已经在里面
     var idx = stacks.indexOf(dirname)
+
     if (idx !== -1) {
       stacks.splice(idx, 1)
     }
-    stacks.unshift(dirname)
 
+    stacks.unshift(dirname)
     var target = find(url, stacks.concat(includePaths))
+
     if (!target) {
       return new Error("Can't find `" + url + '` in `' + prev + '`')
     }
@@ -183,10 +166,10 @@ module.exports = function(content, file, conf) {
 
     if (file.cache) {
       file.cache.addDeps(target.realpath)
-    }
-    //解决include_path 内import导致subpath为空报错问题
+    } //解决include_path 内import导致subpath为空报错问题
+
     if (!target.subpath) {
-      target.subpath = _path2.default.relative(PROJECT_ROOT, target.realpath)
+      target.subpath = _path.default.relative(PROJECT_ROOT, target.realpath)
     }
 
     if (sources.includes(target.subpath)) {
@@ -204,7 +187,6 @@ module.exports = function(content, file, conf) {
     var mapping = fis.file.wrap(
       file.dirname + '/' + file.filename + file.rExt + '.map'
     )
-
     opts.sourceMap = mapping.getUrl(
       fis.compile.settings.hash,
       fis.compile.settings.domain
@@ -217,11 +199,12 @@ module.exports = function(content, file, conf) {
   }
 
   var ret
+
   try {
-    ret = _nodeSass2.default.renderSync(opts)
+    ret = _nodeSass.default.renderSync(opts)
   } catch (e) {
     fis.log.error(
-      _util2.default.format(
+      _util.default.format(
         '%s'.red + ' [`%s` %s:%s]'.yellow,
         e.message,
         e.file,
@@ -229,9 +212,7 @@ module.exports = function(content, file, conf) {
         e.column
       )
     )
-  }
-
-  // if (file.cache && ret.stats.includedFiles.length) {
+  } // if (file.cache && ret.stats.includedFiles.length) {
   //     ret.stats.includedFiles.forEach(function(dep) {
   //         file.cache.addDeps(dep);
   //     });
@@ -239,18 +220,15 @@ module.exports = function(content, file, conf) {
   //
 
   if (mapping && ret.map) {
-    var sourceMap = ret.map.toString('utf8')
-
-    // 修复 sourceMap 文件路径错误问题
+    var sourceMap = ret.map.toString('utf8') // 修复 sourceMap 文件路径错误问题
     // 等 node-sass 修复后，可以删除。
     // ---------------------------------------------
+
     var sourceMapObj = JSON.parse(sourceMap)
     sourceMapObj.sources = sources
-    sourceMap = JSON.stringify(sourceMapObj, null, 2)
-    // -----------------------------------------------
+    sourceMap = JSON.stringify(sourceMapObj, null, 2) // -----------------------------------------------
 
     mapping.setContent(sourceMap)
-
     file.extras = file.extras || {}
     file.extras.derived = file.extras.derived || []
     file.extras.derived.push(mapping)
@@ -264,7 +242,6 @@ module.exports = function(content, file, conf) {
   ) {
     return backups[index]
   })
-
   return content
 }
 

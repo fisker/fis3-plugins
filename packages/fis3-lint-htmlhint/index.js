@@ -2,24 +2,19 @@
 
 var _htmlhint = require('htmlhint')
 
-var _fs = require('fs')
+var _fs = _interopRequireDefault(require('fs'))
 
-var _fs2 = _interopRequireDefault(_fs)
-
-var _path = require('path')
-
-var _path2 = _interopRequireDefault(_path)
+var _path = _interopRequireDefault(require('path'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var log =
-  global.fis
-    .log /*
-                           * fis3-lint-htmlhint
-                           * fisker Cheung<lionkay@gmail.com>
-                           */
+/*
+ * fis3-lint-htmlhint
+ * fisker Cheung<lionkay@gmail.com>
+ */
+var log = global.fis.log
 
 function readConfig(filename) {
   var currentFolder = process.cwd()
@@ -28,11 +23,11 @@ function readConfig(filename) {
 
   do {
     currentFolder = parentFolder || currentFolder
-    currentFile = _path2.default.normalize(
-      _path2.default.join(currentFolder, filename)
+    currentFile = _path.default.normalize(
+      _path.default.join(currentFolder, filename)
     )
 
-    if (_fs2.default.existsSync(currentFile)) {
+    if (_fs.default.existsSync(currentFile)) {
       try {
         return JSON.parse(require('fs').readFileSync(currentFile, 'utf8'))
       } catch (_) {
@@ -40,7 +35,7 @@ function readConfig(filename) {
       }
     }
 
-    parentFolder = _path2.default.resolve(currentFolder, '../')
+    parentFolder = _path.default.resolve(currentFolder, '../')
   } while (parentFolder !== currentFolder)
 }
 
@@ -57,8 +52,8 @@ module.exports = function(content, file, conf) {
     (htmlhintrcConfig = readConfig('.htmlhintrc') || {})
 
   var results = _htmlhint.HTMLHint.verify(content, ruleset)
-  var errorType = 'warning'
 
+  var errorType = 'warning'
   results.forEach(function(msg) {
     if (msg.type === 'error') {
       errorType = 'error'
@@ -70,8 +65,11 @@ module.exports = function(content, file, conf) {
       '[%s] lint failed with %s: \n\n %s',
       file.id,
       errorType,
-      _htmlhint.HTMLHint.format(results, {indent: 2}).join('\n')
+      _htmlhint.HTMLHint.format(results, {
+        indent: 2
+      }).join('\n')
     )
+
     if (errorType === 'error') {
       process.exit(1)
     }

@@ -2,8 +2,6 @@
  * fork from https://github.com/fex-team/fis-parser-node-sass
  */
 
-'use strict'
-
 import path from 'path'
 import sass from 'node-sass'
 import util from 'util'

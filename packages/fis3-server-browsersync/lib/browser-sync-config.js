@@ -3,18 +3,15 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 })
+exports.default = void 0
 
-var _path = require('path')
+var _path = _interopRequireDefault(require('path'))
 
-var _path2 = _interopRequireDefault(_path)
+var _lodash = _interopRequireDefault(require('lodash.merge'))
 
-var _lodash = require('lodash.merge')
-
-var _lodash2 = _interopRequireDefault(_lodash)
-
-var _defaultConfig = require('browser-sync/dist/default-config.js')
-
-var _defaultConfig2 = _interopRequireDefault(_defaultConfig)
+var _defaultConfig = _interopRequireDefault(
+  require('browser-sync/dist/default-config.js')
+)
 
 var _middleware = require('./middleware.js')
 
@@ -22,7 +19,7 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var defaultOptions = (0, _lodash2.default)({}, _defaultConfig2.default, {
+var defaultOptions = (0, _lodash.default)({}, _defaultConfig.default, {
   server: {
     directory: true
   },
@@ -32,7 +29,6 @@ var defaultOptions = (0, _lodash2.default)({}, _defaultConfig2.default, {
   notify: false,
   online: false
 })
-
 var overrideOptions = {
   open: false,
   snippetOptions: {
@@ -51,6 +47,7 @@ function getType(obj) {
 
 function getUserConfig(path) {
   var config = {}
+
   try {
     config = require(path)
 
@@ -82,13 +79,12 @@ function parseMiddleware(middleware) {
 
 function getConfig(bs, argv) {
   var userConfig = getUserConfig(
-    _path2.default.resolve(
+    _path.default.resolve(
       argv.context,
       argv.bsConfig || bs.instance.config.userFile
     )
   )
-
-  var config = (0, _lodash2.default)(
+  var config = (0, _lodash.default)(
     {},
     defaultOptions,
     userConfig,
@@ -101,16 +97,12 @@ function getConfig(bs, argv) {
       https: argv.https
     }
   )
+  config.middleware = parseMiddleware(config.middleware) // logger
 
-  config.middleware = parseMiddleware(config.middleware)
+  config.middleware.push((0, _middleware.logger)('short')) // mock
 
-  // logger
-  config.middleware.push((0, _middleware.logger)('short'))
+  config.middleware.push((0, _middleware.mock)(argv.root)) // serveDirectory
 
-  // mock
-  config.middleware.push((0, _middleware.mock)(argv.root))
-
-  // serveDirectory
   if (config.server && config.server.directory) {
     config.middleware.push((0, _middleware.directory)(argv.root))
     config.server.directory = false
@@ -119,5 +111,5 @@ function getConfig(bs, argv) {
   return config
 }
 
-exports.default = getConfig
-module.exports = exports.default
+var _default = getConfig
+exports.default = _default

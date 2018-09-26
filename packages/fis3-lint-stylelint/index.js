@@ -1,28 +1,22 @@
 'use strict'
 
-var _promiseSynchronizer = require('promise-synchronizer')
+var _promiseSynchronizer = _interopRequireDefault(
+  require('promise-synchronizer')
+)
 
-var _promiseSynchronizer2 = _interopRequireDefault(_promiseSynchronizer)
+var _postcss = _interopRequireDefault(require('postcss'))
 
-var _postcss = require('postcss')
-
-var _postcss2 = _interopRequireDefault(_postcss)
-
-var _stylelint = require('stylelint')
-
-var _stylelint2 = _interopRequireDefault(_stylelint)
+var _stylelint = _interopRequireDefault(require('stylelint'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var log =
-  global.fis
-    .log /*
-                           * fis3-lint-stylelint
-                           * fisker Cheung<lionkay@gmail.com>
-                           */
-
+/*
+ * fis3-lint-stylelint
+ * fisker Cheung<lionkay@gmail.com>
+ */
+var log = global.fis.log
 var syntax = {
   '.scss': 'scss',
   '.less': 'less',
@@ -48,12 +42,13 @@ module.exports = function(content, file, conf) {
     config.syntax = syntax[file.ext]
   }
 
-  var promise = (0, _postcss2.default)([_stylelint2.default])
+  var promise = (0, _postcss.default)([_stylelint.default])
     .process(content, config)
     .then(function(result) {
       var messages = result.messages || []
       var errorMsg = []
       var warnMsg = []
+
       for (var i = 0; i < messages.length; i++) {
         var message = messages[i]
         var type = message.severity || 'warn'
@@ -61,8 +56,7 @@ module.exports = function(content, file, conf) {
           [
             ' ',
             type + ':',
-            message.line ? '[' + message.line + ':' + message.column + ']' : '',
-            // '[' + message.rule + ']',
+            message.line ? '[' + message.line + ':' + message.column + ']' : '', // '[' + message.rule + ']',
             message.text
           ].join(' ')
         )
@@ -89,7 +83,7 @@ module.exports = function(content, file, conf) {
     })
 
   try {
-    return (0, _promiseSynchronizer2.default)(promise)
+    return (0, _promiseSynchronizer.default)(promise)
   } catch (err) {
     log.warn('[%s] lint failed with %s: \n\n %s', file.id, 'error', err)
     process.exit(1)
