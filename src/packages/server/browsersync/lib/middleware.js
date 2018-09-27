@@ -51,7 +51,7 @@ function getMiddleware(name, handler) {
   }
 }
 
-export default {
+module.exports = {
   logger: getMiddleware('Logger', morgan),
   mock: getMiddleware('Mock', mock),
   directory: function(root) {

@@ -97,4 +97,4 @@ function getConfig(bs, argv) {
   return config
 }
 
-export default getConfig
+module.exports = getConfig

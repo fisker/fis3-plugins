@@ -1,10 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-})
-exports.default = void 0
-
 var _path = _interopRequireDefault(require('path'))
 
 var _morgan = _interopRequireDefault(require('morgan'))
@@ -68,7 +63,7 @@ function getMiddleware(name, handler) {
   }
 }
 
-var _default = {
+module.exports = {
   logger: getMiddleware('Logger', _morgan.default),
   mock: getMiddleware('Mock', mock),
   directory: function directory(root) {
@@ -78,4 +73,3 @@ var _default = {
     )
   }
 }
-exports.default = _default

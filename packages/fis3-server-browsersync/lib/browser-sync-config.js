@@ -1,10 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-})
-exports.default = void 0
-
 var _path = _interopRequireDefault(require('path'))
 
 var _lodash = _interopRequireDefault(require('lodash.merge'))
@@ -111,5 +106,4 @@ function getConfig(bs, argv) {
   return config
 }
 
-var _default = getConfig
-exports.default = _default
+module.exports = getConfig
