@@ -88,8 +88,7 @@ function getConfig(bs, argv) {
       server: {
         baseDir: argv.root
       },
-      port: argv.port,
-      https: argv.https
+      port: argv.port // https: argv.https
     }
   )
   config.middleware = parseMiddleware(config.middleware) // logger

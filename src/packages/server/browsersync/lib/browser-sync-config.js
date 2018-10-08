@@ -77,7 +77,7 @@ function getConfig(bs, argv) {
       baseDir: argv.root
     },
     port: argv.port,
-    https: argv.https
+    // https: argv.https
   })
 
   config.middleware = parseMiddleware(config.middleware)
