@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "js-beautify": "^1.8.7"
+    "js-beautify": "^1.8.8"
   },
   "description": "a html formatter of fis3 based on js-beautify",
   "files": [
@@ -33,5 +33,5 @@
   "name": "fis3-postprocessor-html",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-html",
-  "version": "1.1.4"
+  "version": "1.1.5"
 }
