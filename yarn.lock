@@ -27,6 +27,26 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
+"@babel/core@^7.1.5":
+  version "7.1.5"
+  resolved "http://registry.npm.taobao.org/@babel/core/download/@babel/core-7.1.5.tgz#abb32d7aa247a91756469e788998db6a72b93090"
+  integrity sha1-q7MteqJHqRdWRp54iZjbanK5MJA=
+  dependencies:
+    "@babel/code-frame" "^7.0.0"
+    "@babel/generator" "^7.1.5"
+    "@babel/helpers" "^7.1.5"
+    "@babel/parser" "^7.1.5"
+    "@babel/template" "^7.1.2"
+    "@babel/traverse" "^7.1.5"
+    "@babel/types" "^7.1.5"
+    convert-source-map "^1.1.0"
+    debug "^3.1.0"
+    json5 "^0.5.0"
+    lodash "^4.17.10"
+    resolve "^1.3.2"
+    semver "^5.4.1"
+    source-map "^0.5.0"
+
 "@babel/generator@^7.0.0":
   version "7.0.0"
   resolved "http://registry.npm.taobao.org/@babel/generator/download/@babel/generator-7.0.0.tgz#1efd58bffa951dc846449e58ce3a1d7f02d393aa"
@@ -42,6 +62,17 @@
   resolved "http://registry.npm.taobao.org/@babel/generator/download/@babel/generator-7.1.2.tgz#fde75c072575ce7abbd97322e8fef5bae67e4630"
   dependencies:
     "@babel/types" "^7.1.2"
+    jsesc "^2.5.1"
+    lodash "^4.17.10"
+    source-map "^0.5.0"
+    trim-right "^1.0.1"
+
+"@babel/generator@^7.1.5":
+  version "7.1.5"
+  resolved "http://registry.npm.taobao.org/@babel/generator/download/@babel/generator-7.1.5.tgz#615f064d13d95f8f9157c7261f68eddf32ec15b3"
+  integrity sha1-YV8GTRPZX4+RV8cmH2jt3zLsFbM=
+  dependencies:
+    "@babel/types" "^7.1.5"
     jsesc "^2.5.1"
     lodash "^4.17.10"
     source-map "^0.5.0"
@@ -191,6 +222,15 @@
     "@babel/traverse" "^7.1.0"
     "@babel/types" "^7.1.2"
 
+"@babel/helpers@^7.1.5":
+  version "7.1.5"
+  resolved "http://registry.npm.taobao.org/@babel/helpers/download/@babel/helpers-7.1.5.tgz#68bfc1895d685f2b8f1995e788dbfe1f6ccb1996"
+  integrity sha1-aL/BiV1oXyuPGZXniNv+H2zLGZY=
+  dependencies:
+    "@babel/template" "^7.1.2"
+    "@babel/traverse" "^7.1.5"
+    "@babel/types" "^7.1.5"
+
 "@babel/highlight@^7.0.0":
   version "7.0.0"
   resolved "http://registry.npm.taobao.org/@babel/highlight/download/@babel/highlight-7.0.0.tgz#f710c38c8d458e6dd9a201afb637fcb781ce99e4"
@@ -206,6 +246,11 @@
 "@babel/parser@^7.1.2":
   version "7.1.2"
   resolved "http://registry.npm.taobao.org/@babel/parser/download/@babel/parser-7.1.2.tgz#85c5c47af6d244fab77bce6b9bd830e38c978409"
+
+"@babel/parser@^7.1.5":
+  version "7.1.5"
+  resolved "http://registry.npm.taobao.org/@babel/parser/download/@babel/parser-7.1.5.tgz#20b7d5e7e1811ba996f8a868962ea7dd2bfcd2fc"
+  integrity sha1-ILfV5+GBG6mW+Kholi6n3Sv80vw=
 
 "@babel/plugin-proposal-async-generator-functions@^7.1.0":
   version "7.1.0"
@@ -288,9 +333,10 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-transform-block-scoping@^7.0.0":
-  version "7.0.0"
-  resolved "http://registry.npm.taobao.org/@babel/plugin-transform-block-scoping/download/@babel/plugin-transform-block-scoping-7.0.0.tgz#1745075edffd7cdaf69fab2fb6f9694424b7e9bc"
+"@babel/plugin-transform-block-scoping@^7.1.5":
+  version "7.1.5"
+  resolved "http://registry.npm.taobao.org/@babel/plugin-transform-block-scoping/download/@babel/plugin-transform-block-scoping-7.1.5.tgz#3e8e0bc9a5104519923302a24f748f72f2f61f37"
+  integrity sha1-Po4LyaUQRRmSMwKiT3SPcvL2Hzc=
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
     lodash "^4.17.10"
@@ -456,9 +502,10 @@
     "@babel/helper-regex" "^7.0.0"
     regexpu-core "^4.1.3"
 
-"@babel/preset-env@^7.1.0":
-  version "7.1.0"
-  resolved "http://registry.npm.taobao.org/@babel/preset-env/download/@babel/preset-env-7.1.0.tgz#e67ea5b0441cfeab1d6f41e9b5c79798800e8d11"
+"@babel/preset-env@^7.1.5":
+  version "7.1.5"
+  resolved "http://registry.npm.taobao.org/@babel/preset-env/download/@babel/preset-env-7.1.5.tgz#a28b5482ca8bc2f2d0712234d6c690240b92495d"
+  integrity sha1-ootUgsqLwvLQcSI01saQJAuSSV0=
   dependencies:
     "@babel/helper-module-imports" "^7.0.0"
     "@babel/helper-plugin-utils" "^7.0.0"
@@ -473,7 +520,7 @@
     "@babel/plugin-transform-arrow-functions" "^7.0.0"
     "@babel/plugin-transform-async-to-generator" "^7.1.0"
     "@babel/plugin-transform-block-scoped-functions" "^7.0.0"
-    "@babel/plugin-transform-block-scoping" "^7.0.0"
+    "@babel/plugin-transform-block-scoping" "^7.1.5"
     "@babel/plugin-transform-classes" "^7.1.0"
     "@babel/plugin-transform-computed-properties" "^7.0.0"
     "@babel/plugin-transform-destructuring" "^7.0.0"
@@ -536,6 +583,21 @@
     globals "^11.1.0"
     lodash "^4.17.10"
 
+"@babel/traverse@^7.1.5":
+  version "7.1.5"
+  resolved "http://registry.npm.taobao.org/@babel/traverse/download/@babel/traverse-7.1.5.tgz#5aafca2039aa058c104cf2bfeb9fc4a857ccbca9"
+  integrity sha1-Wq/KIDmqBYwQTPK/65/EqFfMvKk=
+  dependencies:
+    "@babel/code-frame" "^7.0.0"
+    "@babel/generator" "^7.1.5"
+    "@babel/helper-function-name" "^7.1.0"
+    "@babel/helper-split-export-declaration" "^7.0.0"
+    "@babel/parser" "^7.1.5"
+    "@babel/types" "^7.1.5"
+    debug "^3.1.0"
+    globals "^11.1.0"
+    lodash "^4.17.10"
+
 "@babel/types@^7.0.0":
   version "7.0.0"
   resolved "http://registry.npm.taobao.org/@babel/types/download/@babel/types-7.0.0.tgz#6e191793d3c854d19c6749989e3bc55f0e962118"
@@ -552,6 +614,15 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@babel/types@^7.1.5":
+  version "7.1.5"
+  resolved "http://registry.npm.taobao.org/@babel/types/download/@babel/types-7.1.5.tgz#12fe64e91a431234b7017b4227a78cc0eec4e081"
+  integrity sha1-Ev5k6RpDEjS3AXtCJ6eMwO7E4IE=
+  dependencies:
+    esutils "^2.0.2"
+    lodash "^4.17.10"
+    to-fast-properties "^2.0.0"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "http://registry.npm.taobao.org/@mrmlnc/readdir-enhanced/download/@mrmlnc/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -559,22 +630,24 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@starptech/hast-util-from-webparser@^0.5.0":
-  version "0.5.0"
-  resolved "http://registry.npm.taobao.org/@starptech/hast-util-from-webparser/download/@starptech/hast-util-from-webparser-0.5.0.tgz#082d33e3041ef470e1f5af99a2c7b459f7563a2a"
+"@starptech/hast-util-from-webparser@^0.6.0":
+  version "0.6.0"
+  resolved "http://registry.npm.taobao.org/@starptech/hast-util-from-webparser/download/@starptech/hast-util-from-webparser-0.6.0.tgz#1e68a3b4314504f5a7bfbf17072b576b0c8a9158"
+  integrity sha1-HmijtDFFBPWnv78XBytXawyKkVg=
   dependencies:
-    "@starptech/prettyhtml-hastscript" "^0.5.0"
-    "@starptech/webparser" "^0.5.0"
-    property-information "https://github.com/StarpTech/property-information#attr_normalization_fix"
+    "@starptech/prettyhtml-hastscript" "^0.6.0"
+    "@starptech/webparser" "^0.6.0"
+    property-information "^5.0.1"
 
-"@starptech/prettyhtml-formatter@^0.5.1":
-  version "0.5.1"
-  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml-formatter/download/@starptech/prettyhtml-formatter-0.5.1.tgz#c5fe4f4b0519b29616de69dda32e4054878345fb"
+"@starptech/prettyhtml-formatter@^0.6.0":
+  version "0.6.0"
+  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml-formatter/download/@starptech/prettyhtml-formatter-0.6.0.tgz#10a60ba7ca375c73b619f0dfad3ac32832e2b112"
+  integrity sha1-EKYLp8o3XHO2GfDfrTrDKDLisRI=
   dependencies:
-    "@starptech/prettyhtml-hast-to-html" "^0.5.1"
-    "@starptech/rehype-minify-whitespace" "^0.5.0"
-    "@starptech/rehype-webparser" "^0.5.0"
-    "@starptech/webparser" "^0.5.0"
+    "@starptech/prettyhtml-hast-to-html" "^0.6.0"
+    "@starptech/rehype-minify-whitespace" "^0.6.0"
+    "@starptech/rehype-webparser" "^0.6.0"
+    "@starptech/webparser" "^0.6.0"
     hast-util-is-element "^1.0.1"
     hast-util-to-string "^1.0.1"
     html-void-elements "^1.0.3"
@@ -589,9 +662,10 @@
     unist-util-visit-parents "^2.0.1"
     xtend "^4.0.1"
 
-"@starptech/prettyhtml-hast-to-html@^0.5.1":
-  version "0.5.1"
-  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml-hast-to-html/download/@starptech/prettyhtml-hast-to-html-0.5.1.tgz#f60c46170a44cce9734776037ef1446c404da4c0"
+"@starptech/prettyhtml-hast-to-html@^0.6.0":
+  version "0.6.0"
+  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml-hast-to-html/download/@starptech/prettyhtml-hast-to-html-0.6.0.tgz#81fcdc1eab68952f2b804b6fdb46c3e1f64e21ef"
+  integrity sha1-gfzcHqtolS8rgEtv20bD4fZOIe8=
   dependencies:
     ccount "^1.0.3"
     comma-separated-tokens "^1.0.5"
@@ -599,28 +673,30 @@
     hast-util-whitespace "^1.0.1"
     html-void-elements "^1.0.3"
     html-whitespace-sensitive-tag-names "^1.0.0"
-    property-information "https://github.com/StarpTech/property-information#attr_normalization_fix"
+    property-information "^5.0.1"
     space-separated-tokens "^1.1.2"
     stringify-entities "^1.3.2"
     unist-util-is "^2.1.2"
     xtend "^4.0.1"
 
-"@starptech/prettyhtml-hastscript@^0.5.0":
-  version "0.5.0"
-  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml-hastscript/download/@starptech/prettyhtml-hastscript-0.5.0.tgz#f3643772856608ecf2bdfaedfb51a4277be37ffe"
+"@starptech/prettyhtml-hastscript@^0.6.0":
+  version "0.6.0"
+  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml-hastscript/download/@starptech/prettyhtml-hastscript-0.6.0.tgz#cdbc83e659c6af627776462c5ccf33f56fb69e40"
+  integrity sha1-zbyD5lnGr2J3dkYsXM8z9W+2nkA=
   dependencies:
     comma-separated-tokens "^1.0.5"
     hast-util-parse-selector "^2.2.0"
-    property-information "https://github.com/StarpTech/property-information#attr_normalization_fix"
+    property-information "^5.0.1"
     space-separated-tokens "^1.1.2"
 
-"@starptech/prettyhtml@^0.5.1":
-  version "0.5.1"
-  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml/download/@starptech/prettyhtml-0.5.1.tgz#24c8a6e3520c50b380d589cc548884c47908373c"
+"@starptech/prettyhtml@^0.6.0":
+  version "0.6.0"
+  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml/download/@starptech/prettyhtml-0.6.0.tgz#de1e0e80b80080734bb65ea0c2ff7abf6df6c5aa"
+  integrity sha1-3h4OgLgAgHNLtl6gwv96v232xao=
   dependencies:
-    "@starptech/prettyhtml-formatter" "^0.5.1"
-    "@starptech/rehype-webparser" "^0.5.0"
-    "@starptech/webparser" "^0.5.0"
+    "@starptech/prettyhtml-formatter" "^0.6.0"
+    "@starptech/rehype-webparser" "^0.6.0"
+    "@starptech/webparser" "^0.6.0"
     meow "^5.0.0"
     prettier "^1.14.3"
     rehype-sort-attribute-values "^1.0.1"
@@ -630,9 +706,10 @@
     vfile "^3.0.0"
     vfile-reporter "^5.0.0"
 
-"@starptech/rehype-minify-whitespace@^0.5.0":
-  version "0.5.0"
-  resolved "http://registry.npm.taobao.org/@starptech/rehype-minify-whitespace/download/@starptech/rehype-minify-whitespace-0.5.0.tgz#94cc720d265ea4cacfe7f867c62e861b77cd2390"
+"@starptech/rehype-minify-whitespace@^0.6.0":
+  version "0.6.0"
+  resolved "http://registry.npm.taobao.org/@starptech/rehype-minify-whitespace/download/@starptech/rehype-minify-whitespace-0.6.0.tgz#4253a54c566874c27bd914da04284ab0c0a9482b"
+  integrity sha1-QlOlTFZodMJ72RTaBChKsMCpSCs=
   dependencies:
     collapse-white-space "^1.0.4"
     hast-util-embedded "^1.0.1"
@@ -643,16 +720,18 @@
     unist-util-is "^2.1.2"
     unist-util-modify-children "^1.1.2"
 
-"@starptech/rehype-webparser@^0.5.0":
-  version "0.5.0"
-  resolved "http://registry.npm.taobao.org/@starptech/rehype-webparser/download/@starptech/rehype-webparser-0.5.0.tgz#bf4e6290afc3b10e1cc2ae68565394fb28fd1d32"
+"@starptech/rehype-webparser@^0.6.0":
+  version "0.6.0"
+  resolved "http://registry.npm.taobao.org/@starptech/rehype-webparser/download/@starptech/rehype-webparser-0.6.0.tgz#86f07037c4e92675566286ab5598b42f91704a73"
+  integrity sha1-hvBwN8TpJnVWYoarVZi0L5FwSnM=
   dependencies:
-    "@starptech/hast-util-from-webparser" "^0.5.0"
-    "@starptech/webparser" "^0.5.0"
+    "@starptech/hast-util-from-webparser" "^0.6.0"
+    "@starptech/webparser" "^0.6.0"
 
-"@starptech/webparser@^0.5.0":
-  version "0.5.0"
-  resolved "http://registry.npm.taobao.org/@starptech/webparser/download/@starptech/webparser-0.5.0.tgz#b50c35dab9934b5728246d7fec7e684208d4e7c9"
+"@starptech/webparser@^0.6.0":
+  version "0.6.0"
+  resolved "http://registry.npm.taobao.org/@starptech/webparser/download/@starptech/webparser-0.6.0.tgz#326dc6c14808cd0c4bb06714e4227ec93eb3b5d7"
+  integrity sha1-Mm3GwUgIzQxLsGcU5CJ+yT6ztdc=
 
 "@types/commander@^2.11.0":
   version "2.12.2"
@@ -4550,9 +4629,10 @@ node-releases@^1.0.1:
   dependencies:
     semver "^5.3.0"
 
-node-sass@^4.9.4:
-  version "4.9.4"
-  resolved "http://registry.npm.taobao.org/node-sass/download/node-sass-4.9.4.tgz#349bd7f1c89422ffe7e1e4b60f2055a69fbc5512"
+node-sass@^4.10.0:
+  version "4.10.0"
+  resolved "http://registry.npm.taobao.org/node-sass/download/node-sass-4.10.0.tgz#dcc2b364c0913630945ccbf7a2bbf1f926effca4"
+  integrity sha1-3MKzZMCRNjCUXMv3orvx+Sbv/KQ=
   dependencies:
     async-foreach "^0.1.3"
     chalk "^1.1.1"
@@ -5255,6 +5335,11 @@ prettier@^1.14.3:
   version "1.14.3"
   resolved "http://registry.npm.taobao.org/prettier/download/prettier-1.14.3.tgz#90238dd4c0684b7edce5f83b0fb7328e48bd0895"
 
+prettier@^1.15.1:
+  version "1.15.1"
+  resolved "http://registry.npm.taobao.org/prettier/download/prettier-1.15.1.tgz#06c67106afb1b40e74b002353b2079cc7e0e67bf"
+  integrity sha1-BsZxBq+xtA50sAI1OyB5zH4OZ78=
+
 pretty-bytes@^4.0.2:
   version "4.0.2"
   resolved "http://registry.npm.taobao.org/pretty-bytes/download/pretty-bytes-4.0.2.tgz#b2bf82e7350d65c6c33aa95aaa5a4f6327f61cd9"
@@ -5302,9 +5387,10 @@ prop-types@^15.6.2:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-"property-information@git+https://github.com/StarpTech/property-information.git#attr_normalization_fix":
-  version "4.2.0"
-  resolved "git+https://github.com/StarpTech/property-information.git#e29762a02f9cf1d000da6c1cdb479800c60aa2c2"
+property-information@^5.0.1:
+  version "5.0.1"
+  resolved "http://registry.npm.taobao.org/property-information/download/property-information-5.0.1.tgz#c3b09f4f5750b1634c0b24205adbf78f18bdf94f"
+  integrity sha1-w7CfT1dQsWNMCyQgWtv3jxi9+U8=
   dependencies:
     xtend "^4.0.1"
 
