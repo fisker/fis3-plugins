@@ -677,24 +677,24 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@starptech/hast-util-from-webparser@^0.8.1":
-  version "0.8.1"
-  resolved "http://registry.npm.taobao.org/@starptech/hast-util-from-webparser/download/@starptech/hast-util-from-webparser-0.8.1.tgz#708193b067e7661a863c010b3e9046a396c6cabe"
-  integrity sha1-cIGTsGfnZhqGPAELPpBGo5bGyr4=
+"@starptech/hast-util-from-webparser@^0.8.5":
+  version "0.8.5"
+  resolved "http://registry.npm.taobao.org/@starptech/hast-util-from-webparser/download/@starptech/hast-util-from-webparser-0.8.5.tgz#789b269234fb3ce07c4b6760a13b90d56d8f7b0c"
+  integrity sha1-eJsmkjT7POB8S2dgoTuQ1W2Peww=
   dependencies:
     "@starptech/prettyhtml-hastscript" "^0.8.1"
-    "@starptech/webparser" "^0.8.0"
+    "@starptech/webparser" "^0.8.5"
     property-information "^5.0.1"
 
-"@starptech/prettyhtml-formatter@^0.8.2":
-  version "0.8.2"
-  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml-formatter/download/@starptech/prettyhtml-formatter-0.8.2.tgz#d3c9029eee0ec46258b78d1c6c960743e4229388"
-  integrity sha1-08kCnu4OxGJYt40cbJYHQ+Qik4g=
+"@starptech/prettyhtml-formatter@^0.8.5":
+  version "0.8.5"
+  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml-formatter/download/@starptech/prettyhtml-formatter-0.8.5.tgz#7b442656d5fd9e5ed02636eab6abcd3d8ab2defe"
+  integrity sha1-e0QmVtX9nl7QJjbqtqvNPYqy3v4=
   dependencies:
     "@starptech/prettyhtml-hast-to-html" "^0.8.1"
     "@starptech/rehype-minify-whitespace" "^0.8.1"
-    "@starptech/rehype-webparser" "^0.8.1"
-    "@starptech/webparser" "^0.8.0"
+    "@starptech/rehype-webparser" "^0.8.5"
+    "@starptech/webparser" "^0.8.5"
     hast-util-is-element "^1.0.1"
     hast-util-to-string "^1.0.1"
     html-void-elements "^1.0.3"
@@ -744,15 +744,15 @@
     hast-util-has-property "^1.0.0"
     unist-util-visit "^1.0.0"
 
-"@starptech/prettyhtml@^0.8.2":
-  version "0.8.2"
-  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml/download/@starptech/prettyhtml-0.8.2.tgz#0f2ce00c27a5f25bd2133d3f0d14b909b3cda0a7"
-  integrity sha1-DyzgDCel8lvSEz0/DRS5CbPNoKc=
+"@starptech/prettyhtml@^0.8.5":
+  version "0.8.5"
+  resolved "http://registry.npm.taobao.org/@starptech/prettyhtml/download/@starptech/prettyhtml-0.8.5.tgz#cef5794ec0e9fca4c0fabdee8ef4129ba62154a3"
+  integrity sha1-zvV5TsDp/KTA+r3ujvQSm6YhVKM=
   dependencies:
-    "@starptech/prettyhtml-formatter" "^0.8.2"
+    "@starptech/prettyhtml-formatter" "^0.8.5"
     "@starptech/prettyhtml-sort-attributes" "^0.8.1"
-    "@starptech/rehype-webparser" "^0.8.1"
-    "@starptech/webparser" "^0.8.0"
+    "@starptech/rehype-webparser" "^0.8.5"
+    "@starptech/webparser" "^0.8.5"
     meow "^5.0.0"
     prettier "^1.14.3"
     rehype-sort-attribute-values "^1.0.1"
@@ -776,18 +776,18 @@
     unist-util-is "^2.1.2"
     unist-util-modify-children "^1.1.2"
 
-"@starptech/rehype-webparser@^0.8.1":
-  version "0.8.1"
-  resolved "http://registry.npm.taobao.org/@starptech/rehype-webparser/download/@starptech/rehype-webparser-0.8.1.tgz#b0c6c514c70e7888f46553773154896957ab7d9d"
-  integrity sha1-sMbFFMcOeIj0ZVN3MVSJaVerfZ0=
+"@starptech/rehype-webparser@^0.8.5":
+  version "0.8.5"
+  resolved "http://registry.npm.taobao.org/@starptech/rehype-webparser/download/@starptech/rehype-webparser-0.8.5.tgz#6036419a3f71e3d1e073e743cabbe60e67e1d964"
+  integrity sha1-YDZBmj9x49Hgc+dDyrvmDmfh2WQ=
   dependencies:
-    "@starptech/hast-util-from-webparser" "^0.8.1"
-    "@starptech/webparser" "^0.8.0"
+    "@starptech/hast-util-from-webparser" "^0.8.5"
+    "@starptech/webparser" "^0.8.5"
 
-"@starptech/webparser@^0.8.0":
-  version "0.8.0"
-  resolved "http://registry.npm.taobao.org/@starptech/webparser/download/@starptech/webparser-0.8.0.tgz#2342b1c379c67666d24a83e85c2d520d469eb633"
-  integrity sha1-I0Kxw3nGdmbSSoPoXC1SDUaetjM=
+"@starptech/webparser@^0.8.5":
+  version "0.8.5"
+  resolved "http://registry.npm.taobao.org/@starptech/webparser/download/@starptech/webparser-0.8.5.tgz#97ace480cf83e318b0cdcd212bef34712f229792"
+  integrity sha1-l6zkgM+D4xiwzc0hK+80cS8il5I=
 
 "@types/commander@^2.11.0":
   version "2.12.2"
@@ -4073,9 +4073,10 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
-known-css-properties@^0.9.0:
-  version "0.9.0"
-  resolved "http://registry.npm.taobao.org/known-css-properties/download/known-css-properties-0.9.0.tgz#28f8a7134cfa3b0aa08b1e5edf64a57f64fc23af"
+known-css-properties@^0.10.0:
+  version "0.10.0"
+  resolved "http://registry.npm.taobao.org/known-css-properties/download/known-css-properties-0.10.0.tgz#8378a8921e6c815ecc47095744a8900af63d577d"
+  integrity sha1-g3iokh5sgV7MRwlXRKiQCvY9V30=
 
 latest-version@^3.0.0:
   version "3.1.0"
@@ -5221,9 +5222,10 @@ postcss-jsx@^0.35.0:
   optionalDependencies:
     postcss-styled ">=0.34.0"
 
-postcss-less@^3.0.1:
-  version "3.0.2"
-  resolved "http://registry.npm.taobao.org/postcss-less/download/postcss-less-3.0.2.tgz#9cf94e2cc90f8566858939e278fb9f0b713908df"
+postcss-less@^3.1.0:
+  version "3.1.0"
+  resolved "http://registry.npm.taobao.org/postcss-less/download/postcss-less-3.1.0.tgz#0e14a80206b452f44d3a09d082fa72645e8168cc"
+  integrity sha1-DhSoAga0UvRNOgnQgvpyZF6BaMw=
   dependencies:
     postcss "^7.0.3"
 
@@ -5345,10 +5347,10 @@ postcss@^7.0.6:
     source-map "^0.6.1"
     supports-color "^5.5.0"
 
-posthtml-beautify@^0.2.2:
-  version "0.2.2"
-  resolved "http://registry.npm.taobao.org/posthtml-beautify/download/posthtml-beautify-0.2.2.tgz#80ed6c964b08f7c67116548d284d5b7d3e26941c"
-  integrity sha1-gO1slksI98ZxFlSNKE1bfT4mlBw=
+posthtml-beautify@^0.2.5:
+  version "0.2.5"
+  resolved "http://registry.npm.taobao.org/posthtml-beautify/download/posthtml-beautify-0.2.5.tgz#97f7d0adcaf4966a9f9f6f8018f5a47f233993de"
+  integrity sha1-l/fQrcr0lmqfn2+AGPWkfyM5k94=
   dependencies:
     "@babel/runtime" "^7.1.5"
     deepmerge "^2.2.1"
@@ -5404,10 +5406,10 @@ prettier@^1.14.3:
   version "1.14.3"
   resolved "http://registry.npm.taobao.org/prettier/download/prettier-1.14.3.tgz#90238dd4c0684b7edce5f83b0fb7328e48bd0895"
 
-prettier@^1.15.2:
-  version "1.15.2"
-  resolved "http://registry.npm.taobao.org/prettier/download/prettier-1.15.2.tgz#d31abe22afa4351efa14c7f8b94b58bb7452205e"
-  integrity sha1-0xq+Iq+kNR76FMf4uUtYu3RSIF4=
+prettier@^1.15.3:
+  version "1.15.3"
+  resolved "http://registry.npm.taobao.org/prettier/download/prettier-1.15.3.tgz#1feaac5bdd181237b54dbe65d874e02a1472786a"
+  integrity sha1-H+qsW90YEje1Tb5l2HTgKhRyeGo=
 
 pretty-bytes@^4.0.2:
   version "4.0.2"
@@ -6829,10 +6831,10 @@ style-search@^0.1.0:
   version "0.1.0"
   resolved "http://registry.npm.taobao.org/style-search/download/style-search-0.1.0.tgz#7958c793e47e32e07d2b5cafe5c0bf8e12e77902"
 
-stylelint@^9.8.0:
-  version "9.8.0"
-  resolved "http://registry.npm.taobao.org/stylelint/download/stylelint-9.8.0.tgz#bfdade6360d82afe820d6b15251b01acf8ffd04d"
-  integrity sha1-v9reY2DYKv6CDWsVJRsBrPj/0E0=
+stylelint@^9.9.0:
+  version "9.9.0"
+  resolved "http://registry.npm.taobao.org/stylelint/download/stylelint-9.9.0.tgz#dde466e9b049e0bd30e912ad280f1a2ecf6efdf8"
+  integrity sha1-3eRm6bBJ4L0w6RKtKA8aLs9u/fg=
   dependencies:
     autoprefixer "^9.0.0"
     balanced-match "^1.0.0"
@@ -6849,7 +6851,7 @@ stylelint@^9.8.0:
     ignore "^5.0.4"
     import-lazy "^3.1.0"
     imurmurhash "^0.1.4"
-    known-css-properties "^0.9.0"
+    known-css-properties "^0.10.0"
     leven "^2.1.0"
     lodash "^4.17.4"
     log-symbols "^2.0.0"
@@ -6861,7 +6863,7 @@ stylelint@^9.8.0:
     postcss "^7.0.0"
     postcss-html "^0.34.0"
     postcss-jsx "^0.35.0"
-    postcss-less "^3.0.1"
+    postcss-less "^3.1.0"
     postcss-markdown "^0.34.0"
     postcss-media-query-parser "^0.2.3"
     postcss-reporter "^6.0.0"
