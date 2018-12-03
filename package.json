@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@starptech/prettyhtml": "^0.8.5",
-    "autoprefixer": "^9.3.1",
+    "autoprefixer": "^9.4.0",
     "body-parser": "^1.18.3",
     "browser-sync": "^2.26.3",
     "clean-css": "^4.2.1",

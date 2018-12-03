@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "autoprefixer": "^9.3.1",
+    "autoprefixer": "^9.4.0",
     "postcss": "^7.0.6"
   },
   "description": "latest version autoprefixer for fis3.",
@@ -31,5 +31,5 @@
   "name": "fis3-postprocessor-autoprefixer-latest",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-autoprefixer-latest",
-  "version": "1.1.19"
+  "version": "1.1.20"
 }
