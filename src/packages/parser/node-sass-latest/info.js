@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.0.8',
+  version: '1.0.9',
   description: 'A fis plugin to parse sass with latest node-sass.',
   keywords: ['scss', 'sass', 'node-sass'],
   dependencies: ['node-sass'],
