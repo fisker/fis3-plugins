@@ -26,7 +26,7 @@ module.exports = function(content, file, conf) {
   var promise = (0, _posthtml.default)()
     .use(
       (0, _posthtmlBeautify.default)({
-        rules: conf.rules
+        rules: conf.rules,
       })
     )
     .process(content)
@@ -56,6 +56,6 @@ module.exports.defaultOptions = {
   rules: {
     indent: 2,
     eol: '\n',
-    eof: '\n'
-  }
+    eof: '\n',
+  },
 }

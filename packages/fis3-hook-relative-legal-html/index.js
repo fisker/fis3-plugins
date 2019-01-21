@@ -9,7 +9,7 @@ function _interopRequireDefault(obj) {
 var quotes = {
   '': 'QUOTE_NONE',
   "'": 'QUOTE_SINGLE',
-  '"': 'QUOTE_DOUBLE'
+  '"': 'QUOTE_DOUBLE',
 }
 var rUrl = /(["']?)__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
 var rFile = /\.[^\.]+$/

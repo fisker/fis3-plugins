@@ -86,8 +86,8 @@ function start(opt, callback) {
     stdio: [
       0,
       opt.daemon ? _fs.default.openSync(logFile, 'w') : 'pipe',
-      opt.daemon ? _fs.default.openSync(logFile, 'w+') : 'pipe'
-    ]
+      opt.daemon ? _fs.default.openSync(logFile, 'w+') : 'pipe',
+    ],
   })
   var log = ''
   var started = false
@@ -158,5 +158,5 @@ function start(opt, callback) {
 }
 
 module.exports = {
-  start: start
+  start: start,
 }

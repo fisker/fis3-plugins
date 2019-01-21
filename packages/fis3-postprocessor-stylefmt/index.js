@@ -14,7 +14,7 @@ module.exports = function(content, file, conf) {
   try {
     content = (0, _promiseSynchronizer.default)(
       (0, _stylefmt.process)(content, {
-        from: conf.filename
+        from: conf.filename,
       }).then(function(result) {
         if (result && result.css) {
           return result.css

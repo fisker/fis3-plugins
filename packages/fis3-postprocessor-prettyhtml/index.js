@@ -17,5 +17,5 @@ module.exports.defaultOptions = {
   useTabs: false,
   printWidth: 80,
   usePrettier: true,
-  singleQuote: false
+  singleQuote: false,
 }

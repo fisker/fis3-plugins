@@ -20,7 +20,7 @@ var log = global.fis.log
 var syntax = {
   '.scss': 'scss',
   '.less': 'less',
-  '.sss': 'sugarss'
+  '.sss': 'sugarss',
 }
 
 module.exports = function(content, file, conf) {
@@ -32,7 +32,7 @@ module.exports = function(content, file, conf) {
     formatter: 'string',
     files: file.realpath,
     extractStyleTagsFromHtml: false,
-    from: config.filename
+    from: config.filename,
   })
   delete config.filename
   delete config.code
@@ -57,7 +57,7 @@ module.exports = function(content, file, conf) {
             ' ',
             type + ':',
             message.line ? '[' + message.line + ':' + message.column + ']' : '', // '[' + message.rule + ']',
-            message.text
+            message.text,
           ].join(' ')
         )
       }

@@ -29,22 +29,22 @@ function mock(root) {
     rewrite_file: [
       _path.default.join(root, 'server.conf'),
       _path.default.join(root, 'config', 'server.conf'),
-      _path.default.join(root, 'mock', 'server.conf')
+      _path.default.join(root, 'mock', 'server.conf'),
     ],
     data_path: [
       _path.default.join(root, 'test'),
-      _path.default.join(root, 'mock')
-    ]
+      _path.default.join(root, 'mock'),
+    ],
   }
   return function(req, res, next) {
     ;[
       (0, _rewrite.default)(options),
       _bodyParser.default.urlencoded({
-        extended: false
+        extended: false,
       }),
       _bodyParser.default.json(),
       (0, _preview.default)(options),
-      (0, _script.default)(options)
+      (0, _script.default)(options),
     ].reduceRight(function(next, middlewave) {
       return function() {
         middlewave(req, res, next)
@@ -58,7 +58,7 @@ function getMiddleware(name, handler) {
     return {
       route: '',
       handle: handler.apply(null, arguments),
-      id: 'Browsersync '.concat(name, ' Middleware')
+      id: 'Browsersync '.concat(name, ' Middleware'),
     }
   }
 }
@@ -71,5 +71,5 @@ module.exports = {
       root,
       _serveDirectoryThemeOcticons.default
     )
-  }
+  },
 }

@@ -66,7 +66,7 @@ module.exports = function(content, file, conf) {
       file.id,
       errorType,
       _htmlhint.HTMLHint.format(results, {
-        indent: 2
+        indent: 2,
       }).join('\n')
     )
 

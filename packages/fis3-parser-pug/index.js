@@ -8,5 +8,5 @@ module.exports = function(content, file, conf) {
 
 module.exports.defaultOptions = {
   pretty: '  ',
-  doctype: 'html'
+  doctype: 'html',
 }

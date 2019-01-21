@@ -35,5 +35,5 @@ module.exports = function(content, file, conf) {
 module.exports.defaultOptions = {
   envs: ['browser'],
   fix: false,
-  useEslintrc: true
+  useEslintrc: true,
 }

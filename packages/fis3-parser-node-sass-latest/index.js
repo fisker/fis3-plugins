@@ -32,7 +32,7 @@ function resolve_and_load(filename, dir) {
     _path.default.join(dirname, '_' + basename + '.scss'),
     _path.default.join(dirname, '_' + basename + '.sass'),
     _path.default.join(dirname, basename + '.scss'),
-    _path.default.join(dirname, basename + '.sass')
+    _path.default.join(dirname, basename + '.sass'),
   ]
   var found = null
   files.every(function(url) {
@@ -178,7 +178,7 @@ module.exports = function(content, file, conf) {
 
     return {
       file: target.subpath,
-      contents: content
+      contents: content,
     }
   }
 
@@ -249,5 +249,5 @@ module.exports.defaultOptions = {
   outputStyle: 'expanded',
   sourceMapContents: true,
   sourceMap: false,
-  omitSourceMapUrl: false
+  omitSourceMapUrl: false,
 }

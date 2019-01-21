@@ -32,7 +32,7 @@ function _defineProperty(obj, key, value) {
       value: value,
       enumerable: true,
       configurable: true,
-      writable: true
+      writable: true,
     })
   } else {
     obj[key] = value
@@ -81,7 +81,7 @@ module.exports = function(content, file, conf) {
     {
       require: makeRequireFunction(dirname),
       __dirname: dirname,
-      __filename: filename
+      __filename: filename,
     },
     conf.data
   )

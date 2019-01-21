@@ -13,11 +13,11 @@ module.exports = function(content, file, conf) {
   var fileFakePath = file.realpathNoExt + file.rExt
 
   var config = _prettier.default.resolveConfig.sync(fileFakePath, {
-    editorconfig: true
+    editorconfig: true,
   })
 
   config = assign(config, conf, {
-    filepath: fileFakePath
+    filepath: fileFakePath,
   })
   delete config.filename
 

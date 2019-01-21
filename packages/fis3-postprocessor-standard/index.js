@@ -17,7 +17,7 @@ module.exports = function(content, file, conf) {
 
   try {
     content = _standard.default.lintTextSync(content, {
-      fix: true
+      fix: true,
     }).results[0].output
   } catch (err) {
     log.error(err)

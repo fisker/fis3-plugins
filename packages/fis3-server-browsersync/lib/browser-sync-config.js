@@ -16,13 +16,13 @@ function _interopRequireDefault(obj) {
 
 var defaultOptions = (0, _lodash.default)({}, _defaultConfig.default, {
   server: {
-    directory: true
+    directory: true,
   },
   watchEvents: ['change', 'add', 'addDir', 'unlink', 'unlinkDir'],
   ghostMode: false,
   reloadDebounce: 500,
   notify: false,
-  online: false
+  online: false,
 })
 var overrideOptions = {
   open: false,
@@ -31,9 +31,9 @@ var overrideOptions = {
       match: /<\/body>|<!--\s*browser-sync-script\s*-->/i,
       fn: function fn(snippet, match) {
         return snippet + match
-      }
-    }
-  }
+      },
+    },
+  },
 }
 
 function getType(obj) {
@@ -48,7 +48,7 @@ function getUserConfig(path) {
 
     if (!config.server || getType(config.server) === 'String') {
       config.server = {
-        directory: true
+        directory: true,
       }
     }
 
@@ -86,9 +86,9 @@ function getConfig(bs, argv) {
     overrideOptions,
     {
       server: {
-        baseDir: argv.root
+        baseDir: argv.root,
       },
-      port: argv.port // https: argv.https
+      port: argv.port, // https: argv.https
     }
   )
   config.middleware = parseMiddleware(config.middleware) // logger

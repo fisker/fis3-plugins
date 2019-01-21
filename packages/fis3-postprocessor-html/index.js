@@ -26,5 +26,5 @@ module.exports.defaultOptions = {
   wrap_line_length: 0,
   wrap_attributes: 'auto',
   wrap_attributes_indent_size: 4,
-  end_with_newline: false
+  end_with_newline: false,
 }
