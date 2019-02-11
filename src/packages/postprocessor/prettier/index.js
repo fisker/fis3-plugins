@@ -18,14 +18,5 @@ module.exports = function(content, file, conf) {
 
   let parsed = prettier.format(content, config)
 
-  // fix inline indent
-  if (file.isInline) {
-    parsed = parsed.trim()
-
-    if (parsed.indexOf('\n') !== -1) {
-      parsed = '\n' + parsed + '\n'
-    }
-  }
-
   return parsed
 }

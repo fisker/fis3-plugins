@@ -8,8 +8,8 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "postcss": "^7.0.13",
-    "promise-synchronizer": "^1.0.9",
+    "postcss": "^7.0.14",
+    "promise-synchronizer": "^1.0.14",
     "stylelint": "^9.10.1"
   },
   "description": "a css linter plugin of fis3 based on stylelint.",
@@ -32,5 +32,5 @@
   "name": "fis3-lint-stylelint",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-stylelint",
-  "version": "2.2.17"
+  "version": "2.2.18"
 }

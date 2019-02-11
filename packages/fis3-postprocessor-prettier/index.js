@@ -21,15 +21,7 @@ module.exports = function(content, file, conf) {
   })
   delete config.filename
 
-  var parsed = _prettier.default.format(content, config) // fix inline indent
-
-  if (file.isInline) {
-    parsed = parsed.trim()
-
-    if (parsed.indexOf('\n') !== -1) {
-      parsed = '\n' + parsed + '\n'
-    }
-  }
+  var parsed = _prettier.default.format(content, config)
 
   return parsed
 }
