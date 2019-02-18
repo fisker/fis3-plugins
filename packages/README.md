@@ -30,6 +30,11 @@
 [![npm](https://img.shields.io/npm/dt/fis3-optimizer-cleancss.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-cleancss)
 [![npm](https://img.shields.io/npm/dm/fis3-optimizer-cleancss.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-cleancss)
 
+## fis3-optimizer-terser
+[![npm](https://img.shields.io/npm/v/fis3-optimizer-terser.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-terser)
+[![npm](https://img.shields.io/npm/dt/fis3-optimizer-terser.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-terser)
+[![npm](https://img.shields.io/npm/dm/fis3-optimizer-terser.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-terser)
+
 ## fis3-optimizer-uglifyjs
 [![npm](https://img.shields.io/npm/v/fis3-optimizer-uglifyjs.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-uglifyjs)
 [![npm](https://img.shields.io/npm/dt/fis3-optimizer-uglifyjs.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-uglifyjs)

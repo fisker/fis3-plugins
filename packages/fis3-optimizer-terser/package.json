@@ -8,9 +8,9 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "eslint": "^5.14.0"
+    "terser": "^3.16.1"
   },
-  "description": "a js linter plugin of fis3 based on eslint.",
+  "description": "js minifer for fis based on terser.",
   "files": [
     "LICENSE",
     "README.md",
@@ -18,18 +18,19 @@
     "package.json"
   ],
   "keywords": [
-    "eslint",
-    "eslint-noisy",
     "fis",
     "fis3",
-    "fis3-lint-eslint-noisy",
-    "lint",
-    "linter"
+    "fis3-optimizer-terser",
+    "javascript",
+    "minifer",
+    "minify",
+    "optimizer",
+    "terser"
   ],
   "license": "MIT",
   "main": "index.js",
-  "name": "fis3-lint-eslint-noisy",
+  "name": "fis3-optimizer-terser",
   "readmeFilename": "README.md",
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-eslint-noisy",
-  "version": "2.1.15"
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-terser",
+  "version": "1.0.0"
 }
