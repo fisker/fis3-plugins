@@ -5,6 +5,6 @@ module.exports = {
   dependencies: ['prettier'],
   options: {},
   links: {
-    prettier: 'https://github.com/prettier/prettier'
-  }
+    prettier: 'https://github.com/prettier/prettier',
+  },
 }

@@ -1,9 +1,11 @@
+<!-- markdownlint-disable MD002 MD041 -->
+
 ## usage
 
 ```js
 // fis-conf.js
 
-var sassConf = {
+const sassConf = {
   outputStyle: 'expanded',
   sourceMapContents: true,
   sourceMap: false,
@@ -15,4 +17,4 @@ fis.match('*.{sass,scss}', {
 });
 ```
 
-[more options](https://github.com/sass/node-sass)
+more options: [https://github.com/sass/node-sass](https://github.com/sass/node-sass)

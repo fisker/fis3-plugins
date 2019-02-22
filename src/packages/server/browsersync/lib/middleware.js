@@ -1,5 +1,3 @@
-'use strict'
-
 import path from 'path'
 
 import morgan from 'morgan'
@@ -18,12 +16,9 @@ function mock(root) {
     rewrite_file: [
       path.join(root, 'server.conf'),
       path.join(root, 'config', 'server.conf'),
-      path.join(root, 'mock', 'server.conf')
+      path.join(root, 'mock', 'server.conf'),
     ],
-    data_path: [
-      path.join(root, 'test'),
-      path.join(root, 'mock')
-    ]
+    data_path: [path.join(root, 'test'), path.join(root, 'mock')],
   }
 
   return function(req, res, next) {
@@ -32,7 +27,7 @@ function mock(root) {
       bodyParser.urlencoded({extended: false}),
       bodyParser.json(),
       ydPreview(options),
-      ydScript(options)
+      ydScript(options),
     ].reduceRight(function(next, middlewave) {
       return function() {
         middlewave(req, res, next)
@@ -42,11 +37,11 @@ function mock(root) {
 }
 
 function getMiddleware(name, handler) {
-  return function() {
+  return function(...args) {
     return {
       route: '',
-      handle: handler.apply(null, arguments),
-      id: `Browsersync ${name} Middleware`
+      handle: handler(...args),
+      id: `Browsersync ${name} Middleware`,
     }
   }
 }
@@ -54,10 +49,10 @@ function getMiddleware(name, handler) {
 module.exports = {
   logger: getMiddleware('Logger', morgan),
   mock: getMiddleware('Mock', mock),
-  directory: function(root) {
+  directory(root) {
     return getMiddleware('Server Directory', serveDirectory)(
       root,
       serveDirectoryThemeOcticons
     )
-  }
+  },
 }

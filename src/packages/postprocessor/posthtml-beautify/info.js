@@ -7,8 +7,8 @@ module.exports = {
     rules: {
       indent: 2,
       eol: '\n',
-      eof: '\n'
-    }
+      eof: '\n',
+    },
   },
-  links: {'posthtml-beautify': 'https://github.com/gitscrum/posthtml-beautify'}
+  links: {'posthtml-beautify': 'https://github.com/gitscrum/posthtml-beautify'},
 }

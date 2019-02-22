@@ -10,15 +10,15 @@
 ## install
 
 ```sh
-$ npm i -g fis3-parser-pug
+npm install --global fis3-parser-pug
 ```
 
 ## usage
 
-```
+```js
 // fis-conf.js
 
-var pugConf = {
+const pugConf = {
   doctype: 'html', // default html
   pretty: '  ', // default '  '
   .. more
@@ -29,26 +29,25 @@ fis.match('*.{pug,jade}', {
 });
 ```
 
-[more options](https://pugjs.org/api/reference.html)
-
-
+more options: [https://pugjs.org/api/reference.html](https://pugjs.org/api/reference.html)
 
 ## default options
+
 ```json
 {
   "pretty": "  ",
   "doctype": "html"
 }
 ```
-** NOTICE: this might change in future **
 
+NOTICE: **this might change in future**
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  pug [https://pugjs.org/](https://pugjs.org/)
-
+- pug: [https://pugjs.org/](https://pugjs.org/)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

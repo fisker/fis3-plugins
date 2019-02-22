@@ -5,9 +5,9 @@ module.exports = {
   dependencies: ['pug'],
   options: {
     pretty: '  ',
-    doctype: 'html'
+    doctype: 'html',
   },
   links: {
-    pug: 'https://pugjs.org/'
-  }
+    pug: 'https://pugjs.org/',
+  },
 }

@@ -1,15 +1,16 @@
+<!-- markdownlint-disable MD002 MD041 -->
+
 ## usage
 
-```
+```js
 // fis-conf.js
-var options = {
-  browsers: ['last 2 versions']
+const options = {
+  browsers: ["last 2 versions"],
 }
 
-fis.match('*.js', {
-  postprocessor: fis.plugin('autoprefixer-latest', options)
+fis.match("*.js", {
+  postprocessor: fis.plugin("autoprefixer-latest", options),
 })
 ```
 
-## config
-https://github.com/postcss/autoprefixer
+config: [https://github.com/postcss/autoprefixer](https://github.com/postcss/autoprefixer)

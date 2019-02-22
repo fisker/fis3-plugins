@@ -10,7 +10,7 @@
 ## install
 
 ```sh
-$ npm i -g fis3-lint-standard
+npm install --global fis3-lint-standard
 ```
 
 ## usage
@@ -18,22 +18,21 @@ $ npm i -g fis3-lint-standard
 ```js
 // fis-conf.js
 
-fis.match('*.js', {
-  lint: fis.plugin('standard')
-});
+fis.match("*.js", {
+  lint: fis.plugin("standard"),
+})
 ```
 
 ### options
 
 no options
 
-
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  standard [https://github.com/standard/standard](https://github.com/standard/standard)
-
+- standard: [https://github.com/standard/standard](https://github.com/standard/standard)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

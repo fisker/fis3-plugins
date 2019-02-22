@@ -10,25 +10,27 @@
 ## install
 
 ```sh
-$ npm i -g fis3-lint-stylelint
+npm install --global fis3-lint-stylelint
 ```
 
 ## usage
 
-```
+```js
 // fis-conf.js
 
-var stylelintConf = {};
+var stylelintConf = {}
 
-fis.match('*.{css,scss,less,sss}}', {
-  lint: fis.plugin('stylelint', stylelintConf)
-});
+fis.match("*.{css,scss,less,sss}}", {
+  lint: fis.plugin("stylelint", stylelintConf),
+})
 ```
 
 ### options
 
-```
-var stylelintConf = {
+<!-- prettier-ignore-start -->
+
+```js
+const stylelintConf = {
   fix: false,
   code: // useless, will be unset
   codeFilename: // useless, will be unset
@@ -43,18 +45,19 @@ var stylelintConf = {
           // rules: .scss => scss, .less => less, .sss =>sugarss
 };
 ```
-options: [http://stylelint.io/user-guide/node-api/#options]
 
-rules: [http://stylelint.io/user-guide/rules/]
+<!-- prettier-ignore-start -->
 
+options: [http://stylelint.io/user-guide/node-api/#options](http://stylelint.io/user-guide/node-api/#options)
 
+rules: [http://stylelint.io/user-guide/rules/](http://stylelint.io/user-guide/rules/)
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  stylelint [http://stylelint.io/](http://stylelint.io/)
-
+- stylelint: [http://stylelint.io/](http://stylelint.io/)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

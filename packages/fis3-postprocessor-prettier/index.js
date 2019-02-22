@@ -1,27 +1,25 @@
-'use strict'
+"use strict";
 
-var _prettier = _interopRequireDefault(require('prettier'))
+var _prettier = _interopRequireDefault(require("prettier"));
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {default: obj}
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var log = global.fis.log
-var assign = Object.assign || global.fis.util.assign
+var log = global.fis.log;
+var assign = Object.assign || global.fis.util.assign;
 
-module.exports = function(content, file, conf) {
-  var fileFakePath = file.realpathNoExt + file.rExt
+module.exports = function (content, file, conf) {
+  var fileFakePath = file.realpathNoExt + file.rExt;
 
   var config = _prettier.default.resolveConfig.sync(fileFakePath, {
-    editorconfig: true,
-  })
+    editorconfig: true
+  });
 
   config = assign(config, conf, {
-    filepath: fileFakePath,
-  })
-  delete config.filename
+    filepath: fileFakePath
+  });
+  delete config.filename;
 
-  var parsed = _prettier.default.format(content, config)
+  var parsed = _prettier.default.format(content, config);
 
-  return parsed
-}
+  return parsed;
+};

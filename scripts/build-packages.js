@@ -11,28 +11,33 @@ const pluginTypes = [
   'postprocessor',
   'server',
   'parser',
-  'command'
+  'command',
 ]
 
 const packages = []
 
-pluginTypes.forEach(function (type) {
+pluginTypes.forEach(function(type) {
   let dir
   try {
     dir = fs.readdirSync(path.join(SOURCE_DIR, 'packages', type))
-  } catch (err) {
+  } catch (error) {
     return
   }
 
-  dir.forEach(function (name) {
+  dir.forEach(function(name) {
     const pkg = new Package(type, name)
     pkg.build()
     packages.push(pkg.pkg)
   })
 })
-
-;(function (packages) {
-  const template = fs.readFileSync(path.join(SOURCE_DIR, 'templates', 'npm-status.ejs'), 'utf-8')
+;(function(packages) {
+  const template = fs.readFileSync(
+    path.join(SOURCE_DIR, 'templates', 'npm-status.ejs'),
+    'utf-8'
+  )
   const render = _.template(template)
-  fs.writeFileSync(path.join(__dirname, '..', 'packages', 'README.md'), render({packages: packages}).trim())
+  fs.writeFileSync(
+    path.join(__dirname, '..', 'packages', 'README.md'),
+    render({packages}).trim()
+  )
 })(packages)

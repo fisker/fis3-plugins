@@ -5,6 +5,6 @@ module.exports = {
   dependencies: ['cssgrace-lite'],
   options: {},
   links: {
-    cssgrace: 'https://github.com/cssdream/cssgrace'
-  }
+    cssgrace: 'https://github.com/cssdream/cssgrace',
+  },
 }

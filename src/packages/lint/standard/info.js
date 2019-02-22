@@ -5,6 +5,6 @@ module.exports = {
   dependencies: ['eslint', 'standard'],
   options: {},
   links: {
-    standard: 'https://github.com/standard/standard'
-  }
+    standard: 'https://github.com/standard/standard',
+  },
 }

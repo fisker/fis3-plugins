@@ -10,29 +10,26 @@
 ## install
 
 ```sh
-$ npm i -g fis3-postprocessor-standard
+npm install --global fis3-postprocessor-standard
 ```
 
 ## usage
 
 ```js
 // fis-conf.js
-fis.match('*.js', {
-  postprocessor: fis.plugin('standard')
-});
+fis.match("*.js", {
+  postprocessor: fis.plugin("standard"),
+})
 ```
 
-## config
-no config
-
-
+config: **none**
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  standard [https://github.com/standard/standard](https://github.com/standard/standard)
-
+- standard: [https://github.com/standard/standard](https://github.com/standard/standard)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

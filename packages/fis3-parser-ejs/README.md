@@ -10,7 +10,7 @@
 ## install
 
 ```sh
-$ npm i -g fis3-parser-ejs
+npm install --global fis3-parser-ejs
 ```
 
 ## usage
@@ -18,7 +18,7 @@ $ npm i -g fis3-parser-ejs
 ```js
 // fis-conf.js
 
-var ejsConf = {
+const ejsConf = {
   // ejs render data
   data: {
 
@@ -34,15 +34,14 @@ fis.match('*.ejs', {
 });
 ```
 
-[more options](https://github.com/mde/ejs)
-
+more options: [https://github.com/mde/ejs](https://github.com/mde/ejs)
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  ejs [http://ejs.co/](http://ejs.co/)
-
+- ejs: [http://ejs.co/](http://ejs.co/)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

@@ -10,7 +10,7 @@
 ## install
 
 ```sh
-$ npm i -g fis3-parser-lodash-template
+npm install --global fis3-parser-lodash-template
 ```
 
 ## usage
@@ -18,7 +18,7 @@ $ npm i -g fis3-parser-lodash-template
 ```js
 // fis-conf.js
 
-var lodashTemplateConf = {
+const lodashTemplateConf = {
   // lodashTemplate render data
   data: {
 
@@ -34,15 +34,14 @@ fis.match('*.jst', {
 });
 ```
 
-[more options](https://lodash.com/docs/#template)
-
+more options [https://lodash.com/docs/#template](https://lodash.com/docs/#template)
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  lodash.template [https://lodash.com/docs/#template](https://lodash.com/docs/#template)
-
+- lodash.template: [https://lodash.com/docs/#template](https://lodash.com/docs/#template)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

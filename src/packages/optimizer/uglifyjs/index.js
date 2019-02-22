@@ -3,7 +3,7 @@
  * fisker Cheung<lionkay@gmail.com>
  */
 import {minify} from 'uglify-js'
-const log = global.fis.log
+const {log} = global.fis
 
 function getUglifyJSOptions(file, conf) {
   const options = Object.assign({}, conf)
@@ -21,8 +21,12 @@ function getUglifyJSOptions(file, conf) {
     if (sourceMap.filename && typeof sourceMap.filename === 'string') {
       sourceMap.filename = filename
     }
-    if (sourceMap.url && sourceMap.url !== 'inline' && typeof sourceMap.url === 'string') {
-      sourceMap.url = filename + '.map'
+    if (
+      sourceMap.url &&
+      sourceMap.url !== 'inline' &&
+      typeof sourceMap.url === 'string'
+    ) {
+      sourceMap.url = `${filename}.map`
     }
   }
 }
@@ -33,7 +37,7 @@ function deriveSourceMap(file, sourceMap) {
   }
 
   const mapping = global.fis.file.wrap(
-    file.dirname + '/' + file.filename + file.rExt + '.map'
+    `${file.dirname}/${file.filename}${file.rExt}.map`
   )
 
   mapping.setContent(sourceMap)

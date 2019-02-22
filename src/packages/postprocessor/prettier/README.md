@@ -1,15 +1,16 @@
+<!-- markdownlint-disable MD002 MD041 -->
+
 ## usage
 
-```
+```js
 // fis-conf.js
-var options = {};
+const options = {}
 
-fis.match('*.{js,css,json,less,sass,md}', {
-  postprocessor: fis.plugin('prettier', options)
-});
+fis.match("*.{js,css,json,less,sass,md}", {
+  postprocessor: fis.plugin("prettier", options),
+})
 ```
 
-## config
-https://github.com/prettier/prettier#options
+config: [https://github.com/prettier/prettier#options](https://github.com/prettier/prettier#options)
 
-both options && Configuration File are supported.
+FYI: **both options && Configuration File are supported.**

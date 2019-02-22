@@ -10,26 +10,24 @@
 ## install
 
 ```sh
-$ npm i -g fis3-postprocessor-prettyhtml
+npm install --global fis3-postprocessor-prettyhtml
 ```
 
 ## usage
 
-```
+```js
 // fis-conf.js
-var options = {};
+const options = {}
 
-fis.match('*.html', {
-  postprocessor: fis.plugin('prettyhtml', options)
-});
+fis.match("*.html", {
+  postprocessor: fis.plugin("prettyhtml", options),
+})
 ```
 
-## config
-https://github.com/Prettyhtml/prettyhtml
-
-
+config: [https://github.com/Prettyhtml/prettyhtml](https://github.com/Prettyhtml/prettyhtml)
 
 ## default options
+
 ```json
 {
   "tabWidth": 2,
@@ -39,15 +37,15 @@ https://github.com/Prettyhtml/prettyhtml
   "singleQuote": false
 }
 ```
-** NOTICE: this might change in future **
 
+NOTICE: **this might change in future**
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  prettyhtml [https://github.com/Prettyhtml/prettyhtml](https://github.com/Prettyhtml/prettyhtml)
-
+- prettyhtml: [https://github.com/Prettyhtml/prettyhtml](https://github.com/Prettyhtml/prettyhtml)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

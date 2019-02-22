@@ -6,9 +6,9 @@ module.exports = {
   options: {
     envs: ['browser'],
     fix: false,
-    useEslintrc: true
+    useEslintrc: true,
   },
   links: {
-    eslint: 'http://eslint.org/'
-  }
+    eslint: 'http://eslint.org/',
+  },
 }

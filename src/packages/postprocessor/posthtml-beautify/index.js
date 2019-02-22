@@ -2,7 +2,7 @@ import posthtml from 'posthtml'
 import beautify from 'posthtml-beautify'
 import sync from 'promise-synchronizer'
 
-const log = global.fis.log
+const {log} = global.fis
 
 module.exports = function(content, file, conf) {
   content = content.replace(
@@ -17,7 +17,7 @@ module.exports = function(content, file, conf) {
   const promise = posthtml()
     .use(
       beautify({
-        rules: conf.rules
+        rules: conf.rules,
       })
     )
     .process(content)
@@ -27,8 +27,8 @@ module.exports = function(content, file, conf) {
 
   try {
     content = sync(promise)
-  } catch (err) {
-    log.warn('%s might not processed due to:\n %s', file.id, err)
+  } catch (error) {
+    log.warn('%s might not processed due to:\n %s', file.id, error)
     process.exit(1)
   }
 

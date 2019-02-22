@@ -1,9 +1,7 @@
-'use strict'
-
 import path from 'path'
 import browserSync from 'browser-sync'
-import getBsConfig from './lib/browser-sync-config.js'
 import yargs from 'yargs'
+import getBsConfig from './lib/browser-sync-config.js'
 
 const argv = (function(argv) {
   argv.root = path.resolve(argv.root || process.cwd())
@@ -23,12 +21,12 @@ function now() {
     .join(':')
     .replace(/\b\d\b/g, '0$&')
 
-  str += '.' + ('00' + d.getMilliseconds()).slice(-3)
+  str += `.${`00${d.getMilliseconds()}`.slice(-3)}`
   return str
 }
 
 function logEvent(event, path) {
-  console.log('%s %s: %s', now(), ('         ' + event).slice(-9), path)
+  console.log('%s %s: %s', now(), `         ${event}`.slice(-9), path)
 }
 
 function onInit(config) {
@@ -43,11 +41,11 @@ function onInit(config) {
 
 function watch(bs, root) {
   return function(event, file) {
-    var relativePath = path.relative(root, file)
+    const relativePath = path.relative(root, file)
     if (
       !relativePath ||
       relativePath === 'server.log' ||
-      /(^|[\/\\])[\._]./.test(relativePath)
+      /(^|[/\\])[._]./.test(relativePath)
     ) {
       return
     }

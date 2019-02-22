@@ -1,9 +1,11 @@
+<!-- markdownlint-disable MD002 MD041 -->
+
 ## usage
 
 ```js
 // fis-conf.js
 
-var lodashTemplateConf = {
+const lodashTemplateConf = {
   // lodashTemplate render data
   data: {
 
@@ -19,4 +21,4 @@ fis.match('*.jst', {
 });
 ```
 
-[more options](https://lodash.com/docs/#template)
+more options [https://lodash.com/docs/#template](https://lodash.com/docs/#template)

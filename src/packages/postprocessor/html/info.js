@@ -23,9 +23,9 @@ module.exports = {
     wrap_line_length: 0,
     wrap_attributes: 'auto',
     wrap_attributes_indent_size: 4,
-    end_with_newline: false
+    end_with_newline: false,
   },
   links: {
-    'js-beautify': 'https://github.com/beautify-web/js-beautify'
-  }
+    'js-beautify': 'https://github.com/beautify-web/js-beautify',
+  },
 }

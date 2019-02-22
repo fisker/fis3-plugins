@@ -10,26 +10,25 @@
 ## install
 
 ```sh
-$ npm i -g fis3-postprocessor-stylefmt
+npm install --global fis3-postprocessor-stylefmt
 ```
 
 ## usage
 
-```
+```js
 // fis-conf.js
 
-fis.match('*.{css,scss,less,sss}}', {
-  postprocessor: fis.plugin('stylefmt')
-});
+fis.match("*.{css,scss,less,sss}}", {
+  postprocessor: fis.plugin("stylefmt"),
+})
 ```
-
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  stylefmt [https://github.com/morishitter/stylefmt](https://github.com/morishitter/stylefmt)
-
+- stylefmt: [https://github.com/morishitter/stylefmt](https://github.com/morishitter/stylefmt)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

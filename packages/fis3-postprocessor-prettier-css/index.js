@@ -1,3 +1,3 @@
-'use strict'
+"use strict";
 
-throw new Error('`fis3-postprocessor-prettier-css` is Deprecated.')
+throw new Error('`fis3-postprocessor-prettier-css` is Deprecated.');

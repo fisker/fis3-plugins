@@ -5,6 +5,6 @@ module.exports = {
   dependencies: ['htmlhint'],
   options: {},
   links: {
-    htmlhint: 'http://htmlhint.com/'
-  }
+    htmlhint: 'http://htmlhint.com/',
+  },
 }

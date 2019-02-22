@@ -4,5 +4,5 @@ module.exports = {
   keywords: [],
   dependencies: [],
   options: {},
-  links: {}
+  links: {},
 }

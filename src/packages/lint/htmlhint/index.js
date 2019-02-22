@@ -7,7 +7,7 @@ import {HTMLHint} from 'htmlhint'
 import fs from 'fs'
 import path from 'path'
 
-const log = global.fis.log
+const {log} = global.fis
 
 function readConfig(filename) {
   let currentFolder = process.cwd()

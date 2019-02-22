@@ -10,16 +10,16 @@
 ## install
 
 ```sh
-$ npm i -g fis3-lint-htmlhint
+npm install --global fis3-lint-htmlhint
 ```
 
 ## usage
 
-```
+```js
 // fis-conf.js
 
 // config with .htmlhintrc file (Recommended)
-var htmlhintConf = {
+const htmlhintConf = {
   // key `rules` should be falsy
 };
 
@@ -29,7 +29,7 @@ fis.match('*.html', {
 
 
 // config with inline rules
-var htmlhintConf = {
+const htmlhintConf = {
   rules: {
     "tagname-lowercase": true,
     "attr-lowercase": true,
@@ -44,16 +44,15 @@ var htmlhintConf = {
   }
 };
 ```
-rules: [https://github.com/yaniswang/HTMLHint/wiki/Rules]
 
-
+rules: [https://github.com/yaniswang/HTMLHint/wiki/Rules](https://github.com/yaniswang/HTMLHint/wiki/Rules)
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  htmlhint [http://htmlhint.com/](http://htmlhint.com/)
-
+- htmlhint: [http://htmlhint.com/](http://htmlhint.com/)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

@@ -10,33 +10,30 @@
 ## install
 
 ```sh
-$ npm i -g fis3-postprocessor-autoprefixer-latest
+npm install --global fis3-postprocessor-autoprefixer-latest
 ```
 
 ## usage
 
-```
+```js
 // fis-conf.js
-var options = {
-  browsers: ['last 2 versions']
+const options = {
+  browsers: ["last 2 versions"],
 }
 
-fis.match('*.js', {
-  postprocessor: fis.plugin('autoprefixer-latest', options)
+fis.match("*.js", {
+  postprocessor: fis.plugin("autoprefixer-latest", options),
 })
 ```
 
-## config
-https://github.com/postcss/autoprefixer
-
-
+config: [https://github.com/postcss/autoprefixer](https://github.com/postcss/autoprefixer)
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  autoprefixer [https://github.com/postcss/autoprefixer](https://github.com/postcss/autoprefixer)
-
+- autoprefixer: [https://github.com/postcss/autoprefixer](https://github.com/postcss/autoprefixer)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

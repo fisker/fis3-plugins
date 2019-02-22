@@ -10,31 +10,28 @@
 ## install
 
 ```sh
-$ npm i -g fis3-preprocessor-cssgrace
+npm install --global fis3-preprocessor-cssgrace
 ```
 
 ## usage
 
-```
+```js
 // fis-conf.js
-var options = {};
+const options = {}
 
-fis.match('*.{css,less,sass,scss,sss,styl}', {
-  preprocessor: fis.plugin('cssgrace', options)
-});
+fis.match("*.{css,less,sass,scss,sss,styl}", {
+  preprocessor: fis.plugin("cssgrace", options),
+})
 ```
 
-## config
-https://github.com/cssdream/cssgrace
-
-
+config: [https://github.com/cssdream/cssgrace](https://github.com/cssdream/cssgrace)
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  cssgrace [https://github.com/cssdream/cssgrace](https://github.com/cssdream/cssgrace)
-
+- cssgrace: [https://github.com/cssdream/cssgrace](https://github.com/cssdream/cssgrace)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

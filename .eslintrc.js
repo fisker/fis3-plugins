@@ -1,10 +1,29 @@
+/*!
+ * config file for eslint
+ * project https://github.com/xwtec/dotfiles
+ * primary link https://raw.githubusercontent.com/xwtec/dotfiles/master/eslint/.eslintrc.js
+ *
+ * configuration https://eslint.org/docs/user-guide/configuring
+ *
+ */
+
 module.exports = {
-  plugins: ['prettier'],
+  root: true,
+  parserOptions: {},
+  extends: [
+    // @xwtec/eslint-config https://github.com/xwtec/eslint-config
+    '@xwtec',
+  ],
+  settings: {},
   rules: {
-    'prettier/prettier': 'error'
+    // FIXME: remove this after @xwtec/eslint-config fix this
+    'import/no-extraneous-dependencies': 'warn',
+    'import/no-dynamic-require': 'warn',
+    'no-catch-shadow': 'off',
+
+    'unicorn/no-process-exit': 'warn',
   },
-  parserOptions: {
-    ecmaVersion: 6,
-    sourceType: 'module'
-  }
+  plugins: [],
+  overrides: [],
+  globals: {},
 }

@@ -10,16 +10,16 @@ module.exports = {
     'serve-directory',
     'serve-directory-theme-octicons',
     'yargs',
-    'yog-devtools'
+    'yog-devtools',
   ],
   options: {},
   links: {
-    browsersync: 'https://browsersync.io/'
+    browsersync: 'https://browsersync.io/',
   },
   files: [
     'app.js',
     'lib/browser-sync-config.js',
     'lib/middleware.js',
-    'templates/script-tags.tmpl'
-  ]
+    'templates/script-tags.tmpl',
+  ],
 }

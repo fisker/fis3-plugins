@@ -8,9 +8,9 @@ module.exports = {
     useTabs: false,
     printWidth: 80,
     usePrettier: true,
-    singleQuote: false
+    singleQuote: false,
   },
   links: {
-    prettyhtml: 'https://github.com/Prettyhtml/prettyhtml'
-  }
+    prettyhtml: 'https://github.com/Prettyhtml/prettyhtml',
+  },
 }

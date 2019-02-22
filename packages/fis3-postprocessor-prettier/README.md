@@ -10,33 +10,30 @@
 ## install
 
 ```sh
-$ npm i -g fis3-postprocessor-prettier
+npm install --global fis3-postprocessor-prettier
 ```
 
 ## usage
 
-```
+```js
 // fis-conf.js
-var options = {};
+const options = {}
 
-fis.match('*.{js,css,json,less,sass,md}', {
-  postprocessor: fis.plugin('prettier', options)
-});
+fis.match("*.{js,css,json,less,sass,md}", {
+  postprocessor: fis.plugin("prettier", options),
+})
 ```
 
-## config
-https://github.com/prettier/prettier#options
+config: [https://github.com/prettier/prettier#options](https://github.com/prettier/prettier#options)
 
-both options && Configuration File are supported.
-
-
+FYI: **both options && Configuration File are supported.**
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  prettier [https://github.com/prettier/prettier](https://github.com/prettier/prettier)
-
+- prettier: [https://github.com/prettier/prettier](https://github.com/prettier/prettier)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

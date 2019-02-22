@@ -10,31 +10,36 @@
 ## install
 
 ```sh
-$ npm i -g <%= pkg.name %>
+npm install --global <%= pkg.name %>
 ```
 
 <%= info.readme %>
+
 <%
 if (!_.isEmpty(info.options)) {
 %>
 
 ## default options
+
 ```json
 <%= JSON.stringify(info.options, null, 2) %>
 ```
-** NOTICE: this might change in future **
+
+NOTICE: **this might change in future**
 <%
 }
 %>
 
 ## links
+
 <%
 _.forEach(info.links, function(link, name) {
 %>
-  <%= name %> [<%= link%>](<%= link%>)
+- <%= name %>: [<%= link%>](<%= link%>)
 <%
 })
 %>
 
 ## license
+
 <%= pkg.license %> © [<%= pkg.author.name %>](<%= pkg.author.url %>)

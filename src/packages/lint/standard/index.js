@@ -2,7 +2,7 @@ import {CLIEngine} from 'eslint'
 import standard from 'standard'
 
 const formatter = CLIEngine.getFormatter()
-const log = global.fis.log
+const {log} = global.fis
 
 module.exports = function(content, file, conf) {
   content = content.replace(/\n\s+$/, '')
@@ -10,8 +10,8 @@ module.exports = function(content, file, conf) {
 
   try {
     results = standard.lintTextSync(content, {}).results
-  } catch (err) {
-    log.error(err)
+  } catch (error) {
+    log.error(error)
     process.exit(1)
   }
 

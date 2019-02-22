@@ -5,6 +5,6 @@ module.exports = {
   dependencies: ['postcss', 'autoprefixer'],
   options: {},
   links: {
-    autoprefixer: 'https://github.com/postcss/autoprefixer'
-  }
+    autoprefixer: 'https://github.com/postcss/autoprefixer',
+  },
 }

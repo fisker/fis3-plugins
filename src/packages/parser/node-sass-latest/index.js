@@ -6,9 +6,10 @@ import path from 'path'
 import sass from 'node-sass'
 import util from 'util'
 
+const {fis} = global
 const PROJECT_ROOT = fis.project.getProjectPath()
 
-function resolve_and_load(filename, dir) {
+function resolveAndLoad(filename, dir) {
   // Resolution order for ambiguous imports:
   // (1) filename as given
   // (2) underscore + given
@@ -20,11 +21,11 @@ function resolve_and_load(filename, dir) {
   const dirname = path.dirname(filename)
   const files = [
     path.join(dirname, basename),
-    path.join(dirname, '_' + basename),
-    path.join(dirname, '_' + basename + '.scss'),
-    path.join(dirname, '_' + basename + '.sass'),
-    path.join(dirname, basename + '.scss'),
-    path.join(dirname, basename + '.sass')
+    path.join(dirname, `_${basename}`),
+    path.join(dirname, `_${basename}.scss`),
+    path.join(dirname, `_${basename}.sass`),
+    path.join(dirname, `${basename}.scss`),
+    path.join(dirname, `${basename}.sass`),
   ]
 
   let found = null
@@ -49,7 +50,7 @@ function find(filename, paths) {
   paths.every(function(dir) {
     let file
 
-    if ((file = resolve_and_load(filename, dir))) {
+    if ((file = resolveAndLoad(filename, dir))) {
       found = file
       return false
     }
@@ -75,7 +76,7 @@ function fixSourcePath(content, file) {
       value = depth
     }
 
-    var info = fis.uri(value, file.dirname)
+    const info = fis.uri(value, file.dirname)
 
     if (info.file && info.file.subpath) {
       value =
@@ -93,18 +94,18 @@ module.exports = function(content, file, conf) {
   }
 
   // sass 对 unicode 字符处理有 bug, 所以这里先用这种方法 解决下。
-  var backups = {}
-  var backupId = 0
+  const backups = {}
+  let backupId = 0
 
   // content = fixImport(content);
 
   content = content.replace(/('|")\\\w{4}\1/g, function(raw) {
-    var id = backupId++
+    const id = backupId++
     backups[id] = raw
-    return "'__scss_backup_" + id + "'"
+    return `'__scss_backup_${id}'`
   })
 
-  var opts = fis.util.clone(conf)
+  const opts = fis.util.clone(conf)
 
   // 读取私有配置。
   if (file.sass) {
@@ -117,7 +118,7 @@ module.exports = function(content, file, conf) {
 
   opts.includePaths = opts.includePaths.map(function(dir) {
     if (
-      path.resolve(dir) != path.normalize(dir) ||
+      path.resolve(dir) !== path.normalize(dir) ||
       fis.util.exists(path.join(PROJECT_ROOT, dir))
     ) {
       dir = path.join(PROJECT_ROOT, dir)
@@ -133,44 +134,44 @@ module.exports = function(content, file, conf) {
     opts.indentedSyntax = true
   }
 
-  var stacks = []
-  var includePaths = opts.includePaths.concat()
-  var sources = [file.subpath]
+  const stacks = []
+  const includePaths = opts.includePaths.concat()
+  const sources = [file.subpath]
 
   opts.importer = function(url, prev, done) {
-    prev = prev.replace(/^\w+\:/, '') // windows 里面莫名加个盘符。
-    var prevFile = find(prev, stacks.concat(includePaths))
+    prev = prev.replace(/^\w+:/, '') // windows 里面莫名加个盘符。
+    const prevFile = find(prev, stacks.concat(includePaths))
 
     if (!prevFile) {
-      return new Error("Can't find `" + prev + '`')
+      return new Error(`Can't find \`${prev}\``)
     }
 
-    var dirname = prevFile.dirname
+    const {dirname} = prevFile
 
     // 如果已经在里面
-    var idx = stacks.indexOf(dirname)
+    const idx = stacks.indexOf(dirname)
     if (idx !== -1) {
       stacks.splice(idx, 1)
     }
     stacks.unshift(dirname)
 
-    var target = find(url, stacks.concat(includePaths))
+    const target = find(url, stacks.concat(includePaths))
     if (!target) {
-      return new Error("Can't find `" + url + '` in `' + prev + '`')
+      return new Error(`Can't find \`${url}\` in \`${prev}\``)
     }
 
-    var content = target.getContent()
+    let content = target.getContent()
     content = fixSourcePath(content, target)
     content = content.replace(/('|")\\\w{4}\1/g, function(raw) {
-      var id = backupId++
+      const id = backupId++
       backups[id] = raw
-      return "'__scss_backup_" + id + "'"
+      return `'__scss_backup_${id}'`
     })
 
     if (file.cache) {
       file.cache.addDeps(target.realpath)
     }
-    //解决include_path 内import导致subpath为空报错问题
+    // 解决include_path 内import导致subpath为空报错问题
     if (!target.subpath) {
       target.subpath = path.relative(PROJECT_ROOT, target.realpath)
     }
@@ -181,38 +182,40 @@ module.exports = function(content, file, conf) {
 
     return {
       file: target.subpath,
-      contents: content
+      contents: content,
     }
   }
 
+  let mapping
+
   if (opts.sourceMap) {
     opts.sourceMapContents = true
-    var mapping = fis.file.wrap(
-      file.dirname + '/' + file.filename + file.rExt + '.map'
-    )
+    mapping = fis.file.wrap(`${file.dirname}/${file.filename}${file.rExt}.map`)
 
     opts.sourceMap = mapping.getUrl(
       fis.compile.settings.hash,
       fis.compile.settings.domain
     )
-    file.release &&
-      (opts.outFile = file.getUrl(
+
+    if (file.release) {
+      opts.outFile = file.getUrl(
         fis.compile.settings.hash,
         fis.compile.settings.domain
-      ))
+      )
+    }
   }
 
-  var ret
+  let ret
   try {
     ret = sass.renderSync(opts)
-  } catch (e) {
+  } catch (error) {
     fis.log.error(
       util.format(
         '%s'.red + ' [`%s` %s:%s]'.yellow,
-        e.message,
-        e.file,
-        e.line,
-        e.column
+        error.message,
+        error.file,
+        error.line,
+        error.column
       )
     )
   }
@@ -225,12 +228,12 @@ module.exports = function(content, file, conf) {
   //
 
   if (mapping && ret.map) {
-    var sourceMap = ret.map.toString('utf8')
+    let sourceMap = ret.map.toString('utf8')
 
     // 修复 sourceMap 文件路径错误问题
     // 等 node-sass 修复后，可以删除。
     // ---------------------------------------------
-    var sourceMapObj = JSON.parse(sourceMap)
+    const sourceMapObj = JSON.parse(sourceMap)
     sourceMapObj.sources = sources
     sourceMap = JSON.stringify(sourceMapObj, null, 2)
     // -----------------------------------------------

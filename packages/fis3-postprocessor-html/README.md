@@ -10,13 +10,11 @@
 ## install
 
 ```sh
-$ npm i -g fis3-postprocessor-html
+npm install --global fis3-postprocessor-html
 ```
 
-
-
-
 ## default options
+
 ```json
 {
   "indent_size": 2,
@@ -41,15 +39,15 @@ $ npm i -g fis3-postprocessor-html
   "end_with_newline": false
 }
 ```
-** NOTICE: this might change in future **
 
+NOTICE: **this might change in future**
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  js-beautify [https://github.com/beautify-web/js-beautify](https://github.com/beautify-web/js-beautify)
-
+- js-beautify: [https://github.com/beautify-web/js-beautify](https://github.com/beautify-web/js-beautify)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

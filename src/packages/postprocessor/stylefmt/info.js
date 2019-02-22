@@ -4,6 +4,6 @@ module.exports = {
   keywords: [],
   options: {},
   links: {
-    stylefmt: 'https://github.com/morishitter/stylefmt'
-  }
+    stylefmt: 'https://github.com/morishitter/stylefmt',
+  },
 }

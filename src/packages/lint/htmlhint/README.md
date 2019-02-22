@@ -1,10 +1,12 @@
+<!-- markdownlint-disable MD002 MD041 -->
+
 ## usage
 
-```
+```js
 // fis-conf.js
 
 // config with .htmlhintrc file (Recommended)
-var htmlhintConf = {
+const htmlhintConf = {
   // key `rules` should be falsy
 };
 
@@ -14,7 +16,7 @@ fis.match('*.html', {
 
 
 // config with inline rules
-var htmlhintConf = {
+const htmlhintConf = {
   rules: {
     "tagname-lowercase": true,
     "attr-lowercase": true,
@@ -29,4 +31,5 @@ var htmlhintConf = {
   }
 };
 ```
-rules: [https://github.com/yaniswang/HTMLHint/wiki/Rules]
+
+rules: [https://github.com/yaniswang/HTMLHint/wiki/Rules](https://github.com/yaniswang/HTMLHint/wiki/Rules)

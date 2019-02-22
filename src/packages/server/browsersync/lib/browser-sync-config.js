@@ -1,23 +1,19 @@
-'use strict'
-
 import path from 'path'
 import merge from 'lodash.merge'
 import bsDefaultConfig from 'browser-sync/dist/default-config.js'
-import {
-  mock,
-  logger,
-  directory
-} from './middleware.js'
+import middleware from './middleware.js'
+
+const {mock, logger, directory} = middleware
 
 const defaultOptions = merge({}, bsDefaultConfig, {
   server: {
-    directory: true
+    directory: true,
   },
   watchEvents: ['change', 'add', 'addDir', 'unlink', 'unlinkDir'],
   ghostMode: false,
   reloadDebounce: 500,
   notify: false,
-  online: false
+  online: false,
 })
 
 const overrideOptions = {
@@ -25,11 +21,11 @@ const overrideOptions = {
   snippetOptions: {
     rule: {
       match: /<\/body>|<!--\s*browser-sync-script\s*-->/i,
-      fn: function (snippet, match) {
+      fn(snippet, match) {
         return snippet + match
-      }
-    }
-  }
+      },
+    },
+  },
 }
 
 function getType(obj) {
@@ -43,7 +39,7 @@ function getUserConfig(path) {
 
     if (!config.server || getType(config.server) === 'String') {
       config.server = {
-        directory: true
+        directory: true,
       }
     }
 
@@ -59,9 +55,8 @@ function parseMiddleware(middleware) {
   if (type !== 'Array') {
     if (type === 'Boolean') {
       return []
-    } else {
-      return [middleware]
     }
+    return [middleware]
   }
 
   return middleware
@@ -74,7 +69,7 @@ function getConfig(bs, argv) {
 
   const config = merge({}, defaultOptions, userConfig, overrideOptions, {
     server: {
-      baseDir: argv.root
+      baseDir: argv.root,
     },
     port: argv.port,
     // https: argv.https

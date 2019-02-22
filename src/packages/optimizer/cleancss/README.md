@@ -1,20 +1,21 @@
+<!-- markdownlint-disable MD002 MD041 -->
+
 ## usage
 
 ```js
 // fis-conf.js
 
-var cleanCSSConf = {};
+const cleanCSSConf = {}
 
-fis.match('*.css', {
-  optimizer: fis.plugin('cleancss', cleanCSSConf)
-});
+fis.match("*.css", {
+  optimizer: fis.plugin("cleancss", cleanCSSConf),
+})
 ```
 
 ### options
 
 ```js
-var cleanCSSConf = {
-};
+const cleanCSSConf = {}
 ```
 
 notice:
@@ -23,4 +24,4 @@ notice:
 
 options:
 
-[https://github.com/jakubpawlowicz/clean-css#constructor-options]
+[https://github.com/jakubpawlowicz/clean-css#constructor-options](https://github.com/jakubpawlowicz/clean-css#constructor-options)

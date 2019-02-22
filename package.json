@@ -2,10 +2,7 @@
   "name": "fis3-plugins",
   "version": "1.0.0",
   "description": "plugins for fi3",
-  "keywords": [
-    "fis",
-    "fis3"
-  ],
+  "keywords": ["fis", "fis3"],
   "main": "index.js",
   "repository": "https://github.com/fisker/fis3-plugins",
   "author": {
@@ -19,18 +16,24 @@
   },
   "readmeFilename": "README.md",
   "scripts": {
-    "precommit": "pretty-quick --staged",
     "prepack": "echo fis3-plugins is not a npm package. && exit 1",
     "update-dependencies": "yarn upgrade-interactive --latest",
-    "build-packages": "cd ./scripts && sh ./build-packages.sh",
+    "build": "cd ./scripts && sh ./build-packages.sh",
     "publish-npm": "cd ./scripts && sh ./publish-npm.sh",
-    "release-packages": "npm run build-packages && npm run publish-npm"
+    "release": "npm run build && npm run publish-npm"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-stage-0": "^7.0.0",
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
+    "@xwtec/eslint-config": "^3.5.4",
+    "cz-conventional-changelog-emoji": "^0.1.0",
+    "husky": "^1.3.1",
     "json-stable-stringify": "^1.0.1",
+    "lint-staged": "^8.1.4",
+    "markdownlint-cli": "^0.13.0",
     "mkdirp": "^0.5.1"
   },
   "dependencies": {
@@ -63,5 +66,10 @@
     "uglify-js": "^3.4.9",
     "yargs": "^13.2.1",
     "yog-devtools": "^0.1.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog-emoji"
+    }
   }
 }

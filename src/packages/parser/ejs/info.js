@@ -4,6 +4,6 @@ module.exports = {
   keywords: ['ejs', 'html'],
   dependencies: ['ejs'],
   links: {
-    ejs: 'http://ejs.co/'
-  }
+    ejs: 'http://ejs.co/',
+  },
 }

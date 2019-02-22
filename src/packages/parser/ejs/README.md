@@ -1,9 +1,11 @@
+<!-- markdownlint-disable MD002 MD041 -->
+
 ## usage
 
 ```js
 // fis-conf.js
 
-var ejsConf = {
+const ejsConf = {
   // ejs render data
   data: {
 
@@ -19,4 +21,4 @@ fis.match('*.ejs', {
 });
 ```
 
-[more options](https://github.com/mde/ejs)
+more options: [https://github.com/mde/ejs](https://github.com/mde/ejs)

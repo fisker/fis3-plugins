@@ -10,7 +10,7 @@
 ## install
 
 ```sh
-$ npm i -g fis3-optimizer-cleancss
+npm install --global fis3-optimizer-cleancss
 ```
 
 ## usage
@@ -18,18 +18,17 @@ $ npm i -g fis3-optimizer-cleancss
 ```js
 // fis-conf.js
 
-var cleanCSSConf = {};
+const cleanCSSConf = {}
 
-fis.match('*.css', {
-  optimizer: fis.plugin('cleancss', cleanCSSConf)
-});
+fis.match("*.css", {
+  optimizer: fis.plugin("cleancss", cleanCSSConf),
+})
 ```
 
 ### options
 
 ```js
-var cleanCSSConf = {
-};
+const cleanCSSConf = {}
 ```
 
 notice:
@@ -38,16 +37,14 @@ notice:
 
 options:
 
-[https://github.com/jakubpawlowicz/clean-css#constructor-options]
-
-
+[https://github.com/jakubpawlowicz/clean-css#constructor-options](https://github.com/jakubpawlowicz/clean-css#constructor-options)
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  clean-css [https://github.com/jakubpawlowicz/clean-css](https://github.com/jakubpawlowicz/clean-css)
-
+- clean-css: [https://github.com/jakubpawlowicz/clean-css](https://github.com/jakubpawlowicz/clean-css)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

@@ -6,12 +6,12 @@ import sync from 'promise-synchronizer'
 import postcss from 'postcss'
 import stylelint from 'stylelint'
 
-const log = global.fis.log
+const {log} = global.fis
 
 const syntax = {
   '.scss': 'scss',
   '.less': 'less',
-  '.sss': 'sugarss'
+  '.sss': 'sugarss',
 }
 
 module.exports = function(content, file, conf) {
@@ -23,7 +23,7 @@ module.exports = function(content, file, conf) {
     formatter: 'string',
     files: file.realpath,
     extractStyleTagsFromHtml: false,
-    from: config.filename
+    from: conf.filename,
   })
   delete config.filename
   delete config.code
@@ -36,19 +36,19 @@ module.exports = function(content, file, conf) {
   const promise = postcss([stylelint])
     .process(content, config)
     .then(function(result) {
-      var messages = result.messages || []
-      var errorMsg = []
-      var warnMsg = []
-      for (var i = 0; i < messages.length; i++) {
-        var message = messages[i]
-        var type = message.severity || 'warn'
+      const messages = result.messages || []
+      const errorMsg = []
+      const warnMsg = []
+      for (let i = 0; i < messages.length; i++) {
+        const message = messages[i]
+        const type = message.severity || 'warn'
         ;(type === 'error' ? errorMsg : warnMsg).push(
           [
             ' ',
-            type + ':',
-            message.line ? '[' + message.line + ':' + message.column + ']' : '',
+            `${type}:`,
+            message.line ? `[${message.line}:${message.column}]` : '',
             // '[' + message.rule + ']',
-            message.text
+            message.text,
           ].join(' ')
         )
       }
@@ -75,8 +75,8 @@ module.exports = function(content, file, conf) {
 
   try {
     return sync(promise)
-  } catch (err) {
-    log.warn('[%s] lint failed with %s: \n\n %s', file.id, 'error', err)
+  } catch (error) {
+    log.warn('[%s] lint failed with %s: \n\n %s', file.id, 'error', error)
     process.exit(1)
   }
 }

@@ -10,16 +10,18 @@
 ## install
 
 ```sh
-$ npm i -g fis3-server-browsersync
+npm install --global fis3-server-browsersync
 ```
 
 ## ustage
+
 ```sh
 fis3 server start --type browsersync
 ```
 
 ## custom config
-put `bs-config.js` in the source folder, it will automatic load
+
+put `bs-config.js` in the source folder
 
 OR
 
@@ -27,15 +29,14 @@ OR
 fis3 server start --type browsersync --bs-config path/to/bs-config.js
 ```
 
-see https://browsersync.io/docs/options
-
+see [https://browsersync.io/docs/options](https://browsersync.io/docs/options)
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  browsersync [https://browsersync.io/](https://browsersync.io/)
-
+- browsersync: [https://browsersync.io/](https://browsersync.io/)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

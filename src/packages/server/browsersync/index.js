@@ -2,6 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import {spawn} from 'child_process'
 
+const {fis} = global
 const util = fis.require('command-server/lib/util.js')
 
 // 每 0.2 秒读取子进程的输出文件。
@@ -17,9 +18,9 @@ function watchOnFile(filepath, callback) {
   function read() {
     const stat = fs.statSync(filepath)
 
-    if (stat.size != lastIndex) {
+    if (stat.size !== lastIndex) {
       const fd = fs.openSync(filepath, 'r')
-      const buffer = new Buffer(stat.size - lastIndex)
+      const buffer = Buffer.from(stat.size - lastIndex)
 
       try {
         fs.readSync(fd, buffer, lastIndex, stat.size - lastIndex)
@@ -27,7 +28,7 @@ function watchOnFile(filepath, callback) {
         lastIndex = stat.size
 
         callback(content)
-      } catch (e) {
+      } catch (error) {
         // 从头读起
         lastIndex = 0
       }
@@ -54,7 +55,7 @@ function start(opt, callback) {
   const args = [script]
 
   if (opt['bs-config']) {
-    const bsConfig = path.join(process.cwd(), '' + opt['bs-config'])
+    const bsConfig = path.join(process.cwd(), `${opt['bs-config']}`)
     if (fis.util.exists(bsConfig)) {
       opt['bs-config'] = bsConfig
     } else {
@@ -66,7 +67,7 @@ function start(opt, callback) {
 
   // 把 options 通过 args 传给 app 程序。
   fis.util.map(opt, function(key, value) {
-    args.push('--' + key, String(value))
+    args.push(`--${key}`, String(value))
   })
 
   process.stdout.write('\n Starting fis-server .')
@@ -77,8 +78,8 @@ function start(opt, callback) {
     stdio: [
       0,
       opt.daemon ? fs.openSync(logFile, 'w') : 'pipe',
-      opt.daemon ? fs.openSync(logFile, 'w+') : 'pipe'
-    ]
+      opt.daemon ? fs.openSync(logFile, 'w+') : 'pipe',
+    ],
   })
 
   let log = ''
@@ -95,7 +96,7 @@ function start(opt, callback) {
     log += chunk
     process.stdout.write('.')
 
-    if (~chunk.indexOf('Error')) {
+    if (chunk.indexOf('Error') !== -1) {
       if (error) {
         return
       }
@@ -106,31 +107,38 @@ function start(opt, callback) {
       const match = chunk.match(/Error:?\s+([^\r\n]+)/i)
       let errMsg = 'unknown'
 
-      if (~chunk.indexOf('EADDRINUSE')) {
+      if (chunk.indexOf('EADDRINUSE') !== -1) {
         log = ''
-        errMsg = 'Address already in use:' + opt.port
+        errMsg = `Address already in use:${opt.port}`
       } else if (match) {
         errMsg = match[1]
       }
 
-      log && console.log(log)
-      stoper && stoper()
+      if (log) {
+        console.log(log)
+      }
+
+      if (stoper) {
+        stoper()
+      }
 
       try {
         callback(errMsg)
-      } catch (e) {
-        console.log(e)
+      } catch (error) {
+        console.log(error)
       }
 
       // try {
       //   process.kill(server.pid, 'SIGKILL');
       // } catch (e) {}
-    } else if (~chunk.indexOf('Listening on')) {
+    } else if (chunk.indexOf('Listening on') !== -1) {
       started = true
-      stoper && stoper()
+      if (stoper) {
+        stoper()
+      }
       clearTimeout(timeoutTimer)
 
-      process.stdout.write(' at port [' + opt.port + ']\n')
+      process.stdout.write(` at port [${opt.port}]\n`)
       callback(null)
     }
   }
@@ -142,7 +150,9 @@ function start(opt, callback) {
 
     timeoutTimer = setTimeout(function() {
       process.stdout.write(' fail\n')
-      if (log) console.log(log)
+      if (log) {
+        console.log(log)
+      }
       fis.log.error('timeout')
     }, timeout)
   } else {

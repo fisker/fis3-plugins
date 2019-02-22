@@ -1,5 +1,5 @@
 import CleanCSS from 'clean-css'
-const log = global.fis.log
+const {log} = global.fis
 
 function deriveSourceMap(file, sourceMap) {
   if (!sourceMap) {
@@ -7,7 +7,7 @@ function deriveSourceMap(file, sourceMap) {
   }
 
   const mapping = global.fis.file.wrap(
-    file.dirname + '/' + file.filename + file.rExt + '.map'
+    `${file.dirname}/${file.filename}${file.rExt}.map`
   )
 
   mapping.setContent(sourceMap)
@@ -25,7 +25,7 @@ module.exports = function(content, file, conf) {
     options.returnPromise = false
   }
 
-  var result = new CleanCSS(conf).minify(content)
+  const result = new CleanCSS(conf).minify(content)
 
   if (result.warnings && result.warnings.length) {
     log.warn(result.warnings)

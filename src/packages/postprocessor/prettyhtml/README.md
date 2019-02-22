@@ -1,13 +1,14 @@
+<!-- markdownlint-disable MD002 MD041 -->
+
 ## usage
 
-```
+```js
 // fis-conf.js
-var options = {};
+const options = {}
 
-fis.match('*.html', {
-  postprocessor: fis.plugin('prettyhtml', options)
-});
+fis.match("*.html", {
+  postprocessor: fis.plugin("prettyhtml", options),
+})
 ```
 
-## config
-https://github.com/Prettyhtml/prettyhtml
+config: [https://github.com/Prettyhtml/prettyhtml](https://github.com/Prettyhtml/prettyhtml)

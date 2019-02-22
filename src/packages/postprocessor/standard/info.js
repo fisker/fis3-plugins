@@ -5,6 +5,6 @@ module.exports = {
   dependencies: ['standard'],
   options: {},
   links: {
-    standard: 'https://github.com/standard/standard'
-  }
+    standard: 'https://github.com/standard/standard',
+  },
 }

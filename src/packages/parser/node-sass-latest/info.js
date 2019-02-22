@@ -7,10 +7,10 @@ module.exports = {
     outputStyle: 'expanded',
     sourceMapContents: true,
     sourceMap: false,
-    omitSourceMapUrl: false
+    omitSourceMapUrl: false,
   },
   links: {
     sass: 'http://sass-lang.com/',
-    'node-sass': 'https://github.com/sass/node-sass'
-  }
+    'node-sass': 'https://github.com/sass/node-sass',
+  },
 }

@@ -4,6 +4,6 @@ module.exports = {
   keywords: ['jst', 'html'],
   dependencies: ['lodash'],
   links: {
-    'lodash.template': 'https://lodash.com/docs/#template'
-  }
+    'lodash.template': 'https://lodash.com/docs/#template',
+  },
 }

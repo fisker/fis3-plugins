@@ -10,29 +10,30 @@
 ## install
 
 ```sh
-$ npm i -g fis3-postprocessor-posthtml-beautify
+npm install --global fis3-postprocessor-posthtml-beautify
 ```
 
 ## usage
 
-```
+```js
 // fis-conf.js
 var config = {
   rules: {
     Indent: 2,
-    eol: '\n',
-    eof: '\n'
-  }
-};
+    eol: "\n",
+    eof: "\n",
+  },
+}
 
-fis.match('*.html', {
-  postprocessor: fis.plugin('posthtml-beautify', config)
-});
+fis.match("*.html", {
+  postprocessor: fis.plugin("posthtml-beautify", config),
+})
 ```
-more rules: https://github.com/gitscrum/posthtml-beautify
 
+more rules: [https://github.com/gitscrum/posthtml-beautify](https://github.com/gitscrum/posthtml-beautify)
 
 ## default options
+
 ```json
 {
   "rules": {
@@ -42,15 +43,15 @@ more rules: https://github.com/gitscrum/posthtml-beautify
   }
 }
 ```
-** NOTICE: this might change in future **
 
+NOTICE: **this might change in future**
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  posthtml-beautify [https://github.com/gitscrum/posthtml-beautify](https://github.com/gitscrum/posthtml-beautify)
-
+- posthtml-beautify: [https://github.com/gitscrum/posthtml-beautify](https://github.com/gitscrum/posthtml-beautify)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

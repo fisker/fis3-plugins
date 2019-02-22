@@ -10,7 +10,7 @@
 ## install
 
 ```sh
-$ npm i -g fis3-lint-eslint-noisy
+npm install --global fis3-lint-eslint-noisy
 ```
 
 ## about package name
@@ -22,18 +22,20 @@ i named this package `noisy` is because the other eslint plugins for fis all sil
 ```js
 // fis-conf.js
 
-const eslintConf = {};
+const eslintConf = {}
 
-fis.match('*.js', {
-  lint: fis.plugin('eslint-noisy', eslintConf),
-});
+fis.match("*.js", {
+  lint: fis.plugin("eslint-noisy", eslintConf),
+})
 ```
 
 ### options
 
-options: [http://eslint.org/docs/developer-guide/nodejs-api#cliengine]
+options: [http://eslint.org/docs/developer-guide/nodejs-api#cliengine](http://eslint.org/docs/developer-guide/nodejs-api#cliengine)
 
-rules and fixable rules: [http://eslint.org/docs/rules/]
+rules and fixable rules: [http://eslint.org/docs/rules/](http://eslint.org/docs/rules/)
+
+<!-- prettier-ignore-start -->
 
 ```js
 const eslintConf = {
@@ -60,27 +62,26 @@ const eslintConf = {
 };
 ```
 
-
+<!-- prettier-ignore-end -->
 
 ## default options
+
 ```json
 {
-  "envs": [
-    "browser"
-  ],
+  "envs": ["browser"],
   "fix": false,
   "useEslintrc": true
 }
 ```
-** NOTICE: this might change in future **
 
+NOTICE: **this might change in future**
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  eslint [http://eslint.org/](http://eslint.org/)
-
+- eslint: [http://eslint.org/](http://eslint.org/)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)

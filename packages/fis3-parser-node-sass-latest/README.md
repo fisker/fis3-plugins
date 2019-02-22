@@ -10,7 +10,7 @@
 ## install
 
 ```sh
-$ npm i -g fis3-parser-node-sass-latest
+npm install --global fis3-parser-node-sass-latest
 ```
 
 ## usage
@@ -18,7 +18,7 @@ $ npm i -g fis3-parser-node-sass-latest
 ```js
 // fis-conf.js
 
-var sassConf = {
+const sassConf = {
   outputStyle: 'expanded',
   sourceMapContents: true,
   sourceMap: false,
@@ -30,11 +30,10 @@ fis.match('*.{sass,scss}', {
 });
 ```
 
-[more options](https://github.com/sass/node-sass)
-
-
+more options: [https://github.com/sass/node-sass](https://github.com/sass/node-sass)
 
 ## default options
+
 ```json
 {
   "outputStyle": "expanded",
@@ -43,17 +42,17 @@ fis.match('*.{sass,scss}', {
   "omitSourceMapUrl": false
 }
 ```
-** NOTICE: this might change in future **
 
+NOTICE: **this might change in future**
 
 ## links
 
-  fis3 [http://fis.baidu.com/](http://fis.baidu.com/)
+- fis3: [http://fis.baidu.com/](http://fis.baidu.com/)
 
-  sass [http://sass-lang.com/](http://sass-lang.com/)
+- sass: [http://sass-lang.com/](http://sass-lang.com/)
 
-  node-sass [https://github.com/sass/node-sass](https://github.com/sass/node-sass)
-
+- node-sass: [https://github.com/sass/node-sass](https://github.com/sass/node-sass)
 
 ## license
+
 MIT © [fisker Cheung](https://github.com/fisker)
