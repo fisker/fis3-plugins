@@ -14,16 +14,18 @@ $ npm i -g fis3-lint-eslint-noisy
 ```
 
 ## about package name
+
 i named this package `noisy` is because the other eslint plugins for fis all silently failed when error report by eslint.
 
 ## usage
-```
+
+```js
 // fis-conf.js
 
-var eslintConf = {};
+const eslintConf = {};
 
 fis.match('*.js', {
-  lint: fis.plugin('eslint-noisy', eslintConf)
+  lint: fis.plugin('eslint-noisy', eslintConf),
 });
 ```
 
@@ -33,8 +35,8 @@ options: [http://eslint.org/docs/developer-guide/nodejs-api#cliengine]
 
 rules and fixable rules: [http://eslint.org/docs/rules/]
 
-```
-var eslintConf = {
+```js
+const eslintConf = {
   configFile:
   envs: // default: ['browser']
   extensions:

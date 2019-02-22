@@ -1,7 +1,7 @@
 # status
 
 name | version | downloads(total) | downloads(month)
-:-: | :-: | :-: |:-:
+:- | :-: | :-: | :-:
 fis3-lint-eslint-noisy | [![npm](https://img.shields.io/npm/v/fis3-lint-eslint-noisy.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-eslint-noisy) | [![npm](https://img.shields.io/npm/dt/fis3-lint-eslint-noisy.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-eslint-noisy) | [![npm](https://img.shields.io/npm/dm/fis3-lint-eslint-noisy.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-eslint-noisy)
 fis3-lint-htmlhint | [![npm](https://img.shields.io/npm/v/fis3-lint-htmlhint.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-htmlhint) | [![npm](https://img.shields.io/npm/dt/fis3-lint-htmlhint.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-htmlhint) | [![npm](https://img.shields.io/npm/dm/fis3-lint-htmlhint.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-htmlhint)
 fis3-lint-standard | [![npm](https://img.shields.io/npm/v/fis3-lint-standard.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-standard) | [![npm](https://img.shields.io/npm/dt/fis3-lint-standard.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-standard) | [![npm](https://img.shields.io/npm/dm/fis3-lint-standard.svg?style=flat-square)](https://www.npmjs.com/package/fis3-lint-standard)
