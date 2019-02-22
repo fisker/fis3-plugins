@@ -11,24 +11,12 @@
     "ejs": "^2.6.1"
   },
   "description": "a fis plugin to parse ejs.",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "index.js",
-    "package.json"
-  ],
-  "keywords": [
-    "ejs",
-    "fis",
-    "fis3",
-    "fis3-parser-ejs",
-    "html",
-    "parser"
-  ],
+  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "keywords": ["ejs", "fis", "fis3", "fis3-parser-ejs", "html", "parser"],
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-parser-ejs",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-ejs",
-  "version": "1.0.4"
+  "version": "1.1.0"
 }

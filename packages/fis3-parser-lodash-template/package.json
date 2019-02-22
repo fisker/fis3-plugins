@@ -11,12 +11,7 @@
     "lodash": "^4.17.11"
   },
   "description": "a fis plugin to parse lodash template.",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "index.js",
-    "package.json"
-  ],
+  "files": ["LICENSE", "README.md", "index.js", "package.json"],
   "keywords": [
     "fis",
     "fis3",
@@ -31,5 +26,5 @@
   "name": "fis3-parser-lodash-template",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-lodash-template",
-  "version": "1.0.5"
+  "version": "1.1.0"
 }

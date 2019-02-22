@@ -29,14 +29,16 @@ function readConfig(filename) {
 
     if (_fs.default.existsSync(currentFile)) {
       try {
-        return JSON.parse(require('fs').readFileSync(currentFile, 'utf8'))
+        return JSON.parse(_fs.default.readFileSync(currentFile, 'utf8'))
       } catch (_) {
-        return
+        return {}
       }
     }
 
     parentFolder = _path.default.resolve(currentFolder, '../')
   } while (parentFolder !== currentFolder)
+
+  return {}
 }
 
 var htmlhintrcConfig = {}
@@ -49,7 +51,7 @@ module.exports = function(content, file, conf) {
   var ruleset =
     conf.rules ||
     htmlhintrcConfig ||
-    (htmlhintrcConfig = readConfig('.htmlhintrc') || {})
+    (htmlhintrcConfig = readConfig('.htmlhintrc'))
 
   var results = _htmlhint.HTMLHint.verify(content, ruleset)
 
@@ -60,7 +62,7 @@ module.exports = function(content, file, conf) {
     }
   })
 
-  if (results.length) {
+  if (results.length > 0) {
     log.warn(
       '[%s] lint failed with %s: \n\n %s',
       file.id,

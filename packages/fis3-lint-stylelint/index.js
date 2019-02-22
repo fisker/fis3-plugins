@@ -64,7 +64,7 @@ module.exports = function(content, file, conf) {
         )
       }
 
-      if (warnMsg.length || errorMsg.length) {
+      if (warnMsg.length > 0 || errorMsg.length > 0) {
         log.warn(
           '[%s] lint failed: \n%s \n  %s problem (%s errors, %s warning)',
           file.id,
@@ -74,7 +74,7 @@ module.exports = function(content, file, conf) {
           warnMsg.length
         )
 
-        if (errorMsg.length) {
+        if (errorMsg.length > 0) {
           process.exit(1)
         }
       }
@@ -82,12 +82,15 @@ module.exports = function(content, file, conf) {
       if (result && result.css) {
         return result.css
       }
+
+      return ''
     })
 
   try {
     return (0, _promiseSynchronizer.default)(promise)
   } catch (error) {
-    log.warn('[%s] lint failed with %s: \n\n %s', file.id, 'error', error)
-    process.exit(1)
+    throw new Error(
+      '['.concat(file.id, '] lint failed with error: \n\n ').concat(error)
+    )
   }
 }

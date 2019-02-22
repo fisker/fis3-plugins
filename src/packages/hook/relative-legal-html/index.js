@@ -77,9 +77,7 @@ function convert(content, file, host) {
 }
 
 function onStandardRestoreUri(message) {
-  const {value} = message
-  const {file} = message
-  const {info} = message
+  const {info, file} = message
 
   // 没有配置，不开启。
   // 或者目标文件不存在
@@ -104,7 +102,6 @@ function onProcessEnd(file) {
 
 function onPackFile(message) {
   const {file} = message
-  const {content} = message
   const {pkg} = message
 
   // 没有配置，不开启。
@@ -126,7 +123,7 @@ function onFetchRelativeUrl(message) {
   message.ret = getRelativeUrl(target, host)
 }
 
-module.exports = function(fis, opts) {
+module.exports = function(fis) {
   fis.on('process:end', onProcessEnd)
   fis.on('standard:restore:uri', onStandardRestoreUri)
   fis.on('pack:file', onPackFile)

@@ -11,12 +11,7 @@
     "standard": "^12.0.1"
   },
   "description": "a code formatter of fis3 based on standard.",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "index.js",
-    "package.json"
-  ],
+  "files": ["LICENSE", "README.md", "index.js", "package.json"],
   "keywords": [
     "beautify",
     "fis",
@@ -32,5 +27,5 @@
   "name": "fis3-postprocessor-standard",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-standard",
-  "version": "1.1.2"
+  "version": "1.2.0"
 }

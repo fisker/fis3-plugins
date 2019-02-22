@@ -6,7 +6,6 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var log = global.fis.log
 var assign = Object.assign || global.fis.util.assign
 
 module.exports = function(content, file, conf) {

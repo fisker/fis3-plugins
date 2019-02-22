@@ -15,7 +15,12 @@ module.exports = {
     '@xwtec',
   ],
   settings: {},
-  rules: {},
+  rules: {
+    'no-console': 'off',
+    'unicorn/no-process-exit': 'off',
+    'consistent-return': 'off',
+    'unicorn/explicit-length-check': 'off',
+  },
   plugins: [],
   overrides: [],
   globals: {},

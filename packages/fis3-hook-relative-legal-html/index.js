@@ -85,9 +85,8 @@ function convert(content, file, host) {
 }
 
 function onStandardRestoreUri(message) {
-  var value = message.value
-  var file = message.file
-  var info = message.info // 没有配置，不开启。
+  var info = message.info,
+    file = message.file // 没有配置，不开启。
   // 或者目标文件不存在
 
   if (!file.relative || !info.file) {
@@ -111,7 +110,6 @@ function onProcessEnd(file) {
 
 function onPackFile(message) {
   var file = message.file
-  var content = message.content
   var pkg = message.pkg // 没有配置，不开启。
 
   if (!file.relative || !file.relativeBody) {
@@ -132,7 +130,7 @@ function onFetchRelativeUrl(message) {
   message.ret = getRelativeUrl(target, host)
 }
 
-module.exports = function(fis, opts) {
+module.exports = function(fis) {
   fis.on('process:end', onProcessEnd)
   fis.on('standard:restore:uri', onStandardRestoreUri)
   fis.on('pack:file', onPackFile) // 给其他插件用的

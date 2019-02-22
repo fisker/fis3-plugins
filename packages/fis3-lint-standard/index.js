@@ -12,7 +12,7 @@ var formatter = _eslint.CLIEngine.getFormatter()
 
 var log = global.fis.log
 
-module.exports = function(content, file, conf) {
+module.exports = function(content, file) {
   content = content.replace(/\n\s+$/, '')
   var results = []
 

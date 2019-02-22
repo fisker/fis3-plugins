@@ -1,3 +1,3 @@
-module.exports = function(content, file, conf) {
+module.exports = function() {
   throw new Error('use prettier instead of stylefmt')
 }

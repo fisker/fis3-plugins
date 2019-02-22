@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.2.6',
+  version: '1.3.0',
   description: 'a css formatter of fis3 based on stylefmt.',
   keywords: [],
   options: {},

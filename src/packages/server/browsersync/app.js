@@ -1,7 +1,7 @@
 import path from 'path'
 import browserSync from 'browser-sync'
 import yargs from 'yargs'
-import getBsConfig from './lib/browser-sync-config.js'
+import getBsConfig from './lib/browser-sync-config'
 
 const argv = (function(argv) {
   argv.root = path.resolve(argv.root || process.cwd())

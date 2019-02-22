@@ -11,12 +11,7 @@
     "terser": "^3.16.1"
   },
   "description": "js minifer for fis based on terser.",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "index.js",
-    "package.json"
-  ],
+  "files": ["LICENSE", "README.md", "index.js", "package.json"],
   "keywords": [
     "fis",
     "fis3",
@@ -32,5 +27,5 @@
   "name": "fis3-optimizer-terser",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-terser",
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

@@ -7,7 +7,7 @@ var _browserSync = _interopRequireDefault(require('browser-sync'))
 var _yargs = _interopRequireDefault(require('yargs'))
 
 var _browserSyncConfig = _interopRequireDefault(
-  require('./lib/browser-sync-config.js')
+  require('./lib/browser-sync-config')
 )
 
 function _interopRequireDefault(obj) {

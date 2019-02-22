@@ -13,12 +13,7 @@
     "promise-synchronizer": "^1.0.14"
   },
   "description": "a html formatter of fis3 based on posthtml-beautify.",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "index.js",
-    "package.json"
-  ],
+  "files": ["LICENSE", "README.md", "index.js", "package.json"],
   "keywords": [
     "beautify",
     "fis",
@@ -36,5 +31,5 @@
   "name": "fis3-postprocessor-posthtml-beautify",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-posthtml-beautify",
-  "version": "1.2.5"
+  "version": "1.3.0"
 }

@@ -1,6 +1,5 @@
 import prettier from 'prettier'
 
-const {log} = global.fis
 const assign = Object.assign || global.fis.util.assign
 
 module.exports = function(content, file, conf) {

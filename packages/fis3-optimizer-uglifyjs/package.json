@@ -11,12 +11,7 @@
     "uglify-js": "^3.4.9"
   },
   "description": "js minifer for fis based on uglifyjs.",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "index.js",
-    "package.json"
-  ],
+  "files": ["LICENSE", "README.md", "index.js", "package.json"],
   "keywords": [
     "es5",
     "fis",
@@ -34,5 +29,5 @@
   "name": "fis3-optimizer-uglifyjs",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-uglifyjs",
-  "version": "1.0.6"
+  "version": "1.1.0"
 }

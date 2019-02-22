@@ -4,7 +4,7 @@ import standard from 'standard'
 const formatter = CLIEngine.getFormatter()
 const {log} = global.fis
 
-module.exports = function(content, file, conf) {
+module.exports = function(content, file) {
   content = content.replace(/\n\s+$/, '')
   let results = []
 

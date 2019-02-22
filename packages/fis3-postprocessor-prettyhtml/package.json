@@ -11,12 +11,7 @@
     "@starptech/prettyhtml": "^0.8.16"
   },
   "description": "a code formatter of fis3 based on prettyhtml.",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "index.js",
-    "package.json"
-  ],
+  "files": ["LICENSE", "README.md", "index.js", "package.json"],
   "keywords": [
     "beautify",
     "fis",
@@ -32,5 +27,5 @@
   "name": "fis3-postprocessor-prettyhtml",
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-prettyhtml",
-  "version": "1.0.14"
+  "version": "1.1.0"
 }

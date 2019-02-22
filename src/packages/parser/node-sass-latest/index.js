@@ -100,7 +100,8 @@ module.exports = function(content, file, conf) {
   // content = fixImport(content);
 
   content = content.replace(/('|")\\\w{4}\1/g, function(raw) {
-    const id = backupId++
+    const id = backupId
+    backupId += 1
     backups[id] = raw
     return `'__scss_backup_${id}'`
   })
@@ -163,7 +164,8 @@ module.exports = function(content, file, conf) {
     let content = target.getContent()
     content = fixSourcePath(content, target)
     content = content.replace(/('|")\\\w{4}\1/g, function(raw) {
-      const id = backupId++
+      const id = backupId
+      backupId += 1
       backups[id] = raw
       return `'__scss_backup_${id}'`
     })

@@ -27,11 +27,11 @@ module.exports = function(content, file, conf) {
 
   const result = new CleanCSS(conf).minify(content)
 
-  if (result.warnings && result.warnings.length) {
+  if (result.warnings && result.warnings.length > 0) {
     log.warn(result.warnings)
   }
 
-  if (result.errors && result.errors.length) {
+  if (result.errors && result.errors.length > 0) {
     log.warn(result.errors)
     process.exit(1)
   }

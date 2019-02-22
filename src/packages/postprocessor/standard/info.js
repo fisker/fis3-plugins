@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.1.2',
+  version: '1.2.0',
   description: 'a code formatter of fis3 based on standard.',
   keywords: ['beautify', 'format', 'formatter'],
   dependencies: ['standard'],

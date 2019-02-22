@@ -5,10 +5,10 @@ var _path = _interopRequireDefault(require('path'))
 var _lodash = _interopRequireDefault(require('lodash.merge'))
 
 var _defaultConfig = _interopRequireDefault(
-  require('browser-sync/dist/default-config.js')
+  require('browser-sync/dist/default-config')
 )
 
-var _middleware = _interopRequireDefault(require('./middleware.js'))
+var _middleware = _interopRequireDefault(require('./middleware'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
