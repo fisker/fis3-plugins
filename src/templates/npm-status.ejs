@@ -1,7 +1,12 @@
 # status
-<% packages.forEach(function(pkg) { %>
-## <%= pkg.name %>
-[![npm](https://img.shields.io/npm/v/<%= pkg.name %>.svg?style=flat-square)](https://www.npmjs.com/package/<%= pkg.name %>)
-[![npm](https://img.shields.io/npm/dt/<%= pkg.name %>.svg?style=flat-square)](https://www.npmjs.com/package/<%= pkg.name %>)
-[![npm](https://img.shields.io/npm/dm/<%= pkg.name %>.svg?style=flat-square)](https://www.npmjs.com/package/<%= pkg.name %>)
-<% }) %>
+
+name | version | downloads(total) | downloads(month)
+:- | :-: | :-: |:-:
+<%=
+packages.map(pkg => [
+  _.escape(pkg.name),
+  `[![npm](https://img.shields.io/npm/v/${_.escape(pkg.name)}.svg?style=flat-square)](https://www.npmjs.com/package/${_.escape(pkg.name)})`,
+  `[![npm](https://img.shields.io/npm/dt/${_.escape(pkg.name)}.svg?style=flat-square)](https://www.npmjs.com/package/${_.escape(pkg.name)})`,
+  `[![npm](https://img.shields.io/npm/dm/${_.escape(pkg.name)}.svg?style=flat-square)](https://www.npmjs.com/package/${_.escape(pkg.name)})`
+].join(' | ')).join('\n')
+%>
