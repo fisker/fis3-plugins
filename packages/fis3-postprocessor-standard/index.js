@@ -1,26 +1,28 @@
-"use strict";
+'use strict'
 
-var _standard = _interopRequireDefault(require("standard"));
+var _standard = _interopRequireDefault(require('standard'))
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj}
+}
 
 /*
  * fis3-postprocessor-standard
  * fisker Cheung<lionkay@gmail.com>
  */
-var log = global.fis.log;
+var log = global.fis.log
 
-module.exports = function (content, file, conf) {
-  content = content.replace(/\n\s+$/, '');
+module.exports = function(content, file, conf) {
+  content = content.replace(/\n\s+$/, '')
 
   try {
     content = _standard.default.lintTextSync(content, {
-      fix: true
-    }).results[0].output;
+      fix: true,
+    }).results[0].output
   } catch (error) {
-    log.error(error);
-    process.exit(1);
+    log.error(error)
+    process.exit(1)
   }
 
-  return content;
-};
+  return content
+}

@@ -1,60 +1,69 @@
-"use strict";
+'use strict'
 
-var _uglifyJs = require("uglify-js");
+var _uglifyJs = require('uglify-js')
 
 /*
  * fis3-optimizer-uglify-js-latest
  * fisker Cheung<lionkay@gmail.com>
  */
-var log = global.fis.log;
+var log = global.fis.log
 
 function getUglifyJSOptions(file, conf) {
-  var options = Object.assign({}, conf);
-  delete options.filename;
-  var filename = file.filename + file.rExt;
+  var options = Object.assign({}, conf)
+  delete options.filename
+  var filename = file.filename + file.rExt
 
   if (file.isInline) {
-    options.sourceMap = false;
+    options.sourceMap = false
   }
 
-  var sourceMap = options.sourceMap;
+  var sourceMap = options.sourceMap
 
   if (sourceMap) {
     if (sourceMap.filename && typeof sourceMap.filename === 'string') {
-      sourceMap.filename = filename;
+      sourceMap.filename = filename
     }
 
-    if (sourceMap.url && sourceMap.url !== 'inline' && typeof sourceMap.url === 'string') {
-      sourceMap.url = "".concat(filename, ".map");
+    if (
+      sourceMap.url &&
+      sourceMap.url !== 'inline' &&
+      typeof sourceMap.url === 'string'
+    ) {
+      sourceMap.url = ''.concat(filename, '.map')
     }
   }
 }
 
 function deriveSourceMap(file, sourceMap) {
   if (!sourceMap) {
-    return;
+    return
   }
 
-  var mapping = global.fis.file.wrap("".concat(file.dirname, "/").concat(file.filename).concat(file.rExt, ".map"));
-  mapping.setContent(sourceMap);
-  file.extras = file.extras || {};
-  file.extras.derived = file.extras.derived || [];
-  file.extras.derived.push(mapping);
+  var mapping = global.fis.file.wrap(
+    ''
+      .concat(file.dirname, '/')
+      .concat(file.filename)
+      .concat(file.rExt, '.map')
+  )
+  mapping.setContent(sourceMap)
+  file.extras = file.extras || {}
+  file.extras.derived = file.extras.derived || []
+  file.extras.derived.push(mapping)
 }
 
-module.exports = function (content, file, conf) {
-  var options = getUglifyJSOptions(file, conf);
-  var result = (0, _uglifyJs.minify)(content, options);
+module.exports = function(content, file, conf) {
+  var options = getUglifyJSOptions(file, conf)
+  var result = (0, _uglifyJs.minify)(content, options)
 
   if (result.warnings) {
-    log.warn(result.warnings);
+    log.warn(result.warnings)
   }
 
   if (result.errors) {
-    log.warn(result.errors);
-    process.exit(1);
+    log.warn(result.errors)
+    process.exit(1)
   }
 
-  deriveSourceMap(file, result.map);
-  return result.code;
-};
+  deriveSourceMap(file, result.map)
+  return result.code
+}
