@@ -1190,13 +1190,13 @@ autoprefixer@^9.0.0:
     postcss "^7.0.0"
     postcss-value-parser "^3.2.3"
 
-autoprefixer@^9.4.7:
-  version "9.4.7"
-  resolved "http://registry.npm.taobao.org/autoprefixer/download/autoprefixer-9.4.7.tgz#f997994f9a810eae47b38fa6d8a119772051c4ff"
-  integrity sha1-+ZeZT5qBDq5Hs4+m2KEZdyBRxP8=
+autoprefixer@^9.4.8:
+  version "9.4.8"
+  resolved "http://registry.npm.taobao.org/autoprefixer/download/autoprefixer-9.4.8.tgz#575dcdfd984228c7bccbc08c5fe53f0ea6915593"
+  integrity sha1-V13N/ZhCKMe8y8CMX+U/DqaRVZM=
   dependencies:
     browserslist "^4.4.1"
-    caniuse-lite "^1.0.30000932"
+    caniuse-lite "^1.0.30000938"
     normalize-range "^0.1.2"
     num2fraction "^1.2.2"
     postcss "^7.0.14"
@@ -1542,10 +1542,10 @@ caniuse-lite@^1.0.30000929:
   resolved "http://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000929.tgz#7b391b781a9c3097ecc39ea053301aea8ea16317"
   integrity sha1-ezkbeBqcMJfsw56gUzAa6o6hYxc=
 
-caniuse-lite@^1.0.30000932:
-  version "1.0.30000935"
-  resolved "http://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000935.tgz#d1b59df00b46f4921bb84a8a34c1d172b346df59"
-  integrity sha1-0bWd8AtG9JIbuEqKNMHRcrNG31k=
+caniuse-lite@^1.0.30000938:
+  version "1.0.30000938"
+  resolved "http://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000938.tgz#b64bf1427438df40183fce910fe24e34feda7a3f"
+  integrity sha1-tkvxQnQ430AYP86RD+JONP7aej8=
 
 capture-stack-trace@^1.0.0:
   version "1.0.1"
@@ -2518,10 +2518,10 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/eslint-visitor-keys/download/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@^5.14.0:
-  version "5.14.0"
-  resolved "http://registry.npm.taobao.org/eslint/download/eslint-5.14.0.tgz#380739df2489dd846baea008638b036c1e987974"
-  integrity sha1-OAc53ySJ3YRrrqAIY4sDbB6YeXQ=
+eslint@^5.14.1:
+  version "5.14.1"
+  resolved "http://registry.npm.taobao.org/eslint/download/eslint-5.14.1.tgz#490a28906be313685c55ccd43a39e8d22efc04ba"
+  integrity sha1-SQookGvjE2hcVczUOjno0i78BLo=
   dependencies:
     "@babel/code-frame" "^7.0.0"
     ajv "^6.9.1"
