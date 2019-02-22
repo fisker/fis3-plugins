@@ -15,14 +15,7 @@ module.exports = {
     '@xwtec',
   ],
   settings: {},
-  rules: {
-    // FIXME: remove this after @xwtec/eslint-config fix this
-    'import/no-extraneous-dependencies': 'warn',
-    'import/no-dynamic-require': 'warn',
-    'no-catch-shadow': 'off',
-
-    'unicorn/no-process-exit': 'warn',
-  },
+  rules: {},
   plugins: [],
   overrides: [],
   globals: {},
