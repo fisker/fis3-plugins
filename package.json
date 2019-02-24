@@ -59,7 +59,7 @@
     "promise-synchronizer": "^1.0.14",
     "pug": "^2.0.3",
     "serve-directory": "^2.1.3",
-    "serve-directory-theme-octicons": "^1.2.1",
+    "serve-directory-theme-octicons": "^1.2.2",
     "standard": "^12.0.1",
     "stylelint": "^9.10.1",
     "terser": "^3.16.1",
