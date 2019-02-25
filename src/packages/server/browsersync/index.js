@@ -11,16 +11,16 @@ const util = fis.require('command-server/lib/util.js')
 // 因为如果使用 stdio pipe 的方式去开启子进程，当 master 进程退出后，子进程再有输出就会导致程序莫名的崩溃。
 // 解决办法是，让子进程的输出直接指向文件指针。
 // master 每隔一段时间去读文件，获取子进程输出。
-function watchOnFile(filepath, callback) {
+function watchOnFile(file, callback) {
   let lastIndex = 0
   let timer
 
   function read() {
-    const stat = fs.statSync(filepath)
+    const stat = fs.statSync(file)
 
     if (stat.size !== lastIndex) {
-      const fd = fs.openSync(filepath, 'r')
-      const buffer = Buffer.from(stat.size - lastIndex)
+      const fd = fs.openSync(file, 'r')
+      const buffer = Buffer.alloc(stat.size - lastIndex)
 
       try {
         fs.readSync(fd, buffer, lastIndex, stat.size - lastIndex)

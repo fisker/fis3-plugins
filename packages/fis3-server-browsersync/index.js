@@ -20,17 +20,17 @@ var util = fis.require('command-server/lib/util.js') // 每 0.2 秒读取子进�
 // 解决办法是，让子进程的输出直接指向文件指针。
 // master 每隔一段时间去读文件，获取子进程输出。
 
-function watchOnFile(filepath, callback) {
+function watchOnFile(file, callback) {
   var lastIndex = 0
   var timer
 
   function read() {
-    var stat = _fs.default.statSync(filepath)
+    var stat = _fs.default.statSync(file)
 
     if (stat.size !== lastIndex) {
-      var fd = _fs.default.openSync(filepath, 'r')
+      var fd = _fs.default.openSync(file, 'r')
 
-      var buffer = Buffer.from(stat.size - lastIndex)
+      var buffer = Buffer.alloc(stat.size - lastIndex)
 
       try {
         _fs.default.readSync(fd, buffer, lastIndex, stat.size - lastIndex)
