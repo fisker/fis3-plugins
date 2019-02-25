@@ -9,3 +9,13 @@ update_configs:
       - "fisker"
     default_assignees:
       - "fisker"
+
+    # Automerge all development updates and production
+    # security (semver patch) updates (waiting for CI to pass)
+    automerged_updates:
+      - match:
+          dependency_type: "development"
+          update_type: "all"
+      - match:
+          dependency_type: "production"
+          update_type: "security:patch"
