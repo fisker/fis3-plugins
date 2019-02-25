@@ -7,6 +7,7 @@ const _ = require('lodash')
 const mkdirp = require('mkdirp').sync
 const stringify = require('json-stable-stringify')
 const babel = require('@babel/core')
+const prettier = require('prettier')
 const globalPackage = require('../package.json')
 const babelConfig = require('../babel.config')
 const files = ['LICENSE', 'README.md', 'index.js', 'package.json']
@@ -113,6 +114,12 @@ class Package {
     mkdirp(path.dirname(file))
     if (/\.js$/.test(file)) {
       content = babel.transform(content, babelConfig).code
+    }
+    if (/.(js|json|md)$/.test(file)) {
+      const config = prettier.resolveConfig.sync(file, {
+        editorconfig: true,
+      })
+      content = prettier.format(content, config)
     }
     try {
       return fs.writeFileSync(file, content)
