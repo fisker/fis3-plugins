@@ -23,7 +23,7 @@
     "release": "npm run build && npm run publish-npm"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.3",
+    "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-stage-0": "^7.0.0",
     "@commitlint/cli": "^7.5.2",
