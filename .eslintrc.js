@@ -15,7 +15,9 @@ module.exports = {
     '@xwtec',
   ],
   settings: {},
-  rules: {},
+  rules: {
+    'unicorn/no-process-exit': 'off',
+  },
   plugins: [],
   overrides: [],
 }
