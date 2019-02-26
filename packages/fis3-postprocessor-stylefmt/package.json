@@ -21,6 +21,9 @@
   "main": "index.js",
   "name": "fis3-postprocessor-stylefmt",
   "readmeFilename": "README.md",
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-stylefmt",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fisker/fis3-plugins.git/tree/master/packages/fis3-postprocessor-stylefmt"
+  },
   "version": "1.3.0"
 }

@@ -87,9 +87,16 @@ class Package {
       )
     )
 
-    const repository = `${globalPackage.repository}/tree/master/packages/${
-      info.name
-    }`
+    let {repository} = globalPackage
+
+    if (typeof repository === 'string') {
+      repository += `/tree/master/packages/${info.name}`
+    } else {
+      repository = {
+        ...repository,
+        url: `${repository.url}/tree/master/packages/${info.name}`,
+      }
+    }
 
     return _.assign(
       _.pick(globalPackage, [

@@ -41,6 +41,9 @@
   "main": "index.js",
   "name": "fis3-server-browsersync",
   "readmeFilename": "README.md",
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-server-browsersync",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fisker/fis3-plugins.git/tree/master/packages/fis3-server-browsersync"
+  },
   "version": "1.8.2"
 }

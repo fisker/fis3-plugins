@@ -26,6 +26,9 @@
   "main": "index.js",
   "name": "fis3-postprocessor-standard",
   "readmeFilename": "README.md",
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-standard",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fisker/fis3-plugins.git/tree/master/packages/fis3-postprocessor-standard"
+  },
   "version": "1.2.0"
 }
