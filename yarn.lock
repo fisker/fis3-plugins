@@ -974,10 +974,10 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@xwtec/eslint-config@^3.5.8":
-  version "3.5.8"
-  resolved "http://registry.npm.taobao.org/@xwtec/eslint-config/download/@xwtec/eslint-config-3.5.8.tgz#4f0b6a16d06271e8d947b493e0e06f99234f3586"
-  integrity sha1-TwtqFtBicejZR7ST4OBvmSNPNYY=
+"@xwtec/eslint-config@^3.5.9":
+  version "3.5.9"
+  resolved "https://registry.yarnpkg.com/@xwtec/eslint-config/-/eslint-config-3.5.9.tgz#a9f7bf71e95edb0aaa41792ec86479d3cf53d092"
+  integrity sha512-/z+FMuE0m/4P3tPjTQ+I8DzXbNcwTcwUGDxfbFpx8RbEJP+x55GYH4z6Jxvdy+DOUImD/LD6qqCK7cKJjwoMVw==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-config-prettier "^4.0.0"
