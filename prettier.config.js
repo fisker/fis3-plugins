@@ -18,13 +18,13 @@ module.exports = {
   // overrides
   overrides: [
     {
-      files: '*.{js,mjs}',
+      files: '*.{js,jsx,mjs}',
       options: {
         parser: 'babel',
       },
     },
     {
-      files: '*.ts',
+      files: '*.{ts,tsx}',
       options: {
         parser: 'typescript',
       },
@@ -48,12 +48,6 @@ module.exports = {
       options: {
         parser: 'less',
         singleQuote: false,
-      },
-    },
-    {
-      files: '*.css',
-      options: {
-        parser: 'css',
       },
     },
     {
@@ -81,10 +75,17 @@ module.exports = {
       },
     },
     {
+      // more ext: mdown,mdwn,mkd,mkdn,mkdown
       files: '*.{md,markdown}',
       options: {
         parser: 'markdown',
         singleQuote: false,
+      },
+    },
+    {
+      files: '*.mdx',
+      options: {
+        parser: 'mdx',
       },
     },
     {
@@ -95,7 +96,7 @@ module.exports = {
       },
     },
     {
-      files: '*.{graphql,gql}',
+      files: '*.{gql,graphql}',
       options: {
         parser: 'graphql',
       },

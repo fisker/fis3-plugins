@@ -1,2 +1,15 @@
+# prettier ignore
+
+# also lint . files
 !.*
-node_modules/**/*.js
+
+# build file
+lib/**
+dist/**
+**/*.min.*
+
+# node_modules
+node_modules/**
+
+# fixtures
+**/fixtures/**

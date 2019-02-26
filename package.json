@@ -4,7 +4,10 @@
   "description": "plugins for fi3",
   "keywords": ["fis", "fis3"],
   "main": "index.js",
-  "repository": "https://github.com/fisker/fis3-plugins",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fisker/fis3-plugins.git"
+  },
   "author": {
     "name": "fisker Cheung",
     "email": "lionkay@gmail.com",
@@ -34,7 +37,8 @@
     "json-stable-stringify": "^1.0.1",
     "lint-staged": "^8.1.4",
     "markdownlint-cli": "^0.14.0",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "np": "^4.0.2"
   },
   "dependencies": {
     "@starptech/prettyhtml": "^0.8.16",
@@ -71,5 +75,10 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog-emoji"
     }
+  },
+  "readme": "ERROR: No README data found!",
+  "homepage": "https://github.com/fisker/fis3-plugins#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

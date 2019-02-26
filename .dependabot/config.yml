@@ -5,10 +5,6 @@ update_configs:
   - package_manager: "javascript"
     directory: "/"
     update_schedule: "live"
-    default_reviewers:
-      - "fisker"
-    default_assignees:
-      - "fisker"
 
     # Automerge all development updates and production
     # security (semver patch) updates (waiting for CI to pass)
