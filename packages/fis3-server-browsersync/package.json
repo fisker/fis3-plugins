@@ -13,7 +13,7 @@
     "lodash.merge": "^4.6.1",
     "morgan": "^1.9.1",
     "serve-directory": "^2.2.0",
-    "serve-directory-theme-octicons": "^1.2.2",
+    "serve-directory-theme-octicons": "^1.2.3",
     "yargs": "^13.2.1",
     "yog-devtools": "^0.1.1"
   },
@@ -45,5 +45,5 @@
     "type": "git",
     "url": "git+https://github.com/fisker/fis3-plugins.git/tree/master/packages/fis3-server-browsersync"
   },
-  "version": "1.8.2"
+  "version": "1.8.3"
 }
