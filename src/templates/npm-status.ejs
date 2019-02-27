@@ -1,12 +1,14 @@
 # status
 
-name | version | downloads(total) | downloads(month)
-:- | :-: | :-: | :-:
+| name | version | downloads(total) | downloads(month) |
+| :- | :-: | :-: | :-: |
 <%=
 packages.map(pkg => [
+  '',
   `[${_.escape(pkg.name)}](https://www.npmjs.com/package/${_.escape(pkg.name)})`,
   `[![npm](https://img.shields.io/npm/v/${_.escape(pkg.name)}.svg?style=flat-square)](https://www.npmjs.com/package/${_.escape(pkg.name)})`,
   `[![npm](https://img.shields.io/npm/dt/${_.escape(pkg.name)}.svg?style=flat-square)](https://www.npmjs.com/package/${_.escape(pkg.name)})`,
-  `[![npm](https://img.shields.io/npm/dm/${_.escape(pkg.name)}.svg?style=flat-square)](https://www.npmjs.com/package/${_.escape(pkg.name)})`
-].join(' | ')).join('\n')
+  `[![npm](https://img.shields.io/npm/dm/${_.escape(pkg.name)}.svg?style=flat-square)](https://www.npmjs.com/package/${_.escape(pkg.name)})`,
+  '',
+].join(' | ').trim()).join('\n')
 %>

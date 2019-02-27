@@ -25,10 +25,10 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-postprocessor-prettier",
-  "readmeFilename": "README.md",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fisker/fis3-plugins.git/tree/master/packages/fis3-postprocessor-prettier"
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
+  "readmeFilename": "README.md",
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-prettier",
   "version": "1.4.0"
 }

@@ -4,10 +4,7 @@
   "description": "plugins for fi3",
   "keywords": ["fis", "fis3"],
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fisker/fis3-plugins.git"
-  },
+  "repository": "https://github.com/fisker/fis3-plugins",
   "author": {
     "name": "fisker Cheung",
     "email": "lionkay@gmail.com",

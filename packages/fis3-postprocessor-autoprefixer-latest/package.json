@@ -24,10 +24,10 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-postprocessor-autoprefixer-latest",
-  "readmeFilename": "README.md",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fisker/fis3-plugins.git/tree/master/packages/fis3-postprocessor-autoprefixer-latest"
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
+  "readmeFilename": "README.md",
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-autoprefixer-latest",
   "version": "1.2.0"
 }

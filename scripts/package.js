@@ -105,6 +105,7 @@ class Package {
         'license',
         'bugs',
         'readmeFilename',
+        'publishConfig',
       ]),
       _.pick(info, ['name', 'version', 'description', 'dependencies']),
       {
