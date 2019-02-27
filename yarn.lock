@@ -974,13 +974,13 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@xwtec/eslint-config@^3.5.9":
-  version "3.5.9"
-  resolved "https://registry.yarnpkg.com/@xwtec/eslint-config/-/eslint-config-3.5.9.tgz#a9f7bf71e95edb0aaa41792ec86479d3cf53d092"
-  integrity sha512-/z+FMuE0m/4P3tPjTQ+I8DzXbNcwTcwUGDxfbFpx8RbEJP+x55GYH4z6Jxvdy+DOUImD/LD6qqCK7cKJjwoMVw==
+"@xwtec/eslint-config@^3.5.10":
+  version "3.5.10"
+  resolved "https://registry.yarnpkg.com/@xwtec/eslint-config/-/eslint-config-3.5.10.tgz#de7f5ae1e5a923233c60951dad7f29f1db08a193"
+  integrity sha512-31lYA4g4DqhfTxQBoSDeiNUbzk5pxv90DG0f/PCDzKbwKU5MIemnAdbG7wxSuAEJcX3Muq5TNdLR+oNxaAJOhg==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
-    eslint-config-prettier "^4.0.0"
+    eslint-config-prettier "^4.1.0"
     eslint-plugin-import "^2.16.0"
     eslint-plugin-prettier "^3.0.1"
     eslint-plugin-promise "^4.0.1"
@@ -2785,10 +2785,10 @@ eslint-config-airbnb-base@^13.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-prettier@^4.0.0:
-  version "4.0.0"
-  resolved "http://registry.npm.taobao.org/eslint-config-prettier/download/eslint-config-prettier-4.0.0.tgz#16cedeea0a56e74de60dcbbe3be0ab2c645405b9"
-  integrity sha1-Fs7e6gpW503mDcu+O+CrLGRUBbk=
+eslint-config-prettier@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-4.1.0.tgz#181364895899fff9fd3605fecb5c4f20e7d5f395"
+  integrity sha512-zILwX9/Ocz4SV2vX7ox85AsrAgXV3f2o2gpIicdMIOra48WYqgUnWNH/cR/iHtmD2Vb3dLSC3LiEJnS05Gkw7w==
   dependencies:
     get-stdin "^6.0.0"
 
