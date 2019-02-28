@@ -16,7 +16,7 @@ var quotes = {
 var rUrl = /(["']?)__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
 var rFile = /\.[^.]+$/
 
-function wrap(info) {
+function wrapPath(info) {
   var path = info.file.subpath + info.query + info.hash
   var quote = info.quote
   var quoteStyle = quotes[quote]
@@ -48,7 +48,13 @@ function getRelativeUrl(file, host) {
   }
 
   url = _path.default.relative(relativeFrom, url)
-  return url.replace(/\\/g, '/')
+  url = url.replace(/\\/g, '/')
+
+  if (url[0] !== '.') {
+    url = './'.concat(url)
+  }
+
+  return url
 }
 
 function convert(content, file, host) {
@@ -93,7 +99,7 @@ function onStandardRestoreUri(message) {
     return
   }
 
-  message.ret = wrap(info)
+  message.ret = wrapPath(info)
 }
 
 function onProcessEnd(file) {
