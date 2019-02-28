@@ -3,11 +3,13 @@
  * fisker Cheung<lionkay@gmail.com>
  */
 
-import {HTMLHint} from 'htmlhint'
+import HTMLHint from 'htmlhint'
 import fs from 'fs'
 import path from 'path'
 
 const {log} = global.fis
+
+HTMLHint = HTMLHint.default || HTMLHint.HTMLHint
 
 function readConfig(filename) {
   let currentFolder = process.cwd()
