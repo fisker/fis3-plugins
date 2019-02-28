@@ -14,8 +14,11 @@ function _interopRequireDefault(obj) {
  * fis3-lint-htmlhint
  * fisker Cheung<lionkay@gmail.com>
  */
-var log = global.fis.log
-var HTMLHint = _htmlhint.default.default || _htmlhint.default.HTMLHint
+var _global = global,
+  _global$fis = _global.fis,
+  fis = _global$fis === void 0 ? {} : _global$fis
+var _fis$log = fis.log,
+  log = _fis$log === void 0 ? function() {} : _fis$log
 
 function readConfig(filename) {
   var currentFolder = process.cwd()
@@ -53,7 +56,9 @@ module.exports = function(content, file, conf) {
     conf.rules ||
     htmlhintrcConfig ||
     (htmlhintrcConfig = readConfig('.htmlhintrc'))
-  var results = HTMLHint.verify(content, ruleset)
+
+  var results = _htmlhint.default.verify(content, ruleset)
+
   var errorType = 'warning'
   results.forEach(function(msg) {
     if (msg.type === 'error') {
@@ -66,9 +71,11 @@ module.exports = function(content, file, conf) {
       '[%s] lint failed with %s: \n\n %s',
       file.id,
       errorType,
-      HTMLHint.format(results, {
-        indent: 2,
-      }).join('\n')
+      _htmlhint.default
+        .format(results, {
+          indent: 2,
+        })
+        .join('\n')
     )
 
     if (errorType === 'error') {
