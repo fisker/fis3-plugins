@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.8.3',
+  version: '1.9.0',
   description: 'a browser sync server for fis3.',
   keywords: ['browser-sync', 'livereload'],
   dependencies: [
@@ -11,6 +11,7 @@ module.exports = {
     'serve-directory-theme-octicons',
     'yargs',
     'yog-devtools',
+    'execa',
   ],
   options: {},
   links: {

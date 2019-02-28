@@ -4,6 +4,10 @@ var _path = _interopRequireDefault(require('path'))
 
 var _fs = _interopRequireDefault(require('fs'))
 
+var _execa = _interopRequireDefault(require('execa'))
+
+var _yargs = _interopRequireDefault(require('yargs'))
+
 var _child_process = require('child_process')
 
 function _interopRequireDefault(obj) {
@@ -13,7 +17,10 @@ function _interopRequireDefault(obj) {
 var _global = global,
   fis = _global.fis
 
-var util = fis.require('command-server/lib/util.js') // 每 0.2 秒读取子进程的输出文件。
+var util = fis.require('command-server/lib/util.js')
+
+var argv = _yargs.default.argv
+var CWD = process.cwd() // 每 0.2 秒读取子进程的输出文件。
 //
 // 为什么不直接通过 child.stdout 读取？
 // 因为如果使用 stdio pipe 的方式去开启子进程，当 master 进程退出后，子进程再有输出就会导致程序莫名的崩溃。
@@ -54,39 +61,31 @@ function watchOnFile(file, callback) {
 }
 
 function start(opt, callback) {
-  var script = _path.default.join(opt.root, 'server.js')
+  var defaultScript = _path.default.join(opt.root, 'server.js')
 
-  if (!fis.util.exists(script)) {
-    script = _path.default.join(__dirname, 'app.js')
-  }
-
-  var timeout = Math.max(opt.timeout * 1000, 60000)
-  var timeoutTimer
-  var args = [script]
-
-  if (opt['bs-config']) {
-    var bsConfig = _path.default.join(
-      process.cwd(),
-      ''.concat(opt['bs-config'])
-    )
-
-    if (fis.util.exists(bsConfig)) {
-      opt['bs-config'] = bsConfig
-    } else {
-      delete opt['bs-config']
-    }
-  }
-
-  opt.context = process.cwd() // 把 options 通过 args 传给 app 程序。
-
-  fis.util.map(opt, function(key, value) {
-    args.push('--'.concat(key), String(value))
-  })
-  process.stdout.write('\n Starting fis-server .')
+  var script = fis.util.exists(defaultScript)
+    ? defaultScript
+    : _path.default.join(__dirname, 'app.js')
 
   var logFile = _path.default.join(opt.root, 'server.log')
 
-  var server = (0, _child_process.spawn)(process.execPath, args, {
+  var timeout = Math.max(opt.timeout * 1000, 60000)
+  var timeoutTimer
+  var args = [
+    script,
+    '--root',
+    opt.root || CWD,
+    '--port',
+    opt.port || 8080,
+    '--https',
+    opt.https,
+    '--context',
+    CWD,
+    '--bs-config',
+    argv.bsConfig,
+  ]
+  process.stdout.write('\n Starting browser-sync server ...')
+  var server = (0, _execa.default)(process.execPath, args, {
     cwd: _path.default.dirname(script),
     detached: opt.daemon,
     stdio: [
@@ -138,9 +137,11 @@ function start(opt, callback) {
         callback(errMsg)
       } catch (error) {
         console.log(error)
-      } // try {
-      //   process.kill(server.pid, 'SIGKILL');
-      // } catch (e) {}
+      }
+
+      try {
+        process.kill(server.pid, 'SIGKILL')
+      } catch (error) {}
     } else if (chunk.indexOf('Listening on') !== -1) {
       started = true
 

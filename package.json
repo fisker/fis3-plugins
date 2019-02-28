@@ -47,6 +47,7 @@
     "cssgrace-lite": "^1.0.1",
     "ejs": "^2.6.1",
     "eslint": "^5.14.1",
+    "execa": "^1.0.0",
     "htmlhint": "^0.11.0",
     "js-beautify": "^1.8.9",
     "lodash": "^4.17.11",

@@ -3,15 +3,7 @@ import browserSync from 'browser-sync'
 import yargs from 'yargs'
 import getBsConfig from './lib/browser-sync-config'
 
-const argv = (function(argv) {
-  argv.root = path.resolve(argv.root || process.cwd())
-  argv.context = argv.context || ''
-  argv.port = argv.port || 8080
-  argv.https = typeof argv.https !== 'undefined' && argv.https !== 'false'
-  argv.bsConfig = argv.bsConfig || ''
-
-  return argv
-})(yargs.argv)
+const {argv} = yargs
 
 startServer(argv)
 
@@ -57,6 +49,10 @@ function watch(bs, root) {
 function signalTerminate(bs) {
   process.on('SIGTERM', function() {
     console.log('Recive quit signal in worker %s.', process.pid)
+    bs.exit()
+  })
+  process.on('SIGKILL', function() {
+    console.log('Recive kill signal in worker %s.', process.pid)
     bs.exit()
   })
 }

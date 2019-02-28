@@ -14,15 +14,7 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var argv = (function(argv) {
-  argv.root = _path.default.resolve(argv.root || process.cwd())
-  argv.context = argv.context || ''
-  argv.port = argv.port || 8080
-  argv.https = typeof argv.https !== 'undefined' && argv.https !== 'false'
-  argv.bsConfig = argv.bsConfig || ''
-  return argv
-})(_yargs.default.argv)
-
+var argv = _yargs.default.argv
 startServer(argv)
 
 function now() {
@@ -68,6 +60,10 @@ function watch(bs, root) {
 function signalTerminate(bs) {
   process.on('SIGTERM', function() {
     console.log('Recive quit signal in worker %s.', process.pid)
+    bs.exit()
+  })
+  process.on('SIGKILL', function() {
+    console.log('Recive kill signal in worker %s.', process.pid)
     bs.exit()
   })
 }

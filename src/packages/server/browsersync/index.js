@@ -1,9 +1,13 @@
 import path from 'path'
 import fs from 'fs'
+import execa from 'execa'
+import yargs from 'yargs'
 import {spawn} from 'child_process'
 
 const {fis} = global
 const util = fis.require('command-server/lib/util.js')
+const {argv} = yargs
+const CWD = process.cwd()
 
 // 每 0.2 秒读取子进程的输出文件。
 //
@@ -44,35 +48,32 @@ function watchOnFile(file, callback) {
 }
 
 function start(opt, callback) {
-  let script = path.join(opt.root, 'server.js')
-
-  if (!fis.util.exists(script)) {
-    script = path.join(__dirname, 'app.js')
-  }
+  const defaultScript = path.join(opt.root, 'server.js')
+  const script = fis.util.exists(defaultScript)
+    ? defaultScript
+    : path.join(__dirname, 'app.js')
+  const logFile = path.join(opt.root, 'server.log')
 
   const timeout = Math.max(opt.timeout * 1000, 60000)
   let timeoutTimer
-  const args = [script]
 
-  if (opt['bs-config']) {
-    const bsConfig = path.join(process.cwd(), `${opt['bs-config']}`)
-    if (fis.util.exists(bsConfig)) {
-      opt['bs-config'] = bsConfig
-    } else {
-      delete opt['bs-config']
-    }
-  }
+  const args = [
+    script,
+    '--root',
+    opt.root || CWD,
+    '--port',
+    opt.port || 8080,
+    '--https',
+    opt.https,
+    '--context',
+    CWD,
+    '--bs-config',
+    argv.bsConfig,
+  ]
 
-  opt.context = process.cwd()
+  process.stdout.write('\n Starting browser-sync server ...')
 
-  // 把 options 通过 args 传给 app 程序。
-  fis.util.map(opt, function(key, value) {
-    args.push(`--${key}`, String(value))
-  })
-
-  process.stdout.write('\n Starting fis-server .')
-  const logFile = path.join(opt.root, 'server.log')
-  const server = spawn(process.execPath, args, {
+  const server = execa(process.execPath, args, {
     cwd: path.dirname(script),
     detached: opt.daemon,
     stdio: [
@@ -128,9 +129,9 @@ function start(opt, callback) {
         console.log(error)
       }
 
-      // try {
-      //   process.kill(server.pid, 'SIGKILL');
-      // } catch (e) {}
+      try {
+        process.kill(server.pid, 'SIGKILL')
+      } catch (error) {}
     } else if (chunk.indexOf('Listening on') !== -1) {
       started = true
       if (stoper) {
