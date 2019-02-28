@@ -15,10 +15,7 @@ function _interopRequireDefault(obj) {
  * fisker Cheung<lionkay@gmail.com>
  */
 var log = global.fis.log
-_htmlhint.default = (_htmlhint.default.default || _htmlhint.default.HTMLHint,
-(function() {
-  throw new Error('"' + 'HTMLHint' + '" is read-only.')
-})())
+var HTMLHint = _htmlhint.default.default || _htmlhint.default.HTMLHint
 
 function readConfig(filename) {
   var currentFolder = process.cwd()
@@ -56,9 +53,7 @@ module.exports = function(content, file, conf) {
     conf.rules ||
     htmlhintrcConfig ||
     (htmlhintrcConfig = readConfig('.htmlhintrc'))
-
-  var results = _htmlhint.default.verify(content, ruleset)
-
+  var results = HTMLHint.verify(content, ruleset)
   var errorType = 'warning'
   results.forEach(function(msg) {
     if (msg.type === 'error') {
@@ -71,11 +66,9 @@ module.exports = function(content, file, conf) {
       '[%s] lint failed with %s: \n\n %s',
       file.id,
       errorType,
-      _htmlhint.default
-        .format(results, {
-          indent: 2,
-        })
-        .join('\n')
+      HTMLHint.format(results, {
+        indent: 2,
+      }).join('\n')
     )
 
     if (errorType === 'error') {
