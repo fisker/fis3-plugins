@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "eslint": "^5.14.1"
+    "eslint": "^5.15.0"
   },
   "description": "a js linter plugin of fis3 based on eslint.",
   "files": ["LICENSE", "README.md", "index.js", "package.json"],
@@ -29,5 +29,5 @@
   },
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-eslint-noisy",
-  "version": "2.2.0"
+  "version": "2.2.1"
 }
