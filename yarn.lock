@@ -969,10 +969,10 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@xwtec/eslint-config@^3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@xwtec/eslint-config/-/eslint-config-3.6.0.tgz#288234df0e63c90f2d26f35d02e888e83fea6edd"
-  integrity sha512-pN68jdR1GpsIp8M5K3zt9dUh/ZfInM9iDeTlxcUcmSvh7P5nOussWh6urwxPDJH+ZJj/hpx8eslt/9jDSIFyQg==
+"@xwtec/eslint-config@^3.7.0":
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/@xwtec/eslint-config/-/eslint-config-3.7.0.tgz#3c7e1fdcdb2bc86156f7fcb0028b29b9c9a84532"
+  integrity sha512-EYrzqwoyCtJSozwuHcbJ56wKY7be2Gm49PUoZGl+IUtlaloo6PwMDfmR/I8lpJisjL2JRmJU1vz1IbktfnwUZQ==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-config-prettier "^4.1.0"
