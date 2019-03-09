@@ -1,6 +1,10 @@
-# eslint ignore
+# ignore file for `eslint`
+#
+# update: wget https://git.io/fhNp3
+# document: https://eslint.org/docs/user-guide/configuring#eslintignore
+#
 
-# also lint . files
+# also lint dot files
 !.*
 
 # build file
@@ -14,5 +18,4 @@ node_modules/**
 # fixtures
 **/fixtures/**
 
-# packages
-packages/**
+# own glob

@@ -1,10 +1,16 @@
+# config file for `dependabot`
+#
+# update: wget https://git.io/fhAJq
+# document: https://dependabot.com/docs/config-file/
+#
+
 version: 1
 update_configs:
   # Keep package.json (& lockfiles) up to date as soon as
   # new versions are published to the npm registry
   - package_manager: "javascript"
     directory: "/"
-    update_schedule: "live"
+    update_schedule: "daily"
 
     # Automerge all development updates and production
     # security (semver patch) updates (waiting for CI to pass)
@@ -15,3 +21,6 @@ update_configs:
       - match:
           dependency_type: "production"
           update_type: "security:patch"
+
+    # auto update package.json
+    version_requirement_updates: "auto"

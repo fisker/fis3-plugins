@@ -1,15 +1,13 @@
 /*!
- * config file for commitlint
- * project https://github.com/xwtec/dotfiles
- * primary link https://raw.githubusercontent.com/xwtec/dotfiles/master/commitlint/commitlint.config.js
+ * config file for `commitlint`
  *
- * configuration https://conventional-changelog.github.io/commitlint/#/reference-configuration
- *
+ * update: wget https://git.io/fhAJV
+ * document: https://git.io/fhAJa
  */
 
+// conventional commits https://www.conventionalcommits.org/en/v1.0.0-beta.2/
+const COMMITLINT_CONFIG_CONVENTIONAL = '@commitlint/config-conventional'
+
 module.exports = {
-  extends: [
-    // conventional commits https://www.conventionalcommits.org/en/v1.0.0-beta.2/
-    '@commitlint/config-conventional',
-  ],
+  extends: [COMMITLINT_CONFIG_CONVENTIONAL],
 }

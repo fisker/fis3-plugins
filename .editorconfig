@@ -1,8 +1,8 @@
-# EditorConfig is awesome: https://EditorConfig.org
-
-# config file for EditorConfig
-# project https://github.com/xwtec/dotfiles
-# primary link https://raw.githubusercontent.com/xwtec/dotfiles/master/editorconfig/.editorconfig
+# config file for `editorconfig`
+#
+# update: wget https://git.io/fhAJu
+# document: https://editorconfig.org
+#
 
 # top-most EditorConfig file
 root = true

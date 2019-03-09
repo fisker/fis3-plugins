@@ -1,105 +1,176 @@
 /*!
- * config file for prettier
- * project https://github.com/xwtec/dotfiles
- * primary link https://raw.githubusercontent.com/xwtec/dotfiles/master/prettier/prettier.config.js
+ * config file for `prettier`
  *
- * options https://prettier.io/docs/en/options.html
- *
+ * update: wget https://git.io/fhNjs
+ * document: https://prettier.io/docs/en/options.html
  */
 
-module.exports = {
-  // options for all files
-  trailingComma: 'es5',
-  semi: false,
-  singleQuote: true,
+/* eslint-disable no-unused-vars */
+
+// default options
+const DEAULT_CONFIG = {
   bracketSpacing: false,
   htmlWhitespaceSensitivity: 'ignore',
+  semi: false,
+  singleQuote: true,
+  trailingComma: 'es5',
+}
+
+// config for lang
+const LANG_CONFIG = {
+  javascript: {
+    ext: 'js,jsx,mjs',
+    parser: 'babel',
+    singleQuote: true,
+  },
+  typescript: {
+    ext: 'ts,tsx',
+    singleQuote: true,
+  },
+  html: {
+    ext: 'html,htm',
+    // effect js in html
+    singleQuote: true,
+  },
+  markdown: {
+    // more ext: mdown,mdwn,mkd,mkdn,mkdown
+    ext: 'md,markdown',
+    singleQuote: false,
+  },
+  yaml: {
+    ext: 'yaml,yml',
+    singleQuote: false,
+  },
+  graphql: {
+    ext: 'gql,graphql',
+  },
+  css: {
+    singleQuote: false,
+  },
+  scss: {
+    singleQuote: false,
+  },
+  less: {
+    singleQuote: false,
+  },
+  vue: {
+    singleQuote: false,
+  },
+  json: {
+    singleQuote: false,
+  },
+  json5: {
+    singleQuote: true,
+  },
+  mdx: {},
+}
+
+// custom config
+const overrides = [
+  // {
+  //   files: '*.ext',
+  //   options: {
+  //     parser: 'some-parser',
+  //     singleQuote: false,
+  //   }
+  // }
+]
+
+// export
+
+const SUPPORTED_OPTIONS = [
+  'singleQuote',
+  'semi',
+  'singleQuote',
+  'bracketSpacing',
+  'htmlWhitespaceSensitivity',
+]
+
+function toArray(x) {
+  x = Array.isArray(x) ? x : x.split(',')
+  return x.filter(Boolean).map(s => s.trim())
+}
+
+function isUndefined(x) {
+  return typeof x === 'undefined'
+}
+
+function isNotDefault(config, option) {
+  const configValue = config[option]
+  const defaultValue = DEAULT_CONFIG[option]
+
+  // console.log({option, configValue, defaultValue})
+
+  return (
+    !isUndefined(configValue) &&
+    (isUndefined(defaultValue) || configValue !== defaultValue)
+  )
+}
+
+function toOverrides(config) {
+  const {lang} = config
+
+  const ext = toArray(config.ext || lang)
+  const parser = config.parser || lang
+
+  const files = ext.length > 1 ? `*.{${ext}}` : `*.${ext}`
+
+  const options = {
+    parser,
+  }
+
+  for (const option of SUPPORTED_OPTIONS) {
+    if (isNotDefault(config, option)) {
+      options[option] = config[option]
+    }
+  }
+
+  return {
+    files,
+    options,
+  }
+}
+
+function configParser({lang, config}) {
+  if (Array.isArray(config)) {
+    config = {
+      ext: config,
+    }
+  }
+
+  if (typeof config === 'string') {
+    if (toArray(config).length === 1) {
+      config = {
+        parser: 'config',
+      }
+    } else {
+      config = {
+        ext: 'config',
+      }
+    }
+  }
+
+  return {
+    ...config,
+    lang,
+  }
+}
+
+function langOverrides(config) {
+  return Object.keys(config)
+    .sort()
+    .map(lang =>
+      configParser({
+        lang,
+        config: config[lang],
+      })
+    )
+    .map(toOverrides)
+}
+
+module.exports = {
+  ...DEAULT_CONFIG,
 
   // overrides
-  overrides: [
-    {
-      files: '*.{js,jsx,mjs}',
-      options: {
-        parser: 'babel',
-      },
-    },
-    {
-      files: '*.{ts,tsx}',
-      options: {
-        parser: 'typescript',
-      },
-    },
-    {
-      files: '*.css',
-      options: {
-        parser: 'css',
-        singleQuote: false,
-      },
-    },
-    {
-      files: '*.scss',
-      options: {
-        parser: 'scss',
-        singleQuote: false,
-      },
-    },
-    {
-      files: '*.less',
-      options: {
-        parser: 'less',
-        singleQuote: false,
-      },
-    },
-    {
-      files: '*.vue',
-      options: {
-        parser: 'vue',
-      },
-    },
-    {
-      files: '*.{html,htm}',
-      options: {
-        parser: 'html',
-      },
-    },
-    {
-      files: '*.json',
-      options: {
-        parser: 'json',
-      },
-    },
-    {
-      files: '*.json5',
-      options: {
-        parser: 'json5',
-      },
-    },
-    {
-      // more ext: mdown,mdwn,mkd,mkdn,mkdown
-      files: '*.{md,markdown}',
-      options: {
-        parser: 'markdown',
-        singleQuote: false,
-      },
-    },
-    {
-      files: '*.mdx',
-      options: {
-        parser: 'mdx',
-      },
-    },
-    {
-      files: '*.{yaml,yml}',
-      options: {
-        parser: 'yaml',
-        singleQuote: false,
-      },
-    },
-    {
-      files: '*.{gql,graphql}',
-      options: {
-        parser: 'graphql',
-      },
-    },
-  ],
+  overrides: [...langOverrides(LANG_CONFIG), ...overrides],
 }

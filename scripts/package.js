@@ -188,15 +188,15 @@ class Package {
 
     if (isDeprecated) {
       this.pkg.scripts = this.pkg.scripts || {}
-      this.writeFile('README.md', template('readme-deprecated.ejs')(this))
+      this.writeFile('readme.md', template('readme-deprecated.ejs')(this))
     } else {
       this.info.files.forEach(file => {
         this.copyFile(file)
       })
-      this.writeFile('README.md', template('readme.ejs')(this))
+      this.writeFile('readme.md', template('readme.ejs')(this))
     }
 
-    this.copyFile('../../../../LICENSE', 'LICENSE')
+    this.copyFile('../../../../license', 'license')
 
     this.writeFile(
       'package.json',

@@ -1,6 +1,10 @@
-# prettier ignore
+# ignore file for `prettier`
+#
+# update: wget https://git.io/fhNj3
+# document: https://prettier.io/docs/en/ignore.html#ignoring-files
+#
 
-# also lint . files
+# also prettier dot files
 !.*
 
 # build file
@@ -13,3 +17,5 @@ node_modules/**
 
 # fixtures
 **/fixtures/**
+
+# own glob

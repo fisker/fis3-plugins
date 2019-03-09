@@ -1,43 +1,114 @@
-module.exports = {
+/*!
+ * config file for `lint-staged`
+ *
+ * update: wget https://git.io/fhNpr
+ * document: https://git.io/fhNpF
+ *
+ */
+
+/* eslint-disable no-unused-vars */
+
+const CMD_PRETTIER = 'prettier --write'
+const CMD_ESLINT = 'eslint'
+const CMD_ESLINT_FIX = 'eslint --fix'
+const CMD_MARKDOWNLINT = 'markdownlint'
+const CMD_GIT_ADD = 'git add'
+
+const config = {
   // markdown files
   // first prettier then lint
-  '*.{md,markdown}': ['prettier --write', 'markdownlint', 'git add'],
+  'md,markdown': [CMD_PRETTIER, CMD_MARKDOWNLINT],
 
   // js files
   // eslint then prettier
-  '*.{js,jsx,mjs}': ['eslint --fix', 'prettier --write', 'git add'],
+  'js,jsx,mjs': [CMD_ESLINT_FIX, CMD_PRETTIER],
 
   // vue files
   // eslint then prettier
-  '*.{vue}': ['eslint --fix', 'prettier --write', 'git add'],
+  vue: [CMD_ESLINT_FIX, CMD_PRETTIER],
 
   // typescript files
   // tslint(eslint) then prettier
-  '*.{ts,tsx}': ['eslint --fix', 'prettier --write', 'git add'],
+  // 'ts,tsx': [CMD_ESLINT_FIX, CMD_PRETTIER],
 
   // css files
   // TODO: stylelint
   // prettier
-  '*.{scss,css,less}': ['prettier --write', 'git add'],
+  'scss,css,less': CMD_PRETTIER,
 
   // html files
   // TODO: htmlhint
   // prettier
-  '*.{html,htm}': ['prettier --write', 'git add'],
+  'html,htm': CMD_PRETTIER,
 
   // json files
   // prettier
-  '*.json': ['prettier --write', 'git add'],
+  json: CMD_PRETTIER,
 
   // json files
   // prettier
-  '*.json5': ['prettier --write', 'git add'],
+  json5: CMD_PRETTIER,
 
   // json files
   // prettier
-  '*.{yaml,yml}': ['prettier --write', 'git add'],
+  'yaml,yml': CMD_PRETTIER,
 
   // json files
   // prettier
-  '*.{gql,graphql}': ['prettier --write', 'git add'],
+  'gql,graphql': CMD_PRETTIER,
 }
+
+// export
+
+function toArray(x) {
+  x = Array.isArray(x) ? x : x.split(',')
+  return x.map(s => s.trim())
+}
+
+function reduceByCommand(grouped, {exts, cmds}) {
+  if (!grouped[cmds]) {
+    grouped[cmds] = [cmds]
+  }
+  grouped[cmds] = grouped[cmds].concat(exts)
+
+  return grouped
+}
+
+function groupByCommand(config) {
+  return Object.keys(config)
+    .map(key => ({
+      exts: toArray(key),
+      cmds: toArray(config[key]),
+    }))
+    .reduce(reduceByCommand, {})
+}
+
+function reduceByGlob(config, {exts, cmds}) {
+  const glob = exts.length > 1 ? `*.{${exts}}` : `*.${exts}`
+
+  config[glob] = (Array.isArray(cmds) ? cmds : [cmds]).concat([CMD_GIT_ADD])
+
+  return config
+}
+
+function groupByGlob(grouped) {
+  return Object.keys(grouped)
+    .map(key => {
+      const [cmds, ...exts] = grouped[key]
+
+      return {
+        cmds,
+        exts,
+      }
+    })
+    .reduce(reduceByGlob, {})
+}
+
+function parseConfig(config) {
+  const grouped = groupByCommand(config)
+  const globed = groupByGlob(grouped)
+
+  return globed
+}
+
+module.exports = parseConfig(config)
