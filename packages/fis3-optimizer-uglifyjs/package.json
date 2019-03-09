@@ -11,7 +11,7 @@
     "uglify-js": "^3.4.9"
   },
   "description": "js minifer for fis based on uglifyjs.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "es5",
     "fis",

@@ -11,7 +11,7 @@
     "pug": "^2.0.3"
   },
   "description": "a fis plugin to parse pug(aka jade).",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "fis",
     "fis3",

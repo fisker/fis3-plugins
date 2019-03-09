@@ -9,7 +9,7 @@
   },
   "dependencies": {},
   "description": "fis3 relative path support",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "fis",
     "fis3",

@@ -37,7 +37,7 @@ pluginTypes.forEach(function(type) {
   )
   const render = _.template(template)
   fs.writeFileSync(
-    path.join(__dirname, '..', 'packages', 'README.md'),
+    path.join(__dirname, '..', 'packages', 'readme.md'),
     render({packages}).trim()
   )
 })(packages)

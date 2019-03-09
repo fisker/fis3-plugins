@@ -13,7 +13,7 @@
     "stylelint": "^9.10.1"
   },
   "description": "a css linter plugin of fis3 based on stylelint.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "fis",
     "fis3",

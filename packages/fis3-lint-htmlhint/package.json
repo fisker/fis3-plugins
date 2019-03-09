@@ -11,7 +11,7 @@
     "htmlhint": "^0.11.0"
   },
   "description": "a html linter plugin of fis3 based on htmlhint.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "fis",
     "fis3",

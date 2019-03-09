@@ -11,7 +11,7 @@
     "lodash": "^4.17.11"
   },
   "description": "a fis plugin to parse lodash template.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "fis",
     "fis3",

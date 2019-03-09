@@ -11,7 +11,7 @@
     "terser": "^3.16.1"
   },
   "description": "js minifer for fis based on terser.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "fis",
     "fis3",

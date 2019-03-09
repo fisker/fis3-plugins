@@ -11,7 +11,7 @@
     "standard": "^12.0.1"
   },
   "description": "a code formatter of fis3 based on standard.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "beautify",
     "fis",

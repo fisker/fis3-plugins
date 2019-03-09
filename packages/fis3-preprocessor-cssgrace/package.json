@@ -11,7 +11,7 @@
     "cssgrace-lite": "^1.0.1"
   },
   "description": "cssgrace for fis3.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "cssgrace",
     "fis",

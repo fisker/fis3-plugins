@@ -11,7 +11,7 @@
     "clean-css": "^4.2.1"
   },
   "description": "css minifer for fis based on clean-css.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "cleancss",
     "fis",

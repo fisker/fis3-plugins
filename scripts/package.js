@@ -10,7 +10,7 @@ const babel = require('@babel/core')
 const prettier = require('prettier')
 const globalPackage = require('../package.json')
 const babelConfig = require('../babel.config')
-const files = ['LICENSE', 'README.md', 'index.js', 'package.json']
+const files = ['index.js']
 const links = {
   fis3: 'http://fis.baidu.com/',
 }
@@ -62,7 +62,7 @@ class Package {
     try {
       _.assign(this.info, {
         name: packageName,
-        readme: this.readFile('README.md'),
+        readme: this.readFile('readme.md'),
         links: _.assign({}, links, this.info.links),
         options: this.info.options || {},
         keywords: this.info.keywords || [],

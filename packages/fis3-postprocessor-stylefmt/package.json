@@ -9,7 +9,7 @@
   },
   "dependencies": {},
   "description": "a css formatter of fis3 based on stylefmt.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "fis",
     "fis3",

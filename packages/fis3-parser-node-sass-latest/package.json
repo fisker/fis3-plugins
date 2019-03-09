@@ -11,7 +11,7 @@
     "node-sass": "^4.11.0"
   },
   "description": "A fis plugin to parse sass with latest node-sass.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "fis",
     "fis3",

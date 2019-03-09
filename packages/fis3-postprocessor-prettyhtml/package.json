@@ -11,7 +11,7 @@
     "@starptech/prettyhtml": "^0.8.16"
   },
   "description": "a code formatter of fis3 based on prettyhtml.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": [
     "beautify",
     "fis",

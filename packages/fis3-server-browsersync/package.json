@@ -13,20 +13,17 @@
     "execa": "^1.0.0",
     "lodash.merge": "^4.6.1",
     "morgan": "^1.9.1",
-    "serve-directory": "^2.2.0",
+    "serve-directory": "^2.2.1",
     "serve-directory-theme-octicons": "^1.2.3",
-    "yargs": "^13.2.1",
+    "yargs": "^13.2.2",
     "yog-devtools": "^0.1.1"
   },
   "description": "a browser sync server for fis3.",
   "files": [
-    "LICENSE",
-    "README.md",
     "app.js",
     "index.js",
     "lib/browser-sync-config.js",
     "lib/middleware.js",
-    "package.json",
     "templates/script-tags.tmpl"
   ],
   "keywords": [
@@ -46,5 +43,5 @@
   },
   "readmeFilename": "README.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-server-browsersync",
-  "version": "1.9.0"
+  "version": "1.9.1"
 }

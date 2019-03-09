@@ -11,7 +11,7 @@
     "ejs": "^2.6.1"
   },
   "description": "a fis plugin to parse ejs.",
-  "files": ["LICENSE", "README.md", "index.js", "package.json"],
+  "files": ["index.js"],
   "keywords": ["ejs", "fis", "fis3", "fis3-parser-ejs", "html", "parser"],
   "license": "MIT",
   "main": "index.js",
