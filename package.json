@@ -2,7 +2,10 @@
   "name": "fis3-plugins",
   "version": "1.0.0",
   "description": "plugins for fi3",
-  "keywords": ["fis", "fis3"],
+  "keywords": [
+    "fis",
+    "fis3"
+  ],
   "main": "index.js",
   "repository": "https://github.com/fisker/fis3-plugins",
   "author": {
@@ -64,7 +67,7 @@
     "serve-directory-theme-octicons": "^1.2.3",
     "standard": "^12.0.1",
     "stylelint": "^9.10.1",
-    "terser": "^3.16.1",
+    "terser": "^3.17.0",
     "uglify-js": "^3.4.9",
     "yargs": "^13.2.2",
     "yog-devtools": "^0.1.1"
