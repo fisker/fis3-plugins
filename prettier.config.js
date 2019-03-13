@@ -7,8 +7,31 @@
 
 /* eslint-disable no-unused-vars */
 
-// default options
-const DEAULT_CONFIG = {
+// https://prettier.io/docs/en/options.html
+const SUPPORTED_OPTIONS = [
+  'printWidth',
+  'tabWidth',
+  'useTabs',
+  'semi',
+  'singleQuote',
+  'jsxSingleQuote',
+  'trailingComma',
+  'bracketSpacing',
+  'jsxBracketSameLine',
+  'arrowParens',
+  'rangeStart',
+  'rangeEnd',
+  'parser',
+  'filepath',
+  'requirePragma',
+  'insertPragma',
+  'proseWrap',
+  'htmlWhitespaceSensitivity',
+  'endOfLine',
+]
+
+// default config
+const DEFAULT_CONFIG = {
   bracketSpacing: false,
   htmlWhitespaceSensitivity: 'ignore',
   semi: false,
@@ -53,9 +76,7 @@ const LANG_CONFIG = {
   less: {
     singleQuote: false,
   },
-  vue: {
-    singleQuote: false,
-  },
+  vue: {},
   json: {
     singleQuote: false,
   },
@@ -65,26 +86,17 @@ const LANG_CONFIG = {
   mdx: {},
 }
 
-// custom config
-const overrides = [
+// custom overrides
+const CUSTOM_OVERRIDES = [
   // {
-  //   files: '*.ext',
+  //   files: 'your glob',
   //   options: {
-  //     parser: 'some-parser',
-  //     singleQuote: false,
+  //     [option key]: [option value],
   //   }
-  // }
+  // },
 ]
 
 // export
-
-const SUPPORTED_OPTIONS = [
-  'singleQuote',
-  'semi',
-  'singleQuote',
-  'bracketSpacing',
-  'htmlWhitespaceSensitivity',
-]
 
 function toArray(x) {
   x = Array.isArray(x) ? x : x.split(',')
@@ -97,9 +109,7 @@ function isUndefined(x) {
 
 function isNotDefault(config, option) {
   const configValue = config[option]
-  const defaultValue = DEAULT_CONFIG[option]
-
-  // console.log({option, configValue, defaultValue})
+  const defaultValue = DEFAULT_CONFIG[option]
 
   return (
     !isUndefined(configValue) &&
@@ -169,8 +179,8 @@ function langOverrides(config) {
 }
 
 module.exports = {
-  ...DEAULT_CONFIG,
+  ...DEFAULT_CONFIG,
 
   // overrides
-  overrides: [...langOverrides(LANG_CONFIG), ...overrides],
+  overrides: [...langOverrides(LANG_CONFIG), ...CUSTOM_OVERRIDES],
 }

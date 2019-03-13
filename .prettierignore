@@ -7,15 +7,19 @@
 # also prettier dot files
 !.*
 
+# vendors
+node_modules/**
+**/vendors/**
+**/vendor/**
+**/third-party/**
+
 # build file
 lib/**
 dist/**
 **/*.min.*
 
-# node_modules
-node_modules/**
-
 # fixtures
 **/fixtures/**
 
-# own glob
+# project glob
+
