@@ -24,7 +24,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "readmeFilename": "README.md",
+  "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-hook-relative-legal-html",
   "version": "2.3.0"
 }

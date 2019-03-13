@@ -2,10 +2,7 @@
   "name": "fis3-plugins",
   "version": "1.0.0",
   "description": "plugins for fi3",
-  "keywords": [
-    "fis",
-    "fis3"
-  ],
+  "keywords": ["fis", "fis3"],
   "main": "index.js",
   "repository": "https://github.com/fisker/fis3-plugins",
   "author": {
@@ -17,7 +14,7 @@
   "bugs": {
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
-  "readmeFilename": "README.md",
+  "readmeFilename": "readme.md",
   "scripts": {
     "prepack": "echo fis3-plugins is not a npm package. && exit 1",
     "update-dependencies": "yarn upgrade-interactive --latest",
@@ -77,7 +74,6 @@
       "path": "./node_modules/cz-conventional-changelog-emoji"
     }
   },
-  "readme": "ERROR: No README data found!",
   "homepage": "https://github.com/fisker/fis3-plugins#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
