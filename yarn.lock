@@ -9093,10 +9093,10 @@ serve-directory-theme-octicons@^1.2.3:
     lodash.uniq "^4.5.0"
     pretty-bytes "^5.1.0"
 
-serve-directory@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/serve-directory/-/serve-directory-3.0.0.tgz#d0de16b3fe673c361dcacf718a6fda9cdeae2d40"
-  integrity sha512-PqdoAFzGoGdq4CVATnI+eZwqm4v7hjC5fOoGzXXYhsL40vEYhp+w17ZRgfJqVlsCepZeNtxm+oVztoMOOFiA8A==
+serve-directory@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/serve-directory/-/serve-directory-3.0.2.tgz#d4183cbcda48f5eab4ceef7c7536d18efe4ff049"
+  integrity sha512-aQY8DfDBPTHtdMAqixG1efBgIJCzquRlGz/4ds1Lv4DMUSJXw1mis0P6fnUzKOJaZntsIf+hUrKaNk2GQqUTDQ==
   dependencies:
     accepts "^1.3.5"
     debug "^4.1.1"
