@@ -8,9 +8,9 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "uglify-js": "^3.4.9"
+    "uglify-js": "^3.4.10"
   },
-  "description": "js minifer for fis based on uglifyjs.",
+  "description": "js minifer for fis3 based on uglifyjs.",
   "files": ["index.js"],
   "keywords": [
     "es5",
@@ -32,5 +32,5 @@
   },
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-uglifyjs",
-  "version": "1.1.0"
+  "version": "1.1.1"
 }

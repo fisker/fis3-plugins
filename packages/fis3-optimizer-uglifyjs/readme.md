@@ -1,6 +1,6 @@
 # fis3-optimizer-uglifyjs
 
-> js minifer for fis based on uglifyjs.
+> js minifer for fis3 based on uglifyjs.
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![npm](https://img.shields.io/npm/v/fis3-optimizer-uglifyjs.svg?style=flat-square)](https://www.npmjs.com/package/fis3-optimizer-uglifyjs)
