@@ -7382,7 +7382,7 @@ opn@5.3.0:
   dependencies:
     is-wsl "^1.1.0"
 
-opn@^5.4.0, opn@^5.5.0:
+opn@^5.4.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/opn/-/opn-5.5.0.tgz#fc7164fab56d235904c51c3b27da6758ca3b9bfc"
   integrity sha512-PqHpggC9bLV0VeWcdKhkpxY+3JTzetLSqTCWL/z/tFIbI6G8JCjondXklT1JinczLz2Xib62sSp0T/gKT4KksA==
@@ -9093,17 +9093,16 @@ serve-directory-theme-octicons@^1.2.3:
     lodash.uniq "^4.5.0"
     pretty-bytes "^5.1.0"
 
-serve-directory@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/serve-directory/-/serve-directory-3.0.2.tgz#d4183cbcda48f5eab4ceef7c7536d18efe4ff049"
-  integrity sha512-aQY8DfDBPTHtdMAqixG1efBgIJCzquRlGz/4ds1Lv4DMUSJXw1mis0P6fnUzKOJaZntsIf+hUrKaNk2GQqUTDQ==
+serve-directory@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/serve-directory/-/serve-directory-3.0.3.tgz#fac1b1f540f3f48ff5386dbf683259fb287ee729"
+  integrity sha512-hvsh/Y9c6T1u0TJxmidkA9+JtTaFXeT67vV5FJz0E/HcBG224oafVSvYTncs1ZrATdo50o81Bopv3arPPdCASg==
   dependencies:
     accepts "^1.3.5"
     debug "^4.1.1"
     http-errors "^1.7.2"
     lodash.template "^4.4.0"
     mime-types "^2.1.22"
-    opn "^5.5.0"
     parseurl "^1.3.2"
 
 serve-index@1.9.1:
