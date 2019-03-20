@@ -73,7 +73,7 @@
     "standard": "^12.0.1",
     "stylelint": "^9.10.1",
     "terser": "^3.17.0",
-    "uglify-js": "^3.4.10",
+    "uglify-js": "^3.5.0",
     "yargs": "^13.2.2",
     "yog-devtools": "^0.1.1"
   },
