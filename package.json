@@ -25,14 +25,14 @@
     "release": "npm run build && npm run publish-npm"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.1",
     "@babel/preset-stage-0": "^7.0.0",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
     "@xwtec/eslint-config": "^3.7.0",
     "cz-conventional-changelog-emoji": "^0.1.0",
-    "eslint": "^5.15.2",
+    "eslint": "^5.15.3",
     "husky": "^1.3.1",
     "json-stable-stringify": "^1.0.1",
     "lerna": "^3.13.1",
@@ -42,7 +42,7 @@
     "mkdirp": "^0.5.1",
     "np": "^4.0.2",
     "prettier": "^1.16.4",
-    "rollup": "^1.6.0",
+    "rollup": "^1.7.0",
     "rollup-plugin-babel": "^4.3.2"
   },
   "dependencies": {
@@ -54,7 +54,7 @@
     "cssgrace": "^3.0.0",
     "cssgrace-lite": "^1.0.1",
     "ejs": "^2.6.1",
-    "eslint": "^5.15.2",
+    "eslint": "^5.15.3",
     "execa": "^1.0.0",
     "htmlhint": "^0.11.0",
     "js-beautify": "^1.9.0",
@@ -73,7 +73,7 @@
     "standard": "^12.0.1",
     "stylelint": "^9.10.1",
     "terser": "^3.17.0",
-    "uglify-js": "^3.4.10",
+    "uglify-js": "^3.5.0",
     "yargs": "^13.2.2",
     "yog-devtools": "^0.1.1"
   },
