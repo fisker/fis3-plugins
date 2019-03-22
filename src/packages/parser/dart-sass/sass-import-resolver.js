@@ -46,13 +46,15 @@ function getFiles(parents, url) {
   const dirs = getDirs(parents, url)
   const fileNames = getFileNames(url)
 
-  return dirs.reduce(
+  const files = dirs.reduce(
     (files, dir) => [
       ...files,
       ...fileNames.map(fileName => join(dir, fileName)),
     ],
     []
   )
+
+  return [...new Set(files)]
 }
 
 function resolveInDirs(includePaths, cache = {}) {

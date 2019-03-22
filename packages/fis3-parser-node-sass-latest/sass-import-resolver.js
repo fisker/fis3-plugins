@@ -81,7 +81,7 @@ function getFileNames(id) {
 function getFiles(parents, url) {
   var dirs = getDirs(parents, url)
   var fileNames = getFileNames(url)
-  return dirs.reduce(function(files, dir) {
+  var files = dirs.reduce(function(files, dir) {
     return [].concat(
       _toConsumableArray(files),
       _toConsumableArray(
@@ -91,6 +91,7 @@ function getFiles(parents, url) {
       )
     )
   }, [])
+  return _toConsumableArray(new Set(files))
 }
 
 function resolveInDirs(includePaths) {
