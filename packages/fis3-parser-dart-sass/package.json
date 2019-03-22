@@ -30,5 +30,5 @@
   },
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-dart-sass",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
