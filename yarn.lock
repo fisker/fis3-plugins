@@ -830,11 +830,6 @@
   dependencies:
     find-up "^2.1.0"
 
-"@csstools/sass-import-resolve@^1.0.0":
-  version "1.0.0"
-  resolved "http://registry.npm.taobao.org/@csstools/sass-import-resolve/download/@csstools/sass-import-resolve-1.0.0.tgz#32c3cdb2f7af3cd8f0dca357b592e7271f3831b5"
-  integrity sha1-MsPNsvevPNjw3KNXtZLnJx84MbU=
-
 "@lerna/add@3.13.1":
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/@lerna/add/-/add-3.13.1.tgz#2cd7838857edb3b43ed73e3c21f69a20beb9b702"

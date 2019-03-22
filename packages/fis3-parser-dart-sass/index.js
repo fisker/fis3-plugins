@@ -6,8 +6,8 @@ var _util = _interopRequireDefault(require('util'))
 
 var _sass = _interopRequireDefault(require('sass'))
 
-var _sassImportResolve = _interopRequireDefault(
-  require('@csstools/sass-import-resolve')
+var _sassImportResolver = _interopRequireDefault(
+  require('./sass-import-resolver')
 )
 
 function _interopRequireDefault(obj) {
@@ -77,34 +77,20 @@ var _global = global,
   fis = _global.fis
 var PROJECT_ROOT = fis.project.getProjectPath()
 
-function toAbsolute(dir) {
-  if (
-    (0, _path.resolve)(dir) !== (0, _path.normalize)(dir) ||
-    fis.util.exists((0, _path.join)(PROJECT_ROOT, dir))
-  ) {
-    return (0, _path.join)(PROJECT_ROOT, dir)
-  }
+function normalizeIncludePath(dirs) {
+  return dirs.reduce(function(all, dir) {
+    var dirs = []
 
-  return dir
-}
+    if ((0, _path.isAbsolute)(dir) && dir[0] !== '/') {
+      dirs.push(dir)
+    } else {
+      dirs.push(dir)
+      dirs.push((0, _path.join)(PROJECT_ROOT, dir))
+      dirs.push((0, _path.join)(process.cwd(), dir))
+    }
 
-function resolveInDirs(dirs, cache) {
-  return function(url, prev, done) {
-    var cwds = [].concat(_toConsumableArray(dirs), [
-      (0, _path.dirname)((0, _path.resolve)(prev)),
-    ])
-    cwds
-      .reduce(function(promise, cwd) {
-        return promise.catch(function() {
-          return (0, _sassImportResolve.default)(url, {
-            cwd: cwd,
-            cache: cache,
-            readFile: true,
-          })
-        })
-      }, Promise.reject()) // eslint-disable-next-line promise/no-callback-in-promise
-      .then(done, done)
-  }
+    return [].concat(_toConsumableArray(all), dirs)
+  }, [])
 }
 
 module.exports = function(content, file, config) {
@@ -118,12 +104,10 @@ module.exports = function(content, file, config) {
     _config$sourceMap = config.sourceMap,
     sourceMap = _config$sourceMap === void 0 ? false : _config$sourceMap,
     sourceMapContents = config.sourceMapContents
-  includePaths = []
-    .concat(_toConsumableArray(includePaths), [
-      PROJECT_ROOT,
-      (0, _path.dirname)(file.realpath),
-    ])
-    .map(toAbsolute)
+  includePaths = [(0, _path.dirname)(file.realpath)].concat(
+    _toConsumableArray(normalizeIncludePath(includePaths)),
+    [PROJECT_ROOT]
+  )
   var sourceMapFile
 
   if (sourceMap) {
@@ -145,7 +129,7 @@ module.exports = function(content, file, config) {
     file: file.realpath,
     data: content,
     indentedSyntax: file.ext === '.sass',
-    importer: resolveInDirs(includePaths, importCache),
+    importer: (0, _sassImportResolver.default)(includePaths, importCache),
     sourceMap: sourceMap,
     sourceMapContents: sourceMapContents,
   })
