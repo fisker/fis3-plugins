@@ -46,6 +46,7 @@
     "rollup-plugin-babel": "^4.3.2"
   },
   "dependencies": {
+    "@csstools/sass-import-resolve": "^1.0.0",
     "@starptech/prettyhtml": "^0.8.16",
     "autoprefixer": "^9.5.0",
     "body-parser": "^1.18.3",

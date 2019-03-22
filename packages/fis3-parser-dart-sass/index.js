@@ -1,216 +1,159 @@
-const _path = _interopRequireDefault(require('path'))
+const _path = require('path')
+
+const _util = _interopRequireDefault(require('util'))
 
 const _sass = _interopRequireDefault(require('sass'))
 
-const _util = _interopRequireDefault(require('util'))
+const _sassImportResolve = _interopRequireDefault(
+  require('@csstools/sass-import-resolve')
+)
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-/*
- * fork from https://github.com/fex-team/fis-parser-node-sass
- */
+function _objectSpread(target) {
+  for (let i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {}
+    let ownKeys = Object.keys(source)
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(
+        Object.getOwnPropertySymbols(source).filter(function(sym) {
+          return Object.getOwnPropertyDescriptor(source, sym).enumerable
+        })
+      )
+    }
+    ownKeys.forEach(function(key) {
+      _defineProperty(target, key, source[key])
+    })
+  }
+  return target
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value,
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    })
+  } else {
+    obj[key] = value
+  }
+  return obj
+}
+
+function _toConsumableArray(arr) {
+  return (
+    _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread()
+  )
+}
+
+function _nonIterableSpread() {
+  throw new TypeError('Invalid attempt to spread non-iterable instance')
+}
+
+function _iterableToArray(iter) {
+  if (
+    Symbol.iterator in new Object(iter) ||
+    Object.prototype.toString.call(iter) === '[object Arguments]'
+  ) {
+    return Array.from(iter)
+  }
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i]
+    }
+    return arr2
+  }
+}
+
 const _global = global
 const {fis} = _global
 const PROJECT_ROOT = fis.project.getProjectPath()
 
-function resolveAndLoad(filename, dir) {
-  // Resolution order for ambiguous imports:
-  // (1) filename as given
-  // (2) underscore + given
-  // (3) underscore + given + extension
-  // (4) given + extension
-  //
-  const basename = _path.default.basename(filename)
-
-  const dirname = _path.default.dirname(filename)
-
-  const files = [
-    _path.default.join(dirname, basename),
-    _path.default.join(dirname, '_'.concat(basename)),
-    _path.default.join(dirname, '_'.concat(basename, '.scss')),
-    _path.default.join(dirname, '_'.concat(basename, '.sass')),
-    _path.default.join(dirname, ''.concat(basename, '.scss')),
-    _path.default.join(dirname, ''.concat(basename, '.sass')),
-  ]
-  let found = null
-  files.every(function(url) {
-    const file = fis.util(dir, url)
-
-    if (file && fis.util.isFile(file)) {
-      found = fis.file(file)
-      return false
-    }
-
-    return true
-  })
-  return found
-}
-
-function find(filename, paths) {
-  let found = null
-  paths.every(function(dir) {
-    let file
-
-    if ((file = resolveAndLoad(filename, dir))) {
-      found = file
-      return false
-    }
-
-    return true
-  })
-  return found
-}
-
-function fixSourcePath(content, file) {
-  // 处理，解决资源引用路径问题。
-  content = fis.compile.extCss(content)
-  return content.replace(fis.compile.lang.reg, function(
-    all,
-    type,
-    depth,
-    value
+function toAbsolute(dir) {
+  if (
+    (0, _path.resolve)(dir) !== (0, _path.normalize)(dir) ||
+    fis.util.exists((0, _path.join)(PROJECT_ROOT, dir))
   ) {
-    // 如果是 fis2 的版本
-    if (!fis.match) {
-      value = depth
-    }
+    return (0, _path.join)(PROJECT_ROOT, dir)
+  }
 
-    const info = fis.uri(value, file.dirname)
-
-    if (info.file && info.file.subpath) {
-      value =
-        info.quote + info.file.subpath + info.query + info.hash + info.quote
-    }
-
-    return value
-  })
+  return dir
 }
 
-module.exports = function(content, file, conf) {
-  // 不处理空文件，处理空文件有人反馈报错。
-  if (!content || !content.trim() || file.basename[0] === '_') {
+function resolveInDirs(dirs, cache) {
+  return function(url, prev, done) {
+    const cwds = [].concat(_toConsumableArray(dirs), [
+      (0, _path.dirname)((0, _path.resolve)(prev)),
+    ])
+    cwds
+      .reduce(function(promise, cwd) {
+        return promise.catch(function() {
+          return (0, _sassImportResolve.default)(url, {
+            cwd,
+            cache,
+            readFile: true,
+          })
+        })
+      }, Promise.reject()) // eslint-disable-next-line promise/no-callback-in-promise
+      .then(done, done)
+  }
+}
+
+module.exports = function(content, file, config) {
+  if (file.basename[0] === '_') {
     return content
-  } // sass 对 unicode 字符处理有 bug, 所以这里先用这种方法 解决下。
-
-  const backups = {}
-  let backupId = 0 // content = fixImport(content);
-
-  content = content.replace(/('|")\\\w{4}\1/g, function(raw) {
-    const id = backupId
-    backupId += 1
-    backups[id] = raw
-    return "'__scss_backup_".concat(id, "'")
-  })
-  const opts = fis.util.clone(conf) // 读取私有配置。
-
-  if (file.sass) {
-    fis.util.map(fis.sass, opts, true)
   }
 
-  opts.includePaths = opts.include_paths || opts.includePaths || [] // file.dirname !== root && opts.includePaths.unshift(file.dirname);
+  const importCache = {}
+  const _config$includePaths = config.includePaths
+  let includePaths = _config$includePaths === void 0 ? [] : _config$includePaths
+  const _config$sourceMap = config.sourceMap
+  let sourceMap = _config$sourceMap === void 0 ? false : _config$sourceMap
+  let {sourceMapContents} = config
+  includePaths = []
+    .concat(_toConsumableArray(includePaths), [
+      PROJECT_ROOT,
+      (0, _path.dirname)(file.realpath),
+    ])
+    .map(toAbsolute)
+  let sourceMapFile
 
-  opts.includePaths.push(PROJECT_ROOT)
-  opts.includePaths = opts.includePaths.map(function(dir) {
-    if (
-      _path.default.resolve(dir) !== _path.default.normalize(dir) ||
-      fis.util.exists(_path.default.join(PROJECT_ROOT, dir))
-    ) {
-      dir = _path.default.join(PROJECT_ROOT, dir)
-    }
-
-    return dir
-  })
-  opts.file = file.subpath
-  opts.data = content
-
-  if (file.ext === '.sass') {
-    opts.indentedSyntax = true
-  }
-
-  const stacks = []
-  const includePaths = opts.includePaths.concat()
-  const sources = [file.subpath]
-
-  opts.importer = function(url, prev, done) {
-    prev = prev.replace(/^\w+:/, '') // windows 里面莫名加个盘符。
-
-    const prevFile = find(prev, stacks.concat(includePaths))
-
-    if (!prevFile) {
-      return new Error("Can't find `".concat(prev, '`'))
-    }
-
-    const {dirname} = prevFile // 如果已经在里面
-
-    const idx = stacks.indexOf(dirname)
-
-    if (idx !== -1) {
-      stacks.splice(idx, 1)
-    }
-
-    stacks.unshift(dirname)
-    const target = find(url, stacks.concat(includePaths))
-
-    if (!target) {
-      return new Error("Can't find `".concat(url, '` in `').concat(prev, '`'))
-    }
-
-    let content = target.getContent()
-    content = fixSourcePath(content, target)
-    content = content.replace(/('|")\\\w{4}\1/g, function(raw) {
-      const id = backupId
-      backupId += 1
-      backups[id] = raw
-      return "'__scss_backup_".concat(id, "'")
-    })
-
-    if (file.cache) {
-      file.cache.addDeps(target.realpath)
-    } // 解决include_path 内import导致subpath为空报错问题
-
-    if (!target.subpath) {
-      target.subpath = _path.default.relative(PROJECT_ROOT, target.realpath)
-    }
-
-    if (sources.includes(target.subpath)) {
-      sources.push(target.subpath)
-    }
-
-    return {
-      file: target.subpath,
-      contents: content,
-    }
-  }
-
-  let mapping
-
-  if (opts.sourceMap) {
-    opts.sourceMapContents = true
-    mapping = fis.file.wrap(
+  if (sourceMap) {
+    sourceMapContents = true
+    sourceMapFile = fis.file.wrap(
       ''
         .concat(file.dirname, '/')
         .concat(file.filename)
         .concat(file.rExt, '.map')
     )
-    opts.sourceMap = mapping.getUrl(
+    sourceMap = sourceMapFile.getUrl(
       fis.compile.settings.hash,
       fis.compile.settings.domain
     )
-
-    if (file.release) {
-      opts.outFile = file.getUrl(
-        fis.compile.settings.hash,
-        fis.compile.settings.domain
-      )
-    }
   }
 
-  let ret
+  const options = _objectSpread({}, config, {
+    includePaths,
+    file: file.realpath,
+    data: content,
+    indentedSyntax: file.ext === '.sass',
+    importer: resolveInDirs(includePaths, importCache),
+    sourceMap,
+    sourceMapContents,
+  })
+
+  delete options.outFile
+  let result
 
   try {
-    ret = _sass.default.renderSync(opts)
+    result = _sass.default.renderSync(options)
   } catch (error) {
     fis.log.error(
       _util.default.format(
@@ -221,36 +164,18 @@ module.exports = function(content, file, conf) {
         error.column
       )
     )
-  } // if (file.cache && ret.stats.includedFiles.length) {
-  //     ret.stats.includedFiles.forEach(function(dep) {
-  //         file.cache.addDeps(dep);
-  //     });
-  // }
-  //
-
-  if (mapping && ret.map) {
-    let sourceMap = ret.map.toString('utf8') // 修复 sourceMap 文件路径错误问题
-    // 等 node-sass 修复后，可以删除。
-    // ---------------------------------------------
-
-    const sourceMapObj = JSON.parse(sourceMap)
-    sourceMapObj.sources = sources
-    sourceMap = JSON.stringify(sourceMapObj, null, 2) // -----------------------------------------------
-
-    mapping.setContent(sourceMap)
-    file.extras = file.extras || {}
-    file.extras.derived = file.extras.derived || []
-    file.extras.derived.push(mapping)
   }
 
-  content = ret.css.toString('utf8')
-  content = content.replace(/('|")__scss_backup_(\d+)\1/g, function(
-    _,
-    quote,
-    index
-  ) {
-    return backups[index]
-  })
+  if (sourceMapFile && result.map) {
+    const _sourceMap = result.map.toString('utf8')
+
+    sourceMapFile.setContent(_sourceMap)
+    file.extras = file.extras || {}
+    file.extras.derived = file.extras.derived || []
+    file.extras.derived.push(sourceMapFile)
+  }
+
+  content = result.css.toString('utf8')
   return content
 }
 
