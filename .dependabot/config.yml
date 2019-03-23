@@ -23,4 +23,4 @@ update_configs:
           update_type: "security:patch"
 
     # auto update package.json
-    version_requirement_updates: "auto"
+    version_requirement_updates: "increase_versions"
