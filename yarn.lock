@@ -1716,10 +1716,10 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@xwtec/eslint-config@^3.8.0":
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/@xwtec/eslint-config/-/eslint-config-3.8.0.tgz#15646c4e069aea1ae13ea4caedc31b607d5ba706"
-  integrity sha512-HcpPkx+r3r9Sxh8M7+QXAnXEegk/1TEkjiT9DxJuWTKlcwxTWsOHsq2EqxY9x/kL1/1nKH0YAgc2cjIsCAjH/w==
+"@xwtec/eslint-config@^3.8.1":
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/@xwtec/eslint-config/-/eslint-config-3.8.1.tgz#894234aaf257aba5eb884ffb4fa88abc7b0d18b7"
+  integrity sha512-DC5KJ1+k87aHDQSkRReVxFq+Y/raZei2lGCcbOHXwOQgd6faSnupsFlel+frhfVya9NSXUAhF6qrhcDeUVCCUQ==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-config-prettier "^4.1.0"
