@@ -3762,10 +3762,10 @@ eslint-config-airbnb-base@^13.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-fisker@^4.0.0:
-  version "4.0.0"
-  resolved "http://registry.npm.taobao.org/eslint-config-fisker/download/eslint-config-fisker-4.0.0.tgz#ffec32c97b6149a8182a70cfc9bab3a828ccbdaf"
-  integrity sha1-/+wyyXthSagYKnDPybqzqCjMva8=
+eslint-config-fisker@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-fisker/-/eslint-config-fisker-4.0.1.tgz#3cbb2176a8a261311595d069e135ce77ab9d0d6e"
+  integrity sha512-ukD/meMdIl6mJOza3eTdV7UZ9o/SB0RAZ/MzMyi6xg8KWaOkueUdrDgiVNr+CTiaV4cPHps6mYL8L8N1LGWsog==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-config-prettier "^4.1.0"
