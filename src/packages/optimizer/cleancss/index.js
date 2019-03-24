@@ -1,4 +1,5 @@
 import CleanCSS from 'clean-css'
+
 const {log} = global.fis
 
 function deriveSourceMap(file, sourceMap) {

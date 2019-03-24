@@ -1,11 +1,9 @@
 /*!
  * config file for `prettier`
  *
- * update: wget https://git.io/fhNjs
+ * update: wget -O prettier.config.js https://git.io/fjJKh
  * document: https://prettier.io/docs/en/options.html
  */
-
-/* eslint-disable no-unused-vars */
 
 // https://prettier.io/docs/en/options.html
 const SUPPORTED_OPTIONS = [

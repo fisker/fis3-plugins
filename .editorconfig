@@ -1,6 +1,6 @@
 # config file for `editorconfig`
 #
-# update: wget https://git.io/fhAJu
+# update: wget -O .editorconfig https://git.io/fhAJu
 # document: https://editorconfig.org
 #
 
@@ -36,3 +36,7 @@ indent_size = 4
 [*.{bat,cmd}]
 charset = ansi
 end_of_line = crlf
+
+# markdown
+[*.{md,markdown}]
+insert_final_newline = false

@@ -1,7 +1,7 @@
 /*!
  * config file for `husky`
  *
- * update: wget https://git.io/fhNpR
+ * update: wget-O .huskyrc.js https://git.io/fhNpR
  * document: https://git.io/fhNph
  */
 

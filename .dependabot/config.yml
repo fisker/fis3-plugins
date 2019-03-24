@@ -1,6 +1,6 @@
 # config file for `dependabot`
 #
-# update: wget https://git.io/fhAJq
+# update: wget -O config.yml https://git.io/fjJKB
 # document: https://dependabot.com/docs/config-file/
 #
 

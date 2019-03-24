@@ -1,14 +1,13 @@
 /*!
  * config file for `lint-staged`
  *
- * update: wget https://git.io/fhNpr
+ * update: wget -O lint-staged.config.js https://git.io/fhNpr
  * document: https://git.io/fhNpF
  *
  */
 
-/* eslint-disable no-unused-vars */
-
 const CMD_PRETTIER = 'prettier --write'
+// eslint-disable-next-line no-unused-vars
 const CMD_ESLINT = 'eslint'
 const CMD_ESLINT_FIX = 'eslint --fix'
 const CMD_MARKDOWNLINT = 'markdownlint'

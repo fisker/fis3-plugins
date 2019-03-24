@@ -2,7 +2,6 @@ import path from 'path'
 import fs from 'fs'
 import execa from 'execa'
 import yargs from 'yargs'
-import {spawn} from 'child_process'
 
 const {fis} = global
 const util = fis.require('command-server/lib/util.js')

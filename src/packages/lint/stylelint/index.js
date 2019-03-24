@@ -16,7 +16,7 @@ const syntax = {
 
 module.exports = function(content, file, conf) {
   if (!content) {
-    return
+    return content
   }
 
   const config = Object.assign({}, conf, {
@@ -39,7 +39,7 @@ module.exports = function(content, file, conf) {
       const messages = result.messages || []
       const errorMsg = []
       const warnMsg = []
-      for (let i = 0; i < messages.length; i++) {
+      for (let i = 0; i < messages.length; i += 1) {
         const message = messages[i]
         const type = message.severity || 'warn'
         ;(type === 'error' ? errorMsg : warnMsg).push(

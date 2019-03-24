@@ -3,6 +3,7 @@
  * fisker Cheung<lionkay@gmail.com>
  */
 import {minify} from 'terser'
+
 const {log} = global.fis
 
 function getTerserOptions(file, conf) {

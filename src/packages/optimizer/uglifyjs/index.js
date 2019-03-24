@@ -3,6 +3,7 @@
  * fisker Cheung<lionkay@gmail.com>
  */
 import {minify} from 'uglify-js'
+
 const {log} = global.fis
 
 function getUglifyJSOptions(file, conf) {

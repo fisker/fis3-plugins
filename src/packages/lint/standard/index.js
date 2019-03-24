@@ -9,7 +9,7 @@ module.exports = function(content, file) {
   let results = []
 
   try {
-    results = standard.lintTextSync(content, {}).results
+    ;({results} = standard.lintTextSync(content, {}))
   } catch (error) {
     log.error(error)
     process.exit(1)

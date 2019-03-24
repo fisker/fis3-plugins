@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+
 const SOURCE_DIR = path.join(__dirname, '..', 'src')
 const DEST_DIR = path.join(__dirname, '..', 'packages')
 const CHARSET = 'utf-8'
@@ -10,6 +11,7 @@ const babel = require('@babel/core')
 const prettier = require('prettier')
 const globalPackage = require('../package.json')
 const babelConfig = require('../babel.config')
+
 const files = ['index.js']
 const links = {
   fis3: 'http://fis.baidu.com/',

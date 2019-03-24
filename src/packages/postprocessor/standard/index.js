@@ -7,7 +7,7 @@ import standard from 'standard'
 
 const {log} = global.fis
 
-module.exports = function(content, file, conf) {
+module.exports = function(content) {
   content = content.replace(/\n\s+$/, '')
 
   try {
