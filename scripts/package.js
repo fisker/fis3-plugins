@@ -25,27 +25,27 @@ const template = _.memoize(function(file) {
 
 function parseDependencies(pkgs) {
   const dependencies = {}
-  _.forEach(pkgs || [], function(pkg) {
-    const pkgArr = pkg.split('@')
-    let pkgName
-    let pkgVersion
-    if (pkgArr[0] === '') {
-      pkgName = pkgArr.slice(0, 2).join('@')
-      pkgVersion = pkgArr[2]
+  _.forEach(pkgs || [], function(package_) {
+    const packageArray = package_.split('@')
+    let packageName
+    let packageVersion
+    if (packageArray[0] === '') {
+      packageName = packageArray.slice(0, 2).join('@')
+      packageVersion = packageArray[2]
     } else {
-      pkgName = pkgArr[0]
-      pkgVersion = pkgArr[1]
+      packageName = packageArray[0]
+      packageVersion = packageArray[1]
     }
 
-    if (!pkgVersion) {
-      pkgVersion = globalPackage.dependencies[pkgName]
+    if (!packageVersion) {
+      packageVersion = globalPackage.dependencies[packageName]
     }
 
-    if (!pkgVersion) {
-      throw new Error(`dependency [${pkgName}] is not in package.json.`)
+    if (!packageVersion) {
+      throw new Error(`dependency [${packageName}] is not in package.json.`)
     }
 
-    dependencies[pkgName] = pkgVersion
+    dependencies[packageName] = packageVersion
   })
 
   return dependencies
@@ -152,16 +152,16 @@ class Package {
     return content
   }
 
-  copyFile(srcFile, distFile = srcFile) {
+  copyFile(sourceFile, distFile = sourceFile) {
     if (/\.js$/.test(distFile)) {
-      return this.writeFile(distFile, this.readFile(srcFile))
+      return this.writeFile(distFile, this.readFile(sourceFile))
     }
     distFile = path.join(this.dest, distFile)
-    srcFile = path.join(this.src, srcFile)
+    sourceFile = path.join(this.src, sourceFile)
     mkdirp(path.dirname(distFile))
 
     try {
-      return fs.writeFileSync(distFile, fs.readFileSync(srcFile))
+      return fs.writeFileSync(distFile, fs.readFileSync(sourceFile))
     } catch {
       return false
     }

@@ -6,18 +6,18 @@ import sassImportResolve from './sass-import-resolver'
 const {fis} = global
 const PROJECT_ROOT = fis.project.getProjectPath()
 
-function normalizeIncludePath(dirs) {
-  return dirs.reduce((all, dir) => {
-    const dirs = []
-    if (isAbsolute(dir) && dir[0] !== '/') {
-      dirs.push(dir)
+function normalizeIncludePath(directories) {
+  return directories.reduce((all, directory) => {
+    const directories_ = []
+    if (isAbsolute(directory) && directory[0] !== '/') {
+      directories_.push(directory)
     } else {
-      dirs.push(dir)
-      dirs.push(join(PROJECT_ROOT, dir))
-      dirs.push(join(process.cwd(), dir))
+      directories_.push(directory)
+      directories_.push(join(PROJECT_ROOT, directory))
+      directories_.push(join(process.cwd(), directory))
     }
 
-    return [...all, ...dirs]
+    return [...all, ...directories_]
   }, [])
 }
 

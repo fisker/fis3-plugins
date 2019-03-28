@@ -1,23 +1,21 @@
-'use strict'
+const _path = _interopRequireDefault(require('path'))
 
-var _path = _interopRequireDefault(require('path'))
+const _lodash = _interopRequireDefault(require('lodash.merge'))
 
-var _lodash = _interopRequireDefault(require('lodash.merge'))
-
-var _defaultConfig = _interopRequireDefault(
+const _defaultConfig = _interopRequireDefault(
   require('browser-sync/dist/default-config')
 )
 
-var _middleware = _interopRequireDefault(require('./middleware'))
+const _middleware = _interopRequireDefault(require('./middleware'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var mock = _middleware.default.mock,
-  logger = _middleware.default.logger,
-  directory = _middleware.default.directory
-var defaultOptions = (0, _lodash.default)({}, _defaultConfig.default, {
+const {mock} = _middleware.default
+const {logger} = _middleware.default
+const {directory} = _middleware.default
+const defaultOptions = (0, _lodash.default)({}, _defaultConfig.default, {
   server: {
     directory: true,
   },
@@ -27,7 +25,7 @@ var defaultOptions = (0, _lodash.default)({}, _defaultConfig.default, {
   notify: false,
   online: false,
 })
-var overrideOptions = {
+const overrideOptions = {
   open: false,
   snippetOptions: {
     rule: {
@@ -44,7 +42,7 @@ function getType(obj) {
 }
 
 function getUserConfig(path) {
-  var config = {}
+  let config = {}
 
   try {
     config = require(path)
@@ -62,7 +60,7 @@ function getUserConfig(path) {
 }
 
 function parseMiddleware(middleware) {
-  var type = getType(middleware)
+  const type = getType(middleware)
 
   if (type !== 'Array') {
     if (type === 'Boolean') {
@@ -76,13 +74,13 @@ function parseMiddleware(middleware) {
 }
 
 function getConfig(bs, argv) {
-  var userConfig = getUserConfig(
+  const userConfig = getUserConfig(
     _path.default.resolve(
       argv.context,
       argv.bsConfig || bs.instance.config.userFile
     )
   )
-  var config = (0, _lodash.default)(
+  const config = (0, _lodash.default)(
     {},
     defaultOptions,
     userConfig,

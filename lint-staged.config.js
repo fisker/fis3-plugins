@@ -93,11 +93,11 @@ function reduceByGlob(config, {exts, cmds}) {
 function groupByGlob(grouped) {
   return Object.keys(grouped)
     .map(key => {
-      const [cmds, ...exts] = grouped[key]
+      const [cmds, ...extensions] = grouped[key]
 
       return {
         cmds,
-        exts,
+        exts: extensions,
       }
     })
     .reduce(reduceByGlob, {})

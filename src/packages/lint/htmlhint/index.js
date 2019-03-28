@@ -35,21 +35,21 @@ function readConfig(filename) {
 
 let htmlhintrcConfig = {}
 
-module.exports = function(content, file, conf) {
+module.exports = function(content, file, config) {
   if (!content) {
     return
   }
 
   const ruleset =
-    conf.rules ||
+    config.rules ||
     htmlhintrcConfig ||
     (htmlhintrcConfig = readConfig('.htmlhintrc'))
 
   const results = HTMLHint.verify(content, ruleset)
   let errorType = 'warning'
 
-  results.forEach(function(msg) {
-    if (msg.type === 'error') {
+  results.forEach(function(message) {
+    if (message.type === 'error') {
       errorType = 'error'
     }
   })
@@ -62,7 +62,8 @@ module.exports = function(content, file, conf) {
       HTMLHint.format(results, {indent: 2}).join('\n')
     )
     if (errorType === 'error') {
-      process.exit(1)
+      process.exitCode = 1
+      throw new Error('htmlhint error.')
     }
   }
 }

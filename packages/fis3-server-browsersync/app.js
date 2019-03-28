@@ -1,12 +1,10 @@
-'use strict'
+const _path = _interopRequireDefault(require('path'))
 
-var _path = _interopRequireDefault(require('path'))
+const _browserSync = _interopRequireDefault(require('browser-sync'))
 
-var _browserSync = _interopRequireDefault(require('browser-sync'))
+const _yargs = _interopRequireDefault(require('yargs'))
 
-var _yargs = _interopRequireDefault(require('yargs'))
-
-var _browserSyncConfig = _interopRequireDefault(
+const _browserSyncConfig = _interopRequireDefault(
   require('./lib/browser-sync-config')
 )
 
@@ -14,12 +12,12 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var argv = _yargs.default.argv
+const {argv} = _yargs.default
 startServer(argv)
 
 function now() {
-  var d = new Date()
-  var str = [d.getHours(), d.getMinutes(), d.getSeconds()]
+  const d = new Date()
+  let str = [d.getHours(), d.getMinutes(), d.getSeconds()]
     .join(':')
     .replace(/\b\d\b/g, '0$&')
   str += '.'.concat('00'.concat(d.getMilliseconds()).slice(-3))
@@ -42,7 +40,7 @@ function onInit(config) {
 
 function watch(bs, root) {
   return function(event, file) {
-    var relativePath = _path.default.relative(root, file)
+    const relativePath = _path.default.relative(root, file)
 
     if (
       !relativePath ||
@@ -77,9 +75,9 @@ function replaceScriptTag(bs) {
 }
 
 function startServer(argv) {
-  var bs = _browserSync.default.create()
+  const bs = _browserSync.default.create()
 
-  var bsConfig = (0, _browserSyncConfig.default)(bs, argv)
+  const bsConfig = (0, _browserSyncConfig.default)(bs, argv)
   bs.exit()
   bs.init(bsConfig, onInit(bsConfig))
   bs.watch(argv.root, watch(bs, argv.root))

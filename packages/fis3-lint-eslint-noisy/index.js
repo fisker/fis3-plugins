@@ -1,23 +1,21 @@
-'use strict'
+const _eslint = require('eslint')
 
-var _eslint = require('eslint')
+const formatter = _eslint.CLIEngine.getFormatter()
 
-var formatter = _eslint.CLIEngine.getFormatter()
-
-var log = global.fis.log
+const {log} = global.fis
 
 module.exports = function(content, file, conf) {
   if (!content) {
     return
   }
 
-  var cli = new _eslint.CLIEngine(conf)
+  const cli = new _eslint.CLIEngine(conf)
 
   if (cli.isPathIgnored(file.realpath)) {
     return
   }
 
-  var report = cli.executeOnText(content, file.realpath)
+  const report = cli.executeOnText(content, file.realpath)
 
   if (conf.fix) {
     _eslint.CLIEngine.outputFixes(report)

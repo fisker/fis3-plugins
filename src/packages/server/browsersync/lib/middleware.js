@@ -21,7 +21,7 @@ function mock(root) {
     data_path: [path.join(root, 'test'), path.join(root, 'mock')],
   }
 
-  return function(req, res, next) {
+  return function(request, response, next) {
     ;[
       ydRewrite(options),
       bodyParser.urlencoded({extended: false}),
@@ -30,17 +30,17 @@ function mock(root) {
       ydScript(options),
     ].reduceRight(function(next, middlewave) {
       return function() {
-        middlewave(req, res, next)
+        middlewave(request, response, next)
       }
     }, next)()
   }
 }
 
 function getMiddleware(name, handler) {
-  return function(...args) {
+  return function(...arguments_) {
     return {
       route: '',
-      handle: handler(...args),
+      handle: handler(...arguments_),
       id: `Browsersync ${name} Middleware`,
     }
   }

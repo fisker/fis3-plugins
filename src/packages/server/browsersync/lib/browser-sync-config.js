@@ -28,8 +28,8 @@ const overrideOptions = {
   },
 }
 
-function getType(obj) {
-  return Object.prototype.toString.call(obj).slice(8, -1)
+function getType(object) {
+  return Object.prototype.toString.call(object).slice(8, -1)
 }
 
 function getUserConfig(path) {

@@ -1,10 +1,8 @@
-'use strict'
+const _posthtml = _interopRequireDefault(require('posthtml'))
 
-var _posthtml = _interopRequireDefault(require('posthtml'))
+const _posthtmlBeautify = _interopRequireDefault(require('posthtml-beautify'))
 
-var _posthtmlBeautify = _interopRequireDefault(require('posthtml-beautify'))
-
-var _promiseSynchronizer = _interopRequireDefault(
+const _promiseSynchronizer = _interopRequireDefault(
   require('promise-synchronizer')
 )
 
@@ -12,7 +10,7 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var log = global.fis.log
+const {log} = global.fis
 
 module.exports = function(content, file, conf) {
   content = content.replace(
@@ -23,7 +21,7 @@ module.exports = function(content, file, conf) {
     /__relative<<<"(.*?)">>>/g,
     '"__relative_fn2_start__$1__relative_fn2_end__"'
   )
-  var promise = (0, _posthtml.default)()
+  const promise = (0, _posthtml.default)()
     .use(
       (0, _posthtmlBeautify.default)({
         rules: conf.rules,

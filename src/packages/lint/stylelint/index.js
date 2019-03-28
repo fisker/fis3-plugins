@@ -14,16 +14,16 @@ const syntax = {
   '.sss': 'sugarss',
 }
 
-module.exports = function(content, file, conf) {
+module.exports = function(content, file, config_) {
   if (!content) {
     return content
   }
 
-  const config = Object.assign({}, conf, {
+  const config = Object.assign({}, config_, {
     formatter: 'string',
     files: file.realpath,
     extractStyleTagsFromHtml: false,
-    from: conf.filename,
+    from: config_.filename,
   })
   delete config.filename
   delete config.code
@@ -37,12 +37,11 @@ module.exports = function(content, file, conf) {
     .process(content, config)
     .then(function(result) {
       const messages = result.messages || []
-      const errorMsg = []
-      const warnMsg = []
-      for (let i = 0; i < messages.length; i += 1) {
-        const message = messages[i]
+      const errorMessage = []
+      const warnMessage = []
+      for (const message of messages) {
         const type = message.severity || 'warn'
-        ;(type === 'error' ? errorMsg : warnMsg).push(
+        ;(type === 'error' ? errorMessage : warnMessage).push(
           [
             ' ',
             `${type}:`,
@@ -53,18 +52,19 @@ module.exports = function(content, file, conf) {
         )
       }
 
-      if (warnMsg.length > 0 || errorMsg.length > 0) {
+      if (warnMessage.length > 0 || errorMessage.length > 0) {
         log.warn(
           '[%s] lint failed: \n%s \n  %s problem (%s errors, %s warning)',
           file.id,
-          warnMsg.concat(errorMsg).join('\n'),
-          warnMsg.length + errorMsg.length,
-          errorMsg.length,
-          warnMsg.length
+          warnMessage.concat(errorMessage).join('\n'),
+          warnMessage.length + errorMessage.length,
+          errorMessage.length,
+          warnMessage.length
         )
 
-        if (errorMsg.length > 0) {
-          process.exit(1)
+        if (errorMessage.length > 0) {
+          process.exitCode = 1
+          throw new Error('stylelint error.')
         }
       }
 

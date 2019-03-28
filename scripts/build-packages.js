@@ -19,17 +19,17 @@ const pluginTypes = [
 const packages = []
 
 pluginTypes.forEach(function(type) {
-  let dir
+  let directory
   try {
-    dir = fs.readdirSync(path.join(SOURCE_DIR, 'packages', type))
+    directory = fs.readdirSync(path.join(SOURCE_DIR, 'packages', type))
   } catch (error) {
     return
   }
 
-  dir.forEach(function(name) {
-    const pkg = new Package(type, name)
-    pkg.build()
-    packages.push(pkg.pkg)
+  directory.forEach(function(name) {
+    const package_ = new Package(type, name)
+    package_.build()
+    packages.push(package_.pkg)
   })
 })
 ;(function(packages) {

@@ -1,20 +1,18 @@
-'use strict'
+const _path = _interopRequireDefault(require('path'))
 
-var _path = _interopRequireDefault(require('path'))
+const _morgan = _interopRequireDefault(require('morgan'))
 
-var _morgan = _interopRequireDefault(require('morgan'))
+const _bodyParser = _interopRequireDefault(require('body-parser'))
 
-var _bodyParser = _interopRequireDefault(require('body-parser'))
+const _rewrite = _interopRequireDefault(require('yog-devtools/lib/rewrite'))
 
-var _rewrite = _interopRequireDefault(require('yog-devtools/lib/rewrite'))
+const _preview = _interopRequireDefault(require('yog-devtools/lib/preview'))
 
-var _preview = _interopRequireDefault(require('yog-devtools/lib/preview'))
+const _script = _interopRequireDefault(require('yog-devtools/lib/script'))
 
-var _script = _interopRequireDefault(require('yog-devtools/lib/script'))
+const _serveDirectory = _interopRequireDefault(require('serve-directory'))
 
-var _serveDirectory = _interopRequireDefault(require('serve-directory'))
-
-var _serveDirectoryThemeOcticons = _interopRequireDefault(
+const _serveDirectoryThemeOcticons = _interopRequireDefault(
   require('serve-directory-theme-octicons')
 )
 
@@ -23,7 +21,7 @@ function _interopRequireDefault(obj) {
 }
 
 function mock(root) {
-  var options = {
+  const options = {
     view_path: '',
     // 避免报错。
     rewrite_file: [

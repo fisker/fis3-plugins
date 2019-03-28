@@ -1,6 +1,4 @@
-'use strict'
-
-var _jsBeautify = require('js-beautify')
+const _jsBeautify = require('js-beautify')
 
 module.exports = function(content, file, conf) {
   return content ? (0, _jsBeautify.html)(content, conf) : ''

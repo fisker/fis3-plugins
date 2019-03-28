@@ -1,6 +1,4 @@
-'use strict'
-
-var _prettyhtml = _interopRequireDefault(require('@starptech/prettyhtml'))
+const _prettyhtml = _interopRequireDefault(require('@starptech/prettyhtml'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}

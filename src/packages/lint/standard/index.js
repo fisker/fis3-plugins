@@ -12,7 +12,8 @@ module.exports = function(content, file) {
     ;({results} = standard.lintTextSync(content, {}))
   } catch (error) {
     log.error(error)
-    process.exit(1)
+    process.exitCode = 1
+    throw new Error('standard error.')
   }
 
   results = results[0]
@@ -20,7 +21,8 @@ module.exports = function(content, file) {
   if (results.errorCount || results.warningCount) {
     log.warn('[%s] lint failed: \n %s', file.id, formatter([results]))
     if (results.errorCount) {
-      process.exit(1)
+      process.exitCode = 1
+      throw new Error('standard error.')
     }
   }
 }

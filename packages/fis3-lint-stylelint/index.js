@@ -1,12 +1,10 @@
-'use strict'
-
-var _promiseSynchronizer = _interopRequireDefault(
+const _promiseSynchronizer = _interopRequireDefault(
   require('promise-synchronizer')
 )
 
-var _postcss = _interopRequireDefault(require('postcss'))
+const _postcss = _interopRequireDefault(require('postcss'))
 
-var _stylelint = _interopRequireDefault(require('stylelint'))
+const _stylelint = _interopRequireDefault(require('stylelint'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
@@ -16,8 +14,8 @@ function _interopRequireDefault(obj) {
  * fis3-lint-stylelint
  * fisker Cheung<lionkay@gmail.com>
  */
-var log = global.fis.log
-var syntax = {
+const {log} = global.fis
+const syntax = {
   '.scss': 'scss',
   '.less': 'less',
   '.sss': 'sugarss',
@@ -28,7 +26,7 @@ module.exports = function(content, file, conf) {
     return
   }
 
-  var config = Object.assign({}, conf, {
+  const config = Object.assign({}, conf, {
     formatter: 'string',
     files: file.realpath,
     extractStyleTagsFromHtml: false,
@@ -42,16 +40,16 @@ module.exports = function(content, file, conf) {
     config.syntax = syntax[file.ext]
   }
 
-  var promise = (0, _postcss.default)([_stylelint.default])
+  const promise = (0, _postcss.default)([_stylelint.default])
     .process(content, config)
     .then(function(result) {
-      var messages = result.messages || []
-      var errorMsg = []
-      var warnMsg = []
+      const messages = result.messages || []
+      const errorMsg = []
+      const warnMsg = []
 
-      for (var i = 0; i < messages.length; i++) {
-        var message = messages[i]
-        var type = message.severity || 'warn'
+      for (let i = 0; i < messages.length; i++) {
+        const message = messages[i]
+        const type = message.severity || 'warn'
         ;(type === 'error' ? errorMsg : warnMsg).push(
           [
             ' ',

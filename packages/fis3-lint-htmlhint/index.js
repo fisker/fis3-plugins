@@ -1,10 +1,8 @@
-'use strict'
+const _htmlhint = _interopRequireDefault(require('htmlhint'))
 
-var _htmlhint = _interopRequireDefault(require('htmlhint'))
+const _fs = _interopRequireDefault(require('fs'))
 
-var _fs = _interopRequireDefault(require('fs'))
-
-var _path = _interopRequireDefault(require('path'))
+const _path = _interopRequireDefault(require('path'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
@@ -14,16 +12,16 @@ function _interopRequireDefault(obj) {
  * fis3-lint-htmlhint
  * fisker Cheung<lionkay@gmail.com>
  */
-var _global = global,
-  _global$fis = _global.fis,
-  fis = _global$fis === void 0 ? {} : _global$fis
-var _fis$log = fis.log,
-  log = _fis$log === void 0 ? function() {} : _fis$log
+const _global = global
+const _global$fis = _global.fis
+const fis = _global$fis === void 0 ? {} : _global$fis
+const _fis$log = fis.log
+const log = _fis$log === void 0 ? function() {} : _fis$log
 
 function readConfig(filename) {
-  var currentFolder = process.cwd()
-  var currentFile = ''
-  var parentFolder = ''
+  let currentFolder = process.cwd()
+  let currentFile = ''
+  let parentFolder = ''
 
   do {
     currentFolder = parentFolder || currentFolder
@@ -45,21 +43,21 @@ function readConfig(filename) {
   return {}
 }
 
-var htmlhintrcConfig = {}
+let htmlhintrcConfig = {}
 
 module.exports = function(content, file, conf) {
   if (!content) {
     return
   }
 
-  var ruleset =
+  const ruleset =
     conf.rules ||
     htmlhintrcConfig ||
     (htmlhintrcConfig = readConfig('.htmlhintrc'))
 
-  var results = _htmlhint.default.verify(content, ruleset)
+  const results = _htmlhint.default.verify(content, ruleset)
 
-  var errorType = 'warning'
+  let errorType = 'warning'
   results.forEach(function(msg) {
     if (msg.type === 'error') {
       errorType = 'error'

@@ -1,17 +1,15 @@
-'use strict'
+const _ejs = _interopRequireDefault(require('ejs'))
 
-var _ejs = _interopRequireDefault(require('ejs'))
-
-var _path = _interopRequireDefault(require('path'))
+const _path = _interopRequireDefault(require('path'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
 function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
+  for (let i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {}
-    var ownKeys = Object.keys(source)
+    let ownKeys = Object.keys(source)
     if (typeof Object.getOwnPropertySymbols === 'function') {
       ownKeys = ownKeys.concat(
         Object.getOwnPropertySymbols(source).filter(function(sym) {
@@ -29,7 +27,7 @@ function _objectSpread(target) {
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
-      value: value,
+      value,
       enumerable: true,
       configurable: true,
       writable: true,
@@ -40,13 +38,13 @@ function _defineProperty(obj, key, value) {
   return obj
 }
 
-var _global = global,
-  fis = _global.fis
-var PROJECT_ROOT = fis.project.getProjectPath()
+const _global = global
+const {fis} = _global
+const PROJECT_ROOT = fis.project.getProjectPath()
 
-var root = _path.default.normalize(PROJECT_ROOT)
+const root = _path.default.normalize(PROJECT_ROOT)
 
-var re = /^[.\\/]/i
+const re = /^[.\\/]/i
 
 function cleanRequireCache() {
   Object.keys(require.cache)
@@ -75,11 +73,11 @@ module.exports = function(content, file, conf) {
     return content
   }
 
-  var filename = conf.filename
+  const {filename} = conf
 
-  var dirname = _path.default.dirname(filename)
+  const dirname = _path.default.dirname(filename)
 
-  var data = _objectSpread(
+  const data = _objectSpread(
     {
       require: makeRequireFunction(dirname),
       __dirname: dirname,
@@ -88,7 +86,7 @@ module.exports = function(content, file, conf) {
     conf.data
   )
 
-  var options = conf.options
+  const {options} = conf
   options.root = PROJECT_ROOT
   options.filename = file.realpath
   options.cache = false

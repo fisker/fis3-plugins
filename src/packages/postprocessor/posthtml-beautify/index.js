@@ -4,7 +4,7 @@ import sync from 'promise-synchronizer'
 
 const {log} = global.fis
 
-module.exports = function(content, file, conf) {
+module.exports = function(content, file, config) {
   content = content.replace(
     /__relative\("(.*?)"\)/g,
     '"__relative_fn1_start__$1__relative_fn1_end__"'
@@ -17,7 +17,7 @@ module.exports = function(content, file, conf) {
   const promise = posthtml()
     .use(
       beautify({
-        rules: conf.rules,
+        rules: config.rules,
       })
     )
     .process(content)
@@ -29,7 +29,9 @@ module.exports = function(content, file, conf) {
     content = sync(promise)
   } catch (error) {
     log.warn('%s might not processed due to:\n %s', file.id, error)
-    process.exit(1)
+
+    process.exitCode = 1
+    throw new Error('posthtml-beautify error.')
   }
 
   content = content.replace(

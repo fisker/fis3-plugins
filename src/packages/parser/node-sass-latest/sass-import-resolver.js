@@ -5,21 +5,21 @@ function startsWithPartial(base) {
   return base[0] === '_'
 }
 
-function getDirs(dirs, id) {
-  dirs = dirs.map(dir => join(dir, id))
+function getDirectories(directories, id) {
+  directories = directories.map(directory => join(directory, id))
 
   if (isAbsolute(id)) {
-    dirs.push(id)
+    directories.push(id)
   }
 
-  return dirs.map(dirname)
+  return directories.map(dirname)
 }
 
-const extensions = ['scss', 'css', 'sass'].map(ext => `.${ext}`)
+const extensions = ['scss', 'css', 'sass'].map(extension => `.${extension}`)
 
 function withExtension(fileName) {
-  const ext = extname(fileName)
-  return extensions.includes(ext)
+  const extension = extname(fileName)
+  return extensions.includes(extension)
 }
 
 function getFileNames(id) {
@@ -43,13 +43,13 @@ function getFileNames(id) {
 }
 
 function getFiles(parents, url) {
-  const dirs = getDirs(parents, url)
+  const directories = getDirectories(parents, url)
   const fileNames = getFileNames(url)
 
-  const files = dirs.reduce(
-    (files, dir) => [
+  const files = directories.reduce(
+    (files, directory) => [
       ...files,
-      ...fileNames.map(fileName => join(dir, fileName)),
+      ...fileNames.map(fileName => join(directory, fileName)),
     ],
     []
   )
@@ -57,15 +57,18 @@ function getFiles(parents, url) {
   return [...new Set(files)]
 }
 
-function resolveInDirs(includePaths, cache = {}) {
-  return function(url, prev) {
-    const cacheKey = `${normalize(prev)}|${url}`
+function resolveInDirectories(includePaths, cache = {}) {
+  return function(url, previous) {
+    const cacheKey = `${normalize(previous)}|${url}`
 
     if (cache[cacheKey]) {
       return cache[cacheKey]
     }
 
-    const files = getFiles([dirname(prev), ...includePaths, process.cwd()], url)
+    const files = getFiles(
+      [dirname(previous), ...includePaths, process.cwd()],
+      url
+    )
 
     const results = files
       .map(file => {
@@ -82,7 +85,7 @@ function resolveInDirs(includePaths, cache = {}) {
 
     if (results.length > 1) {
       return new Error(
-        `importing ${url} from ${prev}. It's not clear which file to import. \n found files:${results
+        `importing ${url} from ${previous}. It's not clear which file to import. \n found files:${results
           .map(({file}) => file)
           .join('\n')}`
       )
@@ -90,7 +93,7 @@ function resolveInDirs(includePaths, cache = {}) {
 
     if (results.length === 0) {
       return new Error(
-        `importing ${url} from ${prev}. File to import not found or unreadable. \n tried files:${results
+        `importing ${url} from ${previous}. File to import not found or unreadable. \n tried files:${results
           .map(({file}) => file)
           .join('\n')}`
       )
@@ -103,4 +106,4 @@ function resolveInDirs(includePaths, cache = {}) {
   }
 }
 
-module.exports = resolveInDirs
+module.exports = resolveInDirectories

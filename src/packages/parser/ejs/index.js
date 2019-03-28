@@ -18,31 +18,31 @@ function cleanRequireCache() {
 }
 
 function makeRequireFunction(context) {
-  return function(mod) {
+  return function(module_) {
     cleanRequireCache()
 
-    if (re.test(mod)) {
-      mod = path.resolve(context, mod)
+    if (re.test(module_)) {
+      module_ = path.resolve(context, module_)
     }
 
-    return require(mod)
+    return require(module_)
   }
 }
 
-module.exports = function(content, file, conf) {
+module.exports = function(content, file, config) {
   if (file.filename[0] === '_') {
     return content
   }
-  const {filename} = conf
+  const {filename} = config
   const dirname = path.dirname(filename)
 
   const data = {
     require: makeRequireFunction(dirname),
     __dirname: dirname,
     __filename: filename,
-    ...conf.data,
+    ...config.data,
   }
-  const {options} = conf
+  const {options} = config
 
   options.root = PROJECT_ROOT
   options.filename = file.realpath

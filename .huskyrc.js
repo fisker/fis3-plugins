@@ -20,7 +20,7 @@ const hooks = {
 
 // export
 
-const tasks = arr => arr.join(' && ')
+const tasks = array => array.join(' && ')
 
 function parseHooks(hooks) {
   const keys = Object.keys(hooks)

@@ -1,23 +1,21 @@
-'use strict'
-
-var _terser = require('terser')
+const _terser = require('terser')
 
 /*
  * fis3-optimizer-terser
  * fisker Cheung<lionkay@gmail.com>
  */
-var log = global.fis.log
+const {log} = global.fis
 
 function getTerserOptions(file, conf) {
-  var options = Object.assign({}, conf)
+  const options = Object.assign({}, conf)
   delete options.filename
-  var filename = file.filename + file.rExt
+  const filename = file.filename + file.rExt
 
   if (file.isInline) {
     options.sourceMap = false
   }
 
-  var sourceMap = options.sourceMap
+  const {sourceMap} = options
 
   if (sourceMap) {
     if (sourceMap.filename && typeof sourceMap.filename === 'string') {
@@ -39,7 +37,7 @@ function deriveSourceMap(file, sourceMap) {
     return
   }
 
-  var mapping = global.fis.file.wrap(
+  const mapping = global.fis.file.wrap(
     ''
       .concat(file.dirname, '/')
       .concat(file.filename)
@@ -52,8 +50,8 @@ function deriveSourceMap(file, sourceMap) {
 }
 
 module.exports = function(content, file, conf) {
-  var options = getTerserOptions(file, conf)
-  var result = (0, _terser.minify)(content, options)
+  const options = getTerserOptions(file, conf)
+  const result = (0, _terser.minify)(content, options)
 
   if (result.warnings) {
     log.warn(result.warnings)

@@ -1,8 +1,6 @@
-'use strict'
+const _postcss = _interopRequireDefault(require('postcss'))
 
-var _postcss = _interopRequireDefault(require('postcss'))
-
-var _autoprefixer = _interopRequireDefault(require('autoprefixer'))
+const _autoprefixer = _interopRequireDefault(require('autoprefixer'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}

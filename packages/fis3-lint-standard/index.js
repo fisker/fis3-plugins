@@ -1,20 +1,18 @@
-'use strict'
+const _eslint = require('eslint')
 
-var _eslint = require('eslint')
-
-var _standard = _interopRequireDefault(require('standard'))
+const _standard = _interopRequireDefault(require('standard'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var formatter = _eslint.CLIEngine.getFormatter()
+const formatter = _eslint.CLIEngine.getFormatter()
 
-var log = global.fis.log
+const {log} = global.fis
 
 module.exports = function(content, file) {
   content = content.replace(/\n\s+$/, '')
-  var results = []
+  let results = []
 
   try {
     results = _standard.default.lintTextSync(content, {}).results

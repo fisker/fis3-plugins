@@ -18,15 +18,15 @@ function deriveSourceMap(file, sourceMap) {
   file.extras.derived.push(mapping)
 }
 
-module.exports = function(content, file, conf) {
-  const options = Object.assign({}, conf)
+module.exports = function(content, file, config) {
+  const options = Object.assign({}, config)
   delete options.filename
 
   if (options.returnPromise) {
     options.returnPromise = false
   }
 
-  const result = new CleanCSS(conf).minify(content)
+  const result = new CleanCSS(config).minify(content)
 
   if (result.warnings && result.warnings.length > 0) {
     log.warn(result.warnings)
@@ -34,7 +34,8 @@ module.exports = function(content, file, conf) {
 
   if (result.errors && result.errors.length > 0) {
     log.warn(result.errors)
-    process.exit(1)
+    process.exitCode = 1
+    throw new Error('cleancss error.')
   }
 
   deriveSourceMap(file, result.sourceMap)

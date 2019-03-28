@@ -6,8 +6,8 @@ import {minify} from 'terser'
 
 const {log} = global.fis
 
-function getTerserOptions(file, conf) {
-  const options = Object.assign({}, conf)
+function getTerserOptions(file, config) {
+  const options = Object.assign({}, config)
   delete options.filename
 
   const filename = file.filename + file.rExt
@@ -48,8 +48,8 @@ function deriveSourceMap(file, sourceMap) {
   file.extras.derived.push(mapping)
 }
 
-module.exports = function(content, file, conf) {
-  const options = getTerserOptions(file, conf)
+module.exports = function(content, file, config) {
+  const options = getTerserOptions(file, config)
   const result = minify(content, options)
 
   if (result.warnings) {
@@ -58,7 +58,8 @@ module.exports = function(content, file, conf) {
 
   if (result.errors) {
     log.warn(result.errors)
-    process.exit(1)
+    process.exitCode = 1
+    throw new Error('terser error.')
   }
 
   deriveSourceMap(file, result.map)

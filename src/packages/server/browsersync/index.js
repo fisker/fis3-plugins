@@ -56,7 +56,7 @@ function start(opt, callback) {
   const timeout = Math.max(opt.timeout * 1000, 60000)
   let timeoutTimer
 
-  const args = [
+  const arguments_ = [
     script,
     '--root',
     opt.root || CWD,
@@ -72,7 +72,7 @@ function start(opt, callback) {
 
   process.stdout.write('\n Starting browser-sync server ...')
 
-  const server = execa(process.execPath, args, {
+  const server = execa(process.execPath, arguments_, {
     cwd: path.dirname(script),
     detached: opt.daemon,
     stdio: [
@@ -96,7 +96,7 @@ function start(opt, callback) {
     log += chunk
     process.stdout.write('.')
 
-    if (chunk.indexOf('Error') !== -1) {
+    if (chunk.includes('Error')) {
       if (error) {
         return
       }
@@ -105,13 +105,13 @@ function start(opt, callback) {
       process.stdout.write(' fail.\n')
 
       const match = chunk.match(/Error:?\s+([^\r\n]+)/i)
-      let errMsg = 'unknown'
+      let errorMessage = 'unknown'
 
-      if (chunk.indexOf('EADDRINUSE') !== -1) {
+      if (chunk.includes('EADDRINUSE')) {
         log = ''
-        errMsg = `Address already in use:${opt.port}`
+        errorMessage = `Address already in use:${opt.port}`
       } else if (match) {
-        errMsg = match[1]
+        errorMessage = match[1]
       }
 
       if (log) {
@@ -123,7 +123,7 @@ function start(opt, callback) {
       }
 
       try {
-        callback(errMsg)
+        callback(errorMessage)
       } catch (error) {
         console.log(error)
       }
@@ -131,7 +131,7 @@ function start(opt, callback) {
       try {
         process.kill(server.pid, 'SIGKILL')
       } catch (error) {}
-    } else if (chunk.indexOf('Listening on') !== -1) {
+    } else if (chunk.includes('Listening on')) {
       started = true
       if (stoper) {
         stoper()

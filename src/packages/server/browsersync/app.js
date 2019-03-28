@@ -9,12 +9,12 @@ startServer(argv)
 
 function now() {
   const d = new Date()
-  let str = [d.getHours(), d.getMinutes(), d.getSeconds()]
+  let string = [d.getHours(), d.getMinutes(), d.getSeconds()]
     .join(':')
     .replace(/\b\d\b/g, '0$&')
 
-  str += `.${`00${d.getMilliseconds()}`.slice(-3)}`
-  return str
+  string += `.${`00${d.getMilliseconds()}`.slice(-3)}`
+  return string
 }
 
 function logEvent(event, path) {

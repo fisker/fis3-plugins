@@ -1,8 +1,6 @@
-'use strict'
+const _path = require('path')
 
-var _path = require('path')
-
-var _fs = require('fs')
+const _fs = require('fs')
 
 function _toConsumableArray(arr) {
   return (
@@ -16,10 +14,11 @@ function _nonIterableSpread() {
 
 function _iterableToArray(iter) {
   if (
-    Symbol.iterator in Object(iter) ||
+    Symbol.iterator in new Object(iter) ||
     Object.prototype.toString.call(iter) === '[object Arguments]'
-  )
+  ) {
     return Array.from(iter)
+  }
 }
 
 function _arrayWithoutHoles(arr) {
@@ -47,18 +46,18 @@ function getDirs(dirs, id) {
   return dirs.map(_path.dirname)
 }
 
-var extensions = ['scss', 'css', 'sass'].map(function(ext) {
+const extensions = ['scss', 'css', 'sass'].map(function(ext) {
   return '.'.concat(ext)
 })
 
 function withExtension(fileName) {
-  var ext = (0, _path.extname)(fileName)
+  const ext = (0, _path.extname)(fileName)
   return extensions.includes(ext)
 }
 
 function getFileNames(id) {
-  var fileName = (0, _path.basename)(id)
-  var fileNames = [fileName]
+  const fileName = (0, _path.basename)(id)
+  const fileNames = [fileName]
 
   if (!startsWithPartial(fileName)) {
     fileNames.unshift('_'.concat(fileName))
@@ -79,9 +78,9 @@ function getFileNames(id) {
 }
 
 function getFiles(parents, url) {
-  var dirs = getDirs(parents, url)
-  var fileNames = getFileNames(url)
-  var files = dirs.reduce(function(files, dir) {
+  const dirs = getDirs(parents, url)
+  const fileNames = getFileNames(url)
+  const files = dirs.reduce(function(files, dir) {
     return [].concat(
       _toConsumableArray(files),
       _toConsumableArray(
@@ -95,26 +94,26 @@ function getFiles(parents, url) {
 }
 
 function resolveInDirs(includePaths) {
-  var cache =
+  const cache =
     arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {}
   return function(url, prev) {
-    var cacheKey = ''.concat((0, _path.normalize)(prev), '|').concat(url)
+    const cacheKey = ''.concat((0, _path.normalize)(prev), '|').concat(url)
 
     if (cache[cacheKey]) {
       return cache[cacheKey]
     }
 
-    var files = getFiles(
+    const files = getFiles(
       [(0, _path.dirname)(prev)].concat(_toConsumableArray(includePaths), [
         process.cwd(),
       ]),
       url
     )
-    var results = files
+    const results = files
       .map(function(file) {
         try {
           return {
-            file: file,
+            file,
             contents: (0, _fs.readFileSync)(file, 'utf8'),
           }
         } catch (error) {
@@ -134,7 +133,7 @@ function resolveInDirs(includePaths) {
           .concat(
             results
               .map(function(_ref) {
-                var file = _ref.file
+                const {file} = _ref
                 return file
               })
               .join('\n')
@@ -153,7 +152,7 @@ function resolveInDirs(includePaths) {
           .concat(
             results
               .map(function(_ref2) {
-                var file = _ref2.file
+                const {file} = _ref2
                 return file
               })
               .join('\n')
@@ -161,7 +160,7 @@ function resolveInDirs(includePaths) {
       )
     }
 
-    var result = results[0]
+    const result = results[0]
     cache[cacheKey] = result
     return result
   }

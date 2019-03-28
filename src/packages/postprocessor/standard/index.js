@@ -14,7 +14,8 @@ module.exports = function(content) {
     content = standard.lintTextSync(content, {fix: true}).results[0].output
   } catch (error) {
     log.error(error)
-    process.exit(1)
+    process.exitCode = 1
+    throw new Error('standard error.')
   }
 
   return content

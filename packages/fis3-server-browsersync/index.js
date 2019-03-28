@@ -1,26 +1,24 @@
-'use strict'
+const _path = _interopRequireDefault(require('path'))
 
-var _path = _interopRequireDefault(require('path'))
+const _fs = _interopRequireDefault(require('fs'))
 
-var _fs = _interopRequireDefault(require('fs'))
+const _execa = _interopRequireDefault(require('execa'))
 
-var _execa = _interopRequireDefault(require('execa'))
+const _yargs = _interopRequireDefault(require('yargs'))
 
-var _yargs = _interopRequireDefault(require('yargs'))
-
-var _child_process = require('child_process')
+const _child_process = require('child_process')
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var _global = global,
-  fis = _global.fis
+const _global = global
+const {fis} = _global
 
-var util = fis.require('command-server/lib/util.js')
+const util = fis.require('command-server/lib/util.js')
 
-var argv = _yargs.default.argv
-var CWD = process.cwd() // 每 0.2 秒读取子进程的输出文件。
+const {argv} = _yargs.default
+const CWD = process.cwd() // 每 0.2 秒读取子进程的输出文件。
 //
 // 为什么不直接通过 child.stdout 读取？
 // 因为如果使用 stdio pipe 的方式去开启子进程，当 master 进程退出后，子进程再有输出就会导致程序莫名的崩溃。
@@ -28,21 +26,21 @@ var CWD = process.cwd() // 每 0.2 秒读取子进程的输出文件。
 // master 每隔一段时间去读文件，获取子进程输出。
 
 function watchOnFile(file, callback) {
-  var lastIndex = 0
-  var timer
+  let lastIndex = 0
+  let timer
 
   function read() {
-    var stat = _fs.default.statSync(file)
+    const stat = _fs.default.statSync(file)
 
     if (stat.size !== lastIndex) {
-      var fd = _fs.default.openSync(file, 'r')
+      const fd = _fs.default.openSync(file, 'r')
 
-      var buffer = Buffer.alloc(stat.size - lastIndex)
+      const buffer = Buffer.alloc(stat.size - lastIndex)
 
       try {
         _fs.default.readSync(fd, buffer, lastIndex, stat.size - lastIndex)
 
-        var content = buffer.toString('utf8')
+        const content = buffer.toString('utf8')
         lastIndex = stat.size
         callback(content)
       } catch (error) {
@@ -61,17 +59,17 @@ function watchOnFile(file, callback) {
 }
 
 function start(opt, callback) {
-  var defaultScript = _path.default.join(opt.root, 'server.js')
+  const defaultScript = _path.default.join(opt.root, 'server.js')
 
-  var script = fis.util.exists(defaultScript)
+  const script = fis.util.exists(defaultScript)
     ? defaultScript
     : _path.default.join(__dirname, 'app.js')
 
-  var logFile = _path.default.join(opt.root, 'server.log')
+  const logFile = _path.default.join(opt.root, 'server.log')
 
-  var timeout = Math.max(opt.timeout * 1000, 60000)
-  var timeoutTimer
-  var args = [
+  const timeout = Math.max(opt.timeout * 1000, 60000)
+  let timeoutTimer
+  const args = [
     script,
     '--root',
     opt.root || CWD,
@@ -85,7 +83,7 @@ function start(opt, callback) {
     argv.bsConfig,
   ]
   process.stdout.write('\n Starting browser-sync server ...')
-  var server = (0, _execa.default)(process.execPath, args, {
+  const server = (0, _execa.default)(process.execPath, args, {
     cwd: _path.default.dirname(script),
     detached: opt.daemon,
     stdio: [
@@ -94,10 +92,10 @@ function start(opt, callback) {
       opt.daemon ? _fs.default.openSync(logFile, 'w+') : 'pipe',
     ],
   })
-  var log = ''
-  var started = false
-  var error = false
-  var stoper
+  let log = ''
+  let started = false
+  let error = false
+  let stoper
 
   function onData(chunk) {
     if (started) {
@@ -115,8 +113,8 @@ function start(opt, callback) {
 
       error = true
       process.stdout.write(' fail.\n')
-      var match = chunk.match(/Error:?\s+([^\r\n]+)/i)
-      var errMsg = 'unknown'
+      const match = chunk.match(/Error:?\s+([^\r\n]+)/i)
+      let errMsg = 'unknown'
 
       if (chunk.indexOf('EADDRINUSE') !== -1) {
         log = ''
@@ -178,5 +176,5 @@ function start(opt, callback) {
 }
 
 module.exports = {
-  start: start,
+  start,
 }
