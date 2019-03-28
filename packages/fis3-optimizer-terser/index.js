@@ -1,21 +1,23 @@
-const _terser = require('terser')
+'use strict'
+
+var _terser = require('terser')
 
 /*
  * fis3-optimizer-terser
  * fisker Cheung<lionkay@gmail.com>
  */
-const {log} = global.fis
+var log = global.fis.log
 
-function getTerserOptions(file, conf) {
-  const options = Object.assign({}, conf)
+function getTerserOptions(file, config) {
+  var options = Object.assign({}, config)
   delete options.filename
-  const filename = file.filename + file.rExt
+  var filename = file.filename + file.rExt
 
   if (file.isInline) {
     options.sourceMap = false
   }
 
-  const {sourceMap} = options
+  var sourceMap = options.sourceMap
 
   if (sourceMap) {
     if (sourceMap.filename && typeof sourceMap.filename === 'string') {
@@ -37,7 +39,7 @@ function deriveSourceMap(file, sourceMap) {
     return
   }
 
-  const mapping = global.fis.file.wrap(
+  var mapping = global.fis.file.wrap(
     ''
       .concat(file.dirname, '/')
       .concat(file.filename)
@@ -49,9 +51,9 @@ function deriveSourceMap(file, sourceMap) {
   file.extras.derived.push(mapping)
 }
 
-module.exports = function(content, file, conf) {
-  const options = getTerserOptions(file, conf)
-  const result = (0, _terser.minify)(content, options)
+module.exports = function(content, file, config) {
+  var options = getTerserOptions(file, config)
+  var result = (0, _terser.minify)(content, options)
 
   if (result.warnings) {
     log.warn(result.warnings)
@@ -59,7 +61,8 @@ module.exports = function(content, file, conf) {
 
   if (result.errors) {
     log.warn(result.errors)
-    process.exit(1)
+    process.exitCode = 1
+    throw new Error('terser error.')
   }
 
   deriveSourceMap(file, result.map)

@@ -1,23 +1,25 @@
-const _path = _interopRequireDefault(require('path'))
+'use strict'
+
+var _path = _interopRequireDefault(require('path'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-const _global = global
-const {fis} = _global
-const quotes = {
+var _global = global,
+  fis = _global.fis
+var quotes = {
   '': 'QUOTE_NONE',
   "'": 'QUOTE_SINGLE',
   '"': 'QUOTE_DOUBLE',
 }
-const rUrl = /(["']?)__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
-const rFile = /\.[^.]+$/
+var rUrl = /(["']?)__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
+var rFile = /\.[^.]+$/
 
 function wrapPath(info) {
-  const path = info.file.subpath + info.query + info.hash
-  const {quote} = info
-  const quoteStyle = quotes[quote]
+  var path = info.file.subpath + info.query + info.hash
+  var quote = info.quote
+  var quoteStyle = quotes[quote]
   return ''
     .concat(quote, '__relative___')
     .concat(quoteStyle, '-')
@@ -26,7 +28,7 @@ function wrapPath(info) {
 }
 
 function getRelativeUrl(file, host) {
-  let url = ''
+  var url = ''
 
   if (typeof file === 'string') {
     url = file
@@ -38,7 +40,7 @@ function getRelativeUrl(file, host) {
     }
   }
 
-  let relativeFrom =
+  var relativeFrom =
     typeof host.relative === 'string' ? host.relative : host.release
 
   if (rFile.test(relativeFrom)) {
@@ -57,17 +59,17 @@ function getRelativeUrl(file, host) {
 
 function convert(content, file, host) {
   return content.replace(rUrl, function(all, _, quoteStyle, path) {
-    const info = fis.project.lookup(path)
+    var info = fis.project.lookup(path)
 
     if (!info.file) {
       return info.origin
     } // 再编译一遍，为了保证 hash 值是一样的。
 
     fis.compile(info.file)
-    const {query} = info
-    const hash = info.hash || info.file.hash
-    let url = getRelativeUrl(info.file, host || file)
-    const parts = url.split('?')
+    var query = info.query
+    var hash = info.hash || info.file.hash
+    var url = getRelativeUrl(info.file, host || file)
+    var parts = url.split('?')
 
     if (parts.length > 1 && query) {
       url = ''.concat(parts[0] + query, '&amp;').concat(parts[1])
@@ -75,9 +77,9 @@ function convert(content, file, host) {
       url += query
     }
 
-    let quoteChr = ''
+    var quoteChr = ''
 
-    for (const chr in quotes) {
+    for (var chr in quotes) {
       if (quotes[chr] === quoteStyle) {
         quoteChr = chr
         break
@@ -89,8 +91,8 @@ function convert(content, file, host) {
 }
 
 function onStandardRestoreUri(message) {
-  const {info} = message
-  const {file} = message // 没有配置，不开启。
+  var info = message.info,
+    file = message.file // 没有配置，不开启。
   // 或者目标文件不存在
 
   if (!file.relative || !info.file) {
@@ -106,15 +108,15 @@ function onProcessEnd(file) {
     return
   }
 
-  let content = file.getContent()
+  var content = file.getContent()
   file.relativeBody = content
   content = convert(content, file)
   file.setContent(content)
 }
 
 function onPackFile(message) {
-  const {file} = message
-  const {pkg} = message // 没有配置，不开启。
+  var file = message.file
+  var pkg = message.pkg // 没有配置，不开启。
 
   if (!file.relative || !file.relativeBody) {
     return
@@ -124,8 +126,8 @@ function onPackFile(message) {
 }
 
 function onFetchRelativeUrl(message) {
-  const {target} = message
-  const host = message.file
+  var target = message.target
+  var host = message.file
 
   if (!host.relative) {
     return

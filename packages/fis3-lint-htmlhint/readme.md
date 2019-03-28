@@ -55,4 +55,4 @@ rules: [https://github.com/yaniswang/HTMLHint/wiki/Rules](https://github.com/yan
 
 ## license
 
-MIT © [fisker Cheung](https://github.com/fisker)
+MIT © [fisker Cheung](https://www.fiskercheung.com/)

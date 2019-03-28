@@ -1,5 +1,7 @@
-const _cssgraceLite = require('cssgrace-lite')
+'use strict'
 
-module.exports = function(content, file, conf) {
-  return (0, _cssgraceLite.pack)(content, conf)
+var _cssgraceLite = require('cssgrace-lite')
+
+module.exports = function(content, file, config) {
+  return (0, _cssgraceLite.pack)(content, config)
 }

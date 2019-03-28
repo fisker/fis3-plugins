@@ -36,4 +36,4 @@ config: [https://github.com/postcss/autoprefixer](https://github.com/postcss/aut
 
 ## license
 
-MIT © [fisker Cheung](https://github.com/fisker)
+MIT © [fisker Cheung](https://www.fiskercheung.com/)

@@ -1,24 +1,29 @@
-const _eslint = require('eslint')
+'use strict'
 
-const _standard = _interopRequireDefault(require('standard'))
+var _eslint = require('eslint')
+
+var _standard = _interopRequireDefault(require('standard'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-const formatter = _eslint.CLIEngine.getFormatter()
+var formatter = _eslint.CLIEngine.getFormatter()
 
-const {log} = global.fis
+var log = global.fis.log
 
 module.exports = function(content, file) {
   content = content.replace(/\n\s+$/, '')
-  let results = []
+  var results = []
 
   try {
-    results = _standard.default.lintTextSync(content, {}).results
+    var _standard$lintTextSyn = _standard.default.lintTextSync(content, {})
+
+    results = _standard$lintTextSyn.results
   } catch (error) {
     log.error(error)
-    process.exit(1)
+    process.exitCode = 1
+    throw new Error('standard error.')
   }
 
   results = results[0]
@@ -27,7 +32,8 @@ module.exports = function(content, file) {
     log.warn('[%s] lint failed: \n %s', file.id, formatter([results]))
 
     if (results.errorCount) {
-      process.exit(1)
+      process.exitCode = 1
+      throw new Error('standard error.')
     }
   }
 }

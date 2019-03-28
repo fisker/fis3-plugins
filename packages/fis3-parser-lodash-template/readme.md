@@ -44,4 +44,4 @@ more options [https://lodash.com/docs/#template](https://lodash.com/docs/#templa
 
 ## license
 
-MIT © [fisker Cheung](https://github.com/fisker)
+MIT © [fisker Cheung](https://www.fiskercheung.com/)

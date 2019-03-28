@@ -1,24 +1,24 @@
-const _path = _interopRequireDefault(require('path'))
+'use strict'
 
-const _fs = _interopRequireDefault(require('fs'))
+var _path = _interopRequireDefault(require('path'))
 
-const _execa = _interopRequireDefault(require('execa'))
+var _fs = _interopRequireDefault(require('fs'))
 
-const _yargs = _interopRequireDefault(require('yargs'))
+var _execa = _interopRequireDefault(require('execa'))
 
-const _child_process = require('child_process')
+var _yargs = _interopRequireDefault(require('yargs'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-const _global = global
-const {fis} = _global
+var _global = global,
+  fis = _global.fis
 
-const util = fis.require('command-server/lib/util.js')
+var util = fis.require('command-server/lib/util.js')
 
-const {argv} = _yargs.default
-const CWD = process.cwd() // 每 0.2 秒读取子进程的输出文件。
+var argv = _yargs.default.argv
+var CWD = process.cwd() // 每 0.2 秒读取子进程的输出文件。
 //
 // 为什么不直接通过 child.stdout 读取？
 // 因为如果使用 stdio pipe 的方式去开启子进程，当 master 进程退出后，子进程再有输出就会导致程序莫名的崩溃。
@@ -26,21 +26,21 @@ const CWD = process.cwd() // 每 0.2 秒读取子进程的输出文件。
 // master 每隔一段时间去读文件，获取子进程输出。
 
 function watchOnFile(file, callback) {
-  let lastIndex = 0
-  let timer
+  var lastIndex = 0
+  var timer
 
   function read() {
-    const stat = _fs.default.statSync(file)
+    var stat = _fs.default.statSync(file)
 
     if (stat.size !== lastIndex) {
-      const fd = _fs.default.openSync(file, 'r')
+      var fd = _fs.default.openSync(file, 'r')
 
-      const buffer = Buffer.alloc(stat.size - lastIndex)
+      var buffer = Buffer.alloc(stat.size - lastIndex)
 
       try {
         _fs.default.readSync(fd, buffer, lastIndex, stat.size - lastIndex)
 
-        const content = buffer.toString('utf8')
+        var content = buffer.toString('utf8')
         lastIndex = stat.size
         callback(content)
       } catch (error) {
@@ -59,17 +59,17 @@ function watchOnFile(file, callback) {
 }
 
 function start(opt, callback) {
-  const defaultScript = _path.default.join(opt.root, 'server.js')
+  var defaultScript = _path.default.join(opt.root, 'server.js')
 
-  const script = fis.util.exists(defaultScript)
+  var script = fis.util.exists(defaultScript)
     ? defaultScript
     : _path.default.join(__dirname, 'app.js')
 
-  const logFile = _path.default.join(opt.root, 'server.log')
+  var logFile = _path.default.join(opt.root, 'server.log')
 
-  const timeout = Math.max(opt.timeout * 1000, 60000)
-  let timeoutTimer
-  const args = [
+  var timeout = Math.max(opt.timeout * 1000, 60000)
+  var timeoutTimer
+  var arguments_ = [
     script,
     '--root',
     opt.root || CWD,
@@ -83,7 +83,7 @@ function start(opt, callback) {
     argv.bsConfig,
   ]
   process.stdout.write('\n Starting browser-sync server ...')
-  const server = (0, _execa.default)(process.execPath, args, {
+  var server = (0, _execa.default)(process.execPath, arguments_, {
     cwd: _path.default.dirname(script),
     detached: opt.daemon,
     stdio: [
@@ -92,10 +92,10 @@ function start(opt, callback) {
       opt.daemon ? _fs.default.openSync(logFile, 'w+') : 'pipe',
     ],
   })
-  let log = ''
-  let started = false
-  let error = false
-  let stoper
+  var log = ''
+  var started = false
+  var error = false
+  var stoper
 
   function onData(chunk) {
     if (started) {
@@ -106,21 +106,21 @@ function start(opt, callback) {
     log += chunk
     process.stdout.write('.')
 
-    if (chunk.indexOf('Error') !== -1) {
+    if (chunk.includes('Error')) {
       if (error) {
         return
       }
 
       error = true
       process.stdout.write(' fail.\n')
-      const match = chunk.match(/Error:?\s+([^\r\n]+)/i)
-      let errMsg = 'unknown'
+      var match = chunk.match(/Error:?\s+([^\r\n]+)/i)
+      var errorMessage = 'unknown'
 
-      if (chunk.indexOf('EADDRINUSE') !== -1) {
+      if (chunk.includes('EADDRINUSE')) {
         log = ''
-        errMsg = 'Address already in use:'.concat(opt.port)
+        errorMessage = 'Address already in use:'.concat(opt.port)
       } else if (match) {
-        errMsg = match[1]
+        errorMessage = match[1]
       }
 
       if (log) {
@@ -132,7 +132,7 @@ function start(opt, callback) {
       }
 
       try {
-        callback(errMsg)
+        callback(errorMessage)
       } catch (error) {
         console.log(error)
       }
@@ -140,7 +140,7 @@ function start(opt, callback) {
       try {
         process.kill(server.pid, 'SIGKILL')
       } catch (error) {}
-    } else if (chunk.indexOf('Listening on') !== -1) {
+    } else if (chunk.includes('Listening on')) {
       started = true
 
       if (stoper) {
@@ -176,5 +176,5 @@ function start(opt, callback) {
 }
 
 module.exports = {
-  start,
+  start: start,
 }

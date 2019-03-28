@@ -1,15 +1,17 @@
-const _ejs = _interopRequireDefault(require('ejs'))
+'use strict'
 
-const _path = _interopRequireDefault(require('path'))
+var _ejs = _interopRequireDefault(require('ejs'))
+
+var _path = _interopRequireDefault(require('path'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
 function _objectSpread(target) {
-  for (let i = 1; i < arguments.length; i++) {
+  for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {}
-    let ownKeys = Object.keys(source)
+    var ownKeys = Object.keys(source)
     if (typeof Object.getOwnPropertySymbols === 'function') {
       ownKeys = ownKeys.concat(
         Object.getOwnPropertySymbols(source).filter(function(sym) {
@@ -27,7 +29,7 @@ function _objectSpread(target) {
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
-      value,
+      value: value,
       enumerable: true,
       configurable: true,
       writable: true,
@@ -38,13 +40,13 @@ function _defineProperty(obj, key, value) {
   return obj
 }
 
-const _global = global
-const {fis} = _global
-const PROJECT_ROOT = fis.project.getProjectPath()
+var _global = global,
+  fis = _global.fis
+var PROJECT_ROOT = fis.project.getProjectPath()
 
-const root = _path.default.normalize(PROJECT_ROOT)
+var root = _path.default.normalize(PROJECT_ROOT)
 
-const re = /^[.\\/]/i
+var re = /^[.\\/]/i
 
 function cleanRequireCache() {
   Object.keys(require.cache)
@@ -57,36 +59,36 @@ function cleanRequireCache() {
 }
 
 function makeRequireFunction(context) {
-  return function(mod) {
+  return function(module_) {
     cleanRequireCache()
 
-    if (re.test(mod)) {
-      mod = _path.default.resolve(context, mod)
+    if (re.test(module_)) {
+      module_ = _path.default.resolve(context, module_)
     }
 
-    return require(mod)
+    return require(module_)
   }
 }
 
-module.exports = function(content, file, conf) {
+module.exports = function(content, file, config) {
   if (file.filename[0] === '_') {
     return content
   }
 
-  const {filename} = conf
+  var filename = config.filename
 
-  const dirname = _path.default.dirname(filename)
+  var dirname = _path.default.dirname(filename)
 
-  const data = _objectSpread(
+  var data = _objectSpread(
     {
       require: makeRequireFunction(dirname),
       __dirname: dirname,
       __filename: filename,
     },
-    conf.data
+    config.data
   )
 
-  const {options} = conf
+  var options = config.options
   options.root = PROJECT_ROOT
   options.filename = file.realpath
   options.cache = false

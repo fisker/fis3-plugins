@@ -1,23 +1,25 @@
-const _eslint = require('eslint')
+'use strict'
 
-const formatter = _eslint.CLIEngine.getFormatter()
+var _eslint = require('eslint')
 
-const {log} = global.fis
+var formatter = _eslint.CLIEngine.getFormatter()
 
-module.exports = function(content, file, conf) {
+var log = global.fis.log
+
+module.exports = function(content, file, config) {
   if (!content) {
     return
   }
 
-  const cli = new _eslint.CLIEngine(conf)
+  var cli = new _eslint.CLIEngine(config)
 
   if (cli.isPathIgnored(file.realpath)) {
     return
   }
 
-  const report = cli.executeOnText(content, file.realpath)
+  var report = cli.executeOnText(content, file.realpath)
 
-  if (conf.fix) {
+  if (config.fix) {
     _eslint.CLIEngine.outputFixes(report)
   }
 
@@ -25,7 +27,8 @@ module.exports = function(content, file, conf) {
     log.warn('[%s] lint failed: \n %s', file.id, formatter(report.results))
 
     if (report.errorCount) {
-      process.exit(1)
+      process.exitCode = 1
+      throw new Error('eslint error.')
     }
   }
 }

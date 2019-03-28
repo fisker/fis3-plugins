@@ -44,4 +44,4 @@ more options: [https://github.com/mde/ejs](https://github.com/mde/ejs)
 
 ## license
 
-MIT © [fisker Cheung](https://github.com/fisker)
+MIT © [fisker Cheung](https://www.fiskercheung.com/)

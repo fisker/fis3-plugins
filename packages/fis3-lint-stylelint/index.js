@@ -1,10 +1,12 @@
-const _promiseSynchronizer = _interopRequireDefault(
+'use strict'
+
+var _promiseSynchronizer = _interopRequireDefault(
   require('promise-synchronizer')
 )
 
-const _postcss = _interopRequireDefault(require('postcss'))
+var _postcss = _interopRequireDefault(require('postcss'))
 
-const _stylelint = _interopRequireDefault(require('stylelint'))
+var _stylelint = _interopRequireDefault(require('stylelint'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
@@ -14,23 +16,23 @@ function _interopRequireDefault(obj) {
  * fis3-lint-stylelint
  * fisker Cheung<lionkay@gmail.com>
  */
-const {log} = global.fis
-const syntax = {
+var log = global.fis.log
+var syntax = {
   '.scss': 'scss',
   '.less': 'less',
   '.sss': 'sugarss',
 }
 
-module.exports = function(content, file, conf) {
+module.exports = function(content, file, config_) {
   if (!content) {
-    return
+    return content
   }
 
-  const config = Object.assign({}, conf, {
+  var config = Object.assign({}, config_, {
     formatter: 'string',
     files: file.realpath,
     extractStyleTagsFromHtml: false,
-    from: conf.filename,
+    from: config_.filename,
   })
   delete config.filename
   delete config.code
@@ -40,40 +42,63 @@ module.exports = function(content, file, conf) {
     config.syntax = syntax[file.ext]
   }
 
-  const promise = (0, _postcss.default)([_stylelint.default])
+  var promise = (0, _postcss.default)([_stylelint.default])
     .process(content, config)
     .then(function(result) {
-      const messages = result.messages || []
-      const errorMsg = []
-      const warnMsg = []
+      var messages = result.messages || []
+      var errorMessage = []
+      var warnMessage = []
+      var _iteratorNormalCompletion = true
+      var _didIteratorError = false
+      var _iteratorError = undefined
 
-      for (let i = 0; i < messages.length; i++) {
-        const message = messages[i]
-        const type = message.severity || 'warn'
-        ;(type === 'error' ? errorMsg : warnMsg).push(
-          [
-            ' ',
-            ''.concat(type, ':'),
-            message.line
-              ? '['.concat(message.line, ':').concat(message.column, ']')
-              : '', // '[' + message.rule + ']',
-            message.text,
-          ].join(' ')
-        )
+      try {
+        for (
+          var _iterator = messages[Symbol.iterator](), _step;
+          !(_iteratorNormalCompletion = (_step = _iterator.next()).done);
+          _iteratorNormalCompletion = true
+        ) {
+          var message = _step.value
+          var type = message.severity || 'warn'
+          ;(type === 'error' ? errorMessage : warnMessage).push(
+            [
+              ' ',
+              ''.concat(type, ':'),
+              message.line
+                ? '['.concat(message.line, ':').concat(message.column, ']')
+                : '', // '[' + message.rule + ']',
+              message.text,
+            ].join(' ')
+          )
+        }
+      } catch (err) {
+        _didIteratorError = true
+        _iteratorError = err
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return()
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError
+          }
+        }
       }
 
-      if (warnMsg.length > 0 || errorMsg.length > 0) {
+      if (warnMessage.length > 0 || errorMessage.length > 0) {
         log.warn(
           '[%s] lint failed: \n%s \n  %s problem (%s errors, %s warning)',
           file.id,
-          warnMsg.concat(errorMsg).join('\n'),
-          warnMsg.length + errorMsg.length,
-          errorMsg.length,
-          warnMsg.length
+          warnMessage.concat(errorMessage).join('\n'),
+          warnMessage.length + errorMessage.length,
+          errorMessage.length,
+          warnMessage.length
         )
 
-        if (errorMsg.length > 0) {
-          process.exit(1)
+        if (errorMessage.length > 0) {
+          process.exitCode = 1
+          throw new Error('stylelint error.')
         }
       }
 

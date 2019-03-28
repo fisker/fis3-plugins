@@ -1,4 +1,6 @@
-const _standard = _interopRequireDefault(require('standard'))
+'use strict'
+
+var _standard = _interopRequireDefault(require('standard'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
@@ -8,9 +10,9 @@ function _interopRequireDefault(obj) {
  * fis3-postprocessor-standard
  * fisker Cheung<lionkay@gmail.com>
  */
-const {log} = global.fis
+var log = global.fis.log
 
-module.exports = function(content, file, conf) {
+module.exports = function(content) {
   content = content.replace(/\n\s+$/, '')
 
   try {
@@ -19,7 +21,8 @@ module.exports = function(content, file, conf) {
     }).results[0].output
   } catch (error) {
     log.error(error)
-    process.exit(1)
+    process.exitCode = 1
+    throw new Error('standard error.')
   }
 
   return content

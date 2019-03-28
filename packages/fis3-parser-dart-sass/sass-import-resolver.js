@@ -1,6 +1,8 @@
-const _path = require('path')
+'use strict'
 
-const _fs = require('fs')
+var _path = require('path')
+
+var _fs = require('fs')
 
 function _toConsumableArray(arr) {
   return (
@@ -14,11 +16,10 @@ function _nonIterableSpread() {
 
 function _iterableToArray(iter) {
   if (
-    Symbol.iterator in new Object(iter) ||
+    Symbol.iterator in Object(iter) ||
     Object.prototype.toString.call(iter) === '[object Arguments]'
-  ) {
+  )
     return Array.from(iter)
-  }
 }
 
 function _arrayWithoutHoles(arr) {
@@ -34,30 +35,30 @@ function startsWithPartial(base) {
   return base[0] === '_'
 }
 
-function getDirs(dirs, id) {
-  dirs = dirs.map(function(dir) {
-    return (0, _path.join)(dir, id)
+function getDirectories(directories, id) {
+  directories = directories.map(function(directory) {
+    return (0, _path.join)(directory, id)
   })
 
   if ((0, _path.isAbsolute)(id)) {
-    dirs.push(id)
+    directories.push(id)
   }
 
-  return dirs.map(_path.dirname)
+  return directories.map(_path.dirname)
 }
 
-const extensions = ['scss', 'css', 'sass'].map(function(ext) {
-  return '.'.concat(ext)
+var extensions = ['scss', 'css', 'sass'].map(function(extension) {
+  return '.'.concat(extension)
 })
 
 function withExtension(fileName) {
-  const ext = (0, _path.extname)(fileName)
-  return extensions.includes(ext)
+  var extension = (0, _path.extname)(fileName)
+  return extensions.includes(extension)
 }
 
 function getFileNames(id) {
-  const fileName = (0, _path.basename)(id)
-  const fileNames = [fileName]
+  var fileName = (0, _path.basename)(id)
+  var fileNames = [fileName]
 
   if (!startsWithPartial(fileName)) {
     fileNames.unshift('_'.concat(fileName))
@@ -78,14 +79,14 @@ function getFileNames(id) {
 }
 
 function getFiles(parents, url) {
-  const dirs = getDirs(parents, url)
-  const fileNames = getFileNames(url)
-  const files = dirs.reduce(function(files, dir) {
+  var directories = getDirectories(parents, url)
+  var fileNames = getFileNames(url)
+  var files = directories.reduce(function(files, directory) {
     return [].concat(
       _toConsumableArray(files),
       _toConsumableArray(
         fileNames.map(function(fileName) {
-          return (0, _path.join)(dir, fileName)
+          return (0, _path.join)(directory, fileName)
         })
       )
     )
@@ -93,27 +94,27 @@ function getFiles(parents, url) {
   return _toConsumableArray(new Set(files))
 }
 
-function resolveInDirs(includePaths) {
-  const cache =
+function resolveInDirectories(includePaths) {
+  var cache =
     arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {}
-  return function(url, prev) {
-    const cacheKey = ''.concat((0, _path.normalize)(prev), '|').concat(url)
+  return function(url, previous) {
+    var cacheKey = ''.concat((0, _path.normalize)(previous), '|').concat(url)
 
     if (cache[cacheKey]) {
       return cache[cacheKey]
     }
 
-    const files = getFiles(
-      [(0, _path.dirname)(prev)].concat(_toConsumableArray(includePaths), [
+    var files = getFiles(
+      [(0, _path.dirname)(previous)].concat(_toConsumableArray(includePaths), [
         process.cwd(),
       ]),
       url
     )
-    const results = files
+    var results = files
       .map(function(file) {
         try {
           return {
-            file,
+            file: file,
             contents: (0, _fs.readFileSync)(file, 'utf8'),
           }
         } catch (error) {
@@ -127,13 +128,13 @@ function resolveInDirs(includePaths) {
         'importing '
           .concat(url, ' from ')
           .concat(
-            prev,
+            previous,
             ". It's not clear which file to import. \n found files:"
           )
           .concat(
             results
               .map(function(_ref) {
-                const {file} = _ref
+                var file = _ref.file
                 return file
               })
               .join('\n')
@@ -146,13 +147,13 @@ function resolveInDirs(includePaths) {
         'importing '
           .concat(url, ' from ')
           .concat(
-            prev,
+            previous,
             '. File to import not found or unreadable. \n tried files:'
           )
           .concat(
             results
               .map(function(_ref2) {
-                const {file} = _ref2
+                var file = _ref2.file
                 return file
               })
               .join('\n')
@@ -160,10 +161,10 @@ function resolveInDirs(includePaths) {
       )
     }
 
-    const result = results[0]
+    var result = results[0]
     cache[cacheKey] = result
     return result
   }
 }
 
-module.exports = resolveInDirs
+module.exports = resolveInDirectories

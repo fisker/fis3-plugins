@@ -39,4 +39,4 @@ see [https://browsersync.io/docs/options](https://browsersync.io/docs/options)
 
 ## license
 
-MIT © [fisker Cheung](https://github.com/fisker)
+MIT © [fisker Cheung](https://www.fiskercheung.com/)

@@ -34,4 +34,4 @@ config: [https://github.com/cssdream/cssgrace](https://github.com/cssdream/cssgr
 
 ## license
 
-MIT © [fisker Cheung](https://github.com/fisker)
+MIT © [fisker Cheung](https://www.fiskercheung.com/)

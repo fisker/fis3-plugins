@@ -60,4 +60,4 @@ rules: [http://stylelint.io/user-guide/rules/](http://stylelint.io/user-guide/ru
 
 ## license
 
-MIT © [fisker Cheung](https://github.com/fisker)
+MIT © [fisker Cheung](https://www.fiskercheung.com/)

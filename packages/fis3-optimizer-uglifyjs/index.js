@@ -1,21 +1,23 @@
-const _uglifyJs = require('uglify-js')
+'use strict'
+
+var _uglifyJs = require('uglify-js')
 
 /*
  * fis3-optimizer-uglify-js-latest
  * fisker Cheung<lionkay@gmail.com>
  */
-const {log} = global.fis
+var log = global.fis.log
 
-function getUglifyJSOptions(file, conf) {
-  const options = Object.assign({}, conf)
+function getUglifyJSOptions(file, config) {
+  var options = Object.assign({}, config)
   delete options.filename
-  const filename = file.filename + file.rExt
+  var filename = file.filename + file.rExt
 
   if (file.isInline) {
     options.sourceMap = false
   }
 
-  const {sourceMap} = options
+  var sourceMap = options.sourceMap
 
   if (sourceMap) {
     if (sourceMap.filename && typeof sourceMap.filename === 'string') {
@@ -37,7 +39,7 @@ function deriveSourceMap(file, sourceMap) {
     return
   }
 
-  const mapping = global.fis.file.wrap(
+  var mapping = global.fis.file.wrap(
     ''
       .concat(file.dirname, '/')
       .concat(file.filename)
@@ -49,9 +51,9 @@ function deriveSourceMap(file, sourceMap) {
   file.extras.derived.push(mapping)
 }
 
-module.exports = function(content, file, conf) {
-  const options = getUglifyJSOptions(file, conf)
-  const result = (0, _uglifyJs.minify)(content, options)
+module.exports = function(content, file, config) {
+  var options = getUglifyJSOptions(file, config)
+  var result = (0, _uglifyJs.minify)(content, options)
 
   if (result.warnings) {
     log.warn(result.warnings)
@@ -59,7 +61,8 @@ module.exports = function(content, file, conf) {
 
   if (result.errors) {
     log.warn(result.errors)
-    process.exit(1)
+    process.exitCode = 1
+    throw new Error('uglifyjs error.')
   }
 
   deriveSourceMap(file, result.map)

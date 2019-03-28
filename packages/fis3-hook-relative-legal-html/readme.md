@@ -67,4 +67,4 @@ fex-team/fis3-hook-relative 中间过程会生成类似`src=__relative___<<<'som
 
 ## license
 
-MIT © [fisker Cheung](https://github.com/fisker)
+MIT © [fisker Cheung](https://www.fiskercheung.com/)

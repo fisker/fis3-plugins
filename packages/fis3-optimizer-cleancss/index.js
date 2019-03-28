@@ -1,17 +1,19 @@
-const _cleanCss = _interopRequireDefault(require('clean-css'))
+'use strict'
+
+var _cleanCss = _interopRequireDefault(require('clean-css'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-const {log} = global.fis
+var log = global.fis.log
 
 function deriveSourceMap(file, sourceMap) {
   if (!sourceMap) {
     return
   }
 
-  const mapping = global.fis.file.wrap(
+  var mapping = global.fis.file.wrap(
     ''
       .concat(file.dirname, '/')
       .concat(file.filename)
@@ -23,15 +25,15 @@ function deriveSourceMap(file, sourceMap) {
   file.extras.derived.push(mapping)
 }
 
-module.exports = function(content, file, conf) {
-  const options = Object.assign({}, conf)
+module.exports = function(content, file, config) {
+  var options = Object.assign({}, config)
   delete options.filename
 
   if (options.returnPromise) {
     options.returnPromise = false
   }
 
-  const result = new _cleanCss.default(conf).minify(content)
+  var result = new _cleanCss.default(config).minify(content)
 
   if (result.warnings && result.warnings.length > 0) {
     log.warn(result.warnings)
@@ -39,7 +41,8 @@ module.exports = function(content, file, conf) {
 
   if (result.errors && result.errors.length > 0) {
     log.warn(result.errors)
-    process.exit(1)
+    process.exitCode = 1
+    throw new Error('cleancss error.')
   }
 
   deriveSourceMap(file, result.sourceMap)

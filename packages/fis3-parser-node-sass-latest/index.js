@@ -1,10 +1,12 @@
-const _path = require('path')
+'use strict'
 
-const _util = _interopRequireDefault(require('util'))
+var _path = require('path')
 
-const _nodeSass = _interopRequireDefault(require('node-sass'))
+var _util = _interopRequireDefault(require('util'))
 
-const _sassImportResolver = _interopRequireDefault(
+var _nodeSass = _interopRequireDefault(require('node-sass'))
+
+var _sassImportResolver = _interopRequireDefault(
   require('./sass-import-resolver')
 )
 
@@ -13,9 +15,9 @@ function _interopRequireDefault(obj) {
 }
 
 function _objectSpread(target) {
-  for (let i = 1; i < arguments.length; i++) {
+  for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {}
-    let ownKeys = Object.keys(source)
+    var ownKeys = Object.keys(source)
     if (typeof Object.getOwnPropertySymbols === 'function') {
       ownKeys = ownKeys.concat(
         Object.getOwnPropertySymbols(source).filter(function(sym) {
@@ -33,7 +35,7 @@ function _objectSpread(target) {
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
-      value,
+      value: value,
       enumerable: true,
       configurable: true,
       writable: true,
@@ -56,11 +58,10 @@ function _nonIterableSpread() {
 
 function _iterableToArray(iter) {
   if (
-    Symbol.iterator in new Object(iter) ||
+    Symbol.iterator in Object(iter) ||
     Object.prototype.toString.call(iter) === '[object Arguments]'
-  ) {
+  )
     return Array.from(iter)
-  }
 }
 
 function _arrayWithoutHoles(arr) {
@@ -72,23 +73,23 @@ function _arrayWithoutHoles(arr) {
   }
 }
 
-const _global = global
-const {fis} = _global
-const PROJECT_ROOT = fis.project.getProjectPath()
+var _global = global,
+  fis = _global.fis
+var PROJECT_ROOT = fis.project.getProjectPath()
 
-function normalizeIncludePath(dirs) {
-  return dirs.reduce(function(all, dir) {
-    const dirs = []
+function normalizeIncludePath(directories) {
+  return directories.reduce(function(all, directory) {
+    var directories_ = []
 
-    if ((0, _path.isAbsolute)(dir) && dir[0] !== '/') {
-      dirs.push(dir)
+    if ((0, _path.isAbsolute)(directory) && directory[0] !== '/') {
+      directories_.push(directory)
     } else {
-      dirs.push(dir)
-      dirs.push((0, _path.join)(PROJECT_ROOT, dir))
-      dirs.push((0, _path.join)(process.cwd(), dir))
+      directories_.push(directory)
+      directories_.push((0, _path.join)(PROJECT_ROOT, directory))
+      directories_.push((0, _path.join)(process.cwd(), directory))
     }
 
-    return [].concat(_toConsumableArray(all), dirs)
+    return [].concat(_toConsumableArray(all), directories_)
   }, [])
 }
 
@@ -97,17 +98,17 @@ module.exports = function(content, file, config) {
     return content
   }
 
-  const importCache = {}
-  const _config$includePaths = config.includePaths
-  let includePaths = _config$includePaths === void 0 ? [] : _config$includePaths
-  const _config$sourceMap = config.sourceMap
-  let sourceMap = _config$sourceMap === void 0 ? false : _config$sourceMap
-  let {sourceMapContents} = config
+  var importCache = {}
+  var _config$includePaths = config.includePaths,
+    includePaths = _config$includePaths === void 0 ? [] : _config$includePaths,
+    _config$sourceMap = config.sourceMap,
+    sourceMap = _config$sourceMap === void 0 ? false : _config$sourceMap,
+    sourceMapContents = config.sourceMapContents
   includePaths = [(0, _path.dirname)(file.realpath)].concat(
     _toConsumableArray(normalizeIncludePath(includePaths)),
     [PROJECT_ROOT]
   )
-  let sourceMapFile
+  var sourceMapFile
 
   if (sourceMap) {
     sourceMapContents = true
@@ -123,18 +124,18 @@ module.exports = function(content, file, config) {
     )
   }
 
-  const options = _objectSpread({}, config, {
-    includePaths,
+  var options = _objectSpread({}, config, {
+    includePaths: includePaths,
     file: file.realpath,
     data: content,
     indentedSyntax: file.ext === '.sass',
     importer: (0, _sassImportResolver.default)(includePaths, importCache),
-    sourceMap,
-    sourceMapContents,
+    sourceMap: sourceMap,
+    sourceMapContents: sourceMapContents,
   })
 
   delete options.outFile
-  let result
+  var result
 
   try {
     result = _nodeSass.default.renderSync(options)
@@ -151,7 +152,7 @@ module.exports = function(content, file, config) {
   }
 
   if (sourceMapFile && result.map) {
-    const _sourceMap = result.map.toString('utf8')
+    var _sourceMap = result.map.toString('utf8')
 
     sourceMapFile.setContent(_sourceMap)
     file.extras = file.extras || {}

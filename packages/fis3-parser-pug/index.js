@@ -1,7 +1,9 @@
-const _pug = require('pug')
+'use strict'
 
-module.exports = function(content, file, conf) {
-  return content ? (0, _pug.render)(content, conf) : ''
+var _pug = require('pug')
+
+module.exports = function(content, file, config) {
+  return content ? (0, _pug.render)(content, config) : ''
 }
 
 module.exports.defaultOptions = {

@@ -1,8 +1,10 @@
-const _htmlhint = _interopRequireDefault(require('htmlhint'))
+'use strict'
 
-const _fs = _interopRequireDefault(require('fs'))
+var _htmlhint = _interopRequireDefault(require('htmlhint'))
 
-const _path = _interopRequireDefault(require('path'))
+var _fs = _interopRequireDefault(require('fs'))
+
+var _path = _interopRequireDefault(require('path'))
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
@@ -12,16 +14,16 @@ function _interopRequireDefault(obj) {
  * fis3-lint-htmlhint
  * fisker Cheung<lionkay@gmail.com>
  */
-const _global = global
-const _global$fis = _global.fis
-const fis = _global$fis === void 0 ? {} : _global$fis
-const _fis$log = fis.log
-const log = _fis$log === void 0 ? function() {} : _fis$log
+var _global = global,
+  _global$fis = _global.fis,
+  fis = _global$fis === void 0 ? {} : _global$fis
+var _fis$log = fis.log,
+  log = _fis$log === void 0 ? function() {} : _fis$log
 
 function readConfig(filename) {
-  let currentFolder = process.cwd()
-  let currentFile = ''
-  let parentFolder = ''
+  var currentFolder = process.cwd()
+  var currentFile = ''
+  var parentFolder = ''
 
   do {
     currentFolder = parentFolder || currentFolder
@@ -43,23 +45,23 @@ function readConfig(filename) {
   return {}
 }
 
-let htmlhintrcConfig = {}
+var htmlhintrcConfig = {}
 
-module.exports = function(content, file, conf) {
+module.exports = function(content, file, config) {
   if (!content) {
     return
   }
 
-  const ruleset =
-    conf.rules ||
+  var ruleset =
+    config.rules ||
     htmlhintrcConfig ||
     (htmlhintrcConfig = readConfig('.htmlhintrc'))
 
-  const results = _htmlhint.default.verify(content, ruleset)
+  var results = _htmlhint.default.verify(content, ruleset)
 
-  let errorType = 'warning'
-  results.forEach(function(msg) {
-    if (msg.type === 'error') {
+  var errorType = 'warning'
+  results.forEach(function(message) {
+    if (message.type === 'error') {
       errorType = 'error'
     }
   })
@@ -77,7 +79,8 @@ module.exports = function(content, file, conf) {
     )
 
     if (errorType === 'error') {
-      process.exit(1)
+      process.exitCode = 1
+      throw new Error('htmlhint error.')
     }
   }
 }
