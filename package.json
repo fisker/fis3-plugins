@@ -67,7 +67,7 @@
     "prettier": "^1.16.4",
     "promise-synchronizer": "^1.0.14",
     "pug": "^2.0.3",
-    "sass": "^1.17.3",
+    "sass": "^1.17.4",
     "serve-directory": "^3.0.4",
     "serve-directory-theme-octicons": "^1.2.3",
     "standard": "^12.0.1",
