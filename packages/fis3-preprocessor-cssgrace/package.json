@@ -4,12 +4,8 @@
     "name": "fisker Cheung",
     "url": "https://www.fiskercheung.com/"
   },
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
-  "dependencies": {
-    "cssgrace-lite": "^1.0.1"
-  },
+  "bugs": {"url": "https://github.com/fisker/fis3-plugins/issues"},
+  "dependencies": {"cssgrace-lite": "^1.0.1"},
   "description": "cssgrace for fis3.",
   "files": ["index.js"],
   "keywords": [
@@ -22,10 +18,8 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-preprocessor-cssgrace",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
+  "publishConfig": {"registry": "https://registry.npmjs.org/"},
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-preprocessor-cssgrace",
-  "version": "1.1.0"
+  "version": "1.1.1"
 }

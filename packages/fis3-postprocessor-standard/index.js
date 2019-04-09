@@ -16,7 +16,7 @@ module.exports = function(content) {
   content = content.replace(/\n\s+$/, '')
 
   try {
-    content = _standard.default.lintTextSync(content, {
+    content = _standard['default'].lintTextSync(content, {
       fix: true,
     }).results[0].output
   } catch (error) {

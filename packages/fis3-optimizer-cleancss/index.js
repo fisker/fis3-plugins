@@ -33,7 +33,7 @@ module.exports = function(content, file, config) {
     options.returnPromise = false
   }
 
-  var result = new _cleanCss.default(config).minify(content)
+  var result = new _cleanCss['default'](config).minify(content)
 
   if (result.warnings && result.warnings.length > 0) {
     log.warn(result.warnings)

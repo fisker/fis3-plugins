@@ -4,13 +4,8 @@
     "name": "fisker Cheung",
     "url": "https://www.fiskercheung.com/"
   },
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
-  "dependencies": {
-    "eslint": "^5.15.3",
-    "standard": "^12.0.1"
-  },
+  "bugs": {"url": "https://github.com/fisker/fis3-plugins/issues"},
+  "dependencies": {"eslint": "^5.16.0", "standard": "^12.0.1"},
   "description": "a js linter plugin of fis3 based on standard.",
   "files": ["index.js"],
   "keywords": [
@@ -24,10 +19,8 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-lint-standard",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
+  "publishConfig": {"registry": "https://registry.npmjs.org/"},
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-standard",
-  "version": "1.2.4"
+  "version": "1.2.5"
 }

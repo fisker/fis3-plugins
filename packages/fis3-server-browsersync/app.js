@@ -14,7 +14,7 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var argv = _yargs.default.argv
+var argv = _yargs['default'].argv
 startServer(argv)
 
 function now() {
@@ -42,7 +42,7 @@ function onInit(config) {
 
 function watch(bs, root) {
   return function(event, file) {
-    var relativePath = _path.default.relative(root, file)
+    var relativePath = _path['default'].relative(root, file)
 
     if (
       !relativePath ||
@@ -70,16 +70,16 @@ function signalTerminate(bs) {
 
 function replaceScriptTag(bs) {
   // replace scriptTag template with mine
-  bs.instance.config.templates.scriptTag = _path.default.join(
+  bs.instance.config.templates.scriptTag = _path['default'].join(
     __dirname,
     'templates/script-tags.tmpl'
   )
 }
 
 function startServer(argv) {
-  var bs = _browserSync.default.create()
+  var bs = _browserSync['default'].create()
 
-  var bsConfig = (0, _browserSyncConfig.default)(bs, argv)
+  var bsConfig = (0, _browserSyncConfig['default'])(bs, argv)
   bs.exit()
   bs.init(bsConfig, onInit(bsConfig))
   bs.watch(argv.root, watch(bs, argv.root))

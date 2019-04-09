@@ -4,12 +4,8 @@
     "name": "fisker Cheung",
     "url": "https://www.fiskercheung.com/"
   },
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
-  "dependencies": {
-    "clean-css": "^4.2.1"
-  },
+  "bugs": {"url": "https://github.com/fisker/fis3-plugins/issues"},
+  "dependencies": {"clean-css": "^4.2.1"},
   "description": "css minifer for fis based on clean-css.",
   "files": ["index.js"],
   "keywords": [
@@ -24,10 +20,8 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-optimizer-cleancss",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
+  "publishConfig": {"registry": "https://registry.npmjs.org/"},
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-cleancss",
-  "version": "1.1.0"
+  "version": "1.1.1"
 }

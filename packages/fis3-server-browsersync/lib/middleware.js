@@ -27,24 +27,24 @@ function mock(root) {
     view_path: '',
     // 避免报错。
     rewrite_file: [
-      _path.default.join(root, 'server.conf'),
-      _path.default.join(root, 'config', 'server.conf'),
-      _path.default.join(root, 'mock', 'server.conf'),
+      _path['default'].join(root, 'server.conf'),
+      _path['default'].join(root, 'config', 'server.conf'),
+      _path['default'].join(root, 'mock', 'server.conf'),
     ],
     data_path: [
-      _path.default.join(root, 'test'),
-      _path.default.join(root, 'mock'),
+      _path['default'].join(root, 'test'),
+      _path['default'].join(root, 'mock'),
     ],
   }
   return function(request, response, next) {
     ;[
-      (0, _rewrite.default)(options),
-      _bodyParser.default.urlencoded({
+      (0, _rewrite['default'])(options),
+      _bodyParser['default'].urlencoded({
         extended: false,
       }),
-      _bodyParser.default.json(),
-      (0, _preview.default)(options),
-      (0, _script.default)(options),
+      _bodyParser['default'].json(),
+      (0, _preview['default'])(options),
+      (0, _script['default'])(options),
     ].reduceRight(function(next, middlewave) {
       return function() {
         middlewave(request, response, next)
@@ -64,12 +64,12 @@ function getMiddleware(name, handler) {
 }
 
 module.exports = {
-  logger: getMiddleware('Logger', _morgan.default),
+  logger: getMiddleware('Logger', _morgan['default']),
   mock: getMiddleware('Mock', mock),
   directory: function directory(root) {
-    return getMiddleware('Server Directory', _serveDirectory.default)(
+    return getMiddleware('Server Directory', _serveDirectory['default'])(
       root,
-      _serveDirectoryThemeOcticons.default
+      _serveDirectoryThemeOcticons['default']
     )
   },
 }

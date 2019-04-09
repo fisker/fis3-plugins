@@ -42,7 +42,7 @@ module.exports = function(content, file, config_) {
     config.syntax = syntax[file.ext]
   }
 
-  var promise = (0, _postcss.default)([_stylelint.default])
+  var promise = (0, _postcss['default'])([_stylelint['default']])
     .process(content, config)
     .then(function(result) {
       var messages = result.messages || []
@@ -76,8 +76,8 @@ module.exports = function(content, file, config_) {
         _iteratorError = err
       } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return()
+          if (!_iteratorNormalCompletion && _iterator['return'] != null) {
+            _iterator['return']()
           }
         } finally {
           if (_didIteratorError) {
@@ -110,7 +110,7 @@ module.exports = function(content, file, config_) {
     })
 
   try {
-    return (0, _promiseSynchronizer.default)(promise)
+    return (0, _promiseSynchronizer['default'])(promise)
   } catch (error) {
     throw new Error(
       '['.concat(file.id, '] lint failed with error: \n\n ').concat(error)

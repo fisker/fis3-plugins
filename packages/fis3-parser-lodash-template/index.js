@@ -44,14 +44,14 @@ var _global = global,
   fis = _global.fis
 var PROJECT_ROOT = fis.project.getProjectPath()
 
-var root = _path.default.normalize(PROJECT_ROOT)
+var root = _path['default'].normalize(PROJECT_ROOT)
 
 var re = /^[.\\/]/i
 
 function cleanRequireCache() {
   Object.keys(require.cache)
     .filter(function(id) {
-      return _path.default.normalize(id).startsWith(root)
+      return _path['default'].normalize(id).startsWith(root)
     })
     .forEach(function(id) {
       delete require.cache[id]
@@ -63,7 +63,7 @@ function makeRequireFunction(context) {
     cleanRequireCache()
 
     if (re.test(module_)) {
-      module_ = _path.default.resolve(context, module_)
+      module_ = _path['default'].resolve(context, module_)
     }
 
     return require(module_)
@@ -75,7 +75,7 @@ module.exports = function(content, file, config) {
   var options = config.options
   var filename = config.filename
 
-  var dirname = _path.default.dirname(filename)
+  var dirname = _path['default'].dirname(filename)
 
   options.imports = _objectSpread(
     {
@@ -86,10 +86,10 @@ module.exports = function(content, file, config) {
     options.imports
   )
 
-  var compiled = _lodash.default.template(content, options)
+  var compiled = _lodash['default'].template(content, options)
 
   content = compiled(data)
   return content
 }
 
-module.exports.lodash = _lodash.default
+module.exports.lodash = _lodash['default']

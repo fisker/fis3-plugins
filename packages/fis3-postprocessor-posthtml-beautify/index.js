@@ -23,9 +23,9 @@ module.exports = function(content, file, config) {
     /__relative<<<"(.*?)">>>/g,
     '"__relative_fn2_start__$1__relative_fn2_end__"'
   )
-  var promise = (0, _posthtml.default)()
+  var promise = (0, _posthtml['default'])()
     .use(
-      (0, _posthtmlBeautify.default)({
+      (0, _posthtmlBeautify['default'])({
         rules: config.rules,
       })
     )
@@ -35,7 +35,7 @@ module.exports = function(content, file, config) {
     })
 
   try {
-    content = (0, _promiseSynchronizer.default)(promise)
+    content = (0, _promiseSynchronizer['default'])(promise)
   } catch (error) {
     log.warn('%s might not processed due to:\n %s', file.id, error)
     process.exitCode = 1

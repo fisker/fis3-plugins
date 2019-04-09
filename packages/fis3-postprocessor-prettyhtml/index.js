@@ -7,7 +7,7 @@ function _interopRequireDefault(obj) {
 }
 
 module.exports = function(content, file, config) {
-  content = (0, _prettyhtml.default)(content, config).contents
+  content = (0, _prettyhtml['default'])(content, config).contents
   content = content.replace(/\n\s*<!-- prettyhtml-ignore -->\n/g, '\n')
   return content
 }

@@ -11,7 +11,7 @@ var assign = Object.assign || global.fis.util.assign
 module.exports = function(content, file, config_) {
   var fileFakePath = file.realpathNoExt + file.rExt
 
-  var config = _prettier.default.resolveConfig.sync(fileFakePath, {
+  var config = _prettier['default'].resolveConfig.sync(fileFakePath, {
     editorconfig: true,
   })
 
@@ -20,7 +20,7 @@ module.exports = function(content, file, config_) {
   })
   delete config.filename
 
-  var parsed = _prettier.default.format(content, config)
+  var parsed = _prettier['default'].format(content, config)
 
   return parsed
 }

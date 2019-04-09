@@ -9,10 +9,9 @@ function _interopRequireDefault(obj) {
 }
 
 module.exports = function(content, file, config) {
-  return (0, _postcss.default)([(0, _autoprefixer.default)(config)]).process(
-    content,
-    {
-      from: config.filename,
-    }
-  ).css
+  return (0, _postcss['default'])([
+    (0, _autoprefixer['default'])(config),
+  ]).process(content, {
+    from: config.filename,
+  }).css
 }

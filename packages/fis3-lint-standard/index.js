@@ -17,7 +17,7 @@ module.exports = function(content, file) {
   var results = []
 
   try {
-    var _standard$lintTextSyn = _standard.default.lintTextSync(content, {})
+    var _standard$lintTextSyn = _standard['default'].lintTextSync(content, {})
 
     results = _standard$lintTextSyn.results
   } catch (error) {

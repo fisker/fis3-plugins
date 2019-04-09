@@ -129,7 +129,7 @@ module.exports = function(content, file, config) {
     file: file.realpath,
     data: content,
     indentedSyntax: file.ext === '.sass',
-    importer: (0, _sassImportResolver.default)(includePaths, importCache),
+    importer: (0, _sassImportResolver['default'])(includePaths, importCache),
     sourceMap: sourceMap,
     sourceMapContents: sourceMapContents,
   })
@@ -138,10 +138,10 @@ module.exports = function(content, file, config) {
   var result
 
   try {
-    result = _sass.default.renderSync(options)
+    result = _sass['default'].renderSync(options)
   } catch (error) {
     fis.log.error(
-      _util.default.format(
+      _util['default'].format(
         '%s'.red + ' [`%s` %s:%s]'.yellow,
         error.message,
         error.file,

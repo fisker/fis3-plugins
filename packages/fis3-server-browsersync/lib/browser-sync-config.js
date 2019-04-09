@@ -14,10 +14,10 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {default: obj}
 }
 
-var mock = _middleware.default.mock,
-  logger = _middleware.default.logger,
-  directory = _middleware.default.directory
-var defaultOptions = (0, _lodash.default)({}, _defaultConfig.default, {
+var mock = _middleware['default'].mock,
+  logger = _middleware['default'].logger,
+  directory = _middleware['default'].directory
+var defaultOptions = (0, _lodash['default'])({}, _defaultConfig['default'], {
   server: {
     directory: true,
   },
@@ -77,12 +77,12 @@ function parseMiddleware(middleware) {
 
 function getConfig(bs, argv) {
   var userConfig = getUserConfig(
-    _path.default.resolve(
+    _path['default'].resolve(
       argv.context,
       argv.bsConfig || bs.instance.config.userFile
     )
   )
-  var config = (0, _lodash.default)(
+  var config = (0, _lodash['default'])(
     {},
     defaultOptions,
     userConfig,

@@ -44,10 +44,10 @@ function getRelativeUrl(file, host) {
     typeof host.relative === 'string' ? host.relative : host.release
 
   if (rFile.test(relativeFrom)) {
-    relativeFrom = _path.default.dirname(relativeFrom)
+    relativeFrom = _path['default'].dirname(relativeFrom)
   }
 
-  url = _path.default.relative(relativeFrom, url)
+  url = _path['default'].relative(relativeFrom, url)
   url = url.replace(/\\/g, '/')
 
   if (url[0] !== '.') {

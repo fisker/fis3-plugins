@@ -4,12 +4,8 @@
     "name": "fisker Cheung",
     "url": "https://www.fiskercheung.com/"
   },
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
-  "dependencies": {
-    "sass": "^1.17.3"
-  },
+  "bugs": {"url": "https://github.com/fisker/fis3-plugins/issues"},
+  "dependencies": {"sass": "^1.18.0"},
   "description": "A fis plugin to parse sass with dart-sass.",
   "files": ["index.js", "sass-import-resolver.js"],
   "keywords": [
@@ -24,10 +20,8 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-parser-dart-sass",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
+  "publishConfig": {"registry": "https://registry.npmjs.org/"},
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-dart-sass",
-  "version": "1.0.4"
+  "version": "1.0.5"
 }

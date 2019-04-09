@@ -27,19 +27,19 @@ function readConfig(filename) {
 
   do {
     currentFolder = parentFolder || currentFolder
-    currentFile = _path.default.normalize(
-      _path.default.join(currentFolder, filename)
+    currentFile = _path['default'].normalize(
+      _path['default'].join(currentFolder, filename)
     )
 
-    if (_fs.default.existsSync(currentFile)) {
+    if (_fs['default'].existsSync(currentFile)) {
       try {
-        return JSON.parse(_fs.default.readFileSync(currentFile, 'utf8'))
+        return JSON.parse(_fs['default'].readFileSync(currentFile, 'utf8'))
       } catch (_) {
         return {}
       }
     }
 
-    parentFolder = _path.default.resolve(currentFolder, '../')
+    parentFolder = _path['default'].resolve(currentFolder, '../')
   } while (parentFolder !== currentFolder)
 
   return {}
@@ -57,7 +57,7 @@ module.exports = function(content, file, config) {
     htmlhintrcConfig ||
     (htmlhintrcConfig = readConfig('.htmlhintrc'))
 
-  var results = _htmlhint.default.verify(content, ruleset)
+  var results = _htmlhint['default'].verify(content, ruleset)
 
   var errorType = 'warning'
   results.forEach(function(message) {
@@ -71,7 +71,7 @@ module.exports = function(content, file, config) {
       '[%s] lint failed with %s: \n\n %s',
       file.id,
       errorType,
-      _htmlhint.default
+      _htmlhint['default']
         .format(results, {
           indent: 2,
         })

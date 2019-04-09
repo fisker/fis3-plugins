@@ -4,9 +4,7 @@
     "name": "fisker Cheung",
     "url": "https://www.fiskercheung.com/"
   },
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
+  "bugs": {"url": "https://github.com/fisker/fis3-plugins/issues"},
   "dependencies": {
     "posthtml": "^0.11.3",
     "posthtml-beautify": "^0.2.5",
@@ -29,10 +27,8 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-postprocessor-posthtml-beautify",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
+  "publishConfig": {"registry": "https://registry.npmjs.org/"},
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-posthtml-beautify",
-  "version": "1.3.0"
+  "version": "1.3.1"
 }

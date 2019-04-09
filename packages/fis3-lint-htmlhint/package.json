@@ -4,12 +4,8 @@
     "name": "fisker Cheung",
     "url": "https://www.fiskercheung.com/"
   },
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
-  "dependencies": {
-    "htmlhint": "^0.11.0"
-  },
+  "bugs": {"url": "https://github.com/fisker/fis3-plugins/issues"},
+  "dependencies": {"htmlhint": "^0.11.0"},
   "description": "a html linter plugin of fis3 based on htmlhint.",
   "files": ["index.js"],
   "keywords": [
@@ -24,10 +20,8 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-lint-htmlhint",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
+  "publishConfig": {"registry": "https://registry.npmjs.org/"},
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-htmlhint",
-  "version": "1.2.5"
+  "version": "1.2.6"
 }

@@ -4,9 +4,7 @@
     "name": "fisker Cheung",
     "url": "https://www.fiskercheung.com/"
   },
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
+  "bugs": {"url": "https://github.com/fisker/fis3-plugins/issues"},
   "dependencies": {
     "postcss": "^7.0.14",
     "promise-synchronizer": "^1.0.14",
@@ -25,10 +23,8 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-lint-stylelint",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
+  "publishConfig": {"registry": "https://registry.npmjs.org/"},
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-stylelint",
-  "version": "2.3.0"
+  "version": "2.3.1"
 }

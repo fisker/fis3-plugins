@@ -6,7 +6,7 @@ const DEST_DIR = path.join(__dirname, '..', 'packages')
 const CHARSET = 'utf-8'
 const _ = require('lodash')
 const mkdirp = require('mkdirp').sync
-const stringify = require('json-stable-stringify')
+const stringify = require('fast-json-stable-stringify')
 const babel = require('@babel/core')
 const prettier = require('prettier')
 const globalPackage = require('../package.json')
@@ -168,14 +168,7 @@ class Package {
   }
 
   build() {
-    const isDeprecated = this.info.deprecated
-
-    if (isDeprecated) {
-      this.writeFile(
-        'index.js',
-        `throw new Error('\`${this.pkg.name}\` is Deprecated.')`
-      )
-    } else if (_.isEmpty(this.info.options)) {
+    if (_.isEmpty(this.info.options)) {
       this.copyFile('index.js')
     } else {
       let code = this.readFile('index.js')
@@ -188,15 +181,10 @@ class Package {
       this.writeFile('index.js', code)
     }
 
-    if (isDeprecated) {
-      this.pkg.scripts = this.pkg.scripts || {}
-      this.writeFile('readme.md', template('readme-deprecated.ejs')(this))
-    } else {
-      this.info.files.forEach(file => {
-        this.copyFile(file)
-      })
-      this.writeFile('readme.md', template('readme.ejs')(this))
-    }
+    this.info.files.forEach(file => {
+      this.copyFile(file)
+    })
+    this.writeFile('readme.md', template('readme.ejs')(this))
 
     this.copyFile('../../../../license', 'license')
 
