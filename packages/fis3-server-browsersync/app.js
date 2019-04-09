@@ -62,10 +62,6 @@ function signalTerminate(bs) {
     console.log('Recive quit signal in worker %s.', process.pid)
     bs.exit()
   })
-  process.on('SIGKILL', function() {
-    console.log('Recive kill signal in worker %s.', process.pid)
-    bs.exit()
-  })
 }
 
 function replaceScriptTag(bs) {

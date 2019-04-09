@@ -129,7 +129,7 @@ function start(opt, callback) {
       }
 
       try {
-        process.kill(server.pid, 'SIGKILL')
+        process.kill(server.pid)
       } catch (error) {}
     } else if (chunk.includes('Listening on')) {
       started = true
