@@ -41,7 +41,7 @@
     "markdownlint-cli": "^0.15.0",
     "mkdirp": "^0.5.1",
     "prettier": "^1.16.4",
-    "rollup": "^1.9.3",
+    "rollup": "^1.10.0",
     "rollup-plugin-babel": "^4.3.2"
   },
   "dependencies": {
