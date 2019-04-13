@@ -18,8 +18,8 @@ npm install --global fis3-lint-standard
 ```js
 // fis-conf.js
 
-fis.match("*.js", {
-  lint: fis.plugin("standard"),
+fis.match('*.js', {
+  lint: fis.plugin('standard'),
 })
 ```
 

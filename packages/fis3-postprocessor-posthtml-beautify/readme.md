@@ -20,13 +20,13 @@ npm install --global fis3-postprocessor-posthtml-beautify
 var config = {
   rules: {
     Indent: 2,
-    eol: "\n",
-    eof: "\n",
+    eol: '\n',
+    eof: '\n',
   },
 }
 
-fis.match("*.html", {
-  postprocessor: fis.plugin("posthtml-beautify", config),
+fis.match('*.html', {
+  postprocessor: fis.plugin('posthtml-beautify', config),
 })
 ```
 

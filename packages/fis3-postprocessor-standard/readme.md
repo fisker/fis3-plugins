@@ -17,8 +17,8 @@ npm install --global fis3-postprocessor-standard
 
 ```js
 // fis-conf.js
-fis.match("*.js", {
-  postprocessor: fis.plugin("standard"),
+fis.match('*.js', {
+  postprocessor: fis.plugin('standard'),
 })
 ```
 

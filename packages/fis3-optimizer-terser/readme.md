@@ -20,8 +20,8 @@ npm install --global fis3-optimizer-terser
 
 const uglifyJSConf = {}
 
-fis.match("*.js", {
-  optimizer: fis.plugin("terser", uglifyJSConf),
+fis.match('*.js', {
+  optimizer: fis.plugin('terser', uglifyJSConf),
 })
 ```
 

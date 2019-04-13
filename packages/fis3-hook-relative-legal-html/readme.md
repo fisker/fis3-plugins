@@ -17,10 +17,10 @@ npm install --global fis3-hook-relative-legal-html
 
 ```js
 // 启用插件
-fis.hook("relative-legal-html")
+fis.hook('relative-legal-html')
 
 // 让所有文件，都使用相对路径。
-fis.match("**", {
+fis.match('**', {
   relative: true,
 })
 ```
@@ -30,8 +30,8 @@ fis.match("**", {
 比如： /templates/xxx.tpl 发布到服务端后，是通过 `http://domain.com/user` 访问的，为了让 /templates/xxx.html 中的相对路径正确。请加上如下配置：
 
 ```js
-fis.match("/templates/xxx.tpl", {
-  relative: "/user/", // 服务端访问路径
+fis.match('/templates/xxx.tpl', {
+  relative: '/user/', // 服务端访问路径
 })
 ```
 
@@ -48,7 +48,7 @@ var message = {
   target: target, // 目标文件对象，或者目标文件的绝对 url
   file: file, // target 相对的文件。
 }
-fis.emit("plugin:relative:fetch", message)
+fis.emit('plugin:relative:fetch', message)
 
 // 如果 fis3-hook-relative 开启了。
 // 那么 message.ret 将返回 target 相对与 file 的相对路径。

@@ -19,8 +19,8 @@ npm install --global fis3-postprocessor-prettier
 // fis-conf.js
 const options = {}
 
-fis.match("*.{js,css,json,less,sass,md}", {
-  postprocessor: fis.plugin("prettier", options),
+fis.match('*.{js,css,json,less,sass,md}', {
+  postprocessor: fis.plugin('prettier', options),
 })
 ```
 

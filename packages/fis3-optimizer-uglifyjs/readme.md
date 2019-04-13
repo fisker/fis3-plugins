@@ -20,8 +20,8 @@ npm install --global fis3-optimizer-uglifyjs
 
 const uglifyJSConf = {}
 
-fis.match("*.js", {
-  optimizer: fis.plugin("uglifyjs", uglifyJSConf),
+fis.match('*.js', {
+  optimizer: fis.plugin('uglifyjs', uglifyJSConf),
 })
 ```
 

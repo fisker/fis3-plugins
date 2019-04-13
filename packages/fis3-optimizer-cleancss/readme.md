@@ -20,8 +20,8 @@ npm install --global fis3-optimizer-cleancss
 
 const cleanCSSConf = {}
 
-fis.match("*.css", {
-  optimizer: fis.plugin("cleancss", cleanCSSConf),
+fis.match('*.css', {
+  optimizer: fis.plugin('cleancss', cleanCSSConf),
 })
 ```
 
