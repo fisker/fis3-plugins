@@ -8089,10 +8089,10 @@ promise-retry@^1.1.1:
     err-code "^1.0.0"
     retry "^0.10.0"
 
-promise-synchronizer@^1.0.14:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/promise-synchronizer/-/promise-synchronizer-1.0.14.tgz#dfd34a49dc3598e1b88ef92f8e2c8f2747a0edaa"
-  integrity sha512-C4+My+q1t91Yr7a25PIvi/LBa/HGQ4piHfO873W7YDDtEM6l6ccgox+lLSD3yeTEwzrW7jy8qNrr9KORHfdKfg==
+promise-synchronizer@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/promise-synchronizer/-/promise-synchronizer-1.0.15.tgz#d388a353f5f4dc71017d73b2768c43c738cc1cab"
+  integrity sha512-oNQFKdTUhUAY6sm3iHe6v7zIjjCj9EqOYCLUyfT5hDho98WIRywSZ9B+TYSula4F+CCsovIZBwFBUqn22yOdRQ==
   dependencies:
     deasync "^0.1.14"
 
