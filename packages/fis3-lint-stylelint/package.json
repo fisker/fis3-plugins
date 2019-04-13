@@ -8,7 +8,7 @@
   "dependencies": {
     "postcss": "^7.0.14",
     "promise-synchronizer": "^1.0.14",
-    "stylelint": "^9.10.1"
+    "stylelint": "^10.0.0"
   },
   "description": "a css linter plugin of fis3 based on stylelint.",
   "files": ["index.js"],

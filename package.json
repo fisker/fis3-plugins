@@ -71,7 +71,7 @@
     "serve-directory": "^3.0.4",
     "serve-directory-theme-octicons": "^1.2.3",
     "standard": "^12.0.1",
-    "stylelint": "^9.10.1",
+    "stylelint": "^10.0.0",
     "terser": "^3.17.0",
     "uglify-js": "^3.5.4",
     "yargs": "^13.2.2",
