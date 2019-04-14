@@ -8039,10 +8039,10 @@ preserve@^0.2.0:
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
   integrity sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
 
-prettier-config-fisker@^1.0.0:
-  version "1.0.0"
-  resolved "http://registry.npm.taobao.org/prettier-config-fisker/download/prettier-config-fisker-1.0.0.tgz#caa98a1d02171b63163b1d2d953a137915413df4"
-  integrity sha1-yqmKHQIXG2MWOx0tlToTeRVBPfQ=
+prettier-config-fisker@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/prettier-config-fisker/-/prettier-config-fisker-1.0.1.tgz#ba98b936627bce634e3dc4dbfde9a86a70a919ad"
+  integrity sha512-92iyyMAxtxYBp0S9FzkdAIdvGy6YZJRHopslAMCX2FnmA4Rw9P3ih19866qmJBNzUsdgHbtUx0E89O8vyYtyNw==
 
 prettier-linter-helpers@^1.0.0:
   version "1.0.0"
