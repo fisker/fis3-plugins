@@ -8067,10 +8067,10 @@ preserve@^0.2.0:
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
   integrity sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
 
-prettier-config-fisker@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/prettier-config-fisker/-/prettier-config-fisker-1.0.2.tgz#d79cc111035e8a267f14df1cbdba7af2afc0998e"
-  integrity sha512-467xbIfq7Fl6clWMh0pziIigodKmz1/o8w7MF4cakfx15qMGD0PrtgooLyWaQ/1o/lbInRSdvm+BS/14b2Dn5A==
+prettier-config-fisker@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/prettier-config-fisker/-/prettier-config-fisker-1.0.3.tgz#8115210d9d95b44d0dcf371dd70b64f5bf1e34fa"
+  integrity sha512-r366OKbMc4kn37wrpl3IP0MTvTGJedse4+AQIVrG9SZ0CC61M+p8OdO78Epjx3GCWyzzItbuZNqiAk/UMUNMXg==
 
 prettier-linter-helpers@^1.0.0:
   version "1.0.0"
