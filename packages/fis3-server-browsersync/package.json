@@ -4,7 +4,9 @@
     "name": "fisker Cheung",
     "url": "https://www.fiskercheung.com/"
   },
-  "bugs": {"url": "https://github.com/fisker/fis3-plugins/issues"},
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "browser-sync": "^2.26.3",
@@ -36,7 +38,9 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-server-browsersync",
-  "publishConfig": {"registry": "https://registry.npmjs.org/"},
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-server-browsersync",
   "version": "1.11.1"

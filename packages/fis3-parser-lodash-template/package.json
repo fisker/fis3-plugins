@@ -4,10 +4,16 @@
     "name": "fisker Cheung",
     "url": "https://www.fiskercheung.com/"
   },
-  "bugs": {"url": "https://github.com/fisker/fis3-plugins/issues"},
-  "dependencies": {"lodash": "^4.17.11"},
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
   "description": "a fis plugin to parse lodash template.",
-  "files": ["index.js"],
+  "files": [
+    "index.js"
+  ],
   "keywords": [
     "fis",
     "fis3",
@@ -20,7 +26,9 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-parser-lodash-template",
-  "publishConfig": {"registry": "https://registry.npmjs.org/"},
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-lodash-template",
   "version": "1.1.1"

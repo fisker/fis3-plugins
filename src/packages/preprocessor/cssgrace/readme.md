@@ -6,8 +6,8 @@
 // fis-conf.js
 const options = {}
 
-fis.match("*.{css,less,sass,scss,sss,styl}", {
-  preprocessor: fis.plugin("cssgrace", options),
+fis.match('*.{css,less,sass,scss,sss,styl}', {
+  preprocessor: fis.plugin('cssgrace', options),
 })
 ```
 

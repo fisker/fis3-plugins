@@ -7,8 +7,8 @@
 
 const uglifyJSConf = {}
 
-fis.match("*.js", {
-  optimizer: fis.plugin("terser", uglifyJSConf),
+fis.match('*.js', {
+  optimizer: fis.plugin('terser', uglifyJSConf),
 })
 ```
 

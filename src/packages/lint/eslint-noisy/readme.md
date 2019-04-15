@@ -11,8 +11,8 @@ i named this package `noisy` is because the other eslint plugins for fis all sil
 
 const eslintConf = {}
 
-fis.match("*.js", {
-  lint: fis.plugin("eslint-noisy", eslintConf),
+fis.match('*.js', {
+  lint: fis.plugin('eslint-noisy', eslintConf),
 })
 ```
 

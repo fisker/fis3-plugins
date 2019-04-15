@@ -5,7 +5,7 @@
 ```js
 // fis-conf.js
 
-fis.match("*.{css,scss,less,sss}}", {
-  postprocessor: fis.plugin("stylefmt"),
+fis.match('*.{css,scss,less,sss}}', {
+  postprocessor: fis.plugin('stylefmt'),
 })
 ```

@@ -5,11 +5,11 @@
 ```js
 // fis-conf.js
 const options = {
-  browsers: ["last 2 versions"],
+  browsers: ['last 2 versions'],
 }
 
-fis.match("*.js", {
-  postprocessor: fis.plugin("autoprefixer-latest", options),
+fis.match('*.js', {
+  postprocessor: fis.plugin('autoprefixer-latest', options),
 })
 ```
 

@@ -7,8 +7,8 @@
 
 const cleanCSSConf = {}
 
-fis.match("*.css", {
-  optimizer: fis.plugin("cleancss", cleanCSSConf),
+fis.match('*.css', {
+  optimizer: fis.plugin('cleancss', cleanCSSConf),
 })
 ```
 

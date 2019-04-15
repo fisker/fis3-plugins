@@ -6,8 +6,8 @@
 // fis-conf.js
 const options = {}
 
-fis.match("*.html", {
-  postprocessor: fis.plugin("prettyhtml", options),
+fis.match('*.html', {
+  postprocessor: fis.plugin('prettyhtml', options),
 })
 ```
 

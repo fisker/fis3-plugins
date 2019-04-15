@@ -4,10 +4,16 @@
     "name": "fisker Cheung",
     "url": "https://www.fiskercheung.com/"
   },
-  "bugs": {"url": "https://github.com/fisker/fis3-plugins/issues"},
-  "dependencies": {"prettier": "^1.17.0"},
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "dependencies": {
+    "prettier": "^1.17.0"
+  },
   "description": "a code formatter of fis3 based on prettier.",
-  "files": ["index.js"],
+  "files": [
+    "index.js"
+  ],
   "keywords": [
     "beautify",
     "fis",
@@ -21,7 +27,9 @@
   "license": "MIT",
   "main": "index.js",
   "name": "fis3-postprocessor-prettier",
-  "publishConfig": {"registry": "https://registry.npmjs.org/"},
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-prettier",
   "version": "1.4.2"
