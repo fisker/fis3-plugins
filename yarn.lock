@@ -3804,17 +3804,17 @@ eslint-config-airbnb-base@^13.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-fisker@^4.3.6:
-  version "4.3.6"
-  resolved "https://registry.yarnpkg.com/eslint-config-fisker/-/eslint-config-fisker-4.3.6.tgz#8a3e530ea635b5fa38829a86d064383b76ab8296"
-  integrity sha512-73k2dIfmZK9hXT49Y4kmKtQdM7EYaonW3dvzXlvnV3fH2YVN2bDIE6tnazfdzwApKdCpCxLt/KiS15eguDn2RA==
+eslint-config-fisker@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-fisker/-/eslint-config-fisker-4.4.0.tgz#8037caf2bccda642abde177cca387c287641d723"
+  integrity sha512-hn631yoQFZcw0MfOshevEmb0nA5uVhqd6PsZbHbFNAhUAYfzPX4NZgJN9V1j96Wo5BSWA9YUKgyF9+UaQn+J/g==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-config-prettier "^4.1.0"
     eslint-plugin-es "^1.4.0"
     eslint-plugin-eslint-comments "^3.1.1"
     eslint-plugin-html "^5.0.3"
-    eslint-plugin-import "^2.17.1"
+    eslint-plugin-import "^2.17.2"
     eslint-plugin-node "^8.0.1"
     eslint-plugin-prettier "^3.0.1"
     eslint-plugin-promise "^4.1.1"
@@ -3877,10 +3877,10 @@ eslint-plugin-html@^5.0.3:
   dependencies:
     htmlparser2 "^3.10.0"
 
-eslint-plugin-import@^2.17.1:
-  version "2.17.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.17.1.tgz#b888feb4d9b3ee155113c8dccdd4bec5db33bdf4"
-  integrity sha512-lzD9uvRvW4MsHzIOMJEDSb5MOV9LzgxRPBaovvOhJqzgxRHYfGy9QOrMuwHIh5ehKFJ7Z3DcrcGKDQ0IbP0EdQ==
+eslint-plugin-import@^2.17.2:
+  version "2.17.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.17.2.tgz#d227d5c6dc67eca71eb590d2bb62fb38d86e9fcb"
+  integrity sha512-m+cSVxM7oLsIpmwNn2WXTJoReOF9f/CtLMo7qOVmKd1KntBy0hEcuNZ3erTmWjx+DxRO0Zcrm5KwAvI9wHcV5g==
   dependencies:
     array-includes "^3.0.3"
     contains-path "^0.1.0"
