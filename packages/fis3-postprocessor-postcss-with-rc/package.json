@@ -1,0 +1,37 @@
+{
+  "author": {
+    "email": "lionkay@gmail.com",
+    "name": "fisker Cheung",
+    "url": "https://www.fiskercheung.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "dependencies": {
+    "postcss": "^7.0.14",
+    "postcss-load-config": "^2.0.0",
+    "promise-synchronizer": "^1.0.15"
+  },
+  "description": "postcss for fis3.",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "fis",
+    "fis3",
+    "fis3-postprocessor-postcss-with-rc",
+    "postcss",
+    "postcss-with-rc",
+    "postprocessor"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "fis3-postprocessor-postcss-with-rc",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "readmeFilename": "readme.md",
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-postcss-with-rc",
+  "version": "1.0.0"
+}
