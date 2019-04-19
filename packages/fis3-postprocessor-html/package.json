@@ -29,6 +29,7 @@
   "main": "index.js",
   "name": "fis3-postprocessor-html",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "readmeFilename": "readme.md",

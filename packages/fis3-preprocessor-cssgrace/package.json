@@ -25,6 +25,7 @@
   "main": "index.js",
   "name": "fis3-preprocessor-cssgrace",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "readmeFilename": "readme.md",

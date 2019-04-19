@@ -24,6 +24,7 @@
   "main": "index.js",
   "name": "fis3-hook-relative-legal-html",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "readmeFilename": "readme.md",

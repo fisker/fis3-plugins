@@ -28,6 +28,7 @@
   "main": "index.js",
   "name": "fis3-optimizer-terser",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "readmeFilename": "readme.md",

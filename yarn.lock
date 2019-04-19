@@ -768,6 +768,43 @@
   dependencies:
     find-up "^2.1.0"
 
+"@fisker/commitlint-config@^1.0.2":
+  version "1.0.2"
+  resolved "http://registry.npm.taobao.org/@fisker/commitlint-config/download/@fisker/commitlint-config-1.0.2.tgz#1d9b0a945b3db7f7f3d0d85d6838a514b9f8bdc5"
+  integrity sha1-HZsKlFs9t/fz0NhdaDilFLn4vcU=
+  dependencies:
+    "@commitlint/config-conventional" "^7.5.0"
+    "@fisker/eslint-config" "^1.0.5"
+
+"@fisker/eslint-config@^1.0.5":
+  version "1.0.5"
+  resolved "http://registry.npm.taobao.org/@fisker/eslint-config/download/@fisker/eslint-config-1.0.5.tgz#e3307eaf3c700f05ad53c6ad37667ee9db220f73"
+  integrity sha1-4zB+rzxwDwWtU8atN2Z+6dsiD3M=
+  dependencies:
+    eslint-config-airbnb-base "^13.1.0"
+    eslint-config-prettier "^4.1.0"
+    eslint-plugin-eslint-comments "^3.1.1"
+    eslint-plugin-html "^5.0.3"
+    eslint-plugin-import "^2.17.2"
+    eslint-plugin-node "^8.0.1"
+    eslint-plugin-prettier "^3.0.1"
+    eslint-plugin-promise "^4.1.1"
+    eslint-plugin-unicorn "^8.0.2"
+
+"@fisker/lint-staged-config@^1.0.1":
+  version "1.0.1"
+  resolved "http://registry.npm.taobao.org/@fisker/lint-staged-config/download/@fisker/lint-staged-config-1.0.1.tgz#957e240ba4cb77402adc63cf94cf76d689bba67a"
+  integrity sha1-lX4kC6TLd0Aq3GPPlM921om7pno=
+  dependencies:
+    "@fisker/eslint-config" "^1.0.5"
+
+"@fisker/prettier-config@^1.0.6":
+  version "1.0.6"
+  resolved "http://registry.npm.taobao.org/@fisker/prettier-config/download/@fisker/prettier-config-1.0.6.tgz#3bff2eae629fdfc75175b0b8f74e82691daca3a7"
+  integrity sha1-O/8urmKf38dRdbC4906CaR2so6c=
+  dependencies:
+    "@fisker/eslint-config" "^1.0.5"
+
 "@lerna/add@3.13.3":
   version "3.13.3"
   resolved "https://registry.yarnpkg.com/@lerna/add/-/add-3.13.3.tgz#f4c1674839780e458f0426d4f7b6d0a77b9a2ae9"
@@ -3804,26 +3841,6 @@ eslint-config-airbnb-base@^13.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-fisker@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-fisker/-/eslint-config-fisker-4.5.0.tgz#0a7f64f20d783106f9b07aacf998030b17164ea7"
-  integrity sha512-kwUUxCzbx0nxb/fFIE3egfou9Wd5Tc7NruZyPI/8otYduN+voqGxv4BqZ7f5GlwFMvGNP/olKLMiykjWk7QwOw==
-  dependencies:
-    eslint-config-airbnb-base "^13.1.0"
-    eslint-config-prettier "^4.1.0"
-    eslint-plugin-es "^1.4.0"
-    eslint-plugin-eslint-comments "^3.1.1"
-    eslint-plugin-html "^5.0.3"
-    eslint-plugin-import "^2.17.2"
-    eslint-plugin-jasmine "^2.10.1"
-    eslint-plugin-jest "^22.4.1"
-    eslint-plugin-mocha "^5.3.0"
-    eslint-plugin-node "^8.0.1"
-    eslint-plugin-prettier "^3.0.1"
-    eslint-plugin-promise "^4.1.1"
-    eslint-plugin-unicorn "^8.0.2"
-    eslint-plugin-vue "^5.2.2"
-
 eslint-config-prettier@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-4.1.0.tgz#181364895899fff9fd3605fecb5c4f20e7d5f395"
@@ -3857,7 +3874,7 @@ eslint-module-utils@^2.2.0, eslint-module-utils@^2.4.0:
     debug "^2.6.8"
     pkg-dir "^2.0.0"
 
-eslint-plugin-es@^1.3.1, eslint-plugin-es@^1.4.0:
+eslint-plugin-es@^1.3.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-es/-/eslint-plugin-es-1.4.0.tgz#475f65bb20c993fc10e8c8fe77d1d60068072da6"
   integrity sha512-XfFmgFdIUDgvaRAlaXUkxrRg5JSADoRC8IkKLc/cISeR3yHVMefFHQZpcyXXEUUPHfy5DwviBcrfqlyqEwlQVw==
@@ -3912,23 +3929,6 @@ eslint-plugin-import@~2.14.0:
     minimatch "^3.0.3"
     read-pkg-up "^2.0.0"
     resolve "^1.6.0"
-
-eslint-plugin-jasmine@^2.10.1:
-  version "2.10.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jasmine/-/eslint-plugin-jasmine-2.10.1.tgz#5733b709e751f4bc40e31e1c16989bd2cdfbec97"
-  integrity sha1-VzO3CedR9LxA4x4cFpib0s377Jc=
-
-eslint-plugin-jest@^22.4.1:
-  version "22.4.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.4.1.tgz#a5fd6f7a2a41388d16f527073b778013c5189a9c"
-  integrity sha512-gcLfn6P2PrFAVx3AobaOzlIEevpAEf9chTpFZz7bYfc7pz8XRv7vuKTIE4hxPKZSha6XWKKplDQ0x9Pq8xX2mg==
-
-eslint-plugin-mocha@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-mocha/-/eslint-plugin-mocha-5.3.0.tgz#cf3eb18ae0e44e433aef7159637095a7cb19b15b"
-  integrity sha512-3uwlJVLijjEmBeNyH60nzqgA1gacUWLUmcKV8PIGNvj1kwP/CTgAWQHn2ayyJVwziX+KETkr9opNwT1qD/RZ5A==
-  dependencies:
-    ramda "^0.26.1"
 
 eslint-plugin-node@^8.0.1:
   version "8.0.1"
@@ -4003,13 +4003,6 @@ eslint-plugin-unicorn@^8.0.2:
     lodash.upperfirst "^4.2.0"
     reserved-words "^0.1.2"
     safe-regex "^2.0.1"
-
-eslint-plugin-vue@^5.2.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-5.2.2.tgz#86601823b7721b70bc92d54f1728cfc03b36283c"
-  integrity sha512-CtGWH7IB0DA6BZOwcV9w9q3Ri6Yuo8qMjx05SmOGJ6X6E0Yo3y9E/gQ5tuNxg2dEt30tRnBoFTbvtmW9iEoyHA==
-  dependencies:
-    vue-eslint-parser "^5.0.0"
 
 eslint-restricted-globals@^0.1.1:
   version "0.1.1"
@@ -4120,7 +4113,7 @@ eslint@~5.4.0:
     table "^4.0.3"
     text-table "^0.2.0"
 
-espree@^4.0.0, espree@^4.1.0:
+espree@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/espree/-/espree-4.1.0.tgz#728d5451e0fd156c04384a7ad89ed51ff54eb25f"
   integrity sha512-I5BycZW6FCVIub93TeVY1s7vjhP9CY6cXCznIRfiig7nRviKZYdRnj/sHEWC6A7WE9RDWOFq9+7OsWSYz8qv2w==
@@ -8137,11 +8130,6 @@ preserve@^0.2.0:
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
   integrity sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
 
-prettier-config-fisker@^1.0.3:
-  version "1.0.3"
-  resolved "http://registry.npm.taobao.org/prettier-config-fisker/download/prettier-config-fisker-1.0.3.tgz#8115210d9d95b44d0dcf371dd70b64f5bf1e34fa"
-  integrity sha1-gRUhDZ2VtE0Nzzcd1wtk9b8eNPo=
-
 prettier-linter-helpers@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/prettier-linter-helpers/-/prettier-linter-helpers-1.0.0.tgz#d23d41fe1375646de2d0104d3454a3008802cf7b"
@@ -8415,11 +8403,6 @@ quick-lru@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
   integrity sha1-Q2CxfGETatOAeDl/8RQW4Ybc+7g=
-
-ramda@^0.26.1:
-  version "0.26.1"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
-  integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
 
 randomatic@^3.0.0:
   version "3.1.1"
@@ -10311,10 +10294,18 @@ uglify-js@^2.6.1:
   optionalDependencies:
     uglify-to-browserify "~1.0.0"
 
-uglify-js@^3.1.4, uglify-js@^3.5.4:
+uglify-js@^3.1.4:
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.5.4.tgz#4a64d57f590e20a898ba057f838dcdfb67a939b9"
   integrity sha512-GpKo28q/7Bm5BcX9vOu4S46FwisbPbAmkkqPnGIpKvKTM96I85N6XHQV+k4I6FA2wxgLhcsSyHoNhzucwCflvA==
+  dependencies:
+    commander "~2.20.0"
+    source-map "~0.6.1"
+
+uglify-js@^3.5.5:
+  version "3.5.5"
+  resolved "http://registry.npm.taobao.org/uglify-js/download/uglify-js-3.5.5.tgz#9c5aaaf3a7586fbf559df31fa6d3bca1b3ba7e9b"
+  integrity sha1-nFqq86dYb79VnfMfptO8obO6fps=
   dependencies:
     commander "~2.20.0"
     source-map "~0.6.1"
@@ -10704,18 +10695,6 @@ void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
   integrity sha1-wGavtYK7HLQSjWDqkjkulNXp2+w=
-
-vue-eslint-parser@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-5.0.0.tgz#00f4e4da94ec974b821a26ff0ed0f7a78402b8a1"
-  integrity sha512-JlHVZwBBTNVvzmifwjpZYn0oPWH2SgWv5dojlZBsrhablDu95VFD+hriB1rQGwbD+bms6g+rAFhQHk6+NyiS6g==
-  dependencies:
-    debug "^4.1.0"
-    eslint-scope "^4.0.0"
-    eslint-visitor-keys "^1.0.0"
-    espree "^4.1.0"
-    esquery "^1.0.1"
-    lodash "^4.17.11"
 
 wcwidth@^1.0.0:
   version "1.0.1"
