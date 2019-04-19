@@ -1,5 +1,5 @@
 module.exports = {
-  version: '1.0.0',
+  version: '1.0.1',
   description: 'postcss for fis3.',
   keywords: ['postcss'],
   dependencies: ['postcss', 'postcss-load-config', 'promise-synchronizer'],

@@ -51,10 +51,13 @@ module.exports = function(content, file, config) {
     plugins = _sync.plugins,
     options = _sync.options
 
-  return (0, _postcss['default'])(plugins).process(
-    content,
-    _objectSpread({}, config, options, {
-      from: config.filename,
-    })
-  ).css
+  var result = (0, _promiseSynchronizer['default'])(
+    (0, _postcss['default'])(plugins).process(
+      content,
+      _objectSpread({}, config, options, {
+        from: config.filename,
+      })
+    )
+  )
+  return result.css
 }
