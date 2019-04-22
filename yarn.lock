@@ -771,10 +771,10 @@
     "@commitlint/config-conventional" "^7.5.0"
     "@fisker/eslint-config" "^1.0.5"
 
-"@fisker/eslint-config@^1.0.5":
-  version "1.0.5"
-  resolved "http://registry.npm.taobao.org/@fisker/eslint-config/download/@fisker/eslint-config-1.0.5.tgz#e3307eaf3c700f05ad53c6ad37667ee9db220f73"
-  integrity sha1-4zB+rzxwDwWtU8atN2Z+6dsiD3M=
+"@fisker/eslint-config@^1.0.5", "@fisker/eslint-config@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@fisker/eslint-config/-/eslint-config-1.0.7.tgz#612b52720159580d218675a2f57501899b10f95d"
+  integrity sha512-1UUGF9ZgtVaBIUuL2aniKkf9V1/W4x1ivJzcgj3ERxD8JXrEkBaQRBGxvJ+sbKjxuwnGdjRF0UWNmI0vyo/OcA==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-config-prettier "^4.1.0"
