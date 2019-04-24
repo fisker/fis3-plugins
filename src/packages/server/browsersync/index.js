@@ -67,7 +67,7 @@ function start(opt, callback) {
     '--context',
     CWD,
     '--bs-config',
-    argv.bsConfig,
+    argv.bsConfig || '',
   ]
 
   process.stdout.write('\n Starting browser-sync server ...')

@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "browser-sync": "^2.26.3",
+    "browser-sync": "^2.26.4",
     "execa": "^1.0.0",
     "lodash.merge": "^4.6.1",
     "morgan": "^1.9.1",
@@ -44,5 +44,5 @@
   },
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-server-browsersync",
-  "version": "1.11.1"
+  "version": "1.11.2"
 }
