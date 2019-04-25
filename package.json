@@ -75,7 +75,7 @@
     "posthtml": "^0.11.3",
     "posthtml-beautify": "^0.2.5",
     "prettier": "^1.17.0",
-    "promise-synchronizer": "^1.0.15",
+    "promise-synchronizer": "^1.1.0",
     "pug": "^2.0.3",
     "sass": "^1.19.0",
     "serve-directory": "^3.0.4",
