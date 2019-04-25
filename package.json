@@ -57,7 +57,7 @@
     "@starptech/prettyhtml": "^0.8.17",
     "autoprefixer": "^9.5.1",
     "body-parser": "^1.18.3",
-    "browser-sync": "^2.26.4",
+    "browser-sync": "^2.26.5",
     "clean-css": "^4.2.1",
     "cssgrace": "^3.0.0",
     "cssgrace-lite": "^1.0.1",
