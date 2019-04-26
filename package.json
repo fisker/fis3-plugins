@@ -31,7 +31,7 @@
     "prettier": "prettier **/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml} --write"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
+    "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.3",
     "@commitlint/cli": "^7.5.2",
     "@fisker/commitlint-config": "^1.0.2",
