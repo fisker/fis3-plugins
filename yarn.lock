@@ -7425,7 +7425,7 @@ p-finally@^1.0.0:
   resolved "https://registry.yarnpkg.com/p-finally/-/p-finally-1.0.0.tgz#3fbcfb15b899a44123b34b6dcc18b724336a2cae"
   integrity sha1-P7z7FbiZpEEjs0ttzBi3JDNqLK4=
 
-p-is-promise@^2.0.0:
+p-is-promise@^2.0.0, p-is-promise@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/p-is-promise/-/p-is-promise-2.1.0.tgz#918cebaea248a62cf7ffab8e3bca8c5f882fc42e"
   integrity sha512-Y3W0wlRPK8ZMRbNq97l4M5otioeA5lm1z7bkNkxCka8HSPjR0xRWmpCmc9utiaLP9Jb1eD8BgeIxTW4AIF45Pg==
@@ -8052,12 +8052,13 @@ promise-retry@^1.1.1:
     err-code "^1.0.0"
     retry "^0.10.0"
 
-promise-synchronizer@^1.0.15:
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/promise-synchronizer/-/promise-synchronizer-1.0.15.tgz#d388a353f5f4dc71017d73b2768c43c738cc1cab"
-  integrity sha512-oNQFKdTUhUAY6sm3iHe6v7zIjjCj9EqOYCLUyfT5hDho98WIRywSZ9B+TYSula4F+CCsovIZBwFBUqn22yOdRQ==
+promise-synchronizer@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/promise-synchronizer/-/promise-synchronizer-1.1.0.tgz#a501d9412f3ca19ab42caa758df96b525adc4338"
+  integrity sha512-oPR4TrUF1qFlNTqJtEsuf/sbbG5Du94YqTDM8+afGXi1BYgwXF9i/VsS/6bKR9rABDbxumvYdD5q8gm1AEbkhQ==
   dependencies:
     deasync "^0.1.14"
+    p-is-promise "^2.1.0"
 
 promise@^7.0.1:
   version "7.3.1"
