@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "postcss": "^7.0.14",
-    "promise-synchronizer": "^1.0.15",
+    "promise-synchronizer": "^1.1.0",
     "stylelint": "^10.0.1"
   },
   "description": "a css linter plugin of fis3 based on stylelint.",
@@ -33,5 +33,5 @@
   },
   "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-stylelint",
-  "version": "2.3.2"
+  "version": "2.3.3"
 }

@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "@starptech/prettyhtml": "^0.8.17"
+    "@starptech/prettyhtml": "^0.9.0"
   },
   "description": "a code formatter of fis3 based on prettyhtml.",
   "files": [
