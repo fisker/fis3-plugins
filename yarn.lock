@@ -844,10 +844,10 @@
   dependencies:
     "@fisker/eslint-config" "^1.0.5"
 
-"@fisker/prettier-config@^1.0.11":
-  version "1.0.11"
-  resolved "https://registry.npm.taobao.org/@fisker/prettier-config/download/@fisker/prettier-config-1.0.11.tgz#58f413bb11665da02b7f508047021a047d255a90"
-  integrity sha1-WPQTuxFmXaArf1CARwIaBH0lWpA=
+"@fisker/prettier-config@^1.0.12":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@fisker/prettier-config/-/prettier-config-1.0.12.tgz#161be5931cc4ec659371c1a56340d7113c525008"
+  integrity sha512-HSGkDUkhmHYgBN2k6qNcZ9Ey/OBOTPLZOblLutGNP0uwoTj5WjBSQu5qyl/P2LOr7R8iNOz8XQ9AeBRv7Pw9lw==
 
 "@lerna/add@3.13.3":
   version "3.13.3"
