@@ -807,28 +807,13 @@
     "@commitlint/config-conventional" "^7.5.0"
     "@fisker/eslint-config" "^1.0.5"
 
-"@fisker/eslint-config@^1.0.5":
-  version "1.0.5"
-  resolved "http://registry.npm.taobao.org/@fisker/eslint-config/download/@fisker/eslint-config-1.0.5.tgz#e3307eaf3c700f05ad53c6ad37667ee9db220f73"
-  integrity sha1-4zB+rzxwDwWtU8atN2Z+6dsiD3M=
+"@fisker/eslint-config@^1.0.5", "@fisker/eslint-config@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@fisker/eslint-config/-/eslint-config-1.0.8.tgz#82c9271de13fd819c57cdfc180edc8ba72a0b355"
+  integrity sha512-ymvf+TlENgA6heFG9Xh4oQxSUn8aElpEb+5meu1Lz9/JOvCso4teMhMtQNgnsA4mgbq8W5ND/1WCNvXflKJXQg==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
-    eslint-config-prettier "^4.1.0"
-    eslint-plugin-eslint-comments "^3.1.1"
-    eslint-plugin-html "^5.0.3"
-    eslint-plugin-import "^2.17.2"
-    eslint-plugin-node "^8.0.1"
-    eslint-plugin-prettier "^3.0.1"
-    eslint-plugin-promise "^4.1.1"
-    eslint-plugin-unicorn "^8.0.2"
-
-"@fisker/eslint-config@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.npm.taobao.org/@fisker/eslint-config/download/@fisker/eslint-config-1.0.7.tgz#612b52720159580d218675a2f57501899b10f95d"
-  integrity sha1-YStScgFZWA0hhnWi9XUBiZsQ+V0=
-  dependencies:
-    eslint-config-airbnb-base "^13.1.0"
-    eslint-config-prettier "^4.1.0"
+    eslint-config-prettier "^4.2.0"
     eslint-plugin-eslint-comments "^3.1.1"
     eslint-plugin-html "^5.0.3"
     eslint-plugin-import "^2.17.2"
@@ -3862,10 +3847,10 @@ eslint-config-airbnb-base@^13.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-prettier@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-4.1.0.tgz#181364895899fff9fd3605fecb5c4f20e7d5f395"
-  integrity sha512-zILwX9/Ocz4SV2vX7ox85AsrAgXV3f2o2gpIicdMIOra48WYqgUnWNH/cR/iHtmD2Vb3dLSC3LiEJnS05Gkw7w==
+eslint-config-prettier@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-4.2.0.tgz#70b946b629cd0e3e98233fd9ecde4cb9778de96c"
+  integrity sha512-y0uWc/FRfrHhpPZCYflWC8aE0KRJRY04rdZVfl8cL3sEZmOYyaBdhdlQPjKZBnuRMyLVK+JUZr7HaZFClQiH4w==
   dependencies:
     get-stdin "^6.0.0"
 
