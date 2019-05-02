@@ -65,7 +65,7 @@
     "eslint": "^5.16.0",
     "execa": "^1.0.0",
     "htmlhint": "^0.11.0",
-    "js-beautify": "^1.9.1",
+    "js-beautify": "^1.10.0",
     "lodash": "^4.17.11",
     "lodash.merge": "^4.6.1",
     "morgan": "^1.9.1",
