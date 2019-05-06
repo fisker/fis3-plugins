@@ -3291,10 +3291,10 @@ dateformat@^3.0.0:
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
 
-deasync@^0.1.14:
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/deasync/-/deasync-0.1.14.tgz#232ea2252b443948cad033d792eb3b24b0a3d828"
-  integrity sha512-wN8sIuEqIwyQh72AG7oY6YQODCxIp1eXzEZlZznBuwDF8Q03Tdy9QNp1BNZXeadXoklNrw+Ip1fch+KXo/+ASw==
+deasync@^0.1.15:
+  version "0.1.15"
+  resolved "https://registry.yarnpkg.com/deasync/-/deasync-0.1.15.tgz#788c4bbe6d32521233b28d23936de1bbadd2e112"
+  integrity sha512-pxMaCYu8cQIbGkA4Y1R0PLSooPIpH1WgFBLeJ+zLxQgHfkZG86ViJSmZmONSjZJ/R3NjwkMcIWZAzpLB2G9/CA==
   dependencies:
     bindings "~1.2.1"
     node-addon-api "^1.6.0"
@@ -8037,12 +8037,12 @@ promise-retry@^1.1.1:
     err-code "^1.0.0"
     retry "^0.10.0"
 
-promise-synchronizer@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/promise-synchronizer/-/promise-synchronizer-1.1.0.tgz#a501d9412f3ca19ab42caa758df96b525adc4338"
-  integrity sha512-oPR4TrUF1qFlNTqJtEsuf/sbbG5Du94YqTDM8+afGXi1BYgwXF9i/VsS/6bKR9rABDbxumvYdD5q8gm1AEbkhQ==
+promise-synchronizer@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/promise-synchronizer/-/promise-synchronizer-1.1.1.tgz#69904cabcf6214806cfdd235faaff9847685fcd9"
+  integrity sha512-0ZHxBk1ob0K3BxS5Dfl1b60iy4FK1GtEhM5YozzZ+zLFl3Y88NemZaQG1FWqjwBoH3qFj9cEJiljfUjukrIm0g==
   dependencies:
-    deasync "^0.1.14"
+    deasync "^0.1.15"
     p-is-promise "^2.1.0"
 
 promise@^7.0.1:
