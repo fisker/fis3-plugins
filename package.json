@@ -72,7 +72,7 @@
     "node-sass": "^4.12.0",
     "postcss": "^7.0.16",
     "postcss-load-config": "^2.0.0",
-    "posthtml": "^0.11.3",
+    "posthtml": "^0.11.4",
     "posthtml-beautify": "^0.2.5",
     "prettier": "^1.17.0",
     "promise-synchronizer": "^1.1.0",
