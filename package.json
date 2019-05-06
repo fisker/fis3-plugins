@@ -34,7 +34,7 @@
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@commitlint/cli": "^7.5.2",
-    "@fisker/commitlint-config": "^1.0.2",
+    "@fisker/commitlint-config": "^1.0.5",
     "@fisker/eslint-config": "^1.0.9",
     "@fisker/lint-staged-config": "^1.0.4",
     "@fisker/prettier-config": "^1.0.12",

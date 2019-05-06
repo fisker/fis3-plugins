@@ -799,15 +799,14 @@
   dependencies:
     find-up "^2.1.0"
 
-"@fisker/commitlint-config@^1.0.2":
-  version "1.0.2"
-  resolved "http://registry.npm.taobao.org/@fisker/commitlint-config/download/@fisker/commitlint-config-1.0.2.tgz#1d9b0a945b3db7f7f3d0d85d6838a514b9f8bdc5"
-  integrity sha1-HZsKlFs9t/fz0NhdaDilFLn4vcU=
+"@fisker/commitlint-config@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@fisker/commitlint-config/-/commitlint-config-1.0.5.tgz#656f9588db3075ff00d07f472774ce56abbb9d56"
+  integrity sha512-XgbIQMT6sH8VMjQJfwxYPAB+mxquTp2Ok1QeDUpBMqjzWUuzQ/7zwKjAbGv4zT7kok1InMSrm+oAL99uXzZZyg==
   dependencies:
     "@commitlint/config-conventional" "^7.5.0"
-    "@fisker/eslint-config" "^1.0.5"
 
-"@fisker/eslint-config@^1.0.5", "@fisker/eslint-config@^1.0.9":
+"@fisker/eslint-config@^1.0.9":
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@fisker/eslint-config/-/eslint-config-1.0.9.tgz#5d9c2b447be486d5a87b84ce25e57cb96505949f"
   integrity sha512-o2pRX6b9bdviW+siCt+/Xvtm6DhFO/Ne7vMfI7AzkvrbZ1F1fJuptTMT0xuPv3k9J8e4Gfx7y6vcuG9QuqMWEA==
