@@ -826,10 +826,10 @@
   resolved "https://registry.yarnpkg.com/@fisker/lint-staged-config/-/lint-staged-config-1.0.4.tgz#08206dd7ce02fccce83939fcf21ba2b774b5be36"
   integrity sha512-hzNU3DPo8SKCWKN4ew/6GZugxl2qihN6jOjQv3yvtOE1u+W2rXS8Wxjdoh4Nia4ggdEIqkNkWcGr8KzjzpFhEA==
 
-"@fisker/prettier-config@^1.0.15":
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/@fisker/prettier-config/-/prettier-config-1.0.15.tgz#536d7d16eeaec518eb2497d20cf36740f7b30abb"
-  integrity sha512-p6owmof3vHspftVlIU9YSQmsJszNLoui0lrQCPNgQbh3QhZSgZ5hkdkjQg5oLx+oBfmtFG3yFssU6vUx21kBQA==
+"@fisker/prettier-config@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@fisker/prettier-config/-/prettier-config-1.0.16.tgz#433acbb263069054dfc10e50f34dffe131feef5d"
+  integrity sha512-RLrBP5vJSEbx4YeDOKcJ9gN2rdd1mqo21GsMbezsOQm9vxkYFhicAs93+taq+EJbuyJbDZz3oYveEI4HM1Jx+w==
 
 "@lerna/add@3.13.3":
   version "3.13.3"
