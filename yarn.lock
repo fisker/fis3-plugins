@@ -806,10 +806,10 @@
   dependencies:
     "@commitlint/config-conventional" "^7.6.0"
 
-"@fisker/eslint-config@^1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@fisker/eslint-config/-/eslint-config-1.0.10.tgz#b1b0bb4c32a0d87158e019500fd6241781e83dee"
-  integrity sha512-6+3wWgnscVZaeHHTFMgjKSZhWBW6KcmkDL06eSsg304pou2DcNvjvo5ijHf7z1akQTy9+HwcfQwSNGXVneEkJQ==
+"@fisker/eslint-config@^1.0.11":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@fisker/eslint-config/-/eslint-config-1.0.11.tgz#05e14ded7aada23828b0af147374e6490b70e4e7"
+  integrity sha512-SPHL40unjwwPi34ggdXVFIwfxHHN8BSzkbz15DIQPfCm0IIWTATx6PxjPERHKhdIeNgxzWVxtc+g/hmUwB+0QA==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-config-prettier "^4.2.0"
