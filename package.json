@@ -37,7 +37,7 @@
     "@fisker/commitlint-config": "^1.0.8",
     "@fisker/eslint-config": "^1.0.11",
     "@fisker/lint-staged-config": "^1.0.4",
-    "@fisker/prettier-config": "^1.0.16",
+    "@fisker/prettier-config": "^1.0.17",
     "cz-conventional-changelog-emoji": "^0.1.0",
     "eslint": "^5.16.0",
     "fast-json-stable-stringify": "^2.0.0",
