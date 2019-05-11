@@ -1,0 +1,3 @@
+[submodule ".dependabot"]
+	path = .dependabot
+	url = git@github.com:fisker/.dependabot.git
