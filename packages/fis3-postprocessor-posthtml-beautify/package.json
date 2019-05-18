@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "posthtml": "^0.11.3",
+    "posthtml": "^0.11.4",
     "posthtml-beautify": "^0.2.5",
     "promise-synchronizer": "^1.1.0"
   },
