@@ -6,5 +6,5 @@
  */
 
 module.exports = {
-  extends: ['@fisker/commitlint-config'],
+  extends: ['@fisker'],
 }

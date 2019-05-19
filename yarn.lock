@@ -821,6 +821,11 @@
     eslint-plugin-promise "^4.1.1"
     eslint-plugin-unicorn "^8.0.2"
 
+"@fisker/husky-config@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@fisker/husky-config/download/@fisker/husky-config-1.1.0.tgz#6edc5a2bf43a53ed7002d6eb3c0d14bc8c06ca69"
+  integrity sha1-btxaK/Q6U+1wAtbrPA0UvIwGymk=
+
 "@fisker/lint-staged-config@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@fisker/lint-staged-config/-/lint-staged-config-1.0.4.tgz#08206dd7ce02fccce83939fcf21ba2b774b5be36"

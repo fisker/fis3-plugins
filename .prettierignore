@@ -21,5 +21,9 @@ dist/**
 # fixtures
 **/fixtures/**
 
+# test
+.nyc_outputs/**
+coverage/**
+
 # project glob
 
