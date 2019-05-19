@@ -30,7 +30,6 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-standard",
   "version": "1.2.5"
 }

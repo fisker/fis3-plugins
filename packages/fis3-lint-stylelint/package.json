@@ -31,7 +31,6 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-stylelint",
   "version": "2.3.3"
 }

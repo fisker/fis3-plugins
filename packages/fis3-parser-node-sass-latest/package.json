@@ -32,7 +32,6 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "readmeFilename": "readme.md",
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-node-sass-latest",
   "version": "1.3.5"
 }
