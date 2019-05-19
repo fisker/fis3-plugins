@@ -15,7 +15,7 @@
     "morgan": "^1.9.1",
     "serve-directory": "^3.0.4",
     "serve-directory-theme-octicons": "^1.2.3",
-    "yargs": "^13.2.2",
+    "yargs": "^13.2.4",
     "yog-devtools": "^0.1.1"
   },
   "description": "a browser sync server for fis3.",
