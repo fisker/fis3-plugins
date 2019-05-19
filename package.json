@@ -18,7 +18,12 @@
   "bugs": {
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
-  "readmeFilename": "readme.md",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": []
+  },
   "scripts": {
     "dev": "rollup --config --watch",
     "build": "node ./scripts/build-packages.js",
