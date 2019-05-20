@@ -1,16 +1,17 @@
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
+import _ from 'lodash'
+import {sync as mkdirp} from 'mkdirp'
+import stringify from 'fast-json-stable-stringify'
+import {transform} from '@babel/core'
+import globalPackage from '../package.json'
+import babelConfig from '../babel.config'
+import writeFile from './utils/write-file'
+import prettierFile from './utils/prettier-file'
 
 const SOURCE_DIR = path.join(__dirname, '..', 'src')
 const DEST_DIR = path.join(__dirname, '..', 'packages')
 const CHARSET = 'utf-8'
-const _ = require('lodash')
-const mkdirp = require('mkdirp').sync
-const stringify = require('fast-json-stable-stringify')
-const babel = require('@babel/core')
-const prettier = require('prettier')
-const globalPackage = require('../package.json')
-const babelConfig = require('../babel.config')
 
 const files = ['index.js']
 const links = {
@@ -121,20 +122,16 @@ class Package {
 
   writeFile(file, content) {
     file = path.join(this.dest, file)
-    mkdirp(path.dirname(file))
     if (/\.js$/.test(file)) {
-      content = babel.transform(content, babelConfig).code
+      content = transform(content, babelConfig).code
     }
     if (/.(js|json|md)$/.test(file)) {
-      const config = prettier.resolveConfig.sync(file, {
-        editorconfig: true,
+      prettierFile({
+        file,
+        content,
       })
-      content = prettier.format(content, config)
-    }
-    try {
-      return fs.writeFileSync(file, content)
-    } catch {
-      return false
+    } else {
+      writeFile(file, content)
     }
   }
 
@@ -186,7 +183,7 @@ class Package {
     })
     this.writeFile('readme.md', template('readme.ejs')(this))
 
-    this.copyFile('../../../../license', 'license')
+    // this.copyFile('../../../../license', 'license')
 
     this.writeFile(
       'package.json',
@@ -197,4 +194,4 @@ class Package {
   }
 }
 
-module.exports = Package
+export default Package

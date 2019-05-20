@@ -1,7 +1,6 @@
-const fs = require('fs')
-const path = require('path')
-
-const Package = require('./package.js')
+import fs from 'fs'
+import path from 'path'
+import Package from './package'
 
 const SOURCE_DIR = path.join(__dirname, '..', 'src')
 
@@ -27,4 +26,4 @@ const packages = pluginTypes.map(type => {
   return directory.map(name => new Package(type, name))
 })
 
-module.exports = packages.reduce((all, packages) => [...all, ...packages], [])
+export default packages.reduce((all, packages) => [...all, ...packages], [])

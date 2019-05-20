@@ -1,20 +1,21 @@
-const path = require('path')
-const fs = require('fs')
-const _ = require('lodash')
-const packages = require('./packages')
+import {join} from 'path'
+import _ from 'lodash'
+import packages from './packages'
+import prettierFile from './utils/prettier-file'
+import readFile from './utils/read-file'
 
-const SOURCE_DIR = path.join(__dirname, '..', 'src')
+const SOURCE_DIR = join(__dirname, '..', 'src')
 
-for (const package_ of packages) {
+for (const package_ of packages.filter(
+  ({info: {deprecated = false}}) => !deprecated
+)) {
   package_.build()
 }
 
-const template = fs.readFileSync(
-  path.join(SOURCE_DIR, 'templates', 'npm-status.ejs'),
-  'utf-8'
-)
+const template = readFile(join(SOURCE_DIR, 'templates', 'npm-status.ejs'))
 const render = _.template(template)
-fs.writeFileSync(
-  path.join(__dirname, '..', 'packages', 'readme.md'),
-  render({packages}).trim()
-)
+
+prettierFile({
+  file: join(__dirname, '..', 'packages', 'readme.md'),
+  content: render({packages}).trim(),
+})
