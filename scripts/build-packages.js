@@ -1,5 +1,5 @@
 import {join} from 'path'
-import _ from 'lodash'
+import {template} from 'lodash'
 import packages from './packages'
 import prettierFile from './utils/prettier-file'
 import readFile from './utils/read-file'
@@ -12,8 +12,8 @@ for (const package_ of packages.filter(
   package_.build()
 }
 
-const template = readFile(join(SOURCE_DIR, 'templates', 'npm-status.ejs'))
-const render = _.template(template)
+const templateFile = readFile(join(SOURCE_DIR, 'templates', 'npm-status.ejs'))
+const render = template(templateFile)
 
 prettierFile({
   file: join(__dirname, '..', 'packages', 'readme.md'),
