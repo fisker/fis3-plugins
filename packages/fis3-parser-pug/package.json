@@ -31,5 +31,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-pug",
-  "version": "1.2.4"
+  "version": "1.2.4",
+  "gitHead": "6c6454711a704f1b168df7c5ad076a3745ba5066"
 }

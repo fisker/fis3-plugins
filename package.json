@@ -34,7 +34,7 @@
     "lint:eslint": "eslint **/*.{js,mjs,vue} --fix",
     "lint:markdown": "markdownlint **/*.md --ignore \"**/node_modules/**\"",
     "prettier": "prettier **/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml} --write",
-    "publish": "node -r esm ../../scripts/bump-versions.js && git add ../../versions.json"
+    "publish": "node -r esm ./scripts/bump-versions.js && git add versions.json"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

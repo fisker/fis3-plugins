@@ -27,5 +27,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-hook-relative-legal-html",
-  "version": "2.4.3"
+  "version": "2.4.3",
+  "gitHead": "6c6454711a704f1b168df7c5ad076a3745ba5066"
 }
