@@ -6,6 +6,7 @@ import stringify from 'fast-json-stable-stringify'
 import {transform} from '@babel/core'
 import globalPackage from '../package.json'
 import babelConfig from '../babel.config'
+import readFile from './utils/read-file'
 import writeFile from './utils/write-file'
 import prettierFile from './utils/prettier-file'
 
@@ -27,9 +28,7 @@ const links = {
 }
 
 const template = _.memoize(function(file) {
-  file = path.join(SOURCE_DIR, 'templates', file)
-  const source = fs.readFileSync(file, 'utf-8')
-  return _.template(source)
+  return _.template(readFile(path.join(SOURCE_DIR, 'templates', file)))
 })
 
 function parseDependencies(pkgs) {
@@ -57,7 +56,7 @@ function parseDependencies(pkgs) {
     dependencies[packageName] = packageVersion
   })
 
-  return dependencies
+  return _.isEmpty(dependencies) ? undefined : dependencies
 }
 
 class Package {
@@ -148,7 +147,7 @@ class Package {
     let content = ''
 
     try {
-      content = fs.readFileSync(path.join(this.src, file), CHARSET)
+      content = readFile(path.join(this.src, file))
     } catch {}
 
     if (/\.md$/.test(file)) {
@@ -191,8 +190,6 @@ class Package {
       this.copyFile(file)
     })
     this.writeFile('readme.md', template('readme.ejs')(this))
-
-    // this.copyFile('../../../../license', 'license')
 
     this.writeFile(
       'package.json',
