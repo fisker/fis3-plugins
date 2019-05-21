@@ -126,11 +126,6 @@ class Package {
         files: _.uniq(files.concat(info.files).sort()),
       }
     )
-    package_.scripts = {
-      ...package_.scripts,
-      postpublish:
-        'node -r esm ../../scripts/bump-versions.js && git add ../../versions.json',
-    }
     return package_
   }
 

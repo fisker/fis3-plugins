@@ -7,6 +7,7 @@
   "bugs": {
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
+  "dependencies": {},
   "description": "fis3 relative path support",
   "files": [
     "index.js"
@@ -27,8 +28,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-hook-relative-legal-html",
-  "scripts": {
-    "postpublish": "node -r esm ../../scripts/bump-versions.js && git add ../../versions.json"
-  },
   "version": "2.4.2"
 }
