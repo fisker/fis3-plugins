@@ -7,6 +7,7 @@
   "bugs": {
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
+  "dependencies": {},
   "description": "a css formatter of fis3 based on stylefmt.",
   "files": [
     "index.js"
@@ -26,5 +27,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-stylefmt",
-  "version": "1.3.2"
+  "version": "1.3.1"
 }

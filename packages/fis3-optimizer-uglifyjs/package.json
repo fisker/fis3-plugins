@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "uglify-js": "^3.5.13"
+    "uglify-js": "^3.5.14"
   },
   "description": "js minifer for fis3 based on uglifyjs.",
   "files": [
@@ -34,5 +34,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-uglifyjs",
-  "version": "1.1.10"
+  "version": "1.1.9"
 }
