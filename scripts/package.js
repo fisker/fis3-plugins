@@ -12,6 +12,14 @@ import prettierFile from './utils/prettier-file'
 const SOURCE_DIR = path.join(__dirname, '..', 'src')
 const DEST_DIR = path.join(__dirname, '..', 'packages')
 const CHARSET = 'utf-8'
+const VERSIONS = (() => {
+  try {
+    // eslint-disable-next-line import/no-unresolved
+    return require('../versions.json')
+  } catch {
+    return {}
+  }
+})()
 
 const files = ['index.js']
 const links = {
@@ -71,6 +79,7 @@ class Package {
         keywords: this.info.keywords || [],
         files: this.info.files || [],
         dependencies: parseDependencies(this.info.dependencies),
+        version: VERSIONS[packageName] || '0.0.0',
       })
     } catch (error) {
       throw new Error(`${packageName} build error: ${error}`)
@@ -101,13 +110,12 @@ class Package {
       }
     }
 
-    return _.assign(
+    const package_ = _.assign(
       _.pick(globalPackage, [
         'main',
         'author',
         'license',
         'bugs',
-        'readmeFilename',
         'publishConfig',
       ]),
       _.pick(info, ['name', 'version', 'description', 'dependencies']),
@@ -118,6 +126,12 @@ class Package {
         files: _.uniq(files.concat(info.files).sort()),
       }
     )
+    package_.scripts = {
+      ...package_.scripts,
+      postpublish:
+        'node -r esm ../../scripts/bump-versions.js && git add ../../versions.json',
+    }
+    return package_
   }
 
   writeFile(file, content) {

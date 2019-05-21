@@ -1,5 +1,4 @@
 module.exports = {
-  version: '1.3.2',
   description: 'a html formatter of fis3 based on posthtml-beautify.',
   keywords: ['posthtml', 'beautify', 'html', 'format', 'formatter'],
   dependencies: ['posthtml', 'posthtml-beautify', 'promise-synchronizer'],

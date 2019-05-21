@@ -31,5 +31,8 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-standard",
-  "version": "1.2.5"
+  "scripts": {
+    "postpublish": "node -r esm ../../scripts/bump-versions.js && git add ../../versions.json"
+  },
+  "version": "1.2.6"
 }

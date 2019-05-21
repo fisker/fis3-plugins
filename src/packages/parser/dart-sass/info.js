@@ -1,5 +1,4 @@
 module.exports = {
-  version: '1.0.6',
   description: 'A fis plugin to parse sass with dart-sass.',
   keywords: ['scss', 'sass', 'dart-sass'],
   dependencies: ['sass'],

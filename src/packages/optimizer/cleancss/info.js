@@ -1,5 +1,4 @@
 module.exports = {
-  version: '1.1.1',
   description: 'css minifer for fis based on clean-css.',
   keywords: ['minifer', 'minify'],
   dependencies: ['clean-css'],

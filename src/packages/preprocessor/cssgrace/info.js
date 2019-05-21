@@ -1,5 +1,4 @@
 module.exports = {
-  version: '1.1.1',
   description: 'cssgrace for fis3.',
   keywords: ['cssgrace'],
   dependencies: ['cssgrace-lite'],
