@@ -34,5 +34,5 @@
   "scripts": {
     "postpublish": "node -r esm ../../scripts/bump-versions.js && git add ../../versions.json"
   },
-  "version": "1.2.7"
+  "version": "1.2.8"
 }
