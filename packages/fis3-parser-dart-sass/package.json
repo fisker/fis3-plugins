@@ -32,5 +32,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-dart-sass",
-  "version": "1.0.8"
+  "version": "1.0.9"
 }
