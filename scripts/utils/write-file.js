@@ -1,15 +1,9 @@
 import {dirname} from 'path'
-import {mkdirSync, writeFileSync} from 'fs'
+import {writeFileSync} from 'fs'
+import {sync as makeDirectory} from 'make-dir'
 
 function writeFile(file, content) {
-  const directory = dirname(file)
-
-  try {
-    mkdirSync(directory, {
-      recursive: true,
-    })
-  } catch (_) {}
-
+  makeDirectory(dirname(file))
   writeFileSync(file, content)
 }
 
