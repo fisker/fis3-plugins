@@ -25,7 +25,7 @@ function getVersion(name) {
   let content = '{}'
   try {
     content = readFile(join(__dirname, '..', 'packages', name, 'package.json'))
-  } catch {}
+  } catch (_) {}
 
   return JSON.parse(content.trim()).version
 }
@@ -34,7 +34,7 @@ function updateVersion(name, version) {
   let content = '{}'
   try {
     content = readFile(versionsFile)
-  } catch {}
+  } catch (_) {}
 
   const versions = JSON.parse(content.trim())
   versions[name] = version
