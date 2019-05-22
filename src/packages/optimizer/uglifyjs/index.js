@@ -1,7 +1,3 @@
-/*
- * fis3-optimizer-uglify-js-latest
- * fisker Cheung<lionkay@gmail.com>
- */
 import {minify} from 'uglify-js'
 
 const {log} = global.fis

@@ -2,10 +2,6 @@
 
 var _uglifyJs = require('uglify-js')
 
-/*
- * fis3-optimizer-uglify-js-latest
- * fisker Cheung<lionkay@gmail.com>
- */
 var log = global.fis.log
 
 function getUglifyJSOptions(file, config) {
