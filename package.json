@@ -35,7 +35,7 @@
     "lint:markdown": "markdownlint **/*.md --ignore \"**/node_modules/**\"",
     "prettier": "prettier **/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml} --write",
     "bump-versions": "node -r esm ./scripts/bump-versions.js",
-    "publish": "yarn bump-versions && git add versions.json && git commit -m \"chore: bump versions\" && git push"
+    "postpack": "yarn bump-versions && git add versions.json"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

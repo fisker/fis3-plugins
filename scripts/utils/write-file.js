@@ -4,9 +4,11 @@ import {mkdirSync, writeFileSync} from 'fs'
 function writeFile(file, content) {
   const directory = dirname(file)
 
-  mkdirSync(directory, {
-    recursive: true,
-  })
+  try {
+    mkdirSync(directory, {
+      recursive: true,
+    })
+  } catch (_) {}
 
   writeFileSync(file, content)
 }
