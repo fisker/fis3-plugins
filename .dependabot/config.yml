@@ -1,0 +1,53 @@
+# config file for `dependabot`
+#
+# update: wget -O config.yml https://git.io/fjJKB
+# document: https://dependabot.com/docs/config-file/
+#
+
+version: 1
+update_configs:
+  # Keep package.json (& lockfiles) up to date as soon as
+  # new versions are published to the npm registry
+  - package_manager: "javascript"
+    directory: "/"
+    update_schedule: "live"
+    # target_branch: "develop"
+    default_reviewers:
+      - "fisker"
+    default_assignees:
+      - "fisker"
+    # default_labels:
+    #   - "label-name"
+
+    allowed_updates:
+      - match:
+          # Only includes indirect (aka transient/sub-dependencies) for
+          # supported package managers: ruby:bundler, python, go:modules,
+          #                             php:composer, rust:cargo
+          update_type: "all"
+    # ignored_updates:
+    #   - match:
+    #       dependency_name: "express"
+    #       # The version_requirement specifies the versions to ignore.
+    #       # The range format is specific to the package manager
+    #       # (e.g., ^1.0.0 for JS, or ~> 2.0 for Ruby).
+    #       version_requirement: "4.x"
+    #   - match:
+    #       # Wildcards match unlimited arbitrary characters (or none)
+    #       dependency_name: "aws*
+
+    # Automerge all development updates and production
+    # security (semver patch) updates (waiting for CI to pass)
+    automerged_updates:
+      - match:
+          dependency_type: "development"
+          update_type: "all"
+      - match:
+          dependency_type: "production"
+          update_type: "security:patch"
+      - match:
+          dependency_type: "production"
+          update_type: "semver:patch"
+
+    # auto update package.json
+    version_requirement_updates: "increase_versions"
