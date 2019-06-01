@@ -124,13 +124,13 @@ function start(opt, callback) {
 
       try {
         callback(errorMessage)
-      } catch (error) {
-        console.log(error)
+      } catch (error_) {
+        console.log(error_)
       }
 
       try {
         process.kill(server.pid)
-      } catch (error) {}
+      } catch (error_) {}
     } else if (chunk.includes('Listening on')) {
       started = true
       if (stoper) {
