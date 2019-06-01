@@ -725,10 +725,10 @@
     resolve-from "5.0.0"
     resolve-global "1.0.0"
 
-"@commitlint/config-conventional@^7.6.0":
-  version "7.6.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-7.6.0.tgz#f3dc66bf39e3b627fdd6f5ac3d0510dd0dd38f94"
-  integrity sha512-1Gnv5p3tc1VsEK25oTIRBO86czLtX6s/jeLNPAQRzdCnyEmsxkbx/sfoUJ1dwv7v8W++xckVnnuvdZv2Hp8yCw==
+"@commitlint/config-conventional@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-8.0.0.tgz#f45349cab9dcfc08a30fbcf2b6317506e17bc8e6"
+  integrity sha512-umg1irroowOV+x8oZPBw8woCogZO5MFKUYQq+fRZvhowoSwDHXYILP3ETcdHUgvytw/K/a8Xvu7iCypK6oZQ+g==
 
 "@commitlint/ensure@^8.0.0":
   version "8.0.0"
@@ -838,12 +838,12 @@
   dependencies:
     find-up "^2.1.0"
 
-"@fisker/commitlint-config@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@fisker/commitlint-config/-/commitlint-config-1.0.8.tgz#a803c474c4e063d691ee379c816d7d5d28fba701"
-  integrity sha512-6Sq4SCxDIQPEC4Liq7e8ia0F/BMmD2LcTI1lV5GmwLTCC3m52ztXiMJMCeAGeYkIPmGuenQKD+WNpbMiYGYCIw==
+"@fisker/commitlint-config@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@fisker/commitlint-config/-/commitlint-config-1.0.9.tgz#83f0f829a592e1b287e0de1c80d60f8772ac2baf"
+  integrity sha512-ISM+DtvUVn7WfmMvIOuH4I0Le9ZCPIIeWJCHXsY41q/yvdENRzDsdEvSZoP8Sw0Hd+sP6uCNOdalyUvQaKPhUQ==
   dependencies:
-    "@commitlint/config-conventional" "^7.6.0"
+    "@commitlint/config-conventional" "^8.0.0"
 
 "@fisker/eslint-config@^1.0.14":
   version "1.0.14"
