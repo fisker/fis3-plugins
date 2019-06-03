@@ -8705,9 +8705,9 @@ regjsparser@^0.6.0:
     jsesc "~0.5.0"
 
 rehype-sort-attribute-values@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/rehype-sort-attribute-values/-/rehype-sort-attribute-values-2.0.0.tgz#9f5f45537465477e4021f92541bb7c15ed3bff50"
-  integrity sha512-m7gr8inuS0aY+ZBtpGnXqPcUw7p0S2sbkKPNf1MKFApedywlYvkJCFqRwL8xzYQXruUiCY/7tFpTp3yyLt0ftA==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/rehype-sort-attribute-values/-/rehype-sort-attribute-values-2.0.1.tgz#2bb66a50e58f986368af14e9664fc720298da7d5"
+  integrity sha512-DitR4wnEvYQEFU8pRPwldGMGW76LM29fvz8s7oTYMwZBMSqNFtBr8eAts/I55LODCQm6b4jzdgFQ+/c6v7RmdA==
   dependencies:
     hast-util-is-element "^1.0.0"
     unist-util-visit "^1.1.0"
