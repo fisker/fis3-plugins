@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "prettier": "^1.17.1"
+    "prettier": "^1.18.0"
   },
   "description": "a code formatter of fis3 based on prettier.",
   "files": [
