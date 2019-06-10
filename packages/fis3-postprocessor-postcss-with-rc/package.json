@@ -32,5 +32,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-postcss-with-rc",
-  "version": "1.0.5"
+  "version": "1.0.6"
 }
