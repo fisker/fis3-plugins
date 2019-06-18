@@ -635,6 +635,13 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
+"@babel/runtime@^7.4.5":
+  version "7.4.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.5.tgz#582bb531f5f9dc67d2fcb682979894f75e253f12"
+  integrity sha512-TuI4qpWZP6lGOGIuGWtp9sPluqYICmbk8T/1vpSysqJxRPkudh/ofFWyqdcMsDf2s7KvDL4/YHgKyvcS3g9CJQ==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@babel/template@^7.1.0", "@babel/template@^7.2.2", "@babel/template@^7.4.4":
   version "7.4.4"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.4.4.tgz#f4b88d1225689a08f5bc3a17483545be9e4ed237"
@@ -3522,6 +3529,11 @@ deepmerge@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
   integrity sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==
+
+deepmerge@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.2.1.tgz#76a1f47854bcfcd66ee9a948d110540a8e12b261"
+  integrity sha512-+hbDSzTqEW0fWgnlKksg7XAOtT+ddZS5lHZJ6f6MdixRs9wQy+50fm1uUCVb1IkvjLUYX/SfFO021ZNwriURTw==
 
 defaults@^1.0.3:
   version "1.0.3"
@@ -8107,6 +8119,16 @@ posthtml-beautify@^0.2.5:
     deepmerge "^2.2.1"
     posthtml-parser "^0.4.1"
     posthtml-render "^1.1.4"
+
+posthtml-beautify@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/posthtml-beautify/-/posthtml-beautify-0.2.6.tgz#e37af767fe152c8a746f7f226af44e955203bb12"
+  integrity sha512-r5stTAKU6lQqsoDv0I/veL8kIHBZ8KihW9jFcJvZi9ebv/H0h74Kg5mykA/kB/1k3tMNSsEH9ptdyP6/al6fNA==
+  dependencies:
+    "@babel/runtime" "^7.4.5"
+    deepmerge "^3.2.1"
+    posthtml-parser "^0.4.1"
+    posthtml-render "^1.1.5"
 
 posthtml-parser@^0.4.1:
   version "0.4.1"
