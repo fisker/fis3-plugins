@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "postcss": "^7.0.17",
-    "postcss-load-config": "^2.0.0",
+    "postcss-load-config": "^2.1.0",
     "promise-synchronizer": "^1.1.1"
   },
   "description": "postcss for fis3.",
