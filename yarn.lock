@@ -8315,12 +8315,12 @@ pug-lexer@^4.0.0:
     pug-error "^1.3.3"
 
 pug-linker@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/pug-linker/-/pug-linker-3.0.5.tgz#9e9a7ae4005682d027deeb96b000f88eeb83a02f"
-  integrity sha1-npp65ABWgtAn3uuWsAD4juuDoC8=
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/pug-linker/-/pug-linker-3.0.6.tgz#f5bf218b0efd65ce6670f7afc51658d0f82989fb"
+  integrity sha512-bagfuHttfQOpANGy1Y6NJ+0mNb7dD2MswFG2ZKj22s8g0wVsojpRlqveEQHmgXXcfROB2RT6oqbPYr9EN2ZWzg==
   dependencies:
-    pug-error "^1.3.2"
-    pug-walk "^1.1.7"
+    pug-error "^1.3.3"
+    pug-walk "^1.1.8"
 
 pug-load@^2.0.11:
   version "2.0.12"
@@ -8350,7 +8350,7 @@ pug-strip-comments@^1.0.3:
   dependencies:
     pug-error "^1.3.2"
 
-pug-walk@^1.1.7, pug-walk@^1.1.8:
+pug-walk@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/pug-walk/-/pug-walk-1.1.8.tgz#b408f67f27912f8c21da2f45b7230c4bd2a5ea7a"
   integrity sha512-GMu3M5nUL3fju4/egXwZO0XLi6fW/K3T3VTgFQ14GxNi8btlxgT5qZL//JwZFm/2Fa64J/PNS8AZeys3wiMkVA==
