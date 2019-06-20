@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "ejs": "^2.6.1"
+    "ejs": "^2.6.2"
   },
   "description": "a fis plugin to parse ejs.",
   "files": [

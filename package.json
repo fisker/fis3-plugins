@@ -28,14 +28,16 @@
     "dev": "rollup --config --watch",
     "build": "node -r esm ./scripts/build-packages.js",
     "clean": "rimraf packages",
-    "release": "run-s clean prettier lint build dist",
+    "release": "run-s clean lint build format dist",
     "dist": "lerna publish",
     "lint": "run-p lint:*",
-    "lint:eslint": "eslint **/*.{js,mjs,vue} --fix",
+    "lint:eslint": "eslint **/*.{js,mjs,vue}",
     "lint:markdown": "markdownlint **/*.md --ignore \"**/node_modules/**\"",
-    "prettier": "prettier **/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml} --write",
     "bump-versions": "node -r esm ./scripts/bump-versions.js",
-    "postpack": "yarn bump-versions && git add versions.json && git commit -m \"chore: update versions cache\" && git push"
+    "postpack": "yarn bump-versions && git add versions.json && git commit -m \"chore: update versions cache\" && git push",
+    "format": "run-p format:*",
+    "format:eslint": "yarn lint:eslint --fix",
+    "format:prettier": "prettier **/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml} --write"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

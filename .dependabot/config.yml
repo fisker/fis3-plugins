@@ -52,5 +52,13 @@ update_configs:
           dependency_type: "production"
           update_type: "semver:minor"
 
+    ignored_updates:
+      - match:
+          dependency_name: "caniuse-lite"
+      - match:
+          dependency_name: "caniuse-db"
+      - match:
+          dependency_name: "electron-to-chromium"
+
     # auto update package.json
     version_requirement_updates: "increase_versions"

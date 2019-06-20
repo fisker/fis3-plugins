@@ -1,6 +1,7 @@
 {
   "extends": [
-    "@fisker"
+    "@fisker",
+    ":assignee(fisker)"
   ],
   "ignorePaths": [
     "packages"
