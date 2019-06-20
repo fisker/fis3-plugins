@@ -31,5 +31,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-autoprefixer-latest",
-  "version": "1.2.7"
+  "version": "1.2.8"
 }
