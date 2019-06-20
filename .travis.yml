@@ -8,4 +8,5 @@ cache: yarn
 before_install:
   - npm install -g yarn
 script:
-  - run-s clean prettier lint build
+  - yarn lint
+  - yarn build
