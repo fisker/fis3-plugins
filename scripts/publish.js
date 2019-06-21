@@ -20,14 +20,14 @@ function deprecate(package_, message) {
 }
 
 async function publish(package_) {
-  const {dest, info} = package_
+  const {dest: destination, info} = package_
   const {name, version} = info
   const publishedVersion = await latestVersion(name)
 
   if (publishedVersion !== version) {
     console.log(`[${name}] publishing, ${publishedVersion} -> ${version}`)
     return npm('publish', [], {
-      cwd: dest,
+      cwd: destination,
     })
   }
 

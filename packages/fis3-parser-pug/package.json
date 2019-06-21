@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "pug": "^2.0.3"
+    "pug": "^2.0.4"
   },
   "description": "a fis plugin to parse pug(aka jade).",
   "files": [
@@ -31,5 +31,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-pug",
-  "version": "1.2.4"
+  "version": "1.2.5"
 }

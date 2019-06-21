@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "postcss": "^7.0.17",
-    "postcss-load-config": "^2.0.0",
+    "postcss-load-config": "^2.1.0",
     "promise-synchronizer": "^1.1.1"
   },
   "description": "postcss for fis3.",
@@ -32,5 +32,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-postcss-with-rc",
-  "version": "1.0.6"
+  "version": "1.0.7"
 }

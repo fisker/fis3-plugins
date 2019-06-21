@@ -108,14 +108,14 @@ function onProcessEnd(file) {
 
 function onPackFile(message) {
   const {file} = message
-  const {pkg} = message
+  const {pkg: package_} = message
 
   // 没有配置，不开启。
   if (!file.relative || !file.relativeBody) {
     return
   }
 
-  message.content = convert(file.relativeBody, file, pkg)
+  message.content = convert(file.relativeBody, file, package_)
 }
 
 function onFetchRelativeUrl(message) {
