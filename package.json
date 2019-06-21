@@ -25,19 +25,20 @@
     "nohoist": []
   },
   "scripts": {
-    "dev": "rollup --config --watch",
-    "build": "node -r esm ./scripts/build-packages.js",
+    "build": "node -r esm \"./scripts/build-packages.js\"",
+    "bump-versions": "node -r esm \"./scripts/bump-versions.js\"",
     "clean": "rimraf packages",
-    "release": "run-s clean lint build format dist",
+    "dev": "rollup --config --watch",
     "dist": "lerna publish",
+    "format": "run-p format:*",
+    "format:eslint": "yarn lint:eslint --fix",
+    "format:prettier": "prettier \"**/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml}\" --write",
     "lint": "run-p lint:*",
     "lint:eslint": "eslint **/*.{js,mjs,vue}",
     "lint:markdown": "markdownlint **/*.md --ignore \"**/node_modules/**\"",
-    "bump-versions": "node -r esm ./scripts/bump-versions.js",
+    "lint:prettier": "prettier \"**/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml}\" --check",
     "postpack": "yarn bump-versions && git add versions.json && git commit -m \"chore: update versions cache\" && git push",
-    "format": "run-p format:*",
-    "format:eslint": "yarn lint:eslint --fix",
-    "format:prettier": "prettier **/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml} --write"
+    "release": "run-s clean lint build format dist"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
