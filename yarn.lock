@@ -892,10 +892,10 @@
   dependencies:
     "@commitlint/config-conventional" "8.0.0"
 
-"@fisker/eslint-config@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@fisker/eslint-config/-/eslint-config-1.2.1.tgz#679c8ad459fe65fb6da5a5f180adc329e7082739"
-  integrity sha512-Yds19OG9YOB8oISuFvcAFdVxN1cdHzrJckSCyLyB/j8TVnGbzmoGZah6vb7egoVNnmnrXsLunmklmFieVqGORg==
+"@fisker/eslint-config@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@fisker/eslint-config/-/eslint-config-1.2.3.tgz#099ce178bb846d65353dee371f9ef55b2181641f"
+  integrity sha512-aTHoqBRqXvrYkUhdwpfgsZmzETFMFFlqzJLHab0reeS5Wr8T4+L9IkrJPhkJUZUyVdfLadFBr9VQvm7U84NBHw==
   dependencies:
     eslint-config-airbnb-base "13.1.0"
     eslint-config-prettier "5.0.0"
