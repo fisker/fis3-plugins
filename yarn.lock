@@ -892,19 +892,19 @@
   dependencies:
     "@commitlint/config-conventional" "8.0.0"
 
-"@fisker/eslint-config@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@fisker/eslint-config/-/eslint-config-1.2.3.tgz#099ce178bb846d65353dee371f9ef55b2181641f"
-  integrity sha512-aTHoqBRqXvrYkUhdwpfgsZmzETFMFFlqzJLHab0reeS5Wr8T4+L9IkrJPhkJUZUyVdfLadFBr9VQvm7U84NBHw==
+"@fisker/eslint-config@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@fisker/eslint-config/-/eslint-config-1.2.4.tgz#4646b7de097d12b3aeb6765c8556486bb442e43c"
+  integrity sha512-9KXCqIFF5SIraPdUh228g2yy6EIihILGTIO2qC+q0/dU65pOkqnh5SCEzyZO3aArcIg7J91cz3N5r4fbACdFaA==
   dependencies:
     eslint-config-airbnb-base "13.1.0"
-    eslint-config-prettier "5.0.0"
+    eslint-config-prettier "6.0.0"
     eslint-plugin-eslint-comments "3.1.2"
     eslint-plugin-html "5.0.5"
     eslint-plugin-import "2.18.0"
     eslint-plugin-node "9.1.0"
     eslint-plugin-prettier "3.1.0"
-    eslint-plugin-promise "4.1.1"
+    eslint-plugin-promise "4.2.1"
     eslint-plugin-unicorn "9.1.1"
 
 "@fisker/husky-config@^1.1.0":
@@ -3954,10 +3954,10 @@ eslint-config-airbnb-base@13.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-prettier@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-5.0.0.tgz#f7a94b2b8ae7cbf25842c36fa96c6d32cd0a697c"
-  integrity sha512-c17Aqiz5e8LEqoc/QPmYnaxQFAHTx2KlCZBPxXXjEMmNchOLnV/7j0HoPZuC+rL/tDC9bazUYOKJW9bOhftI/w==
+eslint-config-prettier@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-6.0.0.tgz#f429a53bde9fc7660e6353910fd996d6284d3c25"
+  integrity sha512-vDrcCFE3+2ixNT5H83g28bO/uYAwibJxerXPj+E7op4qzBCsAV36QfvdAyVOoNxKAH2Os/e01T/2x++V0LPukA==
   dependencies:
     get-stdin "^6.0.0"
 
@@ -4074,10 +4074,10 @@ eslint-plugin-prettier@3.1.0:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-promise@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-4.1.1.tgz#1e08cb68b5b2cd8839f8d5864c796f56d82746db"
-  integrity sha512-faAHw7uzlNPy7b45J1guyjazw28M+7gJokKUjC5JSFoYfUEyy6Gw/i7YQvmv2Yk00sUjWcmzXQLpU1Ki/C2IZQ==
+eslint-plugin-promise@4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-4.2.1.tgz#845fd8b2260ad8f82564c1222fce44ad71d9418a"
+  integrity sha512-VoM09vT7bfA7D+upt+FjeBO5eHIJQBUWki1aPvB+vbNiHS3+oGIJGIeyBtKQTME6UPXXy3vV07OL1tHd3ANuDw==
 
 eslint-plugin-promise@~4.0.0:
   version "4.0.1"
