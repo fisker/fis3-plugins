@@ -2800,7 +2800,7 @@ chardet@^0.7.0:
   optionalDependencies:
     fsevents "^2.0.6"
 
-chokidar@^2.0.0, chokidar@^2.0.4:
+chokidar@^2.0.4:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.6.tgz#b6cad653a929e244ce8a834244164d241fa954c5"
   integrity sha512-V2jUo67OKkc6ySiRpJrjlpJKl9kDuG+Xb8VgsGzb+aEouhgS1D0weyPU4lEzdAcsCAvrih2J2BqyXqHWvVLw5g==
@@ -6245,9 +6245,9 @@ jstransformer@1.0.0:
     promise "^7.0.1"
 
 jsx-ast-utils@^2.0.1:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-2.2.0.tgz#e2bade6d09c8ef9d5f6b9ff2ace67b2cdbc7e370"
-  integrity sha512-yAmhGSzR7TsD0OQpu1AGLz8Bx84cxMqtgoJrufomY6BlveEDlREhvu1rea21936xbe5tlUh7IPda82m5ae0H8Q==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-2.2.1.tgz#4d4973ebf8b9d2837ee91a8208cc66f3a2776cfb"
+  integrity sha512-v3FxCcAf20DayI+uxnCuw795+oOIkVu6EnJ1+kSzhqqTZHNkTZ7B66ZgLp4oLJ/gbA64cI0B7WRoHZMSRdyVRQ==
   dependencies:
     array-includes "^3.0.3"
     object.assign "^4.1.0"
@@ -9172,13 +9172,6 @@ sass-graph@^2.2.4:
     lodash "^4.0.0"
     scss-tokenizer "^0.2.3"
     yargs "^7.0.0"
-
-sass@^1.22.0:
-  version "1.22.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.22.0.tgz#70fcfa86d78450d98a54c7459d3f2c93d7abf30b"
-  integrity sha512-6BEkdLYPP26cKggrMuBjMWpguMFgeayW+35LGnzXqCipm86fUboSVAdRLFKRpk1ClMNzFZums6kKkjgWF00WoA==
-  dependencies:
-    chokidar "^2.0.0"
 
 sass@^1.22.1:
   version "1.22.1"
