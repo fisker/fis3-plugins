@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "terser": "^4.0.1"
+    "terser": "^4.0.2"
   },
   "description": "js minifer for fis based on terser.",
   "files": [
