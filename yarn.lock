@@ -885,15 +885,15 @@
   dependencies:
     "@commitlint/config-conventional" "8.0.0"
 
-"@fisker/eslint-config@^1.2.4":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@fisker/eslint-config/-/eslint-config-1.2.4.tgz#4646b7de097d12b3aeb6765c8556486bb442e43c"
-  integrity sha512-9KXCqIFF5SIraPdUh228g2yy6EIihILGTIO2qC+q0/dU65pOkqnh5SCEzyZO3aArcIg7J91cz3N5r4fbACdFaA==
+"@fisker/eslint-config@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@fisker/eslint-config/-/eslint-config-1.2.5.tgz#54a6c7f5be37e2ab147a4d1bcf9c52a98daa1614"
+  integrity sha512-mi2Ix+tmO0LWPUbiJO9gOJvo0AjitAQOrKlbnIuQjKW4PoW/7msiuki3P8yCZcJ62Ks+Kxx+N04NsTB5tTfBAA==
   dependencies:
-    eslint-config-airbnb-base "13.1.0"
+    eslint-config-airbnb-base "13.2.0"
     eslint-config-prettier "6.0.0"
     eslint-plugin-eslint-comments "3.1.2"
-    eslint-plugin-html "5.0.5"
+    eslint-plugin-html "6.0.0"
     eslint-plugin-import "2.18.0"
     eslint-plugin-node "9.1.0"
     eslint-plugin-prettier "3.1.0"
@@ -3109,6 +3109,11 @@ configstore@^4.0.0:
     write-file-atomic "^2.0.0"
     xdg-basedir "^3.0.0"
 
+confusing-browser-globals@^1.0.5:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/confusing-browser-globals/-/confusing-browser-globals-1.0.7.tgz#5ae852bd541a910e7ffb2dbb864a2d21a36ad29b"
+  integrity sha512-cgHI1azax5ATrZ8rJ+ODDML9Fvu67PimB6aNxBrc/QwSaDaM9eTfIEUHx3bBLJJ82ioSb+/5zfsMCCEJax3ByQ==
+
 connect-history-api-fallback@^1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/connect-history-api-fallback/-/connect-history-api-fallback-1.6.0.tgz#8b32089359308d111115d81cad3fceab888f97bc"
@@ -3982,14 +3987,14 @@ eslint-ast-utils@^1.0.0:
     lodash.get "^4.4.2"
     lodash.zip "^4.2.0"
 
-eslint-config-airbnb-base@13.1.0:
-  version "13.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-13.1.0.tgz#b5a1b480b80dfad16433d6c4ad84e6605052c05c"
-  integrity sha512-XWwQtf3U3zIoKO1BbHh6aUhJZQweOwSt4c2JrPDg9FP3Ltv3+YfEv7jIDB8275tVnO/qOHbfuYg3kzw6Je7uWw==
+eslint-config-airbnb-base@13.2.0:
+  version "13.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-13.2.0.tgz#f6ea81459ff4dec2dda200c35f1d8f7419d57943"
+  integrity sha512-1mg/7eoB4AUeB0X1c/ho4vb2gYkNH8Trr/EgCT/aGmKhhG+F6vF5s8+iRBlWAzFIAphxIdp3YfEKgEl0f9Xg+w==
   dependencies:
-    eslint-restricted-globals "^0.1.1"
+    confusing-browser-globals "^1.0.5"
     object.assign "^4.1.0"
-    object.entries "^1.0.4"
+    object.entries "^1.1.0"
 
 eslint-config-prettier@6.0.0:
   version "6.0.0"
@@ -4040,12 +4045,12 @@ eslint-plugin-eslint-comments@3.1.2:
     escape-string-regexp "^1.0.5"
     ignore "^5.0.5"
 
-eslint-plugin-html@5.0.5:
-  version "5.0.5"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-5.0.5.tgz#e2388f813f75b2287cde884811eab287de8e0f56"
-  integrity sha512-v/33i3OD0fuXcRXexVyXXBOe4mLBLBQoF1UO1Uy9D+XLq4MC8K45GcQKfqjC/FnHAHp3pYUjpHHktYNCtShGmg==
+eslint-plugin-html@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-6.0.0.tgz#28e5c3e71e6f612e07e73d7c215e469766628c13"
+  integrity sha512-PQcGippOHS+HTbQCStmH5MY1BF2MaU8qW/+Mvo/8xTa/ioeMXdSP+IiaBw2+nh0KEMfYQKuTz1Zo+vHynjwhbg==
   dependencies:
-    htmlparser2 "^3.10.0"
+    htmlparser2 "^3.10.1"
 
 eslint-plugin-import@2.18.0:
   version "2.18.0"
@@ -4154,11 +4159,6 @@ eslint-plugin-unicorn@9.1.1:
     regexpp "^2.0.1"
     reserved-words "^0.1.2"
     safe-regex "^2.0.1"
-
-eslint-restricted-globals@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-restricted-globals/-/eslint-restricted-globals-0.1.1.tgz#35f0d5cbc64c2e3ed62e93b4b1a7af05ba7ed4d7"
-  integrity sha1-NfDVy8ZMLj7WLpO0saevBbp+1Nc=
 
 eslint-scope@^4.0.0, eslint-scope@^4.0.3:
   version "4.0.3"
@@ -5312,7 +5312,7 @@ htmlparser2@3.8.x:
     entities "1.0"
     readable-stream "1.1"
 
-htmlparser2@^3.10.0, htmlparser2@^3.9.2:
+htmlparser2@^3.10.0, htmlparser2@^3.10.1, htmlparser2@^3.9.2:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.10.1.tgz#bd679dc3f59897b6a34bb10749c855bb53a9392f"
   integrity sha512-IgieNijUMbkDovyoKObU1DUhm1iwNYE/fuifEoEHfd1oZKZDaONBSkal7Y01shxsM49R4XaMdGez3WnF9UfiCQ==
@@ -7474,7 +7474,7 @@ object.assign@^4.1.0:
     has-symbols "^1.0.0"
     object-keys "^1.0.11"
 
-object.entries@^1.0.4:
+object.entries@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/object.entries/-/object.entries-1.1.0.tgz#2024fc6d6ba246aee38bdb0ffd5cfbcf371b7519"
   integrity sha512-l+H6EQ8qzGRxbkHOd5I/aHRhHDKoQXQ8g0BYt4uSweQU1/J6dZUOyWh9a2Vky35YCKjzmgxOzta2hH6kf9HuXA==
