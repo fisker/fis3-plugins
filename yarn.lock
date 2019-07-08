@@ -1922,7 +1922,7 @@ after@0.8.2:
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
   integrity sha1-/ts5T58OAqqXaOcCvaI7UF+ufh8=
 
-agent-base@4, agent-base@^4.1.0:
+agent-base@4, agent-base@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-4.3.0.tgz#8165f01c436009bccad0b1d122f05ed770efc6ee"
   integrity sha512-salcGninV0nPrwpGNn4VTXBb1SOuXQBiqbrNXoeizJsHrsL6ERFM2Ne3JUSBWRE6aeNJI2ROP/WEEIDUiDe3cg==
@@ -2216,7 +2216,7 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-autoprefixer@^9.5.1, autoprefixer@^9.6.0:
+autoprefixer@^9.5.1:
   version "9.6.0"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.6.0.tgz#0111c6bde2ad20c6f17995a33fad7cf6854b4c87"
   integrity sha512-kuip9YilBqhirhHEGHaBTZKXL//xxGnzvsD0FtBQa6z+A69qZD6s/BAX9VzDF1i9VKDquTJDQaPLSEhOnL6FvQ==
@@ -5420,11 +5420,11 @@ http-signature@~1.2.0:
     sshpk "^1.7.0"
 
 https-proxy-agent@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-2.2.1.tgz#51552970fa04d723e04c56d04178c3f92592bbc0"
-  integrity sha512-HPCTS1LW51bcyMYbxUIOO4HEOlQ1/1qRaFWcyxvwaqUS9TY88aoEuHUY33kuAh1YhVVaDQhLZsnPd+XNARWZlQ==
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-2.2.2.tgz#271ea8e90f836ac9f119daccd39c19ff7dfb0793"
+  integrity sha512-c8Ndjc9Bkpfx/vCJueCPy0jlP4ccCCSNDp8xwCZzPjKJUm+B+u9WX2x98Qx4n1PiMNTWo3D7KK5ifNV/yJyRzg==
   dependencies:
-    agent-base "^4.1.0"
+    agent-base "^4.3.0"
     debug "^3.1.0"
 
 humanize-ms@^1.2.1:
@@ -9547,7 +9547,7 @@ source-map-resolve@^0.5.0:
     source-map-url "^0.4.0"
     urix "^0.1.0"
 
-source-map-support@~0.5.10, source-map-support@~0.5.12:
+source-map-support@~0.5.12:
   version "0.5.12"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.12.tgz#b4f3b10d51857a5af0138d3ce8003b201613d599"
   integrity sha512-4h2Pbvyy15EE02G+JOZpUCmqWJuqrs+sEkzewTm++BPi7Hvn/HwcqLAcNxYAyI0x13CpPPn+kMjl+hplXMHITQ==
@@ -10101,15 +10101,6 @@ term-size@^1.2.0:
   integrity sha1-RYuDiH8oj8Vtb/+/rSYuJmOO+mk=
   dependencies:
     execa "^0.7.0"
-
-terser@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-4.0.2.tgz#580cea06c4932f46a48ed13804c93bc93c275968"
-  integrity sha512-IWLuJqTvx97KP3uTYkFVn93cXO+EtlzJu8TdJylq+H0VBDlPMIfQA9MBS5Vc5t3xTEUG1q0hIfHMpAP2R+gWTw==
-  dependencies:
-    commander "^2.19.0"
-    source-map "~0.6.1"
-    source-map-support "~0.5.10"
 
 terser@^4.1.0:
   version "4.1.0"
