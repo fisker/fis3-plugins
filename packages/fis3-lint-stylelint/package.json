@@ -32,5 +32,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-stylelint",
-  "version": "2.3.10"
+  "version": "2.3.11"
 }
