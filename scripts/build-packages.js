@@ -1,7 +1,7 @@
 import {join} from 'path'
 import {template} from 'lodash'
+import writePrettierFile from 'write-prettier-file'
 import packages from './packages'
-import prettierFile from './utils/prettier-file'
 import readFile from './utils/read-file'
 
 const SOURCE_DIR = join(__dirname, '..', 'src')
@@ -15,7 +15,7 @@ for (const package_ of packages.filter(
 const templateFile = readFile(join(SOURCE_DIR, 'templates', 'npm-status.ejs'))
 const render = template(templateFile)
 
-prettierFile({
-  file: join(__dirname, '..', 'packages', 'readme.md'),
-  content: render({packages}).trim(),
-})
+writePrettierFile(
+  join(__dirname, '..', 'packages', 'readme.md'),
+  render({packages}).trim()
+)

@@ -1,9 +1,9 @@
 import {join} from 'path'
 import latestVersion from 'latest-version'
 import stringify from 'fast-json-stable-stringify'
+import writePrettierFile from 'write-prettier-file'
 import pkgs from './packages'
 import readFile from './utils/read-file'
-import prettierFile from './utils/prettier-file'
 
 const versionsFile = join(__dirname, '..', 'versions.json')
 
@@ -39,8 +39,5 @@ function updateVersion(name, version) {
   const versions = JSON.parse(content.trim())
   versions[name] = version
 
-  prettierFile({
-    file: versionsFile,
-    content: stringify(versions),
-  })
+  writePrettierFile(versionsFile, stringify(versions))
 }

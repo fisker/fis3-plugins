@@ -64,7 +64,8 @@
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
     "rollup": "^1.16.7",
-    "rollup-plugin-babel": "^4.3.3"
+    "rollup-plugin-babel": "^4.3.3",
+    "write-prettier-file": "^1.2.0"
   },
   "dependencies": {
     "@starptech/prettyhtml": "^0.10.0",

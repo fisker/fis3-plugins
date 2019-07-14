@@ -4,11 +4,11 @@ import _ from 'lodash'
 import {sync as mkdirp} from 'mkdirp'
 import stringify from 'fast-json-stable-stringify'
 import {transform} from '@babel/core'
+import writePrettierFile from 'write-prettier-file'
 import globalPackage from '../package.json'
 import babelConfig from '../babel.config'
 import readFile from './utils/read-file'
 import writeFile from './utils/write-file'
-import prettierFile from './utils/prettier-file'
 
 const SOURCE_DIR = path.join(__dirname, '..', 'src')
 const DEST_DIR = path.join(__dirname, '..', 'packages')
@@ -134,10 +134,7 @@ class Package {
       content = transform(content, babelConfig).code
     }
     if (/.(js|json|md)$/.test(file)) {
-      prettierFile({
-        file,
-        content,
-      })
+      writePrettierFile(file, content)
     } else {
       writeFile(file, content)
     }
