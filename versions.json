@@ -11,7 +11,7 @@
   "fis3-parser-ejs": "1.1.8",
   "fis3-parser-lodash-template": "1.1.6",
   "fis3-parser-node-sass-latest": "1.3.10",
-  "fis3-parser-pug": "1.2.8",
+  "fis3-parser-pug": "1.2.9",
   "fis3-postprocessor-autoprefixer-latest": "1.2.11",
   "fis3-postprocessor-html": "1.2.5",
   "fis3-postprocessor-postcss-with-rc": "1.0.10",
