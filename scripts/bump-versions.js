@@ -11,14 +11,14 @@ for (const package_ of pkgs) {
   const {name} = package_.info
   const version = getVersion(name)
 
-  // if (version === '0.0.0') {
-  latestVersion(name).then(
-    version => updateVersion(name, version),
-    () => updateVersion(name, version)
-  )
-  // } else {
-  //   updateVersion(name, version)
-  // }
+  if (version === '0.0.0') {
+    latestVersion(name).then(
+      version => updateVersion(name, version),
+      () => updateVersion(name, version)
+    )
+  } else {
+    updateVersion(name, version)
+  }
 }
 
 function getVersion(name) {
