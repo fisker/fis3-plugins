@@ -4,9 +4,12 @@ node_js:
   - "10"
   - "12"
 sudo: false
-cache: yarn
+cache:
+  yarn: true
 before_install:
-  - npm install -g yarn
+  - npm install --global yarn
+install:
+  - yarn
 script:
   - yarn lint
   - yarn build
