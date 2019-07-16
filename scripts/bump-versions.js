@@ -39,5 +39,5 @@ function updateVersion(name, version) {
   const versions = JSON.parse(content.trim())
   versions[name] = version
 
-  writePrettierFile(versionsFile, stringify(versions))
+  writePrettierFile.sync(versionsFile, stringify(versions))
 }
