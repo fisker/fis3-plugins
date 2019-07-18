@@ -37,7 +37,7 @@
     "lint:eslint": "eslint \"**/*.{js,mjs,vue}\"",
     "lint:markdown": "markdownlint \"**/*.md\" --ignore \"**/node_modules/**\"",
     "lint:prettier": "prettier \"**/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml}\" --check",
-    "postpack": "yarn bump-versions && git add versions.json && git commit -m \"chore: update versions cache\" && git push",
+    "postpack": "yarn bump-versions && git add versions.json && git commit -m \"chore: update versions cache\" --no-verify && git push",
     "release": "run-s clean lint build format dist"
   },
   "devDependencies": {
