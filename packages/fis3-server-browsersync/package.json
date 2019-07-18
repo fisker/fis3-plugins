@@ -43,5 +43,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-server-browsersync",
-  "version": "1.11.12"
+  "version": "1.11.14-alpha.22+db67671"
 }
