@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "postcss": "^7.0.17",
-    "promise-synchronizer": "^1.1.1",
+    "promise-synchronizer": "^1.1.2",
     "stylelint": "^10.1.0"
   },
   "description": "a css linter plugin of fis3 based on stylelint.",

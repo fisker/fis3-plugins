@@ -10,7 +10,7 @@
   "dependencies": {
     "posthtml": "^0.11.4",
     "posthtml-beautify": "^0.2.6",
-    "promise-synchronizer": "^1.1.1"
+    "promise-synchronizer": "^1.1.2"
   },
   "description": "a html formatter of fis3 based on posthtml-beautify.",
   "files": [
