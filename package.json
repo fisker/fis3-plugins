@@ -47,7 +47,7 @@
     "@fisker/commitlint-config": "^1.1.0",
     "@fisker/eslint-config": "^1.2.8",
     "@fisker/husky-config": "^1.1.1",
-    "@fisker/lint-staged-config": "^1.0.4",
+    "@fisker/lint-staged-config": "^1.0.5",
     "@fisker/prettier-config": "^1.0.18",
     "cz-conventional-changelog-emoji": "^0.1.0",
     "eslint": "^6.1.0",
