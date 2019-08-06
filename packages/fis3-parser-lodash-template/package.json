@@ -31,5 +31,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-lodash-template",
-  "version": "1.1.6"
+  "version": "1.2.0"
 }
