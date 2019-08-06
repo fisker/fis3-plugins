@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "cssgrace-lite": "^1.0.1"
+    "cssgrace-lite": "1.0.1"
   },
   "description": "cssgrace for fis3.",
   "files": [

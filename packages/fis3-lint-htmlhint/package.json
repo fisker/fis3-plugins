@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "htmlhint": "^0.11.0"
+    "htmlhint": "0.11.0"
   },
   "description": "a html linter plugin of fis3 based on htmlhint.",
   "files": [
