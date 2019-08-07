@@ -12,7 +12,6 @@ import writeFile from './utils/write-file'
 
 const SOURCE_DIR = path.join(__dirname, '..', 'src')
 const DEST_DIR = path.join(__dirname, '..', 'packages')
-const CHARSET = 'utf-8'
 const VERSIONS = (() => {
   try {
     // eslint-disable-next-line import/no-unresolved
