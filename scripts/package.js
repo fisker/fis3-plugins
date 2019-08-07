@@ -187,6 +187,7 @@ class Package {
       this.copyFile(file)
     })
     this.writeFile('readme.md', template('readme.ejs')(this))
+    this.writeFile('license', readFile(path.join(__dirname, '..', 'license')))
 
     this.writeFile(
       'package.json',
