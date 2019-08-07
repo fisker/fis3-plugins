@@ -32,5 +32,5 @@
     "registry": "https://registry.npmjs.org/"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-prettyhtml",
-  "version": "1.2.1"
+  "version": "1.2.2"
 }
