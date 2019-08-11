@@ -7,7 +7,9 @@ import {minify} from 'terser'
 const {log} = global.fis
 
 function getTerserOptions(file, config) {
-  const options = Object.assign({}, config)
+  const options = {
+    ...config,
+  }
   delete options.filename
 
   const filename = file.filename + file.rExt

@@ -3,7 +3,9 @@ import {minify} from 'uglify-js'
 const {log} = global.fis
 
 function getUglifyJSOptions(file, config) {
-  const options = Object.assign({}, config)
+  const options = {
+    ...config,
+  }
   delete options.filename
 
   const filename = file.filename + file.rExt

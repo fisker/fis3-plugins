@@ -19,12 +19,14 @@ module.exports = function(content, file, config_) {
     return content
   }
 
-  const config = Object.assign({}, config_, {
+  const config = {
+    ...config_,
     formatter: 'string',
     files: file.realpath,
     extractStyleTagsFromHtml: false,
     from: config_.filename,
-  })
+  }
+
   delete config.filename
   delete config.code
   delete config.codeFilename

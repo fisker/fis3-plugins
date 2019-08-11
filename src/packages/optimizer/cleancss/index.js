@@ -19,7 +19,7 @@ function deriveSourceMap(file, sourceMap) {
 }
 
 module.exports = function(content, file, config) {
-  const options = Object.assign({}, config)
+  const options = {...config}
   delete options.filename
 
   if (options.returnPromise) {
