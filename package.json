@@ -77,7 +77,7 @@
     "cssgrace-lite": "1.0.1",
     "ejs": "2.6.2",
     "eslint": "6.1.0",
-    "execa": "2.0.3",
+    "execa": "2.0.4",
     "htmlhint": "0.11.0",
     "js-beautify": "1.10.2",
     "lodash": "4.17.15",
