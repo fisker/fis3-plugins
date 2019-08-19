@@ -98,7 +98,7 @@
     "stylelint": "10.1.0",
     "terser": "4.1.4",
     "uglify-js": "3.6.0",
-    "yargs": "13.3.0",
+    "yargs": "14.0.0",
     "yog-devtools": "0.1.1"
   },
   "config": {
