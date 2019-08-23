@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "eslint": "6.2.1",
-    "standard": "14.0.0"
+    "standard": "14.0.2"
   },
   "description": "a js linter plugin of fis3 based on standard.",
   "files": [
