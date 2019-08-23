@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "standard": "14.0.0"
+    "standard": "14.0.2"
   },
   "description": "a code formatter of fis3 based on standard.",
   "files": [
