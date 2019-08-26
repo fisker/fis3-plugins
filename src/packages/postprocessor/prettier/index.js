@@ -1,21 +1,16 @@
 import prettier from 'prettier'
 
-const assign = Object.assign || global.fis.util.assign
-
-module.exports = function(content, file, config_) {
+module.exports = function(content, file, config) {
   const fileFakePath = file.realpathNoExt + file.rExt
 
-  let config = prettier.resolveConfig.sync(fileFakePath, {
-    editorconfig: true,
-  })
-
-  config = assign(config, config_, {
+  const prettierConfig = {
+    ...prettier.resolveConfig.sync(fileFakePath, {
+      editorconfig: true,
+    }),
+    ...config,
     filepath: fileFakePath,
-  })
+    filename: undefined,
+  }
 
-  delete config.filename
-
-  const parsed = prettier.format(content, config)
-
-  return parsed
+  return prettier.format(content, prettierConfig)
 }
