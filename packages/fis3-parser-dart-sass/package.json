@@ -8,7 +8,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "dependencies": {
-    "sass": "1.22.9"
+    "sass": "1.22.10"
   },
   "description": "A fis plugin to parse sass with dart-sass.",
   "files": [
