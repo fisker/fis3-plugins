@@ -1,25 +1,98 @@
 {
-  "fis3-hook-relative-legal-html": "2.4.13",
-  "fis3-lint-eslint-noisy": "2.3.6",
-  "fis3-lint-htmlhint": "1.3.6",
-  "fis3-lint-standard": "1.3.6",
-  "fis3-lint-stylelint": "2.4.6",
-  "fis3-optimizer-cleancss": "1.2.6",
-  "fis3-optimizer-terser": "1.2.6",
-  "fis3-optimizer-uglifyjs": "1.2.6",
-  "fis3-parser-dart-sass": "1.3.6",
-  "fis3-parser-ejs": "1.2.6",
-  "fis3-parser-lodash-template": "1.2.6",
-  "fis3-parser-node-sass-latest": "1.4.6",
-  "fis3-parser-pug": "1.4.6",
-  "fis3-postprocessor-autoprefixer-latest": "1.3.6",
-  "fis3-postprocessor-html": "1.3.6",
-  "fis3-postprocessor-postcss-with-rc": "1.1.6",
-  "fis3-postprocessor-posthtml-beautify": "1.4.6",
-  "fis3-postprocessor-prettier": "1.5.6",
-  "fis3-postprocessor-prettyhtml": "1.2.6",
-  "fis3-postprocessor-standard": "1.3.6",
-  "fis3-postprocessor-stylefmt": "1.3.9",
-  "fis3-preprocessor-cssgrace": "1.2.6",
-  "fis3-server-browsersync": "1.13.6"
+  "fis3-hook-relative-legal-html": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "2.4.13"
+  },
+  "fis3-lint-eslint-noisy": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "2.3.6"
+  },
+  "fis3-lint-htmlhint": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.3.6"
+  },
+  "fis3-lint-standard": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.3.6"
+  },
+  "fis3-lint-stylelint": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "2.4.6"
+  },
+  "fis3-optimizer-cleancss": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.2.6"
+  },
+  "fis3-optimizer-terser": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.2.6"
+  },
+  "fis3-optimizer-uglifyjs": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.2.6"
+  },
+  "fis3-parser-dart-sass": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.3.6"
+  },
+  "fis3-parser-ejs": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.2.6"
+  },
+  "fis3-parser-lodash-template": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.2.6"
+  },
+  "fis3-parser-node-sass-latest": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.4.6"
+  },
+  "fis3-parser-pug": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.4.6"
+  },
+  "fis3-postprocessor-autoprefixer-latest": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.3.6"
+  },
+  "fis3-postprocessor-html": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.3.6"
+  },
+  "fis3-postprocessor-postcss-with-rc": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.1.6"
+  },
+  "fis3-postprocessor-posthtml-beautify": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.4.6"
+  },
+  "fis3-postprocessor-prettier": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.5.6"
+  },
+  "fis3-postprocessor-prettier-css": {
+    "gitHead": "0000000000000000000000000000000000000000",
+    "version": "0.0.0"
+  },
+  "fis3-postprocessor-prettyhtml": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.2.6"
+  },
+  "fis3-postprocessor-standard": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.3.6"
+  },
+  "fis3-postprocessor-stylefmt": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.3.9"
+  },
+  "fis3-preprocessor-cssgrace": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.2.6"
+  },
+  "fis3-server-browsersync": {
+    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
+    "version": "1.13.6"
+  }
 }

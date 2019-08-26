@@ -1,16 +1,21 @@
 {
+  "main": "index.js",
   "author": {
-    "email": "lionkay@gmail.com",
     "name": "fisker Cheung",
+    "email": "lionkay@gmail.com",
     "url": "https://www.fiskercheung.com/"
   },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "name": "fis3-hook-relative-legal-html",
   "description": "fis3 relative path support",
-  "files": [
-    "index.js"
-  ],
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-hook-relative-legal-html",
   "keywords": [
     "fis",
     "fis3",
@@ -19,13 +24,9 @@
     "relative",
     "relative-legal-html"
   ],
-  "license": "MIT",
-  "main": "index.js",
-  "name": "fis3-hook-relative-legal-html",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-hook-relative-legal-html",
-  "version": "2.4.12"
+  "files": [
+    "index.js"
+  ],
+  "version": "2.4.13",
+  "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8"
 }

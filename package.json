@@ -37,8 +37,7 @@
     "lint:eslint": "eslint \"**/*.{js,mjs,vue}\"",
     "lint:markdown": "markdownlint \"**/*.md\" --ignore \"**/node_modules/**\"",
     "lint:prettier": "prettier \"**/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml}\" --check",
-    "prepublishOnly": "yarn bump-versions && git add versions.json && git commit -m \"chore: bump versions [skip ci]\" --no-verify",
-    "postpublish": "yarn build && git add packages && git commit -m \"chore: rebuild [skip ci]\" --no-verify && git push",
+    "postpublish": "yarn build && git add versions.json && git add packages && git commit -m \"chore: bump versions [skip ci]\" --no-verify && git push",
     "release": "run-s clean lint build format dist"
   },
   "devDependencies": {
@@ -55,7 +54,6 @@
     "esm": "3.2.25",
     "fast-json-stable-stringify": "2.0.0",
     "husky": "3.0.4",
-    "latest-version": "5.1.0",
     "lerna": "3.16.4",
     "lint-staged": "9.2.4",
     "make-dir": "3.0.0",

@@ -77,7 +77,8 @@ class Package {
         keywords: this.info.keywords || [],
         files: this.info.files || [],
         dependencies: parseDependencies(this.info.dependencies),
-        version: VERSIONS[packageName] || '0.0.0',
+        version: VERSIONS[packageName].version,
+        gitHead: VERSIONS[packageName].gitHead,
       })
     } catch (error) {
       throw new Error(`${packageName} build error: ${error}`)
@@ -116,13 +117,14 @@ class Package {
         'bugs',
         'publishConfig',
       ]),
-      _.pick(info, ['name', 'version', 'description', 'dependencies']),
+      _.pick(info, ['name', 'description', 'dependencies']),
       {
         repository,
         keywords: _.uniq(keywords.sort()),
         scripts: info.scripts,
         files: _.uniq(files.concat(info.files).sort()),
-      }
+      },
+      _.pick(info, ['version', 'gitHead'])
     )
     return package_
   }
@@ -188,12 +190,7 @@ class Package {
     this.writeFile('readme.md', template('readme.ejs')(this))
     this.writeFile('license', readFile(path.join(__dirname, '..', 'license')))
 
-    this.writeFile(
-      'package.json',
-      stringify(this.pkg, {
-        space: 2,
-      })
-    )
+    this.writeFile('package.json', JSON.stringify(this.pkg))
   }
 }
 

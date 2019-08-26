@@ -1,19 +1,24 @@
 {
+  "main": "index.js",
   "author": {
-    "email": "lionkay@gmail.com",
     "name": "fisker Cheung",
+    "email": "lionkay@gmail.com",
     "url": "https://www.fiskercheung.com/"
   },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "name": "fis3-parser-ejs",
+  "description": "a fis plugin to parse ejs.",
   "dependencies": {
     "ejs": "2.6.2"
   },
-  "description": "a fis plugin to parse ejs.",
-  "files": [
-    "index.js"
-  ],
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-ejs",
   "keywords": [
     "ejs",
     "fis",
@@ -22,13 +27,9 @@
     "html",
     "parser"
   ],
-  "license": "MIT",
-  "main": "index.js",
-  "name": "fis3-parser-ejs",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-ejs",
-  "version": "1.2.5"
+  "files": [
+    "index.js"
+  ],
+  "version": "1.2.6",
+  "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8"
 }
