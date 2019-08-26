@@ -37,7 +37,7 @@
     "lint:eslint": "eslint \"**/*.{js,mjs,vue}\"",
     "lint:markdown": "markdownlint \"**/*.md\" --ignore \"**/node_modules/**\"",
     "lint:prettier": "prettier \"**/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml}\" --check",
-    "prepublishOnly": "yarn bump-versions && git add . && git commit -m \"chore: bump versions [skip ci]\" --no-verify --amend",
+    "prepublishOnly": "yarn bump-versions && git add versions.json && git commit -m \"chore: bump versions [skip ci]\" --no-verify --amend",
     "release": "run-s clean lint build format dist"
   },
   "devDependencies": {
