@@ -29,7 +29,7 @@
     "bump-versions": "node -r esm \"./scripts/bump-versions.js\"",
     "clean": "rimraf packages",
     "dev": "rollup --config --watch",
-    "dist": "lerna publish",
+    "dist": "lerna publish from-git",
     "format": "run-p format:*",
     "format:eslint": "yarn lint:eslint --fix",
     "format:prettier": "prettier \"**/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml}\" --write",
