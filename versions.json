@@ -68,8 +68,8 @@
     "version": "1.4.6"
   },
   "fis3-postprocessor-prettier": {
-    "gitHead": "46996c51df41b04c7c256e74313f3f7d8df74da8",
-    "version": "1.5.6"
+    "gitHead": "1c7392b25f04b21f111d84c40c22bed1472f6284",
+    "version": "1.5.8"
   },
   "fis3-postprocessor-prettier-css": {
     "gitHead": "0000000000000000000000000000000000000000",
