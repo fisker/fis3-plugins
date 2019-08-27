@@ -57,7 +57,7 @@
     "husky": "3.0.4",
     "latest-version": "5.1.0",
     "lerna": "3.16.4",
-    "lint-staged": "9.2.4",
+    "lint-staged": "9.2.5",
     "make-dir": "3.0.0",
     "markdownlint-cli": "0.18.0",
     "mkdirp": "0.5.1",
