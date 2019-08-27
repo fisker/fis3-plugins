@@ -4,7 +4,7 @@ import sync from 'promise-synchronizer'
 
 async function process(content, file, config) {
   const {plugins, options} = await postcssrc()
-  const {css} = postcss(plugins).process(content, {
+  const {css} = await postcss(plugins).process(content, {
     ...config,
     ...options,
     from: config.filename,

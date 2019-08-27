@@ -61,6 +61,37 @@ function _defineProperty(obj, key, value) {
   return obj
 }
 
+function _await(value, then, direct) {
+  if (direct) {
+    return then ? then(value) : value
+  }
+
+  if (!value || !value.then) {
+    value = Promise.resolve(value)
+  }
+
+  return then ? value.then(then) : value
+}
+
+var process = function process(content, file, config) {
+  return _call(_postcssLoadConfig['default'], function(_ref) {
+    var plugins = _ref.plugins,
+      options = _ref.options
+    return _await(
+      (0, _postcss['default'])(plugins).process(
+        content,
+        _objectSpread({}, config, {}, options, {
+          from: config.filename,
+        })
+      ),
+      function(_ref2) {
+        var css = _ref2.css
+        return css
+      }
+    )
+  })
+}
+
 function _call(body, then, direct) {
   if (direct) {
     return then ? then(body()) : body()
@@ -72,23 +103,6 @@ function _call(body, then, direct) {
   } catch (e) {
     return Promise.reject(e)
   }
-}
-
-var process = function process(content, file, config) {
-  return _call(_postcssLoadConfig['default'], function(_ref) {
-    var plugins = _ref.plugins,
-      options = _ref.options
-
-    var _postcss$process = (0, _postcss['default'])(plugins).process(
-        content,
-        _objectSpread({}, config, {}, options, {
-          from: config.filename,
-        })
-      ),
-      css = _postcss$process.css
-
-    return css
-  })
 }
 
 module.exports = function(content, file, config) {
