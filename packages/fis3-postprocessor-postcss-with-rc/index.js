@@ -61,20 +61,36 @@ function _defineProperty(obj, key, value) {
   return obj
 }
 
-module.exports = function(content, file, config) {
-  var _sync = (0, _promiseSynchronizer['default'])(
-      (0, _postcssLoadConfig['default'])()
-    ),
-    plugins = _sync.plugins,
-    options = _sync.options
+function _call(body, then, direct) {
+  if (direct) {
+    return then ? then(body()) : body()
+  }
 
-  var result = (0, _promiseSynchronizer['default'])(
-    (0, _postcss['default'])(plugins).process(
-      content,
-      _objectSpread({}, config, {}, options, {
-        from: config.filename,
-      })
-    )
-  )
-  return result.css
+  try {
+    var result = Promise.resolve(body())
+    return then ? result.then(then) : result
+  } catch (e) {
+    return Promise.reject(e)
+  }
+}
+
+var process = function process(content, file, config) {
+  return _call(_postcssLoadConfig['default'], function(_ref) {
+    var plugins = _ref.plugins,
+      options = _ref.options
+
+    var _postcss$process = (0, _postcss['default'])(plugins).process(
+        content,
+        _objectSpread({}, config, {}, options, {
+          from: config.filename,
+        })
+      ),
+      css = _postcss$process.css
+
+    return css
+  })
+}
+
+module.exports = function(content, file, config) {
+  return (0, _promiseSynchronizer['default'])(process(content, file, config))
 }

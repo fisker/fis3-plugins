@@ -49,6 +49,7 @@
     "@fisker/husky-config": "1.1.1",
     "@fisker/lint-staged-config": "1.0.5",
     "@fisker/prettier-config": "1.0.18",
+    "babel-plugin-transform-async-to-promises": "0.8.14",
     "cz-conventional-changelog": "3.0.2",
     "eslint": "6.2.2",
     "esm": "3.2.25",

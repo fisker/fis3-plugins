@@ -1,5 +1,4 @@
 module.exports = {
-  plugins: [],
   presets: [
     [
       '@babel/preset-env',
@@ -7,7 +6,9 @@ module.exports = {
         targets: {
           node: '0.8',
         },
+        exclude: ['transform-typeof-symbol', 'transform-regenerator'],
       },
     ],
   ],
+  plugins: ['babel-plugin-transform-async-to-promises'],
 }
