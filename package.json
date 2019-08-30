@@ -39,7 +39,7 @@
     "lint:prettier": "prettier \"**/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml}\" --check",
     "postpack": "yarn bump-versions",
     "after-release": "run-s after-release:bump-versions",
-    "after-release:bump-versions": "git add versions.json && git commit -m \"chore: bump versions [skip ci]\" --no-verify && git push",
+    "after-release:bump-versions": "git add ./versions.json && git commit -m \"chore: bump versions [skip ci]\" --no-verify && git push",
     "release": "run-s clean lint build format dist after-release"
   },
   "devDependencies": {
