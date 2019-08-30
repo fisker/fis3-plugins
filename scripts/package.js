@@ -78,7 +78,7 @@ class Package {
         files: this.info.files || [],
         dependencies: parseDependencies(this.info.dependencies),
         version: VERSIONS[packageName].version,
-        gitHead: VERSIONS[packageName].gitHead,
+        // gitHead: VERSIONS[packageName].gitHead,
       })
     } catch (error) {
       throw new Error(`${packageName} build error: ${error}`)
