@@ -22,7 +22,7 @@ module.exports = function(content) {
   } catch (error) {
     log.error(error)
     process.exitCode = 1
-    throw new Error('standard error.')
+    throw new Error('standard lint error.')
   }
 
   return content
