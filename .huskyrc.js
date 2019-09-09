@@ -7,6 +7,4 @@
 
 /* @fisker/husky-config https://git.io/fjCe9 */
 
-module.exports = require('@fisker/husky-config').prepend({
-  'pre-commit': ['yarn build', 'git add packages'],
-})
+module.exports = require('@fisker/husky-config')
