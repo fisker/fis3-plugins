@@ -45,7 +45,7 @@
     "@babel/preset-env": "7.6.0",
     "@commitlint/cli": "8.1.0",
     "@fisker/commitlint-config": "1.1.2",
-    "@fisker/eslint-config": "1.2.17",
+    "@fisker/eslint-config": "1.2.18",
     "@fisker/husky-config": "1.1.2",
     "@fisker/lint-staged-config": "1.0.5",
     "@fisker/prettier-config": "1.0.19",
