@@ -16,7 +16,7 @@
   "name": "fis3-postprocessor-standard",
   "description": "a code formatter of fis3 based on standard.",
   "dependencies": {
-    "standard": "14.1.0"
+    "standard": "14.2.0"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-standard",
   "keywords": [
