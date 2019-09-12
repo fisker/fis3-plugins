@@ -4,7 +4,7 @@
     "version": "2.5.2"
   },
   "fis3-lint-eslint-noisy": {
-    "gitHead": "0000000000000000000000000000000000000000",
+    "gitHead": "12a37a89d8498ad516ce8071dca8c6aeee8f2695",
     "version": "2.6.0"
   },
   "fis3-lint-htmlhint": {
@@ -52,7 +52,7 @@
     "version": "1.5.2"
   },
   "fis3-postprocessor-autoprefixer-latest": {
-    "gitHead": "11ea41fc6ecf9899b5de81f300fe3c760443cfb5",
+    "gitHead": "0000000000000000000000000000000000000000",
     "version": "1.5.1"
   },
   "fis3-postprocessor-html": {
