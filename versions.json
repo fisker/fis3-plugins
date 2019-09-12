@@ -5,7 +5,7 @@
   },
   "fis3-lint-eslint-noisy": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "2.5.0"
+    "version": "2.6.0"
   },
   "fis3-lint-htmlhint": {
     "gitHead": "0000000000000000000000000000000000000000",
@@ -81,7 +81,7 @@
   },
   "fis3-postprocessor-standard": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.4.2"
+    "version": "1.5.0"
   },
   "fis3-postprocessor-stylefmt": {
     "gitHead": "0000000000000000000000000000000000000000",
