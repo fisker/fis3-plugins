@@ -17,7 +17,7 @@
   "description": "a js linter plugin of fis3 based on standard.",
   "dependencies": {
     "eslint": "6.4.0",
-    "standard": "14.2.0"
+    "standard": "14.3.0"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-standard",
   "keywords": [
