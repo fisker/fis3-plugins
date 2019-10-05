@@ -17,7 +17,7 @@
   "description": "latest version autoprefixer for fis3.",
   "dependencies": {
     "postcss": "7.0.18",
-    "autoprefixer": "9.6.1"
+    "autoprefixer": "9.6.2"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-autoprefixer-latest",
   "keywords": [
