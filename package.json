@@ -41,7 +41,7 @@
     "release": "run-s clean lint build format dist"
   },
   "devDependencies": {
-    "@babel/core": "7.6.3",
+    "@babel/core": "7.6.4",
     "@babel/preset-env": "7.6.3",
     "@commitlint/cli": "8.2.0",
     "@fisker/commitlint-config": "1.1.3",
