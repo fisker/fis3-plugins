@@ -16,7 +16,7 @@
   "name": "fis3-postprocessor-posthtml-beautify",
   "description": "a html formatter of fis3 based on posthtml-beautify.",
   "dependencies": {
-    "posthtml": "0.11.6",
+    "posthtml": "0.12.0",
     "posthtml-beautify": "0.3.0",
     "promise-synchronizer": "1.1.3"
   },
