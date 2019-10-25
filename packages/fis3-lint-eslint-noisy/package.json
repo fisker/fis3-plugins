@@ -16,7 +16,7 @@
   "name": "fis3-lint-eslint-noisy",
   "description": "a js linter plugin of fis3 based on eslint.",
   "dependencies": {
-    "eslint": "6.5.1"
+    "eslint": "6.6.0"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-eslint-noisy",
   "keywords": [
