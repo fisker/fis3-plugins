@@ -16,7 +16,7 @@
   "name": "fis3-optimizer-uglifyjs",
   "description": "js minifer for fis3 based on uglifyjs.",
   "dependencies": {
-    "uglify-js": "3.6.7"
+    "uglify-js": "3.6.8"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-uglifyjs",
   "keywords": [
