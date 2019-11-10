@@ -16,7 +16,7 @@
   "name": "fis3-optimizer-terser",
   "description": "js minifer for fis based on terser.",
   "dependencies": {
-    "terser": "4.3.10"
+    "terser": "4.3.11"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-terser",
   "keywords": [
