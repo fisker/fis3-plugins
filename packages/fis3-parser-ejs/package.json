@@ -16,7 +16,7 @@
   "name": "fis3-parser-ejs",
   "description": "a fis plugin to parse ejs.",
   "dependencies": {
-    "ejs": "2.7.1"
+    "ejs": "2.7.2"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-ejs",
   "keywords": [
