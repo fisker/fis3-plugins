@@ -16,7 +16,7 @@
   "name": "fis3-parser-dart-sass",
   "description": "A fis plugin to parse sass with dart-sass.",
   "dependencies": {
-    "sass": "1.23.3"
+    "sass": "1.23.5"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-dart-sass",
   "keywords": [
