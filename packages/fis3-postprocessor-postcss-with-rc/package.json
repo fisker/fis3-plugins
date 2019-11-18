@@ -16,7 +16,7 @@
   "name": "fis3-postprocessor-postcss-with-rc",
   "description": "postcss for fis3.",
   "dependencies": {
-    "postcss": "7.0.22",
+    "postcss": "7.0.23",
     "postcss-load-config": "2.1.0",
     "promise-synchronizer": "1.1.4"
   },
