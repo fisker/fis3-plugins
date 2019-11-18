@@ -16,7 +16,7 @@
   "name": "fis3-lint-stylelint",
   "description": "a css linter plugin of fis3 based on stylelint.",
   "dependencies": {
-    "postcss": "7.0.21",
+    "postcss": "7.0.22",
     "promise-synchronizer": "1.1.4",
     "stylelint": "12.0.0"
   },
