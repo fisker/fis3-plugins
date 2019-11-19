@@ -76,7 +76,7 @@
     "clean-css": "4.2.1",
     "cssgrace": "3.0.0",
     "cssgrace-lite": "1.0.1",
-    "ejs": "2.7.2",
+    "ejs": "2.7.3",
     "eslint": "6.6.0",
     "execa": "3.3.0",
     "htmlhint": "0.11.0",
