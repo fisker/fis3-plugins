@@ -14,7 +14,6 @@ node_modules/**
 **/third-party/**
 
 # build file
-lib/**
 dist/**
 **/*.min.*
 

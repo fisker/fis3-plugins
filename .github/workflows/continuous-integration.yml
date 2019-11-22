@@ -5,11 +5,110 @@ on:
     branches:
       - master
   pull_request:
+  # schedule:
+  #   - cron: "0 23 * * 6"
 
 jobs:
+  # test:
+  #   strategy:
+  #     matrix:
+  #       PLATFORM:
+  #         - "ubuntu-latest"
+  #         # - "macos-latest"
+  #         # - "windows-latest"
+  #       NODE:
+  #         # - "13"
+  #         - "12"
+  #         # - "10"
+  #       # exclude:
+  #       #   - PLATFORM: "macos-latest"
+  #       #     NODE: "12"
+
+  #   name: Test on node ${{ matrix.NODE }} and ${{ matrix.PLATFORM }}
+  #   runs-on: ${{ matrix.PLATFORM }}
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@master
+
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@master
+  #       with:
+  #         node-version: ${{ matrix.NODE }}
+
+  #     - name: Install Dependencies
+  #       run: yarn
+
+  #     - name: Run Test
+  #       run: yarn test-coverage
+
+  #     - name: Upload Coverage Parallel
+  #       uses: coverallsapp/github-action@master
+  #       if: success()
+  #       with:
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}
+  #         parallel: true
+
+  #     - name: Upload Coverage Finished
+  #       uses: coverallsapp/github-action@master
+  #       if: success()
+  #       with:
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}
+  #         parallel-finished: true
+
+  # test-dist:
+  #   strategy:
+  #     matrix:
+  #       PLATFORM:
+  #         - "ubuntu-latest"
+  #         # - "macos-latest"
+  #         # - "windows-latest"
+  #       NODE:
+  #         # - "13"
+  #         - "12"
+  #         # - "10"
+  #       # exclude:
+  #       #   - PLATFORM: "macos-latest"
+  #       #     NODE: "12"
+
+  #   name: Test on node ${{ matrix.NODE }} and ${{ matrix.PLATFORM }}
+  #   runs-on: ${{ matrix.PLATFORM }}
+  #   needs: [build]
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@master
+
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@master
+  #       with:
+  #         node-version: ${{ matrix.NODE }}
+
+  #     - name: Install Dependencies
+  #       run: yarn
+
+  #     - name: Download Artifact
+  #       uses: actions/download-artifact@master
+  #       with:
+  #         name: dist
+  #         path: dist
+
+  #     - name: Run Test
+  #       run: yarn test-coverage
+
+  #     - name: Upload Coverage Parallel
+  #       uses: coverallsapp/github-action@master
+  #       if: success()
+  #       with:
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}
+  #         parallel: true
+
+  #     - name: Upload Coverage Finished
+  #       uses: coverallsapp/github-action@master
+  #       if: success()
+  #       with:
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}
+  #         parallel-finished: true
+
   lint:
-    strategy:
-      fail-fast: false
     name: Lint
     runs-on: ubuntu-latest
     steps:
@@ -21,7 +120,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@master
         with:
-          node-version: 10.x
+          node-version: "12"
 
       - name: Install Dependencies
         run: yarn
@@ -29,44 +128,28 @@ jobs:
       - name: Run Lint
         run: yarn lint
 
-  test:
-    strategy:
-      fail-fast: false
-      matrix:
-        PLATFORM:
-          - ubuntu-latest
-          # - macos-latest
-          # - windows-latest
-        NODE:
-          # - 12.x
-          - 10.x
-        # exclude:
-        #   - PLATFORM: macos-latest
-        #     NODE: 12.x
-        #   - PLATFORM: windows-latest
-        #     NODE: 12.x
-
-    name: Test on node ${{ matrix.NODE }} and ${{ matrix.PLATFORM }}
-
-    runs-on: ${{ matrix.PLATFORM }}
-
+  build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@master
+        with:
+          fetch-depth: 1
 
       - name: Setup Node.js
         uses: actions/setup-node@master
         with:
-          node-version: ${{ matrix.NODE }}
+          node-version: "12"
 
       - name: Install Dependencies
         run: yarn
 
       - name: Build Package
         run: yarn build
-      # - name: Run Test
-      #   run: yarn test-coverage
-      # - name: Upload Coverage
-      #   uses: coverallsapp/github-action@master
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: dist
+          path: dist
