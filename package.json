@@ -68,7 +68,7 @@
     "prettier": "1.19.1",
     "rollup": "1.27.3",
     "rollup-plugin-babel": "4.3.3",
-    "write-prettier-file": "1.2.1"
+    "write-prettier-file": "1.2.2"
   },
   "dependencies": {
     "@starptech/prettyhtml": "0.10.0",
