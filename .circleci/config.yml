@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: "circleci/node:latest"
+
+    working_directory: ~/fisker
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: yarn
+
+      - run:
+          name: Build dist
+          command: yarn build
+
+      - store_artifacts:
+          path: ./packages
+          destination: packages
