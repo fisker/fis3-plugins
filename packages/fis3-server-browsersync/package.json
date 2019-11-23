@@ -43,5 +43,5 @@
     "lib/middleware.js",
     "templates/script-tags.tmpl"
   ],
-  "version": "1.14.3"
+  "version": "1.15.0"
 }
