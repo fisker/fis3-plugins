@@ -16,7 +16,7 @@
   "name": "fis3-parser-node-sass-latest",
   "description": "A fis plugin to parse sass with latest node-sass.",
   "dependencies": {
-    "node-sass": "4.12.0"
+    "node-sass": "4.13.0"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-node-sass-latest",
   "keywords": [
