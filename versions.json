@@ -1,75 +1,75 @@
 {
   "fis3-hook-relative-legal-html": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "2.5.2"
+    "version": "2.6.0"
   },
   "fis3-lint-eslint-noisy": {
-    "gitHead": "12a37a89d8498ad516ce8071dca8c6aeee8f2695",
-    "version": "2.6.0"
+    "gitHead": "0000000000000000000000000000000000000000",
+    "version": "2.7.0"
   },
   "fis3-lint-htmlhint": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.4.2"
+    "version": "1.5.0"
   },
   "fis3-lint-standard": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.5.0"
+    "version": "1.6.0"
   },
   "fis3-lint-stylelint": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "2.6.0"
+    "version": "2.7.0"
   },
   "fis3-optimizer-cleancss": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.3.2"
+    "version": "1.4.0"
   },
   "fis3-optimizer-terser": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.4.0"
+    "version": "1.5.0"
   },
   "fis3-optimizer-uglifyjs": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.3.2"
+    "version": "1.4.0"
   },
   "fis3-parser-dart-sass": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.4.2"
+    "version": "1.5.0"
   },
   "fis3-parser-ejs": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.4.0"
+    "version": "1.5.0"
   },
   "fis3-parser-lodash-template": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.3.2"
+    "version": "1.4.0"
   },
   "fis3-parser-node-sass-latest": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.5.2"
+    "version": "1.6.0"
   },
   "fis3-parser-pug": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.5.2"
+    "version": "1.6.0"
   },
   "fis3-postprocessor-autoprefixer-latest": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.5.1"
+    "version": "1.6.0"
   },
   "fis3-postprocessor-html": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.4.2"
+    "version": "1.5.0"
   },
   "fis3-postprocessor-postcss-with-rc": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.3.0"
+    "version": "1.4.0"
   },
   "fis3-postprocessor-posthtml-beautify": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.5.2"
+    "version": "1.6.0"
   },
   "fis3-postprocessor-prettier": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.6.2"
+    "version": "1.7.0"
   },
   "fis3-postprocessor-prettier-css": {
     "gitHead": "0000000000000000000000000000000000000000",
@@ -77,22 +77,22 @@
   },
   "fis3-postprocessor-prettyhtml": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.3.2"
+    "version": "1.4.0"
   },
   "fis3-postprocessor-standard": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.5.0"
+    "version": "1.6.0"
   },
   "fis3-postprocessor-stylefmt": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.4.2"
+    "version": "1.5.0"
   },
   "fis3-preprocessor-cssgrace": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.3.2"
+    "version": "1.4.0"
   },
   "fis3-server-browsersync": {
     "gitHead": "0000000000000000000000000000000000000000",
-    "version": "1.14.2"
+    "version": "1.15.0"
   }
 }
