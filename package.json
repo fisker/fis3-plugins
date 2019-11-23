@@ -26,11 +26,11 @@
   },
   "scripts": {
     "build": "node -r esm \"./scripts/build-packages.js\"",
-    "bump-versions": "node -r esm \"./scripts/bump-versions.js\"",
+    "bump-versions": "node -r esm \"./scripts/bump-versions.js\" && git add versions.json && git add packages && git commit -m \"chore: bump versions [skip ci]\" --no-verify && git push",
     "clean": "run-p clean:*",
     "clean:dist": "del-cli packages",
     "dev": "rollup --config --watch",
-    "dist": "lerna publish from-package --create-release github --no-changelog --amend --no-git-tag-version",
+    "dist": "lerna publish --create-release github --no-changelog --amend",
     "format": "run-p format:*",
     "format:eslint": "yarn lint:eslint --fix",
     "format:markdown": "yarn lint:markdown --fix",
@@ -39,8 +39,7 @@
     "lint:eslint": "eslint \"**/*.{js,mjs,vue}\"",
     "lint:markdown": "markdownlint \"**/*.md\" --ignore \"**/node_modules/**\"",
     "lint:prettier": "prettier \"**/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml}\" --check",
-    "postpublish": "yarn bump-versions && yarn build && git add versions.json && git add packages && git commit -m \"chore: bump versions [skip ci]\" --no-verify && git push",
-    "release": "run-s clean lint build format dist"
+    "release": "run-s clean lint build format dist bump-versions"
   },
   "devDependencies": {
     "@babel/core": "7.7.4",
