@@ -1,5 +1,4 @@
 import {join} from 'path'
-import stringify from 'fast-json-stable-stringify'
 import writePrettierFile from 'write-prettier-file'
 import pkgs from './packages'
 import readFile from './utils/read-file'
@@ -39,5 +38,5 @@ function updateVersion(name, {version, gitHead}) {
   const versions = JSON.parse(content.trim())
   versions[name] = {version, gitHead}
 
-  writePrettierFile.sync(versionsFile, stringify(versions))
+  writePrettierFile.sync(versionsFile, JSON.stringify(versions))
 }

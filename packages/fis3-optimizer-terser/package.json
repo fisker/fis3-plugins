@@ -1,24 +1,7 @@
 {
-  "main": "index.js",
-  "author": {
-    "name": "fisker Cheung",
-    "email": "lionkay@gmail.com",
-    "url": "https://www.fiskercheung.com/"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
   "name": "fis3-optimizer-terser",
+  "version": "1.5.1",
   "description": "js minifer for fis based on terser.",
-  "dependencies": {
-    "terser": "4.4.0"
-  },
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-terser",
   "keywords": [
     "fis",
     "fis3",
@@ -29,8 +12,25 @@
     "optimizer",
     "terser"
   ],
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-terser",
+  "license": "MIT",
+  "author": {
+    "name": "fisker Cheung",
+    "email": "lionkay@gmail.com",
+    "url": "https://www.fiskercheung.com/"
+  },
   "files": [
     "index.js"
   ],
-  "version": "1.5.0"
+  "main": "index.js",
+  "dependencies": {
+    "terser": "4.4.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

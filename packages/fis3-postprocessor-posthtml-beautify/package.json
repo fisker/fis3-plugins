@@ -1,26 +1,7 @@
 {
-  "main": "index.js",
-  "author": {
-    "name": "fisker Cheung",
-    "email": "lionkay@gmail.com",
-    "url": "https://www.fiskercheung.com/"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
   "name": "fis3-postprocessor-posthtml-beautify",
+  "version": "1.6.1",
   "description": "a html formatter of fis3 based on posthtml-beautify.",
-  "dependencies": {
-    "posthtml": "0.12.0",
-    "posthtml-beautify": "0.3.1",
-    "promise-synchronizer": "1.1.4"
-  },
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-posthtml-beautify",
   "keywords": [
     "beautify",
     "fis",
@@ -33,8 +14,27 @@
     "posthtml-beautify",
     "postprocessor"
   ],
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-posthtml-beautify",
+  "license": "MIT",
+  "author": {
+    "name": "fisker Cheung",
+    "email": "lionkay@gmail.com",
+    "url": "https://www.fiskercheung.com/"
+  },
   "files": [
     "index.js"
   ],
-  "version": "1.6.0"
+  "main": "index.js",
+  "dependencies": {
+    "posthtml": "0.12.0",
+    "posthtml-beautify": "0.3.1",
+    "promise-synchronizer": "1.1.4"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

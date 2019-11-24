@@ -1,26 +1,7 @@
 {
-  "main": "index.js",
-  "author": {
-    "name": "fisker Cheung",
-    "email": "lionkay@gmail.com",
-    "url": "https://www.fiskercheung.com/"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
   "name": "fis3-postprocessor-postcss-with-rc",
+  "version": "1.4.1",
   "description": "postcss for fis3.",
-  "dependencies": {
-    "postcss": "7.0.23",
-    "postcss-load-config": "2.1.0",
-    "promise-synchronizer": "1.1.4"
-  },
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-postcss-with-rc",
   "keywords": [
     "fis",
     "fis3",
@@ -29,8 +10,27 @@
     "postcss-with-rc",
     "postprocessor"
   ],
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-postcss-with-rc",
+  "license": "MIT",
+  "author": {
+    "name": "fisker Cheung",
+    "email": "lionkay@gmail.com",
+    "url": "https://www.fiskercheung.com/"
+  },
   "files": [
     "index.js"
   ],
-  "version": "1.4.0"
+  "main": "index.js",
+  "dependencies": {
+    "postcss": "7.0.23",
+    "postcss-load-config": "2.1.0",
+    "promise-synchronizer": "1.1.4"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

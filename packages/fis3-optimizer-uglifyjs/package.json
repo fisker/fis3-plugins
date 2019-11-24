@@ -1,24 +1,7 @@
 {
-  "main": "index.js",
-  "author": {
-    "name": "fisker Cheung",
-    "email": "lionkay@gmail.com",
-    "url": "https://www.fiskercheung.com/"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
   "name": "fis3-optimizer-uglifyjs",
+  "version": "1.4.1",
   "description": "js minifer for fis3 based on uglifyjs.",
-  "dependencies": {
-    "uglify-js": "3.6.9"
-  },
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-uglifyjs",
   "keywords": [
     "es5",
     "fis",
@@ -31,8 +14,25 @@
     "uglify",
     "uglifyjs"
   ],
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-optimizer-uglifyjs",
+  "license": "MIT",
+  "author": {
+    "name": "fisker Cheung",
+    "email": "lionkay@gmail.com",
+    "url": "https://www.fiskercheung.com/"
+  },
   "files": [
     "index.js"
   ],
-  "version": "1.4.0"
+  "main": "index.js",
+  "dependencies": {
+    "uglify-js": "3.6.9"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

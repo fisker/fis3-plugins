@@ -1,20 +1,34 @@
 {
-  "main": "index.js",
+  "name": "fis3-server-browsersync",
+  "version": "1.15.1",
+  "description": "a browser sync server for fis3.",
+  "keywords": [
+    "browser-sync",
+    "browsersync",
+    "fis",
+    "fis3",
+    "fis3-server-browsersync",
+    "livereload",
+    "server"
+  ],
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-server-browsersync",
+  "license": "MIT",
   "author": {
     "name": "fisker Cheung",
     "email": "lionkay@gmail.com",
     "url": "https://www.fiskercheung.com/"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "name": "fis3-server-browsersync",
-  "description": "a browser sync server for fis3.",
+  "files": [
+    "app.js",
+    "index.js",
+    "lib/browser-sync-config.js",
+    "lib/middleware.js",
+    "templates/script-tags.tmpl"
+  ],
+  "main": "index.js",
   "dependencies": {
     "body-parser": "1.19.0",
     "browser-sync": "2.26.7",
@@ -26,22 +40,8 @@
     "yargs": "15.0.2",
     "yog-devtools": "0.1.1"
   },
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-server-browsersync",
-  "keywords": [
-    "browser-sync",
-    "browsersync",
-    "fis",
-    "fis3",
-    "fis3-server-browsersync",
-    "livereload",
-    "server"
-  ],
-  "files": [
-    "app.js",
-    "index.js",
-    "lib/browser-sync-config.js",
-    "lib/middleware.js",
-    "templates/script-tags.tmpl"
-  ],
-  "version": "1.15.0"
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

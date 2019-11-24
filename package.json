@@ -55,7 +55,6 @@
     "del-cli": "3.0.0",
     "eslint": "6.7.0",
     "esm": "3.2.25",
-    "fast-json-stable-stringify": "2.0.0",
     "husky": "3.1.0",
     "latest-version": "5.1.0",
     "lerna": "3.19.0",
@@ -67,6 +66,7 @@
     "prettier": "1.19.1",
     "rollup": "1.27.4",
     "rollup-plugin-babel": "4.3.3",
+    "sort-package-json": "1.23.1",
     "write-prettier-file": "1.2.2"
   },
   "dependencies": {

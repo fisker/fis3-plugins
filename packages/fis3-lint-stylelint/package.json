@@ -1,26 +1,7 @@
 {
-  "main": "index.js",
-  "author": {
-    "name": "fisker Cheung",
-    "email": "lionkay@gmail.com",
-    "url": "https://www.fiskercheung.com/"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
   "name": "fis3-lint-stylelint",
+  "version": "2.7.1",
   "description": "a css linter plugin of fis3 based on stylelint.",
-  "dependencies": {
-    "postcss": "7.0.23",
-    "promise-synchronizer": "1.1.4",
-    "stylelint": "12.0.0"
-  },
-  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-stylelint",
   "keywords": [
     "fis",
     "fis3",
@@ -29,8 +10,27 @@
     "linter",
     "stylelint"
   ],
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
+  "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-stylelint",
+  "license": "MIT",
+  "author": {
+    "name": "fisker Cheung",
+    "email": "lionkay@gmail.com",
+    "url": "https://www.fiskercheung.com/"
+  },
   "files": [
     "index.js"
   ],
-  "version": "2.7.0"
+  "main": "index.js",
+  "dependencies": {
+    "postcss": "7.0.23",
+    "promise-synchronizer": "1.1.4",
+    "stylelint": "12.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }

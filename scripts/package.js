@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import _ from 'lodash'
 import {sync as mkdirp} from 'mkdirp'
-import stringify from 'fast-json-stable-stringify'
+import sortPackageJson from 'sort-package-json'
 import {transform} from '@babel/core'
 import writePrettierFile from 'write-prettier-file'
 import globalPackage from '../package.json'
@@ -190,7 +190,10 @@ class Package {
     this.writeFile('readme.md', template('readme.ejs')(this))
     this.writeFile('license', readFile(path.join(__dirname, '..', 'license')))
 
-    this.writeFile('package.json', JSON.stringify(this.pkg))
+    this.writeFile(
+      'package.json',
+      JSON.stringify(sortPackageJson(this.pkg), null, 2)
+    )
   }
 }
 
