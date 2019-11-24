@@ -1,23 +1,25 @@
 {
   "name": "fis3-plugins",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
   "description": "plugins for fi3",
   "keywords": [
     "fis",
     "fis3"
   ],
-  "main": "index.js",
+  "homepage": "https://github.com/fisker/fis3-plugins#readme",
+  "bugs": {
+    "url": "https://github.com/fisker/fis3-plugins/issues"
+  },
   "repository": "https://github.com/fisker/fis3-plugins",
+  "license": "MIT",
   "author": {
     "name": "fisker Cheung",
     "email": "lionkay@gmail.com",
     "url": "https://www.fiskercheung.com/"
   },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fisker/fis3-plugins/issues"
-  },
+  "sideEffects": false,
+  "main": "index.js",
   "workspaces": {
     "packages": [
       "packages/*"
@@ -30,7 +32,7 @@
     "clean": "run-p clean:*",
     "clean:dist": "del-cli packages",
     "dev": "rollup --config --watch",
-    "dist": "lerna publish --create-release github --no-changelog --amend",
+    "dist": "lerna publish",
     "format": "run-p format:*",
     "format:eslint": "yarn lint:eslint --fix",
     "format:markdown": "yarn lint:markdown --fix",
@@ -41,33 +43,10 @@
     "lint:prettier": "prettier \"**/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml}\" --check",
     "release": "run-s clean lint build format dist bump-versions"
   },
-  "devDependencies": {
-    "@babel/core": "7.7.4",
-    "@babel/preset-env": "7.7.4",
-    "@commitlint/cli": "8.2.0",
-    "@fisker/commitlint-config": "1.1.3",
-    "@fisker/eslint-config": "1.3.5",
-    "@fisker/husky-config": "1.1.3",
-    "@fisker/lint-staged-config": "1.0.6",
-    "@fisker/prettier-config": "1.0.22",
-    "babel-plugin-transform-async-to-promises": "0.8.15",
-    "cz-conventional-changelog": "3.0.2",
-    "del-cli": "3.0.0",
-    "eslint": "6.7.0",
-    "esm": "3.2.25",
-    "husky": "3.1.0",
-    "latest-version": "5.1.0",
-    "lerna": "3.19.0",
-    "lint-staged": "9.4.3",
-    "make-dir": "3.0.0",
-    "markdownlint-cli": "0.19.0",
-    "mkdirp": "0.5.1",
-    "npm-run-all": "4.1.5",
-    "prettier": "1.19.1",
-    "rollup": "1.27.4",
-    "rollup-plugin-babel": "4.3.3",
-    "sort-package-json": "1.23.1",
-    "write-prettier-file": "1.2.2"
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "dependencies": {
     "@starptech/prettyhtml": "0.10.0",
@@ -103,15 +82,36 @@
     "yargs": "15.0.2",
     "yog-devtools": "0.1.1"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+  "devDependencies": {
+    "@babel/core": "7.7.4",
+    "@babel/preset-env": "7.7.4",
+    "@commitlint/cli": "8.2.0",
+    "@fisker/commitlint-config": "1.1.3",
+    "@fisker/eslint-config": "1.3.5",
+    "@fisker/husky-config": "1.1.3",
+    "@fisker/lint-staged-config": "1.0.6",
+    "@fisker/prettier-config": "1.0.22",
+    "babel-plugin-transform-async-to-promises": "0.8.15",
+    "cz-conventional-changelog": "3.0.2",
+    "del-cli": "3.0.0",
+    "eslint": "6.7.0",
+    "esm": "3.2.25",
+    "husky": "3.1.0",
+    "latest-version": "5.1.0",
+    "lerna": "3.19.0",
+    "lint-staged": "9.4.3",
+    "make-dir": "3.0.0",
+    "markdownlint-cli": "0.19.0",
+    "mkdirp": "0.5.1",
+    "npm-run-all": "4.1.5",
+    "prettier": "1.19.1",
+    "rollup": "1.27.4",
+    "rollup-plugin-babel": "4.3.3",
+    "sort-package-json": "1.23.1",
+    "write-prettier-file": "1.2.2"
   },
-  "homepage": "https://github.com/fisker/fis3-plugins#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "sideEffects": false
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
 }
