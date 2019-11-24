@@ -14,11 +14,10 @@ module.exports = function(content, file, config) {
   }
   const report = cli.executeOnText(content, file.realpath)
 
-  if (config.fix) {
-    CLIEngine.outputFixes(report)
-  }
-
   if (report.errorCount || report.warningCount) {
+    if (config.fix) {
+      CLIEngine.outputFixes(report)
+    }
     log.warn('[%s] lint failed: \n %s', file.id, formatter(report.results))
     if (report.errorCount) {
       process.exitCode = 1

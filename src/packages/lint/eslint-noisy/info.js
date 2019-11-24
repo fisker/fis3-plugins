@@ -4,7 +4,7 @@ module.exports = {
   dependencies: ['eslint'],
   options: {
     envs: ['browser'],
-    fix: false,
+    fix: true,
     useEslintrc: true,
   },
   links: {

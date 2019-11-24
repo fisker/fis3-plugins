@@ -5,4 +5,7 @@ module.exports = {
   links: {
     stylelint: 'http://stylelint.io/',
   },
+  options: {
+    fix: true,
+  },
 }

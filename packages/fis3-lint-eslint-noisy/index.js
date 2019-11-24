@@ -19,11 +19,11 @@ module.exports = function(content, file, config) {
 
   var report = cli.executeOnText(content, file.realpath)
 
-  if (config.fix) {
-    _eslint.CLIEngine.outputFixes(report)
-  }
-
   if (report.errorCount || report.warningCount) {
+    if (config.fix) {
+      _eslint.CLIEngine.outputFixes(report)
+    }
+
     log.warn('[%s] lint failed: \n %s', file.id, formatter(report.results))
 
     if (report.errorCount) {
@@ -35,6 +35,6 @@ module.exports = function(content, file, config) {
 
 module.exports.defaultOptions = {
   envs: ['browser'],
-  fix: false,
+  fix: true,
   useEslintrc: true,
 }

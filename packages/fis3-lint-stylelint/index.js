@@ -163,3 +163,7 @@ module.exports = function(content, file, config_) {
     )
   }
 }
+
+module.exports.defaultOptions = {
+  fix: true,
+}

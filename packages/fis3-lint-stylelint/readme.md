@@ -31,7 +31,10 @@ fis.match('*.{css,scss,less,sss}}', {
 
 ```js
 const stylelintConf = {
-  fix: false,
+  fix: true, // ❗!!! important !!!❗
+         // default: true,
+         // be careful, this might change your source code
+         // this will trigger `CLIEngine.outputFixes` automatically
   code: // useless, will be unset
   codeFilename: // useless, will be unset
   config:
@@ -51,6 +54,16 @@ const stylelintConf = {
 options: [http://stylelint.io/user-guide/node-api/#options](http://stylelint.io/user-guide/node-api/#options)
 
 rules: [http://stylelint.io/user-guide/rules/](http://stylelint.io/user-guide/rules/)
+
+## default options
+
+```json
+{
+  "fix": true
+}
+```
+
+NOTICE: **this might change in future**
 
 ## links
 

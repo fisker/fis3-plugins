@@ -26,14 +26,14 @@ rules and fixable rules: [http://eslint.org/docs/rules/](http://eslint.org/docs/
 
 ```js
 const eslintConf = {
+  fix: true, // ❗!!! important !!!❗
+         // default: true,
+         // be careful, this might change your source code
+         // this will trigger `CLIEngine.outputFixes` automatically
   configFile:
   envs: // default: ['browser']
   extensions:
   globals:
-  fix: , // ❗!!! important !!!❗
-         // default:false,
-         // be careful, this might change your source code
-         // this will trigger `CLIEngine.outputFixes` automatically
   ignore:
   ignorePath:
   ignorePattern:
