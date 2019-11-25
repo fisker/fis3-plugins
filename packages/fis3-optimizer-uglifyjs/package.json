@@ -29,7 +29,7 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "uglify-js": "3.6.9"
+    "uglify-js": "3.7.0"
   },
   "publishConfig": {
     "access": "public",
