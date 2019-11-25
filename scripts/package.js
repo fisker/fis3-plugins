@@ -77,7 +77,7 @@ class Package {
         keywords: this.info.keywords || [],
         files: this.info.files || [],
         dependencies: parseDependencies(this.info.dependencies),
-        version: VERSIONS[packageName].version,
+        version: VERSIONS[packageName] && VERSIONS[packageName].version,
         // gitHead: VERSIONS[packageName].gitHead,
       })
     } catch (error) {
