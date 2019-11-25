@@ -107,7 +107,7 @@
     "prettier": "1.19.1",
     "rollup": "1.27.5",
     "rollup-plugin-babel": "4.3.3",
-    "sort-package-json": "1.23.1",
+    "sort-package-json": "1.24.0",
     "write-prettier-file": "1.2.2"
   },
   "publishConfig": {
