@@ -94,14 +94,14 @@ function getFiles(parents, url) {
   return _toConsumableArray(new Set(files))
 }
 
-function resolveInDirectories(includePaths) {
-  var cache =
-    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {}
+function resolveInDirectories(includePaths, cache, onFound) {
   return function(url, previous) {
     var cacheKey = ''.concat((0, _path.normalize)(previous), '|').concat(url)
 
     if (cache[cacheKey]) {
-      return cache[cacheKey]
+      var file = cache[cacheKey]
+      onFound(file)
+      return file
     }
 
     var files = getFiles(
@@ -162,6 +162,7 @@ function resolveInDirectories(includePaths) {
     }
 
     var result = results[0]
+    onFound(result)
     cache[cacheKey] = result
     return result
   }

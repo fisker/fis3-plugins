@@ -57,12 +57,14 @@ function getFiles(parents, url) {
   return [...new Set(files)]
 }
 
-function resolveInDirectories(includePaths, cache = {}) {
+function resolveInDirectories(includePaths, cache, onFound) {
   return function(url, previous) {
     const cacheKey = `${normalize(previous)}|${url}`
 
     if (cache[cacheKey]) {
-      return cache[cacheKey]
+      const file = cache[cacheKey]
+      onFound(file)
+      return file
     }
 
     const files = getFiles(
@@ -100,6 +102,7 @@ function resolveInDirectories(includePaths, cache = {}) {
     }
 
     const result = results[0]
+    onFound(result)
     cache[cacheKey] = result
 
     return result

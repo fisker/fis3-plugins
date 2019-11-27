@@ -149,9 +149,11 @@ module.exports = function(content, file, config) {
     importer: (0, _sassImportResolver['default'])(
       includePaths,
       importCache,
-      function(scssFile) {
+      function(_ref) {
+        var file = _ref.file
+
         if (file.cache) {
-          file.cache.addDeps(scssFile)
+          file.cache.addDeps(file)
         }
       }
     ),

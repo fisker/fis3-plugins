@@ -55,9 +55,9 @@ module.exports = function(content, file, config) {
     file: file.realpath,
     data: content,
     indentedSyntax: file.ext === '.sass',
-    importer: sassImportResolve(includePaths, importCache, scssFile => {
+    importer: sassImportResolve(includePaths, importCache, ({file}) => {
       if (file.cache) {
-        file.cache.addDeps(scssFile)
+        file.cache.addDeps(file)
       }
     }),
     sourceMap,

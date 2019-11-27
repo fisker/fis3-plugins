@@ -146,7 +146,17 @@ module.exports = function(content, file, config) {
     file: file.realpath,
     data: content,
     indentedSyntax: file.ext === '.sass',
-    importer: (0, _sassImportResolver['default'])(includePaths, importCache),
+    importer: (0, _sassImportResolver['default'])(
+      includePaths,
+      importCache,
+      function(_ref) {
+        var file = _ref.file
+
+        if (file.cache) {
+          file.cache.addDeps(file)
+        }
+      }
+    ),
     sourceMap: sourceMap,
     sourceMapContents: sourceMapContents,
   })
