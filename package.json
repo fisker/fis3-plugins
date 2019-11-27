@@ -29,7 +29,7 @@
   "scripts": {
     "build": "node -r esm \"./scripts/build-packages.js\"",
     "bump-versions-cache": "node -r esm \"./scripts/bump-versions-cache.js\"",
-    "commit-versions-cache": " && git add versions.json && git add packages && git commit -m \"chore: bump versions cache [skip ci]\" --no-verify && git push",
+    "commit-versions-cache": "git add versions.json && git add packages && git commit -m \"chore: bump versions cache [skip ci]\" --no-verify && git push",
     "clean": "run-p clean:*",
     "clean:dist": "del-cli packages",
     "dev": "rollup --config --watch",
