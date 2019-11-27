@@ -146,7 +146,15 @@ module.exports = function(content, file, config) {
     file: file.realpath,
     data: content,
     indentedSyntax: file.ext === '.sass',
-    importer: (0, _sassImportResolver['default'])(includePaths, importCache),
+    importer: (0, _sassImportResolver['default'])(
+      includePaths,
+      importCache,
+      function(scssFile) {
+        if (file.cache) {
+          file.cache.addDeps(scssFile)
+        }
+      }
+    ),
     sourceMap: sourceMap,
     sourceMapContents: sourceMapContents,
   })
