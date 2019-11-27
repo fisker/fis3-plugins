@@ -150,10 +150,10 @@ module.exports = function(content, file, config) {
       includePaths,
       importCache,
       function(_ref) {
-        var file = _ref.file
+        var imported = _ref.file
 
         if (file.cache) {
-          file.cache.addDeps(file)
+          file.cache.addDeps(imported)
         }
       }
     ),

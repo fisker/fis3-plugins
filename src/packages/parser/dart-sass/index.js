@@ -52,18 +52,26 @@ module.exports = function(content, file, config) {
   const options = {
     ...config,
     includePaths,
-    file: file.realpath,
+    // file: file.realpath,
     data: content,
     indentedSyntax: file.ext === '.sass',
-    importer: sassImportResolve(includePaths, importCache, ({file}) => {
-      if (file.cache) {
-        file.cache.addDeps(file)
+    importer: sassImportResolve(
+      includePaths,
+      importCache,
+      ({file: imported}) => {
+        if (file.cache) {
+          file.cache.addDeps(imported)
+        }
       }
-    }),
+    ),
     sourceMap,
     sourceMapContents,
   }
 
+  // we must not give the real file path to node-sass,
+  // otherwise `options.importer` will not called
+  // https://github.com/sass/dart-sass/issues/574
+  delete options.file
   delete options.outFile
 
   let result
