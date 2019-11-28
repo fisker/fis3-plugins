@@ -1,5 +1,6 @@
 import {CLIEngine} from 'eslint'
 import standard from 'standard'
+import * as info from './info'
 
 const formatter = CLIEngine.getFormatter()
 const {log} = global.fis
@@ -26,3 +27,4 @@ module.exports = function(content, file) {
     }
   }
 }
+module.exports.defaultOptions = info.options

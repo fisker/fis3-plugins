@@ -4,6 +4,7 @@
  */
 
 import standard from 'standard'
+import * as info from './info'
 
 const {log} = global.fis
 
@@ -20,3 +21,5 @@ module.exports = function(content) {
 
   return content
 }
+
+module.exports.defaultOptions = info.options

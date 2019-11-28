@@ -1,4 +1,5 @@
 import path from 'path'
+import * as info from './info'
 
 const {fis} = global
 
@@ -137,3 +138,4 @@ module.exports = function(fis) {
   // 给其他插件用的
   fis.on('plugin:relative:fetch', onFetchRelativeUrl)
 }
+module.exports.defaultOptions = info.options

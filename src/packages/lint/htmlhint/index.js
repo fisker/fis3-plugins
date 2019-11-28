@@ -6,6 +6,7 @@
 import HTMLHint from 'htmlhint'
 import fs from 'fs'
 import path from 'path'
+import * as info from './info'
 
 const {fis = {}} = global
 const {log = () => {}} = fis
@@ -67,3 +68,5 @@ module.exports = function(content, file, config) {
     }
   }
 }
+
+module.exports.defaultOptions = info.options

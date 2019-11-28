@@ -3,12 +3,12 @@ import path from 'path'
 import _ from 'lodash'
 import {sync as mkdirp} from 'mkdirp'
 import sortPackageJson from 'sort-package-json'
-import {transform} from '@babel/core'
 import writePrettierFile from 'write-prettier-file'
 import globalPackage from '../package.json'
 import babelConfig from '../babel.config'
 import readFile from './utils/read-file'
 import writeFile from './utils/write-file'
+import bundle from './bundle'
 
 const SOURCE_DIR = path.join(__dirname, '..', 'src')
 const DEST_DIR = path.join(__dirname, '..', 'packages')
@@ -129,11 +129,8 @@ class Package {
     return package_
   }
 
-  writeFile(file, content) {
+  async writeFile(file, content) {
     file = path.join(this.dest, file)
-    if (/\.js$/.test(file)) {
-      content = transform(content, babelConfig).code
-    }
     if (/.(js|json|md)$/.test(file)) {
       writePrettierFile(file, content)
     } else {
@@ -155,10 +152,14 @@ class Package {
     return content
   }
 
-  copyFile(sourceFile, distFile = sourceFile) {
+  async copyFile(sourceFile, distFile = sourceFile) {
     if (/\.js$/.test(distFile)) {
-      return this.writeFile(distFile, this.readFile(sourceFile))
+      return bundle(
+        path.join(this.src, sourceFile),
+        path.join(this.dest, distFile)
+      )
     }
+
     distFile = path.join(this.dest, distFile)
     sourceFile = path.join(this.src, sourceFile)
     mkdirp(path.dirname(distFile))
@@ -170,23 +171,12 @@ class Package {
     }
   }
 
-  build() {
-    if (_.isEmpty(this.info.options)) {
-      this.copyFile('index.js')
-    } else {
-      let code = this.readFile('index.js')
-      code += '\n'
-      code += `module.exports.defaultOptions = ${JSON.stringify(
-        this.info.options,
-        null,
-        2
-      )}`
-      this.writeFile('index.js', code)
-    }
+  async build() {
+    // console.log(`building ${this.name}...`)
+    await Promise.all(
+      ['index.js', ...this.info.files].map(file => this.copyFile(file))
+    )
 
-    this.info.files.forEach(file => {
-      this.copyFile(file)
-    })
     this.writeFile('readme.md', template('readme.ejs')(this))
     this.writeFile('license', readFile(path.join(__dirname, '..', 'license')))
 
@@ -194,6 +184,7 @@ class Package {
       'package.json',
       JSON.stringify(sortPackageJson(this.pkg), null, 2)
     )
+    // console.log(`build ${this.name} done.`)
   }
 }
 

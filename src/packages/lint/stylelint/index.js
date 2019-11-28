@@ -5,6 +5,7 @@
 import sync from 'promise-synchronizer'
 import postcss from 'postcss'
 import stylelint from 'stylelint'
+import * as info from './info'
 
 const {log} = global.fis
 
@@ -83,3 +84,5 @@ module.exports = function(content, file, config_) {
     throw new Error(`[${file.id}] lint failed with error: \n\n ${error}`)
   }
 }
+
+module.exports.defaultOptions = info.options

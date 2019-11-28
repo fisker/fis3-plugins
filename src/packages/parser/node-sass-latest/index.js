@@ -1,7 +1,8 @@
 import {join, dirname, isAbsolute} from 'path'
 import util from 'util'
 import sass from 'node-sass'
-import sassImportResolve from './sass-import-resolver'
+import sassImportResolve from '../../../shared/sass-import-resolver'
+import * as info from './info'
 
 const {fis} = global
 const PROJECT_ROOT = fis.project.getProjectPath()
@@ -107,3 +108,5 @@ module.exports = function(content, file, config) {
 
   return content
 }
+
+module.exports.defaultOptions = info.options

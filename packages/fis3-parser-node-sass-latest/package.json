@@ -23,8 +23,7 @@
     "url": "https://www.fiskercheung.com/"
   },
   "files": [
-    "index.js",
-    "sass-import-resolver.js"
+    "index.js"
   ],
   "main": "index.js",
   "dependencies": {

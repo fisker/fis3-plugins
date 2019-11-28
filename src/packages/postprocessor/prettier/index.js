@@ -1,4 +1,5 @@
 import prettier from 'prettier'
+import * as info from './info'
 
 module.exports = function(content, file, config) {
   const fileFakePath = file.realpathNoExt + file.rExt
@@ -14,3 +15,5 @@ module.exports = function(content, file, config) {
 
   return prettier.format(content, prettierConfig)
 }
+
+module.exports.defaultOptions = info.options

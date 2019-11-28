@@ -24,8 +24,6 @@
   "files": [
     "app.js",
     "index.js",
-    "lib/browser-sync-config.js",
-    "lib/middleware.js",
     "templates/script-tags.tmpl"
   ],
   "main": "index.js",

@@ -8,7 +8,6 @@ module.exports = {
     sourceMap: false,
     omitSourceMapUrl: false,
   },
-  files: ['sass-import-resolver.js'],
   links: {
     sass: 'http://sass-lang.com/',
     'node-sass': 'https://github.com/sass/node-sass',

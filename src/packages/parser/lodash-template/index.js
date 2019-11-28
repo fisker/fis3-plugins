@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import path from 'path'
+import * as info from './info'
 
 const {fis} = global
 const PROJECT_ROOT = fis.project.getProjectPath()
@@ -50,3 +51,4 @@ module.exports = function(content, file, config) {
 }
 
 module.exports.lodash = _
+module.exports.defaultOptions = info.options

@@ -1,5 +1,6 @@
 import ejs from 'ejs'
 import path from 'path'
+import * as info from './info'
 
 const {fis} = global
 const PROJECT_ROOT = fis.project.getProjectPath()
@@ -52,3 +53,5 @@ module.exports = function(content, file, config) {
 
   return content
 }
+
+module.exports.defaultOptions = info.options

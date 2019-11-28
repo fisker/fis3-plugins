@@ -5,4 +5,5 @@ module.exports = {
   links: {
     'lodash.template': 'https://lodash.com/docs/#template',
   },
+  options: {},
 }
