@@ -35,6 +35,5 @@ export default pkgs.map(({packageName, source, entry}) => ({
     file: path.join(destinationRoot, packageName, 'index.js'),
     format: 'cjs',
   },
-  treeshake: true,
   plugins: rollupPlugins,
 }))

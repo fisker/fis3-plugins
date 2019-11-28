@@ -56,7 +56,7 @@ function resolveInDirectories({includePaths, cache, onFound}) {
     }
 
     if (file[0] === '~') {
-      return require.resolve(file.slice(1))
+      return require.resolve(file)
     }
 
     const files = getFiles(

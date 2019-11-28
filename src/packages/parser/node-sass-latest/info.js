@@ -1,7 +1,7 @@
 module.exports = {
   description: 'A fis plugin to parse sass with latest node-sass.',
   keywords: ['scss', 'sass', 'node-sass'],
-  dependencies: ['node-sass'],
+  dependencies: ['node-sass', 'fast-cartesian-product'],
   options: {
     outputStyle: 'expanded',
     sourceMapContents: true,

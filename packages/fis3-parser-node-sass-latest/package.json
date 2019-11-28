@@ -28,6 +28,7 @@
   ],
   "main": "index.js",
   "dependencies": {
+    "fast-cartesian-product": "1.0.0",
     "node-sass": "4.13.0"
   },
   "publishConfig": {

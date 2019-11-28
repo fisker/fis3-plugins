@@ -1,8 +1,70 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {
+  value: true,
+})
+exports['default'] = void 0
+
 var _path = require('path')
 
 var _fs = require('fs')
+
+var _fastCartesianProduct = _interopRequireDefault(
+  require('fast-cartesian-product')
+)
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {default: obj}
+}
+
+function _slicedToArray(arr, i) {
+  return (
+    _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest()
+  )
+}
+
+function _nonIterableRest() {
+  throw new TypeError('Invalid attempt to destructure non-iterable instance')
+}
+
+function _iterableToArrayLimit(arr, i) {
+  if (
+    !(
+      Symbol.iterator in Object(arr) ||
+      Object.prototype.toString.call(arr) === '[object Arguments]'
+    )
+  ) {
+    return
+  }
+  var _arr = []
+  var _n = true
+  var _d = false
+  var _e = undefined
+  try {
+    for (
+      var _i = arr[Symbol.iterator](), _s;
+      !(_n = (_s = _i.next()).done);
+      _n = true
+    ) {
+      _arr.push(_s.value)
+      if (i && _arr.length === i) break
+    }
+  } catch (err) {
+    _d = true
+    _e = err
+  } finally {
+    try {
+      if (!_n && _i['return'] != null) _i['return']()
+    } finally {
+      if (_d) throw _e
+    }
+  }
+  return _arr
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr
+}
 
 function _toConsumableArray(arr) {
   return (
@@ -31,84 +93,93 @@ function _arrayWithoutHoles(arr) {
   }
 }
 
-function startsWithPartial(base) {
-  return base[0] === '_'
-}
-
-function getDirectories(directories, id) {
-  directories = directories.map(function(directory) {
-    return (0, _path.join)(directory, id)
-  })
-
-  if ((0, _path.isAbsolute)(id)) {
-    directories.push(id)
-  }
-
-  return directories.map(_path.dirname)
+var isPartial = function isPartial(file) {
+  return file[0] === '_'
 }
 
 var extensions = ['scss', 'css', 'sass'].map(function(extension) {
   return '.'.concat(extension)
 })
 
-function withExtension(fileName) {
-  var extension = (0, _path.extname)(fileName)
-  return extensions.includes(extension)
+var hasExtension = function hasExtension(file) {
+  return extensions.includes((0, _path.extname)(file))
 }
 
-function getFileNames(id) {
-  var fileName = (0, _path.basename)(id)
+var unique = function unique(array) {
+  return _toConsumableArray(new Set(array))
+}
+
+function getDirectories(directories, file) {
+  directories = directories.map(function(directory) {
+    return (0, _path.join)(directory, file)
+  })
+
+  if ((0, _path.isAbsolute)(file)) {
+    directories.push(file)
+  }
+
+  return directories.map(_path.dirname)
+}
+
+function possibleFileNames(file) {
+  var fileName = (0, _path.basename)(file)
   var fileNames = [fileName]
 
-  if (!startsWithPartial(fileName)) {
+  if (!isPartial(fileName)) {
     fileNames.unshift('_'.concat(fileName))
   }
 
-  return withExtension(fileName)
+  return hasExtension(fileName)
     ? fileNames
-    : extensions.reduce(function(all, extension) {
-        return [].concat(
-          _toConsumableArray(all),
-          _toConsumableArray(
-            fileNames.map(function(file) {
-              return file + extension
-            })
-          )
-        )
-      }, [])
-}
+    : (0, _fastCartesianProduct['default'])([fileNames, extensions]).map(
+        function(_ref) {
+          var _ref2 = _slicedToArray(_ref, 2),
+            fileName = _ref2[0],
+            extension = _ref2[1]
 
-function getFiles(parents, url) {
-  var directories = getDirectories(parents, url)
-  var fileNames = getFileNames(url)
-  var files = directories.reduce(function(files, directory) {
-    return [].concat(
-      _toConsumableArray(files),
-      _toConsumableArray(
-        fileNames.map(function(fileName) {
-          return (0, _path.join)(directory, fileName)
-        })
+          return fileName + extension
+        }
       )
-    )
-  }, [])
-  return _toConsumableArray(new Set(files))
 }
 
-function resolveInDirectories(includePaths, cache, onFound) {
-  return function(url, previous) {
-    var cacheKey = ''.concat((0, _path.normalize)(previous), '|').concat(url)
+function getFiles(directories, file) {
+  directories = getDirectories(directories, file)
+  var fileNames = possibleFileNames(file)
+  var files = (0, _fastCartesianProduct['default'])([
+    directories,
+    fileNames,
+  ]).map(function(_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+      directory = _ref4[0],
+      fileName = _ref4[1]
+
+    return (0, _path.join)(directory, fileName)
+  })
+  return unique(files)
+}
+
+function resolveInDirectories(_ref5) {
+  var includePaths = _ref5.includePaths,
+    cache = _ref5.cache,
+    onFound = _ref5.onFound
+  return function(file, previous) {
+    var cacheKey = ''.concat((0, _path.normalize)(previous), '|').concat(file)
 
     if (cache[cacheKey]) {
-      var file = cache[cacheKey]
-      onFound(file)
-      return file
+      var _file = cache[cacheKey]
+      onFound(_file)
+      return _file
+    }
+
+    if (file[0] === '~') {
+      return require.resolve(file.slice(1))
     }
 
     var files = getFiles(
       [(0, _path.dirname)(previous)].concat(_toConsumableArray(includePaths), [
         process.cwd(),
       ]),
-      url
+      file
     )
     var results = files
       .map(function(file) {
@@ -126,15 +197,15 @@ function resolveInDirectories(includePaths, cache, onFound) {
     if (results.length > 1) {
       return new Error(
         'importing '
-          .concat(url, ' from ')
+          .concat(file, ' from ')
           .concat(
             previous,
             ". It's not clear which file to import. \n found files:"
           )
           .concat(
             results
-              .map(function(_ref) {
-                var file = _ref.file
+              .map(function(_ref6) {
+                var file = _ref6.file
                 return file
               })
               .join('\n')
@@ -145,15 +216,15 @@ function resolveInDirectories(includePaths, cache, onFound) {
     if (results.length === 0) {
       return new Error(
         'importing '
-          .concat(url, ' from ')
+          .concat(file, ' from ')
           .concat(
             previous,
             '. File to import not found or unreadable. \n tried files:'
           )
           .concat(
             results
-              .map(function(_ref2) {
-                var file = _ref2.file
+              .map(function(_ref7) {
+                var file = _ref7.file
                 return file
               })
               .join('\n')
@@ -168,4 +239,5 @@ function resolveInDirectories(includePaths, cache, onFound) {
   }
 }
 
-module.exports = resolveInDirectories
+var _default = resolveInDirectories
+exports['default'] = _default
