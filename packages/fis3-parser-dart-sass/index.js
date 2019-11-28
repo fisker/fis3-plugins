@@ -115,12 +115,13 @@ module.exports = function(content, file, config) {
     return content
   }
 
-  var importCache = {}
   var _config$includePaths = config.includePaths,
     includePaths = _config$includePaths === void 0 ? [] : _config$includePaths,
     _config$sourceMap = config.sourceMap,
     sourceMap = _config$sourceMap === void 0 ? false : _config$sourceMap,
-    sourceMapContents = config.sourceMapContents
+    sourceMapContents = config.sourceMapContents,
+    _config$alias = config.alias,
+    alias = _config$alias === void 0 ? {} : _config$alias
   includePaths = [(0, _path.dirname)(file.realpath)].concat(
     _toConsumableArray(normalizeIncludePath(includePaths)),
     [PROJECT_ROOT]
@@ -141,25 +142,33 @@ module.exports = function(content, file, config) {
     )
   }
 
+  var _importer = (0, _sassImportResolver['default'])({
+    includePaths: includePaths,
+    alias: _objectSpread(
+      {
+        '@/': PROJECT_ROOT,
+      },
+      alias
+    ),
+  })
+
   var options = _objectSpread({}, config, {
     includePaths: includePaths,
     // file: file.realpath,
     data: content,
     indentedSyntax: file.ext === '.sass',
-    importer: (0, _sassImportResolver['default'])({
-      includePaths: includePaths,
-      cache: importCache,
-      onFound: function onFound(_ref) {
-        var imported = _ref.file
+    importer: function importer(file, previous) {
+      var result = _importer(file, previous)
 
-        if (file.cache) {
-          file.cache.addDeps(imported)
-        }
-      },
-    }),
+      if (file.cache) {
+        file.cache.addDeps(result.file)
+      }
+
+      return result
+    },
     sourceMap: sourceMap,
     sourceMapContents: sourceMapContents,
-  }) // we must not give the real file path to node-sass,
+  }) // we must not give `node-sass` the real file path,
   // otherwise `options.importer` will not called
   // https://github.com/sass/dart-sass/issues/574
 

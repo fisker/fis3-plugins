@@ -45,24 +45,37 @@ function getFiles(directories, file) {
   return unique(files)
 }
 
-function resolveInDirectories({includePaths, cache, onFound}) {
+function resolveInDirectories({includePaths, cache = {}, alias = {}}) {
   return function(file, previous) {
     const cacheKey = `${normalize(previous)}|${file}`
 
     if (cache[cacheKey]) {
       const file = cache[cacheKey]
-      onFound(file)
       return file
     }
 
-    if (file[0] === '~') {
-      return require.resolve(file.slice(1))
-    }
+    ;[file] = file.split(/[#?]/)
 
-    const files = getFiles(
-      [dirname(previous), ...includePaths, process.cwd()],
-      file
-    )
+    let files = []
+
+    if (file[0] === '~') {
+      files = [
+        require.resolve(file, {
+          paths: [process.cwd()],
+        }),
+      ]
+    } else {
+      for (const [aliasName, path] of Object.entries(alias)) {
+        if (file.startsWith(aliasName)) {
+          file.replace(aliasName, path)
+        }
+      }
+
+      files = getFiles(
+        [dirname(previous), ...includePaths, process.cwd()],
+        file
+      )
+    }
 
     const results = files
       .map(file => {
@@ -94,7 +107,6 @@ function resolveInDirectories({includePaths, cache, onFound}) {
     }
 
     const result = results[0]
-    onFound(result)
     cache[cacheKey] = result
     return result
   }

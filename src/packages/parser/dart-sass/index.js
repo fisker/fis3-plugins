@@ -26,9 +26,12 @@ module.exports = function(content, file, config) {
     return content
   }
 
-  const importCache = {}
-
-  let {includePaths = [], sourceMap = false, sourceMapContents} = config
+  let {
+    includePaths = [],
+    sourceMap = false,
+    sourceMapContents,
+    alias = {},
+  } = config
 
   includePaths = [
     dirname(file.realpath),
@@ -49,26 +52,31 @@ module.exports = function(content, file, config) {
     )
   }
 
+  const importer = sassImportResolve({
+    includePaths,
+    alias: {
+      '@/': PROJECT_ROOT,
+      ...alias,
+    },
+  })
   const options = {
     ...config,
     includePaths,
     // file: file.realpath,
     data: content,
     indentedSyntax: file.ext === '.sass',
-    importer: sassImportResolve({
-      includePaths,
-      cache: importCache,
-      onFound({file: imported}) {
-        if (file.cache) {
-          file.cache.addDeps(imported)
-        }
-      },
-    }),
+    importer(file, previous) {
+      const result = importer(file, previous)
+      if (file.cache) {
+        file.cache.addDeps(result.file)
+      }
+      return result
+    },
     sourceMap,
     sourceMapContents,
   }
 
-  // we must not give the real file path to node-sass,
+  // we must not give `node-sass` the real file path,
   // otherwise `options.importer` will not called
   // https://github.com/sass/dart-sass/issues/574
   delete options.file

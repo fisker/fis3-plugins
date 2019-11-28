@@ -160,27 +160,55 @@ function getFiles(directories, file) {
 
 function resolveInDirectories(_ref5) {
   var includePaths = _ref5.includePaths,
-    cache = _ref5.cache,
-    onFound = _ref5.onFound
+    _ref5$cache = _ref5.cache,
+    cache = _ref5$cache === void 0 ? {} : _ref5$cache,
+    _ref5$alias = _ref5.alias,
+    alias = _ref5$alias === void 0 ? {} : _ref5$alias
   return function(file, previous) {
     var cacheKey = ''.concat((0, _path.normalize)(previous), '|').concat(file)
 
     if (cache[cacheKey]) {
       var _file = cache[cacheKey]
-      onFound(_file)
       return _file
     }
 
+    var _file$split = file.split(/[#?]/)
+
+    var _file$split2 = _slicedToArray(_file$split, 1)
+
+    file = _file$split2[0]
+    var files = []
+
     if (file[0] === '~') {
-      return require.resolve(file.slice(1))
+      files = [
+        require.resolve(file, {
+          paths: [process.cwd()],
+        }),
+      ]
+    } else {
+      for (
+        var _i2 = 0, _Object$entries = Object.entries(alias);
+        _i2 < _Object$entries.length;
+        _i2++
+      ) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i2], 2),
+          aliasName = _Object$entries$_i[0],
+          path = _Object$entries$_i[1]
+
+        if (file.startsWith(aliasName)) {
+          file.replace(aliasName, path)
+        }
+      }
+
+      files = getFiles(
+        [(0, _path.dirname)(previous)].concat(
+          _toConsumableArray(includePaths),
+          [process.cwd()]
+        ),
+        file
+      )
     }
 
-    var files = getFiles(
-      [(0, _path.dirname)(previous)].concat(_toConsumableArray(includePaths), [
-        process.cwd(),
-      ]),
-      file
-    )
     var results = files
       .map(function(file) {
         try {
@@ -233,7 +261,6 @@ function resolveInDirectories(_ref5) {
     }
 
     var result = results[0]
-    onFound(result)
     cache[cacheKey] = result
     return result
   }
