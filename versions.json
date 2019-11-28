@@ -1,74 +1,74 @@
 {
   "fis3-hook-relative-legal-html": {
-    "version": "2.6.1"
-  },
-  "fis3-lint-eslint-noisy": {
-    "version": "3.0.1"
-  },
-  "fis3-lint-htmlhint": {
-    "version": "1.5.1"
-  },
-  "fis3-lint-standard": {
-    "version": "1.6.2"
-  },
-  "fis3-lint-stylelint": {
     "version": "3.0.0"
   },
+  "fis3-lint-eslint-noisy": {
+    "version": "4.0.0"
+  },
+  "fis3-lint-htmlhint": {
+    "version": "2.0.0"
+  },
+  "fis3-lint-standard": {
+    "version": "2.0.0"
+  },
+  "fis3-lint-stylelint": {
+    "version": "4.0.0"
+  },
   "fis3-optimizer-cleancss": {
-    "version": "1.4.1"
+    "version": "2.0.0"
   },
   "fis3-optimizer-terser": {
-    "version": "1.5.1"
+    "version": "2.0.0"
   },
   "fis3-optimizer-uglifyjs": {
-    "version": "1.4.2"
+    "version": "2.0.0"
   },
   "fis3-parser-dart-sass": {
-    "version": "1.7.4"
+    "version": "2.0.0"
   },
   "fis3-parser-ejs": {
-    "version": "1.5.1"
+    "version": "2.0.0"
   },
   "fis3-parser-lodash-template": {
-    "version": "1.4.1"
+    "version": "2.0.0"
   },
   "fis3-parser-node-sass-latest": {
-    "version": "1.8.4"
+    "version": "2.0.0"
   },
   "fis3-parser-pug": {
-    "version": "1.6.1"
+    "version": "2.0.0"
   },
   "fis3-postprocessor-autoprefixer-latest": {
-    "version": "1.6.1"
+    "version": "2.0.0"
   },
   "fis3-postprocessor-html": {
-    "version": "1.5.1"
+    "version": "2.0.0"
   },
   "fis3-postprocessor-postcss-with-rc": {
-    "version": "1.4.1"
+    "version": "2.0.0"
   },
   "fis3-postprocessor-posthtml-beautify": {
-    "version": "1.6.1"
+    "version": "2.0.0"
   },
   "fis3-postprocessor-prettier": {
-    "version": "1.7.1"
+    "version": "2.0.0"
   },
   "fis3-postprocessor-prettier-css": {
     "version": "0.0.0"
   },
   "fis3-postprocessor-prettyhtml": {
-    "version": "1.4.1"
+    "version": "2.0.0"
   },
   "fis3-postprocessor-standard": {
-    "version": "1.6.1"
+    "version": "2.0.0"
   },
   "fis3-postprocessor-stylefmt": {
-    "version": "1.5.1"
+    "version": "2.0.0"
   },
   "fis3-preprocessor-cssgrace": {
-    "version": "1.4.1"
+    "version": "2.0.0"
   },
   "fis3-server-browsersync": {
-    "version": "1.15.2"
+    "version": "2.0.0"
   }
 }
