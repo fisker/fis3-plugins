@@ -172,7 +172,6 @@ class Package {
   }
 
   async build() {
-    // console.log(`building ${this.name}...`)
     await Promise.all(
       ['index.js', ...this.info.files].map(file => this.copyFile(file))
     )
@@ -184,7 +183,6 @@ class Package {
       'package.json',
       JSON.stringify(sortPackageJson(this.pkg), null, 2)
     )
-    // console.log(`build ${this.name} done.`)
   }
 }
 
