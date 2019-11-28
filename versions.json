@@ -24,7 +24,7 @@
     "version": "1.4.2"
   },
   "fis3-parser-dart-sass": {
-    "version": "1.7.3"
+    "version": "1.7.4"
   },
   "fis3-parser-ejs": {
     "version": "1.5.1"
@@ -33,7 +33,7 @@
     "version": "1.4.1"
   },
   "fis3-parser-node-sass-latest": {
-    "version": "1.8.3"
+    "version": "1.8.4"
   },
   "fis3-parser-pug": {
     "version": "1.6.1"
