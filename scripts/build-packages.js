@@ -9,7 +9,7 @@ const SOURCE_DIR = join(__dirname, '..', 'src')
 
 new Listr([
   ...packages.map(package_ => ({
-    title: `building package ${package_.name}`,
+    title: `building package ${package_.info.name}`,
     task: () => package_.build(),
     skip: () => package_.info.deprecated,
   })),
