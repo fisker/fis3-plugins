@@ -1,6 +1,6 @@
 {
   "name": "fis3-server-browsersync",
-  "version": "1.15.2",
+  "version": "2.0.0",
   "description": "a browser sync server for fis3.",
   "keywords": [
     "browser-sync",
