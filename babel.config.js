@@ -17,5 +17,6 @@ module.exports = {
     ],
   ],
   plugins: ['babel-plugin-transform-async-to-promises'],
+  exclude: /node_modules/,
   ignore: [/\/core-js\//],
 }
