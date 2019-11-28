@@ -181,7 +181,7 @@ function resolveInDirectories(_ref5) {
 
     if (file[0] === '~') {
       files = [
-        require.resolve(file, {
+        require.resolve(file.slice(1), {
           paths: [process.cwd()],
         }),
       ]
@@ -196,7 +196,7 @@ function resolveInDirectories(_ref5) {
           path = _Object$entries$_i[1]
 
         if (file.startsWith(aliasName)) {
-          file.replace(aliasName, path)
+          file = file.replace(aliasName, ''.concat(path, '/'))
         }
       }
 
