@@ -1,6 +1,7 @@
 import {join, dirname, isAbsolute} from 'path'
 import util from 'util'
 import sass from 'node-sass'
+import exportPlugin from '../../../shared/export-plugin'
 import sassImportResolve from '../../../shared/sass-import-resolver'
 import * as info from './info'
 
@@ -108,5 +109,4 @@ function process(content, file, config) {
 
   return content
 }
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

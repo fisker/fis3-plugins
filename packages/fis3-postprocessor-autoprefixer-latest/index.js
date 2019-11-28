@@ -1,13 +1,17 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
 
 var postcss = _interopDefault(require('postcss'))
 var autoprefixer = _interopDefault(require('autoprefixer'))
+
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
 
 var info = {
   description: 'latest version autoprefixer for fis3.',
@@ -29,7 +33,5 @@ function process(content, file, config) {
     from: config.filename,
   }).css
 }
-var defaultOptions = undefined
 
-exports.default = process
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process, info$1)

@@ -1,5 +1,6 @@
 import ejs from 'ejs'
 import path from 'path'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 const {fis} = global
@@ -54,5 +55,4 @@ function process(content, file, config) {
   return content
 }
 
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

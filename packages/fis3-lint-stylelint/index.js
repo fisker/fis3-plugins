@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -2035,6 +2033,12 @@ function _objectSpread2(target) {
   return target
 }
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'a css linter plugin of fis3 based on stylelint.',
   keywords: ['linter'],
@@ -2154,7 +2158,5 @@ function process$1(content, file, config_) {
     )
   }
 }
-var defaultOptions = undefined
 
-exports.default = process$1
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process$1, info$1)

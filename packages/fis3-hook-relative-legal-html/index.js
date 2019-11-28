@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1414,6 +1412,12 @@ var info$1 = /*#__PURE__*/ Object.freeze({
   default: info,
 })
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var _global = global,
   fis = _global.fis
 var quotes = {
@@ -1551,7 +1555,5 @@ function process$1(fis) {
 
   fis.on('plugin:relative:fetch', onFetchRelativeUrl)
 }
-var defaultOptions = undefined
 
-exports.default = process$1
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process$1, info$1)

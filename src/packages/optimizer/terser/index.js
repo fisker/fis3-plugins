@@ -3,6 +3,7 @@
  * fisker Cheung<lionkay@gmail.com>
  */
 import {minify} from 'terser'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 const {log} = global.fis
@@ -69,5 +70,4 @@ function process(content, file, config) {
 
   return result.code
 }
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

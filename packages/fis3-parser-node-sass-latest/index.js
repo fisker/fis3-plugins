@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1292,6 +1290,12 @@ function _nonIterableSpread() {
 
 function _nonIterableRest() {
   throw new TypeError('Invalid attempt to destructure non-iterable instance')
+}
+
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
 }
 
 var $filter = arrayIteration.filter
@@ -4001,7 +4005,5 @@ function process$2(content, file, config) {
   content = result.css.toString('utf8')
   return content
 }
-var defaultOptions = undefined
 
-exports.default = process$2
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process$2, info$1)

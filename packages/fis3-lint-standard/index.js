@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1078,6 +1076,12 @@ fixRegexpWellKnownSymbolLogic('replace', 2, function(
   }
 })
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'a js linter plugin of fis3 based on standard.',
   keywords: ['linter'],
@@ -1121,7 +1125,5 @@ function lint(content, file) {
     }
   }
 }
-var defaultOptions = undefined
 
-exports.default = lint
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(lint, info$1)

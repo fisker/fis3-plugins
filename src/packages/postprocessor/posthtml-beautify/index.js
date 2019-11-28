@@ -1,6 +1,7 @@
 import posthtml from 'posthtml'
 import beautify from 'posthtml-beautify'
 import sync from 'promise-synchronizer'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 const {log} = global.fis
@@ -47,5 +48,4 @@ function process(content, file, config) {
 
   return content
 }
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

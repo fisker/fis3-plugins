@@ -1,8 +1,8 @@
 import * as info from './info'
+import exportPlugin from '../../../shared/export-plugin'
 
 function process() {
   throw new Error('use prettier instead of stylefmt')
 }
 
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

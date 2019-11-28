@@ -1,5 +1,6 @@
 import path from 'path'
 import * as info from './info'
+import exportPlugin from '../../../shared/export-plugin'
 
 const {fis} = global
 
@@ -139,5 +140,4 @@ function process(fis) {
   fis.on('plugin:relative:fetch', onFetchRelativeUrl)
 }
 
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

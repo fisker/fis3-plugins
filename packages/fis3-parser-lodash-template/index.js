@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1084,6 +1082,12 @@ function _objectSpread2(target) {
   return target
 }
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'a fis plugin to parse lodash template.',
   keywords: ['jst', 'html'],
@@ -1146,9 +1150,7 @@ function process$1(content, file, config) {
   content = compiled(data)
   return content
 }
-var lodash = _
-var defaultOptions = undefined
 
-exports.default = process$1
-exports.defaultOptions = defaultOptions
-exports.lodash = lodash
+var plugin = exportPlugin(process$1, info$1)
+plugin.lodash = _
+module.exports = plugin

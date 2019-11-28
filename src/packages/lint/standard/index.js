@@ -1,5 +1,6 @@
 import {CLIEngine} from 'eslint'
 import standard from 'standard'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 const formatter = CLIEngine.getFormatter()
@@ -28,5 +29,4 @@ function lint(content, file) {
   }
 }
 
-export default lint
-export const defaultOptions = info.options
+module.exports = exportPlugin(lint, info)

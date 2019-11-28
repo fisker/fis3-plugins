@@ -1,4 +1,5 @@
 import CleanCSS from 'clean-css'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 const {log} = global.fis
@@ -44,5 +45,4 @@ function process(content, file, config) {
   return result.styles
 }
 
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

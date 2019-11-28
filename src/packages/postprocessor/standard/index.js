@@ -4,11 +4,12 @@
  */
 
 import standard from 'standard'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 const {log} = global.fis
 
-function lint(content) {
+function format(content) {
   content = content.replace(/\n\s+$/, '')
 
   try {
@@ -22,5 +23,4 @@ function lint(content) {
   return content
 }
 
-export default lint
-export const defaultOptions = info.options
+module.exports = exportPlugin(format, info)

@@ -1,5 +1,6 @@
 import {CLIEngine} from 'eslint'
 import * as info from './info'
+import exportPlugin from '../../../shared/export-plugin'
 
 const formatter = CLIEngine.getFormatter()
 const {log} = global.fis
@@ -26,5 +27,4 @@ function process(content, file, config) {
     }
   }
 }
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

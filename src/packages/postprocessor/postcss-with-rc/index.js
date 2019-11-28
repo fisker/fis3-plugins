@@ -1,6 +1,7 @@
 import postcss from 'postcss'
 import postcssrc from 'postcss-load-config'
 import sync from 'promise-synchronizer'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 async function postcssProcess(content, file, config) {
@@ -18,5 +19,4 @@ function process(content, file, config) {
   return sync(postcssProcess(content, file, config))
 }
 
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

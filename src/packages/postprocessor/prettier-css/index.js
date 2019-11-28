@@ -1,4 +1,5 @@
 import prettier from 'prettier'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 const {fis} = global
@@ -31,5 +32,4 @@ function process(content, file, config_) {
   return parsed
 }
 
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

@@ -1,9 +1,9 @@
 import {pack as cssgrace} from 'cssgrace-lite'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 function process(content, file, config) {
   return cssgrace(content, config)
 }
 
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

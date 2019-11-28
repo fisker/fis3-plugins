@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import path from 'path'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 const {fis} = global
@@ -50,6 +51,6 @@ function process(content, file, config) {
   return content
 }
 
-export default process
-export const lodash = _
-export const defaultOptions = info.options
+const plugin = exportPlugin(process, info)
+plugin.lodash = _
+module.exports = plugin

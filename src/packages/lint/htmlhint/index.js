@@ -7,6 +7,7 @@ import HTMLHint from 'htmlhint'
 import fs from 'fs'
 import path from 'path'
 import * as info from './info'
+import exportPlugin from '../../../shared/export-plugin'
 
 const {fis = {}} = global
 const {log = () => {}} = fis
@@ -69,6 +70,4 @@ function process(content, file, config) {
   }
 }
 
-export default process
-
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

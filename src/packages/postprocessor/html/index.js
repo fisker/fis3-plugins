@@ -1,9 +1,8 @@
 import {html as jsBeautifier} from 'js-beautify'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 function process(content, file, config) {
   return content ? jsBeautifier(content, config) : ''
 }
-
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

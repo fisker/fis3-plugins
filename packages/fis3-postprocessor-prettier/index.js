@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -62,6 +60,12 @@ function _objectSpread2(target) {
   return target
 }
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'a code formatter of fis3 based on prettier.',
   keywords: ['beautify', 'format', 'formatter'],
@@ -95,7 +99,5 @@ function process(content, file, config) {
 
   return prettier.format(content, prettierConfig)
 }
-var defaultOptions = undefined
 
-exports.default = process
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process, info$1)

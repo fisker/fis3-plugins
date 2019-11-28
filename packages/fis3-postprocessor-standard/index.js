@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1077,6 +1075,12 @@ fixRegexpWellKnownSymbolLogic('replace', 2, function(
   }
 })
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'a code formatter of fis3 based on standard.',
   keywords: ['beautify', 'format', 'formatter'],
@@ -1094,7 +1098,7 @@ var info$1 = /*#__PURE__*/ Object.freeze({
 
 var log = global.fis.log
 
-function lint(content) {
+function format(content) {
   content = content.replace(/\n\s+$/, '')
 
   try {
@@ -1109,7 +1113,5 @@ function lint(content) {
 
   return content
 }
-var defaultOptions = undefined
 
-exports.default = lint
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(format, info$1)

@@ -1,8 +1,12 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 var jsBeautify = require('js-beautify')
+
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
 
 var info = {
   description: 'a html formatter of fis3 based on js-beautify',
@@ -43,7 +47,5 @@ var info$1 = /*#__PURE__*/ Object.freeze({
 function process(content, file, config) {
   return content ? jsBeautify.html(content, config) : ''
 }
-var defaultOptions = undefined
 
-exports.default = process
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process, info$1)

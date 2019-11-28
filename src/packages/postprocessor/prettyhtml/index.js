@@ -1,4 +1,5 @@
 import prettyhtml from '@starptech/prettyhtml'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 function process(content, file, config) {
@@ -6,5 +7,4 @@ function process(content, file, config) {
   content = content.replace(/\n\s*<!-- prettyhtml-ignore -->\n/g, '\n')
   return content
 }
-export default process
-export const defaultOptions = info.options
+module.exports = exportPlugin(process, info)

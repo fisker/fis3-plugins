@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 var pug = require('pug')
 
 var info = {
@@ -22,10 +20,14 @@ var info$1 = /*#__PURE__*/ Object.freeze({
   default: info,
 })
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 function process(content, file, config) {
   return content ? pug.render(content, config) : ''
 }
-var defaultOptions = undefined
 
-exports.default = process
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process, info$1)

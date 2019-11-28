@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1698,6 +1696,12 @@ function _objectSpread2(target) {
   return target
 }
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'postcss for fis3.',
   keywords: ['postcss'],
@@ -1758,7 +1762,5 @@ function _call(body, then, direct) {
 function process$4(content, file, config) {
   return sync(postcssProcess(content, file, config))
 }
-var defaultOptions = undefined
 
-exports.default = process$4
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process$4, info$1)

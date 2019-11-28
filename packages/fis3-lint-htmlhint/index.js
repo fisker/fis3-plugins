@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -881,6 +879,12 @@ var info$1 = /*#__PURE__*/ Object.freeze({
   default: info,
 })
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var _global = global,
   _global$fis = _global.fis,
   fis = _global$fis === void 0 ? {} : _global$fis
@@ -945,7 +949,5 @@ function process(content, file, config) {
     }
   }
 }
-var defaultOptions = undefined
 
-exports.default = process
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process, info$1)

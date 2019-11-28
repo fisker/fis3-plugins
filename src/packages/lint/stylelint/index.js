@@ -5,6 +5,7 @@
 import sync from 'promise-synchronizer'
 import postcss from 'postcss'
 import stylelint from 'stylelint'
+import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 const {log} = global.fis
@@ -84,5 +85,5 @@ function process(content, file, config_) {
     throw new Error(`[${file.id}] lint failed with error: \n\n ${error}`)
   }
 }
-export default process
-export const defaultOptions = info.options
+
+module.exports = exportPlugin(process, info)

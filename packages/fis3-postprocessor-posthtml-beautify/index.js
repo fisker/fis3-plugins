@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1079,6 +1077,12 @@ fixRegexpWellKnownSymbolLogic('replace', 2, function(
   }
 })
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'a html formatter of fis3 based on posthtml-beautify.',
   keywords: ['posthtml', 'beautify', 'html', 'format', 'formatter'],
@@ -1140,7 +1144,5 @@ function process(content, file, config) {
   )
   return content
 }
-var defaultOptions = undefined
 
-exports.default = process
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process, info$1)

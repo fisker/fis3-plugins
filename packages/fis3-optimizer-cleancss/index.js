@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -845,6 +843,12 @@ function _objectSpread2(target) {
   return target
 }
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'css minifer for fis based on clean-css.',
   keywords: ['minifer', 'minify'],
@@ -903,7 +907,5 @@ function process$1(content, file, config) {
   deriveSourceMap(file, result.sourceMap)
   return result.styles
 }
-var defaultOptions = undefined
 
-exports.default = process$1
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process$1, info$1)

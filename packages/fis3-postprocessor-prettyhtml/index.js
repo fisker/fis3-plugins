@@ -1,7 +1,5 @@
 'use strict'
 
-Object.defineProperty(exports, '__esModule', {value: true})
-
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1077,6 +1075,12 @@ fixRegexpWellKnownSymbolLogic('replace', 2, function(
   }
 })
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'a code formatter of fis3 based on prettyhtml.',
   keywords: ['beautify', 'format', 'formatter'],
@@ -1103,7 +1107,5 @@ function process(content, file, config) {
   content = content.replace(/\n\s*<!-- prettyhtml-ignore -->\n/g, '\n')
   return content
 }
-var defaultOptions = undefined
 
-exports.default = process
-exports.defaultOptions = defaultOptions
+module.exports = exportPlugin(process, info$1)
