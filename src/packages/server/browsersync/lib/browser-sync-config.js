@@ -92,4 +92,4 @@ function getConfig(bs, argv) {
   return config
 }
 
-module.exports = getConfig
+export default getConfig

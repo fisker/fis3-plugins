@@ -3,6 +3,7 @@
  * fisker Cheung<lionkay@gmail.com>
  */
 import {minify} from 'terser'
+import * as info from './info'
 
 const {log} = global.fis
 
@@ -68,3 +69,4 @@ module.exports = function(content, file, config) {
 
   return result.code
 }
+module.exports.defaultOptions = info.options

@@ -1,7 +1,20 @@
 'use strict'
 
-var _cssgraceLite = require('cssgrace-lite')
+var cssgraceLite = require('cssgrace-lite')
+
+var info = {
+  description: 'cssgrace for fis3.',
+  keywords: ['cssgrace'],
+  dependencies: ['cssgrace-lite'],
+  options: {},
+  links: {
+    cssgrace: 'https://github.com/cssdream/cssgrace',
+  },
+}
+var info_4 = info.options
 
 module.exports = function(content, file, config) {
-  return (0, _cssgraceLite.pack)(content, config)
+  return cssgraceLite.pack(content, config)
 }
+
+module.exports.defaultOptions = info_4

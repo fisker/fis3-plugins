@@ -2,6 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import execa from 'execa'
 import yargs from 'yargs'
+import * as info from './info'
 
 const {fis} = global
 const util = fis.require('command-server/lib/util.js')
@@ -164,3 +165,4 @@ function start(opt, callback) {
 }
 
 module.exports = {start}
+module.exports.defaultOptions = info.options

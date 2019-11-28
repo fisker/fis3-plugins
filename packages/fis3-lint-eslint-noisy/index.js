@@ -1,9 +1,23 @@
 'use strict'
 
-var _eslint = require('eslint')
+var eslint = require('eslint')
 
-var formatter = _eslint.CLIEngine.getFormatter()
+var info = {
+  description: 'a js linter plugin of fis3 based on eslint.',
+  keywords: ['eslint', 'linter'],
+  dependencies: ['eslint'],
+  options: {
+    envs: ['browser'],
+    fix: true,
+    useEslintrc: true,
+  },
+  links: {
+    eslint: 'http://eslint.org/',
+  },
+}
+var info_4 = info.options
 
+var formatter = eslint.CLIEngine.getFormatter()
 var log = global.fis.log
 
 module.exports = function(content, file, config) {
@@ -11,7 +25,7 @@ module.exports = function(content, file, config) {
     return
   }
 
-  var cli = new _eslint.CLIEngine(config)
+  var cli = new eslint.CLIEngine(config)
 
   if (cli.isPathIgnored(file.realpath)) {
     return
@@ -21,7 +35,7 @@ module.exports = function(content, file, config) {
 
   if (report.errorCount || report.warningCount) {
     if (config.fix) {
-      _eslint.CLIEngine.outputFixes(report)
+      eslint.CLIEngine.outputFixes(report)
     }
 
     log.warn('[%s] lint failed: \n %s', file.id, formatter(report.results))
@@ -33,8 +47,4 @@ module.exports = function(content, file, config) {
   }
 }
 
-module.exports.defaultOptions = {
-  envs: ['browser'],
-  fix: true,
-  useEslintrc: true,
-}
+module.exports.defaultOptions = info_4

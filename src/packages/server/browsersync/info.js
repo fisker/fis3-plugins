@@ -16,10 +16,5 @@ module.exports = {
   links: {
     browsersync: 'https://browsersync.io/',
   },
-  files: [
-    'app.js',
-    'lib/browser-sync-config.js',
-    'lib/middleware.js',
-    'templates/script-tags.tmpl',
-  ],
+  files: ['app.js', 'templates/script-tags.tmpl'],
 }

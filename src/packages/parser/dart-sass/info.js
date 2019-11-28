@@ -8,7 +8,6 @@ module.exports = {
     sourceMap: false,
     omitSourceMapUrl: false,
   },
-  files: ['sass-import-resolver.js'],
   links: {
     sass: 'http://sass-lang.com/',
     'dart-sass': 'https://github.com/sass/dart-sass/',

@@ -1,13 +1,29 @@
 'use strict'
 
-var _prettier = _interopRequireDefault(require('prettier'))
+function _interopDefault(ex) {
+  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+}
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {default: obj}
+var prettier = _interopDefault(require('prettier'))
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    })
+  } else {
+    obj[key] = value
+  }
+
+  return obj
 }
 
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object)
+
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object)
     if (enumerableOnly)
@@ -16,12 +32,14 @@ function ownKeys(object, enumerableOnly) {
       })
     keys.push.apply(keys, symbols)
   }
+
   return keys
 }
 
-function _objectSpread(target) {
+function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {}
+
     if (i % 2) {
       ownKeys(Object(source), true).forEach(function(key) {
         _defineProperty(target, key, source[key])
@@ -38,29 +56,27 @@ function _objectSpread(target) {
       })
     }
   }
+
   return target
 }
 
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true,
-    })
-  } else {
-    obj[key] = value
-  }
-  return obj
+var info = {
+  description: 'a code formatter of fis3 based on prettier.',
+  keywords: ['beautify', 'format', 'formatter'],
+  dependencies: ['prettier'],
+  options: {},
+  links: {
+    prettier: 'https://github.com/prettier/prettier',
+  },
 }
+var info_4 = info.options
 
 module.exports = function(content, file, config) {
   var fileFakePath = file.realpathNoExt + file.rExt
 
-  var prettierConfig = _objectSpread(
+  var prettierConfig = _objectSpread2(
     {},
-    _prettier['default'].resolveConfig.sync(fileFakePath, {
+    prettier.resolveConfig.sync(fileFakePath, {
       editorconfig: true,
     }),
     {},
@@ -71,5 +87,7 @@ module.exports = function(content, file, config) {
     }
   )
 
-  return _prettier['default'].format(content, prettierConfig)
+  return prettier.format(content, prettierConfig)
 }
+
+module.exports.defaultOptions = info_4

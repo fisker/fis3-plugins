@@ -1,4 +1,5 @@
 import CleanCSS from 'clean-css'
+import * as info from './info'
 
 const {log} = global.fis
 
@@ -42,3 +43,4 @@ module.exports = function(content, file, config) {
 
   return result.styles
 }
+module.exports.defaultOptions = info.options

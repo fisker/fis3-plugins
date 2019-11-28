@@ -1,6 +1,7 @@
 import posthtml from 'posthtml'
 import beautify from 'posthtml-beautify'
 import sync from 'promise-synchronizer'
+import * as info from './info'
 
 const {log} = global.fis
 
@@ -46,3 +47,4 @@ module.exports = function(content, file, config) {
 
   return content
 }
+module.exports.defaultOptions = info.options

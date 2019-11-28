@@ -4,11 +4,18 @@ module.exports = {
       '@babel/preset-env',
       {
         targets: {
-          node: '0.8',
+          node: '0.10',
         },
         exclude: ['transform-typeof-symbol', 'transform-regenerator'],
+        modules: false,
+        useBuiltIns: 'usage',
+        corejs: {
+          version: 3,
+          proposals: true,
+        },
       },
     ],
   ],
   plugins: ['babel-plugin-transform-async-to-promises'],
+  ignore: [/\/core-js\//],
 }

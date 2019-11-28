@@ -1,4 +1,5 @@
 import prettier from 'prettier'
+import * as info from './info'
 
 const {fis} = global
 const assign = Object.assign || fis.util.assign
@@ -29,3 +30,4 @@ module.exports = function(content, file, config_) {
 
   return parsed
 }
+module.exports.defaultOptions = info.options

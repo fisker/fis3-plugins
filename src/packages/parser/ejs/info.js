@@ -5,4 +5,5 @@ module.exports = {
   links: {
     ejs: 'http://ejs.co/',
   },
+  options: {},
 }
