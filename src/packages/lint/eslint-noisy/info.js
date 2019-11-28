@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   description: 'a js linter plugin of fis3 based on eslint.',
   keywords: ['eslint', 'linter'],
   dependencies: ['eslint'],

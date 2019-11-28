@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -686,8 +688,8 @@ var arraySpeciesCreate = function(originalArray, length) {
 
 var userAgent = getBuiltIn('navigator', 'userAgent') || ''
 
-var process$1 = global_1.process
-var versions = process$1 && process$1.versions
+var process = global_1.process
+var versions = process && process.versions
 var v8 = versions && versions.v8
 var match, version
 
@@ -852,7 +854,11 @@ var info = {
     'clean-css': 'https://github.com/jakubpawlowicz/clean-css',
   },
 }
-var info_4 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 var log = global.fis.log
 
@@ -873,7 +879,7 @@ function deriveSourceMap(file, sourceMap) {
   file.extras.derived.push(mapping)
 }
 
-module.exports = function(content, file, config) {
+function process$1(content, file, config) {
   var options = _objectSpread2({}, config)
 
   delete options.filename
@@ -890,12 +896,14 @@ module.exports = function(content, file, config) {
 
   if (result.errors && result.errors.length > 0) {
     log.warn(result.errors)
-    process.exitCode = 1
+    process$1.exitCode = 1
     throw new Error('cleancss error.')
   }
 
   deriveSourceMap(file, result.sourceMap)
   return result.styles
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_4
+exports.default = process$1
+exports.defaultOptions = defaultOptions

@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -873,7 +875,11 @@ var info = {
     htmlhint: 'http://htmlhint.com/',
   },
 }
-var info_4 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 var _global = global,
   _global$fis = _global.fis,
@@ -906,7 +912,7 @@ function readConfig(filename) {
 
 var htmlhintrcConfig = {}
 
-module.exports = function(content, file, config) {
+function process(content, file, config) {
   if (!content) {
     return
   }
@@ -939,5 +945,7 @@ module.exports = function(content, file, config) {
     }
   }
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_4
+exports.default = process
+exports.defaultOptions = defaultOptions

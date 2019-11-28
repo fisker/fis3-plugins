@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   description: 'latest version autoprefixer for fis3.',
   keywords: ['autoprefixer'],
   dependencies: ['postcss', 'autoprefixer'],

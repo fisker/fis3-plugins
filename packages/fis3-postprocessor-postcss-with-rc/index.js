@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1703,7 +1705,11 @@ var info = {
   options: {},
   links: {},
 }
-var info_4 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 function _await(value, then, direct) {
   if (direct) {
@@ -1717,7 +1723,7 @@ function _await(value, then, direct) {
   return then ? value.then(then) : value
 }
 
-var process$4 = function process(content, file, config) {
+var postcssProcess = function postcssProcess(content, file, config) {
   return _call(postcssrc, function(_ref) {
     var plugins = _ref.plugins,
       options = _ref.options
@@ -1749,8 +1755,10 @@ function _call(body, then, direct) {
   }
 }
 
-module.exports = function(content, file, config) {
-  return sync(process$4(content, file, config))
+function process$4(content, file, config) {
+  return sync(postcssProcess(content, file, config))
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_4
+exports.default = process$4
+exports.defaultOptions = defaultOptions

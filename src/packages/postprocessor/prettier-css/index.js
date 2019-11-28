@@ -4,7 +4,7 @@ import * as info from './info'
 const {fis} = global
 const assign = Object.assign || fis.util.assign
 
-module.exports = function(content, file, config_) {
+function process(content, file, config_) {
   const fileFakePath = file.realpathNoExt + file.rExt
 
   let config = prettier.resolveConfig.sync(fileFakePath, {
@@ -30,4 +30,6 @@ module.exports = function(content, file, config_) {
 
   return parsed
 }
-module.exports.defaultOptions = info.options
+
+export default process
+export const defaultOptions = info.options

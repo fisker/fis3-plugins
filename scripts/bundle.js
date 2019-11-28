@@ -41,35 +41,37 @@ const ignoreImportModules = new Set([
   'tty',
 ])
 
+function onwarn(warning) {
+  const {code} = warning
+
+  if (code === 'MIXED_EXPORTS' || code === 'INPUT_HOOK_IN_OUTPUT_PLUGIN') {
+    return
+  }
+
+  if (
+    code === 'CIRCULAR_DEPENDENCY' &&
+    warning.importer.startsWith('node_modules')
+  ) {
+    return
+  }
+
+  if (
+    code === 'UNRESOLVED_IMPORT' &&
+    (warning.importer.startsWith('\0') ||
+      ignoreImportModules.has(warning.source))
+  ) {
+    return
+  }
+
+  console.warn(warning.toString())
+}
+
 async function bundle(input, output) {
   const bundle = await rollup({
     external,
     input,
     plugins,
-    onwarn(warning) {
-      const {code} = warning
-
-      if (code === 'MIXED_EXPORTS' || code === 'INPUT_HOOK_IN_OUTPUT_PLUGIN') {
-        return
-      }
-
-      if (
-        code === 'CIRCULAR_DEPENDENCY' &&
-        warning.importer.startsWith('node_modules')
-      ) {
-        return
-      }
-
-      if (
-        code === 'UNRESOLVED_IMPORT' &&
-        (warning.importer.startsWith('\0') ||
-          ignoreImportModules.has(warning.source))
-      ) {
-        return
-      }
-
-      console.warn(warning.toString())
-    },
+    onwarn,
   })
 
   await bundle.write({

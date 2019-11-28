@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1393,8 +1395,8 @@ var createProperty = function(object, key, value) {
 
 var userAgent = getBuiltIn('navigator', 'userAgent') || ''
 
-var process$1 = global_1.process
-var versions = process$1 && process$1.versions
+var process = global_1.process
+var versions = process && process.versions
 var v8 = versions && versions.v8
 var match, version
 
@@ -2044,7 +2046,11 @@ var info = {
     fix: true,
   },
 }
-var info_5 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 var log = global.fis.log
 var syntax = {
@@ -2053,7 +2059,7 @@ var syntax = {
   '.sss': 'sugarss',
 }
 
-module.exports = function(content, file, config_) {
+function process$1(content, file, config_) {
   if (!content) {
     return content
   }
@@ -2128,7 +2134,7 @@ module.exports = function(content, file, config_) {
         )
 
         if (errorMessage.length > 0) {
-          process.exitCode = 1
+          process$1.exitCode = 1
           throw new Error('stylelint error.')
         }
       }
@@ -2148,5 +2154,7 @@ module.exports = function(content, file, config_) {
     )
   }
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_5
+exports.default = process$1
+exports.defaultOptions = defaultOptions

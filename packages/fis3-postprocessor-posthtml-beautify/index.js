@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1092,11 +1094,15 @@ var info = {
     'posthtml-beautify': 'https://github.com/gitscrum/posthtml-beautify',
   },
 }
-var info_4 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 var log = global.fis.log
 
-module.exports = function(content, file, config) {
+function process(content, file, config) {
   content = content.replace(
     /__relative\("(.*?)"\)/g,
     '"__relative_fn1_start__$1__relative_fn1_end__"'
@@ -1134,5 +1140,7 @@ module.exports = function(content, file, config) {
   )
   return content
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_4
+exports.default = process
+exports.defaultOptions = defaultOptions

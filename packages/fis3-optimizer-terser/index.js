@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 var terser = require('terser')
 
 var commonjsGlobal =
@@ -682,8 +684,8 @@ var arraySpeciesCreate = function(originalArray, length) {
 
 var userAgent = getBuiltIn('navigator', 'userAgent') || ''
 
-var process$1 = global_1.process
-var versions = process$1 && process$1.versions
+var process = global_1.process
+var versions = process && process.versions
 var v8 = versions && versions.v8
 var match, version
 
@@ -1008,7 +1010,11 @@ var info = {
     terser: 'https://github.com/terser-js/terser',
   },
 }
-var info_4 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 var log = global.fis.log
 
@@ -1056,7 +1062,7 @@ function deriveSourceMap(file, sourceMap) {
   file.extras.derived.push(mapping)
 }
 
-module.exports = function(content, file, config) {
+function process$1(content, file, config) {
   var options = getTerserOptions(file, config)
   var result = terser.minify(content, options)
 
@@ -1066,12 +1072,14 @@ module.exports = function(content, file, config) {
 
   if (result.errors) {
     log.warn(result.errors)
-    process.exitCode = 1
+    process$1.exitCode = 1
     throw new Error('terser error.')
   }
 
   deriveSourceMap(file, result.map)
   return result.code
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_4
+exports.default = process$1
+exports.defaultOptions = defaultOptions

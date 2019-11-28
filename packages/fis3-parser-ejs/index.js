@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1091,7 +1093,11 @@ var info = {
   },
   options: {},
 }
-var info_5 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 var _global = global,
   fis = _global.fis
@@ -1121,7 +1127,7 @@ function makeRequireFunction(context) {
   }
 }
 
-module.exports = function(content, file, config) {
+function process$1(content, file, config) {
   if (file.filename[0] === '_') {
     return content
   }
@@ -1145,5 +1151,7 @@ module.exports = function(content, file, config) {
   content = ejs.render(content, data, options)
   return content
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_5
+exports.default = process$1
+exports.defaultOptions = defaultOptions

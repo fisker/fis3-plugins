@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 var eslint = require('eslint')
 
 var info = {
@@ -15,12 +17,16 @@ var info = {
     eslint: 'http://eslint.org/',
   },
 }
-var info_4 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 var formatter = eslint.CLIEngine.getFormatter()
 var log = global.fis.log
 
-module.exports = function(content, file, config) {
+function process(content, file, config) {
   if (!content) {
     return
   }
@@ -46,5 +52,7 @@ module.exports = function(content, file, config) {
     }
   }
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_4
+exports.default = process
+exports.defaultOptions = defaultOptions

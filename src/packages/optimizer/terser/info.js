@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   description: 'js minifer for fis based on terser.',
   keywords: ['minifer', 'minify', 'terser', 'javascript'],
   dependencies: ['terser'],

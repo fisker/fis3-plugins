@@ -8,7 +8,7 @@ import * as info from './info'
 
 const {log} = global.fis
 
-module.exports = function(content) {
+function lint(content) {
   content = content.replace(/\n\s+$/, '')
 
   try {
@@ -22,4 +22,5 @@ module.exports = function(content) {
   return content
 }
 
-module.exports.defaultOptions = info.options
+export default lint
+export const defaultOptions = info.options

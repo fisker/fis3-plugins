@@ -1,7 +1,7 @@
 import prettier from 'prettier'
 import * as info from './info'
 
-module.exports = function(content, file, config) {
+function process(content, file, config) {
   const fileFakePath = file.realpathNoExt + file.rExt
 
   const prettierConfig = {
@@ -16,4 +16,5 @@ module.exports = function(content, file, config) {
   return prettier.format(content, prettierConfig)
 }
 
-module.exports.defaultOptions = info.options
+export default process
+export const defaultOptions = info.options

@@ -67,7 +67,7 @@ class Package {
 
     this.type = type
     this.name = name
-    this.info = require(path.join(this.src, 'info.js'))
+    this.info = require(path.join(this.src, 'info.js')).default
     try {
       _.assign(this.info, {
         name: packageName,

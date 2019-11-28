@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1090,12 +1092,18 @@ var info = {
     prettyhtml: 'https://github.com/Prettyhtml/prettyhtml',
   },
 }
-var info_4 = info.options
 
-module.exports = function(content, file, config) {
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
+
+function process(content, file, config) {
   content = prettyhtml(content, config).contents
   content = content.replace(/\n\s*<!-- prettyhtml-ignore -->\n/g, '\n')
   return content
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_4
+exports.default = process
+exports.defaultOptions = defaultOptions

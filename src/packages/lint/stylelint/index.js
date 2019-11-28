@@ -15,7 +15,7 @@ const syntax = {
   '.sss': 'sugarss',
 }
 
-module.exports = function(content, file, config_) {
+function process(content, file, config_) {
   if (!content) {
     return content
   }
@@ -84,5 +84,5 @@ module.exports = function(content, file, config_) {
     throw new Error(`[${file.id}] lint failed with error: \n\n ${error}`)
   }
 }
-
-module.exports.defaultOptions = info.options
+export default process
+export const defaultOptions = info.options

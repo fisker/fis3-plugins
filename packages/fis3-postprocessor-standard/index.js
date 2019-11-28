@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1084,11 +1086,15 @@ var info = {
     standard: 'https://github.com/standard/standard',
   },
 }
-var info_4 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 var log = global.fis.log
 
-module.exports = function(content) {
+function lint(content) {
   content = content.replace(/\n\s+$/, '')
 
   try {
@@ -1103,5 +1109,7 @@ module.exports = function(content) {
 
   return content
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_4
+exports.default = lint
+exports.defaultOptions = defaultOptions

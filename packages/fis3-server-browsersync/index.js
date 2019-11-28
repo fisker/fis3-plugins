@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1299,7 +1301,11 @@ var info = {
   },
   files: ['app.js', 'templates/script-tags.tmpl'],
 }
-var info_4 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 var _global = global,
   fis = _global.fis
@@ -1458,8 +1464,7 @@ function start(opt, callback) {
     server.stderr.pipe(process.stderr)
   }
 }
+var defaultOptions = undefined
 
-module.exports = {
-  start: start,
-}
-module.exports.defaultOptions = info_4
+exports.defaultOptions = defaultOptions
+exports.start = start

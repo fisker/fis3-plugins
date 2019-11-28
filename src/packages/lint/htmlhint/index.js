@@ -36,7 +36,7 @@ function readConfig(filename) {
 
 let htmlhintrcConfig = {}
 
-module.exports = function(content, file, config) {
+function process(content, file, config) {
   if (!content) {
     return
   }
@@ -69,4 +69,6 @@ module.exports = function(content, file, config) {
   }
 }
 
-module.exports.defaultOptions = info.options
+export default process
+
+export const defaultOptions = info.options

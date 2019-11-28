@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -1406,7 +1408,11 @@ var info = {
   keywords: ['relative'],
   options: {},
 }
-var info_3 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 var _global = global,
   fis = _global.fis
@@ -1538,12 +1544,14 @@ function onFetchRelativeUrl(message) {
   message.ret = getRelativeUrl(target, host)
 }
 
-module.exports = function(fis) {
+function process$1(fis) {
   fis.on('process:end', onProcessEnd)
   fis.on('standard:restore:uri', onStandardRestoreUri)
   fis.on('pack:file', onPackFile) // 给其他插件用的
 
   fis.on('plugin:relative:fetch', onFetchRelativeUrl)
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_3
+exports.default = process$1
+exports.defaultOptions = defaultOptions

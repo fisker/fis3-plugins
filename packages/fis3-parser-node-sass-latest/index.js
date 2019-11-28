@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 function _interopDefault(ex) {
   return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
 }
@@ -3884,7 +3886,11 @@ var info = {
     'node-sass': 'https://github.com/sass/node-sass',
   },
 }
-var info_4 = info.options
+
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
 
 var _global = global,
   fis = _global.fis
@@ -3899,14 +3905,14 @@ function normalizeIncludePath(directories) {
     } else {
       directories_.push(directory)
       directories_.push(path$1.join(PROJECT_ROOT, directory))
-      directories_.push(path$1.join(process.cwd(), directory))
+      directories_.push(path$1.join(process$2.cwd(), directory))
     }
 
     return [].concat(_toConsumableArray(all), directories_)
   }, [])
 }
 
-module.exports = function(content, file, config) {
+function process$2(content, file, config) {
   if (file.basename[0] === '_') {
     return content
   }
@@ -3995,5 +4001,7 @@ module.exports = function(content, file, config) {
   content = result.css.toString('utf8')
   return content
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_4
+exports.default = process$2
+exports.defaultOptions = defaultOptions

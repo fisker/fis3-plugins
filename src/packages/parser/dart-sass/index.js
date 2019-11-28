@@ -22,7 +22,7 @@ function normalizeIncludePath(directories) {
   }, [])
 }
 
-module.exports = function(content, file, config) {
+function process(content, file, config) {
   if (file.basename[0] === '_') {
     return content
   }
@@ -112,4 +112,6 @@ module.exports = function(content, file, config) {
 
   return content
 }
-module.exports.defaultOptions = info.options
+
+export default process
+export const defaultOptions = info.options

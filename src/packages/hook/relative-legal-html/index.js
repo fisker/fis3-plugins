@@ -130,7 +130,7 @@ function onFetchRelativeUrl(message) {
   message.ret = getRelativeUrl(target, host)
 }
 
-module.exports = function(fis) {
+function process(fis) {
   fis.on('process:end', onProcessEnd)
   fis.on('standard:restore:uri', onStandardRestoreUri)
   fis.on('pack:file', onPackFile)
@@ -138,4 +138,6 @@ module.exports = function(fis) {
   // 给其他插件用的
   fis.on('plugin:relative:fetch', onFetchRelativeUrl)
 }
-module.exports.defaultOptions = info.options
+
+export default process
+export const defaultOptions = info.options

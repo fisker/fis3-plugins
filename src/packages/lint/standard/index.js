@@ -5,7 +5,7 @@ import * as info from './info'
 const formatter = CLIEngine.getFormatter()
 const {log} = global.fis
 
-module.exports = function(content, file) {
+function lint(content, file) {
   content = content.replace(/\n\s+$/, '')
   let results = []
 
@@ -27,4 +27,6 @@ module.exports = function(content, file) {
     }
   }
 }
-module.exports.defaultOptions = info.options
+
+export default lint
+export const defaultOptions = info.options

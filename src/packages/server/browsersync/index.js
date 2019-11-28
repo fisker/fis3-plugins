@@ -164,5 +164,5 @@ function start(opt, callback) {
   }
 }
 
-module.exports = {start}
-module.exports.defaultOptions = info.options
+export {start}
+export const defaultOptions = info.options

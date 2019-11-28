@@ -1,5 +1,7 @@
 'use strict'
 
+Object.defineProperty(exports, '__esModule', {value: true})
+
 var jsBeautify = require('js-beautify')
 
 var info = {
@@ -32,10 +34,16 @@ var info = {
     'js-beautify': 'https://github.com/beautify-web/js-beautify',
   },
 }
-var info_4 = info.options
 
-module.exports = function(content, file, config) {
+var info$1 = /*#__PURE__*/ Object.freeze({
+  __proto__: null,
+  default: info,
+})
+
+function process(content, file, config) {
   return content ? jsBeautify.html(content, config) : ''
 }
+var defaultOptions = undefined
 
-module.exports.defaultOptions = info_4
+exports.default = process
+exports.defaultOptions = defaultOptions

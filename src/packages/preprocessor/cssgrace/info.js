@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   description: 'cssgrace for fis3.',
   keywords: ['cssgrace'],
   dependencies: ['cssgrace-lite'],

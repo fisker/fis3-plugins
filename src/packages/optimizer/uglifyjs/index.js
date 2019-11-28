@@ -47,7 +47,7 @@ function deriveSourceMap(file, sourceMap) {
   file.extras.derived.push(mapping)
 }
 
-module.exports = function(content, file, config) {
+function process(content, file, config) {
   const options = getUglifyJSOptions(file, config)
   const result = minify(content, options)
 
@@ -65,4 +65,6 @@ module.exports = function(content, file, config) {
 
   return result.code
 }
-module.exports.defaultOptions = info.options
+
+export default process
+export const defaultOptions = info.options

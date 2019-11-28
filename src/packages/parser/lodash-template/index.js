@@ -30,7 +30,7 @@ function makeRequireFunction(context) {
   }
 }
 
-module.exports = function(content, file, config) {
+function process(content, file, config) {
   const {data} = config
   const {options} = config
   const {filename} = config
@@ -50,5 +50,6 @@ module.exports = function(content, file, config) {
   return content
 }
 
-module.exports.lodash = _
-module.exports.defaultOptions = info.options
+export default process
+export const lodash = _
+export const defaultOptions = info.options

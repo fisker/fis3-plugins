@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   description: 'a code formatter of fis3 based on prettyhtml.',
   keywords: ['beautify', 'format', 'formatter'],
   dependencies: ['@starptech/prettyhtml'],

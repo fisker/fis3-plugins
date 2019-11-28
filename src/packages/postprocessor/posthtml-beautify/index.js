@@ -5,7 +5,7 @@ import * as info from './info'
 
 const {log} = global.fis
 
-module.exports = function(content, file, config) {
+function process(content, file, config) {
   content = content.replace(
     /__relative\("(.*?)"\)/g,
     '"__relative_fn1_start__$1__relative_fn1_end__"'
@@ -47,4 +47,5 @@ module.exports = function(content, file, config) {
 
   return content
 }
-module.exports.defaultOptions = info.options
+export default process
+export const defaultOptions = info.options

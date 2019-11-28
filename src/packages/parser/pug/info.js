@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   description: 'a fis plugin to parse pug(aka jade).',
   keywords: ['jade', 'html'],
   dependencies: ['pug'],
