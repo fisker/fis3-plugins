@@ -1,12 +1,12 @@
 import {join} from 'path'
 import writePrettierFile from 'write-prettier-file'
 import sortObjectKeys from 'sort-object-keys'
-import pkgs from './packages'
+import packages from './packages'
 import readFile from './utils/read-file'
 
 const versionsFile = join(__dirname, '..', 'versions.json')
 
-for (const package_ of pkgs) {
+for (const package_ of packages) {
   const {name} = package_.info
   const {version, gitHead} = getVersion(name)
 
