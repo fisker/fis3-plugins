@@ -7,7 +7,7 @@ const {fis} = global
 const PROJECT_ROOT = fis.project.getProjectPath()
 const root = path.normalize(PROJECT_ROOT)
 
-const re = /^[.\\/]/i
+const re = /^[./\\]/i
 
 function cleanRequireCache() {
   Object.keys(require.cache)

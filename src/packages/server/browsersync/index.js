@@ -105,7 +105,7 @@ function start(opt, callback) {
       error = true
       process.stdout.write(' fail.\n')
 
-      const match = chunk.match(/Error:?\s+([^\r\n]+)/i)
+      const match = chunk.match(/error:?\s+([^\n\r]+)/i)
       let errorMessage = 'unknown'
 
       if (chunk.includes('EADDRINUSE')) {
