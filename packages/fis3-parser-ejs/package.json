@@ -1,6 +1,6 @@
 {
   "name": "fis3-parser-ejs",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "a fis plugin to parse ejs.",
   "keywords": [
     "ejs",
