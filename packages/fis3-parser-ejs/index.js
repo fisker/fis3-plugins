@@ -1107,7 +1107,7 @@ var _global = global,
   fis = _global.fis
 var PROJECT_ROOT = fis.project.getProjectPath()
 var root = path$1.normalize(PROJECT_ROOT)
-var re = /^[.\\/]/i
+var re = /^[./\\]/i
 
 function cleanRequireCache() {
   Object.keys(require.cache)

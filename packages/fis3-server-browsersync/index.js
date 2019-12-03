@@ -1403,7 +1403,7 @@ function start(opt, callback) {
 
       error = true
       process.stdout.write(' fail.\n')
-      var match = chunk.match(/Error:?\s+([^\r\n]+)/i)
+      var match = chunk.match(/error:?\s+([^\n\r]+)/i)
       var errorMessage = 'unknown'
 
       if (chunk.includes('EADDRINUSE')) {
