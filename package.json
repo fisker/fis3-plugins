@@ -118,7 +118,7 @@
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-prettier": "0.6.0",
     "sort-object-keys": "1.1.2",
-    "sort-package-json": "1.27.0",
+    "sort-package-json": "1.28.0",
     "write-prettier-file": "1.2.3"
   },
   "publishConfig": {
