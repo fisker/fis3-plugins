@@ -11,6 +11,7 @@ on:
 jobs:
   # test:
   #   strategy:
+  #     fail-fast: false
   #     matrix:
   #       PLATFORM:
   #         - "ubuntu-latest"
@@ -26,6 +27,7 @@ jobs:
 
   #   name: Test on node ${{ matrix.NODE }} and ${{ matrix.PLATFORM }}
   #   runs-on: ${{ matrix.PLATFORM }}
+  #   # needs: [build]
   #   steps:
   #     - name: Checkout
   #       uses: actions/checkout@master
@@ -38,75 +40,21 @@ jobs:
   #     - name: Install Dependencies
   #       run: yarn
 
-  #     - name: Run Test
-  #       run: yarn test-coverage
-
-  #     - name: Upload Coverage Parallel
-  #       uses: coverallsapp/github-action@master
-  #       if: success()
-  #       with:
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         parallel: true
-
-  #     - name: Upload Coverage Finished
-  #       uses: coverallsapp/github-action@master
-  #       if: success()
-  #       with:
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         parallel-finished: true
-
-  # test-dist:
-  #   strategy:
-  #     matrix:
-  #       PLATFORM:
-  #         - "ubuntu-latest"
-  #         # - "macos-latest"
-  #         # - "windows-latest"
-  #       NODE:
-  #         # - "13"
-  #         - "12"
-  #         # - "10"
-  #       # exclude:
-  #       #   - PLATFORM: "macos-latest"
-  #       #     NODE: "12"
-
-  #   name: Test on node ${{ matrix.NODE }} and ${{ matrix.PLATFORM }}
-  #   runs-on: ${{ matrix.PLATFORM }}
-  #   needs: [build]
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@master
-
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@master
-  #       with:
-  #         node-version: ${{ matrix.NODE }}
-
-  #     - name: Install Dependencies
-  #       run: yarn
-
-  #     - name: Download Artifact
-  #       uses: actions/download-artifact@master
-  #       with:
-  #         name: dist
-  #         path: dist
+  #     # - name: Download Artifact
+  #     #   uses: actions/download-artifact@master
+  #     #   with:
+  #     #     name: dist
+  #     #     path: dist
 
   #     - name: Run Test
   #       run: yarn test-coverage
 
-  #     - name: Upload Coverage Parallel
+  #     - name: Upload Coverage
   #       uses: coverallsapp/github-action@master
   #       if: success()
+  #       continue-on-error: true
   #       with:
   #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         parallel: true
-
-  #     - name: Upload Coverage Finished
-  #       uses: coverallsapp/github-action@master
-  #       if: success()
-  #       with:
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         parallel-finished: true
 
   lint:
     name: Lint
@@ -151,5 +99,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@master
         with:
-          name: packages
-          path: packages
+          name: dist
+          path: dist
