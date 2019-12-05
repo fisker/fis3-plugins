@@ -1,7 +1,7 @@
 import {rollup} from 'rollup'
 import babel from 'rollup-plugin-babel'
 import cjs from 'rollup-plugin-commonjs'
-import resolve from 'rollup-plugin-node-resolve'
+import resolve from '@rollup/plugin-node-resolve'
 import prettier from 'rollup-plugin-prettier'
 // eslint-disable-next-line import/no-unresolved
 import json from '@rollup/plugin-json'
