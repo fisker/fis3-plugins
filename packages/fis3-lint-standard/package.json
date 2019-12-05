@@ -1,6 +1,6 @@
 {
   "name": "fis3-lint-standard",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "a js linter plugin of fis3 based on standard.",
   "keywords": [
     "fis",

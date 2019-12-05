@@ -1,6 +1,6 @@
 {
   "name": "fis3-lint-stylelint",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "a css linter plugin of fis3 based on stylelint.",
   "keywords": [
     "fis",
