@@ -86,7 +86,7 @@
     "yog-devtools": "0.1.1"
   },
   "devDependencies": {
-    "@babel/core": "7.7.4",
+    "@babel/core": "7.7.5",
     "@babel/preset-env": "7.7.4",
     "@commitlint/cli": "8.2.0",
     "@fisker/commitlint-config": "1.1.4",
