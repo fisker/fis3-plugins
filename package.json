@@ -97,7 +97,7 @@
     "@rollup/plugin-json": "4.0.0",
     "@rollup/plugin-node-resolve": "6.0.0",
     "babel-plugin-transform-async-to-promises": "0.8.15",
-    "core-js": "3.4.8",
+    "core-js": "3.5.0",
     "cz-conventional-changelog": "3.0.2",
     "del-cli": "3.0.0",
     "eslint": "6.7.2",
