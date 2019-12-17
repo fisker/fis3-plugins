@@ -275,26 +275,31 @@ var SHARED = '__core-js_shared__'
 var store = global_1[SHARED] || setGlobal(SHARED, {})
 var sharedStore = store
 
+var functionToString = Function.toString // this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
+
+if (typeof sharedStore.inspectSource != 'function') {
+  sharedStore.inspectSource = function(it) {
+    return functionToString.call(it)
+  }
+}
+
+var inspectSource = sharedStore.inspectSource
+
+var WeakMap = global_1.WeakMap
+var nativeWeakMap =
+  typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap))
+
 var shared = createCommonjsModule(function(module) {
   ;(module.exports = function(key, value) {
     return (
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.4.7',
+    version: '3.5.0',
     mode: 'global',
     copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
   })
 })
-
-var functionToString = Function.toString
-var inspectSource = shared('inspectSource', function(it) {
-  return functionToString.call(it)
-})
-
-var WeakMap = global_1.WeakMap
-var nativeWeakMap =
-  typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap))
 
 var id = 0
 var postfix = Math.random()
@@ -3598,23 +3603,36 @@ var hasFlag = (flag, argv) => {
   return pos !== -1 && (terminatorPos === -1 ? true : pos < terminatorPos)
 }
 
-const env = process.env
+const {env} = process
 let forceColor
 
-if (hasFlag('no-color') || hasFlag('no-colors') || hasFlag('color=false')) {
-  forceColor = false
+if (
+  hasFlag('no-color') ||
+  hasFlag('no-colors') ||
+  hasFlag('color=false') ||
+  hasFlag('color=never')
+) {
+  forceColor = 0
 } else if (
   hasFlag('color') ||
   hasFlag('colors') ||
   hasFlag('color=true') ||
   hasFlag('color=always')
 ) {
-  forceColor = true
+  forceColor = 1
 }
 
 if ('FORCE_COLOR' in env) {
-  forceColor =
-    env.FORCE_COLOR.length === 0 || parseInt(env.FORCE_COLOR, 10) !== 0
+  if (env.FORCE_COLOR === true || env.FORCE_COLOR === 'true') {
+    forceColor = 1
+  } else if (env.FORCE_COLOR === false || env.FORCE_COLOR === 'false') {
+    forceColor = 0
+  } else {
+    forceColor =
+      env.FORCE_COLOR.length === 0
+        ? 1
+        : Math.min(parseInt(env.FORCE_COLOR, 10), 3)
+  }
 }
 
 function translateLevel(level) {
@@ -3631,7 +3649,7 @@ function translateLevel(level) {
 }
 
 function supportsColor(stream) {
-  if (forceColor === false) {
+  if (forceColor === 0) {
     return 0
   }
 
@@ -3647,11 +3665,15 @@ function supportsColor(stream) {
     return 2
   }
 
-  if (stream && !stream.isTTY && forceColor !== true) {
+  if (stream && !stream.isTTY && forceColor === undefined) {
     return 0
   }
 
-  const min = forceColor ? 1 : 0
+  const min = forceColor || 0
+
+  if (env.TERM === 'dumb') {
+    return min
+  }
 
   if (process.platform === 'win32') {
     // Node.js 7.5.0 is the first version of Node.js to include a patch to
@@ -3719,10 +3741,6 @@ function supportsColor(stream) {
 
   if ('COLORTERM' in env) {
     return 1
-  }
-
-  if (env.TERM === 'dumb') {
-    return min
   }
 
   return min
