@@ -1,6 +1,6 @@
 {
   "name": "fis3-postprocessor-postcss-with-rc",
-  "version": "2.0.5",
+  "version": "2.0.4",
   "description": "postcss for fis3.",
   "keywords": [
     "fis",
