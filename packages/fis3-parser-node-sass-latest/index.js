@@ -152,12 +152,12 @@ var has = function(it, key) {
   return hasOwnProperty.call(it, key)
 }
 
-var document = global_1.document // typeof document.createElement is 'object' in old IE
+var document$1 = global_1.document // typeof document.createElement is 'object' in old IE
 
-var EXISTS = isObject(document) && isObject(document.createElement)
+var EXISTS = isObject(document$1) && isObject(document$1.createElement)
 
 var documentCreateElement = function(it) {
-  return EXISTS ? document.createElement(it) : {}
+  return EXISTS ? document$1.createElement(it) : {}
 }
 
 var ie8DomDefine =
@@ -277,7 +277,7 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.5.0',
+    version: '3.6.0',
     mode: 'global',
     copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
   })
@@ -1369,37 +1369,70 @@ var objectDefineProperties = descriptors
 
 var html = getBuiltIn('document', 'documentElement')
 
-var IE_PROTO = sharedKey('IE_PROTO')
+var GT = '>'
+var LT = '<'
 var PROTOTYPE = 'prototype'
+var SCRIPT = 'script'
+var IE_PROTO = sharedKey('IE_PROTO')
 
-var Empty = function() {
+var EmptyConstructor = function() {
   /* empty */
+}
+
+var scriptTag = function(content) {
+  return LT + SCRIPT + GT + content + LT + '/' + SCRIPT + GT
+} // Create object with fake `null` prototype: use ActiveX Object with cleared prototype
+
+var NullProtoObjectViaActiveX = function(activeXDocument) {
+  activeXDocument.write(scriptTag(''))
+  activeXDocument.close()
+  var temp = activeXDocument.parentWindow.Object
+  activeXDocument = null // avoid memory leak
+
+  return temp
 } // Create object with fake `null` prototype: use iframe Object with cleared prototype
 
-var createDict = function() {
+var NullProtoObjectViaIFrame = function() {
   // Thrash, waste and sodomy: IE GC bug
   var iframe = documentCreateElement('iframe')
-  var length = enumBugKeys.length
-  var lt = '<'
-  var script = 'script'
-  var gt = '>'
-  var js = 'java' + script + ':'
+  var JS = 'java' + SCRIPT + ':'
   var iframeDocument
   iframe.style.display = 'none'
-  html.appendChild(iframe)
-  iframe.src = String(js)
+  html.appendChild(iframe) // https://github.com/zloirock/core-js/issues/475
+
+  iframe.src = String(JS)
   iframeDocument = iframe.contentWindow.document
   iframeDocument.open()
-  iframeDocument.write(
-    lt + script + gt + 'document.F=Object' + lt + '/' + script + gt
-  )
+  iframeDocument.write(scriptTag('document.F=Object'))
   iframeDocument.close()
-  createDict = iframeDocument.F
+  return iframeDocument.F
+} // Check for document.domain and active x support
+// No need to use active x approach when document.domain is not set
+// see https://github.com/es-shims/es5-shim/issues/150
+// variation of https://github.com/kitcambridge/es5-shim/commit/4f738ac066346
+// avoid IE GC bug
 
-  while (length--) delete createDict[PROTOTYPE][enumBugKeys[length]]
+var activeXDocument
 
-  return createDict()
-} // `Object.create` method
+var NullProtoObject = function() {
+  try {
+    /* global ActiveXObject */
+    activeXDocument = document.domain && new ActiveXObject('htmlfile')
+  } catch (error) {
+    /* ignore */
+  }
+
+  NullProtoObject = activeXDocument
+    ? NullProtoObjectViaActiveX(activeXDocument)
+    : NullProtoObjectViaIFrame()
+  var length = enumBugKeys.length
+
+  while (length--) delete NullProtoObject[PROTOTYPE][enumBugKeys[length]]
+
+  return NullProtoObject()
+}
+
+hiddenKeys[IE_PROTO] = true // `Object.create` method
 // https://tc39.github.io/ecma262/#sec-object.create
 
 var objectCreate =
@@ -1408,26 +1441,27 @@ var objectCreate =
     var result
 
     if (O !== null) {
-      Empty[PROTOTYPE] = anObject(O)
-      result = new Empty()
-      Empty[PROTOTYPE] = null // add "__proto__" for Object.getPrototypeOf polyfill
+      EmptyConstructor[PROTOTYPE] = anObject(O)
+      result = new EmptyConstructor()
+      EmptyConstructor[PROTOTYPE] = null // add "__proto__" for Object.getPrototypeOf polyfill
 
       result[IE_PROTO] = O
-    } else result = createDict()
+    } else result = NullProtoObject()
 
     return Properties === undefined
       ? result
       : objectDefineProperties(result, Properties)
   }
 
-hiddenKeys[IE_PROTO] = true
-
 var UNSCOPABLES = wellKnownSymbol('unscopables')
 var ArrayPrototype = Array.prototype // Array.prototype[@@unscopables]
 // https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
 
 if (ArrayPrototype[UNSCOPABLES] == undefined) {
-  createNonEnumerableProperty(ArrayPrototype, UNSCOPABLES, objectCreate(null))
+  objectDefineProperty.f(ArrayPrototype, UNSCOPABLES, {
+    configurable: true,
+    value: objectCreate(null),
+  })
 } // add a key to Array.prototype[@@unscopables]
 
 var addToUnscopables = function(key) {
@@ -1911,6 +1945,29 @@ _export(
   }
 )
 
+// so we use an intermediate function.
+
+function RE(s, f) {
+  return RegExp(s, f)
+}
+
+var UNSUPPORTED_Y = fails(function() {
+  // babel-minify transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError
+  var re = RE('a', 'y')
+  re.lastIndex = 2
+  return re.exec('abcd') != null
+})
+var BROKEN_CARET = fails(function() {
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=773687
+  var re = RE('^r', 'gy')
+  re.lastIndex = 2
+  return re.exec('str') != null
+})
+var regexpStickyHelpers = {
+  UNSUPPORTED_Y: UNSUPPORTED_Y,
+  BROKEN_CARET: BROKEN_CARET,
+}
+
 var nativeExec = RegExp.prototype.exec // This always refers to the native implementation, because the
 // String#replace polyfill uses ./fix-regexp-well-known-symbol-logic.js,
 // which loads this file before patching the method.
@@ -1924,24 +1981,61 @@ var UPDATES_LAST_INDEX_WRONG = (function() {
   nativeExec.call(re1, 'a')
   nativeExec.call(re2, 'a')
   return re1.lastIndex !== 0 || re2.lastIndex !== 0
-})() // nonparticipating capturing group, copied from es5-shim's String#split patch.
+})()
+
+var UNSUPPORTED_Y$1 =
+  regexpStickyHelpers.UNSUPPORTED_Y || regexpStickyHelpers.BROKEN_CARET // nonparticipating capturing group, copied from es5-shim's String#split patch.
 
 var NPCG_INCLUDED = /()??/.exec('')[1] !== undefined
-var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED
+var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y$1
 
 if (PATCH) {
   patchedExec = function exec(str) {
     var re = this
     var lastIndex, reCopy, match, i
+    var sticky = UNSUPPORTED_Y$1 && re.sticky
+    var flags = regexpFlags.call(re)
+    var source = re.source
+    var charsAdded = 0
+    var strCopy = str
+
+    if (sticky) {
+      flags = flags.replace('y', '')
+
+      if (flags.indexOf('g') === -1) {
+        flags += 'g'
+      }
+
+      strCopy = String(str).slice(re.lastIndex) // Support anchored sticky behavior.
+
+      if (
+        re.lastIndex > 0 &&
+        (!re.multiline || (re.multiline && str[re.lastIndex - 1] !== '\n'))
+      ) {
+        source = '(?: ' + source + ')'
+        strCopy = ' ' + strCopy
+        charsAdded++
+      } // ^(? + rx + ) is needed, in combination with some str slicing, to
+      // simulate the 'y' flag.
+
+      reCopy = new RegExp('^(?:' + source + ')', flags)
+    }
 
     if (NPCG_INCLUDED) {
-      reCopy = new RegExp('^' + re.source + '$(?!\\s)', regexpFlags.call(re))
+      reCopy = new RegExp('^' + source + '$(?!\\s)', flags)
     }
 
     if (UPDATES_LAST_INDEX_WRONG) lastIndex = re.lastIndex
-    match = nativeExec.call(re, str)
+    match = nativeExec.call(sticky ? reCopy : re, strCopy)
 
-    if (UPDATES_LAST_INDEX_WRONG && match) {
+    if (sticky) {
+      if (match) {
+        match.input = match.input.slice(charsAdded)
+        match[0] = match[0].slice(charsAdded)
+        match.index = re.lastIndex
+        re.lastIndex += match[0].length
+      } else re.lastIndex = 0
+    } else if (UPDATES_LAST_INDEX_WRONG && match) {
       re.lastIndex = re.global ? match.index + match[0].length : lastIndex
     }
 
@@ -2737,7 +2831,12 @@ var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function() {
   }
 
   return ''.replace(re, '$<a>') !== '7'
-}) // Chrome 51 has a buggy "split" implementation when RegExp#exec !== nativeExec
+}) // IE <= 11 replaces $0 with the whole match, as if it was $&
+// https://stackoverflow.com/questions/6024666/getting-ie-to-replace-a-regex-with-the-literal-string-0
+
+var REPLACE_KEEPS_$0 = (function() {
+  return 'a'.replace(/./, '$0') === '$0'
+})() // Chrome 51 has a buggy "split" implementation when RegExp#exec !== nativeExec
 // Weex JS has frozen built-in prototypes, so use try / catch wrapper
 
 var SPLIT_WORKS_WITH_OVERWRITTEN_EXEC = !fails(function() {
@@ -2800,38 +2899,40 @@ var fixRegexpWellKnownSymbolLogic = function(KEY, length, exec, sham) {
   if (
     !DELEGATES_TO_SYMBOL ||
     !DELEGATES_TO_EXEC ||
-    (KEY === 'replace' && !REPLACE_SUPPORTS_NAMED_GROUPS) ||
+    (KEY === 'replace' &&
+      !(REPLACE_SUPPORTS_NAMED_GROUPS && REPLACE_KEEPS_$0)) ||
     (KEY === 'split' && !SPLIT_WORKS_WITH_OVERWRITTEN_EXEC)
   ) {
     var nativeRegExpMethod = /./[SYMBOL]
-    var methods = exec(SYMBOL, ''[KEY], function(
-      nativeMethod,
-      regexp,
-      str,
-      arg2,
-      forceStringMethod
-    ) {
-      if (regexp.exec === regexpExec) {
-        if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
-          // The native String method already delegates to @@method (this
-          // polyfilled function), leasing to infinite recursion.
-          // We avoid it by directly calling the native @@method method.
+    var methods = exec(
+      SYMBOL,
+      ''[KEY],
+      function(nativeMethod, regexp, str, arg2, forceStringMethod) {
+        if (regexp.exec === regexpExec) {
+          if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
+            // The native String method already delegates to @@method (this
+            // polyfilled function), leasing to infinite recursion.
+            // We avoid it by directly calling the native @@method method.
+            return {
+              done: true,
+              value: nativeRegExpMethod.call(regexp, str, arg2),
+            }
+          }
+
           return {
             done: true,
-            value: nativeRegExpMethod.call(regexp, str, arg2),
+            value: nativeMethod.call(str, regexp, arg2),
           }
         }
 
         return {
-          done: true,
-          value: nativeMethod.call(str, regexp, arg2),
+          done: false,
         }
+      },
+      {
+        REPLACE_KEEPS_$0: REPLACE_KEEPS_$0,
       }
-
-      return {
-        done: false,
-      }
-    })
+    )
     var stringMethod = methods[0]
     var regexMethod = methods[1]
     redefine(String.prototype, KEY, stringMethod)
@@ -2848,9 +2949,9 @@ var fixRegexpWellKnownSymbolLogic = function(KEY, length, exec, sham) {
             return regexMethod.call(string, this)
           }
     )
-    if (sham)
-      createNonEnumerableProperty(RegExp.prototype[SYMBOL], 'sham', true)
   }
+
+  if (sham) createNonEnumerableProperty(RegExp.prototype[SYMBOL], 'sham', true)
 }
 
 var charAt$1 = stringMultibyte.charAt // `AdvanceStringIndex` abstract operation
@@ -2897,7 +2998,8 @@ var maybeToString = function(it) {
 fixRegexpWellKnownSymbolLogic('replace', 2, function(
   REPLACE,
   nativeReplace,
-  maybeCallNative
+  maybeCallNative,
+  reason
 ) {
   return [
     // `String.prototype.replace` method
@@ -2911,8 +3013,14 @@ fixRegexpWellKnownSymbolLogic('replace', 2, function(
     }, // `RegExp.prototype[@@replace]` method
     // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@replace
     function(regexp, replaceValue) {
-      var res = maybeCallNative(nativeReplace, regexp, this, replaceValue)
-      if (res.done) return res.value
+      if (
+        reason.REPLACE_KEEPS_$0 ||
+        (typeof replaceValue === 'string' && replaceValue.indexOf('$0') === -1)
+      ) {
+        var res = maybeCallNative(nativeReplace, regexp, this, replaceValue)
+        if (res.done) return res.value
+      }
+
       var rx = anObject(regexp)
       var S = String(this)
       var functionalReplace = typeof replaceValue === 'function'

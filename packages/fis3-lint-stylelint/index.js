@@ -150,12 +150,12 @@ var has = function(it, key) {
   return hasOwnProperty.call(it, key)
 }
 
-var document = global_1.document // typeof document.createElement is 'object' in old IE
+var document$1 = global_1.document // typeof document.createElement is 'object' in old IE
 
-var EXISTS = isObject(document) && isObject(document.createElement)
+var EXISTS = isObject(document$1) && isObject(document$1.createElement)
 
 var documentCreateElement = function(it) {
-  return EXISTS ? document.createElement(it) : {}
+  return EXISTS ? document$1.createElement(it) : {}
 }
 
 var ie8DomDefine =
@@ -273,7 +273,7 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.5.0',
+    version: '3.6.0',
     mode: 'global',
     copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
   })
@@ -673,37 +673,70 @@ var objectDefineProperties = descriptors
 
 var html = getBuiltIn('document', 'documentElement')
 
-var IE_PROTO = sharedKey('IE_PROTO')
+var GT = '>'
+var LT = '<'
 var PROTOTYPE = 'prototype'
+var SCRIPT = 'script'
+var IE_PROTO = sharedKey('IE_PROTO')
 
-var Empty = function() {
+var EmptyConstructor = function() {
   /* empty */
+}
+
+var scriptTag = function(content) {
+  return LT + SCRIPT + GT + content + LT + '/' + SCRIPT + GT
+} // Create object with fake `null` prototype: use ActiveX Object with cleared prototype
+
+var NullProtoObjectViaActiveX = function(activeXDocument) {
+  activeXDocument.write(scriptTag(''))
+  activeXDocument.close()
+  var temp = activeXDocument.parentWindow.Object
+  activeXDocument = null // avoid memory leak
+
+  return temp
 } // Create object with fake `null` prototype: use iframe Object with cleared prototype
 
-var createDict = function() {
+var NullProtoObjectViaIFrame = function() {
   // Thrash, waste and sodomy: IE GC bug
   var iframe = documentCreateElement('iframe')
-  var length = enumBugKeys.length
-  var lt = '<'
-  var script = 'script'
-  var gt = '>'
-  var js = 'java' + script + ':'
+  var JS = 'java' + SCRIPT + ':'
   var iframeDocument
   iframe.style.display = 'none'
-  html.appendChild(iframe)
-  iframe.src = String(js)
+  html.appendChild(iframe) // https://github.com/zloirock/core-js/issues/475
+
+  iframe.src = String(JS)
   iframeDocument = iframe.contentWindow.document
   iframeDocument.open()
-  iframeDocument.write(
-    lt + script + gt + 'document.F=Object' + lt + '/' + script + gt
-  )
+  iframeDocument.write(scriptTag('document.F=Object'))
   iframeDocument.close()
-  createDict = iframeDocument.F
+  return iframeDocument.F
+} // Check for document.domain and active x support
+// No need to use active x approach when document.domain is not set
+// see https://github.com/es-shims/es5-shim/issues/150
+// variation of https://github.com/kitcambridge/es5-shim/commit/4f738ac066346
+// avoid IE GC bug
 
-  while (length--) delete createDict[PROTOTYPE][enumBugKeys[length]]
+var activeXDocument
 
-  return createDict()
-} // `Object.create` method
+var NullProtoObject = function() {
+  try {
+    /* global ActiveXObject */
+    activeXDocument = document.domain && new ActiveXObject('htmlfile')
+  } catch (error) {
+    /* ignore */
+  }
+
+  NullProtoObject = activeXDocument
+    ? NullProtoObjectViaActiveX(activeXDocument)
+    : NullProtoObjectViaIFrame()
+  var length = enumBugKeys.length
+
+  while (length--) delete NullProtoObject[PROTOTYPE][enumBugKeys[length]]
+
+  return NullProtoObject()
+}
+
+hiddenKeys[IE_PROTO] = true // `Object.create` method
 // https://tc39.github.io/ecma262/#sec-object.create
 
 var objectCreate =
@@ -712,19 +745,17 @@ var objectCreate =
     var result
 
     if (O !== null) {
-      Empty[PROTOTYPE] = anObject(O)
-      result = new Empty()
-      Empty[PROTOTYPE] = null // add "__proto__" for Object.getPrototypeOf polyfill
+      EmptyConstructor[PROTOTYPE] = anObject(O)
+      result = new EmptyConstructor()
+      EmptyConstructor[PROTOTYPE] = null // add "__proto__" for Object.getPrototypeOf polyfill
 
       result[IE_PROTO] = O
-    } else result = createDict()
+    } else result = NullProtoObject()
 
     return Properties === undefined
       ? result
       : objectDefineProperties(result, Properties)
   }
-
-hiddenKeys[IE_PROTO] = true
 
 var nativeGetOwnPropertyNames = objectGetOwnPropertyNames.f
 var toString$1 = {}.toString
@@ -1506,7 +1537,10 @@ var ArrayPrototype = Array.prototype // Array.prototype[@@unscopables]
 // https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
 
 if (ArrayPrototype[UNSCOPABLES] == undefined) {
-  createNonEnumerableProperty(ArrayPrototype, UNSCOPABLES, objectCreate(null))
+  objectDefineProperty.f(ArrayPrototype, UNSCOPABLES, {
+    configurable: true,
+    value: objectCreate(null),
+  })
 } // add a key to Array.prototype[@@unscopables]
 
 var addToUnscopables = function(key) {

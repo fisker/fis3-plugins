@@ -273,7 +273,7 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.5.0',
+    version: '3.6.0',
     mode: 'global',
     copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
   })
@@ -633,6 +633,29 @@ var regexpFlags = function() {
   return result
 }
 
+// so we use an intermediate function.
+
+function RE(s, f) {
+  return RegExp(s, f)
+}
+
+var UNSUPPORTED_Y = fails(function() {
+  // babel-minify transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError
+  var re = RE('a', 'y')
+  re.lastIndex = 2
+  return re.exec('abcd') != null
+})
+var BROKEN_CARET = fails(function() {
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=773687
+  var re = RE('^r', 'gy')
+  re.lastIndex = 2
+  return re.exec('str') != null
+})
+var regexpStickyHelpers = {
+  UNSUPPORTED_Y: UNSUPPORTED_Y,
+  BROKEN_CARET: BROKEN_CARET,
+}
+
 var nativeExec = RegExp.prototype.exec // This always refers to the native implementation, because the
 // String#replace polyfill uses ./fix-regexp-well-known-symbol-logic.js,
 // which loads this file before patching the method.
@@ -646,24 +669,61 @@ var UPDATES_LAST_INDEX_WRONG = (function() {
   nativeExec.call(re1, 'a')
   nativeExec.call(re2, 'a')
   return re1.lastIndex !== 0 || re2.lastIndex !== 0
-})() // nonparticipating capturing group, copied from es5-shim's String#split patch.
+})()
+
+var UNSUPPORTED_Y$1 =
+  regexpStickyHelpers.UNSUPPORTED_Y || regexpStickyHelpers.BROKEN_CARET // nonparticipating capturing group, copied from es5-shim's String#split patch.
 
 var NPCG_INCLUDED = /()??/.exec('')[1] !== undefined
-var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED
+var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y$1
 
 if (PATCH) {
   patchedExec = function exec(str) {
     var re = this
     var lastIndex, reCopy, match, i
+    var sticky = UNSUPPORTED_Y$1 && re.sticky
+    var flags = regexpFlags.call(re)
+    var source = re.source
+    var charsAdded = 0
+    var strCopy = str
+
+    if (sticky) {
+      flags = flags.replace('y', '')
+
+      if (flags.indexOf('g') === -1) {
+        flags += 'g'
+      }
+
+      strCopy = String(str).slice(re.lastIndex) // Support anchored sticky behavior.
+
+      if (
+        re.lastIndex > 0 &&
+        (!re.multiline || (re.multiline && str[re.lastIndex - 1] !== '\n'))
+      ) {
+        source = '(?: ' + source + ')'
+        strCopy = ' ' + strCopy
+        charsAdded++
+      } // ^(? + rx + ) is needed, in combination with some str slicing, to
+      // simulate the 'y' flag.
+
+      reCopy = new RegExp('^(?:' + source + ')', flags)
+    }
 
     if (NPCG_INCLUDED) {
-      reCopy = new RegExp('^' + re.source + '$(?!\\s)', regexpFlags.call(re))
+      reCopy = new RegExp('^' + source + '$(?!\\s)', flags)
     }
 
     if (UPDATES_LAST_INDEX_WRONG) lastIndex = re.lastIndex
-    match = nativeExec.call(re, str)
+    match = nativeExec.call(sticky ? reCopy : re, strCopy)
 
-    if (UPDATES_LAST_INDEX_WRONG && match) {
+    if (sticky) {
+      if (match) {
+        match.input = match.input.slice(charsAdded)
+        match[0] = match[0].slice(charsAdded)
+        match.index = re.lastIndex
+        re.lastIndex += match[0].length
+      } else re.lastIndex = 0
+    } else if (UPDATES_LAST_INDEX_WRONG && match) {
       re.lastIndex = re.global ? match.index + match[0].length : lastIndex
     }
 
@@ -737,7 +797,12 @@ var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function() {
   }
 
   return ''.replace(re, '$<a>') !== '7'
-}) // Chrome 51 has a buggy "split" implementation when RegExp#exec !== nativeExec
+}) // IE <= 11 replaces $0 with the whole match, as if it was $&
+// https://stackoverflow.com/questions/6024666/getting-ie-to-replace-a-regex-with-the-literal-string-0
+
+var REPLACE_KEEPS_$0 = (function() {
+  return 'a'.replace(/./, '$0') === '$0'
+})() // Chrome 51 has a buggy "split" implementation when RegExp#exec !== nativeExec
 // Weex JS has frozen built-in prototypes, so use try / catch wrapper
 
 var SPLIT_WORKS_WITH_OVERWRITTEN_EXEC = !fails(function() {
@@ -800,38 +865,40 @@ var fixRegexpWellKnownSymbolLogic = function(KEY, length, exec, sham) {
   if (
     !DELEGATES_TO_SYMBOL ||
     !DELEGATES_TO_EXEC ||
-    (KEY === 'replace' && !REPLACE_SUPPORTS_NAMED_GROUPS) ||
+    (KEY === 'replace' &&
+      !(REPLACE_SUPPORTS_NAMED_GROUPS && REPLACE_KEEPS_$0)) ||
     (KEY === 'split' && !SPLIT_WORKS_WITH_OVERWRITTEN_EXEC)
   ) {
     var nativeRegExpMethod = /./[SYMBOL]
-    var methods = exec(SYMBOL, ''[KEY], function(
-      nativeMethod,
-      regexp,
-      str,
-      arg2,
-      forceStringMethod
-    ) {
-      if (regexp.exec === regexpExec) {
-        if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
-          // The native String method already delegates to @@method (this
-          // polyfilled function), leasing to infinite recursion.
-          // We avoid it by directly calling the native @@method method.
+    var methods = exec(
+      SYMBOL,
+      ''[KEY],
+      function(nativeMethod, regexp, str, arg2, forceStringMethod) {
+        if (regexp.exec === regexpExec) {
+          if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
+            // The native String method already delegates to @@method (this
+            // polyfilled function), leasing to infinite recursion.
+            // We avoid it by directly calling the native @@method method.
+            return {
+              done: true,
+              value: nativeRegExpMethod.call(regexp, str, arg2),
+            }
+          }
+
           return {
             done: true,
-            value: nativeRegExpMethod.call(regexp, str, arg2),
+            value: nativeMethod.call(str, regexp, arg2),
           }
         }
 
         return {
-          done: true,
-          value: nativeMethod.call(str, regexp, arg2),
+          done: false,
         }
+      },
+      {
+        REPLACE_KEEPS_$0: REPLACE_KEEPS_$0,
       }
-
-      return {
-        done: false,
-      }
-    })
+    )
     var stringMethod = methods[0]
     var regexMethod = methods[1]
     redefine(String.prototype, KEY, stringMethod)
@@ -848,9 +915,9 @@ var fixRegexpWellKnownSymbolLogic = function(KEY, length, exec, sham) {
             return regexMethod.call(string, this)
           }
     )
-    if (sham)
-      createNonEnumerableProperty(RegExp.prototype[SYMBOL], 'sham', true)
   }
+
+  if (sham) createNonEnumerableProperty(RegExp.prototype[SYMBOL], 'sham', true)
 }
 
 // https://tc39.github.io/ecma262/#sec-toobject
@@ -935,7 +1002,8 @@ var maybeToString = function(it) {
 fixRegexpWellKnownSymbolLogic('replace', 2, function(
   REPLACE,
   nativeReplace,
-  maybeCallNative
+  maybeCallNative,
+  reason
 ) {
   return [
     // `String.prototype.replace` method
@@ -949,8 +1017,14 @@ fixRegexpWellKnownSymbolLogic('replace', 2, function(
     }, // `RegExp.prototype[@@replace]` method
     // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@replace
     function(regexp, replaceValue) {
-      var res = maybeCallNative(nativeReplace, regexp, this, replaceValue)
-      if (res.done) return res.value
+      if (
+        reason.REPLACE_KEEPS_$0 ||
+        (typeof replaceValue === 'string' && replaceValue.indexOf('$0') === -1)
+      ) {
+        var res = maybeCallNative(nativeReplace, regexp, this, replaceValue)
+        if (res.done) return res.value
+      }
+
       var rx = anObject(regexp)
       var S = String(this)
       var functionalReplace = typeof replaceValue === 'function'
