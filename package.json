@@ -94,7 +94,7 @@
     "@fisker/husky-config": "1.1.5",
     "@fisker/lint-staged-config": "1.0.8",
     "@fisker/prettier-config": "1.0.24",
-    "@rollup/plugin-json": "4.0.0",
+    "@rollup/plugin-json": "4.0.1",
     "@rollup/plugin-node-resolve": "6.0.0",
     "babel-plugin-transform-async-to-promises": "0.8.15",
     "core-js": "3.6.0",
