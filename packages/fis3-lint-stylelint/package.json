@@ -26,7 +26,7 @@
   "main": "index.js",
   "dependencies": {
     "postcss": "7.0.25",
-    "promise-synchronizer": "1.1.6",
+    "promise-synchronizer": "1.1.7",
     "stylelint": "12.0.0"
   },
   "publishConfig": {
