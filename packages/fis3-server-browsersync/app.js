@@ -37,7 +37,7 @@ var commonjsGlobal =
 
 function commonjsRequire() {
   throw new Error(
-    'Dynamic requires are not currently supported by rollup-plugin-commonjs'
+    'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
   )
 }
 
@@ -295,7 +295,7 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.0',
+    version: '3.6.1',
     mode: 'global',
     copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
   })
@@ -710,11 +710,13 @@ var nativeSymbol =
 var useSymbolAsUid =
   nativeSymbol && // eslint-disable-next-line no-undef
   !Symbol.sham && // eslint-disable-next-line no-undef
-  typeof Symbol() == 'symbol'
+  typeof Symbol.iterator == 'symbol'
 
 var WellKnownSymbolsStore = shared('wks')
 var Symbol$1 = global_1.Symbol
-var createWellKnownSymbol = useSymbolAsUid ? Symbol$1 : uid
+var createWellKnownSymbol = useSymbolAsUid
+  ? Symbol$1
+  : (Symbol$1 && Symbol$1.withoutSetter) || uid
 
 var wellKnownSymbol = function(name) {
   if (!has(WellKnownSymbolsStore, name)) {

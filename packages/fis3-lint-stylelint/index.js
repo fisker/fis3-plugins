@@ -273,7 +273,7 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.0',
+    version: '3.6.1',
     mode: 'global',
     copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
   })
@@ -630,7 +630,7 @@ var nativeSymbol =
 var useSymbolAsUid =
   nativeSymbol && // eslint-disable-next-line no-undef
   !Symbol.sham && // eslint-disable-next-line no-undef
-  typeof Symbol() == 'symbol'
+  typeof Symbol.iterator == 'symbol'
 
 // https://tc39.github.io/ecma262/#sec-isarray
 
@@ -784,7 +784,9 @@ var objectGetOwnPropertyNamesExternal = {
 
 var WellKnownSymbolsStore = shared('wks')
 var Symbol$1 = global_1.Symbol
-var createWellKnownSymbol = useSymbolAsUid ? Symbol$1 : uid
+var createWellKnownSymbol = useSymbolAsUid
+  ? Symbol$1
+  : (Symbol$1 && Symbol$1.withoutSetter) || uid
 
 var wellKnownSymbol = function(name) {
   if (!has(WellKnownSymbolsStore, name)) {
@@ -1028,14 +1030,13 @@ var wrap = function(tag, description) {
   return symbol
 }
 
-var isSymbol =
-  nativeSymbol && typeof $Symbol.iterator == 'symbol'
-    ? function(it) {
-        return typeof it == 'symbol'
-      }
-    : function(it) {
-        return Object(it) instanceof $Symbol
-      }
+var isSymbol = useSymbolAsUid
+  ? function(it) {
+      return typeof it == 'symbol'
+    }
+  : function(it) {
+      return Object(it) instanceof $Symbol
+    }
 
 var $defineProperty = function defineProperty(O, P, Attributes) {
   if (O === ObjectPrototype)
@@ -1171,11 +1172,18 @@ if (!nativeSymbol) {
   redefine($Symbol[PROTOTYPE$1], 'toString', function toString() {
     return getInternalState(this).tag
   })
+  redefine($Symbol, 'withoutSetter', function(description) {
+    return wrap(uid(description), description)
+  })
   objectPropertyIsEnumerable.f = $propertyIsEnumerable
   objectDefineProperty.f = $defineProperty
   objectGetOwnPropertyDescriptor.f = $getOwnPropertyDescriptor
   objectGetOwnPropertyNames.f = objectGetOwnPropertyNamesExternal.f = $getOwnPropertyNames
   objectGetOwnPropertySymbols.f = $getOwnPropertySymbols
+
+  wrappedWellKnownSymbol.f = function(name) {
+    return wrap(wellKnownSymbol(name), name)
+  }
 
   if (descriptors) {
     // https://github.com/tc39/proposal-Symbol-description
@@ -1191,12 +1199,6 @@ if (!nativeSymbol) {
         unsafe: true,
       })
     }
-  }
-}
-
-if (!useSymbolAsUid) {
-  wrappedWellKnownSymbol.f = function(name) {
-    return wrap(wellKnownSymbol(name), name)
   }
 }
 
