@@ -42,11 +42,11 @@ var fails = function(exec) {
 
 var descriptors = !fails(function() {
   return (
-    Object.defineProperty({}, 'a', {
+    Object.defineProperty({}, 1, {
       get: function() {
         return 7
       },
-    }).a != 7
+    })[1] != 7
   )
 })
 
@@ -271,9 +271,9 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.1',
+    version: '3.6.2',
     mode: 'global',
-    copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
+    copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
 })
 
@@ -691,7 +691,7 @@ var arraySpeciesCreate = function(originalArray, length) {
   return new (C === undefined ? Array : C)(length === 0 ? 0 : length)
 }
 
-var userAgent = getBuiltIn('navigator', 'userAgent') || ''
+var engineUserAgent = getBuiltIn('navigator', 'userAgent') || ''
 
 var process = global_1.process
 var versions = process && process.versions
@@ -701,16 +701,16 @@ var match, version
 if (v8) {
   match = v8.split('.')
   version = match[0] + match[1]
-} else if (userAgent) {
-  match = userAgent.match(/Edge\/(\d+)/)
+} else if (engineUserAgent) {
+  match = engineUserAgent.match(/Edge\/(\d+)/)
 
   if (!match || match[1] >= 74) {
-    match = userAgent.match(/Chrome\/(\d+)/)
+    match = engineUserAgent.match(/Chrome\/(\d+)/)
     if (match) version = match[1]
   }
 }
 
-var v8Version = version && +version
+var engineV8Version = version && +version
 
 var SPECIES$1 = wellKnownSymbol('species')
 
@@ -719,7 +719,7 @@ var arrayMethodHasSpeciesSupport = function(METHOD_NAME) {
   // deoptimization and serious performance degradation
   // https://github.com/zloirock/core-js/issues/677
   return (
-    v8Version >= 51 ||
+    engineV8Version >= 51 ||
     !fails(function() {
       var array = []
       var constructor = (array.constructor = {})
@@ -742,7 +742,7 @@ var MAXIMUM_ALLOWED_INDEX_EXCEEDED = 'Maximum allowed index exceeded' // We can'
 // https://github.com/zloirock/core-js/issues/679
 
 var IS_CONCAT_SPREADABLE_SUPPORT =
-  v8Version >= 51 ||
+  engineV8Version >= 51 ||
   !fails(function() {
     var array = []
     array[IS_CONCAT_SPREADABLE] = false

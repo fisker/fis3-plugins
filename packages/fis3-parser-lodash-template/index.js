@@ -43,11 +43,11 @@ var fails = function(exec) {
 
 var descriptors = !fails(function() {
   return (
-    Object.defineProperty({}, 'a', {
+    Object.defineProperty({}, 1, {
       get: function() {
         return 7
       },
-    }).a != 7
+    })[1] != 7
   )
 })
 
@@ -272,9 +272,9 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.1',
+    version: '3.6.2',
     mode: 'global',
-    copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
+    copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
 })
 
@@ -626,7 +626,7 @@ var aFunction$1 = function(it) {
   return it
 }
 
-var bindContext = function(fn, that, length) {
+var functionBindContext = function(fn, that, length) {
   aFunction$1(fn)
   if (that === undefined) return fn
 
@@ -733,7 +733,7 @@ var createMethod$1 = function(TYPE) {
   return function($this, callbackfn, that, specificCreate) {
     var O = toObject($this)
     var self = indexedObject(O)
-    var boundFunction = bindContext(callbackfn, that, 3)
+    var boundFunction = functionBindContext(callbackfn, that, 3)
     var length = toLength(self.length)
     var index = 0
     var create = specificCreate || arraySpeciesCreate
@@ -802,7 +802,7 @@ var arrayIteration = {
   findIndex: createMethod$1(6),
 }
 
-var userAgent = getBuiltIn('navigator', 'userAgent') || ''
+var engineUserAgent = getBuiltIn('navigator', 'userAgent') || ''
 
 var process = global_1.process
 var versions = process && process.versions
@@ -812,16 +812,16 @@ var match, version
 if (v8) {
   match = v8.split('.')
   version = match[0] + match[1]
-} else if (userAgent) {
-  match = userAgent.match(/Edge\/(\d+)/)
+} else if (engineUserAgent) {
+  match = engineUserAgent.match(/Edge\/(\d+)/)
 
   if (!match || match[1] >= 74) {
-    match = userAgent.match(/Chrome\/(\d+)/)
+    match = engineUserAgent.match(/Chrome\/(\d+)/)
     if (match) version = match[1]
   }
 }
 
-var v8Version = version && +version
+var engineV8Version = version && +version
 
 var SPECIES$1 = wellKnownSymbol('species')
 
@@ -830,7 +830,7 @@ var arrayMethodHasSpeciesSupport = function(METHOD_NAME) {
   // deoptimization and serious performance degradation
   // https://github.com/zloirock/core-js/issues/677
   return (
-    v8Version >= 51 ||
+    engineV8Version >= 51 ||
     !fails(function() {
       var array = []
       var constructor = (array.constructor = {})
@@ -846,22 +846,47 @@ var arrayMethodHasSpeciesSupport = function(METHOD_NAME) {
   )
 }
 
+var defineProperty = Object.defineProperty
+
+var thrower = function(it) {
+  throw it
+}
+
+var arrayMethodUsesToLength = function(METHOD_NAME, options) {
+  if (!options) options = {}
+  var method = [][METHOD_NAME]
+  var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false
+  var argument0 = has(options, 0) ? options[0] : thrower
+  var argument1 = has(options, 1) ? options[1] : undefined
+  return (
+    !!method &&
+    !fails(function() {
+      if (ACCESSORS && !descriptors) return true
+      var O = {
+        length: -1,
+      }
+
+      var addTrap = function(key) {
+        if (ACCESSORS)
+          defineProperty(O, key, {
+            enumerable: true,
+            get: thrower,
+          })
+        else O[key] = 1
+      }
+
+      addTrap(1)
+      addTrap(2147483646)
+      addTrap(4294967294)
+      method.call(O, argument0, argument1)
+    })
+  )
+}
+
 var $filter = arrayIteration.filter
 var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('filter') // Edge 14- issue
 
-var USES_TO_LENGTH =
-  HAS_SPECIES_SUPPORT &&
-  !fails(function() {
-    ;[].filter.call(
-      {
-        length: -1,
-        0: 1,
-      },
-      function(it) {
-        throw it
-      }
-    )
-  }) // `Array.prototype.filter` method
+var USES_TO_LENGTH = arrayMethodUsesToLength('filter') // `Array.prototype.filter` method
 // https://tc39.github.io/ecma262/#sec-array.prototype.filter
 // with adding support of @@species
 
@@ -885,11 +910,11 @@ _export(
   }
 )
 
-var sloppyArrayMethod = function(METHOD_NAME, argument) {
+var arrayMethodIsStrict = function(METHOD_NAME, argument) {
   var method = [][METHOD_NAME]
   return (
-    !method ||
-    !fails(function() {
+    !!method &&
+    fails(function() {
       // eslint-disable-next-line no-useless-call,no-throw-literal
       method.call(
         null,
@@ -903,21 +928,24 @@ var sloppyArrayMethod = function(METHOD_NAME, argument) {
   )
 }
 
-var $forEach = arrayIteration.forEach // `Array.prototype.forEach` method implementation
+var $forEach = arrayIteration.forEach
+var STRICT_METHOD = arrayMethodIsStrict('forEach')
+var USES_TO_LENGTH$1 = arrayMethodUsesToLength('forEach') // `Array.prototype.forEach` method implementation
 // https://tc39.github.io/ecma262/#sec-array.prototype.foreach
 
-var arrayForEach = sloppyArrayMethod('forEach')
-  ? function forEach(
-      callbackfn
-      /* , thisArg */
-    ) {
-      return $forEach(
-        this,
-        callbackfn,
-        arguments.length > 1 ? arguments[1] : undefined
-      )
-    }
-  : [].forEach
+var arrayForEach =
+  !STRICT_METHOD || !USES_TO_LENGTH$1
+    ? function forEach(
+        callbackfn
+        /* , thisArg */
+      ) {
+        return $forEach(
+          this,
+          callbackfn,
+          arguments.length > 1 ? arguments[1] : undefined
+        )
+      }
+    : [].forEach
 
 // https://tc39.github.io/ecma262/#sec-array.prototype.foreach
 

@@ -44,11 +44,11 @@ var fails = function(exec) {
 
 var descriptors = !fails(function() {
   return (
-    Object.defineProperty({}, 'a', {
+    Object.defineProperty({}, 1, {
       get: function() {
         return 7
       },
-    }).a != 7
+    })[1] != 7
   )
 })
 
@@ -273,9 +273,9 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.1',
+    version: '3.6.2',
     mode: 'global',
-    copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
+    copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
 })
 

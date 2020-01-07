@@ -66,11 +66,11 @@ var fails = function(exec) {
 
 var descriptors = !fails(function() {
   return (
-    Object.defineProperty({}, 'a', {
+    Object.defineProperty({}, 1, {
       get: function() {
         return 7
       },
-    }).a != 7
+    })[1] != 7
   )
 })
 
@@ -295,9 +295,9 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.1',
+    version: '3.6.2',
     mode: 'global',
-    copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
+    copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
 })
 
@@ -641,11 +641,11 @@ var _export = function(options, source) {
     }
 }
 
-var sloppyArrayMethod = function(METHOD_NAME, argument) {
+var arrayMethodIsStrict = function(METHOD_NAME, argument) {
   var method = [][METHOD_NAME]
   return (
-    !method ||
-    !fails(function() {
+    !!method &&
+    fails(function() {
       // eslint-disable-next-line no-useless-call,no-throw-literal
       method.call(
         null,
@@ -661,14 +661,14 @@ var sloppyArrayMethod = function(METHOD_NAME, argument) {
 
 var nativeJoin = [].join
 var ES3_STRINGS = indexedObject != Object
-var SLOPPY_METHOD = sloppyArrayMethod('join', ',') // `Array.prototype.join` method
+var STRICT_METHOD = arrayMethodIsStrict('join', ',') // `Array.prototype.join` method
 // https://tc39.github.io/ecma262/#sec-array.prototype.join
 
 _export(
   {
     target: 'Array',
     proto: true,
-    forced: ES3_STRINGS || SLOPPY_METHOD,
+    forced: ES3_STRINGS || !STRICT_METHOD,
   },
   {
     join: function join(separator) {
@@ -728,7 +728,7 @@ var wellKnownSymbol = function(name) {
   return WellKnownSymbolsStore[name]
 }
 
-var userAgent = getBuiltIn('navigator', 'userAgent') || ''
+var engineUserAgent = getBuiltIn('navigator', 'userAgent') || ''
 
 var process$1 = global_1.process
 var versions = process$1 && process$1.versions
@@ -738,16 +738,16 @@ var match, version
 if (v8) {
   match = v8.split('.')
   version = match[0] + match[1]
-} else if (userAgent) {
-  match = userAgent.match(/Edge\/(\d+)/)
+} else if (engineUserAgent) {
+  match = engineUserAgent.match(/Edge\/(\d+)/)
 
   if (!match || match[1] >= 74) {
-    match = userAgent.match(/Chrome\/(\d+)/)
+    match = engineUserAgent.match(/Chrome\/(\d+)/)
     if (match) version = match[1]
   }
 }
 
-var v8Version = version && +version
+var engineV8Version = version && +version
 
 var SPECIES = wellKnownSymbol('species')
 
@@ -756,7 +756,7 @@ var arrayMethodHasSpeciesSupport = function(METHOD_NAME) {
   // deoptimization and serious performance degradation
   // https://github.com/zloirock/core-js/issues/677
   return (
-    v8Version >= 51 ||
+    engineV8Version >= 51 ||
     !fails(function() {
       var array = []
       var constructor = (array.constructor = {})
@@ -772,6 +772,49 @@ var arrayMethodHasSpeciesSupport = function(METHOD_NAME) {
   )
 }
 
+var defineProperty = Object.defineProperty
+
+var thrower = function(it) {
+  throw it
+}
+
+var arrayMethodUsesToLength = function(METHOD_NAME, options) {
+  if (!options) options = {}
+  var method = [][METHOD_NAME]
+  var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false
+  var argument0 = has(options, 0) ? options[0] : thrower
+  var argument1 = has(options, 1) ? options[1] : undefined
+  return (
+    !!method &&
+    !fails(function() {
+      if (ACCESSORS && !descriptors) return true
+      var O = {
+        length: -1,
+      }
+
+      var addTrap = function(key) {
+        if (ACCESSORS)
+          defineProperty(O, key, {
+            enumerable: true,
+            get: thrower,
+          })
+        else O[key] = 1
+      }
+
+      addTrap(1)
+      addTrap(2147483646)
+      addTrap(4294967294)
+      method.call(O, argument0, argument1)
+    })
+  )
+}
+
+var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('slice')
+var USES_TO_LENGTH = arrayMethodUsesToLength('slice', {
+  ACCESSORS: true,
+  0: 0,
+  1: 2,
+})
 var SPECIES$1 = wellKnownSymbol('species')
 var nativeSlice = [].slice
 var max$1 = Math.max // `Array.prototype.slice` method
@@ -782,7 +825,7 @@ _export(
   {
     target: 'Array',
     proto: true,
-    forced: !arrayMethodHasSpeciesSupport('slice'),
+    forced: !HAS_SPECIES_SUPPORT || !USES_TO_LENGTH,
   },
   {
     slice: function slice(start, end) {
@@ -2087,14 +2130,18 @@ var arrayReduce = {
   right: createMethod$2(true),
 }
 
-var $reduceRight = arrayReduce.right // `Array.prototype.reduceRight` method
+var $reduceRight = arrayReduce.right
+var STRICT_METHOD$1 = arrayMethodIsStrict('reduceRight')
+var USES_TO_LENGTH$1 = arrayMethodUsesToLength('reduceRight', {
+  1: 0,
+}) // `Array.prototype.reduceRight` method
 // https://tc39.github.io/ecma262/#sec-array.prototype.reduceright
 
 _export(
   {
     target: 'Array',
     proto: true,
-    forced: sloppyArrayMethod('reduceRight'),
+    forced: !STRICT_METHOD$1 || !USES_TO_LENGTH$1,
   },
   {
     reduceRight: function reduceRight(

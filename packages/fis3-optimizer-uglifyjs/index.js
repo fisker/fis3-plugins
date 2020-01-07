@@ -38,11 +38,11 @@ var fails = function(exec) {
 
 var descriptors = !fails(function() {
   return (
-    Object.defineProperty({}, 'a', {
+    Object.defineProperty({}, 1, {
       get: function() {
         return 7
       },
-    }).a != 7
+    })[1] != 7
   )
 })
 
@@ -267,9 +267,9 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.1',
+    version: '3.6.2',
     mode: 'global',
-    copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
+    copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
 })
 
@@ -687,7 +687,7 @@ var arraySpeciesCreate = function(originalArray, length) {
   return new (C === undefined ? Array : C)(length === 0 ? 0 : length)
 }
 
-var userAgent = getBuiltIn('navigator', 'userAgent') || ''
+var engineUserAgent = getBuiltIn('navigator', 'userAgent') || ''
 
 var process = global_1.process
 var versions = process && process.versions
@@ -697,16 +697,16 @@ var match, version
 if (v8) {
   match = v8.split('.')
   version = match[0] + match[1]
-} else if (userAgent) {
-  match = userAgent.match(/Edge\/(\d+)/)
+} else if (engineUserAgent) {
+  match = engineUserAgent.match(/Edge\/(\d+)/)
 
   if (!match || match[1] >= 74) {
-    match = userAgent.match(/Chrome\/(\d+)/)
+    match = engineUserAgent.match(/Chrome\/(\d+)/)
     if (match) version = match[1]
   }
 }
 
-var v8Version = version && +version
+var engineV8Version = version && +version
 
 var SPECIES$1 = wellKnownSymbol('species')
 
@@ -715,7 +715,7 @@ var arrayMethodHasSpeciesSupport = function(METHOD_NAME) {
   // deoptimization and serious performance degradation
   // https://github.com/zloirock/core-js/issues/677
   return (
-    v8Version >= 51 ||
+    engineV8Version >= 51 ||
     !fails(function() {
       var array = []
       var constructor = (array.constructor = {})
@@ -738,7 +738,7 @@ var MAXIMUM_ALLOWED_INDEX_EXCEEDED = 'Maximum allowed index exceeded' // We can'
 // https://github.com/zloirock/core-js/issues/679
 
 var IS_CONCAT_SPREADABLE_SUPPORT =
-  v8Version >= 51 ||
+  engineV8Version >= 51 ||
   !fails(function() {
     var array = []
     array[IS_CONCAT_SPREADABLE] = false
@@ -800,7 +800,7 @@ var aFunction$1 = function(it) {
   return it
 }
 
-var bindContext = function(fn, that, length) {
+var functionBindContext = function(fn, that, length) {
   aFunction$1(fn)
   if (that === undefined) return fn
 
@@ -844,7 +844,7 @@ var createMethod$1 = function(TYPE) {
   return function($this, callbackfn, that, specificCreate) {
     var O = toObject($this)
     var self = indexedObject(O)
-    var boundFunction = bindContext(callbackfn, that, 3)
+    var boundFunction = functionBindContext(callbackfn, that, 3)
     var length = toLength(self.length)
     var index = 0
     var create = specificCreate || arraySpeciesCreate
@@ -913,22 +913,47 @@ var arrayIteration = {
   findIndex: createMethod$1(6),
 }
 
+var defineProperty = Object.defineProperty
+
+var thrower = function(it) {
+  throw it
+}
+
+var arrayMethodUsesToLength = function(METHOD_NAME, options) {
+  if (!options) options = {}
+  var method = [][METHOD_NAME]
+  var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false
+  var argument0 = has(options, 0) ? options[0] : thrower
+  var argument1 = has(options, 1) ? options[1] : undefined
+  return (
+    !!method &&
+    !fails(function() {
+      if (ACCESSORS && !descriptors) return true
+      var O = {
+        length: -1,
+      }
+
+      var addTrap = function(key) {
+        if (ACCESSORS)
+          defineProperty(O, key, {
+            enumerable: true,
+            get: thrower,
+          })
+        else O[key] = 1
+      }
+
+      addTrap(1)
+      addTrap(2147483646)
+      addTrap(4294967294)
+      method.call(O, argument0, argument1)
+    })
+  )
+}
+
 var $map = arrayIteration.map
 var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('map') // FF49- issue
 
-var USES_TO_LENGTH =
-  HAS_SPECIES_SUPPORT &&
-  !fails(function() {
-    ;[].map.call(
-      {
-        length: -1,
-        0: 1,
-      },
-      function(it) {
-        throw it
-      }
-    )
-  }) // `Array.prototype.map` method
+var USES_TO_LENGTH = arrayMethodUsesToLength('map') // `Array.prototype.map` method
 // https://tc39.github.io/ecma262/#sec-array.prototype.map
 // with adding support of @@species
 

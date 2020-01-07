@@ -44,11 +44,11 @@ var fails = function(exec) {
 
 var descriptors = !fails(function() {
   return (
-    Object.defineProperty({}, 'a', {
+    Object.defineProperty({}, 1, {
       get: function() {
         return 7
       },
-    }).a != 7
+    })[1] != 7
   )
 })
 
@@ -177,9 +177,9 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.1',
+    version: '3.6.2',
     mode: 'global',
-    copyright: '© 2019 Denis Pushkarev (zloirock.ru)',
+    copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
 })
 
@@ -767,7 +767,7 @@ var isArrayIteratorMethod = function(it) {
   )
 }
 
-var bindContext = function(fn, that, length) {
+var functionBindContext = function(fn, that, length) {
   aFunction$1(fn)
   if (that === undefined) return fn
 
@@ -829,7 +829,7 @@ var iterate_1 = createCommonjsModule(function(module) {
     AS_ENTRIES,
     IS_ITERATOR
   ) {
-    var boundFunction = bindContext(fn, that, AS_ENTRIES ? 2 : 1)
+    var boundFunction = functionBindContext(fn, that, AS_ENTRIES ? 2 : 1)
     var iterator, iterFn, index, length, result, next, step
 
     if (IS_ITERATOR) {
@@ -942,9 +942,9 @@ var speciesConstructor = function(O, defaultConstructor) {
 
 var html = getBuiltIn('document', 'documentElement')
 
-var userAgent = getBuiltIn('navigator', 'userAgent') || ''
+var engineUserAgent = getBuiltIn('navigator', 'userAgent') || ''
 
-var isIos = /(iphone|ipod|ipad).*applewebkit/i.test(userAgent)
+var engineIsIos = /(iphone|ipod|ipad).*applewebkit/i.test(engineUserAgent)
 
 var location = global_1.location
 var set$1 = global_1.setImmediate
@@ -1010,11 +1010,11 @@ if (!set$1 || !clear) {
       Dispatch.now(runner(id))
     } // Browsers with MessageChannel, includes WebWorkers
     // except iOS - https://github.com/zloirock/core-js/issues/624
-  } else if (MessageChannel && !isIos) {
+  } else if (MessageChannel && !engineIsIos) {
     channel = new MessageChannel()
     port = channel.port2
     channel.port1.onmessage = listener
-    defer = bindContext(port.postMessage, port, 1) // Browsers with postMessage, skip WebWorkers
+    defer = functionBindContext(port.postMessage, port, 1) // Browsers with postMessage, skip WebWorkers
     // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
   } else if (
     global_1.addEventListener &&
@@ -1086,7 +1086,7 @@ if (!queueMicrotask) {
     notify = function() {
       process$1.nextTick(flush)
     } // browsers with MutationObserver, except iOS - https://github.com/zloirock/core-js/issues/339
-  } else if (MutationObserver && !isIos) {
+  } else if (MutationObserver && !engineIsIos) {
     toggle = true
     node = document.createTextNode('')
     new MutationObserver(flush).observe(node, {
@@ -1193,16 +1193,16 @@ var match, version
 if (v8) {
   match = v8.split('.')
   version = match[0] + match[1]
-} else if (userAgent) {
-  match = userAgent.match(/Edge\/(\d+)/)
+} else if (engineUserAgent) {
+  match = engineUserAgent.match(/Edge\/(\d+)/)
 
   if (!match || match[1] >= 74) {
-    match = userAgent.match(/Chrome\/(\d+)/)
+    match = engineUserAgent.match(/Chrome\/(\d+)/)
     if (match) version = match[1]
   }
 }
 
-var v8Version = version && +version
+var engineV8Version = version && +version
 
 var task$1 = task.set
 var SPECIES$2 = wellKnownSymbol('species')
@@ -1239,14 +1239,15 @@ var FORCED = isForced_1(PROMISE, function() {
     // V8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
     // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
     // We can't detect it synchronously, so just check versions
-    if (v8Version === 66) return true // Unhandled rejections tracking support, NodeJS Promise without it fails @@species test
+    if (engineV8Version === 66) return true // Unhandled rejections tracking support, NodeJS Promise without it fails @@species test
 
     if (!IS_NODE$1 && typeof PromiseRejectionEvent != 'function') return true
   } // We need Promise#finally in the pure version for preventing prototype pollution
   // deoptimization and performance degradation
   // https://github.com/zloirock/core-js/issues/679
 
-  if (v8Version >= 51 && /native code/.test(PromiseConstructor)) return false // Detect correctness of subclassing with @@species support
+  if (engineV8Version >= 51 && /native code/.test(PromiseConstructor))
+    return false // Detect correctness of subclassing with @@species support
 
   var promise = PromiseConstructor.resolve(1)
 
