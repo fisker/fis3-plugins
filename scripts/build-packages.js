@@ -21,10 +21,12 @@ new Listr([
       )
       const render = template(templateFile)
 
-      writePrettierFile(
+      return writePrettierFile(
         join(__dirname, '..', 'packages', 'readme.md'),
         render({packages}).trim()
       )
     },
   },
-]).run()
+])
+  .run()
+  .catch(() => process.exit(1))
