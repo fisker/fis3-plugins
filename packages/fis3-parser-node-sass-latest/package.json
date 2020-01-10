@@ -1,6 +1,6 @@
 {
   "name": "fis3-parser-node-sass-latest",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "A fis plugin to parse sass with latest node-sass.",
   "keywords": [
     "fis",
