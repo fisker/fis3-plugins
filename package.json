@@ -67,7 +67,7 @@
     "lodash": "4.17.15",
     "lodash.merge": "4.6.2",
     "morgan": "1.9.1",
-    "node-sass": "4.13.0",
+    "node-sass": "4.13.1",
     "postcss": "7.0.26",
     "postcss-load-config": "2.1.0",
     "posthtml": "0.12.0",
