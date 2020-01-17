@@ -27,7 +27,7 @@
   "main": "index.js",
   "dependencies": {
     "fast-cartesian-product": "1.0.2",
-    "sass": "1.24.5"
+    "sass": "1.25.0"
   },
   "publishConfig": {
     "access": "public",
