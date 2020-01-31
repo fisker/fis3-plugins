@@ -23,10 +23,10 @@
     "email": "lionkay@gmail.com",
     "url": "https://www.fiskercheung.com/"
   },
+  "main": "index.js",
   "files": [
     "index.js"
   ],
-  "main": "index.js",
   "dependencies": {
     "js-beautify": "1.10.3"
   },
