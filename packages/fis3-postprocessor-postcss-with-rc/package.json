@@ -20,10 +20,10 @@
     "email": "lionkay@gmail.com",
     "url": "https://www.fiskercheung.com/"
   },
+  "main": "index.js",
   "files": [
     "index.js"
   ],
-  "main": "index.js",
   "dependencies": {
     "postcss": "7.0.26",
     "postcss-load-config": "2.1.0",
