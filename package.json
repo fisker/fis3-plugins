@@ -95,7 +95,7 @@
     "@fisker/lint-staged-config": "1.0.11",
     "@fisker/prettier-config": "1.0.27",
     "@rollup/plugin-commonjs": "11.0.1",
-    "@rollup/plugin-json": "4.0.1",
+    "@rollup/plugin-json": "4.0.2",
     "@rollup/plugin-node-resolve": "7.0.0",
     "babel-plugin-transform-async-to-promises": "0.8.15",
     "core-js": "3.6.4",
