@@ -13,29 +13,31 @@ jobs:
   #   strategy:
   #     fail-fast: false
   #     matrix:
-  #       PLATFORM:
+  #       os:
   #         - "ubuntu-latest"
-  #         # - "macos-latest"
-  #         # - "windows-latest"
-  #       NODE:
-  #         # - "13"
+  #         - "macos-latest"
+  #         - "windows-latest"
+  #       node_version:
+  #         - "13"
   #         - "12"
-  #         # - "10"
+  #         - "10"
   #       # exclude:
-  #       #   - PLATFORM: "macos-latest"
-  #       #     NODE: "12"
+  #       #   - os: "macos-latest"
+  #       #     node_version: "12"
 
-  #   name: Test on node ${{ matrix.NODE }} and ${{ matrix.PLATFORM }}
-  #   runs-on: ${{ matrix.PLATFORM }}
+  #   name: Node.js ${{ matrix.node_version }} on ${{ matrix.os }}
+  #   runs-on: ${{ matrix.os }}
   #   # needs: [build]
   #   steps:
   #     - name: Checkout
   #       uses: actions/checkout@master
+  #       with:
+  #         depth: 1
 
   #     - name: Setup Node.js
   #       uses: actions/setup-node@master
   #       with:
-  #         node-version: ${{ matrix.NODE }}
+  #         node-version: ${{ matrix.node_version }}
 
   #     - name: Install Dependencies
   #       run: yarn
@@ -54,7 +56,19 @@ jobs:
   #       if: success()
   #       continue-on-error: true
   #       with:
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
+  #         github-token: ${{ secrets.github_token }}
+  #         parallel: true
+
+  # coverage:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Sending webhook to Coveralls
+  #       uses: coverallsapp/github-action@master
+  #       continue-on-error: true
+  #       with:
+  #         github-token: ${{ secrets.github_token }}
+  #         parallel-finished: true
 
   lint:
     name: Lint
