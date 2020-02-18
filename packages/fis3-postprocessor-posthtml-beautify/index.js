@@ -273,7 +273,7 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.2',
+    version: '3.6.4',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -804,6 +804,16 @@ var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function() {
 
 var REPLACE_KEEPS_$0 = (function() {
   return 'a'.replace(/./, '$0') === '$0'
+})()
+
+var REPLACE = wellKnownSymbol('replace') // Safari <= 13.0.3(?) substitutes nth capture where n>m with an empty string
+
+var REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE = (function() {
+  if (/./[REPLACE]) {
+    return /./[REPLACE]('a', '$0') === ''
+  }
+
+  return false
 })() // Chrome 51 has a buggy "split" implementation when RegExp#exec !== nativeExec
 // Weex JS has frozen built-in prototypes, so use try / catch wrapper
 
@@ -868,7 +878,11 @@ var fixRegexpWellKnownSymbolLogic = function(KEY, length, exec, sham) {
     !DELEGATES_TO_SYMBOL ||
     !DELEGATES_TO_EXEC ||
     (KEY === 'replace' &&
-      !(REPLACE_SUPPORTS_NAMED_GROUPS && REPLACE_KEEPS_$0)) ||
+      !(
+        REPLACE_SUPPORTS_NAMED_GROUPS &&
+        REPLACE_KEEPS_$0 &&
+        !REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE
+      )) ||
     (KEY === 'split' && !SPLIT_WORKS_WITH_OVERWRITTEN_EXEC)
   ) {
     var nativeRegExpMethod = /./[SYMBOL]
@@ -899,6 +913,7 @@ var fixRegexpWellKnownSymbolLogic = function(KEY, length, exec, sham) {
       },
       {
         REPLACE_KEEPS_$0: REPLACE_KEEPS_$0,
+        REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE: REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE,
       }
     )
     var stringMethod = methods[0]
@@ -1007,6 +1022,12 @@ fixRegexpWellKnownSymbolLogic('replace', 2, function(
   maybeCallNative,
   reason
 ) {
+  var REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE =
+    reason.REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE
+  var REPLACE_KEEPS_$0 = reason.REPLACE_KEEPS_$0
+  var UNSAFE_SUBSTITUTE = REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE
+    ? '$'
+    : '$0'
   return [
     // `String.prototype.replace` method
     // https://tc39.github.io/ecma262/#sec-string.prototype.replace
@@ -1020,8 +1041,9 @@ fixRegexpWellKnownSymbolLogic('replace', 2, function(
     // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@replace
     function(regexp, replaceValue) {
       if (
-        reason.REPLACE_KEEPS_$0 ||
-        (typeof replaceValue === 'string' && replaceValue.indexOf('$0') === -1)
+        (!REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE && REPLACE_KEEPS_$0) ||
+        (typeof replaceValue === 'string' &&
+          replaceValue.indexOf(UNSAFE_SUBSTITUTE) === -1)
       ) {
         var res = maybeCallNative(nativeReplace, regexp, this, replaceValue)
         if (res.done) return res.value

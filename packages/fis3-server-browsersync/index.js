@@ -276,7 +276,7 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.2',
+    version: '3.6.4',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -778,40 +778,34 @@ var addToUnscopables = function(key) {
 }
 
 var defineProperty = Object.defineProperty
+var cache = {}
 
 var thrower = function(it) {
   throw it
 }
 
 var arrayMethodUsesToLength = function(METHOD_NAME, options) {
+  if (has(cache, METHOD_NAME)) return cache[METHOD_NAME]
   if (!options) options = {}
   var method = [][METHOD_NAME]
   var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false
   var argument0 = has(options, 0) ? options[0] : thrower
   var argument1 = has(options, 1) ? options[1] : undefined
-  return (
+  return (cache[METHOD_NAME] =
     !!method &&
     !fails(function() {
       if (ACCESSORS && !descriptors) return true
       var O = {
         length: -1,
       }
-
-      var addTrap = function(key) {
-        if (ACCESSORS)
-          defineProperty(O, key, {
-            enumerable: true,
-            get: thrower,
-          })
-        else O[key] = 1
-      }
-
-      addTrap(1)
-      addTrap(2147483646)
-      addTrap(4294967294)
+      if (ACCESSORS)
+        defineProperty(O, 1, {
+          enumerable: true,
+          get: thrower,
+        })
+      else O[1] = 1
       method.call(O, argument0, argument1)
-    })
-  )
+    }))
 }
 
 var $includes = arrayIncludes.includes
@@ -881,21 +875,6 @@ _export(
     },
   }
 )
-
-var DatePrototype = Date.prototype
-var INVALID_DATE = 'Invalid Date'
-var TO_STRING = 'toString'
-var nativeDateToString = DatePrototype[TO_STRING]
-var getTime = DatePrototype.getTime // `Date.prototype.toString` method
-// https://tc39.github.io/ecma262/#sec-date.prototype.tostring
-
-if (new Date(NaN) + '' != INVALID_DATE) {
-  redefine(DatePrototype, TO_STRING, function toString() {
-    var value = getTime.call(this) // eslint-disable-next-line no-self-compare
-
-    return value === value ? nativeDateToString.call(this) : INVALID_DATE
-  })
-}
 
 var TO_STRING_TAG = wellKnownSymbol('toStringTag')
 var test = {}
@@ -1087,9 +1066,9 @@ _export(
   }
 )
 
-var TO_STRING$1 = 'toString'
+var TO_STRING = 'toString'
 var RegExpPrototype = RegExp.prototype
-var nativeToString = RegExpPrototype[TO_STRING$1]
+var nativeToString = RegExpPrototype[TO_STRING]
 var NOT_GENERIC = fails(function() {
   return (
     nativeToString.call({
@@ -1099,13 +1078,13 @@ var NOT_GENERIC = fails(function() {
   )
 }) // FF44- RegExp#toString has a wrong name
 
-var INCORRECT_NAME = nativeToString.name != TO_STRING$1 // `RegExp.prototype.toString` method
+var INCORRECT_NAME = nativeToString.name != TO_STRING // `RegExp.prototype.toString` method
 // https://tc39.github.io/ecma262/#sec-regexp.prototype.tostring
 
 if (NOT_GENERIC || INCORRECT_NAME) {
   redefine(
     RegExp.prototype,
-    TO_STRING$1,
+    TO_STRING,
     function toString() {
       var R = anObject(this)
       var p = String(R.source)
@@ -1205,6 +1184,16 @@ var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function() {
 
 var REPLACE_KEEPS_$0 = (function() {
   return 'a'.replace(/./, '$0') === '$0'
+})()
+
+var REPLACE = wellKnownSymbol('replace') // Safari <= 13.0.3(?) substitutes nth capture where n>m with an empty string
+
+var REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE = (function() {
+  if (/./[REPLACE]) {
+    return /./[REPLACE]('a', '$0') === ''
+  }
+
+  return false
 })() // Chrome 51 has a buggy "split" implementation when RegExp#exec !== nativeExec
 // Weex JS has frozen built-in prototypes, so use try / catch wrapper
 
@@ -1269,7 +1258,11 @@ var fixRegexpWellKnownSymbolLogic = function(KEY, length, exec, sham) {
     !DELEGATES_TO_SYMBOL ||
     !DELEGATES_TO_EXEC ||
     (KEY === 'replace' &&
-      !(REPLACE_SUPPORTS_NAMED_GROUPS && REPLACE_KEEPS_$0)) ||
+      !(
+        REPLACE_SUPPORTS_NAMED_GROUPS &&
+        REPLACE_KEEPS_$0 &&
+        !REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE
+      )) ||
     (KEY === 'split' && !SPLIT_WORKS_WITH_OVERWRITTEN_EXEC)
   ) {
     var nativeRegExpMethod = /./[SYMBOL]
@@ -1300,6 +1293,7 @@ var fixRegexpWellKnownSymbolLogic = function(KEY, length, exec, sham) {
       },
       {
         REPLACE_KEEPS_$0: REPLACE_KEEPS_$0,
+        REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE: REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE,
       }
     )
     var stringMethod = methods[0]

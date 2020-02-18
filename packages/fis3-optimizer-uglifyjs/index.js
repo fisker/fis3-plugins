@@ -267,7 +267,7 @@ var shared = createCommonjsModule(function(module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.2',
+    version: '3.6.4',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -914,40 +914,34 @@ var arrayIteration = {
 }
 
 var defineProperty = Object.defineProperty
+var cache = {}
 
 var thrower = function(it) {
   throw it
 }
 
 var arrayMethodUsesToLength = function(METHOD_NAME, options) {
+  if (has(cache, METHOD_NAME)) return cache[METHOD_NAME]
   if (!options) options = {}
   var method = [][METHOD_NAME]
   var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false
   var argument0 = has(options, 0) ? options[0] : thrower
   var argument1 = has(options, 1) ? options[1] : undefined
-  return (
+  return (cache[METHOD_NAME] =
     !!method &&
     !fails(function() {
       if (ACCESSORS && !descriptors) return true
       var O = {
         length: -1,
       }
-
-      var addTrap = function(key) {
-        if (ACCESSORS)
-          defineProperty(O, key, {
-            enumerable: true,
-            get: thrower,
-          })
-        else O[key] = 1
-      }
-
-      addTrap(1)
-      addTrap(2147483646)
-      addTrap(4294967294)
+      if (ACCESSORS)
+        defineProperty(O, 1, {
+          enumerable: true,
+          get: thrower,
+        })
+      else O[1] = 1
       method.call(O, argument0, argument1)
-    })
-  )
+    }))
 }
 
 var $map = arrayIteration.map
