@@ -119,7 +119,7 @@
     "rollup-plugin-prettier": "0.6.0",
     "sort-object-keys": "1.1.3",
     "sort-package-json": "1.40.0",
-    "write-prettier-file": "1.2.5"
+    "write-prettier-file": "1.2.6"
   },
   "publishConfig": {
     "access": "public",
