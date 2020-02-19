@@ -18,6 +18,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-posthtml-beautify",
+  "funding": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-postprocessor-posthtml-beautify?sponsor=1",
   "license": "MIT",
   "author": {
     "name": "fisker Cheung",

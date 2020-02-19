@@ -16,6 +16,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-node-sass-latest",
+  "funding": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-parser-node-sass-latest?sponsor=1",
   "license": "MIT",
   "author": {
     "name": "fisker Cheung",

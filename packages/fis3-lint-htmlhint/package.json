@@ -15,6 +15,7 @@
     "url": "https://github.com/fisker/fis3-plugins/issues"
   },
   "repository": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-htmlhint",
+  "funding": "https://github.com/fisker/fis3-plugins/tree/master/packages/fis3-lint-htmlhint?sponsor=1",
   "license": "MIT",
   "author": {
     "name": "fisker Cheung",

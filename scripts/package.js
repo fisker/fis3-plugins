@@ -97,9 +97,12 @@ class Package {
       )
     )
 
-    let {repository} = globalPackage
+    let {repository, funding} = globalPackage
 
     if (typeof repository === 'string') {
+      if (repository.split('/').length === 2) {
+        repository = `https://github.com/${repository}`
+      }
       repository += `/tree/master/packages/${info.name}`
     } else {
       repository = {
@@ -107,6 +110,11 @@ class Package {
         url: `${repository.url}/tree/master/packages/${info.name}`,
       }
     }
+
+    funding = funding.replace(
+      '?sponsor=1',
+      `/tree/master/packages/${info.name}?sponsor=1`
+    )
 
     const package_ = _.assign(
       _.pick(globalPackage, [
@@ -119,6 +127,7 @@ class Package {
       _.pick(info, ['name', 'description', 'dependencies']),
       {
         repository,
+        funding,
         keywords: _.uniq(keywords.sort()),
         scripts: info.scripts,
         files: _.uniq(files.concat(info.files).sort()),
