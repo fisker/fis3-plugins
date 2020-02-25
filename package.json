@@ -107,7 +107,7 @@
     "husky": "4.2.3",
     "latest-version": "5.1.0",
     "lerna": "3.20.2",
-    "lint-staged": "10.0.7",
+    "lint-staged": "10.0.8",
     "listr": "0.14.3",
     "make-dir": "3.0.2",
     "markdownlint-cli": "0.22.0",
