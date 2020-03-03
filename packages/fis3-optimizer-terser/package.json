@@ -28,7 +28,7 @@
     "index.js"
   ],
   "dependencies": {
-    "terser": "4.6.4"
+    "terser": "4.6.5"
   },
   "publishConfig": {
     "access": "public",
