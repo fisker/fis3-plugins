@@ -80,7 +80,7 @@
     "serve-directory": "3.1.4",
     "serve-directory-theme-octicons": "2.0.1",
     "standard": "14.3.1",
-    "stylelint": "13.2.0",
+    "stylelint": "13.2.1",
     "terser": "4.6.6",
     "uglify-js": "3.8.0",
     "yargs": "15.3.0",
