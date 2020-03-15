@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "eslint": "6.8.0",
-    "standard": "14.3.2"
+    "standard": "14.3.3"
   },
   "publishConfig": {
     "access": "public",
