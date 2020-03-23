@@ -23,7 +23,7 @@ function process(content, file, config) {
       })
     )
     .process(content)
-    .then(function(data) {
+    .then(function (data) {
       return data.html
     })
 

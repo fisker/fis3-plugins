@@ -50,7 +50,7 @@ function process(content, file, config) {
   const results = HTMLHint.verify(content, ruleset)
   let errorType = 'warning'
 
-  results.forEach(function(message) {
+  results.forEach(function (message) {
     if (message.type === 'error') {
       errorType = 'error'
     }

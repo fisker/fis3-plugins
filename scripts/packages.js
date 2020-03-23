@@ -15,7 +15,7 @@ const pluginTypes = [
   'command',
 ]
 
-const packages = pluginTypes.map(type => {
+const packages = pluginTypes.map((type) => {
   let directory
   try {
     directory = fs.readdirSync(path.join(SOURCE_DIR, 'packages', type))
@@ -23,7 +23,7 @@ const packages = pluginTypes.map(type => {
     return []
   }
 
-  return directory.map(name => new Package(type, name))
+  return directory.map((name) => new Package(type, name))
 })
 
 export default packages.reduce((all, packages) => [...all, ...packages], [])

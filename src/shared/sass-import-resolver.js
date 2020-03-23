@@ -2,13 +2,13 @@ import {join, isAbsolute, dirname, basename, normalize, extname} from 'path'
 import {readFileSync} from 'fs'
 import cartesianProduct from 'fast-cartesian-product'
 
-const isPartial = file => file[0] === '_'
-const extensions = ['scss', 'css', 'sass'].map(extension => `.${extension}`)
-const hasExtension = file => extensions.includes(extname(file))
-const unique = array => [...new Set(array)]
+const isPartial = (file) => file[0] === '_'
+const extensions = ['scss', 'css', 'sass'].map((extension) => `.${extension}`)
+const hasExtension = (file) => extensions.includes(extname(file))
+const unique = (array) => [...new Set(array)]
 
 function getDirectories(directories, file) {
-  directories = directories.map(directory => join(directory, file))
+  directories = directories.map((directory) => join(directory, file))
 
   if (isAbsolute(file)) {
     directories.push(file)
@@ -46,7 +46,7 @@ function getFiles(directories, file) {
 }
 
 function resolveInDirectories({includePaths, cache = {}, alias = {}}) {
-  return function(file, previous) {
+  return function (file, previous) {
     const cacheKey = `${normalize(previous)}|${file}`
 
     if (cache[cacheKey]) {
@@ -78,7 +78,7 @@ function resolveInDirectories({includePaths, cache = {}, alias = {}}) {
     }
 
     const results = files
-      .map(file => {
+      .map((file) => {
         try {
           return {
             file,

@@ -39,7 +39,7 @@ function process(content, file, config_) {
 
   const promise = postcss([stylelint])
     .process(content, config)
-    .then(function(result) {
+    .then(function (result) {
       const messages = result.messages || []
       const errorMessage = []
       const warnMessage = []

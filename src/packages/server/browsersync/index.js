@@ -42,7 +42,7 @@ function watchOnFile(file, callback) {
   }
 
   read()
-  return function() {
+  return function () {
     clearTimeout(timer)
   }
 }
@@ -149,7 +149,7 @@ function start(opt, callback) {
     util.pid(server.pid) // save pid to file.
     server.unref()
 
-    timeoutTimer = setTimeout(function() {
+    timeoutTimer = setTimeout(function () {
       process.stdout.write(' fail\n')
       if (log) {
         console.log(log)

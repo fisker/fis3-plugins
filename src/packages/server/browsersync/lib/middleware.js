@@ -21,15 +21,15 @@ function mock(root) {
     data_path: [path.join(root, 'test'), path.join(root, 'mock')],
   }
 
-  return function(request, response, next) {
+  return function (request, response, next) {
     ;[
       ydRewrite(options),
       bodyParser.urlencoded({extended: false}),
       bodyParser.json(),
       ydPreview(options),
       ydScript(options),
-    ].reduceRight(function(next, middlewave) {
-      return function() {
+    ].reduceRight(function (next, middlewave) {
+      return function () {
         middlewave(request, response, next)
       }
     }, next)()
@@ -37,7 +37,7 @@ function mock(root) {
 }
 
 function getMiddleware(name, handler) {
-  return function(...arguments_) {
+  return function (...arguments_) {
     return {
       route: '',
       handle: handler(...arguments_),

@@ -22,7 +22,7 @@ function logEvent(event, path) {
 }
 
 function onInit(config) {
-  return function() {
+  return function () {
     console.log(
       'Listening on %s://127.0.0.1:%d',
       config.https ? 'https' : 'http',
@@ -32,7 +32,7 @@ function onInit(config) {
 }
 
 function watch(bs, root) {
-  return function(event, file) {
+  return function (event, file) {
     const relativePath = path.relative(root, file)
     if (
       !relativePath ||
@@ -47,7 +47,7 @@ function watch(bs, root) {
 }
 
 function signalTerminate(bs) {
-  process.on('SIGTERM', function() {
+  process.on('SIGTERM', function () {
     console.log('Recive quit signal in worker %s.', process.pid)
     bs.exit()
   })

@@ -11,16 +11,16 @@ const re = /^[./\\]/i
 
 function cleanRequireCache() {
   Object.keys(require.cache)
-    .filter(function(id) {
+    .filter(function (id) {
       return path.normalize(id).startsWith(root)
     })
-    .forEach(function(id) {
+    .forEach(function (id) {
       delete require.cache[id]
     })
 }
 
 function makeRequireFunction(context) {
-  return function(module_) {
+  return function (module_) {
     cleanRequireCache()
 
     if (re.test(module_)) {

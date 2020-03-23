@@ -25,13 +25,13 @@ const links = {
   fis3: 'http://fis.baidu.com/',
 }
 
-const template = _.memoize(function(file) {
+const template = _.memoize(function (file) {
   return _.template(readFile(path.join(SOURCE_DIR, 'templates', file)))
 })
 
 function parseDependencies(pkgs) {
   const dependencies = {}
-  _.forEach(pkgs || [], function(package_) {
+  _.forEach(pkgs || [], function (package_) {
     const packageArray = package_.split('@')
     let packageName
     let packageVersion
@@ -181,7 +181,7 @@ class Package {
 
   async build() {
     await Promise.all(
-      ['index.js', ...this.info.files].map(file => this.copyFile(file))
+      ['index.js', ...this.info.files].map((file) => this.copyFile(file))
     )
 
     this.writeFile('readme.md', template('readme.ejs')(this))
