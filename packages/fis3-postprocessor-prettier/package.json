@@ -28,7 +28,7 @@
     "index.js"
   ],
   "dependencies": {
-    "prettier": "2.0.1"
+    "prettier": "2.0.2"
   },
   "publishConfig": {
     "access": "public",
