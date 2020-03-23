@@ -1,6 +1,6 @@
 {
   "name": "fis3-parser-dart-sass",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "A fis plugin to parse sass with dart-sass.",
   "keywords": [
     "dart-sass",

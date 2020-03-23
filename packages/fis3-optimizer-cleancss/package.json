@@ -1,6 +1,6 @@
 {
   "name": "fis3-optimizer-cleancss",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "css minifer for fis based on clean-css.",
   "keywords": [
     "cleancss",
