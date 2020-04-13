@@ -30,7 +30,7 @@
     "index.js"
   ],
   "dependencies": {
-    "uglify-js": "3.8.1"
+    "uglify-js": "3.9.0"
   },
   "publishConfig": {
     "access": "public",
