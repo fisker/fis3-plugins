@@ -1227,4 +1227,4 @@ function lint(content, file) {
   }
 }
 
-var standard_1 = exportPlugin(lint, info$1)
+module.exports = exportPlugin(lint, info$1)

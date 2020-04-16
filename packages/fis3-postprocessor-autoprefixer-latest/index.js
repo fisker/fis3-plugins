@@ -34,4 +34,4 @@ function process(content, file, config) {
   }).css
 }
 
-var autoprefixerLatest = exportPlugin(process, info$1)
+module.exports = exportPlugin(process, info$1)

@@ -1770,4 +1770,4 @@ function process$4(content, file, config) {
   return sync(postcssProcess(content, file, config))
 }
 
-var postcssWithRc = exportPlugin(process$4, info$1)
+module.exports = exportPlugin(process$4, info$1)

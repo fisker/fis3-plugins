@@ -57,4 +57,4 @@ function process(content, file, config) {
   }
 }
 
-var eslintNoisy = exportPlugin(process, info$1)
+module.exports = exportPlugin(process, info$1)

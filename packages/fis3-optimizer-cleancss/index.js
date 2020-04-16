@@ -910,4 +910,4 @@ function process$1(content, file, config) {
   return result.styles
 }
 
-var cleancss = exportPlugin(process$1, info$1)
+module.exports = exportPlugin(process$1, info$1)

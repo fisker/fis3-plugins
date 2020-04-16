@@ -1215,4 +1215,4 @@ function format(content) {
   return content
 }
 
-var standard_1 = exportPlugin(format, info$1)
+module.exports = exportPlugin(format, info$1)

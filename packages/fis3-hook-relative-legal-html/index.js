@@ -1657,4 +1657,4 @@ function process$1(fis) {
   fis.on('plugin:relative:fetch', onFetchRelativeUrl)
 }
 
-var relativeLegalHtml = exportPlugin(process$1, info$1)
+module.exports = exportPlugin(process$1, info$1)

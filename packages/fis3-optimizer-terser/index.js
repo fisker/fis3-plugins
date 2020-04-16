@@ -1,6 +1,6 @@
 'use strict'
 
-var terser$1 = require('terser')
+var terser = require('terser')
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1089,7 +1089,7 @@ function deriveSourceMap(file, sourceMap) {
 
 function process$1(content, file, config) {
   var options = getTerserOptions(file, config)
-  var result = terser$1.minify(content, options)
+  var result = terser.minify(content, options)
 
   if (result.warnings) {
     log.warn(result.warnings)
@@ -1105,4 +1105,4 @@ function process$1(content, file, config) {
   return result.code
 }
 
-var terser = exportPlugin(process$1, info$1)
+module.exports = exportPlugin(process$1, info$1)

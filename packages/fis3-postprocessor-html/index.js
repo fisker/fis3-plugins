@@ -48,4 +48,4 @@ function process(content, file, config) {
   return content ? jsBeautify.html(content, config) : ''
 }
 
-var html = exportPlugin(process, info$1)
+module.exports = exportPlugin(process, info$1)

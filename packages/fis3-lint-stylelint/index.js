@@ -1078,4 +1078,4 @@ function process$1(content, file, config_) {
   }
 }
 
-var stylelint_1 = exportPlugin(process$1, info$1)
+module.exports = exportPlugin(process$1, info$1)

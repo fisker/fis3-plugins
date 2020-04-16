@@ -1209,4 +1209,4 @@ function process(content, file, config) {
   return content
 }
 
-var prettyhtml_1 = exportPlugin(process, info$1)
+module.exports = exportPlugin(process, info$1)

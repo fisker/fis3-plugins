@@ -1105,4 +1105,4 @@ function process$1(content, file, config) {
   return result.code
 }
 
-var uglifyjs = exportPlugin(process$1, info$1)
+module.exports = exportPlugin(process$1, info$1)

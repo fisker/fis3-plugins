@@ -25,12 +25,6 @@ function createCommonjsModule(fn, module) {
   return (module = {exports: {}}), fn(module, module.exports), module.exports
 }
 
-function commonjsRequire() {
-  throw new Error(
-    'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
-  )
-}
-
 var check = function (it) {
   return it && it.Math == Math && it
 } // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -3951,7 +3945,7 @@ function resolveInDirectories(_ref5) {
 
     if (file[0] === '~') {
       files = [
-        commonjsRequire.resolve(file.slice(1), {
+        require.resolve(file.slice(1), {
           paths: [process.cwd()],
         }),
       ]
@@ -4166,4 +4160,4 @@ function process$2(content, file, config) {
   return content
 }
 
-var nodeSassLatest = exportPlugin(process$2, info$1)
+module.exports = exportPlugin(process$2, info$1)

@@ -989,4 +989,4 @@ function process(content, file, config) {
   }
 }
 
-var htmlhint = exportPlugin(process, info$1)
+module.exports = exportPlugin(process, info$1)
