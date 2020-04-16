@@ -1,6 +1,6 @@
 {
   "name": "fis3-lint-eslint-noisy",
-  "version": "4.0.6",
+  "version": "4.0.7",
   "description": "a js linter plugin of fis3 based on eslint.",
   "keywords": [
     "eslint",
