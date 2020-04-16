@@ -273,7 +273,7 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.4',
+    version: '3.6.5',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -989,4 +989,4 @@ function process(content, file, config) {
   }
 }
 
-module.exports = exportPlugin(process, info$1)
+var htmlhint = exportPlugin(process, info$1)

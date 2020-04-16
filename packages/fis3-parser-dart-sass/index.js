@@ -25,6 +25,12 @@ function createCommonjsModule(fn, module) {
   return (module = {exports: {}}), fn(module, module.exports), module.exports
 }
 
+function commonjsRequire() {
+  throw new Error(
+    'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
+  )
+}
+
 var check = function (it) {
   return it && it.Math == Math && it
 } // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -277,7 +283,7 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.4',
+    version: '3.6.5',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -3945,7 +3951,7 @@ function resolveInDirectories(_ref5) {
 
     if (file[0] === '~') {
       files = [
-        require.resolve(file.slice(1), {
+        commonjsRequire.resolve(file.slice(1), {
           paths: [process.cwd()],
         }),
       ]
@@ -4163,4 +4169,4 @@ function process$2(content, file, config) {
   return content
 }
 
-module.exports = exportPlugin(process$2, info$1)
+var dartSass = exportPlugin(process$2, info$1)

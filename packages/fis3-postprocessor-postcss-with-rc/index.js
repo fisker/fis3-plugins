@@ -177,7 +177,7 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.4',
+    version: '3.6.5',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -1018,7 +1018,8 @@ if (!set$1 || !clear) {
     global_1.addEventListener &&
     typeof postMessage == 'function' &&
     !global_1.importScripts &&
-    !fails(post)
+    !fails(post) &&
+    location.protocol !== 'file:'
   ) {
     defer = post
     global_1.addEventListener('message', listener, false) // IE8-
@@ -1769,4 +1770,4 @@ function process$4(content, file, config) {
   return sync(postcssProcess(content, file, config))
 }
 
-module.exports = exportPlugin(process$4, info$1)
+var postcssWithRc = exportPlugin(process$4, info$1)

@@ -27,4 +27,4 @@ function process(content, file, config) {
   return cssgraceLite.pack(content, config)
 }
 
-module.exports = exportPlugin(process, info$1)
+var cssgrace_1 = exportPlugin(process, info$1)

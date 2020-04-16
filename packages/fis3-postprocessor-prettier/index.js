@@ -100,4 +100,4 @@ function process(content, file, config) {
   return prettier.format(content, prettierConfig)
 }
 
-module.exports = exportPlugin(process, info$1)
+var prettier_1 = exportPlugin(process, info$1)

@@ -1,6 +1,6 @@
 'use strict'
 
-var terser = require('terser')
+var terser$1 = require('terser')
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -267,7 +267,7 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.4',
+    version: '3.6.5',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -1089,7 +1089,7 @@ function deriveSourceMap(file, sourceMap) {
 
 function process$1(content, file, config) {
   var options = getTerserOptions(file, config)
-  var result = terser.minify(content, options)
+  var result = terser$1.minify(content, options)
 
   if (result.warnings) {
     log.warn(result.warnings)
@@ -1105,4 +1105,4 @@ function process$1(content, file, config) {
   return result.code
 }
 
-module.exports = exportPlugin(process$1, info$1)
+var terser = exportPlugin(process$1, info$1)

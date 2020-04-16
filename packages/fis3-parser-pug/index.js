@@ -1,6 +1,6 @@
 'use strict'
 
-var pug = require('pug')
+var pug$1 = require('pug')
 
 var info = {
   description: 'a fis plugin to parse pug(aka jade).',
@@ -27,7 +27,7 @@ function exportPlugin(process, _ref) {
 }
 
 function process(content, file, config) {
-  return content ? pug.render(content, config) : ''
+  return content ? pug$1.render(content, config) : ''
 }
 
-module.exports = exportPlugin(process, info$1)
+var pug = exportPlugin(process, info$1)

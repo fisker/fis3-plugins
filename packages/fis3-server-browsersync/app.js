@@ -35,14 +35,14 @@ var commonjsGlobal =
     ? self
     : {}
 
+function createCommonjsModule(fn, module) {
+  return (module = {exports: {}}), fn(module, module.exports), module.exports
+}
+
 function commonjsRequire() {
   throw new Error(
     'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
   )
-}
-
-function createCommonjsModule(fn, module) {
-  return (module = {exports: {}}), fn(module, module.exports), module.exports
 }
 
 var check = function (it) {
@@ -295,7 +295,7 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.4',
+    version: '3.6.5',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -5604,7 +5604,7 @@ function getUserConfig(path) {
   var config = {}
 
   try {
-    config = require(path)
+    config = commonjsRequire(path)
 
     if (!config.server || getType(config.server) === 'String') {
       config.server = {

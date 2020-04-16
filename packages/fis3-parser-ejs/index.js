@@ -22,6 +22,12 @@ function createCommonjsModule(fn, module) {
   return (module = {exports: {}}), fn(module, module.exports), module.exports
 }
 
+function commonjsRequire() {
+  throw new Error(
+    'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
+  )
+}
+
 var check = function (it) {
   return it && it.Math == Math && it
 } // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -272,7 +278,7 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.4',
+    version: '3.6.5',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -1137,12 +1143,12 @@ var root = path$1.normalize(PROJECT_ROOT)
 var re = /^[./\\]/i
 
 function cleanRequireCache() {
-  Object.keys(require.cache)
+  Object.keys(commonjsRequire.cache)
     .filter(function (id) {
       return path$1.normalize(id).startsWith(root)
     })
     .forEach(function (id) {
-      delete require.cache[id]
+      delete commonjsRequire.cache[id]
     })
 }
 
@@ -1154,7 +1160,7 @@ function makeRequireFunction(context) {
       module_ = path$1.resolve(context, module_)
     }
 
-    return require(module_)
+    return commonjsRequire()
   }
 }
 
@@ -1183,4 +1189,4 @@ function process$1(content, file, config) {
   return content
 }
 
-module.exports = exportPlugin(process$1, info$1)
+var ejs_1 = exportPlugin(process$1, info$1)
