@@ -32,7 +32,7 @@
   "dependencies": {
     "posthtml": "0.12.2",
     "posthtml-beautify": "0.3.1",
-    "promise-synchronizer": "1.1.9"
+    "promise-synchronizer": "2.0.0"
   },
   "publishConfig": {
     "access": "public",
