@@ -44,7 +44,9 @@
     "lint:markdown": "markdownlint \"**/*.md\" --ignore \"**/node_modules/**\"",
     "lint:package-json": "yarn run format:package-json --check",
     "lint:prettier": "prettier \"**/*.{css,html,js,json,less,md,scss,ts,vue,yaml,yml}\" --check",
-    "release": "run-s clean lint build format dist bump-versions-cache commit-versions-cache"
+    "release": "run-s clean lint build format dist bump-versions-cache commit-versions-cache",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "config": {
     "commitizen": {
@@ -84,7 +86,8 @@
     "terser": "4.6.12",
     "uglify-js": "3.9.1",
     "yargs": "15.3.1",
-    "yog-devtools": "0.1.1"
+    "yog-devtools": "0.1.1",
+    "snyk": "^1.315.1"
   },
   "devDependencies": {
     "@babel/core": "7.9.6",
@@ -124,5 +127,6 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "snyk": true
 }
