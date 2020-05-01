@@ -94,7 +94,7 @@
     "@fisker/eslint-config": "2.2.3",
     "@fisker/husky-config": "2.1.2",
     "@fisker/lint-staged-config": "2.1.0",
-    "@fisker/prettier-config": "2.2.0",
+    "@fisker/prettier-config": "2.2.1",
     "@rollup/plugin-commonjs": "11.1.0",
     "@rollup/plugin-json": "4.0.3",
     "@rollup/plugin-node-resolve": "7.1.3",
