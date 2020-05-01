@@ -28,10 +28,16 @@
     "index.js"
   ],
   "dependencies": {
-    "standard": "14.3.3"
+    "standard": "14.3.3",
+    "snyk": "^1.316.1"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
