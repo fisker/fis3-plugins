@@ -27,10 +27,16 @@
     "index.js"
   ],
   "dependencies": {
-    "eslint": "6.8.0"
+    "eslint": "6.8.0",
+    "snyk": "^1.316.1"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
