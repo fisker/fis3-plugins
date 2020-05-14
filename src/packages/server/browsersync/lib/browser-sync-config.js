@@ -44,7 +44,7 @@ function getUserConfig(path) {
     }
 
     delete config.port
-  } catch (_) {}
+  } catch {}
 
   return config
 }

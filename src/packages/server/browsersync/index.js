@@ -32,7 +32,7 @@ function watchOnFile(file, callback) {
         lastIndex = stat.size
 
         callback(content)
-      } catch (error) {
+      } catch {
         // 从头读起
         lastIndex = 0
       }
@@ -131,7 +131,7 @@ function start(opt, callback) {
 
       try {
         process.kill(server.pid)
-      } catch (error_) {}
+      } catch {}
     } else if (chunk.includes('Listening on')) {
       started = true
       if (stoper) {

@@ -19,7 +19,7 @@ const packages = pluginTypes.map((type) => {
   let directory
   try {
     directory = fs.readdirSync(path.join(SOURCE_DIR, 'packages', type))
-  } catch (error) {
+  } catch {
     return []
   }
 
