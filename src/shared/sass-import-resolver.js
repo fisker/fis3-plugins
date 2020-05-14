@@ -84,7 +84,7 @@ function resolveInDirectories({includePaths, cache = {}, alias = {}}) {
             file,
             contents: readFileSync(file, 'utf8'),
           }
-        } catch (error) {
+        } catch {
           return null
         }
       })

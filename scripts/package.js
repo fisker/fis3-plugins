@@ -15,7 +15,7 @@ const VERSIONS = (() => {
   try {
     // eslint-disable-next-line import/no-unresolved
     return require('../versions.json')
-  } catch (_) {
+  } catch {
     return {}
   }
 })()
@@ -151,7 +151,7 @@ class Package {
 
     try {
       content = readFile(path.join(this.src, file))
-    } catch (_) {}
+    } catch {}
 
     if (/\.md$/.test(file)) {
       content = content.replace('<!-- markdownlint-disable MD002 MD041 -->', '')
@@ -174,7 +174,7 @@ class Package {
 
     try {
       return fs.writeFileSync(distFile, fs.readFileSync(sourceFile))
-    } catch (_) {
+    } catch {
       return false
     }
   }
