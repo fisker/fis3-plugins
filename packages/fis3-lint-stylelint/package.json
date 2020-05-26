@@ -26,7 +26,7 @@
     "index.js"
   ],
   "dependencies": {
-    "postcss": "7.0.30",
+    "postcss": "7.0.31",
     "promise-synchronizer": "2.0.0",
     "stylelint": "13.5.0"
   },
