@@ -22,8 +22,27 @@ var commonjsGlobal =
     ? self
     : {}
 
-function createCommonjsModule(fn, module) {
-  return (module = {exports: {}}), fn(module, module.exports), module.exports
+function createCommonjsModule(fn, basedir, module) {
+  return (
+    (module = {
+      path: basedir,
+      exports: {},
+      require: function (path, base) {
+        return commonjsRequire(
+          path,
+          base === undefined || base === null ? module.path : base
+        )
+      },
+    }),
+    fn(module, module.exports),
+    module.exports
+  )
+}
+
+function commonjsRequire() {
+  throw new Error(
+    'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
+  )
 }
 
 var check = function (it) {
@@ -1478,7 +1497,7 @@ function watchOnFile(file, callback) {
         var content = buffer.toString('utf8')
         lastIndex = stat.size
         callback(content)
-      } catch (error) {
+      } catch (_unused) {
         // 从头读起
         lastIndex = 0
       }
@@ -1571,7 +1590,7 @@ function start(opt, callback) {
 
       try {
         process.kill(server.pid)
-      } catch (error_) {}
+      } catch (_unused2) {}
     } else if (chunk.includes('Listening on')) {
       started = true
 

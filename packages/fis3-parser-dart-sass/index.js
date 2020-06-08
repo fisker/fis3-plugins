@@ -21,8 +21,27 @@ var commonjsGlobal =
     ? self
     : {}
 
-function createCommonjsModule(fn, module) {
-  return (module = {exports: {}}), fn(module, module.exports), module.exports
+function createCommonjsModule(fn, basedir, module) {
+  return (
+    (module = {
+      path: basedir,
+      exports: {},
+      require: function (path, base) {
+        return commonjsRequire(
+          path,
+          base === undefined || base === null ? module.path : base
+        )
+      },
+    }),
+    fn(module, module.exports),
+    module.exports
+  )
+}
+
+function commonjsRequire() {
+  throw new Error(
+    'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
+  )
 }
 
 var check = function (it) {
@@ -1292,7 +1311,7 @@ function _unsupportedIterableToArray(o, minLen) {
   if (typeof o === 'string') return _arrayLikeToArray(o, minLen)
   var n = Object.prototype.toString.call(o).slice(8, -1)
   if (n === 'Object' && o.constructor) n = o.constructor.name
-  if (n === 'Map' || n === 'Set') return Array.from(n)
+  if (n === 'Map' || n === 'Set') return Array.from(o)
   if (n === 'Arguments' || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
     return _arrayLikeToArray(o, minLen)
 }
@@ -2156,10 +2175,6 @@ var internalMetadata = createCommonjsModule(function (module) {
   })
   hiddenKeys[METADATA] = true
 })
-var internalMetadata_1 = internalMetadata.REQUIRED
-var internalMetadata_2 = internalMetadata.fastKey
-var internalMetadata_3 = internalMetadata.getWeakData
-var internalMetadata_4 = internalMetadata.onFreeze
 
 var ITERATOR$2 = wellKnownSymbol('iterator')
 var ArrayPrototype$1 = Array.prototype // check on default Array iterator
@@ -3979,7 +3994,7 @@ function resolveInDirectories(_ref5) {
             file: file,
             contents: fs.readFileSync(file, 'utf8'),
           }
-        } catch (error) {
+        } catch (_unused) {
           return null
         }
       })
@@ -4112,23 +4127,27 @@ function process$2(content, file, config) {
     ),
   })
 
-  var options = _objectSpread2({}, config, {
-    includePaths: includePaths,
-    // file: file.realpath,
-    data: content,
-    indentedSyntax: file.ext === '.sass',
-    importer: function importer(file, previous) {
-      var result = _importer(file, previous)
+  var options = _objectSpread2(
+    _objectSpread2({}, config),
+    {},
+    {
+      includePaths: includePaths,
+      // file: file.realpath,
+      data: content,
+      indentedSyntax: file.ext === '.sass',
+      importer: function importer(file, previous) {
+        var result = _importer(file, previous)
 
-      if (file.cache) {
-        file.cache.addDeps(result.file)
-      }
+        if (file.cache) {
+          file.cache.addDeps(result.file)
+        }
 
-      return result
-    },
-    sourceMap: sourceMap,
-    sourceMapContents: sourceMapContents,
-  }) // we must not give `node-sass` the real file path,
+        return result
+      },
+      sourceMap: sourceMap,
+      sourceMapContents: sourceMapContents,
+    }
+  ) // we must not give `node-sass` the real file path,
   // otherwise `options.importer` will not called
   // https://github.com/sass/dart-sass/issues/574
 

@@ -35,14 +35,27 @@ var commonjsGlobal =
     ? self
     : {}
 
+function createCommonjsModule(fn, basedir, module) {
+  return (
+    (module = {
+      path: basedir,
+      exports: {},
+      require: function (path, base) {
+        return commonjsRequire(
+          path,
+          base === undefined || base === null ? module.path : base
+        )
+      },
+    }),
+    fn(module, module.exports),
+    module.exports
+  )
+}
+
 function commonjsRequire() {
   throw new Error(
     'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
   )
-}
-
-function createCommonjsModule(fn, module) {
-  return (module = {exports: {}}), fn(module, module.exports), module.exports
 }
 
 var check = function (it) {
@@ -3710,13 +3723,6 @@ var browser = createCommonjsModule(function (module, exports) {
     }
   }
 })
-var browser_1 = browser.log
-var browser_2 = browser.formatArgs
-var browser_3 = browser.save
-var browser_4 = browser.load
-var browser_5 = browser.useColors
-var browser_6 = browser.storage
-var browser_7 = browser.colors
 
 var hasFlag = (flag, argv) => {
   argv = argv || process.argv
@@ -4129,14 +4135,6 @@ var node = createCommonjsModule(function (module, exports) {
     return util.inspect(v, this.inspectOpts)
   }
 })
-var node_1 = node.init
-var node_2 = node.log
-var node_3 = node.formatArgs
-var node_4 = node.save
-var node_5 = node.load
-var node_6 = node.useColors
-var node_7 = node.colors
-var node_8 = node.inspectOpts
 
 var src = createCommonjsModule(function (module) {
   /**
@@ -5613,7 +5611,7 @@ function getUserConfig(path) {
     }
 
     delete config.port
-  } catch (_) {}
+  } catch (_unused) {}
 
   return config
 }

@@ -19,8 +19,27 @@ var commonjsGlobal =
     ? self
     : {}
 
-function createCommonjsModule(fn, module) {
-  return (module = {exports: {}}), fn(module, module.exports), module.exports
+function createCommonjsModule(fn, basedir, module) {
+  return (
+    (module = {
+      path: basedir,
+      exports: {},
+      require: function (path, base) {
+        return commonjsRequire(
+          path,
+          base === undefined || base === null ? module.path : base
+        )
+      },
+    }),
+    fn(module, module.exports),
+    module.exports
+  )
+}
+
+function commonjsRequire() {
+  throw new Error(
+    'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
+  )
 }
 
 var check = function (it) {
@@ -894,7 +913,7 @@ function _unsupportedIterableToArray(o, minLen) {
   if (typeof o === 'string') return _arrayLikeToArray(o, minLen)
   var n = Object.prototype.toString.call(o).slice(8, -1)
   if (n === 'Object' && o.constructor) n = o.constructor.name
-  if (n === 'Map' || n === 'Set') return Array.from(n)
+  if (n === 'Map' || n === 'Set') return Array.from(o)
   if (n === 'Arguments' || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
     return _arrayLikeToArray(o, minLen)
 }
@@ -907,9 +926,16 @@ function _arrayLikeToArray(arr, len) {
   return arr2
 }
 
-function _createForOfIteratorHelper(o) {
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it
+
   if (typeof Symbol === 'undefined' || o[Symbol.iterator] == null) {
-    if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) {
+    if (
+      Array.isArray(o) ||
+      (it = _unsupportedIterableToArray(o)) ||
+      (allowArrayLike && o && typeof o.length === 'number')
+    ) {
+      if (it) o = it
       var i = 0
 
       var F = function () {}
@@ -938,8 +964,7 @@ function _createForOfIteratorHelper(o) {
     )
   }
 
-  var it,
-    normalCompletion = true,
+  var normalCompletion = true,
     didErr = false,
     err
   return {
@@ -1000,12 +1025,16 @@ function process$1(content, file, config_) {
     return content
   }
 
-  var config = _objectSpread2({}, config_, {
-    formatter: 'string',
-    files: file.realpath,
-    extractStyleTagsFromHtml: false,
-    from: config_.filename,
-  })
+  var config = _objectSpread2(
+    _objectSpread2({}, config_),
+    {},
+    {
+      formatter: 'string',
+      files: file.realpath,
+      extractStyleTagsFromHtml: false,
+      from: config_.filename,
+    }
+  )
 
   delete config.filename
   delete config.code

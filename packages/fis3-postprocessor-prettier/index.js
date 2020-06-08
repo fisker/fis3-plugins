@@ -85,12 +85,16 @@ function process(content, file, config) {
   var fileFakePath = file.realpathNoExt + file.rExt
 
   var prettierConfig = _objectSpread2(
+    _objectSpread2(
+      _objectSpread2(
+        {},
+        prettier.resolveConfig.sync(fileFakePath, {
+          editorconfig: true,
+        })
+      ),
+      config
+    ),
     {},
-    prettier.resolveConfig.sync(fileFakePath, {
-      editorconfig: true,
-    }),
-    {},
-    config,
     {
       filepath: fileFakePath,
       filename: undefined,

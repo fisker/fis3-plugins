@@ -19,8 +19,27 @@ var commonjsGlobal =
     ? self
     : {}
 
-function createCommonjsModule(fn, module) {
-  return (module = {exports: {}}), fn(module, module.exports), module.exports
+function createCommonjsModule(fn, basedir, module) {
+  return (
+    (module = {
+      path: basedir,
+      exports: {},
+      require: function (path, base) {
+        return commonjsRequire(
+          path,
+          base === undefined || base === null ? module.path : base
+        )
+      },
+    }),
+    fn(module, module.exports),
+    module.exports
+  )
+}
+
+function commonjsRequire() {
+  throw new Error(
+    'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
+  )
 }
 
 var check = function (it) {
@@ -1741,9 +1760,13 @@ var postcssProcess = function postcssProcess(content, file, config) {
     return _await(
       postcss(plugins).process(
         content,
-        _objectSpread2({}, config, {}, options, {
-          from: config.filename,
-        })
+        _objectSpread2(
+          _objectSpread2(_objectSpread2({}, config), options),
+          {},
+          {
+            from: config.filename,
+          }
+        )
       ),
       function (_ref2) {
         var css = _ref2.css
