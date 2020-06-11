@@ -1,0 +1,24 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: '22:00'
+    timezone: Asia/Shanghai
+  open-pull-requests-limit: 99
+  reviewers:
+  - fisker
+  assignees:
+  - fisker
+  versioning-strategy: increase
+  ignore:
+  - dependency-name: caniuse-db
+    versions:
+    - ">= 0"
+  - dependency-name: caniuse-lite
+    versions:
+    - ">= 0"
+  - dependency-name: electron-to-chromium
+    versions:
+    - ">= 0"
