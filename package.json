@@ -92,7 +92,7 @@
     "@commitlint/cli": "9.0.1",
     "@fisker/commitlint-config": "1.2.1",
     "@fisker/eslint-config": "3.0.0",
-    "@fisker/husky-config": "2.2.1",
+    "@fisker/husky-config": "3.0.0",
     "@fisker/lint-staged-config": "2.2.0",
     "@fisker/prettier-config": "3.0.0",
     "@rollup/plugin-commonjs": "13.0.0",
