@@ -31,7 +31,7 @@
   "dependencies": {
     "body-parser": "1.19.0",
     "browser-sync": "2.26.7",
-    "execa": "4.0.2",
+    "execa": "4.0.3",
     "lodash.merge": "4.6.2",
     "morgan": "1.10.0",
     "serve-directory": "3.1.4",
