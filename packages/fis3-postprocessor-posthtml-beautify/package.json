@@ -30,8 +30,8 @@
     "index.js"
   ],
   "dependencies": {
-    "posthtml": "0.13.0",
-    "posthtml-beautify": "0.6.0",
+    "posthtml": "0.13.1",
+    "posthtml-beautify": "0.7.0",
     "promise-synchronizer": "2.0.0"
   },
   "publishConfig": {

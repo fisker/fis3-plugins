@@ -27,7 +27,7 @@
     "index.js"
   ],
   "dependencies": {
-    "htmlhint": "0.14.0"
+    "htmlhint": "0.14.1"
   },
   "publishConfig": {
     "access": "public",

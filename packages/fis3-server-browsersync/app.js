@@ -4571,9 +4571,9 @@ function wrap(protocols) {
 }
 /* istanbul ignore next */
 
-function noop() {}
-/* empty */
-// from https://github.com/nodejs/node/blob/master/lib/internal/url.js
+function noop() {
+  /* empty */
+} // from https://github.com/nodejs/node/blob/master/lib/internal/url.js
 
 function urlToOptions(urlObject) {
   var options = {
