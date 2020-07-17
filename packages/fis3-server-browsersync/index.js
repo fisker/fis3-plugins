@@ -1606,7 +1606,7 @@ function start(opt, callback) {
 
   if (opt.daemon) {
     stoper = watchOnFile(logFile, onData)
-    util.pid(server.pid) // save pid to file.
+    util.pid(String(server.pid)) // save pid to file.
 
     server.unref()
     timeoutTimer = setTimeout(function () {
