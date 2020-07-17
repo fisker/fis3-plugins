@@ -39,7 +39,7 @@
     "version": "2.0.7"
   },
   "fis3-postprocessor-autoprefixer-latest": {
-    "version": "2.1.7"
+    "version": "2.1.8"
   },
   "fis3-postprocessor-html": {
     "version": "2.0.6"
@@ -69,6 +69,6 @@
     "version": "2.0.6"
   },
   "fis3-server-browsersync": {
-    "version": "2.1.10"
+    "version": "2.2.0"
   }
 }
