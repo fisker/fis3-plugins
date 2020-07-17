@@ -5,6 +5,7 @@ function _interopDefault(ex) {
 }
 
 var path$1 = require('path')
+var url = require('url')
 var util = _interopDefault(require('util'))
 var sass = _interopDefault(require('sass'))
 var fs = require('fs')
@@ -4131,8 +4132,10 @@ function process$2(content, file, config) {
     _objectSpread2({}, config),
     {},
     {
-      includePaths: includePaths,
-      // file: file.realpath,
+      includePaths: includePaths.map(function (directory) {
+        return url.pathToFileURL(directory).href
+      }),
+      file: file.realpath,
       data: content,
       indentedSyntax: file.ext === '.sass',
       importer: function importer(file, previous) {
@@ -4147,11 +4150,8 @@ function process$2(content, file, config) {
       sourceMap: sourceMap,
       sourceMapContents: sourceMapContents,
     }
-  ) // we must not give `node-sass` the real file path,
-  // otherwise `options.importer` will not called
-  // https://github.com/sass/dart-sass/issues/574
+  )
 
-  delete options.file
   delete options.outFile
   var result
 

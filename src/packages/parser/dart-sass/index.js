@@ -1,4 +1,5 @@
 import {join, dirname, isAbsolute} from 'path'
+import {pathToFileURL} from 'url'
 import util from 'util'
 import sass from 'sass'
 import exportPlugin from '../../../shared/export-plugin'
@@ -63,8 +64,10 @@ function process(content, file, config) {
   })
   const options = {
     ...config,
-    includePaths,
-    // file: file.realpath,
+    includePaths: includePaths.map(
+      (directory) => pathToFileURL(directory).href
+    ),
+    file: file.realpath,
     data: content,
     indentedSyntax: file.ext === '.sass',
     importer(file, previous) {
@@ -78,10 +81,6 @@ function process(content, file, config) {
     sourceMapContents,
   }
 
-  // we must not give `node-sass` the real file path,
-  // otherwise `options.importer` will not called
-  // https://github.com/sass/dart-sass/issues/574
-  delete options.file
   delete options.outFile
 
   let result
