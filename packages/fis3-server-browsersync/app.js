@@ -5421,7 +5421,7 @@ var preview = function (options) {
 
     if (jsonfile) {
       try {
-        delete commonjsRequire.cache[commonjsRequire.resolve(jsonfile)]
+        delete require.cache[require.resolve(jsonfile)]
         data = commonjsRequire(jsonfile)
       } catch (err) {
         data = {}
@@ -5442,7 +5442,7 @@ var preview = function (options) {
     jsfile = path$1.join(dataroot, ns, 'page', page + '.js')
 
     if (fs.existsSync(jsfile)) {
-      delete commonjsRequire.cache[commonjsRequire.resolve(jsfile)]
+      delete require.cache[require.resolve(jsfile)]
       res.locals = res.locals || {}
       res.locals = mixin(res.locals, data)
       jsreturn = commonjsRequire()(req, res, render)
@@ -5491,7 +5491,7 @@ var script = function (options) {
 
     if (type === 'js') {
       try {
-        delete commonjsRequire.cache[commonjsRequire.resolve(file)]
+        delete require.cache[require.resolve(file)]
         commonjsRequire(file)(req, res, next)
       } catch (err) {
         next(err)
