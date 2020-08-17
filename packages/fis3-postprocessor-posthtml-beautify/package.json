@@ -1,6 +1,6 @@
 {
   "name": "fis3-postprocessor-posthtml-beautify",
-  "version": "2.1.11",
+  "version": "2.1.12",
   "description": "a html formatter of fis3 based on posthtml-beautify.",
   "keywords": [
     "beautify",
