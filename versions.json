@@ -12,13 +12,13 @@
     "version": "2.1.11"
   },
   "fis3-lint-stylelint": {
-    "version": "4.1.12"
+    "version": "4.1.13"
   },
   "fis3-optimizer-cleancss": {
     "version": "2.1.10"
   },
   "fis3-optimizer-terser": {
-    "version": "3.0.0"
+    "version": "3.0.1"
   },
   "fis3-optimizer-uglifyjs": {
     "version": "2.1.11"
@@ -45,10 +45,10 @@
     "version": "2.0.7"
   },
   "fis3-postprocessor-postcss-with-rc": {
-    "version": "2.1.11"
+    "version": "2.1.12"
   },
   "fis3-postprocessor-posthtml-beautify": {
-    "version": "2.1.12"
+    "version": "2.1.13"
   },
   "fis3-postprocessor-prettier": {
     "version": "2.0.9"
