@@ -1058,7 +1058,7 @@ function exportPlugin(process, _ref) {
 var info = {
   description: 'js minifer for fis based on terser.',
   keywords: ['minifer', 'minify', 'terser', 'javascript'],
-  dependencies: ['terser'],
+  dependencies: ['terser', 'promise-synchronizer'],
   options: {},
   links: {
     terser: 'https://github.com/terser-js/terser',
