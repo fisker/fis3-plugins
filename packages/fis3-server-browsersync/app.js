@@ -1,27 +1,47 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var path$1 = require('path')
+var browserSync = require('browser-sync')
+var yargs = require('yargs')
+var merge = require('lodash.merge')
+var morgan = require('morgan')
+var bodyParser = require('body-parser')
+var fs = require('fs')
+var url = require('url')
+var util = require('util')
+var http = require('http')
+var https = require('https')
+var assert = require('assert')
+var require$$0 = require('stream')
+var tty = require('tty')
+var os = require('os')
+var serveDirectory = require('serve-directory')
+var serveDirectoryThemeOcticons = require('serve-directory-theme-octicons')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var path$1 = _interopDefault(require('path'))
-var browserSync = _interopDefault(require('browser-sync'))
-var yargs = _interopDefault(require('yargs'))
-var merge = _interopDefault(require('lodash.merge'))
-var morgan = _interopDefault(require('morgan'))
-var bodyParser = _interopDefault(require('body-parser'))
-var fs = _interopDefault(require('fs'))
-var url = _interopDefault(require('url'))
-var util = _interopDefault(require('util'))
-var http = _interopDefault(require('http'))
-var https = _interopDefault(require('https'))
-var assert = _interopDefault(require('assert'))
-var stream = _interopDefault(require('stream'))
-var tty = _interopDefault(require('tty'))
-var os = _interopDefault(require('os'))
-var serveDirectory = _interopDefault(require('serve-directory'))
-var serveDirectoryThemeOcticons = _interopDefault(
-  require('serve-directory-theme-octicons')
+var path__default = /*#__PURE__*/ _interopDefaultLegacy(path$1)
+var browserSync__default = /*#__PURE__*/ _interopDefaultLegacy(browserSync)
+var yargs__default = /*#__PURE__*/ _interopDefaultLegacy(yargs)
+var merge__default = /*#__PURE__*/ _interopDefaultLegacy(merge)
+var morgan__default = /*#__PURE__*/ _interopDefaultLegacy(morgan)
+var bodyParser__default = /*#__PURE__*/ _interopDefaultLegacy(bodyParser)
+var fs__default = /*#__PURE__*/ _interopDefaultLegacy(fs)
+var url__default = /*#__PURE__*/ _interopDefaultLegacy(url)
+var util__default = /*#__PURE__*/ _interopDefaultLegacy(util)
+var http__default = /*#__PURE__*/ _interopDefaultLegacy(http)
+var https__default = /*#__PURE__*/ _interopDefaultLegacy(https)
+var assert__default = /*#__PURE__*/ _interopDefaultLegacy(assert)
+var require$$0__default = /*#__PURE__*/ _interopDefaultLegacy(require$$0)
+var tty__default = /*#__PURE__*/ _interopDefaultLegacy(tty)
+var os__default = /*#__PURE__*/ _interopDefaultLegacy(os)
+var serveDirectory__default = /*#__PURE__*/ _interopDefaultLegacy(
+  serveDirectory
+)
+var serveDirectoryThemeOcticons__default = /*#__PURE__*/ _interopDefaultLegacy(
+  serveDirectoryThemeOcticons
 )
 
 var commonjsGlobal =
@@ -2567,7 +2587,7 @@ var requiresPort = function required(port, protocol) {
 
 var common_1 = createCommonjsModule(function (module, exports) {
   var common = exports,
-    extend = util._extend
+    extend = util__default['default']._extend
   var upgradeHeader = /(^|,)\s*upgrade\s*($|,)/i,
     isSSL = /^https|wss/
   /**
@@ -2657,7 +2677,7 @@ var common_1 = createCommonjsModule(function (module, exports) {
     //
 
     var outgoingPath = !options.toProxy
-      ? url.parse(req.url).path || ''
+      ? url__default['default'].parse(req.url).path || ''
       : req.url //
     // Remark: ignorePath will just straight up ignore whatever the request's
     // path is. This can be labeled as FOOT-GUN material if you do not know what
@@ -2876,8 +2896,8 @@ var webOutgoing = {
       proxyRes.headers['location'] &&
       redirectRegex.test(proxyRes.statusCode)
     ) {
-      var target = url.parse(options.target)
-      var u = url.parse(proxyRes.headers['location']) // make sure the redirected host matches the target host before rewriting
+      var target = url__default['default'].parse(options.target)
+      var u = url__default['default'].parse(proxyRes.headers['location']) // make sure the redirected host matches the target host before rewriting
 
       if (target.host != u.host) {
         return
@@ -3811,7 +3831,7 @@ function supportsColor(stream) {
     // release, and Node.js 7 is not. Windows 10 build 10586 is the first Windows
     // release that supports 256 colors. Windows 10 build 14931 is the first release
     // that supports 16m/TrueColor.
-    const osRelease = os.release().split('.')
+    const osRelease = os__default['default'].release().split('.')
 
     if (
       Number(process.versions.node.split('.')[0]) >= 8 &&
@@ -4035,7 +4055,7 @@ var node = createCommonjsModule(function (module, exports) {
   function useColors() {
     return 'colors' in exports.inspectOpts
       ? Boolean(exports.inspectOpts.colors)
-      : tty.isatty(process.stderr.fd)
+      : tty__default['default'].isatty(process.stderr.fd)
   }
   /**
    * Adds ANSI color escape codes if enabled.
@@ -4072,7 +4092,12 @@ var node = createCommonjsModule(function (module, exports) {
    */
 
   function log() {
-    return process.stderr.write(util.format.apply(util, arguments) + '\n')
+    return process.stderr.write(
+      util__default['default'].format.apply(
+        util__default['default'],
+        arguments
+      ) + '\n'
+    )
   }
   /**
    * Save `namespaces`.
@@ -4124,7 +4149,9 @@ var node = createCommonjsModule(function (module, exports) {
 
   formatters.o = function (v) {
     this.inspectOpts.colors = this.useColors
-    return util.inspect(v, this.inspectOpts).replace(/\s*\n\s*/g, ' ')
+    return util__default['default']
+      .inspect(v, this.inspectOpts)
+      .replace(/\s*\n\s*/g, ' ')
   }
   /**
    * Map %O to `util.inspect()`, allowing multiple lines if needed.
@@ -4132,7 +4159,7 @@ var node = createCommonjsModule(function (module, exports) {
 
   formatters.O = function (v) {
     this.inspectOpts.colors = this.useColors
-    return util.inspect(v, this.inspectOpts)
+    return util__default['default'].inspect(v, this.inspectOpts)
   }
 })
 
@@ -4154,8 +4181,8 @@ var src = createCommonjsModule(function (module) {
   }
 })
 
-var URL = url.URL
-var Writable = stream.Writable
+var URL = url__default['default'].URL
+var Writable = require$$0__default['default'].Writable
 var debug = src('follow-redirects') // RFC7231§4.2.1: Of the request methods defined by this specification,
 // the GET, HEAD, OPTIONS, and TRACE methods are defined to be safe.
 
@@ -4377,7 +4404,7 @@ RedirectableRequest.prototype._performRequest = function () {
     this._options,
     this._onNativeResponse
   ))
-  this._currentUrl = url.format(this._options) // Set up event handlers
+  this._currentUrl = url__default['default'].format(this._options) // Set up event handlers
 
   request._redirectable = this
 
@@ -4490,9 +4517,12 @@ RedirectableRequest.prototype._processResponse = function (response) {
       }
     } // Perform the redirected request
 
-    var redirectUrl = url.resolve(this._currentUrl, location)
+    var redirectUrl = url__default['default'].resolve(
+      this._currentUrl,
+      location
+    )
     debug('redirecting to', redirectUrl)
-    Object.assign(this._options, url.parse(redirectUrl))
+    Object.assign(this._options, url__default['default'].parse(redirectUrl))
     this._isRedirect = true
 
     this._performRequest() // Discard the remainder of the response to avoid waiting for data
@@ -4530,7 +4560,7 @@ function wrap(protocols) {
           input = urlToOptions(new URL(urlStr))
         } catch (err) {
           /* istanbul ignore next */
-          input = url.parse(urlStr)
+          input = url__default['default'].parse(urlStr)
         }
       } else if (URL && input instanceof URL) {
         input = urlToOptions(input)
@@ -4556,7 +4586,11 @@ function wrap(protocols) {
         options
       )
       options.nativeProtocols = nativeProtocols
-      assert.equal(options.protocol, protocol, 'protocol mismatch')
+      assert__default['default'].equal(
+        options.protocol,
+        protocol,
+        'protocol mismatch'
+      )
       debug('options', options)
       return new RedirectableRequest(options, callback)
     } // Executes a GET request, following redirects
@@ -4597,8 +4631,8 @@ function urlToOptions(urlObject) {
 } // Exports
 
 var followRedirects = wrap({
-  http: http,
-  https: https,
+  http: http__default['default'],
+  https: https__default['default'],
 })
 var wrap_1 = wrap
 followRedirects.wrap = wrap_1
@@ -4608,8 +4642,8 @@ web_o = Object.keys(web_o).map(function (pass) {
   return web_o[pass]
 })
 var nativeAgents = {
-  http: http,
-  https: https,
+  http: http__default['default'],
+  https: https__default['default'],
 }
 /*!
  * Array of passes.
@@ -4884,8 +4918,8 @@ var wsIncoming = {
     common_1.setupSocket(socket)
     if (head && head.length) socket.unshift(head)
     var proxyReq = (common_1.isSSL.test(options.target.protocol)
-      ? https
-      : http
+      ? https__default['default']
+      : http__default['default']
     ).request(common_1.setupOutgoing(options.ssl || {}, options, req)) // Enable developers to modify the proxyReq before headers are sent
 
     if (server) {
@@ -4951,8 +4985,8 @@ var wsIncoming = {
 
 var httpProxy_1 = createCommonjsModule(function (module) {
   var httpProxy = module.exports,
-    extend = util._extend,
-    parse_url = url.parse
+    extend = util__default['default']._extend,
+    parse_url = url__default['default'].parse
   httpProxy.Server = ProxyServer
   /**
    * Returns a function that creates the loader for
@@ -5052,7 +5086,7 @@ var httpProxy_1 = createCommonjsModule(function (module) {
     this.on('error', this.onError, this)
   }
 
-  util.inherits(ProxyServer, eventemitter3)
+  util__default['default'].inherits(ProxyServer, eventemitter3)
 
   ProxyServer.prototype.onError = function (err) {
     //
@@ -5071,8 +5105,8 @@ var httpProxy_1 = createCommonjsModule(function (module) {
       }
 
     this._server = this.options.ssl
-      ? https.createServer(this.options.ssl, closure)
-      : http.createServer(closure)
+      ? https__default['default'].createServer(this.options.ssl, closure)
+      : http__default['default'].createServer(closure)
 
     if (this.options.ws) {
       this._server.on('upgrade', function (req, socket, head) {
@@ -5214,7 +5248,7 @@ var httpProxy$1 = httpProxy
  * ```
  */
 
-var parseUrl = url.parse
+var parseUrl = url__default['default'].parse
 
 function escapeHtml(html) {
   return String(html)
@@ -5240,11 +5274,11 @@ function rewriteParser(file) {
     file = [file]
   }
   file.forEach(function (file) {
-    if (!fs.existsSync(file)) {
+    if (!fs__default['default'].existsSync(file)) {
       return null
     }
 
-    var content = fs.readFileSync(file, 'utf-8')
+    var content = fs__default['default'].readFileSync(file, 'utf-8')
     var lines = content.split(/\r\n|\n/)
     var rrule = /^(rewrite|redirect|proxy)\s+([^\s]+)\s+([^\s]+)$/i
     lines.forEach(function (line) {
@@ -5384,12 +5418,12 @@ function mixin(a, b) {
 
 var preview = function (options) {
   var rpage = /^\/([\w0-9_\-]+)\/page\/(.*)$/i
-  var tplroot = path$1.resolve(options.view_path)
+  var tplroot = path__default['default'].resolve(options.view_path)
   var dirs = Array.isArray(options.data_path)
     ? options.data_path
     : [options.data_path]
   dirs = dirs.map(function (dir) {
-    return path$1.resolve(dir)
+    return path__default['default'].resolve(dir)
   })
 
   function previewPage(ns, page, req, res, next) {
@@ -5403,16 +5437,21 @@ var preview = function (options) {
       page = m[1]
     }
 
-    tplfile = path$1.join(tplroot, ns, page + '.tpl')
+    tplfile = path__default['default'].join(tplroot, ns, page + '.tpl')
 
-    if (!fs.existsSync(tplfile)) {
+    if (!fs__default['default'].existsSync(tplfile)) {
       return next()
     }
 
     dirs.every(function (dir) {
-      var filepath = path$1.join(dir, ns, 'page', page + '.json')
+      var filepath = path__default['default'].join(
+        dir,
+        ns,
+        'page',
+        page + '.json'
+      )
 
-      if (fs.existsSync(filepath)) {
+      if (fs__default['default'].existsSync(filepath)) {
         jsonfile = filepath
       }
 
@@ -5439,9 +5478,9 @@ var preview = function (options) {
       res.render(tpl, data)
     }
 
-    jsfile = path$1.join(dataroot, ns, 'page', page + '.js')
+    jsfile = path__default['default'].join(dataroot, ns, 'page', page + '.js')
 
-    if (fs.existsSync(jsfile)) {
+    if (fs__default['default'].existsSync(jsfile)) {
       delete require.cache[require.resolve(jsfile)]
       res.locals = res.locals || {}
       res.locals = mixin(res.locals, data)
@@ -5476,9 +5515,9 @@ var script = function (options) {
     var dirs = Array.isArray(dataroot) ? dataroot : [dataroot]
     var file
     dirs.every(function (dir) {
-      var filepath = path$1.join(dir, page)
+      var filepath = path__default['default'].join(dir, page)
 
-      if (fs.existsSync(filepath)) {
+      if (fs__default['default'].existsSync(filepath)) {
         file = filepath
       }
 
@@ -5497,7 +5536,7 @@ var script = function (options) {
         next(err)
       }
     } else {
-      fs.readFile(file, function (err, buf) {
+      fs__default['default'].readFile(file, function (err, buf) {
         if (err) return next(err)
         res.writeHead(200, {
           'Content-Type': 'application/json',
@@ -5525,19 +5564,22 @@ function mock(root) {
     view_path: '',
     // 避免报错。
     rewrite_file: [
-      path$1.join(root, 'server.conf'),
-      path$1.join(root, 'config', 'server.conf'),
-      path$1.join(root, 'mock', 'server.conf'),
+      path__default['default'].join(root, 'server.conf'),
+      path__default['default'].join(root, 'config', 'server.conf'),
+      path__default['default'].join(root, 'mock', 'server.conf'),
     ],
-    data_path: [path$1.join(root, 'test'), path$1.join(root, 'mock')],
+    data_path: [
+      path__default['default'].join(root, 'test'),
+      path__default['default'].join(root, 'mock'),
+    ],
   }
   return function (request, response, next) {
     ;[
       rewrite(options),
-      bodyParser.urlencoded({
+      bodyParser__default['default'].urlencoded({
         extended: false,
       }),
-      bodyParser.json(),
+      bodyParser__default['default'].json(),
       preview(options),
       script(options),
     ].reduceRight(function (next, middlewave) {
@@ -5559,20 +5601,20 @@ function getMiddleware(name, handler) {
 }
 
 var middleware = {
-  logger: getMiddleware('Logger', morgan),
+  logger: getMiddleware('Logger', morgan__default['default']),
   mock: getMiddleware('Mock', mock),
   directory: function directory(root) {
-    return getMiddleware('Server Directory', serveDirectory)(
-      root,
-      serveDirectoryThemeOcticons
-    )
+    return getMiddleware(
+      'Server Directory',
+      serveDirectory__default['default']
+    )(root, serveDirectoryThemeOcticons__default['default'])
   },
 }
 
 var mock$1 = middleware.mock,
   logger = middleware.logger,
   directory = middleware.directory
-var defaultOptions = merge({}, defaultConfig, {
+var defaultOptions = merge__default['default']({}, defaultConfig, {
   server: {
     directory: true,
   },
@@ -5632,14 +5674,23 @@ function parseMiddleware(middleware) {
 
 function getConfig(bs, argv) {
   var userConfig = getUserConfig(
-    path$1.resolve(argv.context, argv.bsConfig || bs.instance.config.userFile)
+    path__default['default'].resolve(
+      argv.context,
+      argv.bsConfig || bs.instance.config.userFile
+    )
   )
-  var config = merge({}, defaultOptions, userConfig, overrideOptions, {
-    server: {
-      baseDir: argv.root,
-    },
-    port: argv.port, // https: argv.https
-  })
+  var config = merge__default['default'](
+    {},
+    defaultOptions,
+    userConfig,
+    overrideOptions,
+    {
+      server: {
+        baseDir: argv.root,
+      },
+      port: argv.port, // https: argv.https
+    }
+  )
   config.middleware = parseMiddleware(config.middleware) // logger
 
   config.middleware.push(logger('short')) // mock
@@ -5654,7 +5705,7 @@ function getConfig(bs, argv) {
   return config
 }
 
-var argv = yargs.argv
+var argv = yargs__default['default'].argv
 startServer(argv)
 
 function now() {
@@ -5682,7 +5733,7 @@ function onInit(config) {
 
 function watch(bs, root) {
   return function (event, file) {
-    var relativePath = path$1.relative(root, file)
+    var relativePath = path__default['default'].relative(root, file)
 
     if (
       !relativePath ||
@@ -5706,14 +5757,14 @@ function signalTerminate(bs) {
 
 function replaceScriptTag(bs) {
   // replace scriptTag template with mine
-  bs.instance.config.templates.scriptTag = path$1.join(
+  bs.instance.config.templates.scriptTag = path__default['default'].join(
     __dirname,
     'templates/script-tags.tmpl'
   )
 }
 
 function startServer(argv) {
-  var bs = browserSync.create()
+  var bs = browserSync__default['default'].create()
   var bsConfig = getConfig(bs, argv)
   bs.exit()
   bs.init(bsConfig, onInit(bsConfig))

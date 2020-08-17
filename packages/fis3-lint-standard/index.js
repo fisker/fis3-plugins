@@ -1,11 +1,13 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var eslint = require('eslint')
+var standard = require('standard')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var eslint = require('eslint')
-var standard = _interopDefault(require('standard'))
+var standard__default = /*#__PURE__*/ _interopDefaultLegacy(standard)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1225,7 +1227,10 @@ function lint(content, file) {
   var results = []
 
   try {
-    var _standard$lintTextSyn = standard.lintTextSync(content, {})
+    var _standard$lintTextSyn = standard__default['default'].lintTextSync(
+      content,
+      {}
+    )
 
     results = _standard$lintTextSyn.results
   } catch (error) {

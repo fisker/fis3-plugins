@@ -2,14 +2,19 @@
 
 Object.defineProperty(exports, '__esModule', {value: true})
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var path$1 = require('path')
+var fs = require('fs')
+var execa = require('execa')
+var yargs = require('yargs')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var path$1 = _interopDefault(require('path'))
-var fs = _interopDefault(require('fs'))
-var execa = _interopDefault(require('execa'))
-var yargs = _interopDefault(require('yargs'))
+var path__default = /*#__PURE__*/ _interopDefaultLegacy(path$1)
+var fs__default = /*#__PURE__*/ _interopDefaultLegacy(fs)
+var execa__default = /*#__PURE__*/ _interopDefaultLegacy(execa)
+var yargs__default = /*#__PURE__*/ _interopDefaultLegacy(yargs)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1473,7 +1478,7 @@ var _global = global,
 
 var util = fis.require('command-server/lib/util.js')
 
-var argv = yargs.argv
+var argv = yargs__default['default'].argv
 var CWD = process.cwd() // 每 0.2 秒读取子进程的输出文件。
 //
 // 为什么不直接通过 child.stdout 读取？
@@ -1486,14 +1491,19 @@ function watchOnFile(file, callback) {
   var timer
 
   function read() {
-    var stat = fs.statSync(file)
+    var stat = fs__default['default'].statSync(file)
 
     if (stat.size !== lastIndex) {
-      var fd = fs.openSync(file, 'r')
+      var fd = fs__default['default'].openSync(file, 'r')
       var buffer = Buffer.alloc(stat.size - lastIndex)
 
       try {
-        fs.readSync(fd, buffer, lastIndex, stat.size - lastIndex)
+        fs__default['default'].readSync(
+          fd,
+          buffer,
+          lastIndex,
+          stat.size - lastIndex
+        )
         var content = buffer.toString('utf8')
         lastIndex = stat.size
         callback(content)
@@ -1513,11 +1523,11 @@ function watchOnFile(file, callback) {
 }
 
 function start(opt, callback) {
-  var defaultScript = path$1.join(opt.root, 'server.js')
+  var defaultScript = path__default['default'].join(opt.root, 'server.js')
   var script = fis.util.exists(defaultScript)
     ? defaultScript
-    : path$1.join(__dirname, 'app.js')
-  var logFile = path$1.join(opt.root, 'server.log')
+    : path__default['default'].join(__dirname, 'app.js')
+  var logFile = path__default['default'].join(opt.root, 'server.log')
   var timeout = Math.max(opt.timeout * 1000, 60000)
   var timeoutTimer
   var arguments_ = [
@@ -1534,13 +1544,13 @@ function start(opt, callback) {
     argv.bsConfig || '',
   ]
   process.stdout.write('\n Starting browser-sync server ...')
-  var server = execa(process.execPath, arguments_, {
-    cwd: path$1.dirname(script),
+  var server = execa__default['default'](process.execPath, arguments_, {
+    cwd: path__default['default'].dirname(script),
     detached: opt.daemon,
     stdio: [
       0,
-      opt.daemon ? fs.openSync(logFile, 'w') : 'pipe',
-      opt.daemon ? fs.openSync(logFile, 'w+') : 'pipe',
+      opt.daemon ? fs__default['default'].openSync(logFile, 'w') : 'pipe',
+      opt.daemon ? fs__default['default'].openSync(logFile, 'w+') : 'pipe',
     ],
   })
   var log = ''

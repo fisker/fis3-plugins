@@ -1,10 +1,12 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var CleanCSS = require('clean-css')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var CleanCSS = _interopDefault(require('clean-css'))
+var CleanCSS__default = /*#__PURE__*/ _interopDefaultLegacy(CleanCSS)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -913,7 +915,7 @@ function process$1(content, file, config) {
     options.returnPromise = false
   }
 
-  var result = new CleanCSS(config).minify(content)
+  var result = new CleanCSS__default['default'](config).minify(content)
 
   if (result.warnings && result.warnings.length > 0) {
     log.warn(result.warnings)

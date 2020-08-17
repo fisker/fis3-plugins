@@ -1,10 +1,12 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var prettyhtml = require('@starptech/prettyhtml')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var prettyhtml = _interopDefault(require('@starptech/prettyhtml'))
+var prettyhtml__default = /*#__PURE__*/ _interopDefaultLegacy(prettyhtml)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1223,7 +1225,7 @@ var info$1 = /*#__PURE__*/ Object.freeze({
 })
 
 function process(content, file, config) {
-  content = prettyhtml(content, config).contents
+  content = prettyhtml__default['default'](content, config).contents
   content = content.replace(/\n\s*<!-- prettyhtml-ignore -->\n/g, '\n')
   return content
 }

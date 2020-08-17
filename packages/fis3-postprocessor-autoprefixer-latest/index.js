@@ -1,11 +1,14 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var postcss = require('postcss')
+var autoprefixer = require('autoprefixer')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var postcss = _interopDefault(require('postcss'))
-var autoprefixer = _interopDefault(require('autoprefixer'))
+var postcss__default = /*#__PURE__*/ _interopDefaultLegacy(postcss)
+var autoprefixer__default = /*#__PURE__*/ _interopDefaultLegacy(autoprefixer)
 
 function exportPlugin(process, _ref) {
   var options = _ref.options
@@ -29,7 +32,9 @@ var info$1 = /*#__PURE__*/ Object.freeze({
 })
 
 function process(content, file, config) {
-  return postcss([autoprefixer(config)]).process(content, {
+  return postcss__default['default']([
+    autoprefixer__default['default'](config),
+  ]).process(content, {
     from: config.filename,
   }).css
 }

@@ -1,11 +1,14 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var ejs = require('ejs')
+var path$1 = require('path')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var ejs = _interopDefault(require('ejs'))
-var path$1 = _interopDefault(require('path'))
+var ejs__default = /*#__PURE__*/ _interopDefaultLegacy(ejs)
+var path__default = /*#__PURE__*/ _interopDefaultLegacy(path$1)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1152,13 +1155,13 @@ var info$1 = /*#__PURE__*/ Object.freeze({
 var _global = global,
   fis = _global.fis
 var PROJECT_ROOT = fis.project.getProjectPath()
-var root = path$1.normalize(PROJECT_ROOT)
+var root = path__default['default'].normalize(PROJECT_ROOT)
 var re = /^[./\\]/i
 
 function cleanRequireCache() {
   Object.keys(require.cache)
     .filter(function (id) {
-      return path$1.normalize(id).startsWith(root)
+      return path__default['default'].normalize(id).startsWith(root)
     })
     .forEach(function (id) {
       delete require.cache[id]
@@ -1170,7 +1173,7 @@ function makeRequireFunction(context) {
     cleanRequireCache()
 
     if (re.test(module_)) {
-      module_ = path$1.resolve(context, module_)
+      module_ = path__default['default'].resolve(context, module_)
     }
 
     return require(module_)
@@ -1183,7 +1186,7 @@ function process$1(content, file, config) {
   }
 
   var filename = config.filename
-  var dirname = path$1.dirname(filename)
+  var dirname = path__default['default'].dirname(filename)
 
   var data = _objectSpread2(
     {
@@ -1198,7 +1201,7 @@ function process$1(content, file, config) {
   options.root = PROJECT_ROOT
   options.filename = file.realpath
   options.cache = false
-  content = ejs.render(content, data, options)
+  content = ejs__default['default'].render(content, data, options)
   return content
 }
 

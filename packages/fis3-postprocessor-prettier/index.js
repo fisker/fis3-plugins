@@ -1,10 +1,12 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var prettier = require('prettier')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var prettier = _interopDefault(require('prettier'))
+var prettier__default = /*#__PURE__*/ _interopDefaultLegacy(prettier)
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -88,7 +90,7 @@ function process(content, file, config) {
     _objectSpread2(
       _objectSpread2(
         {},
-        prettier.resolveConfig.sync(fileFakePath, {
+        prettier__default['default'].resolveConfig.sync(fileFakePath, {
           editorconfig: true,
         })
       ),
@@ -101,7 +103,7 @@ function process(content, file, config) {
     }
   )
 
-  return prettier.format(content, prettierConfig)
+  return prettier__default['default'].format(content, prettierConfig)
 }
 
 module.exports = exportPlugin(process, info$1)

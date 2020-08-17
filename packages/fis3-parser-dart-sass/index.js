@@ -1,15 +1,21 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
-}
-
 var path$1 = require('path')
 var url = require('url')
-var util = _interopDefault(require('util'))
-var sass = _interopDefault(require('sass'))
+var util = require('util')
+var sass = require('sass')
 var fs = require('fs')
-var cartesianProduct = _interopDefault(require('fast-cartesian-product'))
+var cartesianProduct = require('fast-cartesian-product')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
+}
+
+var util__default = /*#__PURE__*/ _interopDefaultLegacy(util)
+var sass__default = /*#__PURE__*/ _interopDefaultLegacy(sass)
+var cartesianProduct__default = /*#__PURE__*/ _interopDefaultLegacy(
+  cartesianProduct
+)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -3916,19 +3922,24 @@ function possibleFileNames(file) {
 
   return hasExtension(fileName)
     ? fileNames
-    : cartesianProduct([fileNames, extensions]).map(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
-          fileName = _ref2[0],
-          extension = _ref2[1]
+    : cartesianProduct__default['default']([fileNames, extensions]).map(
+        function (_ref) {
+          var _ref2 = _slicedToArray(_ref, 2),
+            fileName = _ref2[0],
+            extension = _ref2[1]
 
-        return fileName + extension
-      })
+          return fileName + extension
+        }
+      )
 }
 
 function getFiles(directories, file) {
   directories = getDirectories(directories, file)
   var fileNames = possibleFileNames(file)
-  var files = cartesianProduct([directories, fileNames]).map(function (_ref3) {
+  var files = cartesianProduct__default['default']([
+    directories,
+    fileNames,
+  ]).map(function (_ref3) {
     var _ref4 = _slicedToArray(_ref3, 2),
       directory = _ref4[0],
       fileName = _ref4[1]
@@ -4156,10 +4167,10 @@ function process$2(content, file, config) {
   var result
 
   try {
-    result = sass.renderSync(options)
+    result = sass__default['default'].renderSync(options)
   } catch (error) {
     fis.log.error(
-      util.format(
+      util__default['default'].format(
         '%s'.red + ' [`%s` %s:%s]'.yellow,
         error.message,
         error.file,

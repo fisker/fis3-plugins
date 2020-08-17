@@ -1,12 +1,16 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var posthtml = require('posthtml')
+var beautify = require('posthtml-beautify')
+var sync = require('promise-synchronizer')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var posthtml = _interopDefault(require('posthtml'))
-var beautify = _interopDefault(require('posthtml-beautify'))
-var sync = _interopDefault(require('promise-synchronizer'))
+var posthtml__default = /*#__PURE__*/ _interopDefaultLegacy(posthtml)
+var beautify__default = /*#__PURE__*/ _interopDefaultLegacy(beautify)
+var sync__default = /*#__PURE__*/ _interopDefaultLegacy(sync)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1235,9 +1239,9 @@ function process(content, file, config) {
     /__relative<<<"(.*?)">>>/g,
     '"__relative_fn2_start__$1__relative_fn2_end__"'
   )
-  var promise = posthtml()
+  var promise = posthtml__default['default']()
     .use(
-      beautify({
+      beautify__default['default']({
         rules: config.rules,
       })
     )
@@ -1247,7 +1251,7 @@ function process(content, file, config) {
     })
 
   try {
-    content = sync(promise)
+    content = sync__default['default'](promise)
   } catch (error) {
     log.warn('%s might not processed due to:\n %s', file.id, error)
     process.exitCode = 1

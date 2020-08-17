@@ -3,6 +3,7 @@
  * fisker Cheung<lionkay@gmail.com>
  */
 import {minify} from 'terser'
+import sync from 'promise-synchronizer'
 import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
@@ -54,7 +55,7 @@ function deriveSourceMap(file, sourceMap) {
 
 function process(content, file, config) {
   const options = getTerserOptions(file, config)
-  const result = minify(content, options)
+  const result = sync(minify(content, options))
 
   if (result.warnings) {
     log.warn(result.warnings)

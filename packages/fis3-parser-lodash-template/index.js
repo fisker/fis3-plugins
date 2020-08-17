@@ -1,11 +1,14 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var _ = require('lodash')
+var path$1 = require('path')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var _ = _interopDefault(require('lodash'))
-var path$1 = _interopDefault(require('path'))
+var ___default = /*#__PURE__*/ _interopDefaultLegacy(_)
+var path__default = /*#__PURE__*/ _interopDefaultLegacy(path$1)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1152,13 +1155,13 @@ var info$1 = /*#__PURE__*/ Object.freeze({
 var _global = global,
   fis = _global.fis
 var PROJECT_ROOT = fis.project.getProjectPath()
-var root = path$1.normalize(PROJECT_ROOT)
+var root = path__default['default'].normalize(PROJECT_ROOT)
 var re = /^[./\\]/i
 
 function cleanRequireCache() {
   Object.keys(require.cache)
     .filter(function (id) {
-      return path$1.normalize(id).startsWith(root)
+      return path__default['default'].normalize(id).startsWith(root)
     })
     .forEach(function (id) {
       delete require.cache[id]
@@ -1170,7 +1173,7 @@ function makeRequireFunction(context) {
     cleanRequireCache()
 
     if (re.test(module_)) {
-      module_ = path$1.resolve(context, module_)
+      module_ = path__default['default'].resolve(context, module_)
     }
 
     return require(module_)
@@ -1181,7 +1184,7 @@ function process$1(content, file, config) {
   var data = config.data
   var options = config.options
   var filename = config.filename
-  var dirname = path$1.dirname(filename)
+  var dirname = path__default['default'].dirname(filename)
   options.imports = _objectSpread2(
     {
       require: makeRequireFunction(dirname),
@@ -1191,12 +1194,12 @@ function process$1(content, file, config) {
     options.imports
   )
 
-  var compiled = _.template(content, options)
+  var compiled = ___default['default'].template(content, options)
 
   content = compiled(data)
   return content
 }
 
 var plugin = exportPlugin(process$1, info$1)
-plugin.lodash = _
+plugin.lodash = ___default['default']
 module.exports = plugin

@@ -1,12 +1,16 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var postcss = require('postcss')
+var postcssrc = require('postcss-load-config')
+var sync = require('promise-synchronizer')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var postcss = _interopDefault(require('postcss'))
-var postcssrc = _interopDefault(require('postcss-load-config'))
-var sync = _interopDefault(require('promise-synchronizer'))
+var postcss__default = /*#__PURE__*/ _interopDefaultLegacy(postcss)
+var postcssrc__default = /*#__PURE__*/ _interopDefaultLegacy(postcssrc)
+var sync__default = /*#__PURE__*/ _interopDefaultLegacy(sync)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1754,11 +1758,11 @@ function _await(value, then, direct) {
 }
 
 var postcssProcess = function postcssProcess(content, file, config) {
-  return _call(postcssrc, function (_ref) {
+  return _call(postcssrc__default['default'], function (_ref) {
     var plugins = _ref.plugins,
       options = _ref.options
     return _await(
-      postcss(plugins).process(
+      postcss__default['default'](plugins).process(
         content,
         _objectSpread2(
           _objectSpread2(_objectSpread2({}, config), options),
@@ -1790,7 +1794,7 @@ function _call(body, then, direct) {
 }
 
 function process$4(content, file, config) {
-  return sync(postcssProcess(content, file, config))
+  return sync__default['default'](postcssProcess(content, file, config))
 }
 
 module.exports = exportPlugin(process$4, info$1)

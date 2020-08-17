@@ -1,6 +1,13 @@
 'use strict'
 
 var terser = require('terser')
+var sync = require('promise-synchronizer')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
+}
+
+var sync__default = /*#__PURE__*/ _interopDefaultLegacy(sync)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1108,7 +1115,7 @@ function deriveSourceMap(file, sourceMap) {
 
 function process$1(content, file, config) {
   var options = getTerserOptions(file, config)
-  var result = terser.minify(content, options)
+  var result = sync__default['default'](terser.minify(content, options))
 
   if (result.warnings) {
     log.warn(result.warnings)

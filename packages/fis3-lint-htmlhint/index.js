@@ -1,12 +1,16 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var HTMLHint = require('htmlhint')
+var fs = require('fs')
+var path$1 = require('path')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var HTMLHint = _interopDefault(require('htmlhint'))
-var fs = _interopDefault(require('fs'))
-var path$1 = _interopDefault(require('path'))
+var HTMLHint__default = /*#__PURE__*/ _interopDefaultLegacy(HTMLHint)
+var fs__default = /*#__PURE__*/ _interopDefaultLegacy(fs)
+var path__default = /*#__PURE__*/ _interopDefaultLegacy(path$1)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -956,17 +960,21 @@ function readConfig(filename) {
 
   do {
     currentFolder = parentFolder || currentFolder
-    currentFile = path$1.normalize(path$1.join(currentFolder, filename))
+    currentFile = path__default['default'].normalize(
+      path__default['default'].join(currentFolder, filename)
+    )
 
-    if (fs.existsSync(currentFile)) {
+    if (fs__default['default'].existsSync(currentFile)) {
       try {
-        return JSON.parse(fs.readFileSync(currentFile, 'utf8'))
+        return JSON.parse(
+          fs__default['default'].readFileSync(currentFile, 'utf8')
+        )
       } catch (_unused) {
         return {}
       }
     }
 
-    parentFolder = path$1.resolve(currentFolder, '../')
+    parentFolder = path__default['default'].resolve(currentFolder, '../')
   } while (parentFolder !== currentFolder)
 
   return {}
@@ -983,7 +991,7 @@ function process(content, file, config) {
     config.rules ||
     htmlhintrcConfig ||
     (htmlhintrcConfig = readConfig('.htmlhintrc'))
-  var results = HTMLHint.verify(content, ruleset)
+  var results = HTMLHint__default['default'].verify(content, ruleset)
   var errorType = 'warning'
   results.forEach(function (message) {
     if (message.type === 'error') {
@@ -996,9 +1004,11 @@ function process(content, file, config) {
       '[%s] lint failed with %s: \n\n %s',
       file.id,
       errorType,
-      HTMLHint.format(results, {
-        indent: 2,
-      }).join('\n')
+      HTMLHint__default['default']
+        .format(results, {
+          indent: 2,
+        })
+        .join('\n')
     )
 
     if (errorType === 'error') {

@@ -1,10 +1,12 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var path$1 = require('path')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var path$1 = _interopDefault(require('path'))
+var path__default = /*#__PURE__*/ _interopDefaultLegacy(path$1)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1576,10 +1578,10 @@ function getRelativeUrl(file, host) {
     typeof host.relative === 'string' ? host.relative : host.release
 
   if (rFile.test(relativeFrom)) {
-    relativeFrom = path$1.dirname(relativeFrom)
+    relativeFrom = path__default['default'].dirname(relativeFrom)
   }
 
-  url = path$1.relative(relativeFrom, url)
+  url = path__default['default'].relative(relativeFrom, url)
   url = url.replace(/\\/g, '/')
 
   if (url[0] !== '.') {

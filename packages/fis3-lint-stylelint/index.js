@@ -1,12 +1,16 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var sync = require('promise-synchronizer')
+var postcss = require('postcss')
+var stylelint = require('stylelint')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var sync = _interopDefault(require('promise-synchronizer'))
-var postcss = _interopDefault(require('postcss'))
-var stylelint = _interopDefault(require('stylelint'))
+var sync__default = /*#__PURE__*/ _interopDefaultLegacy(sync)
+var postcss__default = /*#__PURE__*/ _interopDefaultLegacy(postcss)
+var stylelint__default = /*#__PURE__*/ _interopDefaultLegacy(stylelint)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1044,7 +1048,7 @@ function process$1(content, file, config_) {
     config.syntax = syntax[file.ext]
   }
 
-  var promise = postcss([stylelint])
+  var promise = postcss__default['default']([stylelint__default['default']])
     .process(content, config)
     .then(function (result) {
       var messages = result.messages || []
@@ -1099,7 +1103,7 @@ function process$1(content, file, config_) {
     })
 
   try {
-    return sync(promise)
+    return sync__default['default'](promise)
   } catch (error) {
     throw new Error(
       '['.concat(file.id, '] lint failed with error: \n\n ').concat(error)

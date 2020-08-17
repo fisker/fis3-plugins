@@ -1,10 +1,12 @@
 'use strict'
 
-function _interopDefault(ex) {
-  return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex
+var standard = require('standard')
+
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var standard = _interopDefault(require('standard'))
+var standard__default = /*#__PURE__*/ _interopDefaultLegacy(standard)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -1222,7 +1224,7 @@ function format(content) {
   content = content.replace(/\n\s+$/, '')
 
   try {
-    content = standard.lintTextSync(content, {
+    content = standard__default['default'].lintTextSync(content, {
       fix: true,
     }).results[0].output
   } catch (error) {
