@@ -28,7 +28,7 @@
   "dependencies": {
     "postcss": "7.0.32",
     "postcss-load-config": "2.1.0",
-    "promise-synchronizer": "2.0.0"
+    "promise-synchronizer": "3.0.0"
   },
   "publishConfig": {
     "access": "public",

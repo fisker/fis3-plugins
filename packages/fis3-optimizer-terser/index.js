@@ -1071,6 +1071,7 @@ var info$1 = /*#__PURE__*/ Object.freeze({
 })
 
 var log = global.fis.log
+var synchronizedMinify = sync__default['default'](terser.minify)
 
 function getTerserOptions(file, config) {
   var options = _objectSpread2({}, config)
@@ -1115,7 +1116,7 @@ function deriveSourceMap(file, sourceMap) {
 
 function process$1(content, file, config) {
   var options = getTerserOptions(file, config)
-  var result = sync__default['default'](terser.minify(content, options))
+  var result = synchronizedMinify(content, options)
 
   if (result.warnings) {
     log.warn(result.warnings)

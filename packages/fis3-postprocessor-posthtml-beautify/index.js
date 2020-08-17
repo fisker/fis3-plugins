@@ -75,69 +75,36 @@ var descriptors = !fails(function () {
   )
 })
 
-var nativePropertyIsEnumerable = {}.propertyIsEnumerable
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor // Nashorn ~ JDK8 bug
-
-var NASHORN_BUG =
-  getOwnPropertyDescriptor &&
-  !nativePropertyIsEnumerable.call(
-    {
-      1: 2,
-    },
-    1
-  ) // `Object.prototype.propertyIsEnumerable` method implementation
-// https://tc39.github.io/ecma262/#sec-object.prototype.propertyisenumerable
-
-var f = NASHORN_BUG
-  ? function propertyIsEnumerable(V) {
-      var descriptor = getOwnPropertyDescriptor(this, V)
-      return !!descriptor && descriptor.enumerable
-    }
-  : nativePropertyIsEnumerable
-var objectPropertyIsEnumerable = {
-  f: f,
-}
-
-var createPropertyDescriptor = function (bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value,
-  }
-}
-
-var toString = {}.toString
-
-var classofRaw = function (it) {
-  return toString.call(it).slice(8, -1)
-}
-
-var split = ''.split // fallback for non-array-like ES3 and non-enumerable old V8 strings
-
-var indexedObject = fails(function () {
-  // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
-  // eslint-disable-next-line no-prototype-builtins
-  return !Object('z').propertyIsEnumerable(0)
-})
-  ? function (it) {
-      return classofRaw(it) == 'String' ? split.call(it, '') : Object(it)
-    }
-  : Object
-
-// `RequireObjectCoercible` abstract operation
-// https://tc39.github.io/ecma262/#sec-requireobjectcoercible
-var requireObjectCoercible = function (it) {
-  if (it == undefined) throw TypeError("Can't call method on " + it)
-  return it
-}
-
-var toIndexedObject = function (it) {
-  return indexedObject(requireObjectCoercible(it))
-}
-
 var isObject = function (it) {
   return typeof it === 'object' ? it !== null : typeof it === 'function'
+}
+
+var document$1 = global_1.document // typeof document.createElement is 'object' in old IE
+
+var EXISTS = isObject(document$1) && isObject(document$1.createElement)
+
+var documentCreateElement = function (it) {
+  return EXISTS ? document$1.createElement(it) : {}
+}
+
+var ie8DomDefine =
+  !descriptors &&
+  !fails(function () {
+    return (
+      Object.defineProperty(documentCreateElement('div'), 'a', {
+        get: function () {
+          return 7
+        },
+      }).a != 7
+    )
+  })
+
+var anObject = function (it) {
+  if (!isObject(it)) {
+    throw TypeError(String(it) + ' is not an object')
+  }
+
+  return it
 }
 
 // https://tc39.github.io/ecma262/#sec-toprimitive
@@ -167,68 +134,10 @@ var toPrimitive = function (input, PREFERRED_STRING) {
   throw TypeError("Can't convert object to primitive value")
 }
 
-var hasOwnProperty = {}.hasOwnProperty
-
-var has = function (it, key) {
-  return hasOwnProperty.call(it, key)
-}
-
-var document = global_1.document // typeof document.createElement is 'object' in old IE
-
-var EXISTS = isObject(document) && isObject(document.createElement)
-
-var documentCreateElement = function (it) {
-  return EXISTS ? document.createElement(it) : {}
-}
-
-var ie8DomDefine =
-  !descriptors &&
-  !fails(function () {
-    return (
-      Object.defineProperty(documentCreateElement('div'), 'a', {
-        get: function () {
-          return 7
-        },
-      }).a != 7
-    )
-  })
-
-var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor // `Object.getOwnPropertyDescriptor` method
-// https://tc39.github.io/ecma262/#sec-object.getownpropertydescriptor
-
-var f$1 = descriptors
-  ? nativeGetOwnPropertyDescriptor
-  : function getOwnPropertyDescriptor(O, P) {
-      O = toIndexedObject(O)
-      P = toPrimitive(P, true)
-      if (ie8DomDefine)
-        try {
-          return nativeGetOwnPropertyDescriptor(O, P)
-        } catch (error) {
-          /* empty */
-        }
-      if (has(O, P))
-        return createPropertyDescriptor(
-          !objectPropertyIsEnumerable.f.call(O, P),
-          O[P]
-        )
-    }
-var objectGetOwnPropertyDescriptor = {
-  f: f$1,
-}
-
-var anObject = function (it) {
-  if (!isObject(it)) {
-    throw TypeError(String(it) + ' is not an object')
-  }
-
-  return it
-}
-
 var nativeDefineProperty = Object.defineProperty // `Object.defineProperty` method
 // https://tc39.github.io/ecma262/#sec-object.defineproperty
 
-var f$2 = descriptors
+var f = descriptors
   ? nativeDefineProperty
   : function defineProperty(O, P, Attributes) {
       anObject(O)
@@ -246,7 +155,16 @@ var f$2 = descriptors
       return O
     }
 var objectDefineProperty = {
-  f: f$2,
+  f: f,
+}
+
+var createPropertyDescriptor = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value,
+  }
 }
 
 var createNonEnumerableProperty = descriptors
@@ -276,6 +194,70 @@ var SHARED = '__core-js_shared__'
 var store = global_1[SHARED] || setGlobal(SHARED, {})
 var sharedStore = store
 
+var shared = createCommonjsModule(function (module) {
+  ;(module.exports = function (key, value) {
+    return (
+      sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
+    )
+  })('versions', []).push({
+    version: '3.6.5',
+    mode: 'global',
+    copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
+  })
+})
+
+var hasOwnProperty = {}.hasOwnProperty
+
+var has = function (it, key) {
+  return hasOwnProperty.call(it, key)
+}
+
+var id = 0
+var postfix = Math.random()
+
+var uid = function (key) {
+  return (
+    'Symbol(' +
+    String(key === undefined ? '' : key) +
+    ')_' +
+    (++id + postfix).toString(36)
+  )
+}
+
+var nativeSymbol =
+  !!Object.getOwnPropertySymbols &&
+  !fails(function () {
+    // Chrome 38 Symbol has incorrect toString conversion
+    // eslint-disable-next-line no-undef
+    return !String(Symbol())
+  })
+
+var useSymbolAsUid =
+  nativeSymbol && // eslint-disable-next-line no-undef
+  !Symbol.sham && // eslint-disable-next-line no-undef
+  typeof Symbol.iterator == 'symbol'
+
+var WellKnownSymbolsStore = shared('wks')
+var Symbol$1 = global_1.Symbol
+var createWellKnownSymbol = useSymbolAsUid
+  ? Symbol$1
+  : (Symbol$1 && Symbol$1.withoutSetter) || uid
+
+var wellKnownSymbol = function (name) {
+  if (!has(WellKnownSymbolsStore, name)) {
+    if (nativeSymbol && has(Symbol$1, name))
+      WellKnownSymbolsStore[name] = Symbol$1[name]
+    else WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name)
+  }
+
+  return WellKnownSymbolsStore[name]
+}
+
+var TO_STRING_TAG = wellKnownSymbol('toStringTag')
+var test = {}
+test[TO_STRING_TAG] = 'z'
+var toStringTagSupport = String(test) === '[object z]'
+
 var functionToString = Function.toString // this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
 
 if (typeof sharedStore.inspectSource != 'function') {
@@ -289,30 +271,6 @@ var inspectSource = sharedStore.inspectSource
 var WeakMap = global_1.WeakMap
 var nativeWeakMap =
   typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap))
-
-var shared = createCommonjsModule(function (module) {
-  ;(module.exports = function (key, value) {
-    return (
-      sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
-    )
-  })('versions', []).push({
-    version: '3.6.5',
-    mode: 'global',
-    copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
-  })
-})
-
-var id = 0
-var postfix = Math.random()
-
-var uid = function (key) {
-  return (
-    'Symbol(' +
-    String(key === undefined ? '' : key) +
-    ')_' +
-    (++id + postfix).toString(36)
-  )
-}
 
 var keys = shared('keys')
 
@@ -421,6 +379,132 @@ var redefine = createCommonjsModule(function (module) {
     )
   })
 })
+
+var toString = {}.toString
+
+var classofRaw = function (it) {
+  return toString.call(it).slice(8, -1)
+}
+
+var TO_STRING_TAG$1 = wellKnownSymbol('toStringTag') // ES3 wrong here
+
+var CORRECT_ARGUMENTS =
+  classofRaw(
+    (function () {
+      return arguments
+    })()
+  ) == 'Arguments' // fallback for IE11 Script Access Denied error
+
+var tryGet = function (it, key) {
+  try {
+    return it[key]
+  } catch (error) {
+    /* empty */
+  }
+} // getting tag from ES6+ `Object.prototype.toString`
+
+var classof = toStringTagSupport
+  ? classofRaw
+  : function (it) {
+      var O, tag, result
+      return it === undefined
+        ? 'Undefined'
+        : it === null
+        ? 'Null' // @@toStringTag case
+        : typeof (tag = tryGet((O = Object(it)), TO_STRING_TAG$1)) == 'string'
+        ? tag // builtinTag case
+        : CORRECT_ARGUMENTS
+        ? classofRaw(O) // ES3 arguments fallback
+        : (result = classofRaw(O)) == 'Object' && typeof O.callee == 'function'
+        ? 'Arguments'
+        : result
+    }
+
+// https://tc39.github.io/ecma262/#sec-object.prototype.tostring
+
+var objectToString = toStringTagSupport
+  ? {}.toString
+  : function toString() {
+      return '[object ' + classof(this) + ']'
+    }
+
+// https://tc39.github.io/ecma262/#sec-object.prototype.tostring
+
+if (!toStringTagSupport) {
+  redefine(Object.prototype, 'toString', objectToString, {
+    unsafe: true,
+  })
+}
+
+var nativePropertyIsEnumerable = {}.propertyIsEnumerable
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor // Nashorn ~ JDK8 bug
+
+var NASHORN_BUG =
+  getOwnPropertyDescriptor &&
+  !nativePropertyIsEnumerable.call(
+    {
+      1: 2,
+    },
+    1
+  ) // `Object.prototype.propertyIsEnumerable` method implementation
+// https://tc39.github.io/ecma262/#sec-object.prototype.propertyisenumerable
+
+var f$1 = NASHORN_BUG
+  ? function propertyIsEnumerable(V) {
+      var descriptor = getOwnPropertyDescriptor(this, V)
+      return !!descriptor && descriptor.enumerable
+    }
+  : nativePropertyIsEnumerable
+var objectPropertyIsEnumerable = {
+  f: f$1,
+}
+
+var split = ''.split // fallback for non-array-like ES3 and non-enumerable old V8 strings
+
+var indexedObject = fails(function () {
+  // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
+  // eslint-disable-next-line no-prototype-builtins
+  return !Object('z').propertyIsEnumerable(0)
+})
+  ? function (it) {
+      return classofRaw(it) == 'String' ? split.call(it, '') : Object(it)
+    }
+  : Object
+
+// `RequireObjectCoercible` abstract operation
+// https://tc39.github.io/ecma262/#sec-requireobjectcoercible
+var requireObjectCoercible = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on " + it)
+  return it
+}
+
+var toIndexedObject = function (it) {
+  return indexedObject(requireObjectCoercible(it))
+}
+
+var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor // `Object.getOwnPropertyDescriptor` method
+// https://tc39.github.io/ecma262/#sec-object.getownpropertydescriptor
+
+var f$2 = descriptors
+  ? nativeGetOwnPropertyDescriptor
+  : function getOwnPropertyDescriptor(O, P) {
+      O = toIndexedObject(O)
+      P = toPrimitive(P, true)
+      if (ie8DomDefine)
+        try {
+          return nativeGetOwnPropertyDescriptor(O, P)
+        } catch (error) {
+          /* empty */
+        }
+      if (has(O, P))
+        return createPropertyDescriptor(
+          !objectPropertyIsEnumerable.f.call(O, P),
+          O[P]
+        )
+    }
+var objectGetOwnPropertyDescriptor = {
+  f: f$2,
+}
 
 var path = global_1
 
@@ -640,6 +724,954 @@ var _export = function (options, source) {
     }
 }
 
+var nativePromiseConstructor = global_1.Promise
+
+var redefineAll = function (target, src, options) {
+  for (var key in src) redefine(target, key, src[key], options)
+
+  return target
+}
+
+var defineProperty = objectDefineProperty.f
+var TO_STRING_TAG$2 = wellKnownSymbol('toStringTag')
+
+var setToStringTag = function (it, TAG, STATIC) {
+  if (it && !has((it = STATIC ? it : it.prototype), TO_STRING_TAG$2)) {
+    defineProperty(it, TO_STRING_TAG$2, {
+      configurable: true,
+      value: TAG,
+    })
+  }
+}
+
+var SPECIES = wellKnownSymbol('species')
+
+var setSpecies = function (CONSTRUCTOR_NAME) {
+  var Constructor = getBuiltIn(CONSTRUCTOR_NAME)
+  var defineProperty = objectDefineProperty.f
+
+  if (descriptors && Constructor && !Constructor[SPECIES]) {
+    defineProperty(Constructor, SPECIES, {
+      configurable: true,
+      get: function () {
+        return this
+      },
+    })
+  }
+}
+
+var aFunction$1 = function (it) {
+  if (typeof it != 'function') {
+    throw TypeError(String(it) + ' is not a function')
+  }
+
+  return it
+}
+
+var anInstance = function (it, Constructor, name) {
+  if (!(it instanceof Constructor)) {
+    throw TypeError('Incorrect ' + (name ? name + ' ' : '') + 'invocation')
+  }
+
+  return it
+}
+
+var iterators = {}
+
+var ITERATOR = wellKnownSymbol('iterator')
+var ArrayPrototype = Array.prototype // check on default Array iterator
+
+var isArrayIteratorMethod = function (it) {
+  return (
+    it !== undefined &&
+    (iterators.Array === it || ArrayPrototype[ITERATOR] === it)
+  )
+}
+
+var functionBindContext = function (fn, that, length) {
+  aFunction$1(fn)
+  if (that === undefined) return fn
+
+  switch (length) {
+    case 0:
+      return function () {
+        return fn.call(that)
+      }
+
+    case 1:
+      return function (a) {
+        return fn.call(that, a)
+      }
+
+    case 2:
+      return function (a, b) {
+        return fn.call(that, a, b)
+      }
+
+    case 3:
+      return function (a, b, c) {
+        return fn.call(that, a, b, c)
+      }
+  }
+
+  return function () /* ...args */
+  {
+    return fn.apply(that, arguments)
+  }
+}
+
+var ITERATOR$1 = wellKnownSymbol('iterator')
+
+var getIteratorMethod = function (it) {
+  if (it != undefined)
+    return it[ITERATOR$1] || it['@@iterator'] || iterators[classof(it)]
+}
+
+var callWithSafeIterationClosing = function (iterator, fn, value, ENTRIES) {
+  try {
+    return ENTRIES ? fn(anObject(value)[0], value[1]) : fn(value) // 7.4.6 IteratorClose(iterator, completion)
+  } catch (error) {
+    var returnMethod = iterator['return']
+    if (returnMethod !== undefined) anObject(returnMethod.call(iterator))
+    throw error
+  }
+}
+
+var iterate_1 = createCommonjsModule(function (module) {
+  var Result = function (stopped, result) {
+    this.stopped = stopped
+    this.result = result
+  }
+
+  var iterate = (module.exports = function (
+    iterable,
+    fn,
+    that,
+    AS_ENTRIES,
+    IS_ITERATOR
+  ) {
+    var boundFunction = functionBindContext(fn, that, AS_ENTRIES ? 2 : 1)
+    var iterator, iterFn, index, length, result, next, step
+
+    if (IS_ITERATOR) {
+      iterator = iterable
+    } else {
+      iterFn = getIteratorMethod(iterable)
+      if (typeof iterFn != 'function') throw TypeError('Target is not iterable') // optimisation for array iterators
+
+      if (isArrayIteratorMethod(iterFn)) {
+        for (
+          index = 0, length = toLength(iterable.length);
+          length > index;
+          index++
+        ) {
+          result = AS_ENTRIES
+            ? boundFunction(anObject((step = iterable[index]))[0], step[1])
+            : boundFunction(iterable[index])
+          if (result && result instanceof Result) return result
+        }
+
+        return new Result(false)
+      }
+
+      iterator = iterFn.call(iterable)
+    }
+
+    next = iterator.next
+
+    while (!(step = next.call(iterator)).done) {
+      result = callWithSafeIterationClosing(
+        iterator,
+        boundFunction,
+        step.value,
+        AS_ENTRIES
+      )
+      if (typeof result == 'object' && result && result instanceof Result)
+        return result
+    }
+
+    return new Result(false)
+  })
+
+  iterate.stop = function (result) {
+    return new Result(true, result)
+  }
+})
+
+var ITERATOR$2 = wellKnownSymbol('iterator')
+var SAFE_CLOSING = false
+
+try {
+  var called = 0
+  var iteratorWithReturn = {
+    next: function () {
+      return {
+        done: !!called++,
+      }
+    },
+    return: function () {
+      SAFE_CLOSING = true
+    },
+  }
+
+  iteratorWithReturn[ITERATOR$2] = function () {
+    return this
+  } // eslint-disable-next-line no-throw-literal
+
+  Array.from(iteratorWithReturn, function () {
+    throw 2
+  })
+} catch (error) {
+  /* empty */
+}
+
+var checkCorrectnessOfIteration = function (exec, SKIP_CLOSING) {
+  if (!SKIP_CLOSING && !SAFE_CLOSING) return false
+  var ITERATION_SUPPORT = false
+
+  try {
+    var object = {}
+
+    object[ITERATOR$2] = function () {
+      return {
+        next: function () {
+          return {
+            done: (ITERATION_SUPPORT = true),
+          }
+        },
+      }
+    }
+
+    exec(object)
+  } catch (error) {
+    /* empty */
+  }
+
+  return ITERATION_SUPPORT
+}
+
+var SPECIES$1 = wellKnownSymbol('species') // `SpeciesConstructor` abstract operation
+// https://tc39.github.io/ecma262/#sec-speciesconstructor
+
+var speciesConstructor = function (O, defaultConstructor) {
+  var C = anObject(O).constructor
+  var S
+  return C === undefined || (S = anObject(C)[SPECIES$1]) == undefined
+    ? defaultConstructor
+    : aFunction$1(S)
+}
+
+var html = getBuiltIn('document', 'documentElement')
+
+var engineUserAgent = getBuiltIn('navigator', 'userAgent') || ''
+
+var engineIsIos = /(iphone|ipod|ipad).*applewebkit/i.test(engineUserAgent)
+
+var location = global_1.location
+var set$1 = global_1.setImmediate
+var clear = global_1.clearImmediate
+var process = global_1.process
+var MessageChannel = global_1.MessageChannel
+var Dispatch = global_1.Dispatch
+var counter = 0
+var queue = {}
+var ONREADYSTATECHANGE = 'onreadystatechange'
+var defer, channel, port
+
+var run = function (id) {
+  // eslint-disable-next-line no-prototype-builtins
+  if (queue.hasOwnProperty(id)) {
+    var fn = queue[id]
+    delete queue[id]
+    fn()
+  }
+}
+
+var runner = function (id) {
+  return function () {
+    run(id)
+  }
+}
+
+var listener = function (event) {
+  run(event.data)
+}
+
+var post = function (id) {
+  // old engines have not location.origin
+  global_1.postMessage(id + '', location.protocol + '//' + location.host)
+} // Node.js 0.9+ & IE10+ has setImmediate, otherwise:
+
+if (!set$1 || !clear) {
+  set$1 = function setImmediate(fn) {
+    var args = []
+    var i = 1
+
+    while (arguments.length > i) args.push(arguments[i++])
+
+    queue[++counter] = function () {
+      // eslint-disable-next-line no-new-func
+      ;(typeof fn == 'function' ? fn : Function(fn)).apply(undefined, args)
+    }
+
+    defer(counter)
+    return counter
+  }
+
+  clear = function clearImmediate(id) {
+    delete queue[id]
+  } // Node.js 0.8-
+
+  if (classofRaw(process) == 'process') {
+    defer = function (id) {
+      process.nextTick(runner(id))
+    } // Sphere (JS game engine) Dispatch API
+  } else if (Dispatch && Dispatch.now) {
+    defer = function (id) {
+      Dispatch.now(runner(id))
+    } // Browsers with MessageChannel, includes WebWorkers
+    // except iOS - https://github.com/zloirock/core-js/issues/624
+  } else if (MessageChannel && !engineIsIos) {
+    channel = new MessageChannel()
+    port = channel.port2
+    channel.port1.onmessage = listener
+    defer = functionBindContext(port.postMessage, port, 1) // Browsers with postMessage, skip WebWorkers
+    // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
+  } else if (
+    global_1.addEventListener &&
+    typeof postMessage == 'function' &&
+    !global_1.importScripts &&
+    !fails(post) &&
+    location.protocol !== 'file:'
+  ) {
+    defer = post
+    global_1.addEventListener('message', listener, false) // IE8-
+  } else if (ONREADYSTATECHANGE in documentCreateElement('script')) {
+    defer = function (id) {
+      html.appendChild(documentCreateElement('script'))[
+        ONREADYSTATECHANGE
+      ] = function () {
+        html.removeChild(this)
+        run(id)
+      }
+    } // Rest old browsers
+  } else {
+    defer = function (id) {
+      setTimeout(runner(id), 0)
+    }
+  }
+}
+
+var task = {
+  set: set$1,
+  clear: clear,
+}
+
+var getOwnPropertyDescriptor$2 = objectGetOwnPropertyDescriptor.f
+var macrotask = task.set
+var MutationObserver =
+  global_1.MutationObserver || global_1.WebKitMutationObserver
+var process$1 = global_1.process
+var Promise$1 = global_1.Promise
+var IS_NODE = classofRaw(process$1) == 'process' // Node.js 11 shows ExperimentalWarning on getting `queueMicrotask`
+
+var queueMicrotaskDescriptor = getOwnPropertyDescriptor$2(
+  global_1,
+  'queueMicrotask'
+)
+var queueMicrotask = queueMicrotaskDescriptor && queueMicrotaskDescriptor.value
+var flush, head, last, notify, toggle, node, promise, then // modern engines have queueMicrotask method
+
+if (!queueMicrotask) {
+  flush = function () {
+    var parent, fn
+    if (IS_NODE && (parent = process$1.domain)) parent.exit()
+
+    while (head) {
+      fn = head.fn
+      head = head.next
+
+      try {
+        fn()
+      } catch (error) {
+        if (head) notify()
+        else last = undefined
+        throw error
+      }
+    }
+
+    last = undefined
+    if (parent) parent.enter()
+  } // Node.js
+
+  if (IS_NODE) {
+    notify = function () {
+      process$1.nextTick(flush)
+    } // browsers with MutationObserver, except iOS - https://github.com/zloirock/core-js/issues/339
+  } else if (MutationObserver && !engineIsIos) {
+    toggle = true
+    node = document.createTextNode('')
+    new MutationObserver(flush).observe(node, {
+      characterData: true,
+    })
+
+    notify = function () {
+      node.data = toggle = !toggle
+    } // environments with maybe non-completely correct, but existent Promise
+  } else if (Promise$1 && Promise$1.resolve) {
+    // Promise.resolve without an argument throws an error in LG WebOS 2
+    promise = Promise$1.resolve(undefined)
+    then = promise.then
+
+    notify = function () {
+      then.call(promise, flush)
+    } // for other environments - macrotask based on:
+    // - setImmediate
+    // - MessageChannel
+    // - window.postMessag
+    // - onreadystatechange
+    // - setTimeout
+  } else {
+    notify = function () {
+      // strange IE + webpack dev server bug - use .call(global)
+      macrotask.call(global_1, flush)
+    }
+  }
+}
+
+var microtask =
+  queueMicrotask ||
+  function (fn) {
+    var task = {
+      fn: fn,
+      next: undefined,
+    }
+    if (last) last.next = task
+
+    if (!head) {
+      head = task
+      notify()
+    }
+
+    last = task
+  }
+
+var PromiseCapability = function (C) {
+  var resolve, reject
+  this.promise = new C(function ($$resolve, $$reject) {
+    if (resolve !== undefined || reject !== undefined)
+      throw TypeError('Bad Promise constructor')
+    resolve = $$resolve
+    reject = $$reject
+  })
+  this.resolve = aFunction$1(resolve)
+  this.reject = aFunction$1(reject)
+} // 25.4.1.5 NewPromiseCapability(C)
+
+var f$5 = function (C) {
+  return new PromiseCapability(C)
+}
+
+var newPromiseCapability = {
+  f: f$5,
+}
+
+var promiseResolve = function (C, x) {
+  anObject(C)
+  if (isObject(x) && x.constructor === C) return x
+  var promiseCapability = newPromiseCapability.f(C)
+  var resolve = promiseCapability.resolve
+  resolve(x)
+  return promiseCapability.promise
+}
+
+var hostReportErrors = function (a, b) {
+  var console = global_1.console
+
+  if (console && console.error) {
+    arguments.length === 1 ? console.error(a) : console.error(a, b)
+  }
+}
+
+var perform = function (exec) {
+  try {
+    return {
+      error: false,
+      value: exec(),
+    }
+  } catch (error) {
+    return {
+      error: true,
+      value: error,
+    }
+  }
+}
+
+var process$2 = global_1.process
+var versions = process$2 && process$2.versions
+var v8 = versions && versions.v8
+var match, version
+
+if (v8) {
+  match = v8.split('.')
+  version = match[0] + match[1]
+} else if (engineUserAgent) {
+  match = engineUserAgent.match(/Edge\/(\d+)/)
+
+  if (!match || match[1] >= 74) {
+    match = engineUserAgent.match(/Chrome\/(\d+)/)
+    if (match) version = match[1]
+  }
+}
+
+var engineV8Version = version && +version
+
+var task$1 = task.set
+var SPECIES$2 = wellKnownSymbol('species')
+var PROMISE = 'Promise'
+var getInternalState = internalState.get
+var setInternalState = internalState.set
+var getInternalPromiseState = internalState.getterFor(PROMISE)
+var PromiseConstructor = nativePromiseConstructor
+var TypeError$1 = global_1.TypeError
+var document$2 = global_1.document
+var process$3 = global_1.process
+var $fetch = getBuiltIn('fetch')
+var newPromiseCapability$1 = newPromiseCapability.f
+var newGenericPromiseCapability = newPromiseCapability$1
+var IS_NODE$1 = classofRaw(process$3) == 'process'
+var DISPATCH_EVENT = !!(
+  document$2 &&
+  document$2.createEvent &&
+  global_1.dispatchEvent
+)
+var UNHANDLED_REJECTION = 'unhandledrejection'
+var REJECTION_HANDLED = 'rejectionhandled'
+var PENDING = 0
+var FULFILLED = 1
+var REJECTED = 2
+var HANDLED = 1
+var UNHANDLED = 2
+var Internal, OwnPromiseCapability, PromiseWrapper, nativeThen
+var FORCED = isForced_1(PROMISE, function () {
+  var GLOBAL_CORE_JS_PROMISE =
+    inspectSource(PromiseConstructor) !== String(PromiseConstructor)
+
+  if (!GLOBAL_CORE_JS_PROMISE) {
+    // V8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
+    // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
+    // We can't detect it synchronously, so just check versions
+    if (engineV8Version === 66) return true // Unhandled rejections tracking support, NodeJS Promise without it fails @@species test
+
+    if (!IS_NODE$1 && typeof PromiseRejectionEvent != 'function') return true
+  } // We need Promise#finally in the pure version for preventing prototype pollution
+  // deoptimization and performance degradation
+  // https://github.com/zloirock/core-js/issues/679
+
+  if (engineV8Version >= 51 && /native code/.test(PromiseConstructor))
+    return false // Detect correctness of subclassing with @@species support
+
+  var promise = PromiseConstructor.resolve(1)
+
+  var FakePromise = function (exec) {
+    exec(
+      function () {
+        /* empty */
+      },
+      function () {
+        /* empty */
+      }
+    )
+  }
+
+  var constructor = (promise.constructor = {})
+  constructor[SPECIES$2] = FakePromise
+  return !(
+    promise.then(function () {
+      /* empty */
+    }) instanceof FakePromise
+  )
+})
+var INCORRECT_ITERATION =
+  FORCED ||
+  !checkCorrectnessOfIteration(function (iterable) {
+    PromiseConstructor.all(iterable)['catch'](function () {
+      /* empty */
+    })
+  }) // helpers
+
+var isThenable = function (it) {
+  var then
+  return isObject(it) && typeof (then = it.then) == 'function' ? then : false
+}
+
+var notify$1 = function (promise, state, isReject) {
+  if (state.notified) return
+  state.notified = true
+  var chain = state.reactions
+  microtask(function () {
+    var value = state.value
+    var ok = state.state == FULFILLED
+    var index = 0 // variable length - can't use forEach
+
+    while (chain.length > index) {
+      var reaction = chain[index++]
+      var handler = ok ? reaction.ok : reaction.fail
+      var resolve = reaction.resolve
+      var reject = reaction.reject
+      var domain = reaction.domain
+      var result, then, exited
+
+      try {
+        if (handler) {
+          if (!ok) {
+            if (state.rejection === UNHANDLED) onHandleUnhandled(promise, state)
+            state.rejection = HANDLED
+          }
+
+          if (handler === true) result = value
+          else {
+            if (domain) domain.enter()
+            result = handler(value) // can throw
+
+            if (domain) {
+              domain.exit()
+              exited = true
+            }
+          }
+
+          if (result === reaction.promise) {
+            reject(TypeError$1('Promise-chain cycle'))
+          } else if ((then = isThenable(result))) {
+            then.call(result, resolve, reject)
+          } else resolve(result)
+        } else reject(value)
+      } catch (error) {
+        if (domain && !exited) domain.exit()
+        reject(error)
+      }
+    }
+
+    state.reactions = []
+    state.notified = false
+    if (isReject && !state.rejection) onUnhandled(promise, state)
+  })
+}
+
+var dispatchEvent = function (name, promise, reason) {
+  var event, handler
+
+  if (DISPATCH_EVENT) {
+    event = document$2.createEvent('Event')
+    event.promise = promise
+    event.reason = reason
+    event.initEvent(name, false, true)
+    global_1.dispatchEvent(event)
+  } else
+    event = {
+      promise: promise,
+      reason: reason,
+    }
+
+  if ((handler = global_1['on' + name])) handler(event)
+  else if (name === UNHANDLED_REJECTION)
+    hostReportErrors('Unhandled promise rejection', reason)
+}
+
+var onUnhandled = function (promise, state) {
+  task$1.call(global_1, function () {
+    var value = state.value
+    var IS_UNHANDLED = isUnhandled(state)
+    var result
+
+    if (IS_UNHANDLED) {
+      result = perform(function () {
+        if (IS_NODE$1) {
+          process$3.emit('unhandledRejection', value, promise)
+        } else dispatchEvent(UNHANDLED_REJECTION, promise, value)
+      }) // Browsers should not trigger `rejectionHandled` event if it was handled here, NodeJS - should
+
+      state.rejection = IS_NODE$1 || isUnhandled(state) ? UNHANDLED : HANDLED
+      if (result.error) throw result.value
+    }
+  })
+}
+
+var isUnhandled = function (state) {
+  return state.rejection !== HANDLED && !state.parent
+}
+
+var onHandleUnhandled = function (promise, state) {
+  task$1.call(global_1, function () {
+    if (IS_NODE$1) {
+      process$3.emit('rejectionHandled', promise)
+    } else dispatchEvent(REJECTION_HANDLED, promise, state.value)
+  })
+}
+
+var bind = function (fn, promise, state, unwrap) {
+  return function (value) {
+    fn(promise, state, value, unwrap)
+  }
+}
+
+var internalReject = function (promise, state, value, unwrap) {
+  if (state.done) return
+  state.done = true
+  if (unwrap) state = unwrap
+  state.value = value
+  state.state = REJECTED
+  notify$1(promise, state, true)
+}
+
+var internalResolve = function (promise, state, value, unwrap) {
+  if (state.done) return
+  state.done = true
+  if (unwrap) state = unwrap
+
+  try {
+    if (promise === value) throw TypeError$1("Promise can't be resolved itself")
+    var then = isThenable(value)
+
+    if (then) {
+      microtask(function () {
+        var wrapper = {
+          done: false,
+        }
+
+        try {
+          then.call(
+            value,
+            bind(internalResolve, promise, wrapper, state),
+            bind(internalReject, promise, wrapper, state)
+          )
+        } catch (error) {
+          internalReject(promise, wrapper, error, state)
+        }
+      })
+    } else {
+      state.value = value
+      state.state = FULFILLED
+      notify$1(promise, state, false)
+    }
+  } catch (error) {
+    internalReject(
+      promise,
+      {
+        done: false,
+      },
+      error,
+      state
+    )
+  }
+} // constructor polyfill
+
+if (FORCED) {
+  // 25.4.3.1 Promise(executor)
+  PromiseConstructor = function Promise(executor) {
+    anInstance(this, PromiseConstructor, PROMISE)
+    aFunction$1(executor)
+    Internal.call(this)
+    var state = getInternalState(this)
+
+    try {
+      executor(
+        bind(internalResolve, this, state),
+        bind(internalReject, this, state)
+      )
+    } catch (error) {
+      internalReject(this, state, error)
+    }
+  } // eslint-disable-next-line no-unused-vars
+
+  Internal = function Promise(executor) {
+    setInternalState(this, {
+      type: PROMISE,
+      done: false,
+      notified: false,
+      parent: false,
+      reactions: [],
+      rejection: false,
+      state: PENDING,
+      value: undefined,
+    })
+  }
+
+  Internal.prototype = redefineAll(PromiseConstructor.prototype, {
+    // `Promise.prototype.then` method
+    // https://tc39.github.io/ecma262/#sec-promise.prototype.then
+    then: function then(onFulfilled, onRejected) {
+      var state = getInternalPromiseState(this)
+      var reaction = newPromiseCapability$1(
+        speciesConstructor(this, PromiseConstructor)
+      )
+      reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true
+      reaction.fail = typeof onRejected == 'function' && onRejected
+      reaction.domain = IS_NODE$1 ? process$3.domain : undefined
+      state.parent = true
+      state.reactions.push(reaction)
+      if (state.state != PENDING) notify$1(this, state, false)
+      return reaction.promise
+    },
+    // `Promise.prototype.catch` method
+    // https://tc39.github.io/ecma262/#sec-promise.prototype.catch
+    catch: function (onRejected) {
+      return this.then(undefined, onRejected)
+    },
+  })
+
+  OwnPromiseCapability = function () {
+    var promise = new Internal()
+    var state = getInternalState(promise)
+    this.promise = promise
+    this.resolve = bind(internalResolve, promise, state)
+    this.reject = bind(internalReject, promise, state)
+  }
+
+  newPromiseCapability.f = newPromiseCapability$1 = function (C) {
+    return C === PromiseConstructor || C === PromiseWrapper
+      ? new OwnPromiseCapability(C)
+      : newGenericPromiseCapability(C)
+  }
+
+  if (typeof nativePromiseConstructor == 'function') {
+    nativeThen = nativePromiseConstructor.prototype.then // wrap native Promise#then for native async functions
+
+    redefine(
+      nativePromiseConstructor.prototype,
+      'then',
+      function then(onFulfilled, onRejected) {
+        var that = this
+        return new PromiseConstructor(function (resolve, reject) {
+          nativeThen.call(that, resolve, reject)
+        }).then(onFulfilled, onRejected) // https://github.com/zloirock/core-js/issues/640
+      },
+      {
+        unsafe: true,
+      }
+    ) // wrap fetch result
+
+    if (typeof $fetch == 'function')
+      _export(
+        {
+          global: true,
+          enumerable: true,
+          forced: true,
+        },
+        {
+          // eslint-disable-next-line no-unused-vars
+          fetch: function fetch(
+            input
+            /* , init */
+          ) {
+            return promiseResolve(
+              PromiseConstructor,
+              $fetch.apply(global_1, arguments)
+            )
+          },
+        }
+      )
+  }
+}
+
+_export(
+  {
+    global: true,
+    wrap: true,
+    forced: FORCED,
+  },
+  {
+    Promise: PromiseConstructor,
+  }
+)
+setToStringTag(PromiseConstructor, PROMISE, false)
+setSpecies(PROMISE)
+PromiseWrapper = getBuiltIn(PROMISE) // statics
+
+_export(
+  {
+    target: PROMISE,
+    stat: true,
+    forced: FORCED,
+  },
+  {
+    // `Promise.reject` method
+    // https://tc39.github.io/ecma262/#sec-promise.reject
+    reject: function reject(r) {
+      var capability = newPromiseCapability$1(this)
+      capability.reject.call(undefined, r)
+      return capability.promise
+    },
+  }
+)
+_export(
+  {
+    target: PROMISE,
+    stat: true,
+    forced: FORCED,
+  },
+  {
+    // `Promise.resolve` method
+    // https://tc39.github.io/ecma262/#sec-promise.resolve
+    resolve: function resolve(x) {
+      return promiseResolve(this, x)
+    },
+  }
+)
+_export(
+  {
+    target: PROMISE,
+    stat: true,
+    forced: INCORRECT_ITERATION,
+  },
+  {
+    // `Promise.all` method
+    // https://tc39.github.io/ecma262/#sec-promise.all
+    all: function all(iterable) {
+      var C = this
+      var capability = newPromiseCapability$1(C)
+      var resolve = capability.resolve
+      var reject = capability.reject
+      var result = perform(function () {
+        var $promiseResolve = aFunction$1(C.resolve)
+        var values = []
+        var counter = 0
+        var remaining = 1
+        iterate_1(iterable, function (promise) {
+          var index = counter++
+          var alreadyCalled = false
+          values.push(undefined)
+          remaining++
+          $promiseResolve.call(C, promise).then(function (value) {
+            if (alreadyCalled) return
+            alreadyCalled = true
+            values[index] = value
+            --remaining || resolve(values)
+          }, reject)
+        })
+        --remaining || resolve(values)
+      })
+      if (result.error) reject(result.value)
+      return capability.promise
+    },
+    // `Promise.race` method
+    // https://tc39.github.io/ecma262/#sec-promise.race
+    race: function race(iterable) {
+      var C = this
+      var capability = newPromiseCapability$1(C)
+      var reject = capability.reject
+      var result = perform(function () {
+        var $promiseResolve = aFunction$1(C.resolve)
+        iterate_1(iterable, function (promise) {
+          $promiseResolve.call(C, promise).then(capability.resolve, reject)
+        })
+      })
+      if (result.error) reject(result.value)
+      return capability.promise
+    },
+  }
+)
+
 // https://tc39.github.io/ecma262/#sec-get-regexp.prototype.flags
 
 var regexpFlags = function () {
@@ -775,36 +1807,7 @@ _export(
   }
 )
 
-var nativeSymbol =
-  !!Object.getOwnPropertySymbols &&
-  !fails(function () {
-    // Chrome 38 Symbol has incorrect toString conversion
-    // eslint-disable-next-line no-undef
-    return !String(Symbol())
-  })
-
-var useSymbolAsUid =
-  nativeSymbol && // eslint-disable-next-line no-undef
-  !Symbol.sham && // eslint-disable-next-line no-undef
-  typeof Symbol.iterator == 'symbol'
-
-var WellKnownSymbolsStore = shared('wks')
-var Symbol$1 = global_1.Symbol
-var createWellKnownSymbol = useSymbolAsUid
-  ? Symbol$1
-  : (Symbol$1 && Symbol$1.withoutSetter) || uid
-
-var wellKnownSymbol = function (name) {
-  if (!has(WellKnownSymbolsStore, name)) {
-    if (nativeSymbol && has(Symbol$1, name))
-      WellKnownSymbolsStore[name] = Symbol$1[name]
-    else WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name)
-  }
-
-  return WellKnownSymbolsStore[name]
-}
-
-var SPECIES = wellKnownSymbol('species')
+var SPECIES$3 = wellKnownSymbol('species')
 var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function () {
   // #replace needs built-in support for named groups.
   // #match works fine because it just return the exec results, even if it has
@@ -878,7 +1881,7 @@ var fixRegexpWellKnownSymbolLogic = function (KEY, length, exec, sham) {
 
         re.constructor = {}
 
-        re.constructor[SPECIES] = function () {
+        re.constructor[SPECIES$3] = function () {
           return re
         }
 
@@ -1228,9 +2231,52 @@ var info$1 = /*#__PURE__*/ Object.freeze({
   default: info,
 })
 
+function _await(value, then, direct) {
+  if (direct) {
+    return then ? then(value) : value
+  }
+
+  if (!value || !value.then) {
+    value = Promise.resolve(value)
+  }
+
+  return then ? value.then(then) : value
+}
+
 var log = global.fis.log
 
-function process(content, file, config) {
+function _async(f) {
+  return function () {
+    for (var args = [], i = 0; i < arguments.length; i++) {
+      args[i] = arguments[i]
+    }
+
+    try {
+      return Promise.resolve(f.apply(this, args))
+    } catch (e) {
+      return Promise.reject(e)
+    }
+  }
+}
+
+var runBeautify = sync__default['default'](
+  _async(function (html, rules) {
+    return _await(
+      posthtml__default['default']()
+        .use(
+          beautify__default['default']({
+            rules: rules,
+          })
+        )
+        .process(html),
+      function (data) {
+        return data.html
+      }
+    )
+  })
+)
+
+function process$4(content, file, config) {
   content = content.replace(
     /__relative\("(.*?)"\)/g,
     '"__relative_fn1_start__$1__relative_fn1_end__"'
@@ -1239,22 +2285,12 @@ function process(content, file, config) {
     /__relative<<<"(.*?)">>>/g,
     '"__relative_fn2_start__$1__relative_fn2_end__"'
   )
-  var promise = posthtml__default['default']()
-    .use(
-      beautify__default['default']({
-        rules: config.rules,
-      })
-    )
-    .process(content)
-    .then(function (data) {
-      return data.html
-    })
 
   try {
-    content = sync__default['default'](promise)
+    content = runBeautify(content, config.rules)
   } catch (error) {
     log.warn('%s might not processed due to:\n %s', file.id, error)
-    process.exitCode = 1
+    process$4.exitCode = 1
     throw new Error('posthtml-beautify error.')
   }
 
@@ -1269,4 +2305,4 @@ function process(content, file, config) {
   return content
 }
 
-module.exports = exportPlugin(process, info$1)
+module.exports = exportPlugin(process$4, info$1)

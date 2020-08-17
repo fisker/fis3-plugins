@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "postcss": "7.0.32",
-    "promise-synchronizer": "2.0.0",
+    "promise-synchronizer": "3.0.0",
     "stylelint": "13.6.1"
   },
   "publishConfig": {

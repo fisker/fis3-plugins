@@ -1757,7 +1757,11 @@ function _await(value, then, direct) {
   return then ? value.then(then) : value
 }
 
-var postcssProcess = function postcssProcess(content, file, config) {
+var postcssProcess = sync__default['default'](function postcssProcess(
+  content,
+  file,
+  config
+) {
   return _call(postcssrc__default['default'], function (_ref) {
     var plugins = _ref.plugins,
       options = _ref.options
@@ -1778,7 +1782,7 @@ var postcssProcess = function postcssProcess(content, file, config) {
       }
     )
   })
-}
+})
 
 function _call(body, then, direct) {
   if (direct) {
@@ -1794,7 +1798,7 @@ function _call(body, then, direct) {
 }
 
 function process$4(content, file, config) {
-  return sync__default['default'](postcssProcess(content, file, config))
+  return postcssProcess(content, file, config)
 }
 
 module.exports = exportPlugin(process$4, info$1)
