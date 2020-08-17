@@ -1,66 +1,66 @@
 {
   "fis3-hook-relative-legal-html": {
-    "version": "3.1.9"
+    "version": "3.1.10"
   },
   "fis3-lint-eslint-noisy": {
-    "version": "4.0.10"
+    "version": "4.0.11"
   },
   "fis3-lint-htmlhint": {
-    "version": "2.1.10"
+    "version": "2.1.11"
   },
   "fis3-lint-standard": {
-    "version": "2.1.10"
+    "version": "2.1.11"
   },
   "fis3-lint-stylelint": {
-    "version": "4.1.11"
+    "version": "4.1.12"
   },
   "fis3-optimizer-cleancss": {
-    "version": "2.1.9"
+    "version": "2.1.10"
   },
   "fis3-optimizer-terser": {
-    "version": "2.1.10"
+    "version": "3.0.0"
   },
   "fis3-optimizer-uglifyjs": {
-    "version": "2.1.10"
+    "version": "2.1.11"
   },
   "fis3-parser-dart-sass": {
-    "version": "2.2.0"
+    "version": "2.2.1"
   },
   "fis3-parser-ejs": {
-    "version": "2.1.9"
-  },
-  "fis3-parser-lodash-template": {
     "version": "2.1.10"
   },
+  "fis3-parser-lodash-template": {
+    "version": "2.1.11"
+  },
   "fis3-parser-node-sass-latest": {
-    "version": "2.1.9"
+    "version": "2.1.10"
   },
   "fis3-parser-pug": {
     "version": "2.0.7"
   },
   "fis3-postprocessor-autoprefixer-latest": {
-    "version": "2.1.8"
+    "version": "2.1.9"
   },
   "fis3-postprocessor-html": {
-    "version": "2.0.6"
+    "version": "2.0.7"
   },
   "fis3-postprocessor-postcss-with-rc": {
-    "version": "2.1.10"
-  },
-  "fis3-postprocessor-posthtml-beautify": {
     "version": "2.1.11"
   },
+  "fis3-postprocessor-posthtml-beautify": {
+    "version": "2.1.12"
+  },
   "fis3-postprocessor-prettier": {
-    "version": "2.0.8"
+    "version": "2.0.9"
   },
   "fis3-postprocessor-prettier-css": {
     "version": "0.0.0"
   },
   "fis3-postprocessor-prettyhtml": {
-    "version": "2.1.9"
+    "version": "2.1.10"
   },
   "fis3-postprocessor-standard": {
-    "version": "2.1.9"
+    "version": "2.1.10"
   },
   "fis3-postprocessor-stylefmt": {
     "version": "0.0.0"
@@ -69,6 +69,6 @@
     "version": "2.0.6"
   },
   "fis3-server-browsersync": {
-    "version": "2.2.2"
+    "version": "2.2.3"
   }
 }
