@@ -64,7 +64,7 @@
     "execa": "4.0.3",
     "fast-cartesian-product": "1.0.3",
     "htmlhint": "0.14.1",
-    "js-beautify": "1.11.0",
+    "js-beautify": "1.12.0",
     "lodash": "4.17.20",
     "lodash.merge": "4.6.2",
     "morgan": "1.10.0",
