@@ -6,6 +6,18 @@ import * as info from './info'
 
 const {log} = global.fis
 
+const runBeautify = sync(async (html, rules) => {
+  const data = await posthtml()
+    .use(
+      beautify({
+        rules,
+      })
+    )
+    .process(html)
+
+  return data.html
+})
+
 function process(content, file, config) {
   content = content.replace(
     /__relative\("(.*?)"\)/g,
@@ -16,19 +28,8 @@ function process(content, file, config) {
     '"__relative_fn2_start__$1__relative_fn2_end__"'
   )
 
-  const promise = posthtml()
-    .use(
-      beautify({
-        rules: config.rules,
-      })
-    )
-    .process(content)
-    .then(function (data) {
-      return data.html
-    })
-
   try {
-    content = sync(promise)
+    content = runBeautify(content, config.rules)
   } catch (error) {
     log.warn('%s might not processed due to:\n %s', file.id, error)
 

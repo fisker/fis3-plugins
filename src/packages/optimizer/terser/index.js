@@ -8,6 +8,7 @@ import exportPlugin from '../../../shared/export-plugin'
 import * as info from './info'
 
 const {log} = global.fis
+const synchronizedMinify = sync(minify)
 
 function getTerserOptions(file, config) {
   const options = {
@@ -55,7 +56,7 @@ function deriveSourceMap(file, sourceMap) {
 
 function process(content, file, config) {
   const options = getTerserOptions(file, config)
-  const result = sync(minify(content, options))
+  const result = synchronizedMinify(content, options)
 
   if (result.warnings) {
     log.warn(result.warnings)
