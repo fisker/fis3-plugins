@@ -10,8 +10,9 @@ function _interopDefaultLegacy(e) {
   return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var util__default = /*#__PURE__*/ _interopDefaultLegacy(util)
+var path__default = /*#__PURE__*/ _interopDefaultLegacy(path$1)
 var sass__default = /*#__PURE__*/ _interopDefaultLegacy(sass)
+var fs__default = /*#__PURE__*/ _interopDefaultLegacy(fs)
 var cartesianProduct__default = /*#__PURE__*/ _interopDefaultLegacy(
   cartesianProduct
 )
@@ -825,6 +826,45 @@ _export(
   }
 )
 
+var arrayMethodIsStrict = function (METHOD_NAME, argument) {
+  var method = [][METHOD_NAME]
+  return (
+    !!method &&
+    fails(function () {
+      // eslint-disable-next-line no-useless-call,no-throw-literal
+      method.call(
+        null,
+        argument ||
+          function () {
+            throw 1
+          },
+        1
+      )
+    })
+  )
+}
+
+var nativeJoin = [].join
+var ES3_STRINGS = indexedObject != Object
+var STRICT_METHOD = arrayMethodIsStrict('join', ',') // `Array.prototype.join` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.join
+
+_export(
+  {
+    target: 'Array',
+    proto: true,
+    forced: ES3_STRINGS || !STRICT_METHOD,
+  },
+  {
+    join: function join(separator) {
+      return nativeJoin.call(
+        toIndexedObject(this),
+        separator === undefined ? ',' : separator
+      )
+    },
+  }
+)
+
 var aFunction$1 = function (it) {
   if (typeof it != 'function') {
     throw TypeError(String(it) + ' is not a function')
@@ -1045,26 +1085,8 @@ var arrayReduce = {
   right: createMethod$2(true),
 }
 
-var arrayMethodIsStrict = function (METHOD_NAME, argument) {
-  var method = [][METHOD_NAME]
-  return (
-    !!method &&
-    fails(function () {
-      // eslint-disable-next-line no-useless-call,no-throw-literal
-      method.call(
-        null,
-        argument ||
-          function () {
-            throw 1
-          },
-        1
-      )
-    })
-  )
-}
-
 var $reduce = arrayReduce.left
-var STRICT_METHOD = arrayMethodIsStrict('reduce')
+var STRICT_METHOD$1 = arrayMethodIsStrict('reduce')
 var USES_TO_LENGTH$1 = arrayMethodUsesToLength('reduce', {
   1: 0,
 }) // `Array.prototype.reduce` method
@@ -1074,7 +1096,7 @@ _export(
   {
     target: 'Array',
     proto: true,
-    forced: !STRICT_METHOD || !USES_TO_LENGTH$1,
+    forced: !STRICT_METHOD$1 || !USES_TO_LENGTH$1,
   },
   {
     reduce: function reduce(
@@ -1863,27 +1885,6 @@ iterators.Arguments = iterators.Array // https://tc39.github.io/ecma262/#sec-arr
 addToUnscopables('keys')
 addToUnscopables('values')
 addToUnscopables('entries')
-
-var nativeJoin = [].join
-var ES3_STRINGS = indexedObject != Object
-var STRICT_METHOD$1 = arrayMethodIsStrict('join', ',') // `Array.prototype.join` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.join
-
-_export(
-  {
-    target: 'Array',
-    proto: true,
-    forced: ES3_STRINGS || !STRICT_METHOD$1,
-  },
-  {
-    join: function join(separator) {
-      return nativeJoin.call(
-        toIndexedObject(this),
-        separator === undefined ? ',' : separator
-      )
-    },
-  }
-)
 
 var HAS_SPECIES_SUPPORT$2 = arrayMethodHasSpeciesSupport('slice')
 var USES_TO_LENGTH$4 = arrayMethodUsesToLength('slice', {
@@ -3892,7 +3893,7 @@ var extensions = ['scss', 'css', 'sass'].map(function (extension) {
 })
 
 var hasExtension = function hasExtension(file) {
-  return extensions.includes(path$1.extname(file))
+  return extensions.includes(path__default['default'].extname(file))
 }
 
 var unique = function unique(array) {
@@ -3901,18 +3902,20 @@ var unique = function unique(array) {
 
 function getDirectories(directories, file) {
   directories = directories.map(function (directory) {
-    return path$1.join(directory, file)
+    return path__default['default'].join(directory, file)
   })
 
-  if (path$1.isAbsolute(file)) {
+  if (path__default['default'].isAbsolute(file)) {
     directories.push(file)
   }
 
-  return directories.map(path$1.dirname)
+  return directories.map(function (directory) {
+    return path__default['default'].dirname(directory)
+  })
 }
 
 function possibleFileNames(file) {
-  var fileName = path$1.basename(file)
+  var fileName = path__default['default'].basename(file)
   var fileNames = [fileName]
 
   if (!isPartial(fileName)) {
@@ -3943,7 +3946,7 @@ function getFiles(directories, file) {
       directory = _ref4[0],
       fileName = _ref4[1]
 
-    return path$1.join(directory, fileName)
+    return path__default['default'].join(directory, fileName)
   })
   return unique(files)
 }
@@ -3955,7 +3958,9 @@ function resolveInDirectories(_ref5) {
     _ref5$alias = _ref5.alias,
     alias = _ref5$alias === void 0 ? {} : _ref5$alias
   return function (file, previous) {
-    var cacheKey = ''.concat(path$1.normalize(previous), '|').concat(file)
+    var cacheKey = ''
+      .concat(path__default['default'].normalize(previous), '|')
+      .concat(file)
 
     if (cache[cacheKey]) {
       var _file = cache[cacheKey]
@@ -3983,17 +3988,18 @@ function resolveInDirectories(_ref5) {
       ) {
         var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
           aliasName = _Object$entries$_i[0],
-          path = _Object$entries$_i[1]
+          _path = _Object$entries$_i[1]
 
         if (file.startsWith(aliasName)) {
-          file = file.replace(aliasName, ''.concat(path, '/'))
+          file = file.replace(aliasName, ''.concat(_path, '/'))
         }
       }
 
       files = getFiles(
-        [path$1.dirname(previous)].concat(_toConsumableArray(includePaths), [
-          process.cwd(),
-        ]),
+        [path__default['default'].dirname(previous)].concat(
+          _toConsumableArray(includePaths),
+          [process.cwd()]
+        ),
         file
       )
     }
@@ -4003,7 +4009,7 @@ function resolveInDirectories(_ref5) {
         try {
           return {
             file: file,
-            contents: fs.readFileSync(file, 'utf8'),
+            contents: fs__default['default'].readFileSync(file, 'utf8'),
           }
         } catch (_unused) {
           return null
@@ -4084,12 +4090,17 @@ function normalizeIncludePath(directories) {
   return directories.reduce(function (all, directory) {
     var directories_ = []
 
-    if (path$1.isAbsolute(directory) && directory[0] !== '/') {
+    if (
+      path__default['default'].isAbsolute(directory) &&
+      directory[0] !== '/'
+    ) {
       directories_.push(directory)
     } else {
       directories_.push(directory)
-      directories_.push(path$1.join(PROJECT_ROOT, directory))
-      directories_.push(path$1.join(process$2.cwd(), directory))
+      directories_.push(path__default['default'].join(PROJECT_ROOT, directory))
+      directories_.push(
+        path__default['default'].join(process$2.cwd(), directory)
+      )
     }
 
     return [].concat(_toConsumableArray(all), directories_)
@@ -4108,10 +4119,11 @@ function process$2(content, file, config) {
     sourceMapContents = config.sourceMapContents,
     _config$alias = config.alias,
     alias = _config$alias === void 0 ? {} : _config$alias
-  includePaths = [path$1.dirname(file.realpath)].concat(
-    _toConsumableArray(normalizeIncludePath(includePaths)),
-    [PROJECT_ROOT]
-  )
+  includePaths = [
+    path__default['default'].dirname(file.realpath),
+  ].concat(_toConsumableArray(normalizeIncludePath(includePaths)), [
+    PROJECT_ROOT,
+  ])
   var sourceMapFile
 
   if (sourceMap) {
@@ -4167,7 +4179,7 @@ function process$2(content, file, config) {
     result = sass__default['default'].renderSync(options)
   } catch (error) {
     fis.log.error(
-      util__default['default'].format(
+      util.format(
         '%s'.red + ' [`%s` %s:%s]'.yellow,
         error.message,
         error.file,

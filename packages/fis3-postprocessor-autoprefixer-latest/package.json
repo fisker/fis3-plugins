@@ -26,8 +26,8 @@
     "index.js"
   ],
   "dependencies": {
-    "autoprefixer": "9.8.6",
-    "postcss": "8.0.3"
+    "autoprefixer": "10.0.0",
+    "postcss": "8.0.8"
   },
   "publishConfig": {
     "access": "public",

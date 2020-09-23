@@ -36,7 +36,7 @@
     "morgan": "1.10.0",
     "serve-directory": "3.3.0",
     "serve-directory-theme-octicons": "2.0.1",
-    "yargs": "15.4.1",
+    "yargs": "16.0.3",
     "yog-devtools": "0.1.1"
   },
   "publishConfig": {
