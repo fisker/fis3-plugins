@@ -1,24 +1,24 @@
-import {join, isAbsolute, dirname, basename, normalize, extname} from 'path'
-import {readFileSync} from 'fs'
+import path from 'path'
+import fs from 'fs'
 import cartesianProduct from 'fast-cartesian-product'
 
 const isPartial = (file) => file[0] === '_'
 const extensions = ['scss', 'css', 'sass'].map((extension) => `.${extension}`)
-const hasExtension = (file) => extensions.includes(extname(file))
+const hasExtension = (file) => extensions.includes(path.extname(file))
 const unique = (array) => [...new Set(array)]
 
 function getDirectories(directories, file) {
-  directories = directories.map((directory) => join(directory, file))
+  directories = directories.map((directory) => path.join(directory, file))
 
-  if (isAbsolute(file)) {
+  if (path.isAbsolute(file)) {
     directories.push(file)
   }
 
-  return directories.map(dirname)
+  return directories.map((directory) => path.dirname(directory))
 }
 
 function possibleFileNames(file) {
-  const fileName = basename(file)
+  const fileName = path.basename(file)
 
   const fileNames = [fileName]
 
@@ -40,14 +40,14 @@ function getFiles(directories, file) {
   const files = cartesianProduct([
     directories,
     fileNames,
-  ]).map(([directory, fileName]) => join(directory, fileName))
+  ]).map(([directory, fileName]) => path.join(directory, fileName))
 
   return unique(files)
 }
 
 function resolveInDirectories({includePaths, cache = {}, alias = {}}) {
   return function (file, previous) {
-    const cacheKey = `${normalize(previous)}|${file}`
+    const cacheKey = `${path.normalize(previous)}|${file}`
 
     if (cache[cacheKey]) {
       const file = cache[cacheKey]
@@ -72,7 +72,7 @@ function resolveInDirectories({includePaths, cache = {}, alias = {}}) {
       }
 
       files = getFiles(
-        [dirname(previous), ...includePaths, process.cwd()],
+        [path.dirname(previous), ...includePaths, process.cwd()],
         file
       )
     }
@@ -82,7 +82,7 @@ function resolveInDirectories({includePaths, cache = {}, alias = {}}) {
         try {
           return {
             file,
-            contents: readFileSync(file, 'utf8'),
+            contents: fs.readFileSync(file, 'utf8'),
           }
         } catch {
           return null

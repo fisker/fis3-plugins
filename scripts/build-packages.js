@@ -1,11 +1,11 @@
-import {join} from 'path'
+import path from 'path'
 import {template} from 'lodash'
 import writePrettierFile from 'write-prettier-file'
 import Listr from 'listr'
 import packages from './packages'
 import readFile from './utils/read-file'
 
-const SOURCE_DIR = join(__dirname, '..', 'src')
+const SOURCE_DIR = path.join(__dirname, '../src')
 
 new Listr([
   ...packages.map((package_) => ({
@@ -17,12 +17,12 @@ new Listr([
     title: 'miscellaneous',
     task() {
       const templateFile = readFile(
-        join(SOURCE_DIR, 'templates', 'npm-status.ejs')
+        path.join(SOURCE_DIR, 'templates/npm-status.ejs')
       )
       const render = template(templateFile)
 
       return writePrettierFile(
-        join(__dirname, '..', 'packages', 'readme.md'),
+        path.join(__dirname, '../packages/readme.md'),
         render({packages}).trim()
       )
     },

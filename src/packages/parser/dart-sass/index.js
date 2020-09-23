@@ -1,6 +1,6 @@
-import {join, dirname, isAbsolute} from 'path'
+import path from 'path'
 import {pathToFileURL} from 'url'
-import util from 'util'
+import {format} from 'util'
 import sass from 'sass'
 import exportPlugin from '../../../shared/export-plugin'
 import sassImportResolve from '../../../shared/sass-import-resolver'
@@ -12,12 +12,12 @@ const PROJECT_ROOT = fis.project.getProjectPath()
 function normalizeIncludePath(directories) {
   return directories.reduce((all, directory) => {
     const directories_ = []
-    if (isAbsolute(directory) && directory[0] !== '/') {
+    if (path.isAbsolute(directory) && directory[0] !== '/') {
       directories_.push(directory)
     } else {
       directories_.push(directory)
-      directories_.push(join(PROJECT_ROOT, directory))
-      directories_.push(join(process.cwd(), directory))
+      directories_.push(path.join(PROJECT_ROOT, directory))
+      directories_.push(path.join(process.cwd(), directory))
     }
 
     return [...all, ...directories_]
@@ -37,7 +37,7 @@ function process(content, file, config) {
   } = config
 
   includePaths = [
-    dirname(file.realpath),
+    path.dirname(file.realpath),
     ...normalizeIncludePath(includePaths),
     PROJECT_ROOT,
   ]
@@ -88,7 +88,7 @@ function process(content, file, config) {
     result = sass.renderSync(options)
   } catch (error) {
     fis.log.error(
-      util.format(
+      format(
         '%s'.red + ' [`%s` %s:%s]'.yellow,
         error.message,
         error.file,
