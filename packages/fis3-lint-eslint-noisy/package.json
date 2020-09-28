@@ -27,7 +27,7 @@
     "index.js"
   ],
   "dependencies": {
-    "eslint": "7.9.0"
+    "eslint": "7.10.0"
   },
   "publishConfig": {
     "access": "public",
