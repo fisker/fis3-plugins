@@ -81,7 +81,7 @@
     "serve-directory-theme-octicons": "2.0.1",
     "standard": "14.3.4",
     "stylelint": "13.7.2",
-    "terser": "5.3.3",
+    "terser": "5.3.4",
     "uglify-js": "3.11.0",
     "yargs": "16.0.3",
     "yog-devtools": "0.1.1"
