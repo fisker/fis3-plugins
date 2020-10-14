@@ -3,14 +3,14 @@
  * fisker Cheung<lionkay@gmail.com>
  */
 
-import HTMLHint from 'htmlhint'
+import {HTMLHint} from 'htmlhint'
 import fs from 'fs'
 import path from 'path'
 import * as info from './info'
 import exportPlugin from '../../../shared/export-plugin'
 
 const {fis = {}} = global
-const {log = () => {}} = fis
+const {log = console.log} = fis
 
 function readConfig(filename) {
   let currentFolder = process.cwd()
@@ -35,19 +35,23 @@ function readConfig(filename) {
   return {}
 }
 
-let htmlhintrcConfig = {}
+let htmlhintrcConfig
 
 function process(content, file, config) {
   if (!content) {
     return
   }
 
-  const ruleset =
-    config.rules ||
-    htmlhintrcConfig ||
-    (htmlhintrcConfig = readConfig('.htmlhintrc'))
+  let {rules} = config
 
-  const results = HTMLHint.verify(content, ruleset)
+  if (!rules) {
+    if (!htmlhintrcConfig) {
+      htmlhintrcConfig = readConfig('.htmlhintrc') || {}
+    }
+    rules = htmlhintrcConfig
+  }
+
+  const results = HTMLHint.verify(content, rules)
   let errorType = 'warning'
 
   results.forEach(function (message) {
