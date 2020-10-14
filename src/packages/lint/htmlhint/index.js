@@ -1,8 +1,3 @@
-/*
- * fis3-lint-htmlhint
- * fisker Cheung<lionkay@gmail.com>
- */
-
 import {HTMLHint} from 'htmlhint'
 import fs from 'fs'
 import path from 'path'
@@ -19,7 +14,7 @@ function readConfig(filename) {
 
   do {
     currentFolder = parentFolder || currentFolder
-    currentFile = path.normalize(path.join(currentFolder, filename))
+    currentFile = path.join(currentFolder, filename)
 
     if (fs.existsSync(currentFile)) {
       try {
@@ -29,7 +24,7 @@ function readConfig(filename) {
       }
     }
 
-    parentFolder = path.resolve(currentFolder, '../')
+    parentFolder = path.join(currentFolder, '..')
   } while (parentFolder !== currentFolder)
 
   return {}
@@ -37,7 +32,7 @@ function readConfig(filename) {
 
 let htmlhintrcConfig
 
-function process(content, file, config) {
+function mainProcess(content, file, config) {
   if (!content) {
     return
   }
@@ -46,19 +41,15 @@ function process(content, file, config) {
 
   if (!rules) {
     if (!htmlhintrcConfig) {
-      htmlhintrcConfig = readConfig('.htmlhintrc') || {}
+      htmlhintrcConfig = readConfig('.htmlhintrc')
     }
     rules = htmlhintrcConfig
   }
 
   const results = HTMLHint.verify(content, rules)
-  let errorType = 'warning'
-
-  results.forEach(function (message) {
-    if (message.type === 'error') {
-      errorType = 'error'
-    }
-  })
+  const errorType = results.some(({type}) => type === 'error')
+    ? 'error'
+    : 'warning'
 
   if (results.length > 0) {
     log.warn(
@@ -74,4 +65,4 @@ function process(content, file, config) {
   }
 }
 
-module.exports = exportPlugin(process, info)
+module.exports = exportPlugin(mainProcess, info)

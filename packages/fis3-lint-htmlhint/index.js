@@ -639,6 +639,45 @@ var _export = function (options, source) {
     }
 }
 
+var arrayMethodIsStrict = function (METHOD_NAME, argument) {
+  var method = [][METHOD_NAME]
+  return (
+    !!method &&
+    fails(function () {
+      // eslint-disable-next-line no-useless-call,no-throw-literal
+      method.call(
+        null,
+        argument ||
+          function () {
+            throw 1
+          },
+        1
+      )
+    })
+  )
+}
+
+var nativeJoin = [].join
+var ES3_STRINGS = indexedObject != Object
+var STRICT_METHOD = arrayMethodIsStrict('join', ',') // `Array.prototype.join` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.join
+
+_export(
+  {
+    target: 'Array',
+    proto: true,
+    forced: ES3_STRINGS || !STRICT_METHOD,
+  },
+  {
+    join: function join(separator) {
+      return nativeJoin.call(
+        toIndexedObject(this),
+        separator === undefined ? ',' : separator
+      )
+    },
+  }
+)
+
 var aFunction$1 = function (it) {
   if (typeof it != 'function') {
     throw TypeError(String(it) + ' is not a function')
@@ -823,24 +862,6 @@ var arrayIteration = {
   findIndex: createMethod$1(6),
 }
 
-var arrayMethodIsStrict = function (METHOD_NAME, argument) {
-  var method = [][METHOD_NAME]
-  return (
-    !!method &&
-    fails(function () {
-      // eslint-disable-next-line no-useless-call,no-throw-literal
-      method.call(
-        null,
-        argument ||
-          function () {
-            throw 1
-          },
-        1
-      )
-    })
-  )
-}
-
 var defineProperty = Object.defineProperty
 var cache = {}
 
@@ -872,54 +893,26 @@ var arrayMethodUsesToLength = function (METHOD_NAME, options) {
     }))
 }
 
-var $forEach = arrayIteration.forEach
-var STRICT_METHOD = arrayMethodIsStrict('forEach')
-var USES_TO_LENGTH = arrayMethodUsesToLength('forEach') // `Array.prototype.forEach` method implementation
-// https://tc39.github.io/ecma262/#sec-array.prototype.foreach
-
-var arrayForEach =
-  !STRICT_METHOD || !USES_TO_LENGTH
-    ? function forEach(
-        callbackfn
-        /* , thisArg */
-      ) {
-        return $forEach(
-          this,
-          callbackfn,
-          arguments.length > 1 ? arguments[1] : undefined
-        )
-      }
-    : [].forEach
-
-// https://tc39.github.io/ecma262/#sec-array.prototype.foreach
+var $some = arrayIteration.some
+var STRICT_METHOD$1 = arrayMethodIsStrict('some')
+var USES_TO_LENGTH = arrayMethodUsesToLength('some') // `Array.prototype.some` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.some
 
 _export(
   {
     target: 'Array',
     proto: true,
-    forced: [].forEach != arrayForEach,
+    forced: !STRICT_METHOD$1 || !USES_TO_LENGTH,
   },
   {
-    forEach: arrayForEach,
-  }
-)
-
-var nativeJoin = [].join
-var ES3_STRINGS = indexedObject != Object
-var STRICT_METHOD$1 = arrayMethodIsStrict('join', ',') // `Array.prototype.join` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.join
-
-_export(
-  {
-    target: 'Array',
-    proto: true,
-    forced: ES3_STRINGS || !STRICT_METHOD$1,
-  },
-  {
-    join: function join(separator) {
-      return nativeJoin.call(
-        toIndexedObject(this),
-        separator === undefined ? ',' : separator
+    some: function some(
+      callbackfn
+      /* , thisArg */
+    ) {
+      return $some(
+        this,
+        callbackfn,
+        arguments.length > 1 ? arguments[1] : undefined
       )
     },
   }
@@ -959,9 +952,7 @@ function readConfig(filename) {
 
   do {
     currentFolder = parentFolder || currentFolder
-    currentFile = path__default['default'].normalize(
-      path__default['default'].join(currentFolder, filename)
-    )
+    currentFile = path__default['default'].join(currentFolder, filename)
 
     if (fs__default['default'].existsSync(currentFile)) {
       try {
@@ -973,7 +964,7 @@ function readConfig(filename) {
       }
     }
 
-    parentFolder = path__default['default'].resolve(currentFolder, '../')
+    parentFolder = path__default['default'].join(currentFolder, '..')
   } while (parentFolder !== currentFolder)
 
   return {}
@@ -981,7 +972,7 @@ function readConfig(filename) {
 
 var htmlhintrcConfig
 
-function process(content, file, config) {
+function mainProcess(content, file, config) {
   if (!content) {
     return
   }
@@ -990,19 +981,19 @@ function process(content, file, config) {
 
   if (!rules) {
     if (!htmlhintrcConfig) {
-      htmlhintrcConfig = readConfig('.htmlhintrc') || {}
+      htmlhintrcConfig = readConfig('.htmlhintrc')
     }
 
     rules = htmlhintrcConfig
   }
 
   var results = htmlhint.HTMLHint.verify(content, rules)
-  var errorType = 'warning'
-  results.forEach(function (message) {
-    if (message.type === 'error') {
-      errorType = 'error'
-    }
+  var errorType = results.some(function (_ref) {
+    var type = _ref.type
+    return type === 'error'
   })
+    ? 'error'
+    : 'warning'
 
   if (results.length > 0) {
     log.warn(
@@ -1021,4 +1012,4 @@ function process(content, file, config) {
   }
 }
 
-module.exports = exportPlugin(process, info$1)
+module.exports = exportPlugin(mainProcess, info$1)
