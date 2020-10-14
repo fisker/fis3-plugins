@@ -1,6 +1,6 @@
 'use strict'
 
-var HTMLHint = require('htmlhint')
+var htmlhint = require('htmlhint')
 var fs = require('fs')
 var path$1 = require('path')
 
@@ -8,7 +8,6 @@ function _interopDefaultLegacy(e) {
   return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var HTMLHint__default = /*#__PURE__*/ _interopDefaultLegacy(HTMLHint)
 var fs__default = /*#__PURE__*/ _interopDefaultLegacy(fs)
 var path__default = /*#__PURE__*/ _interopDefaultLegacy(path$1)
 
@@ -951,7 +950,7 @@ var _global = global,
   _global$fis = _global.fis,
   fis = _global$fis === void 0 ? {} : _global$fis
 var _fis$log = fis.log,
-  log = _fis$log === void 0 ? function () {} : _fis$log
+  log = _fis$log === void 0 ? console.log : _fis$log
 
 function readConfig(filename) {
   var currentFolder = process.cwd()
@@ -980,18 +979,24 @@ function readConfig(filename) {
   return {}
 }
 
-var htmlhintrcConfig = {}
+var htmlhintrcConfig
 
 function process(content, file, config) {
   if (!content) {
     return
   }
 
-  var ruleset =
-    config.rules ||
-    htmlhintrcConfig ||
-    (htmlhintrcConfig = readConfig('.htmlhintrc'))
-  var results = HTMLHint__default['default'].verify(content, ruleset)
+  var rules = config.rules
+
+  if (!rules) {
+    if (!htmlhintrcConfig) {
+      htmlhintrcConfig = readConfig('.htmlhintrc') || {}
+    }
+
+    rules = htmlhintrcConfig
+  }
+
+  var results = htmlhint.HTMLHint.verify(content, rules)
   var errorType = 'warning'
   results.forEach(function (message) {
     if (message.type === 'error') {
@@ -1004,11 +1009,9 @@ function process(content, file, config) {
       '[%s] lint failed with %s: \n\n %s',
       file.id,
       errorType,
-      HTMLHint__default['default']
-        .format(results, {
-          indent: 2,
-        })
-        .join('\n')
+      htmlhint.HTMLHint.format(results, {
+        indent: 2,
+      }).join('\n')
     )
 
     if (errorType === 'error') {
