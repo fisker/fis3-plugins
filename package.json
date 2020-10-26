@@ -82,7 +82,7 @@
     "standard": "15.0.0",
     "stylelint": "13.7.2",
     "terser": "5.3.8",
-    "uglify-js": "3.11.3",
+    "uglify-js": "3.11.4",
     "yargs": "16.1.0",
     "yog-devtools": "0.1.1"
   },
