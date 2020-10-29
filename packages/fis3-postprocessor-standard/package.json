@@ -28,7 +28,7 @@
     "index.js"
   ],
   "dependencies": {
-    "standard": "14.3.4"
+    "standard": "15.0.1"
   },
   "publishConfig": {
     "access": "public",
