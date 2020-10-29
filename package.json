@@ -77,7 +77,7 @@
     "promise-synchronizer": "3.0.0",
     "pug": "3.0.0",
     "sass": "1.27.1",
-    "serve-directory": "3.3.0",
+    "serve-directory": "4.0.0",
     "serve-directory-theme-octicons": "2.0.1",
     "standard": "16.0.0",
     "stylelint": "13.7.2",
