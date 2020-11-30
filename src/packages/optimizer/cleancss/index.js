@@ -30,11 +30,11 @@ function process(content, file, config) {
 
   const result = new CleanCSS(config).minify(content)
 
-  if (result.warnings && result.warnings.length > 0) {
+  if (result.warnings && result.warnings.length !== 0) {
     log.warn(result.warnings)
   }
 
-  if (result.errors && result.errors.length > 0) {
+  if (result.errors && result.errors.length !== 0) {
     log.warn(result.errors)
     process.exitCode = 1
     throw new Error('cleancss error.')

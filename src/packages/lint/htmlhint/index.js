@@ -51,7 +51,7 @@ function mainProcess(content, file, config) {
     ? 'error'
     : 'warning'
 
-  if (results.length > 0) {
+  if (results.length !== 0) {
     log.warn(
       '[%s] lint failed with %s: \n\n %s',
       file.id,

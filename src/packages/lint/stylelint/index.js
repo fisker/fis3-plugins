@@ -35,7 +35,7 @@ const runStylelint = sync(async (content, config, file) => {
     )
   }
 
-  if (warnMessage.length > 0 || errorMessage.length > 0) {
+  if (warnMessage.length !== 0 || errorMessage.length !== 0) {
     log.warn(
       '[%s] lint failed: \n%s \n  %s problem (%s errors, %s warning)',
       file.id,
@@ -45,7 +45,7 @@ const runStylelint = sync(async (content, config, file) => {
       warnMessage.length
     )
 
-    if (errorMessage.length > 0) {
+    if (errorMessage.length !== 0) {
       process.exitCode = 1
       throw new Error('stylelint error.')
     }
