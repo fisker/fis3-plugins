@@ -1,6 +1,6 @@
 {
   "name": "fis3-optimizer-uglifyjs",
-  "version": "2.1.13",
+  "version": "2.1.14",
   "description": "js minifer for fis3 based on uglifyjs.",
   "keywords": [
     "es5",
