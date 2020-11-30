@@ -87,6 +87,9 @@ var global_1 = // eslint-disable-next-line no-undef
   check(typeof window == 'object' && window) ||
   check(typeof self == 'object' && self) ||
   check(typeof commonjsGlobal == 'object' && commonjsGlobal) || // eslint-disable-next-line no-new-func
+  (function () {
+    return this
+  })() ||
   Function('return this')()
 
 var fails = function (exec) {
@@ -328,7 +331,7 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.5',
+    version: '3.8.0',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -374,12 +377,13 @@ var getterFor = function (TYPE) {
 }
 
 if (nativeWeakMap) {
-  var store$1 = new WeakMap$1()
+  var store$1 = sharedStore.state || (sharedStore.state = new WeakMap$1())
   var wmget = store$1.get
   var wmhas = store$1.has
   var wmset = store$1.set
 
   set = function (it, metadata) {
+    metadata.facade = it
     wmset.call(store$1, it, metadata)
     return metadata
   }
@@ -396,6 +400,7 @@ if (nativeWeakMap) {
   hiddenKeys[STATE] = true
 
   set = function (it, metadata) {
+    metadata.facade = it
     createNonEnumerableProperty(it, STATE, metadata)
     return metadata
   }
@@ -425,13 +430,18 @@ var redefine = createCommonjsModule(function (module) {
     var unsafe = options ? !!options.unsafe : false
     var simple = options ? !!options.enumerable : false
     var noTargetGet = options ? !!options.noTargetGet : false
+    var state
 
     if (typeof value == 'function') {
-      if (typeof key == 'string' && !has(value, 'name'))
+      if (typeof key == 'string' && !has(value, 'name')) {
         createNonEnumerableProperty(value, 'name', key)
-      enforceInternalState(value).source = TEMPLATE.join(
-        typeof key == 'string' ? key : ''
-      )
+      }
+
+      state = enforceInternalState(value)
+
+      if (!state.source) {
+        state.source = TEMPLATE.join(typeof key == 'string' ? key : '')
+      }
     }
 
     if (O === global_1) {
@@ -2164,19 +2174,24 @@ var arrayReduce = {
   right: createMethod$2(true),
 }
 
+var engineIsNode = classofRaw(global_1.process) == 'process'
+
 var $reduceRight = arrayReduce.right
 var STRICT_METHOD$1 = arrayMethodIsStrict('reduceRight') // For preventing possible almost infinite loop in non-standard implementations, test the forward version of the method
 
 var USES_TO_LENGTH$1 = arrayMethodUsesToLength('reduce', {
   1: 0,
-}) // `Array.prototype.reduceRight` method
+}) // Chrome 80-82 has a critical bug
+// https://bugs.chromium.org/p/chromium/issues/detail?id=1049982
+
+var CHROME_BUG = !engineIsNode && engineV8Version > 79 && engineV8Version < 83 // `Array.prototype.reduceRight` method
 // https://tc39.github.io/ecma262/#sec-array.prototype.reduceright
 
 _export(
   {
     target: 'Array',
     proto: true,
-    forced: !STRICT_METHOD$1 || !USES_TO_LENGTH$1,
+    forced: !STRICT_METHOD$1 || !USES_TO_LENGTH$1 || CHROME_BUG,
   },
   {
     reduceRight: function reduceRight(

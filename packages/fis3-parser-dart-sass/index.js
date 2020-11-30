@@ -61,6 +61,9 @@ var global_1 = // eslint-disable-next-line no-undef
   check(typeof window == 'object' && window) ||
   check(typeof self == 'object' && self) ||
   check(typeof commonjsGlobal == 'object' && commonjsGlobal) || // eslint-disable-next-line no-new-func
+  (function () {
+    return this
+  })() ||
   Function('return this')()
 
 var fails = function (exec) {
@@ -304,7 +307,7 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.5',
+    version: '3.8.0',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -350,12 +353,13 @@ var getterFor = function (TYPE) {
 }
 
 if (nativeWeakMap) {
-  var store$1 = new WeakMap$1()
+  var store$1 = sharedStore.state || (sharedStore.state = new WeakMap$1())
   var wmget = store$1.get
   var wmhas = store$1.has
   var wmset = store$1.set
 
   set = function (it, metadata) {
+    metadata.facade = it
     wmset.call(store$1, it, metadata)
     return metadata
   }
@@ -372,6 +376,7 @@ if (nativeWeakMap) {
   hiddenKeys[STATE] = true
 
   set = function (it, metadata) {
+    metadata.facade = it
     createNonEnumerableProperty(it, STATE, metadata)
     return metadata
   }
@@ -401,13 +406,18 @@ var redefine = createCommonjsModule(function (module) {
     var unsafe = options ? !!options.unsafe : false
     var simple = options ? !!options.enumerable : false
     var noTargetGet = options ? !!options.noTargetGet : false
+    var state
 
     if (typeof value == 'function') {
-      if (typeof key == 'string' && !has(value, 'name'))
+      if (typeof key == 'string' && !has(value, 'name')) {
         createNonEnumerableProperty(value, 'name', key)
-      enforceInternalState(value).source = TEMPLATE.join(
-        typeof key == 'string' ? key : ''
-      )
+      }
+
+      state = enforceInternalState(value)
+
+      if (!state.source) {
+        state.source = TEMPLATE.join(typeof key == 'string' ? key : '')
+      }
     }
 
     if (O === global_1) {
@@ -906,7 +916,7 @@ var functionBindContext = function (fn, that, length) {
   }
 }
 
-var push = [].push // `Array.prototype.{ forEach, map, filter, some, every, find, findIndex }` methods implementation
+var push = [].push // `Array.prototype.{ forEach, map, filter, some, every, find, findIndex, filterOut }` methods implementation
 
 var createMethod$1 = function (TYPE) {
   var IS_MAP = TYPE == 1
@@ -914,6 +924,7 @@ var createMethod$1 = function (TYPE) {
   var IS_SOME = TYPE == 3
   var IS_EVERY = TYPE == 4
   var IS_FIND_INDEX = TYPE == 6
+  var IS_FILTER_OUT = TYPE == 7
   var NO_HOLES = TYPE == 5 || IS_FIND_INDEX
   return function ($this, callbackfn, that, specificCreate) {
     var O = toObject($this)
@@ -924,7 +935,7 @@ var createMethod$1 = function (TYPE) {
     var create = specificCreate || arraySpeciesCreate
     var target = IS_MAP
       ? create($this, length)
-      : IS_FILTER
+      : IS_FILTER || IS_FILTER_OUT
       ? create($this, 0)
       : undefined
     var value, result
@@ -955,7 +966,16 @@ var createMethod$1 = function (TYPE) {
                 push.call(target, value)
               // filter
             }
-          else if (IS_EVERY) return false // every
+          else
+            switch (TYPE) {
+              case 4:
+                return false
+              // every
+
+              case 7:
+                push.call(target, value)
+              // filterOut
+            }
         }
       }
 
@@ -985,6 +1005,9 @@ var arrayIteration = {
   // `Array.prototype.findIndex` method
   // https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
   findIndex: createMethod$1(6),
+  // `Array.prototype.filterOut` method
+  // https://github.com/tc39/proposal-array-filtering
+  filterOut: createMethod$1(7),
 }
 
 var defineProperty = Object.defineProperty
@@ -1086,18 +1109,23 @@ var arrayReduce = {
   right: createMethod$2(true),
 }
 
+var engineIsNode = classofRaw(global_1.process) == 'process'
+
 var $reduce = arrayReduce.left
 var STRICT_METHOD$1 = arrayMethodIsStrict('reduce')
 var USES_TO_LENGTH$1 = arrayMethodUsesToLength('reduce', {
   1: 0,
-}) // `Array.prototype.reduce` method
+}) // Chrome 80-82 has a critical bug
+// https://bugs.chromium.org/p/chromium/issues/detail?id=1049982
+
+var CHROME_BUG = !engineIsNode && engineV8Version > 79 && engineV8Version < 83 // `Array.prototype.reduce` method
 // https://tc39.github.io/ecma262/#sec-array.prototype.reduce
 
 _export(
   {
     target: 'Array',
     proto: true,
-    forced: !STRICT_METHOD$1 || !USES_TO_LENGTH$1,
+    forced: !STRICT_METHOD$1 || !USES_TO_LENGTH$1 || CHROME_BUG,
   },
   {
     reduce: function reduce(
@@ -2201,76 +2229,83 @@ var getIteratorMethod = function (it) {
     return it[ITERATOR$3] || it['@@iterator'] || iterators[classof(it)]
 }
 
-var callWithSafeIterationClosing = function (iterator, fn, value, ENTRIES) {
-  try {
-    return ENTRIES ? fn(anObject(value)[0], value[1]) : fn(value) // 7.4.6 IteratorClose(iterator, completion)
-  } catch (error) {
-    var returnMethod = iterator['return']
-    if (returnMethod !== undefined) anObject(returnMethod.call(iterator))
-    throw error
+var iteratorClose = function (iterator) {
+  var returnMethod = iterator['return']
+
+  if (returnMethod !== undefined) {
+    return anObject(returnMethod.call(iterator)).value
   }
 }
 
-var iterate_1 = createCommonjsModule(function (module) {
-  var Result = function (stopped, result) {
-    this.stopped = stopped
-    this.result = result
+var Result = function (stopped, result) {
+  this.stopped = stopped
+  this.result = result
+}
+
+var iterate = function (iterable, unboundFunction, options) {
+  var that = options && options.that
+  var AS_ENTRIES = !!(options && options.AS_ENTRIES)
+  var IS_ITERATOR = !!(options && options.IS_ITERATOR)
+  var INTERRUPTED = !!(options && options.INTERRUPTED)
+  var fn = functionBindContext(
+    unboundFunction,
+    that,
+    1 + AS_ENTRIES + INTERRUPTED
+  )
+  var iterator, iterFn, index, length, result, next, step
+
+  var stop = function (condition) {
+    if (iterator) iteratorClose(iterator)
+    return new Result(true, condition)
   }
 
-  var iterate = (module.exports = function (
-    iterable,
-    fn,
-    that,
-    AS_ENTRIES,
-    IS_ITERATOR
-  ) {
-    var boundFunction = functionBindContext(fn, that, AS_ENTRIES ? 2 : 1)
-    var iterator, iterFn, index, length, result, next, step
+  var callFn = function (value) {
+    if (AS_ENTRIES) {
+      anObject(value)
+      return INTERRUPTED ? fn(value[0], value[1], stop) : fn(value[0], value[1])
+    }
 
-    if (IS_ITERATOR) {
-      iterator = iterable
-    } else {
-      iterFn = getIteratorMethod(iterable)
-      if (typeof iterFn != 'function') throw TypeError('Target is not iterable') // optimisation for array iterators
+    return INTERRUPTED ? fn(value, stop) : fn(value)
+  }
 
-      if (isArrayIteratorMethod(iterFn)) {
-        for (
-          index = 0, length = toLength(iterable.length);
-          length > index;
-          index++
-        ) {
-          result = AS_ENTRIES
-            ? boundFunction(anObject((step = iterable[index]))[0], step[1])
-            : boundFunction(iterable[index])
-          if (result && result instanceof Result) return result
-        }
+  if (IS_ITERATOR) {
+    iterator = iterable
+  } else {
+    iterFn = getIteratorMethod(iterable)
+    if (typeof iterFn != 'function') throw TypeError('Target is not iterable') // optimisation for array iterators
 
-        return new Result(false)
+    if (isArrayIteratorMethod(iterFn)) {
+      for (
+        index = 0, length = toLength(iterable.length);
+        length > index;
+        index++
+      ) {
+        result = callFn(iterable[index])
+        if (result && result instanceof Result) return result
       }
 
-      iterator = iterFn.call(iterable)
+      return new Result(false)
     }
 
-    next = iterator.next
-
-    while (!(step = next.call(iterator)).done) {
-      result = callWithSafeIterationClosing(
-        iterator,
-        boundFunction,
-        step.value,
-        AS_ENTRIES
-      )
-      if (typeof result == 'object' && result && result instanceof Result)
-        return result
-    }
-
-    return new Result(false)
-  })
-
-  iterate.stop = function (result) {
-    return new Result(true, result)
+    iterator = iterFn.call(iterable)
   }
-})
+
+  next = iterator.next
+
+  while (!(step = next.call(iterator)).done) {
+    try {
+      result = callFn(step.value)
+    } catch (error) {
+      iteratorClose(iterator)
+      throw error
+    }
+
+    if (typeof result == 'object' && result && result instanceof Result)
+      return result
+  }
+
+  return new Result(false)
+}
 
 var anInstance = function (it, Constructor, name) {
   if (!(it instanceof Constructor)) {
@@ -2446,7 +2481,10 @@ var collection = function (CONSTRUCTOR_NAME, wrapper, common) {
           Constructor
         )
         if (iterable != undefined)
-          iterate_1(iterable, that[ADDER], that, IS_MAP)
+          iterate(iterable, that[ADDER], {
+            that: that,
+            AS_ENTRIES: IS_MAP,
+          })
         return that
       })
       Constructor.prototype = NativePrototype
@@ -2515,7 +2553,11 @@ var collectionStrong = {
         size: 0,
       })
       if (!descriptors) that.size = 0
-      if (iterable != undefined) iterate_1(iterable, that[ADDER], that, IS_MAP)
+      if (iterable != undefined)
+        iterate(iterable, that[ADDER], {
+          that: that,
+          AS_ENTRIES: IS_MAP,
+        })
     })
     var getInternalState = internalStateGetterFor(CONSTRUCTOR_NAME)
 
@@ -2756,11 +2798,11 @@ var correctIsRegexpLogic = function (METHOD_NAME) {
 
   try {
     '/./'[METHOD_NAME](regexp)
-  } catch (e) {
+  } catch (error1) {
     try {
       regexp[MATCH$1] = false
       return '/./'[METHOD_NAME](regexp)
-    } catch (f) {
+    } catch (error2) {
       /* empty */
     }
   }
@@ -3489,7 +3531,7 @@ _export(
       var set = anObject(this)
       var newSet = new (speciesConstructor(set, getBuiltIn('Set')))(set)
       var remover = aFunction$1(newSet['delete'])
-      iterate_1(iterable, function (value) {
+      iterate(iterable, function (value) {
         remover.call(newSet, value)
       })
       return newSet
@@ -3533,14 +3575,15 @@ _export(
         arguments.length > 1 ? arguments[1] : undefined,
         3
       )
-      return !iterate_1(
+      return !iterate(
         iterator,
-        function (value) {
-          if (!boundFunction(value, value, set)) return iterate_1.stop()
+        function (value, stop) {
+          if (!boundFunction(value, value, set)) return stop()
         },
-        undefined,
-        false,
-        true
+        {
+          IS_ITERATOR: true,
+          INTERRUPTED: true,
+        }
       ).stopped
     },
   }
@@ -3569,14 +3612,14 @@ _export(
       )
       var newSet = new (speciesConstructor(set, getBuiltIn('Set')))()
       var adder = aFunction$1(newSet.add)
-      iterate_1(
+      iterate(
         iterator,
         function (value) {
           if (boundFunction(value, value, set)) adder.call(newSet, value)
         },
-        undefined,
-        false,
-        true
+        {
+          IS_ITERATOR: true,
+        }
       )
       return newSet
     },
@@ -3604,14 +3647,15 @@ _export(
         arguments.length > 1 ? arguments[1] : undefined,
         3
       )
-      return iterate_1(
+      return iterate(
         iterator,
-        function (value) {
-          if (boundFunction(value, value, set)) return iterate_1.stop(value)
+        function (value, stop) {
+          if (boundFunction(value, value, set)) return stop(value)
         },
-        undefined,
-        false,
-        true
+        {
+          IS_ITERATOR: true,
+          INTERRUPTED: true,
+        }
       ).result
     },
   }
@@ -3632,7 +3676,7 @@ _export(
       var newSet = new (speciesConstructor(set, getBuiltIn('Set')))()
       var hasCheck = aFunction$1(set.has)
       var adder = aFunction$1(newSet.add)
-      iterate_1(iterable, function (value) {
+      iterate(iterable, function (value) {
         if (hasCheck.call(set, value)) adder.call(newSet, value)
       })
       return newSet
@@ -3653,9 +3697,15 @@ _export(
     isDisjointFrom: function isDisjointFrom(iterable) {
       var set = anObject(this)
       var hasCheck = aFunction$1(set.has)
-      return !iterate_1(iterable, function (value) {
-        if (hasCheck.call(set, value) === true) return iterate_1.stop()
-      }).stopped
+      return !iterate(
+        iterable,
+        function (value, stop) {
+          if (hasCheck.call(set, value) === true) return stop()
+        },
+        {
+          INTERRUPTED: true,
+        }
+      ).stopped
     },
   }
 )
@@ -3680,14 +3730,15 @@ _export(
         hasCheck = aFunction$1(otherSet.has)
       }
 
-      return !iterate_1(
+      return !iterate(
         iterator,
-        function (value) {
-          if (hasCheck.call(otherSet, value) === false) return iterate_1.stop()
+        function (value, stop) {
+          if (hasCheck.call(otherSet, value) === false) return stop()
         },
-        undefined,
-        false,
-        true
+        {
+          IS_ITERATOR: true,
+          INTERRUPTED: true,
+        }
       ).stopped
     },
   }
@@ -3706,9 +3757,15 @@ _export(
     isSupersetOf: function isSupersetOf(iterable) {
       var set = anObject(this)
       var hasCheck = aFunction$1(set.has)
-      return !iterate_1(iterable, function (value) {
-        if (hasCheck.call(set, value) === false) return iterate_1.stop()
-      }).stopped
+      return !iterate(
+        iterable,
+        function (value, stop) {
+          if (hasCheck.call(set, value) === false) return stop()
+        },
+        {
+          INTERRUPTED: true,
+        }
+      ).stopped
     },
   }
 )
@@ -3728,7 +3785,10 @@ _export(
       var iterator = getSetIterator(set)
       var sep = separator === undefined ? ',' : String(separator)
       var result = []
-      iterate_1(iterator, result.push, result, false, true)
+      iterate(iterator, result.push, {
+        that: result,
+        IS_ITERATOR: true,
+      })
       return result.join(sep)
     },
   }
@@ -3757,14 +3817,14 @@ _export(
       )
       var newSet = new (speciesConstructor(set, getBuiltIn('Set')))()
       var adder = aFunction$1(newSet.add)
-      iterate_1(
+      iterate(
         iterator,
         function (value) {
           adder.call(newSet, boundFunction(value, value, set))
         },
-        undefined,
-        false,
-        true
+        {
+          IS_ITERATOR: true,
+        }
       )
       return newSet
     },
@@ -3790,7 +3850,7 @@ _export(
       var noInitial = arguments.length < 2
       var accumulator = noInitial ? undefined : arguments[1]
       aFunction$1(callbackfn)
-      iterate_1(
+      iterate(
         iterator,
         function (value) {
           if (noInitial) {
@@ -3800,9 +3860,9 @@ _export(
             accumulator = callbackfn(accumulator, value, value, set)
           }
         },
-        undefined,
-        false,
-        true
+        {
+          IS_ITERATOR: true,
+        }
       )
       if (noInitial)
         throw TypeError('Reduce of empty set with no initial value')
@@ -3832,14 +3892,15 @@ _export(
         arguments.length > 1 ? arguments[1] : undefined,
         3
       )
-      return iterate_1(
+      return iterate(
         iterator,
-        function (value) {
-          if (boundFunction(value, value, set)) return iterate_1.stop()
+        function (value, stop) {
+          if (boundFunction(value, value, set)) return stop()
         },
-        undefined,
-        false,
-        true
+        {
+          IS_ITERATOR: true,
+          INTERRUPTED: true,
+        }
       ).stopped
     },
   }
@@ -3860,7 +3921,7 @@ _export(
       var newSet = new (speciesConstructor(set, getBuiltIn('Set')))(set)
       var remover = aFunction$1(newSet['delete'])
       var adder = aFunction$1(newSet.add)
-      iterate_1(iterable, function (value) {
+      iterate(iterable, function (value) {
         remover.call(newSet, value) || adder.call(newSet, value)
       })
       return newSet
@@ -3881,7 +3942,9 @@ _export(
     union: function union(iterable) {
       var set = anObject(this)
       var newSet = new (speciesConstructor(set, getBuiltIn('Set')))(set)
-      iterate_1(iterable, aFunction$1(newSet.add), newSet)
+      iterate(iterable, aFunction$1(newSet.add), {
+        that: newSet,
+      })
       return newSet
     },
   }

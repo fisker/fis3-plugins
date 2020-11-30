@@ -59,6 +59,9 @@ var global_1 = // eslint-disable-next-line no-undef
   check(typeof window == 'object' && window) ||
   check(typeof self == 'object' && self) ||
   check(typeof commonjsGlobal == 'object' && commonjsGlobal) || // eslint-disable-next-line no-new-func
+  (function () {
+    return this
+  })() ||
   Function('return this')()
 
 var fails = function (exec) {
@@ -300,7 +303,7 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.6.5',
+    version: '3.8.0',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -346,12 +349,13 @@ var getterFor = function (TYPE) {
 }
 
 if (nativeWeakMap) {
-  var store$1 = new WeakMap$1()
+  var store$1 = sharedStore.state || (sharedStore.state = new WeakMap$1())
   var wmget = store$1.get
   var wmhas = store$1.has
   var wmset = store$1.set
 
   set = function (it, metadata) {
+    metadata.facade = it
     wmset.call(store$1, it, metadata)
     return metadata
   }
@@ -368,6 +372,7 @@ if (nativeWeakMap) {
   hiddenKeys[STATE] = true
 
   set = function (it, metadata) {
+    metadata.facade = it
     createNonEnumerableProperty(it, STATE, metadata)
     return metadata
   }
@@ -397,13 +402,18 @@ var redefine = createCommonjsModule(function (module) {
     var unsafe = options ? !!options.unsafe : false
     var simple = options ? !!options.enumerable : false
     var noTargetGet = options ? !!options.noTargetGet : false
+    var state
 
     if (typeof value == 'function') {
-      if (typeof key == 'string' && !has(value, 'name'))
+      if (typeof key == 'string' && !has(value, 'name')) {
         createNonEnumerableProperty(value, 'name', key)
-      enforceInternalState(value).source = TEMPLATE.join(
-        typeof key == 'string' ? key : ''
-      )
+      }
+
+      state = enforceInternalState(value)
+
+      if (!state.source) {
+        state.source = TEMPLATE.join(typeof key == 'string' ? key : '')
+      }
     }
 
     if (O === global_1) {
@@ -1152,11 +1162,11 @@ var correctIsRegexpLogic = function (METHOD_NAME) {
 
   try {
     '/./'[METHOD_NAME](regexp)
-  } catch (e) {
+  } catch (error1) {
     try {
       regexp[MATCH$1] = false
       return '/./'[METHOD_NAME](regexp)
-    } catch (f) {
+    } catch (error2) {
       /* empty */
     }
   }
