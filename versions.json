@@ -1,54 +1,54 @@
 {
   "fis3-hook-relative-legal-html": {
-    "version": "3.1.11"
+    "version": "3.1.12"
   },
   "fis3-lint-eslint-noisy": {
-    "version": "4.0.14"
+    "version": "4.0.15"
   },
   "fis3-lint-htmlhint": {
-    "version": "2.2.2"
-  },
-  "fis3-lint-standard": {
-    "version": "2.1.14"
-  },
-  "fis3-lint-stylelint": {
-    "version": "4.1.16"
-  },
-  "fis3-optimizer-cleancss": {
-    "version": "2.1.11"
-  },
-  "fis3-optimizer-terser": {
-    "version": "3.0.4"
-  },
-  "fis3-optimizer-uglifyjs": {
-    "version": "2.1.14"
-  },
-  "fis3-parser-dart-sass": {
     "version": "2.2.3"
   },
-  "fis3-parser-ejs": {
+  "fis3-lint-standard": {
+    "version": "2.1.15"
+  },
+  "fis3-lint-stylelint": {
+    "version": "4.1.17"
+  },
+  "fis3-optimizer-cleancss": {
     "version": "2.1.12"
+  },
+  "fis3-optimizer-terser": {
+    "version": "3.0.5"
+  },
+  "fis3-optimizer-uglifyjs": {
+    "version": "2.1.15"
+  },
+  "fis3-parser-dart-sass": {
+    "version": "2.2.4"
+  },
+  "fis3-parser-ejs": {
+    "version": "2.1.13"
   },
   "fis3-parser-lodash-template": {
-    "version": "2.1.12"
+    "version": "2.1.13"
   },
   "fis3-parser-node-sass-latest": {
-    "version": "2.1.12"
+    "version": "2.1.13"
   },
   "fis3-parser-pug": {
     "version": "2.0.7"
   },
   "fis3-postprocessor-autoprefixer-latest": {
-    "version": "2.1.12"
+    "version": "2.1.13"
   },
   "fis3-postprocessor-html": {
     "version": "2.0.8"
   },
   "fis3-postprocessor-postcss-with-rc": {
-    "version": "2.1.15"
+    "version": "2.1.16"
   },
   "fis3-postprocessor-posthtml-beautify": {
-    "version": "2.1.15"
+    "version": "2.1.16"
   },
   "fis3-postprocessor-prettier": {
     "version": "2.0.11"
@@ -57,10 +57,10 @@
     "version": "0.0.0"
   },
   "fis3-postprocessor-prettyhtml": {
-    "version": "2.1.11"
+    "version": "2.1.12"
   },
   "fis3-postprocessor-standard": {
-    "version": "2.1.11"
+    "version": "2.1.12"
   },
   "fis3-postprocessor-stylefmt": {
     "version": "0.0.0"
@@ -69,6 +69,6 @@
     "version": "2.0.6"
   },
   "fis3-server-browsersync": {
-    "version": "2.2.5"
+    "version": "2.2.6"
   }
 }
