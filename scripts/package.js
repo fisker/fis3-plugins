@@ -25,13 +25,13 @@ const links = {
   fis3: 'http://fis.baidu.com/',
 }
 
-const template = _.memoize(function (file) {
-  return _.template(readFile(path.join(SOURCE_DIR, 'templates', file)))
-})
+const template = _.memoize((file) =>
+  _.template(readFile(path.join(SOURCE_DIR, 'templates', file)))
+)
 
 function parseDependencies(pkgs) {
   const dependencies = {}
-  _.forEach(pkgs || [], function (package_) {
+  _.forEach(pkgs || [], (package_) => {
     const packageArray = package_.split('@')
     let packageName
     let packageVersion

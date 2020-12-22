@@ -47,7 +47,7 @@ function watch(bs, root) {
 }
 
 function signalTerminate(bs) {
-  process.on('SIGTERM', function () {
+  process.on('SIGTERM', () => {
     console.log('Recive quit signal in worker %s.', process.pid)
     bs.exit()
   })

@@ -28,11 +28,13 @@ function mock(root) {
       bodyParser.json(),
       ydPreview(options),
       ydScript(options),
-    ].reduceRight(function (next, middlewave) {
-      return function () {
-        middlewave(request, response, next)
-      }
-    }, next)()
+    ].reduceRight(
+      (next, middlewave) =>
+        function () {
+          middlewave(request, response, next)
+        },
+      next
+    )()
   }
 }
 

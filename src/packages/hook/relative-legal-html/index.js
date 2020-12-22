@@ -50,7 +50,7 @@ function getRelativeUrl(file, host) {
 }
 
 function convert(content, file, host) {
-  return content.replace(rUrl, function (all, _, quoteStyle, path) {
+  return content.replace(rUrl, (all, _, quoteStyle, path) => {
     const info = fis.project.lookup(path)
 
     if (!info.file) {

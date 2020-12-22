@@ -149,7 +149,7 @@ function start(opt, callback) {
     util.pid(String(server.pid)) // save pid to file.
     server.unref()
 
-    timeoutTimer = setTimeout(function () {
+    timeoutTimer = setTimeout(() => {
       process.stdout.write(' fail\n')
       if (log) {
         console.log(log)
