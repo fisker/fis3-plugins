@@ -23,34 +23,16 @@ var commonjsGlobal =
     ? self
     : {}
 
-function createCommonjsModule(fn, basedir, module) {
-  return (
-    (module = {
-      path: basedir,
-      exports: {},
-      require: function (path, base) {
-        return commonjsRequire(
-          path,
-          base === undefined || base === null ? module.path : base
-        )
-      },
-    }),
-    fn(module, module.exports),
-    module.exports
-  )
-}
-
-function commonjsRequire() {
-  throw new Error(
-    'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
-  )
+function createCommonjsModule(fn) {
+  var module = {exports: {}}
+  return fn(module, module.exports), module.exports
 }
 
 var check = function (it) {
   return it && it.Math == Math && it
 } // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 
-var global_1 = // eslint-disable-next-line no-undef
+var global$1 = // eslint-disable-next-line no-undef
   check(typeof globalThis == 'object' && globalThis) ||
   check(typeof window == 'object' && window) ||
   check(typeof self == 'object' && self) ||
@@ -176,7 +158,7 @@ var has = function (it, key) {
   return hasOwnProperty.call(it, key)
 }
 
-var document = global_1.document // typeof document.createElement is 'object' in old IE
+var document = global$1.document // typeof document.createElement is 'object' in old IE
 
 var EXISTS = isObject(document) && isObject(document.createElement)
 
@@ -267,16 +249,16 @@ var createNonEnumerableProperty = descriptors
 
 var setGlobal = function (key, value) {
   try {
-    createNonEnumerableProperty(global_1, key, value)
+    createNonEnumerableProperty(global$1, key, value)
   } catch (error) {
-    global_1[key] = value
+    global$1[key] = value
   }
 
   return value
 }
 
 var SHARED = '__core-js_shared__'
-var store = global_1[SHARED] || setGlobal(SHARED, {})
+var store = global$1[SHARED] || setGlobal(SHARED, {})
 var sharedStore = store
 
 var functionToString = Function.toString // this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
@@ -289,7 +271,7 @@ if (typeof sharedStore.inspectSource != 'function') {
 
 var inspectSource = sharedStore.inspectSource
 
-var WeakMap = global_1.WeakMap
+var WeakMap = global$1.WeakMap
 var nativeWeakMap =
   typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap))
 
@@ -299,7 +281,7 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.8.0',
+    version: '3.8.1',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -325,7 +307,7 @@ var sharedKey = function (key) {
 
 var hiddenKeys = {}
 
-var WeakMap$1 = global_1.WeakMap
+var WeakMap$1 = global$1.WeakMap
 var set, get, has$1
 
 var enforce = function (it) {
@@ -412,7 +394,7 @@ var redefine = createCommonjsModule(function (module) {
       }
     }
 
-    if (O === global_1) {
+    if (O === global$1) {
       if (simple) O[key] = value
       else setGlobal(key, value)
       return
@@ -432,7 +414,7 @@ var redefine = createCommonjsModule(function (module) {
   })
 })
 
-var path = global_1
+var path = global$1
 
 var aFunction = function (variable) {
   return typeof variable == 'function' ? variable : undefined
@@ -440,9 +422,9 @@ var aFunction = function (variable) {
 
 var getBuiltIn = function (namespace, method) {
   return arguments.length < 2
-    ? aFunction(path[namespace]) || aFunction(global_1[namespace])
+    ? aFunction(path[namespace]) || aFunction(global$1[namespace])
     : (path[namespace] && path[namespace][method]) ||
-        (global_1[namespace] && global_1[namespace][method])
+        (global$1[namespace] && global$1[namespace][method])
 }
 
 var ceil = Math.ceil
@@ -616,11 +598,11 @@ var _export = function (options, source) {
   var FORCED, target, key, targetProperty, sourceProperty, descriptor
 
   if (GLOBAL) {
-    target = global_1
+    target = global$1
   } else if (STATIC) {
-    target = global_1[TARGET] || setGlobal(TARGET, {})
+    target = global$1[TARGET] || setGlobal(TARGET, {})
   } else {
-    target = (global_1[TARGET] || {}).prototype
+    target = (global$1[TARGET] || {}).prototype
   }
 
   if (target)
@@ -689,7 +671,7 @@ var useSymbolAsUid =
   typeof Symbol.iterator == 'symbol'
 
 var WellKnownSymbolsStore = shared('wks')
-var Symbol$1 = global_1.Symbol
+var Symbol$1 = global$1.Symbol
 var createWellKnownSymbol = useSymbolAsUid
   ? Symbol$1
   : (Symbol$1 && Symbol$1.withoutSetter) || uid
@@ -726,7 +708,7 @@ var arraySpeciesCreate = function (originalArray, length) {
 
 var engineUserAgent = getBuiltIn('navigator', 'userAgent') || ''
 
-var process = global_1.process
+var process = global$1.process
 var versions = process && process.versions
 var v8 = versions && versions.v8
 var match, version
@@ -923,7 +905,7 @@ if (!toStringTagSupport) {
   })
 }
 
-var nativePromiseConstructor = global_1.Promise
+var nativePromiseConstructor = global$1.Promise
 
 var redefineAll = function (target, src, options) {
   for (var key in src) redefine(target, key, src[key], options)
@@ -1171,14 +1153,14 @@ var html = getBuiltIn('document', 'documentElement')
 
 var engineIsIos = /(iphone|ipod|ipad).*applewebkit/i.test(engineUserAgent)
 
-var engineIsNode = classofRaw(global_1.process) == 'process'
+var engineIsNode = classofRaw(global$1.process) == 'process'
 
-var location = global_1.location
-var set$1 = global_1.setImmediate
-var clear = global_1.clearImmediate
-var process$1 = global_1.process
-var MessageChannel = global_1.MessageChannel
-var Dispatch = global_1.Dispatch
+var location = global$1.location
+var set$1 = global$1.setImmediate
+var clear = global$1.clearImmediate
+var process$1 = global$1.process
+var MessageChannel = global$1.MessageChannel
+var Dispatch = global$1.Dispatch
 var counter = 0
 var queue = {}
 var ONREADYSTATECHANGE = 'onreadystatechange'
@@ -1205,7 +1187,7 @@ var listener = function (event) {
 
 var post = function (id) {
   // old engines have not location.origin
-  global_1.postMessage(id + '', location.protocol + '//' + location.host)
+  global$1.postMessage(id + '', location.protocol + '//' + location.host)
 } // Node.js 0.9+ & IE10+ has setImmediate, otherwise:
 
 if (!set$1 || !clear) {
@@ -1244,15 +1226,15 @@ if (!set$1 || !clear) {
     defer = functionBindContext(port.postMessage, port, 1) // Browsers with postMessage, skip WebWorkers
     // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
   } else if (
-    global_1.addEventListener &&
+    global$1.addEventListener &&
     typeof postMessage == 'function' &&
-    !global_1.importScripts &&
+    !global$1.importScripts &&
     location &&
     location.protocol !== 'file:' &&
     !fails(post)
   ) {
     defer = post
-    global_1.addEventListener('message', listener, false) // IE8-
+    global$1.addEventListener('message', listener, false) // IE8-
   } else if (ONREADYSTATECHANGE in documentCreateElement('script')) {
     defer = function (id) {
       html.appendChild(documentCreateElement('script'))[
@@ -1277,13 +1259,13 @@ var task = {
 var getOwnPropertyDescriptor$2 = objectGetOwnPropertyDescriptor.f
 var macrotask = task.set
 var MutationObserver =
-  global_1.MutationObserver || global_1.WebKitMutationObserver
-var document$1 = global_1.document
-var process$2 = global_1.process
-var Promise$1 = global_1.Promise // Node.js 11 shows ExperimentalWarning on getting `queueMicrotask`
+  global$1.MutationObserver || global$1.WebKitMutationObserver
+var document$1 = global$1.document
+var process$2 = global$1.process
+var Promise$1 = global$1.Promise // Node.js 11 shows ExperimentalWarning on getting `queueMicrotask`
 
 var queueMicrotaskDescriptor = getOwnPropertyDescriptor$2(
-  global_1,
+  global$1,
   'queueMicrotask'
 )
 var queueMicrotask = queueMicrotaskDescriptor && queueMicrotaskDescriptor.value
@@ -1341,7 +1323,7 @@ if (!queueMicrotask) {
   } else {
     notify = function () {
       // strange IE + webpack dev server bug - use .call(global)
-      macrotask.call(global_1, flush)
+      macrotask.call(global$1, flush)
     }
   }
 }
@@ -1393,7 +1375,7 @@ var promiseResolve = function (C, x) {
 }
 
 var hostReportErrors = function (a, b) {
-  var console = global_1.console
+  var console = global$1.console
 
   if (console && console.error) {
     arguments.length === 1 ? console.error(a) : console.error(a, b)
@@ -1421,16 +1403,16 @@ var getInternalState = internalState.get
 var setInternalState = internalState.set
 var getInternalPromiseState = internalState.getterFor(PROMISE)
 var PromiseConstructor = nativePromiseConstructor
-var TypeError$1 = global_1.TypeError
-var document$2 = global_1.document
-var process$3 = global_1.process
+var TypeError$1 = global$1.TypeError
+var document$2 = global$1.document
+var process$3 = global$1.process
 var $fetch = getBuiltIn('fetch')
 var newPromiseCapability$1 = newPromiseCapability.f
 var newGenericPromiseCapability = newPromiseCapability$1
 var DISPATCH_EVENT = !!(
   document$2 &&
   document$2.createEvent &&
-  global_1.dispatchEvent
+  global$1.dispatchEvent
 )
 var NATIVE_REJECTION_EVENT = typeof PromiseRejectionEvent == 'function'
 var UNHANDLED_REJECTION = 'unhandledrejection'
@@ -1554,21 +1536,21 @@ var dispatchEvent = function (name, promise, reason) {
     event.promise = promise
     event.reason = reason
     event.initEvent(name, false, true)
-    global_1.dispatchEvent(event)
+    global$1.dispatchEvent(event)
   } else
     event = {
       promise: promise,
       reason: reason,
     }
 
-  if (!NATIVE_REJECTION_EVENT && (handler = global_1['on' + name]))
+  if (!NATIVE_REJECTION_EVENT && (handler = global$1['on' + name]))
     handler(event)
   else if (name === UNHANDLED_REJECTION)
     hostReportErrors('Unhandled promise rejection', reason)
 }
 
 var onUnhandled = function (state) {
-  task$1.call(global_1, function () {
+  task$1.call(global$1, function () {
     var promise = state.facade
     var value = state.value
     var IS_UNHANDLED = isUnhandled(state)
@@ -1592,7 +1574,7 @@ var isUnhandled = function (state) {
 }
 
 var onHandleUnhandled = function (state) {
-  task$1.call(global_1, function () {
+  task$1.call(global$1, function () {
     var promise = state.facade
 
     if (engineIsNode) {
@@ -1755,7 +1737,7 @@ if (FORCED$1) {
           ) {
             return promiseResolve(
               PromiseConstructor,
-              $fetch.apply(global_1, arguments)
+              $fetch.apply(global$1, arguments)
             )
           },
         }

@@ -13,34 +13,16 @@ var commonjsGlobal =
     ? self
     : {}
 
-function createCommonjsModule(fn, basedir, module) {
-  return (
-    (module = {
-      path: basedir,
-      exports: {},
-      require: function (path, base) {
-        return commonjsRequire(
-          path,
-          base === undefined || base === null ? module.path : base
-        )
-      },
-    }),
-    fn(module, module.exports),
-    module.exports
-  )
-}
-
-function commonjsRequire() {
-  throw new Error(
-    'Dynamic requires are not currently supported by @rollup/plugin-commonjs'
-  )
+function createCommonjsModule(fn) {
+  var module = {exports: {}}
+  return fn(module, module.exports), module.exports
 }
 
 var check = function (it) {
   return it && it.Math == Math && it
 } // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 
-var global_1 = // eslint-disable-next-line no-undef
+var global$1 = // eslint-disable-next-line no-undef
   check(typeof globalThis == 'object' && globalThis) ||
   check(typeof window == 'object' && window) ||
   check(typeof self == 'object' && self) ||
@@ -166,7 +148,7 @@ var has = function (it, key) {
   return hasOwnProperty.call(it, key)
 }
 
-var document = global_1.document // typeof document.createElement is 'object' in old IE
+var document = global$1.document // typeof document.createElement is 'object' in old IE
 
 var EXISTS = isObject(document) && isObject(document.createElement)
 
@@ -257,16 +239,16 @@ var createNonEnumerableProperty = descriptors
 
 var setGlobal = function (key, value) {
   try {
-    createNonEnumerableProperty(global_1, key, value)
+    createNonEnumerableProperty(global$1, key, value)
   } catch (error) {
-    global_1[key] = value
+    global$1[key] = value
   }
 
   return value
 }
 
 var SHARED = '__core-js_shared__'
-var store = global_1[SHARED] || setGlobal(SHARED, {})
+var store = global$1[SHARED] || setGlobal(SHARED, {})
 var sharedStore = store
 
 var functionToString = Function.toString // this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
@@ -279,7 +261,7 @@ if (typeof sharedStore.inspectSource != 'function') {
 
 var inspectSource = sharedStore.inspectSource
 
-var WeakMap = global_1.WeakMap
+var WeakMap = global$1.WeakMap
 var nativeWeakMap =
   typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap))
 
@@ -289,7 +271,7 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.8.0',
+    version: '3.8.1',
     mode: 'global',
     copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
   })
@@ -315,7 +297,7 @@ var sharedKey = function (key) {
 
 var hiddenKeys = {}
 
-var WeakMap$1 = global_1.WeakMap
+var WeakMap$1 = global$1.WeakMap
 var set, get, has$1
 
 var enforce = function (it) {
@@ -402,7 +384,7 @@ var redefine = createCommonjsModule(function (module) {
       }
     }
 
-    if (O === global_1) {
+    if (O === global$1) {
       if (simple) O[key] = value
       else setGlobal(key, value)
       return
@@ -422,7 +404,7 @@ var redefine = createCommonjsModule(function (module) {
   })
 })
 
-var path = global_1
+var path = global$1
 
 var aFunction = function (variable) {
   return typeof variable == 'function' ? variable : undefined
@@ -430,9 +412,9 @@ var aFunction = function (variable) {
 
 var getBuiltIn = function (namespace, method) {
   return arguments.length < 2
-    ? aFunction(path[namespace]) || aFunction(global_1[namespace])
+    ? aFunction(path[namespace]) || aFunction(global$1[namespace])
     : (path[namespace] && path[namespace][method]) ||
-        (global_1[namespace] && global_1[namespace][method])
+        (global$1[namespace] && global$1[namespace][method])
 }
 
 var ceil = Math.ceil
@@ -606,11 +588,11 @@ var _export = function (options, source) {
   var FORCED, target, key, targetProperty, sourceProperty, descriptor
 
   if (GLOBAL) {
-    target = global_1
+    target = global$1
   } else if (STATIC) {
-    target = global_1[TARGET] || setGlobal(TARGET, {})
+    target = global$1[TARGET] || setGlobal(TARGET, {})
   } else {
-    target = (global_1[TARGET] || {}).prototype
+    target = (global$1[TARGET] || {}).prototype
   }
 
   if (target)
@@ -679,7 +661,7 @@ var useSymbolAsUid =
   typeof Symbol.iterator == 'symbol'
 
 var WellKnownSymbolsStore = shared('wks')
-var Symbol$1 = global_1.Symbol
+var Symbol$1 = global$1.Symbol
 var createWellKnownSymbol = useSymbolAsUid
   ? Symbol$1
   : (Symbol$1 && Symbol$1.withoutSetter) || uid
@@ -716,7 +698,7 @@ var arraySpeciesCreate = function (originalArray, length) {
 
 var engineUserAgent = getBuiltIn('navigator', 'userAgent') || ''
 
-var process = global_1.process
+var process = global$1.process
 var versions = process && process.versions
 var v8 = versions && versions.v8
 var match, version
