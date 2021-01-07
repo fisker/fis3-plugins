@@ -26,7 +26,7 @@
     "index.js"
   ],
   "dependencies": {
-    "postcss": "8.2.2",
+    "postcss": "8.2.3",
     "postcss-load-config": "3.0.0",
     "promise-synchronizer": "3.0.0"
   },
