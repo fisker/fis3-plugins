@@ -65,7 +65,7 @@
     "fast-cartesian-product": "1.0.3",
     "htmlhint": "0.14.2",
     "js-beautify": "1.13.5",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "lodash.merge": "4.6.2",
     "morgan": "1.10.0",
     "node-sass": "5.0.0",
