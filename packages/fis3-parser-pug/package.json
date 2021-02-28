@@ -27,7 +27,7 @@
     "index.js"
   ],
   "dependencies": {
-    "pug": "3.0.0"
+    "pug": "3.0.2"
   },
   "publishConfig": {
     "access": "public",
