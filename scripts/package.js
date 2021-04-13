@@ -31,7 +31,7 @@ const template = _.memoize((file) =>
 
 function parseDependencies(pkgs) {
   const dependencies = {}
-  _.forEach(pkgs || [], (package_) => {
+  for (const package_ of pkgs || []) {
     const packageArray = package_.split('@')
     let packageName
     let packageVersion
@@ -52,7 +52,7 @@ function parseDependencies(pkgs) {
     }
 
     dependencies[packageName] = packageVersion
-  })
+  }
 
   return _.isEmpty(dependencies) ? undefined : dependencies
 }

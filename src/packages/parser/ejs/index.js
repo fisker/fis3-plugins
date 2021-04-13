@@ -10,11 +10,11 @@ const root = path.normalize(PROJECT_ROOT)
 const re = /^[./\\]/i
 
 function cleanRequireCache() {
-  Object.keys(require.cache)
-    .filter((id) => path.normalize(id).startsWith(root))
-    .forEach((id) => {
-      delete require.cache[id]
-    })
+  for (const id of Object.keys(require.cache).filter((id) =>
+    path.normalize(id).startsWith(root)
+  )) {
+    delete require.cache[id]
+  }
 }
 
 function makeRequireFunction(context) {
