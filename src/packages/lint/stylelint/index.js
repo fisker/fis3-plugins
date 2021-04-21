@@ -39,7 +39,7 @@ const runStylelint = sync(async (content, config, file) => {
     log.warn(
       '[%s] lint failed: \n%s \n  %s problem (%s errors, %s warning)',
       file.id,
-      warnMessage.concat(errorMessage).join('\n'),
+      [...warnMessage, ...errorMessage].join('\n'),
       warnMessage.length + errorMessage.length,
       errorMessage.length,
       warnMessage.length

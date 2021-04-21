@@ -15,9 +15,11 @@ function normalizeIncludePath(directories) {
     if (path.isAbsolute(directory) && directory[0] !== '/') {
       directories_.push(directory)
     } else {
-      directories_.push(directory)
-      directories_.push(path.join(PROJECT_ROOT, directory))
-      directories_.push(path.join(process.cwd(), directory))
+      directories_.push(
+        directory,
+        path.join(PROJECT_ROOT, directory),
+        path.join(process.cwd(), directory)
+      )
     }
 
     return [...all, ...directories_]

@@ -77,11 +77,12 @@ function getConfig(bs, argv) {
 
   config.middleware = parseMiddleware(config.middleware)
 
-  // logger
-  config.middleware.push(logger('short'))
-
-  // mock
-  config.middleware.push(mock(argv.root))
+  config.middleware.push(
+    // logger
+    logger('short'),
+    // mock
+    mock(argv.root)
+  )
 
   // serveDirectory
   if (config.server && config.server.directory) {

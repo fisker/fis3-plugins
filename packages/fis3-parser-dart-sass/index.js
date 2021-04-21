@@ -4139,9 +4139,9 @@ function normalizeIncludePath(directories) {
     ) {
       directories_.push(directory)
     } else {
-      directories_.push(directory)
-      directories_.push(path__default['default'].join(PROJECT_ROOT, directory))
       directories_.push(
+        directory,
+        path__default['default'].join(PROJECT_ROOT, directory),
         path__default['default'].join(process$1.cwd(), directory)
       )
     }

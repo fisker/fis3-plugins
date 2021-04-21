@@ -1,9 +1,10 @@
 import path from 'path'
 import {format} from 'util'
-import sass from 'node-sass'
 import exportPlugin from '../../../shared/export-plugin'
 import sassImportResolve from '../../../shared/sass-import-resolver'
 import * as info from './info'
+
+const sass = {}
 
 const {fis} = global
 const PROJECT_ROOT = fis.project.getProjectPath()
@@ -14,9 +15,11 @@ function normalizeIncludePath(directories) {
     if (path.isAbsolute(directory) && directory[0] !== '/') {
       directories_.push(directory)
     } else {
-      directories_.push(directory)
-      directories_.push(path.join(PROJECT_ROOT, directory))
-      directories_.push(path.join(process.cwd(), directory))
+      directories_.push(
+        directory,
+        path.join(PROJECT_ROOT, directory),
+        path.join(process.cwd(), directory)
+      )
     }
 
     return [...all, ...directories_]

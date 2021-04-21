@@ -75,7 +75,9 @@ class Package {
         options: this.info.options || {},
         keywords: this.info.keywords || [],
         files: this.info.files || [],
-        dependencies: this.info.deprecated ? undefined : parseDependencies(this.info.dependencies),
+        dependencies: this.info.deprecated
+          ? undefined
+          : parseDependencies(this.info.dependencies),
         version: VERSIONS[packageName] && VERSIONS[packageName].version,
         // gitHead: VERSIONS[packageName].gitHead,
       })
@@ -89,13 +91,13 @@ class Package {
   getPackageInfo() {
     const {info} = this
 
-    const keywords = _.uniq(
-      _.concat(
-        globalPackage.keywords,
-        [this.type, this.name, this.info.name],
-        info.keywords
-      )
-    )
+    const keywords = _.uniq([
+      ...globalPackage.keywords,
+      this.type,
+      this.name,
+      this.info.name,
+      ...info.keywords,
+    ])
 
     let {repository, funding} = globalPackage
 
@@ -128,9 +130,9 @@ class Package {
       {
         repository,
         funding,
-        keywords: _.uniq(keywords.sort()),
+        keywords: _.uniq(keywords).sort(),
         scripts: info.scripts,
-        files: _.uniq(files.concat(info.files).sort()),
+        files: _.uniq([...files, ...info.files]).sort(),
       },
       _.pick(info, ['version', 'gitHead'])
     )
