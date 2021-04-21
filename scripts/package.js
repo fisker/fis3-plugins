@@ -75,7 +75,7 @@ class Package {
         options: this.info.options || {},
         keywords: this.info.keywords || [],
         files: this.info.files || [],
-        dependencies: parseDependencies(this.info.dependencies),
+        dependencies: this.info.deprecated ? undefined : parseDependencies(this.info.dependencies),
         version: VERSIONS[packageName] && VERSIONS[packageName].version,
         // gitHead: VERSIONS[packageName].gitHead,
       })

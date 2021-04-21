@@ -29,11 +29,11 @@ var check = function (it) {
   return it && it.Math == Math && it
 } // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 
-var global$1 = // eslint-disable-next-line no-undef
+var global$1 = // eslint-disable-next-line es/no-global-this -- safe
   check(typeof globalThis == 'object' && globalThis) ||
-  check(typeof window == 'object' && window) ||
+  check(typeof window == 'object' && window) || // eslint-disable-next-line no-restricted-globals -- safe
   check(typeof self == 'object' && self) ||
-  check(typeof commonjsGlobal == 'object' && commonjsGlobal) || // eslint-disable-next-line no-new-func
+  check(typeof commonjsGlobal == 'object' && commonjsGlobal) || // eslint-disable-next-line no-new-func -- fallback
   (function () {
     return this
   })() ||
@@ -48,6 +48,7 @@ var fails = function (exec) {
 }
 
 var descriptors = !fails(function () {
+  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
   return (
     Object.defineProperty({}, 1, {
       get: function () {
@@ -57,27 +58,28 @@ var descriptors = !fails(function () {
   )
 })
 
-var nativePropertyIsEnumerable = {}.propertyIsEnumerable
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor // Nashorn ~ JDK8 bug
+var $propertyIsEnumerable = {}.propertyIsEnumerable // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+
+var getOwnPropertyDescriptor$1 = Object.getOwnPropertyDescriptor // Nashorn ~ JDK8 bug
 
 var NASHORN_BUG =
-  getOwnPropertyDescriptor &&
-  !nativePropertyIsEnumerable.call(
+  getOwnPropertyDescriptor$1 &&
+  !$propertyIsEnumerable.call(
     {
       1: 2,
     },
     1
   ) // `Object.prototype.propertyIsEnumerable` method implementation
-// https://tc39.github.io/ecma262/#sec-object.prototype.propertyisenumerable
+// https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
-var f = NASHORN_BUG
+var f$4 = NASHORN_BUG
   ? function propertyIsEnumerable(V) {
-      var descriptor = getOwnPropertyDescriptor(this, V)
+      var descriptor = getOwnPropertyDescriptor$1(this, V)
       return !!descriptor && descriptor.enumerable
     }
-  : nativePropertyIsEnumerable
+  : $propertyIsEnumerable
 var objectPropertyIsEnumerable = {
-  f: f,
+  f: f$4,
 }
 
 var createPropertyDescriptor = function (bitmap, value) {
@@ -99,7 +101,7 @@ var split = ''.split // fallback for non-array-like ES3 and non-enumerable old V
 
 var indexedObject = fails(function () {
   // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
-  // eslint-disable-next-line no-prototype-builtins
+  // eslint-disable-next-line no-prototype-builtins -- safe
   return !Object('z').propertyIsEnumerable(0)
 })
   ? function (it) {
@@ -108,7 +110,7 @@ var indexedObject = fails(function () {
   : Object
 
 // `RequireObjectCoercible` abstract operation
-// https://tc39.github.io/ecma262/#sec-requireobjectcoercible
+// https://tc39.es/ecma262/#sec-requireobjectcoercible
 var requireObjectCoercible = function (it) {
   if (it == undefined) throw TypeError("Can't call method on " + it)
   return it
@@ -122,7 +124,7 @@ var isObject = function (it) {
   return typeof it === 'object' ? it !== null : typeof it === 'function'
 }
 
-// https://tc39.github.io/ecma262/#sec-toprimitive
+// https://tc39.es/ecma262/#sec-toprimitive
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
 // and the second argument - flag - preferred type is a string
 
@@ -151,7 +153,7 @@ var toPrimitive = function (input, PREFERRED_STRING) {
 
 var hasOwnProperty = {}.hasOwnProperty
 
-var has = function (it, key) {
+var has$1 = function (it, key) {
   return hasOwnProperty.call(it, key)
 }
 
@@ -166,6 +168,7 @@ var documentCreateElement = function (it) {
 var ie8DomDefine =
   !descriptors &&
   !fails(function () {
+    // eslint-disable-next-line es/no-object-defineproperty -- requied for testing
     return (
       Object.defineProperty(documentCreateElement('div'), 'a', {
         get: function () {
@@ -175,28 +178,28 @@ var ie8DomDefine =
     )
   })
 
-var nativeGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor // `Object.getOwnPropertyDescriptor` method
-// https://tc39.github.io/ecma262/#sec-object.getownpropertydescriptor
+var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor // `Object.getOwnPropertyDescriptor` method
+// https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
 
-var f$1 = descriptors
-  ? nativeGetOwnPropertyDescriptor
+var f$3 = descriptors
+  ? $getOwnPropertyDescriptor
   : function getOwnPropertyDescriptor(O, P) {
       O = toIndexedObject(O)
       P = toPrimitive(P, true)
       if (ie8DomDefine)
         try {
-          return nativeGetOwnPropertyDescriptor(O, P)
+          return $getOwnPropertyDescriptor(O, P)
         } catch (error) {
           /* empty */
         }
-      if (has(O, P))
+      if (has$1(O, P))
         return createPropertyDescriptor(
           !objectPropertyIsEnumerable.f.call(O, P),
           O[P]
         )
     }
 var objectGetOwnPropertyDescriptor = {
-  f: f$1,
+  f: f$3,
 }
 
 var anObject = function (it) {
@@ -207,18 +210,18 @@ var anObject = function (it) {
   return it
 }
 
-var nativeDefineProperty = Object.defineProperty // `Object.defineProperty` method
-// https://tc39.github.io/ecma262/#sec-object.defineproperty
+var $defineProperty = Object.defineProperty // `Object.defineProperty` method
+// https://tc39.es/ecma262/#sec-object.defineproperty
 
 var f$2 = descriptors
-  ? nativeDefineProperty
+  ? $defineProperty
   : function defineProperty(O, P, Attributes) {
       anObject(O)
       P = toPrimitive(P, true)
       anObject(Attributes)
       if (ie8DomDefine)
         try {
-          return nativeDefineProperty(O, P, Attributes)
+          return $defineProperty(O, P, Attributes)
         } catch (error) {
           /* empty */
         }
@@ -255,8 +258,8 @@ var setGlobal = function (key, value) {
 }
 
 var SHARED = '__core-js_shared__'
-var store = global$1[SHARED] || setGlobal(SHARED, {})
-var sharedStore = store
+var store$1 = global$1[SHARED] || setGlobal(SHARED, {})
+var sharedStore = store$1
 
 var functionToString = Function.toString // this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
 
@@ -268,9 +271,10 @@ if (typeof sharedStore.inspectSource != 'function') {
 
 var inspectSource = sharedStore.inspectSource
 
-var WeakMap = global$1.WeakMap
+var WeakMap$1 = global$1.WeakMap
 var nativeWeakMap =
-  typeof WeakMap === 'function' && /native code/.test(inspectSource(WeakMap))
+  typeof WeakMap$1 === 'function' &&
+  /native code/.test(inspectSource(WeakMap$1))
 
 var shared = createCommonjsModule(function (module) {
   ;(module.exports = function (key, value) {
@@ -278,9 +282,9 @@ var shared = createCommonjsModule(function (module) {
       sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
     )
   })('versions', []).push({
-    version: '3.8.1',
+    version: '3.10.2',
     mode: 'global',
-    copyright: '© 2020 Denis Pushkarev (zloirock.ru)',
+    copyright: '© 2021 Denis Pushkarev (zloirock.ru)',
   })
 })
 
@@ -302,13 +306,14 @@ var sharedKey = function (key) {
   return keys[key] || (keys[key] = uid(key))
 }
 
-var hiddenKeys = {}
+var hiddenKeys$1 = {}
 
-var WeakMap$1 = global$1.WeakMap
-var set, get, has$1
+var OBJECT_ALREADY_INITIALIZED = 'Object already initialized'
+var WeakMap = global$1.WeakMap
+var set, get, has
 
 var enforce = function (it) {
-  return has$1(it) ? get(it) : set(it, {})
+  return has(it) ? get(it) : set(it, {})
 }
 
 var getterFor = function (TYPE) {
@@ -324,47 +329,49 @@ var getterFor = function (TYPE) {
 }
 
 if (nativeWeakMap) {
-  var store$1 = sharedStore.state || (sharedStore.state = new WeakMap$1())
-  var wmget = store$1.get
-  var wmhas = store$1.has
-  var wmset = store$1.set
+  var store = sharedStore.state || (sharedStore.state = new WeakMap())
+  var wmget = store.get
+  var wmhas = store.has
+  var wmset = store.set
 
   set = function (it, metadata) {
+    if (wmhas.call(store, it)) throw new TypeError(OBJECT_ALREADY_INITIALIZED)
     metadata.facade = it
-    wmset.call(store$1, it, metadata)
+    wmset.call(store, it, metadata)
     return metadata
   }
 
   get = function (it) {
-    return wmget.call(store$1, it) || {}
+    return wmget.call(store, it) || {}
   }
 
-  has$1 = function (it) {
-    return wmhas.call(store$1, it)
+  has = function (it) {
+    return wmhas.call(store, it)
   }
 } else {
   var STATE = sharedKey('state')
-  hiddenKeys[STATE] = true
+  hiddenKeys$1[STATE] = true
 
   set = function (it, metadata) {
+    if (has$1(it, STATE)) throw new TypeError(OBJECT_ALREADY_INITIALIZED)
     metadata.facade = it
     createNonEnumerableProperty(it, STATE, metadata)
     return metadata
   }
 
   get = function (it) {
-    return has(it, STATE) ? it[STATE] : {}
+    return has$1(it, STATE) ? it[STATE] : {}
   }
 
-  has$1 = function (it) {
-    return has(it, STATE)
+  has = function (it) {
+    return has$1(it, STATE)
   }
 }
 
 var internalState = {
   set: set,
   get: get,
-  has: has$1,
+  has: has,
   enforce: enforce,
   getterFor: getterFor,
 }
@@ -380,7 +387,7 @@ var redefine = createCommonjsModule(function (module) {
     var state
 
     if (typeof value == 'function') {
-      if (typeof key == 'string' && !has(value, 'name')) {
+      if (typeof key == 'string' && !has$1(value, 'name')) {
         createNonEnumerableProperty(value, 'name', key)
       }
 
@@ -425,43 +432,43 @@ var getBuiltIn = function (namespace, method) {
 }
 
 var ceil = Math.ceil
-var floor = Math.floor // `ToInteger` abstract operation
-// https://tc39.github.io/ecma262/#sec-tointeger
+var floor$1 = Math.floor // `ToInteger` abstract operation
+// https://tc39.es/ecma262/#sec-tointeger
 
 var toInteger = function (argument) {
   return isNaN((argument = +argument))
     ? 0
-    : (argument > 0 ? floor : ceil)(argument)
+    : (argument > 0 ? floor$1 : ceil)(argument)
 }
 
-var min = Math.min // `ToLength` abstract operation
-// https://tc39.github.io/ecma262/#sec-tolength
+var min$2 = Math.min // `ToLength` abstract operation
+// https://tc39.es/ecma262/#sec-tolength
 
 var toLength = function (argument) {
-  return argument > 0 ? min(toInteger(argument), 0x1fffffffffffff) : 0 // 2 ** 53 - 1 == 9007199254740991
+  return argument > 0 ? min$2(toInteger(argument), 0x1fffffffffffff) : 0 // 2 ** 53 - 1 == 9007199254740991
 }
 
-var max = Math.max
+var max$1 = Math.max
 var min$1 = Math.min // Helper for a popular repeating case of the spec:
 // Let integer be ? ToInteger(index).
 // If integer < 0, let result be max((length + integer), 0); else let result be min(integer, length).
 
 var toAbsoluteIndex = function (index, length) {
   var integer = toInteger(index)
-  return integer < 0 ? max(integer + length, 0) : min$1(integer, length)
+  return integer < 0 ? max$1(integer + length, 0) : min$1(integer, length)
 }
 
-var createMethod = function (IS_INCLUDES) {
+var createMethod$1 = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
     var O = toIndexedObject($this)
     var length = toLength(O.length)
     var index = toAbsoluteIndex(fromIndex, length)
     var value // Array#includes uses SameValueZero equality algorithm
-    // eslint-disable-next-line no-self-compare
+    // eslint-disable-next-line no-self-compare -- NaN check
 
     if (IS_INCLUDES && el != el)
       while (length > index) {
-        value = O[index++] // eslint-disable-next-line no-self-compare
+        value = O[index++] // eslint-disable-next-line no-self-compare -- NaN check
 
         if (value != value) return true // Array#indexOf ignores holes, Array#includes - not
       }
@@ -476,11 +483,11 @@ var createMethod = function (IS_INCLUDES) {
 
 var arrayIncludes = {
   // `Array.prototype.includes` method
-  // https://tc39.github.io/ecma262/#sec-array.prototype.includes
-  includes: createMethod(true),
+  // https://tc39.es/ecma262/#sec-array.prototype.includes
+  includes: createMethod$1(true),
   // `Array.prototype.indexOf` method
-  // https://tc39.github.io/ecma262/#sec-array.prototype.indexof
-  indexOf: createMethod(false),
+  // https://tc39.es/ecma262/#sec-array.prototype.indexof
+  indexOf: createMethod$1(false),
 }
 
 var indexOf = arrayIncludes.indexOf
@@ -491,10 +498,10 @@ var objectKeysInternal = function (object, names) {
   var result = []
   var key
 
-  for (key in O) !has(hiddenKeys, key) && has(O, key) && result.push(key) // Don't enum bug & hidden keys
+  for (key in O) !has$1(hiddenKeys$1, key) && has$1(O, key) && result.push(key) // Don't enum bug & hidden keys
 
   while (names.length > i)
-    if (has(O, (key = names[i++]))) {
+    if (has$1(O, (key = names[i++]))) {
       ~indexOf(result, key) || result.push(key)
     }
 
@@ -512,22 +519,24 @@ var enumBugKeys = [
   'valueOf',
 ]
 
-var hiddenKeys$1 = enumBugKeys.concat('length', 'prototype') // `Object.getOwnPropertyNames` method
-// https://tc39.github.io/ecma262/#sec-object.getownpropertynames
+var hiddenKeys = enumBugKeys.concat('length', 'prototype') // `Object.getOwnPropertyNames` method
+// https://tc39.es/ecma262/#sec-object.getownpropertynames
+// eslint-disable-next-line es/no-object-getownpropertynames -- safe
 
-var f$3 =
+var f$1 =
   Object.getOwnPropertyNames ||
   function getOwnPropertyNames(O) {
-    return objectKeysInternal(O, hiddenKeys$1)
+    return objectKeysInternal(O, hiddenKeys)
   }
 
 var objectGetOwnPropertyNames = {
-  f: f$3,
+  f: f$1,
 }
 
-var f$4 = Object.getOwnPropertySymbols
+// eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
+var f = Object.getOwnPropertySymbols
 var objectGetOwnPropertySymbols = {
-  f: f$4,
+  f: f,
 }
 
 var ownKeys =
@@ -545,7 +554,7 @@ var copyConstructorProperties = function (target, source) {
 
   for (var i = 0; i < keys.length; i++) {
     var key = keys[i]
-    if (!has(target, key))
+    if (!has$1(target, key))
       defineProperty(target, key, getOwnPropertyDescriptor(source, key))
   }
 }
@@ -572,7 +581,7 @@ var NATIVE = (isForced.NATIVE = 'N')
 var POLYFILL = (isForced.POLYFILL = 'P')
 var isForced_1 = isForced
 
-var getOwnPropertyDescriptor$1 = objectGetOwnPropertyDescriptor.f
+var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f
 /*
   options.target      - name of the target object
   options.global      - target is the global object
@@ -607,7 +616,7 @@ var _export = function (options, source) {
       sourceProperty = source[key]
 
       if (options.noTargetGet) {
-        descriptor = getOwnPropertyDescriptor$1(target, key)
+        descriptor = getOwnPropertyDescriptor(target, key)
         targetProperty = descriptor && descriptor.value
       } else targetProperty = target[key]
 
@@ -629,7 +638,7 @@ var _export = function (options, source) {
     }
 }
 
-// https://tc39.github.io/ecma262/#sec-get-regexp.prototype.flags
+// https://tc39.es/ecma262/#sec-get-regexp.prototype.flags
 
 var regexpFlags = function () {
   var that = anObject(this)
@@ -649,7 +658,7 @@ function RE(s, f) {
   return RegExp(s, f)
 }
 
-var UNSUPPORTED_Y = fails(function () {
+var UNSUPPORTED_Y$1 = fails(function () {
   // babel-minify transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError
   var re = RE('a', 'y')
   re.lastIndex = 2
@@ -662,15 +671,12 @@ var BROKEN_CARET = fails(function () {
   return re.exec('str') != null
 })
 var regexpStickyHelpers = {
-  UNSUPPORTED_Y: UNSUPPORTED_Y,
+  UNSUPPORTED_Y: UNSUPPORTED_Y$1,
   BROKEN_CARET: BROKEN_CARET,
 }
 
-var nativeExec = RegExp.prototype.exec // This always refers to the native implementation, because the
-// String#replace polyfill uses ./fix-regexp-well-known-symbol-logic.js,
-// which loads this file before patching the method.
-
-var nativeReplace = String.prototype.replace
+var nativeExec = RegExp.prototype.exec
+var nativeReplace = shared('native-string-replace', String.prototype.replace)
 var patchedExec = nativeExec
 
 var UPDATES_LAST_INDEX_WRONG = (function () {
@@ -681,17 +687,18 @@ var UPDATES_LAST_INDEX_WRONG = (function () {
   return re1.lastIndex !== 0 || re2.lastIndex !== 0
 })()
 
-var UNSUPPORTED_Y$1 =
+var UNSUPPORTED_Y =
   regexpStickyHelpers.UNSUPPORTED_Y || regexpStickyHelpers.BROKEN_CARET // nonparticipating capturing group, copied from es5-shim's String#split patch.
+// eslint-disable-next-line regexp/no-assertion-capturing-group, regexp/no-empty-group, regexp/no-lazy-ends -- testing
 
 var NPCG_INCLUDED = /()??/.exec('')[1] !== undefined
-var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y$1
+var PATCH = UPDATES_LAST_INDEX_WRONG || NPCG_INCLUDED || UNSUPPORTED_Y
 
 if (PATCH) {
   patchedExec = function exec(str) {
     var re = this
     var lastIndex, reCopy, match, i
-    var sticky = UNSUPPORTED_Y$1 && re.sticky
+    var sticky = UNSUPPORTED_Y && re.sticky
     var flags = regexpFlags.call(re)
     var source = re.source
     var charsAdded = 0
@@ -753,6 +760,8 @@ if (PATCH) {
 
 var regexpExec = patchedExec
 
+// https://tc39.es/ecma262/#sec-regexp.prototype.exec
+
 _export(
   {
     target: 'RegExp',
@@ -764,18 +773,45 @@ _export(
   }
 )
 
+var engineIsNode = classofRaw(global$1.process) == 'process'
+
+var engineUserAgent = getBuiltIn('navigator', 'userAgent') || ''
+
+var process$1 = global$1.process
+var versions = process$1 && process$1.versions
+var v8 = versions && versions.v8
+var match, version
+
+if (v8) {
+  match = v8.split('.')
+  version = match[0] + match[1]
+} else if (engineUserAgent) {
+  match = engineUserAgent.match(/Edge\/(\d+)/)
+
+  if (!match || match[1] >= 74) {
+    match = engineUserAgent.match(/Chrome\/(\d+)/)
+    if (match) version = match[1]
+  }
+}
+
+var engineV8Version = version && +version
+
 var nativeSymbol =
   !!Object.getOwnPropertySymbols &&
   !fails(function () {
-    // Chrome 38 Symbol has incorrect toString conversion
-    // eslint-disable-next-line no-undef
-    return !String(Symbol())
+    // eslint-disable-next-line es/no-symbol -- required for testing
+    return (
+      !Symbol.sham && // Chrome 38 Symbol has incorrect toString conversion
+      // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
+      (engineIsNode
+        ? engineV8Version === 38
+        : engineV8Version > 37 && engineV8Version < 41)
+    )
   })
 
+/* eslint-disable es/no-symbol -- required for testing */
 var useSymbolAsUid =
-  nativeSymbol && // eslint-disable-next-line no-undef
-  !Symbol.sham && // eslint-disable-next-line no-undef
-  typeof Symbol.iterator == 'symbol'
+  nativeSymbol && !Symbol.sham && typeof Symbol.iterator == 'symbol'
 
 var WellKnownSymbolsStore = shared('wks')
 var Symbol$1 = global$1.Symbol
@@ -784,10 +820,15 @@ var createWellKnownSymbol = useSymbolAsUid
   : (Symbol$1 && Symbol$1.withoutSetter) || uid
 
 var wellKnownSymbol = function (name) {
-  if (!has(WellKnownSymbolsStore, name)) {
-    if (nativeSymbol && has(Symbol$1, name))
+  if (
+    !has$1(WellKnownSymbolsStore, name) ||
+    !(nativeSymbol || typeof WellKnownSymbolsStore[name] == 'string')
+  ) {
+    if (nativeSymbol && has$1(Symbol$1, name)) {
       WellKnownSymbolsStore[name] = Symbol$1[name]
-    else WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name)
+    } else {
+      WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name)
+    }
   }
 
   return WellKnownSymbolsStore[name]
@@ -813,6 +854,7 @@ var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function () {
 // https://stackoverflow.com/questions/6024666/getting-ie-to-replace-a-regex-with-the-literal-string-0
 
 var REPLACE_KEEPS_$0 = (function () {
+  // eslint-disable-next-line regexp/prefer-escape-replacement-dollar-char -- required for testing
   return 'a'.replace(/./, '$0') === '$0'
 })()
 
@@ -828,6 +870,7 @@ var REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE = (function () {
 // Weex JS has frozen built-in prototypes, so use try / catch wrapper
 
 var SPLIT_WORKS_WITH_OVERWRITTEN_EXEC = !fails(function () {
+  // eslint-disable-next-line regexp/no-empty-group -- required for testing
   var re = /(?:)/
   var originalExec = re.exec
 
@@ -900,7 +943,7 @@ var fixRegexpWellKnownSymbolLogic = function (KEY, length, exec, sham) {
       SYMBOL,
       ''[KEY],
       function (nativeMethod, regexp, str, arg2, forceStringMethod) {
-        if (regexp.exec === regexpExec) {
+        if (regexp.exec === RegExp.prototype.exec) {
           if (DELEGATES_TO_SYMBOL && !forceStringMethod) {
             // The native String method already delegates to @@method (this
             // polyfilled function), leasing to infinite recursion.
@@ -947,13 +990,7 @@ var fixRegexpWellKnownSymbolLogic = function (KEY, length, exec, sham) {
   if (sham) createNonEnumerableProperty(RegExp.prototype[SYMBOL], 'sham', true)
 }
 
-// https://tc39.github.io/ecma262/#sec-toobject
-
-var toObject = function (argument) {
-  return Object(requireObjectCoercible(argument))
-}
-
-var createMethod$1 = function (CONVERT_TO_STRING) {
+var createMethod = function (CONVERT_TO_STRING) {
   return function ($this, pos) {
     var S = String(requireObjectCoercible($this))
     var position = toInteger(pos)
@@ -978,21 +1015,91 @@ var createMethod$1 = function (CONVERT_TO_STRING) {
 
 var stringMultibyte = {
   // `String.prototype.codePointAt` method
-  // https://tc39.github.io/ecma262/#sec-string.prototype.codepointat
-  codeAt: createMethod$1(false),
+  // https://tc39.es/ecma262/#sec-string.prototype.codepointat
+  codeAt: createMethod(false),
   // `String.prototype.at` method
   // https://github.com/mathiasbynens/String.prototype.at
-  charAt: createMethod$1(true),
+  charAt: createMethod(true),
 }
 
 var charAt = stringMultibyte.charAt // `AdvanceStringIndex` abstract operation
-// https://tc39.github.io/ecma262/#sec-advancestringindex
+// https://tc39.es/ecma262/#sec-advancestringindex
 
 var advanceStringIndex = function (S, index, unicode) {
   return index + (unicode ? charAt(S, index).length : 1)
 }
 
-// https://tc39.github.io/ecma262/#sec-regexpexec
+// https://tc39.es/ecma262/#sec-toobject
+
+var toObject = function (argument) {
+  return Object(requireObjectCoercible(argument))
+}
+
+var floor = Math.floor
+var replace = ''.replace
+var SUBSTITUTION_SYMBOLS = /\$([$&'`]|\d{1,2}|<[^>]*>)/g
+var SUBSTITUTION_SYMBOLS_NO_NAMED = /\$([$&'`]|\d{1,2})/g // https://tc39.es/ecma262/#sec-getsubstitution
+
+var getSubstitution = function (
+  matched,
+  str,
+  position,
+  captures,
+  namedCaptures,
+  replacement
+) {
+  var tailPos = position + matched.length
+  var m = captures.length
+  var symbols = SUBSTITUTION_SYMBOLS_NO_NAMED
+
+  if (namedCaptures !== undefined) {
+    namedCaptures = toObject(namedCaptures)
+    symbols = SUBSTITUTION_SYMBOLS
+  }
+
+  return replace.call(replacement, symbols, function (match, ch) {
+    var capture
+
+    switch (ch.charAt(0)) {
+      case '$':
+        return '$'
+
+      case '&':
+        return matched
+
+      case '`':
+        return str.slice(0, position)
+
+      case "'":
+        return str.slice(tailPos)
+
+      case '<':
+        capture = namedCaptures[ch.slice(1, -1)]
+        break
+
+      default:
+        // \d\d?
+        var n = +ch
+        if (n === 0) return match
+
+        if (n > m) {
+          var f = floor(n / 10)
+          if (f === 0) return match
+          if (f <= m)
+            return captures[f - 1] === undefined
+              ? ch.charAt(1)
+              : captures[f - 1] + ch.charAt(1)
+          return match
+        }
+
+        capture = captures[n - 1]
+    }
+
+    return capture === undefined ? '' : capture
+  })
+}
+
+// https://tc39.es/ecma262/#sec-regexpexec
 
 var regexpExecAbstract = function (R, S) {
   var exec = R.exec
@@ -1016,11 +1123,8 @@ var regexpExecAbstract = function (R, S) {
   return regexpExec.call(R, S)
 }
 
-var max$1 = Math.max
-var min$2 = Math.min
-var floor$1 = Math.floor
-var SUBSTITUTION_SYMBOLS = /\$([$&'`]|\d\d?|<[^>]*>)/g
-var SUBSTITUTION_SYMBOLS_NO_NAMED = /\$([$&'`]|\d\d?)/g
+var max = Math.max
+var min = Math.min
 
 var maybeToString = function (it) {
   return it === undefined ? it : String(it)
@@ -1038,7 +1142,7 @@ fixRegexpWellKnownSymbolLogic(
       : '$0'
     return [
       // `String.prototype.replace` method
-      // https://tc39.github.io/ecma262/#sec-string.prototype.replace
+      // https://tc39.es/ecma262/#sec-string.prototype.replace
       function replace(searchValue, replaceValue) {
         var O = requireObjectCoercible(this)
         var replacer =
@@ -1047,7 +1151,7 @@ fixRegexpWellKnownSymbolLogic(
           ? replacer.call(searchValue, O, replaceValue)
           : nativeReplace.call(String(O), searchValue, replaceValue)
       }, // `RegExp.prototype[@@replace]` method
-      // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@replace
+      // https://tc39.es/ecma262/#sec-regexp.prototype-@@replace
       function (regexp, replaceValue) {
         if (
           (!REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE && REPLACE_KEEPS_$0) ||
@@ -1091,7 +1195,7 @@ fixRegexpWellKnownSymbolLogic(
         for (var i = 0; i < results.length; i++) {
           result = results[i]
           var matched = String(result[0])
-          var position = max$1(min$2(toInteger(result.index), S.length), 0)
+          var position = max(min(toInteger(result.index), S.length), 0)
           var captures = [] // NOTE: This is equivalent to
           //   captures = result.slice(1).map(maybeToString)
           // but for some reason `nativeSlice.call(result, 1, result.length)` (called in
@@ -1129,66 +1233,7 @@ fixRegexpWellKnownSymbolLogic(
 
         return accumulatedResult + S.slice(nextSourcePosition)
       },
-    ] // https://tc39.github.io/ecma262/#sec-getsubstitution
-
-    function getSubstitution(
-      matched,
-      str,
-      position,
-      captures,
-      namedCaptures,
-      replacement
-    ) {
-      var tailPos = position + matched.length
-      var m = captures.length
-      var symbols = SUBSTITUTION_SYMBOLS_NO_NAMED
-
-      if (namedCaptures !== undefined) {
-        namedCaptures = toObject(namedCaptures)
-        symbols = SUBSTITUTION_SYMBOLS
-      }
-
-      return nativeReplace.call(replacement, symbols, function (match, ch) {
-        var capture
-
-        switch (ch.charAt(0)) {
-          case '$':
-            return '$'
-
-          case '&':
-            return matched
-
-          case '`':
-            return str.slice(0, position)
-
-          case "'":
-            return str.slice(tailPos)
-
-          case '<':
-            capture = namedCaptures[ch.slice(1, -1)]
-            break
-
-          default:
-            // \d\d?
-            var n = +ch
-            if (n === 0) return match
-
-            if (n > m) {
-              var f = floor$1(n / 10)
-              if (f === 0) return match
-              if (f <= m)
-                return captures[f - 1] === undefined
-                  ? ch.charAt(1)
-                  : captures[f - 1] + ch.charAt(1)
-              return match
-            }
-
-            capture = captures[n - 1]
-        }
-
-        return capture === undefined ? '' : capture
-      })
-    }
+    ]
   }
 )
 

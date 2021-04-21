@@ -1,4 +1,5 @@
 export default {
+  deprecated: 'use `fis3-parser-dart-sass` instead.',
   description: 'A fis plugin to parse sass with latest node-sass.',
   keywords: ['scss', 'sass', 'node-sass'],
   dependencies: ['node-sass', 'fast-cartesian-product'],
