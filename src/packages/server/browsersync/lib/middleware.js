@@ -29,9 +29,9 @@ function mock(root) {
       ydPreview(options),
       ydScript(options),
     ].reduceRight(
-      (next, middlewave) =>
+      (next, middleware) =>
         function () {
-          middlewave(request, response, next)
+          middleware(request, response, next)
         },
       next
     )()
