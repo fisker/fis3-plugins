@@ -13,8 +13,17 @@ module.exports = {
   parserOptions: {},
   extends: ['@fisker'],
   settings: {},
-  rules: {},
+  rules: {
+    'unicorn/prefer-node-protocol': 'off',
+  },
   plugins: [],
   globals: {},
-  overrides: [],
+  overrides: [
+    {
+      files: ['scripts/**/*'],
+      rules: {
+        'unicorn/prefer-node-protocol': 'error',
+      },
+    },
+  ],
 }

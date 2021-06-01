@@ -1,7 +1,7 @@
 import ejs from 'ejs'
 import path from 'path'
 import exportPlugin from '../../../shared/export-plugin'
-import * as info from './info'
+import info from './info'
 
 const {fis} = global
 const PROJECT_ROOT = fis.project.getProjectPath()

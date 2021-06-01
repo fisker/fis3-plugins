@@ -1,8 +1,10 @@
-import fs from 'fs'
-import path from 'path'
-import Package from './package'
+import fs from 'node:fs'
+import path from 'node:path'
+import createEsmUtils from 'esm-utils'
+import Package from './package.mjs'
 
-const SOURCE_DIR = path.join(__dirname, '..', 'src')
+const {dirname} = createEsmUtils(import.meta)
+const SOURCE_DIR = path.join(dirname, '..', 'src')
 
 const pluginTypes = [
   'lint',

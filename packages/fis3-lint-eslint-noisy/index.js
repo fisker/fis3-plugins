@@ -16,11 +16,6 @@ var info = {
   },
 }
 
-var info$1 = /*#__PURE__*/ Object.freeze({
-  __proto__: null,
-  default: info,
-})
-
 function exportPlugin(process, _ref) {
   var options = _ref.options
   process.defaultOptions = options
@@ -57,4 +52,4 @@ function process(content, file, config) {
   }
 }
 
-module.exports = exportPlugin(process, info$1)
+module.exports = exportPlugin(process, info)

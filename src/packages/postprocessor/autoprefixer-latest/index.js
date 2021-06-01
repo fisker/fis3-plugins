@@ -1,7 +1,7 @@
 import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 import exportPlugin from '../../../shared/export-plugin'
-import * as info from './info'
+import info from './info'
 
 function process(content, file, config) {
   return postcss([autoprefixer(config)]).process(content, {

@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   description: 'A fis plugin to parse sass with dart-sass.',
   keywords: ['scss', 'sass', 'dart-sass'],
   dependencies: ['sass', 'fast-cartesian-product'],

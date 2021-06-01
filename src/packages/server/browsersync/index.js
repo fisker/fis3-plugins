@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import execa from 'execa'
 import yargs from 'yargs'
-import * as info from './info'
+import info from './info'
 
 const {fis} = global
 const util = fis.require('command-server/lib/util.js')

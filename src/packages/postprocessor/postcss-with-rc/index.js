@@ -2,7 +2,7 @@ import postcss from 'postcss'
 import postcssrc from 'postcss-load-config'
 import sync from 'promise-synchronizer'
 import exportPlugin from '../../../shared/export-plugin'
-import * as info from './info'
+import info from './info'
 
 const postcssProcess = sync(async (content, file, config) => {
   const {plugins, options} = await postcssrc()

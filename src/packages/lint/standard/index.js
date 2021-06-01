@@ -1,7 +1,7 @@
 import {CLIEngine} from 'eslint'
 import standard from 'standard'
 import exportPlugin from '../../../shared/export-plugin'
-import * as info from './info'
+import info from './info'
 
 const formatter = CLIEngine.getFormatter()
 const {log} = global.fis

@@ -37,10 +37,9 @@ function getFiles(directories, file) {
   directories = getDirectories(directories, file)
   const fileNames = possibleFileNames(file)
 
-  const files = cartesianProduct([
-    directories,
-    fileNames,
-  ]).map(([directory, fileName]) => path.join(directory, fileName))
+  const files = cartesianProduct([directories, fileNames]).map(
+    ([directory, fileName]) => path.join(directory, fileName)
+  )
 
   return unique(files)
 }

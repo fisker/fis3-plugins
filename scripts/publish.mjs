@@ -1,8 +1,6 @@
-const execa = require('execa')
-const latestVersion = require('latest-version')
-const path = require('path')
-
-const packages = require('./packages')
+import execa from 'execa'
+import latestVersion from 'latest-version'
+import packages from './packages.mjs'
 
 function npm(command, arguments_, options) {
   const {stdout} = execa.sync(
@@ -35,8 +33,10 @@ async function publish(package_) {
 }
 
 ;(async () => {
-  for await (const package_ of packages) {
-    const {deprecated = false} = package_.info
+  for (const package_ of packages) {
+    // eslint-disable-next-line no-await-in-loop
+    const info = await package_.getInfo()
+    const {deprecated = false} = info
 
     if (deprecated) {
       deprecate(package_, deprecated)

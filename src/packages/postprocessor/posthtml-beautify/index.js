@@ -2,7 +2,7 @@ import posthtml from 'posthtml'
 import beautify from 'posthtml-beautify'
 import sync from 'promise-synchronizer'
 import exportPlugin from '../../../shared/export-plugin'
-import * as info from './info'
+import info from './info'
 
 const {log} = global.fis
 

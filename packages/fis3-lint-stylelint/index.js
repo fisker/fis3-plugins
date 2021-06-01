@@ -12,6 +12,48 @@ var sync__default = /*#__PURE__*/ _interopDefaultLegacy(sync)
 var postcss__default = /*#__PURE__*/ _interopDefaultLegacy(postcss)
 var stylelint__default = /*#__PURE__*/ _interopDefaultLegacy(stylelint)
 
+function ownKeys$2(object, enumerableOnly) {
+  var keys = Object.keys(object)
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object)
+
+    if (enumerableOnly) {
+      symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable
+      })
+    }
+
+    keys.push.apply(keys, symbols)
+  }
+
+  return keys
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {}
+
+    if (i % 2) {
+      ownKeys$2(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key])
+      })
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+    } else {
+      ownKeys$2(Object(source)).forEach(function (key) {
+        Object.defineProperty(
+          target,
+          key,
+          Object.getOwnPropertyDescriptor(source, key)
+        )
+      })
+    }
+  }
+
+  return target
+}
+
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -25,45 +67,6 @@ function _defineProperty(obj, key, value) {
   }
 
   return obj
-}
-
-function ownKeys$1(object, enumerableOnly) {
-  var keys = Object.keys(object)
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object)
-    if (enumerableOnly)
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable
-      })
-    keys.push.apply(keys, symbols)
-  }
-
-  return keys
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {}
-
-    if (i % 2) {
-      ownKeys$1(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key])
-      })
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
-    } else {
-      ownKeys$1(Object(source)).forEach(function (key) {
-        Object.defineProperty(
-          target,
-          key,
-          Object.getOwnPropertyDescriptor(source, key)
-        )
-      })
-    }
-  }
-
-  return target
 }
 
 function _unsupportedIterableToArray(o, minLen) {
@@ -160,16 +163,11 @@ var commonjsGlobal =
     ? self
     : {}
 
-function createCommonjsModule(fn) {
-  var module = {exports: {}}
-  return fn(module, module.exports), module.exports
-}
-
 var check = function (it) {
   return it && it.Math == Math && it
 } // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 
-var global$1 = // eslint-disable-next-line es/no-global-this -- safe
+var global$i = // eslint-disable-next-line es/no-global-this -- safe
   check(typeof globalThis == 'object' && globalThis) ||
   check(typeof window == 'object' && window) || // eslint-disable-next-line no-restricted-globals -- safe
   check(typeof self == 'object' && self) ||
@@ -179,7 +177,9 @@ var global$1 = // eslint-disable-next-line es/no-global-this -- safe
   })() ||
   Function('return this')()
 
-var fails = function (exec) {
+var objectGetOwnPropertyDescriptor = {}
+
+var fails$9 = function (exec) {
   try {
     return !!exec()
   } catch (error) {
@@ -187,7 +187,9 @@ var fails = function (exec) {
   }
 }
 
-var descriptors = !fails(function () {
+var fails$8 = fails$9 // Detect IE8's incomplete defineProperty implementation
+
+var descriptors = !fails$8(function () {
   // eslint-disable-next-line es/no-object-defineproperty -- required for testing
   return (
     Object.defineProperty({}, 1, {
@@ -197,6 +199,8 @@ var descriptors = !fails(function () {
     })[1] != 7
   )
 })
+
+var objectPropertyIsEnumerable = {}
 
 var $propertyIsEnumerable = {}.propertyIsEnumerable // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
 
@@ -212,17 +216,14 @@ var NASHORN_BUG =
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
-var f$5 = NASHORN_BUG
+objectPropertyIsEnumerable.f = NASHORN_BUG
   ? function propertyIsEnumerable(V) {
       var descriptor = getOwnPropertyDescriptor$2(this, V)
       return !!descriptor && descriptor.enumerable
     }
   : $propertyIsEnumerable
-var objectPropertyIsEnumerable = {
-  f: f$5,
-}
 
-var createPropertyDescriptor = function (bitmap, value) {
+var createPropertyDescriptor$3 = function (bitmap, value) {
   return {
     enumerable: !(bitmap & 1),
     configurable: !(bitmap & 2),
@@ -231,86 +232,108 @@ var createPropertyDescriptor = function (bitmap, value) {
   }
 }
 
-var toString = {}.toString
+var toString$1 = {}.toString
 
-var classofRaw = function (it) {
-  return toString.call(it).slice(8, -1)
+var classofRaw$1 = function (it) {
+  return toString$1.call(it).slice(8, -1)
 }
 
+var fails$7 = fails$9
+var classof$5 = classofRaw$1
 var split = ''.split // fallback for non-array-like ES3 and non-enumerable old V8 strings
 
-var indexedObject = fails(function () {
+var indexedObject = fails$7(function () {
   // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
   // eslint-disable-next-line no-prototype-builtins -- safe
   return !Object('z').propertyIsEnumerable(0)
 })
   ? function (it) {
-      return classofRaw(it) == 'String' ? split.call(it, '') : Object(it)
+      return classof$5(it) == 'String' ? split.call(it, '') : Object(it)
     }
   : Object
 
-// `RequireObjectCoercible` abstract operation
 // https://tc39.es/ecma262/#sec-requireobjectcoercible
-var requireObjectCoercible = function (it) {
+
+var requireObjectCoercible$2 = function (it) {
   if (it == undefined) throw TypeError("Can't call method on " + it)
   return it
 }
 
-var toIndexedObject = function (it) {
-  return indexedObject(requireObjectCoercible(it))
+var IndexedObject$1 = indexedObject
+var requireObjectCoercible$1 = requireObjectCoercible$2
+
+var toIndexedObject$4 = function (it) {
+  return IndexedObject$1(requireObjectCoercible$1(it))
 }
 
-var isObject = function (it) {
+var isObject$9 = function (it) {
   return typeof it === 'object' ? it !== null : typeof it === 'function'
 }
 
+var isObject$8 = isObject$9 // `ToPrimitive` abstract operation
 // https://tc39.es/ecma262/#sec-toprimitive
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
 // and the second argument - flag - preferred type is a string
 
-var toPrimitive = function (input, PREFERRED_STRING) {
-  if (!isObject(input)) return input
+var toPrimitive$3 = function (input, PREFERRED_STRING) {
+  if (!isObject$8(input)) return input
   var fn, val
   if (
     PREFERRED_STRING &&
     typeof (fn = input.toString) == 'function' &&
-    !isObject((val = fn.call(input)))
+    !isObject$8((val = fn.call(input)))
   )
     return val
   if (
     typeof (fn = input.valueOf) == 'function' &&
-    !isObject((val = fn.call(input)))
+    !isObject$8((val = fn.call(input)))
   )
     return val
   if (
     !PREFERRED_STRING &&
     typeof (fn = input.toString) == 'function' &&
-    !isObject((val = fn.call(input)))
+    !isObject$8((val = fn.call(input)))
   )
     return val
   throw TypeError("Can't convert object to primitive value")
 }
 
-var hasOwnProperty = {}.hasOwnProperty
+var requireObjectCoercible = requireObjectCoercible$2 // `ToObject` abstract operation
+// https://tc39.es/ecma262/#sec-toobject
 
-var has$1 = function (it, key) {
-  return hasOwnProperty.call(it, key)
+var toObject$2 = function (argument) {
+  return Object(requireObjectCoercible(argument))
 }
 
-var document$2 = global$1.document // typeof document.createElement is 'object' in old IE
+var toObject$1 = toObject$2
+var hasOwnProperty = {}.hasOwnProperty
 
-var EXISTS = isObject(document$2) && isObject(document$2.createElement)
+var has$7 =
+  Object.hasOwn ||
+  function hasOwn(it, key) {
+    return hasOwnProperty.call(toObject$1(it), key)
+  }
+
+var global$h = global$i
+var isObject$7 = isObject$9
+var document$2 = global$h.document // typeof document.createElement is 'object' in old IE
+
+var EXISTS = isObject$7(document$2) && isObject$7(document$2.createElement)
 
 var documentCreateElement = function (it) {
   return EXISTS ? document$2.createElement(it) : {}
 }
 
+var DESCRIPTORS$4 = descriptors
+var fails$6 = fails$9
+var createElement$1 = documentCreateElement // Thank's IE8 for his funny defineProperty
+
 var ie8DomDefine =
-  !descriptors &&
-  !fails(function () {
+  !DESCRIPTORS$4 &&
+  !fails$6(function () {
     // eslint-disable-next-line es/no-object-defineproperty -- requied for testing
     return (
-      Object.defineProperty(documentCreateElement('div'), 'a', {
+      Object.defineProperty(createElement$1('div'), 'a', {
         get: function () {
           return 7
         },
@@ -318,48 +341,62 @@ var ie8DomDefine =
     )
   })
 
+var DESCRIPTORS$3 = descriptors
+var propertyIsEnumerableModule = objectPropertyIsEnumerable
+var createPropertyDescriptor$2 = createPropertyDescriptor$3
+var toIndexedObject$3 = toIndexedObject$4
+var toPrimitive$2 = toPrimitive$3
+var has$6 = has$7
+var IE8_DOM_DEFINE$1 = ie8DomDefine // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+
 var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor // `Object.getOwnPropertyDescriptor` method
 // https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
 
-var f$4 = descriptors
+objectGetOwnPropertyDescriptor.f = DESCRIPTORS$3
   ? $getOwnPropertyDescriptor
   : function getOwnPropertyDescriptor(O, P) {
-      O = toIndexedObject(O)
-      P = toPrimitive(P, true)
-      if (ie8DomDefine)
+      O = toIndexedObject$3(O)
+      P = toPrimitive$2(P, true)
+      if (IE8_DOM_DEFINE$1)
         try {
           return $getOwnPropertyDescriptor(O, P)
         } catch (error) {
           /* empty */
         }
-      if (has$1(O, P))
-        return createPropertyDescriptor(
-          !objectPropertyIsEnumerable.f.call(O, P),
+      if (has$6(O, P))
+        return createPropertyDescriptor$2(
+          !propertyIsEnumerableModule.f.call(O, P),
           O[P]
         )
     }
-var objectGetOwnPropertyDescriptor = {
-  f: f$4,
-}
 
-var anObject = function (it) {
-  if (!isObject(it)) {
+var objectDefineProperty = {}
+
+var isObject$6 = isObject$9
+
+var anObject$7 = function (it) {
+  if (!isObject$6(it)) {
     throw TypeError(String(it) + ' is not an object')
   }
 
   return it
 }
 
+var DESCRIPTORS$2 = descriptors
+var IE8_DOM_DEFINE = ie8DomDefine
+var anObject$6 = anObject$7
+var toPrimitive$1 = toPrimitive$3 // eslint-disable-next-line es/no-object-defineproperty -- safe
+
 var $defineProperty = Object.defineProperty // `Object.defineProperty` method
 // https://tc39.es/ecma262/#sec-object.defineproperty
 
-var f$3 = descriptors
+objectDefineProperty.f = DESCRIPTORS$2
   ? $defineProperty
   : function defineProperty(O, P, Attributes) {
-      anObject(O)
-      P = toPrimitive(P, true)
-      anObject(Attributes)
-      if (ie8DomDefine)
+      anObject$6(O)
+      P = toPrimitive$1(P, true)
+      anObject$6(Attributes)
+      if (IE8_DOM_DEFINE)
         try {
           return $defineProperty(O, P, Attributes)
         } catch (error) {
@@ -370,16 +407,16 @@ var f$3 = descriptors
       if ('value' in Attributes) O[P] = Attributes.value
       return O
     }
-var objectDefineProperty = {
-  f: f$3,
-}
 
-var createNonEnumerableProperty = descriptors
+var DESCRIPTORS$1 = descriptors
+var definePropertyModule$3 = objectDefineProperty
+var createPropertyDescriptor$1 = createPropertyDescriptor$3
+var createNonEnumerableProperty$4 = DESCRIPTORS$1
   ? function (object, key, value) {
-      return objectDefineProperty.f(
+      return definePropertyModule$3.f(
         object,
         key,
-        createPropertyDescriptor(1, value)
+        createPropertyDescriptor$1(1, value)
       )
     }
   : function (object, key, value) {
@@ -387,51 +424,60 @@ var createNonEnumerableProperty = descriptors
       return object
     }
 
-var setGlobal = function (key, value) {
+var redefine$4 = {exports: {}}
+
+var global$g = global$i
+var createNonEnumerableProperty$3 = createNonEnumerableProperty$4
+
+var setGlobal$3 = function (key, value) {
   try {
-    createNonEnumerableProperty(global$1, key, value)
+    createNonEnumerableProperty$3(global$g, key, value)
   } catch (error) {
-    global$1[key] = value
+    global$g[key] = value
   }
 
   return value
 }
 
+var global$f = global$i
+var setGlobal$2 = setGlobal$3
 var SHARED = '__core-js_shared__'
-var store$1 = global$1[SHARED] || setGlobal(SHARED, {})
-var sharedStore = store$1
+var store$3 = global$f[SHARED] || setGlobal$2(SHARED, {})
+var sharedStore = store$3
 
-var functionToString = Function.toString // this helper broken in `3.4.1-3.4.4`, so we can't use `shared` helper
+var store$2 = sharedStore
+var functionToString = Function.toString // this helper broken in `core-js@3.4.1-3.4.4`, so we can't use `shared` helper
 
-if (typeof sharedStore.inspectSource != 'function') {
-  sharedStore.inspectSource = function (it) {
+if (typeof store$2.inspectSource != 'function') {
+  store$2.inspectSource = function (it) {
     return functionToString.call(it)
   }
 }
 
-var inspectSource = sharedStore.inspectSource
+var inspectSource$3 = store$2.inspectSource
 
-var WeakMap$1 = global$1.WeakMap
+var global$e = global$i
+var inspectSource$2 = inspectSource$3
+var WeakMap$1 = global$e.WeakMap
 var nativeWeakMap =
   typeof WeakMap$1 === 'function' &&
-  /native code/.test(inspectSource(WeakMap$1))
+  /native code/.test(inspectSource$2(WeakMap$1))
 
-var shared = createCommonjsModule(function (module) {
-  ;(module.exports = function (key, value) {
-    return (
-      sharedStore[key] || (sharedStore[key] = value !== undefined ? value : {})
-    )
-  })('versions', []).push({
-    version: '3.10.2',
-    mode: 'global',
-    copyright: '© 2021 Denis Pushkarev (zloirock.ru)',
-  })
+var shared$3 = {exports: {}}
+
+var store$1 = sharedStore
+;(shared$3.exports = function (key, value) {
+  return store$1[key] || (store$1[key] = value !== undefined ? value : {})
+})('versions', []).push({
+  version: '3.13.1',
+  mode: 'global',
+  copyright: '© 2021 Denis Pushkarev (zloirock.ru)',
 })
 
 var id = 0
 var postfix = Math.random()
 
-var uid = function (key) {
+var uid$2 = function (key) {
   return (
     'Symbol(' +
     String(key === undefined ? '' : key) +
@@ -440,27 +486,37 @@ var uid = function (key) {
   )
 }
 
-var keys = shared('keys')
+var shared$2 = shared$3.exports
+var uid$1 = uid$2
+var keys = shared$2('keys')
 
-var sharedKey = function (key) {
-  return keys[key] || (keys[key] = uid(key))
+var sharedKey$1 = function (key) {
+  return keys[key] || (keys[key] = uid$1(key))
 }
 
-var hiddenKeys$1 = {}
+var hiddenKeys$3 = {}
 
+var NATIVE_WEAK_MAP = nativeWeakMap
+var global$d = global$i
+var isObject$5 = isObject$9
+var createNonEnumerableProperty$2 = createNonEnumerableProperty$4
+var objectHas = has$7
+var shared$1 = sharedStore
+var sharedKey = sharedKey$1
+var hiddenKeys$2 = hiddenKeys$3
 var OBJECT_ALREADY_INITIALIZED = 'Object already initialized'
-var WeakMap = global$1.WeakMap
-var set$1, get, has
+var WeakMap = global$d.WeakMap
+var set$1, get, has$5
 
 var enforce = function (it) {
-  return has(it) ? get(it) : set$1(it, {})
+  return has$5(it) ? get(it) : set$1(it, {})
 }
 
 var getterFor = function (TYPE) {
   return function (it) {
     var state
 
-    if (!isObject(it) || (state = get(it)).type !== TYPE) {
+    if (!isObject$5(it) || (state = get(it)).type !== TYPE) {
       throw TypeError('Incompatible receiver, ' + TYPE + ' required')
     }
 
@@ -468,8 +524,8 @@ var getterFor = function (TYPE) {
   }
 }
 
-if (nativeWeakMap) {
-  var store = sharedStore.state || (sharedStore.state = new WeakMap())
+if (NATIVE_WEAK_MAP || shared$1.state) {
+  var store = shared$1.state || (shared$1.state = new WeakMap())
   var wmget = store.get
   var wmhas = store.has
   var wmset = store.set
@@ -485,123 +541,139 @@ if (nativeWeakMap) {
     return wmget.call(store, it) || {}
   }
 
-  has = function (it) {
+  has$5 = function (it) {
     return wmhas.call(store, it)
   }
 } else {
   var STATE = sharedKey('state')
-  hiddenKeys$1[STATE] = true
+  hiddenKeys$2[STATE] = true
 
   set$1 = function (it, metadata) {
-    if (has$1(it, STATE)) throw new TypeError(OBJECT_ALREADY_INITIALIZED)
+    if (objectHas(it, STATE)) throw new TypeError(OBJECT_ALREADY_INITIALIZED)
     metadata.facade = it
-    createNonEnumerableProperty(it, STATE, metadata)
+    createNonEnumerableProperty$2(it, STATE, metadata)
     return metadata
   }
 
   get = function (it) {
-    return has$1(it, STATE) ? it[STATE] : {}
+    return objectHas(it, STATE) ? it[STATE] : {}
   }
 
-  has = function (it) {
-    return has$1(it, STATE)
+  has$5 = function (it) {
+    return objectHas(it, STATE)
   }
 }
 
 var internalState = {
   set: set$1,
   get: get,
-  has: has,
+  has: has$5,
   enforce: enforce,
   getterFor: getterFor,
 }
 
-var redefine = createCommonjsModule(function (module) {
-  var getInternalState = internalState.get
-  var enforceInternalState = internalState.enforce
-  var TEMPLATE = String(String).split('String')
-  ;(module.exports = function (O, key, value, options) {
-    var unsafe = options ? !!options.unsafe : false
-    var simple = options ? !!options.enumerable : false
-    var noTargetGet = options ? !!options.noTargetGet : false
-    var state
+var global$c = global$i
+var createNonEnumerableProperty$1 = createNonEnumerableProperty$4
+var has$4 = has$7
+var setGlobal$1 = setGlobal$3
+var inspectSource$1 = inspectSource$3
+var InternalStateModule$1 = internalState
+var getInternalState$1 = InternalStateModule$1.get
+var enforceInternalState = InternalStateModule$1.enforce
+var TEMPLATE = String(String).split('String')
+;(redefine$4.exports = function (O, key, value, options) {
+  var unsafe = options ? !!options.unsafe : false
+  var simple = options ? !!options.enumerable : false
+  var noTargetGet = options ? !!options.noTargetGet : false
+  var state
 
-    if (typeof value == 'function') {
-      if (typeof key == 'string' && !has$1(value, 'name')) {
-        createNonEnumerableProperty(value, 'name', key)
-      }
-
-      state = enforceInternalState(value)
-
-      if (!state.source) {
-        state.source = TEMPLATE.join(typeof key == 'string' ? key : '')
-      }
+  if (typeof value == 'function') {
+    if (typeof key == 'string' && !has$4(value, 'name')) {
+      createNonEnumerableProperty$1(value, 'name', key)
     }
 
-    if (O === global$1) {
-      if (simple) O[key] = value
-      else setGlobal(key, value)
-      return
-    } else if (!unsafe) {
-      delete O[key]
-    } else if (!noTargetGet && O[key]) {
-      simple = true
-    }
+    state = enforceInternalState(value)
 
+    if (!state.source) {
+      state.source = TEMPLATE.join(typeof key == 'string' ? key : '')
+    }
+  }
+
+  if (O === global$c) {
     if (simple) O[key] = value
-    else createNonEnumerableProperty(O, key, value) // add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
-  })(Function.prototype, 'toString', function toString() {
-    return (
-      (typeof this == 'function' && getInternalState(this).source) ||
-      inspectSource(this)
-    )
-  })
+    else setGlobal$1(key, value)
+    return
+  } else if (!unsafe) {
+    delete O[key]
+  } else if (!noTargetGet && O[key]) {
+    simple = true
+  }
+
+  if (simple) O[key] = value
+  else createNonEnumerableProperty$1(O, key, value) // add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
+})(Function.prototype, 'toString', function toString() {
+  return (
+    (typeof this == 'function' && getInternalState$1(this).source) ||
+    inspectSource$1(this)
+  )
 })
 
-var path = global$1
+var global$b = global$i
+var path$1 = global$b
 
-var aFunction$1 = function (variable) {
+var path = path$1
+var global$a = global$i
+
+var aFunction$5 = function (variable) {
   return typeof variable == 'function' ? variable : undefined
 }
 
-var getBuiltIn = function (namespace, method) {
+var getBuiltIn$5 = function (namespace, method) {
   return arguments.length < 2
-    ? aFunction$1(path[namespace]) || aFunction$1(global$1[namespace])
+    ? aFunction$5(path[namespace]) || aFunction$5(global$a[namespace])
     : (path[namespace] && path[namespace][method]) ||
-        (global$1[namespace] && global$1[namespace][method])
+        (global$a[namespace] && global$a[namespace][method])
 }
+
+var objectGetOwnPropertyNames = {}
 
 var ceil = Math.ceil
 var floor = Math.floor // `ToInteger` abstract operation
 // https://tc39.es/ecma262/#sec-tointeger
 
-var toInteger = function (argument) {
+var toInteger$2 = function (argument) {
   return isNaN((argument = +argument))
     ? 0
     : (argument > 0 ? floor : ceil)(argument)
 }
 
+var toInteger$1 = toInteger$2
 var min$1 = Math.min // `ToLength` abstract operation
 // https://tc39.es/ecma262/#sec-tolength
 
-var toLength = function (argument) {
-  return argument > 0 ? min$1(toInteger(argument), 0x1fffffffffffff) : 0 // 2 ** 53 - 1 == 9007199254740991
+var toLength$3 = function (argument) {
+  return argument > 0 ? min$1(toInteger$1(argument), 0x1fffffffffffff) : 0 // 2 ** 53 - 1 == 9007199254740991
 }
 
+var toInteger = toInteger$2
 var max = Math.max
 var min = Math.min // Helper for a popular repeating case of the spec:
 // Let integer be ? ToInteger(index).
 // If integer < 0, let result be max((length + integer), 0); else let result be min(integer, length).
 
-var toAbsoluteIndex = function (index, length) {
+var toAbsoluteIndex$1 = function (index, length) {
   var integer = toInteger(index)
   return integer < 0 ? max(integer + length, 0) : min(integer, length)
 }
 
+var toIndexedObject$2 = toIndexedObject$4
+var toLength$2 = toLength$3
+var toAbsoluteIndex = toAbsoluteIndex$1 // `Array.prototype.{ indexOf, includes }` methods implementation
+
 var createMethod = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
-    var O = toIndexedObject($this)
-    var length = toLength(O.length)
+    var O = toIndexedObject$2($this)
+    var length = toLength$2(O.length)
     var index = toAbsoluteIndex(fromIndex, length)
     var value // Array#includes uses SameValueZero equality algorithm
     // eslint-disable-next-line no-self-compare -- NaN check
@@ -630,26 +702,28 @@ var arrayIncludes = {
   indexOf: createMethod(false),
 }
 
+var has$3 = has$7
+var toIndexedObject$1 = toIndexedObject$4
 var indexOf = arrayIncludes.indexOf
+var hiddenKeys$1 = hiddenKeys$3
 
 var objectKeysInternal = function (object, names) {
-  var O = toIndexedObject(object)
+  var O = toIndexedObject$1(object)
   var i = 0
   var result = []
   var key
 
-  for (key in O) !has$1(hiddenKeys$1, key) && has$1(O, key) && result.push(key) // Don't enum bug & hidden keys
+  for (key in O) !has$3(hiddenKeys$1, key) && has$3(O, key) && result.push(key) // Don't enum bug & hidden keys
 
   while (names.length > i)
-    if (has$1(O, (key = names[i++]))) {
+    if (has$3(O, (key = names[i++]))) {
       ~indexOf(result, key) || result.push(key)
     }
 
   return result
 }
 
-// IE8- don't enum bug keys
-var enumBugKeys = [
+var enumBugKeys$1 = [
   'constructor',
   'hasOwnProperty',
   'isPrototypeOf',
@@ -659,69 +733,82 @@ var enumBugKeys = [
   'valueOf',
 ]
 
+var internalObjectKeys = objectKeysInternal
+var enumBugKeys = enumBugKeys$1
 var hiddenKeys = enumBugKeys.concat('length', 'prototype') // `Object.getOwnPropertyNames` method
 // https://tc39.es/ecma262/#sec-object.getownpropertynames
 // eslint-disable-next-line es/no-object-getownpropertynames -- safe
 
-var f$2 =
+objectGetOwnPropertyNames.f =
   Object.getOwnPropertyNames ||
   function getOwnPropertyNames(O) {
-    return objectKeysInternal(O, hiddenKeys)
+    return internalObjectKeys(O, hiddenKeys)
   }
 
-var objectGetOwnPropertyNames = {
-  f: f$2,
-}
+var objectGetOwnPropertySymbols = {}
 
-// eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
-var f$1 = Object.getOwnPropertySymbols
-var objectGetOwnPropertySymbols = {
-  f: f$1,
-}
+objectGetOwnPropertySymbols.f = Object.getOwnPropertySymbols
 
-var ownKeys =
-  getBuiltIn('Reflect', 'ownKeys') ||
+var getBuiltIn$4 = getBuiltIn$5
+var getOwnPropertyNamesModule = objectGetOwnPropertyNames
+var getOwnPropertySymbolsModule = objectGetOwnPropertySymbols
+var anObject$5 = anObject$7 // all object keys, includes non-enumerable and symbols
+
+var ownKeys$1 =
+  getBuiltIn$4('Reflect', 'ownKeys') ||
   function ownKeys(it) {
-    var keys = objectGetOwnPropertyNames.f(anObject(it))
-    var getOwnPropertySymbols = objectGetOwnPropertySymbols.f
+    var keys = getOwnPropertyNamesModule.f(anObject$5(it))
+    var getOwnPropertySymbols = getOwnPropertySymbolsModule.f
     return getOwnPropertySymbols ? keys.concat(getOwnPropertySymbols(it)) : keys
   }
 
-var copyConstructorProperties = function (target, source) {
+var has$2 = has$7
+var ownKeys = ownKeys$1
+var getOwnPropertyDescriptorModule = objectGetOwnPropertyDescriptor
+var definePropertyModule$2 = objectDefineProperty
+
+var copyConstructorProperties$1 = function (target, source) {
   var keys = ownKeys(source)
-  var defineProperty = objectDefineProperty.f
-  var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f
+  var defineProperty = definePropertyModule$2.f
+  var getOwnPropertyDescriptor = getOwnPropertyDescriptorModule.f
 
   for (var i = 0; i < keys.length; i++) {
     var key = keys[i]
-    if (!has$1(target, key))
+    if (!has$2(target, key))
       defineProperty(target, key, getOwnPropertyDescriptor(source, key))
   }
 }
 
+var fails$5 = fails$9
 var replacement = /#|\.prototype\./
 
-var isForced = function (feature, detection) {
+var isForced$2 = function (feature, detection) {
   var value = data[normalize(feature)]
   return value == POLYFILL
     ? true
     : value == NATIVE
     ? false
     : typeof detection == 'function'
-    ? fails(detection)
+    ? fails$5(detection)
     : !!detection
 }
 
-var normalize = (isForced.normalize = function (string) {
+var normalize = (isForced$2.normalize = function (string) {
   return String(string).replace(replacement, '.').toLowerCase()
 })
 
-var data = (isForced.data = {})
-var NATIVE = (isForced.NATIVE = 'N')
-var POLYFILL = (isForced.POLYFILL = 'P')
-var isForced_1 = isForced
+var data = (isForced$2.data = {})
+var NATIVE = (isForced$2.NATIVE = 'N')
+var POLYFILL = (isForced$2.POLYFILL = 'P')
+var isForced_1 = isForced$2
 
+var global$9 = global$i
 var getOwnPropertyDescriptor$1 = objectGetOwnPropertyDescriptor.f
+var createNonEnumerableProperty = createNonEnumerableProperty$4
+var redefine$3 = redefine$4.exports
+var setGlobal = setGlobal$3
+var copyConstructorProperties = copyConstructorProperties$1
+var isForced$1 = isForced_1
 /*
   options.target      - name of the target object
   options.global      - target is the global object
@@ -744,11 +831,11 @@ var _export = function (options, source) {
   var FORCED, target, key, targetProperty, sourceProperty, descriptor
 
   if (GLOBAL) {
-    target = global$1
+    target = global$9
   } else if (STATIC) {
-    target = global$1[TARGET] || setGlobal(TARGET, {})
+    target = global$9[TARGET] || setGlobal(TARGET, {})
   } else {
-    target = (global$1[TARGET] || {}).prototype
+    target = (global$9[TARGET] || {}).prototype
   }
 
   if (target)
@@ -760,7 +847,7 @@ var _export = function (options, source) {
         targetProperty = descriptor && descriptor.value
       } else targetProperty = target[key]
 
-      FORCED = isForced_1(
+      FORCED = isForced$1(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
         options.forced
       ) // contained in target
@@ -774,15 +861,17 @@ var _export = function (options, source) {
         createNonEnumerableProperty(sourceProperty, 'sham', true)
       } // extend global
 
-      redefine(target, key, sourceProperty, options)
+      redefine$3(target, key, sourceProperty, options)
     }
 }
 
-var arrayMethodIsStrict = function (METHOD_NAME, argument) {
+var fails$4 = fails$9
+
+var arrayMethodIsStrict$1 = function (METHOD_NAME, argument) {
   var method = [][METHOD_NAME]
   return (
     !!method &&
-    fails(function () {
+    fails$4(function () {
       // eslint-disable-next-line no-useless-call,no-throw-literal -- required for testing
       method.call(
         null,
@@ -796,12 +885,16 @@ var arrayMethodIsStrict = function (METHOD_NAME, argument) {
   )
 }
 
+var $$2 = _export
+var IndexedObject = indexedObject
+var toIndexedObject = toIndexedObject$4
+var arrayMethodIsStrict = arrayMethodIsStrict$1
 var nativeJoin = [].join
-var ES3_STRINGS = indexedObject != Object
+var ES3_STRINGS = IndexedObject != Object
 var STRICT_METHOD = arrayMethodIsStrict('join', ',') // `Array.prototype.join` method
 // https://tc39.es/ecma262/#sec-array.prototype.join
 
-_export(
+$$2(
   {
     target: 'Array',
     proto: true,
@@ -817,25 +910,24 @@ _export(
   }
 )
 
+var classof$4 = classofRaw$1 // `IsArray` abstract operation
 // https://tc39.es/ecma262/#sec-isarray
 // eslint-disable-next-line es/no-array-isarray -- safe
 
-var isArray =
+var isArray$2 =
   Array.isArray ||
   function isArray(arg) {
-    return classofRaw(arg) == 'Array'
+    return classof$4(arg) == 'Array'
   }
 
-// https://tc39.es/ecma262/#sec-toobject
+var toPrimitive = toPrimitive$3
+var definePropertyModule$1 = objectDefineProperty
+var createPropertyDescriptor = createPropertyDescriptor$3
 
-var toObject = function (argument) {
-  return Object(requireObjectCoercible(argument))
-}
-
-var createProperty = function (object, key, value) {
+var createProperty$1 = function (object, key, value) {
   var propertyKey = toPrimitive(key)
   if (propertyKey in object)
-    objectDefineProperty.f(
+    definePropertyModule$1.f(
       object,
       propertyKey,
       createPropertyDescriptor(0, value)
@@ -843,58 +935,70 @@ var createProperty = function (object, key, value) {
   else object[propertyKey] = value
 }
 
-var engineIsNode = classofRaw(global$1.process) == 'process'
+var getBuiltIn$3 = getBuiltIn$5
+var engineUserAgent = getBuiltIn$3('navigator', 'userAgent') || ''
 
-var engineUserAgent = getBuiltIn('navigator', 'userAgent') || ''
-
-var process$4 = global$1.process
+var global$8 = global$i
+var userAgent$2 = engineUserAgent
+var process$4 = global$8.process
 var versions = process$4 && process$4.versions
 var v8 = versions && versions.v8
 var match, version
 
 if (v8) {
   match = v8.split('.')
-  version = match[0] + match[1]
-} else if (engineUserAgent) {
-  match = engineUserAgent.match(/Edge\/(\d+)/)
+  version = match[0] < 4 ? 1 : match[0] + match[1]
+} else if (userAgent$2) {
+  match = userAgent$2.match(/Edge\/(\d+)/)
 
   if (!match || match[1] >= 74) {
-    match = engineUserAgent.match(/Chrome\/(\d+)/)
+    match = userAgent$2.match(/Chrome\/(\d+)/)
     if (match) version = match[1]
   }
 }
 
 var engineV8Version = version && +version
 
+/* eslint-disable es/no-symbol -- required for testing */
+var V8_VERSION$3 = engineV8Version
+var fails$3 = fails$9 // eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
+
 var nativeSymbol =
   !!Object.getOwnPropertySymbols &&
-  !fails(function () {
-    // eslint-disable-next-line es/no-symbol -- required for testing
+  !fails$3(function () {
+    var symbol = Symbol() // Chrome 38 Symbol has incorrect toString conversion
+    // `get-own-property-symbols` polyfill symbols converted to object are not Symbol instances
+
     return (
-      !Symbol.sham && // Chrome 38 Symbol has incorrect toString conversion
-      // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
-      (engineIsNode
-        ? engineV8Version === 38
-        : engineV8Version > 37 && engineV8Version < 41)
+      !String(symbol) ||
+      !(Object(symbol) instanceof Symbol) || // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
+      (!Symbol.sham && V8_VERSION$3 && V8_VERSION$3 < 41)
     )
   })
 
 /* eslint-disable es/no-symbol -- required for testing */
+var NATIVE_SYMBOL$1 = nativeSymbol
 var useSymbolAsUid =
-  nativeSymbol && !Symbol.sham && typeof Symbol.iterator == 'symbol'
+  NATIVE_SYMBOL$1 && !Symbol.sham && typeof Symbol.iterator == 'symbol'
 
+var global$7 = global$i
+var shared = shared$3.exports
+var has$1 = has$7
+var uid = uid$2
+var NATIVE_SYMBOL = nativeSymbol
+var USE_SYMBOL_AS_UID = useSymbolAsUid
 var WellKnownSymbolsStore = shared('wks')
-var Symbol$1 = global$1.Symbol
-var createWellKnownSymbol = useSymbolAsUid
+var Symbol$1 = global$7.Symbol
+var createWellKnownSymbol = USE_SYMBOL_AS_UID
   ? Symbol$1
   : (Symbol$1 && Symbol$1.withoutSetter) || uid
 
-var wellKnownSymbol = function (name) {
+var wellKnownSymbol$c = function (name) {
   if (
     !has$1(WellKnownSymbolsStore, name) ||
-    !(nativeSymbol || typeof WellKnownSymbolsStore[name] == 'string')
+    !(NATIVE_SYMBOL || typeof WellKnownSymbolsStore[name] == 'string')
   ) {
-    if (nativeSymbol && has$1(Symbol$1, name)) {
+    if (NATIVE_SYMBOL && has$1(Symbol$1, name)) {
       WellKnownSymbolsStore[name] = Symbol$1[name]
     } else {
       WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name)
@@ -904,18 +1008,21 @@ var wellKnownSymbol = function (name) {
   return WellKnownSymbolsStore[name]
 }
 
-var SPECIES$4 = wellKnownSymbol('species') // `ArraySpeciesCreate` abstract operation
+var isObject$4 = isObject$9
+var isArray$1 = isArray$2
+var wellKnownSymbol$b = wellKnownSymbol$c
+var SPECIES$4 = wellKnownSymbol$b('species') // `ArraySpeciesCreate` abstract operation
 // https://tc39.es/ecma262/#sec-arrayspeciescreate
 
-var arraySpeciesCreate = function (originalArray, length) {
+var arraySpeciesCreate$1 = function (originalArray, length) {
   var C
 
-  if (isArray(originalArray)) {
+  if (isArray$1(originalArray)) {
     C = originalArray.constructor // cross-realm fallback
 
-    if (typeof C == 'function' && (C === Array || isArray(C.prototype)))
+    if (typeof C == 'function' && (C === Array || isArray$1(C.prototype)))
       C = undefined
-    else if (isObject(C)) {
+    else if (isObject$4(C)) {
       C = C[SPECIES$4]
       if (C === null) C = undefined
     }
@@ -924,15 +1031,18 @@ var arraySpeciesCreate = function (originalArray, length) {
   return new (C === undefined ? Array : C)(length === 0 ? 0 : length)
 }
 
-var SPECIES$3 = wellKnownSymbol('species')
+var fails$2 = fails$9
+var wellKnownSymbol$a = wellKnownSymbol$c
+var V8_VERSION$2 = engineV8Version
+var SPECIES$3 = wellKnownSymbol$a('species')
 
-var arrayMethodHasSpeciesSupport = function (METHOD_NAME) {
+var arrayMethodHasSpeciesSupport$1 = function (METHOD_NAME) {
   // We can't use this feature detection in V8 since it causes
   // deoptimization and serious performance degradation
   // https://github.com/zloirock/core-js/issues/677
   return (
-    engineV8Version >= 51 ||
-    !fails(function () {
+    V8_VERSION$2 >= 51 ||
+    !fails$2(function () {
       var array = []
       var constructor = (array.constructor = {})
 
@@ -947,15 +1057,26 @@ var arrayMethodHasSpeciesSupport = function (METHOD_NAME) {
   )
 }
 
-var IS_CONCAT_SPREADABLE = wellKnownSymbol('isConcatSpreadable')
+var $$1 = _export
+var fails$1 = fails$9
+var isArray = isArray$2
+var isObject$3 = isObject$9
+var toObject = toObject$2
+var toLength$1 = toLength$3
+var createProperty = createProperty$1
+var arraySpeciesCreate = arraySpeciesCreate$1
+var arrayMethodHasSpeciesSupport = arrayMethodHasSpeciesSupport$1
+var wellKnownSymbol$9 = wellKnownSymbol$c
+var V8_VERSION$1 = engineV8Version
+var IS_CONCAT_SPREADABLE = wellKnownSymbol$9('isConcatSpreadable')
 var MAX_SAFE_INTEGER = 0x1fffffffffffff
 var MAXIMUM_ALLOWED_INDEX_EXCEEDED = 'Maximum allowed index exceeded' // We can't use this feature detection in V8 since it causes
 // deoptimization and serious performance degradation
 // https://github.com/zloirock/core-js/issues/679
 
 var IS_CONCAT_SPREADABLE_SUPPORT =
-  engineV8Version >= 51 ||
-  !fails(function () {
+  V8_VERSION$1 >= 51 ||
+  !fails$1(function () {
     var array = []
     array[IS_CONCAT_SPREADABLE] = false
     return array.concat()[0] !== array
@@ -963,7 +1084,7 @@ var IS_CONCAT_SPREADABLE_SUPPORT =
 var SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('concat')
 
 var isConcatSpreadable = function (O) {
-  if (!isObject(O)) return false
+  if (!isObject$3(O)) return false
   var spreadable = O[IS_CONCAT_SPREADABLE]
   return spreadable !== undefined ? !!spreadable : isArray(O)
 }
@@ -972,7 +1093,7 @@ var FORCED$1 = !IS_CONCAT_SPREADABLE_SUPPORT || !SPECIES_SUPPORT // `Array.proto
 // https://tc39.es/ecma262/#sec-array.prototype.concat
 // with adding support of @@isConcatSpreadable and @@species
 
-_export(
+$$1(
   {
     target: 'Array',
     proto: true,
@@ -990,7 +1111,7 @@ _export(
         E = i === -1 ? O : arguments[i]
 
         if (isConcatSpreadable(E)) {
-          len = toLength(E.length)
+          len = toLength$1(E.length)
           if (n + len > MAX_SAFE_INTEGER)
             throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED)
 
@@ -1008,12 +1129,16 @@ _export(
   }
 )
 
-var TO_STRING_TAG$2 = wellKnownSymbol('toStringTag')
+var wellKnownSymbol$8 = wellKnownSymbol$c
+var TO_STRING_TAG$2 = wellKnownSymbol$8('toStringTag')
 var test = {}
 test[TO_STRING_TAG$2] = 'z'
 var toStringTagSupport = String(test) === '[object z]'
 
-var TO_STRING_TAG$1 = wellKnownSymbol('toStringTag') // ES3 wrong here
+var TO_STRING_TAG_SUPPORT$2 = toStringTagSupport
+var classofRaw = classofRaw$1
+var wellKnownSymbol$7 = wellKnownSymbol$c
+var TO_STRING_TAG$1 = wellKnownSymbol$7('toStringTag') // ES3 wrong here
 
 var CORRECT_ARGUMENTS =
   classofRaw(
@@ -1030,7 +1155,7 @@ var tryGet = function (it, key) {
   }
 } // getting tag from ES6+ `Object.prototype.toString`
 
-var classof = toStringTagSupport
+var classof$3 = TO_STRING_TAG_SUPPORT$2
   ? classofRaw
   : function (it) {
       var O, tag, result
@@ -1047,35 +1172,92 @@ var classof = toStringTagSupport
         : result
     }
 
+var TO_STRING_TAG_SUPPORT$1 = toStringTagSupport
+var classof$2 = classof$3 // `Object.prototype.toString` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.tostring
 
-var objectToString = toStringTagSupport
+var objectToString = TO_STRING_TAG_SUPPORT$1
   ? {}.toString
   : function toString() {
-      return '[object ' + classof(this) + ']'
+      return '[object ' + classof$2(this) + ']'
     }
 
+var TO_STRING_TAG_SUPPORT = toStringTagSupport
+var redefine$2 = redefine$4.exports
+var toString = objectToString // `Object.prototype.toString` method
 // https://tc39.es/ecma262/#sec-object.prototype.tostring
 
-if (!toStringTagSupport) {
-  redefine(Object.prototype, 'toString', objectToString, {
+if (!TO_STRING_TAG_SUPPORT) {
+  redefine$2(Object.prototype, 'toString', toString, {
     unsafe: true,
   })
 }
 
-var nativePromiseConstructor = global$1.Promise
+var global$6 = global$i
+var nativePromiseConstructor = global$6.Promise
 
-var redefineAll = function (target, src, options) {
-  for (var key in src) redefine(target, key, src[key], options)
+var redefine$1 = redefine$4.exports
+
+var redefineAll$1 = function (target, src, options) {
+  for (var key in src) redefine$1(target, key, src[key], options)
 
   return target
 }
 
-var defineProperty = objectDefineProperty.f
-var TO_STRING_TAG = wellKnownSymbol('toStringTag')
+var isObject$2 = isObject$9
 
-var setToStringTag = function (it, TAG, STATIC) {
-  if (it && !has$1((it = STATIC ? it : it.prototype), TO_STRING_TAG)) {
+var aPossiblePrototype$1 = function (it) {
+  if (!isObject$2(it) && it !== null) {
+    throw TypeError("Can't set " + String(it) + ' as a prototype')
+  }
+
+  return it
+}
+
+/* eslint-disable no-proto -- safe */
+var anObject$4 = anObject$7
+var aPossiblePrototype = aPossiblePrototype$1 // `Object.setPrototypeOf` method
+// https://tc39.es/ecma262/#sec-object.setprototypeof
+// Works with __proto__ only. Old v8 can't work with null proto objects.
+// eslint-disable-next-line es/no-object-setprototypeof -- safe
+
+var objectSetPrototypeOf =
+  Object.setPrototypeOf ||
+  ('__proto__' in {}
+    ? (function () {
+        var CORRECT_SETTER = false
+        var test = {}
+        var setter
+
+        try {
+          // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+          setter = Object.getOwnPropertyDescriptor(
+            Object.prototype,
+            '__proto__'
+          ).set
+          setter.call(test, [])
+          CORRECT_SETTER = test instanceof Array
+        } catch (error) {
+          /* empty */
+        }
+
+        return function setPrototypeOf(O, proto) {
+          anObject$4(O)
+          aPossiblePrototype(proto)
+          if (CORRECT_SETTER) setter.call(O, proto)
+          else O.__proto__ = proto
+          return O
+        }
+      })()
+    : undefined)
+
+var defineProperty = objectDefineProperty.f
+var has = has$7
+var wellKnownSymbol$6 = wellKnownSymbol$c
+var TO_STRING_TAG = wellKnownSymbol$6('toStringTag')
+
+var setToStringTag$1 = function (it, TAG, STATIC) {
+  if (it && !has((it = STATIC ? it : it.prototype), TO_STRING_TAG)) {
     defineProperty(it, TO_STRING_TAG, {
       configurable: true,
       value: TAG,
@@ -1083,13 +1265,17 @@ var setToStringTag = function (it, TAG, STATIC) {
   }
 }
 
-var SPECIES$2 = wellKnownSymbol('species')
+var getBuiltIn$2 = getBuiltIn$5
+var definePropertyModule = objectDefineProperty
+var wellKnownSymbol$5 = wellKnownSymbol$c
+var DESCRIPTORS = descriptors
+var SPECIES$2 = wellKnownSymbol$5('species')
 
-var setSpecies = function (CONSTRUCTOR_NAME) {
-  var Constructor = getBuiltIn(CONSTRUCTOR_NAME)
-  var defineProperty = objectDefineProperty.f
+var setSpecies$1 = function (CONSTRUCTOR_NAME) {
+  var Constructor = getBuiltIn$2(CONSTRUCTOR_NAME)
+  var defineProperty = definePropertyModule.f
 
-  if (descriptors && Constructor && !Constructor[SPECIES$2]) {
+  if (DESCRIPTORS && Constructor && !Constructor[SPECIES$2]) {
     defineProperty(Constructor, SPECIES$2, {
       configurable: true,
       get: function () {
@@ -1099,7 +1285,7 @@ var setSpecies = function (CONSTRUCTOR_NAME) {
   }
 }
 
-var aFunction = function (it) {
+var aFunction$4 = function (it) {
   if (typeof it != 'function') {
     throw TypeError(String(it) + ' is not a function')
   }
@@ -1107,7 +1293,7 @@ var aFunction = function (it) {
   return it
 }
 
-var anInstance = function (it, Constructor, name) {
+var anInstance$1 = function (it, Constructor, name) {
   if (!(it instanceof Constructor)) {
     throw TypeError('Incorrect ' + (name ? name + ' ' : '') + 'invocation')
   }
@@ -1117,18 +1303,22 @@ var anInstance = function (it, Constructor, name) {
 
 var iterators = {}
 
-var ITERATOR$2 = wellKnownSymbol('iterator')
+var wellKnownSymbol$4 = wellKnownSymbol$c
+var Iterators$1 = iterators
+var ITERATOR$2 = wellKnownSymbol$4('iterator')
 var ArrayPrototype = Array.prototype // check on default Array iterator
 
-var isArrayIteratorMethod = function (it) {
+var isArrayIteratorMethod$1 = function (it) {
   return (
     it !== undefined &&
-    (iterators.Array === it || ArrayPrototype[ITERATOR$2] === it)
+    (Iterators$1.Array === it || ArrayPrototype[ITERATOR$2] === it)
   )
 }
 
+var aFunction$3 = aFunction$4 // optional / simple context binding
+
 var functionBindContext = function (fn, that, length) {
-  aFunction(fn)
+  aFunction$3(fn)
   if (that === undefined) return fn
 
   switch (length) {
@@ -1159,36 +1349,44 @@ var functionBindContext = function (fn, that, length) {
   }
 }
 
-var ITERATOR$1 = wellKnownSymbol('iterator')
+var classof$1 = classof$3
+var Iterators = iterators
+var wellKnownSymbol$3 = wellKnownSymbol$c
+var ITERATOR$1 = wellKnownSymbol$3('iterator')
 
-var getIteratorMethod = function (it) {
+var getIteratorMethod$1 = function (it) {
   if (it != undefined)
-    return it[ITERATOR$1] || it['@@iterator'] || iterators[classof(it)]
+    return it[ITERATOR$1] || it['@@iterator'] || Iterators[classof$1(it)]
 }
 
-var iteratorClose = function (iterator) {
+var anObject$3 = anObject$7
+
+var iteratorClose$1 = function (iterator) {
   var returnMethod = iterator['return']
 
   if (returnMethod !== undefined) {
-    return anObject(returnMethod.call(iterator)).value
+    return anObject$3(returnMethod.call(iterator)).value
   }
 }
+
+var anObject$2 = anObject$7
+var isArrayIteratorMethod = isArrayIteratorMethod$1
+var toLength = toLength$3
+var bind$2 = functionBindContext
+var getIteratorMethod = getIteratorMethod$1
+var iteratorClose = iteratorClose$1
 
 var Result = function (stopped, result) {
   this.stopped = stopped
   this.result = result
 }
 
-var iterate = function (iterable, unboundFunction, options) {
+var iterate$1 = function (iterable, unboundFunction, options) {
   var that = options && options.that
   var AS_ENTRIES = !!(options && options.AS_ENTRIES)
   var IS_ITERATOR = !!(options && options.IS_ITERATOR)
   var INTERRUPTED = !!(options && options.INTERRUPTED)
-  var fn = functionBindContext(
-    unboundFunction,
-    that,
-    1 + AS_ENTRIES + INTERRUPTED
-  )
+  var fn = bind$2(unboundFunction, that, 1 + AS_ENTRIES + INTERRUPTED)
   var iterator, iterFn, index, length, result, next, step
 
   var stop = function (condition) {
@@ -1198,7 +1396,7 @@ var iterate = function (iterable, unboundFunction, options) {
 
   var callFn = function (value) {
     if (AS_ENTRIES) {
-      anObject(value)
+      anObject$2(value)
       return INTERRUPTED ? fn(value[0], value[1], stop) : fn(value[0], value[1])
     }
 
@@ -1244,7 +1442,8 @@ var iterate = function (iterable, unboundFunction, options) {
   return new Result(false)
 }
 
-var ITERATOR = wellKnownSymbol('iterator')
+var wellKnownSymbol$2 = wellKnownSymbol$c
+var ITERATOR = wellKnownSymbol$2('iterator')
 var SAFE_CLOSING = false
 
 try {
@@ -1271,7 +1470,7 @@ try {
   /* empty */
 }
 
-var checkCorrectnessOfIteration = function (exec, SKIP_CLOSING) {
+var checkCorrectnessOfIteration$1 = function (exec, SKIP_CLOSING) {
   if (!SKIP_CLOSING && !SAFE_CLOSING) return false
   var ITERATION_SUPPORT = false
 
@@ -1296,27 +1495,43 @@ var checkCorrectnessOfIteration = function (exec, SKIP_CLOSING) {
   return ITERATION_SUPPORT
 }
 
-var SPECIES$1 = wellKnownSymbol('species') // `SpeciesConstructor` abstract operation
+var anObject$1 = anObject$7
+var aFunction$2 = aFunction$4
+var wellKnownSymbol$1 = wellKnownSymbol$c
+var SPECIES$1 = wellKnownSymbol$1('species') // `SpeciesConstructor` abstract operation
 // https://tc39.es/ecma262/#sec-speciesconstructor
 
-var speciesConstructor = function (O, defaultConstructor) {
-  var C = anObject(O).constructor
+var speciesConstructor$1 = function (O, defaultConstructor) {
+  var C = anObject$1(O).constructor
   var S
-  return C === undefined || (S = anObject(C)[SPECIES$1]) == undefined
+  return C === undefined || (S = anObject$1(C)[SPECIES$1]) == undefined
     ? defaultConstructor
-    : aFunction(S)
+    : aFunction$2(S)
 }
 
-var html = getBuiltIn('document', 'documentElement')
+var getBuiltIn$1 = getBuiltIn$5
+var html$1 = getBuiltIn$1('document', 'documentElement')
 
-var engineIsIos = /(?:iphone|ipod|ipad).*applewebkit/i.test(engineUserAgent)
+var userAgent$1 = engineUserAgent
+var engineIsIos = /(?:iphone|ipod|ipad).*applewebkit/i.test(userAgent$1)
 
-var location = global$1.location
-var set = global$1.setImmediate
-var clear = global$1.clearImmediate
-var process$3 = global$1.process
-var MessageChannel = global$1.MessageChannel
-var Dispatch = global$1.Dispatch
+var classof = classofRaw$1
+var global$5 = global$i
+var engineIsNode = classof(global$5.process) == 'process'
+
+var global$4 = global$i
+var fails = fails$9
+var bind$1 = functionBindContext
+var html = html$1
+var createElement = documentCreateElement
+var IS_IOS$1 = engineIsIos
+var IS_NODE$2 = engineIsNode
+var location = global$4.location
+var set = global$4.setImmediate
+var clear = global$4.clearImmediate
+var process$3 = global$4.process
+var MessageChannel = global$4.MessageChannel
+var Dispatch = global$4.Dispatch
 var counter = 0
 var queue = {}
 var ONREADYSTATECHANGE = 'onreadystatechange'
@@ -1343,7 +1558,7 @@ var listener = function (event) {
 
 var post = function (id) {
   // old engines have not location.origin
-  global$1.postMessage(id + '', location.protocol + '//' + location.host)
+  global$4.postMessage(id + '', location.protocol + '//' + location.host)
 } // Node.js 0.9+ & IE10+ has setImmediate, otherwise:
 
 if (!set || !clear) {
@@ -1366,7 +1581,7 @@ if (!set || !clear) {
     delete queue[id]
   } // Node.js 0.8-
 
-  if (engineIsNode) {
+  if (IS_NODE$2) {
     defer = function (id) {
       process$3.nextTick(runner(id))
     } // Sphere (JS game engine) Dispatch API
@@ -1375,30 +1590,29 @@ if (!set || !clear) {
       Dispatch.now(runner(id))
     } // Browsers with MessageChannel, includes WebWorkers
     // except iOS - https://github.com/zloirock/core-js/issues/624
-  } else if (MessageChannel && !engineIsIos) {
+  } else if (MessageChannel && !IS_IOS$1) {
     channel = new MessageChannel()
     port = channel.port2
     channel.port1.onmessage = listener
-    defer = functionBindContext(port.postMessage, port, 1) // Browsers with postMessage, skip WebWorkers
+    defer = bind$1(port.postMessage, port, 1) // Browsers with postMessage, skip WebWorkers
     // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
   } else if (
-    global$1.addEventListener &&
+    global$4.addEventListener &&
     typeof postMessage == 'function' &&
-    !global$1.importScripts &&
+    !global$4.importScripts &&
     location &&
     location.protocol !== 'file:' &&
     !fails(post)
   ) {
     defer = post
-    global$1.addEventListener('message', listener, false) // IE8-
-  } else if (ONREADYSTATECHANGE in documentCreateElement('script')) {
+    global$4.addEventListener('message', listener, false) // IE8-
+  } else if (ONREADYSTATECHANGE in createElement('script')) {
     defer = function (id) {
-      html.appendChild(documentCreateElement('script'))[
-        ONREADYSTATECHANGE
-      ] = function () {
-        html.removeChild(this)
-        run(id)
-      }
+      html.appendChild(createElement('script'))[ONREADYSTATECHANGE] =
+        function () {
+          html.removeChild(this)
+          run(id)
+        }
     } // Rest old browsers
   } else {
     defer = function (id) {
@@ -1412,18 +1626,23 @@ var task$1 = {
   clear: clear,
 }
 
-var engineIsWebosWebkit = /web0s(?!.*chrome)/i.test(engineUserAgent)
+var userAgent = engineUserAgent
+var engineIsWebosWebkit = /web0s(?!.*chrome)/i.test(userAgent)
 
+var global$3 = global$i
 var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f
 var macrotask = task$1.set
+var IS_IOS = engineIsIos
+var IS_WEBOS_WEBKIT = engineIsWebosWebkit
+var IS_NODE$1 = engineIsNode
 var MutationObserver =
-  global$1.MutationObserver || global$1.WebKitMutationObserver
-var document$1 = global$1.document
-var process$2 = global$1.process
-var Promise$1 = global$1.Promise // Node.js 11 shows ExperimentalWarning on getting `queueMicrotask`
+  global$3.MutationObserver || global$3.WebKitMutationObserver
+var document$1 = global$3.document
+var process$2 = global$3.process
+var Promise$1 = global$3.Promise // Node.js 11 shows ExperimentalWarning on getting `queueMicrotask`
 
 var queueMicrotaskDescriptor = getOwnPropertyDescriptor(
-  global$1,
+  global$3,
   'queueMicrotask'
 )
 var queueMicrotask = queueMicrotaskDescriptor && queueMicrotaskDescriptor.value
@@ -1432,7 +1651,7 @@ var flush, head, last, notify$1, toggle, node, promise, then // modern engines h
 if (!queueMicrotask) {
   flush = function () {
     var parent, fn
-    if (engineIsNode && (parent = process$2.domain)) parent.exit()
+    if (IS_NODE$1 && (parent = process$2.domain)) parent.exit()
 
     while (head) {
       fn = head.fn
@@ -1453,9 +1672,9 @@ if (!queueMicrotask) {
   // also except WebOS Webkit https://github.com/zloirock/core-js/issues/898
 
   if (
-    !engineIsIos &&
-    !engineIsNode &&
-    !engineIsWebosWebkit &&
+    !IS_IOS &&
+    !IS_NODE$1 &&
+    !IS_WEBOS_WEBKIT &&
     MutationObserver &&
     document$1
   ) {
@@ -1470,13 +1689,15 @@ if (!queueMicrotask) {
     } // environments with maybe non-completely correct, but existent Promise
   } else if (Promise$1 && Promise$1.resolve) {
     // Promise.resolve without an argument throws an error in LG WebOS 2
-    promise = Promise$1.resolve(undefined)
+    promise = Promise$1.resolve(undefined) // workaround of WebKit ~ iOS Safari 10.1 bug
+
+    promise.constructor = Promise$1
     then = promise.then
 
     notify$1 = function () {
       then.call(promise, flush)
     } // Node.js without promises
-  } else if (engineIsNode) {
+  } else if (IS_NODE$1) {
     notify$1 = function () {
       process$2.nextTick(flush)
     } // for other environments - macrotask based on:
@@ -1488,12 +1709,12 @@ if (!queueMicrotask) {
   } else {
     notify$1 = function () {
       // strange IE + webpack dev server bug - use .call(global)
-      macrotask.call(global$1, flush)
+      macrotask.call(global$3, flush)
     }
   }
 }
 
-var microtask =
+var microtask$1 =
   queueMicrotask ||
   function (fn) {
     var task = {
@@ -1510,6 +1731,10 @@ var microtask =
     last = task
   }
 
+var newPromiseCapability$2 = {}
+
+var aFunction$1 = aFunction$4
+
 var PromiseCapability = function (C) {
   var resolve, reject
   this.promise = new C(function ($$resolve, $$reject) {
@@ -1518,36 +1743,39 @@ var PromiseCapability = function (C) {
     resolve = $$resolve
     reject = $$reject
   })
-  this.resolve = aFunction(resolve)
-  this.reject = aFunction(reject)
-} // 25.4.1.5 NewPromiseCapability(C)
+  this.resolve = aFunction$1(resolve)
+  this.reject = aFunction$1(reject)
+} // `NewPromiseCapability` abstract operation
+// https://tc39.es/ecma262/#sec-newpromisecapability
 
-var f = function (C) {
+newPromiseCapability$2.f = function (C) {
   return new PromiseCapability(C)
 }
 
-var newPromiseCapability$1 = {
-  f: f,
-}
+var anObject = anObject$7
+var isObject$1 = isObject$9
+var newPromiseCapability$1 = newPromiseCapability$2
 
-var promiseResolve = function (C, x) {
+var promiseResolve$1 = function (C, x) {
   anObject(C)
-  if (isObject(x) && x.constructor === C) return x
+  if (isObject$1(x) && x.constructor === C) return x
   var promiseCapability = newPromiseCapability$1.f(C)
   var resolve = promiseCapability.resolve
   resolve(x)
   return promiseCapability.promise
 }
 
-var hostReportErrors = function (a, b) {
-  var console = global$1.console
+var global$2 = global$i
+
+var hostReportErrors$1 = function (a, b) {
+  var console = global$2.console
 
   if (console && console.error) {
     arguments.length === 1 ? console.error(a) : console.error(a, b)
   }
 }
 
-var perform = function (exec) {
+var perform$1 = function (exec) {
   try {
     return {
       error: false,
@@ -1561,18 +1789,48 @@ var perform = function (exec) {
   }
 }
 
+var engineIsBrowser = typeof window == 'object'
+
+var $ = _export
+var global$1 = global$i
+var getBuiltIn = getBuiltIn$5
+var NativePromise = nativePromiseConstructor
+var redefine = redefine$4.exports
+var redefineAll = redefineAll$1
+var setPrototypeOf = objectSetPrototypeOf
+var setToStringTag = setToStringTag$1
+var setSpecies = setSpecies$1
+var isObject = isObject$9
+var aFunction = aFunction$4
+var anInstance = anInstance$1
+var inspectSource = inspectSource$3
+var iterate = iterate$1
+var checkCorrectnessOfIteration = checkCorrectnessOfIteration$1
+var speciesConstructor = speciesConstructor$1
 var task = task$1.set
+var microtask = microtask$1
+var promiseResolve = promiseResolve$1
+var hostReportErrors = hostReportErrors$1
+var newPromiseCapabilityModule = newPromiseCapability$2
+var perform = perform$1
+var InternalStateModule = internalState
+var isForced = isForced_1
+var wellKnownSymbol = wellKnownSymbol$c
+var IS_BROWSER = engineIsBrowser
+var IS_NODE = engineIsNode
+var V8_VERSION = engineV8Version
 var SPECIES = wellKnownSymbol('species')
 var PROMISE = 'Promise'
-var getInternalState = internalState.get
-var setInternalState = internalState.set
-var getInternalPromiseState = internalState.getterFor(PROMISE)
-var PromiseConstructor = nativePromiseConstructor
+var getInternalState = InternalStateModule.get
+var setInternalState = InternalStateModule.set
+var getInternalPromiseState = InternalStateModule.getterFor(PROMISE)
+var NativePromisePrototype = NativePromise && NativePromise.prototype
+var PromiseConstructor = NativePromise
+var PromiseConstructorPrototype = NativePromisePrototype
 var TypeError$1 = global$1.TypeError
 var document = global$1.document
 var process$1 = global$1.process
-var $fetch = getBuiltIn('fetch')
-var newPromiseCapability = newPromiseCapability$1.f
+var newPromiseCapability = newPromiseCapabilityModule.f
 var newGenericPromiseCapability = newPromiseCapability
 var DISPATCH_EVENT = !!(
   document &&
@@ -1587,26 +1845,23 @@ var FULFILLED = 1
 var REJECTED = 2
 var HANDLED = 1
 var UNHANDLED = 2
+var SUBCLASSING = false
 var Internal, OwnPromiseCapability, PromiseWrapper, nativeThen
-var FORCED = isForced_1(PROMISE, function () {
+var FORCED = isForced(PROMISE, function () {
   var GLOBAL_CORE_JS_PROMISE =
-    inspectSource(PromiseConstructor) !== String(PromiseConstructor)
+    inspectSource(PromiseConstructor) !== String(PromiseConstructor) // V8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
+  // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
+  // We can't detect it synchronously, so just check versions
 
-  if (!GLOBAL_CORE_JS_PROMISE) {
-    // V8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
-    // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
-    // We can't detect it synchronously, so just check versions
-    if (engineV8Version === 66) return true // Unhandled rejections tracking support, NodeJS Promise without it fails @@species test
-
-    if (!engineIsNode && !NATIVE_REJECTION_EVENT) return true
-  } // We need Promise#finally in the pure version for preventing prototype pollution
+  if (!GLOBAL_CORE_JS_PROMISE && V8_VERSION === 66) return true // We need Promise#finally in the pure version for preventing prototype pollution
   // deoptimization and performance degradation
   // https://github.com/zloirock/core-js/issues/679
 
-  if (engineV8Version >= 51 && /native code/.test(PromiseConstructor))
-    return false // Detect correctness of subclassing with @@species support
+  if (V8_VERSION >= 51 && /native code/.test(PromiseConstructor)) return false // Detect correctness of subclassing with @@species support
 
-  var promise = PromiseConstructor.resolve(1)
+  var promise = new PromiseConstructor(function (resolve) {
+    resolve(1)
+  })
 
   var FakePromise = function (exec) {
     exec(
@@ -1621,11 +1876,13 @@ var FORCED = isForced_1(PROMISE, function () {
 
   var constructor = (promise.constructor = {})
   constructor[SPECIES] = FakePromise
-  return !(
+  SUBCLASSING =
     promise.then(function () {
       /* empty */
     }) instanceof FakePromise
-  )
+  if (!SUBCLASSING) return true // Unhandled rejections tracking support, NodeJS Promise without it fails @@species test
+
+  return !GLOBAL_CORE_JS_PROMISE && IS_BROWSER && !NATIVE_REJECTION_EVENT
 })
 var INCORRECT_ITERATION =
   FORCED ||
@@ -1723,12 +1980,12 @@ var onUnhandled = function (state) {
 
     if (IS_UNHANDLED) {
       result = perform(function () {
-        if (engineIsNode) {
+        if (IS_NODE) {
           process$1.emit('unhandledRejection', value, promise)
         } else dispatchEvent(UNHANDLED_REJECTION, promise, value)
       }) // Browsers should not trigger `rejectionHandled` event if it was handled here, NodeJS - should
 
-      state.rejection = engineIsNode || isUnhandled(state) ? UNHANDLED : HANDLED
+      state.rejection = IS_NODE || isUnhandled(state) ? UNHANDLED : HANDLED
       if (result.error) throw result.value
     }
   })
@@ -1742,7 +1999,7 @@ var onHandleUnhandled = function (state) {
   task.call(global$1, function () {
     var promise = state.facade
 
-    if (engineIsNode) {
+    if (IS_NODE) {
       process$1.emit('rejectionHandled', promise)
     } else dispatchEvent(REJECTION_HANDLED, promise, state.value)
   })
@@ -1818,7 +2075,9 @@ if (FORCED) {
     } catch (error) {
       internalReject(state, error)
     }
-  } // eslint-disable-next-line no-unused-vars -- required for `.length`
+  }
+
+  PromiseConstructorPrototype = PromiseConstructor.prototype // eslint-disable-next-line no-unused-vars -- required for `.length`
 
   Internal = function Promise(executor) {
     setInternalState(this, {
@@ -1833,7 +2092,7 @@ if (FORCED) {
     })
   }
 
-  Internal.prototype = redefineAll(PromiseConstructor.prototype, {
+  Internal.prototype = redefineAll(PromiseConstructorPrototype, {
     // `Promise.prototype.then` method
     // https://tc39.es/ecma262/#sec-promise.prototype.then
     then: function then(onFulfilled, onRejected) {
@@ -1843,7 +2102,7 @@ if (FORCED) {
       )
       reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true
       reaction.fail = typeof onRejected == 'function' && onRejected
-      reaction.domain = engineIsNode ? process$1.domain : undefined
+      reaction.domain = IS_NODE ? process$1.domain : undefined
       state.parent = true
       state.reactions.push(reaction)
       if (state.state != PENDING) notify(state, false)
@@ -1864,53 +2123,57 @@ if (FORCED) {
     this.reject = bind(internalReject, state)
   }
 
-  newPromiseCapability$1.f = newPromiseCapability = function (C) {
+  newPromiseCapabilityModule.f = newPromiseCapability = function (C) {
     return C === PromiseConstructor || C === PromiseWrapper
       ? new OwnPromiseCapability(C)
       : newGenericPromiseCapability(C)
   }
 
-  if (typeof nativePromiseConstructor == 'function') {
-    nativeThen = nativePromiseConstructor.prototype.then // wrap native Promise#then for native async functions
+  if (
+    typeof NativePromise == 'function' &&
+    NativePromisePrototype !== Object.prototype
+  ) {
+    nativeThen = NativePromisePrototype.then
 
-    redefine(
-      nativePromiseConstructor.prototype,
-      'then',
-      function then(onFulfilled, onRejected) {
-        var that = this
-        return new PromiseConstructor(function (resolve, reject) {
-          nativeThen.call(that, resolve, reject)
-        }).then(onFulfilled, onRejected) // https://github.com/zloirock/core-js/issues/640
-      },
-      {
-        unsafe: true,
-      }
-    ) // wrap fetch result
-
-    if (typeof $fetch == 'function')
-      _export(
-        {
-          global: true,
-          enumerable: true,
-          forced: true,
+    if (!SUBCLASSING) {
+      // make `Promise#then` return a polyfilled `Promise` for native promise-based APIs
+      redefine(
+        NativePromisePrototype,
+        'then',
+        function then(onFulfilled, onRejected) {
+          var that = this
+          return new PromiseConstructor(function (resolve, reject) {
+            nativeThen.call(that, resolve, reject)
+          }).then(onFulfilled, onRejected) // https://github.com/zloirock/core-js/issues/640
         },
         {
-          // eslint-disable-next-line no-unused-vars -- required for `.length`
-          fetch: function fetch(
-            input
-            /* , init */
-          ) {
-            return promiseResolve(
-              PromiseConstructor,
-              $fetch.apply(global$1, arguments)
-            )
-          },
+          unsafe: true,
+        }
+      ) // makes sure that native promise-based APIs `Promise#catch` properly works with patched `Promise#then`
+
+      redefine(
+        NativePromisePrototype,
+        'catch',
+        PromiseConstructorPrototype['catch'],
+        {
+          unsafe: true,
         }
       )
+    } // make `.constructor === Promise` work for native promise-based APIs
+
+    try {
+      delete NativePromisePrototype.constructor
+    } catch (error) {
+      /* empty */
+    } // make `instanceof Promise` work for native promise-based APIs
+
+    if (setPrototypeOf) {
+      setPrototypeOf(NativePromisePrototype, PromiseConstructorPrototype)
+    }
   }
 }
 
-_export(
+$(
   {
     global: true,
     wrap: true,
@@ -1924,7 +2187,7 @@ setToStringTag(PromiseConstructor, PROMISE, false)
 setSpecies(PROMISE)
 PromiseWrapper = getBuiltIn(PROMISE) // statics
 
-_export(
+$(
   {
     target: PROMISE,
     stat: true,
@@ -1940,7 +2203,7 @@ _export(
     },
   }
 )
-_export(
+$(
   {
     target: PROMISE,
     stat: true,
@@ -1954,7 +2217,7 @@ _export(
     },
   }
 )
-_export(
+$(
   {
     target: PROMISE,
     stat: true,
@@ -2025,11 +2288,6 @@ var info = {
     fix: true,
   },
 }
-
-var info$1 = /*#__PURE__*/ Object.freeze({
-  __proto__: null,
-  default: info,
-})
 
 function _await(value, then, direct) {
   if (direct) {
@@ -2155,4 +2413,4 @@ function process(content, file, config_) {
   }
 }
 
-module.exports = exportPlugin(process, info$1)
+module.exports = exportPlugin(process, info)

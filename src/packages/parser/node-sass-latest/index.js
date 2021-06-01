@@ -2,7 +2,7 @@ import path from 'path'
 import {format} from 'util'
 import exportPlugin from '../../../shared/export-plugin'
 import sassImportResolve from '../../../shared/sass-import-resolver'
-import * as info from './info'
+import info from './info'
 
 const sass = {}
 
