@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   description: 'a code formatter of fis3 based on prettier.',
   keywords: ['beautify', 'format', 'formatter'],
   dependencies: ['prettier'],

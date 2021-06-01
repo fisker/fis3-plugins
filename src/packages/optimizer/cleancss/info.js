@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   description: 'css minifer for fis based on clean-css.',
   keywords: ['minifer', 'minify'],
   dependencies: ['clean-css'],

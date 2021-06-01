@@ -1,5 +1,5 @@
 import {render} from 'pug'
-import * as info from './info'
+import info from './info'
 import exportPlugin from '../../../shared/export-plugin'
 
 function process(content, file, config) {

@@ -26,11 +26,6 @@ var info = {
   },
 }
 
-var info$1 = /*#__PURE__*/ Object.freeze({
-  __proto__: null,
-  default: info,
-})
-
 function process(content, file, config) {
   return postcss__default['default']([
     autoprefixer__default['default'](config),
@@ -39,4 +34,4 @@ function process(content, file, config) {
   }).css
 }
 
-module.exports = exportPlugin(process, info$1)
+module.exports = exportPlugin(process, info)

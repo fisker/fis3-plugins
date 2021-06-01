@@ -5,7 +5,7 @@
 import {minify} from 'terser'
 import sync from 'promise-synchronizer'
 import exportPlugin from '../../../shared/export-plugin'
-import * as info from './info'
+import info from './info'
 
 const {log} = global.fis
 const synchronizedMinify = sync(minify)

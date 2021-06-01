@@ -1,5 +1,5 @@
 import {CLIEngine} from 'eslint'
-import * as info from './info'
+import info from './info'
 import exportPlugin from '../../../shared/export-plugin'
 
 const formatter = CLIEngine.getFormatter()

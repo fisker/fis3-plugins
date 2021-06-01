@@ -26,9 +26,9 @@
     "index.js"
   ],
   "dependencies": {
-    "postcss": "8.2.10",
+    "postcss": "8.3.0",
     "promise-synchronizer": "3.0.0",
-    "stylelint": "13.12.0"
+    "stylelint": "13.13.1"
   },
   "publishConfig": {
     "access": "public",

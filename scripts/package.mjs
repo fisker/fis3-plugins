@@ -1,23 +1,24 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import _ from 'lodash'
-import {sync as mkdirp} from 'mkdirp'
+import mkdirp from 'mkdirp'
 import sortPackageJson from 'sort-package-json'
 import writePrettierFile from 'write-prettier-file'
-import globalPackage from '../package.json'
-import readFile from './utils/read-file'
-import writeFile from './utils/write-file'
-import bundle from './bundle'
+import createEsmUtils from 'esm-utils'
+import readFile from './utils/read-file.mjs'
+import writeFile from './utils/write-file.mjs'
+import bundle from './bundle.mjs'
 
-const SOURCE_DIR = path.join(__dirname, '..', 'src')
-const DEST_DIR = path.join(__dirname, '..', 'packages')
+const {dirname, require} = createEsmUtils(import.meta)
+const globalPackage = require('../package.json')
+
+const SOURCE_DIR = path.join(dirname, '../src')
+const DEST_DIR = path.join(dirname, '../packages')
 const VERSIONS = (() => {
   try {
-    // eslint-disable-next-line import/no-unresolved
     return require('../versions.json')
-  } catch {
-    return {}
-  }
+  } catch {}
+  return {}
 })()
 
 const files = ['index.js']
@@ -66,18 +67,20 @@ class Package {
 
     this.type = type
     this.name = name
-    this.info = require(path.join(this.src, 'info.js')).default
+    this.packageName = packageName
+
+    const info = require(path.join(this.src, 'info.js'))
     try {
-      _.assign(this.info, {
+      _.assign(info, {
         name: packageName,
         readme: this.readFile('readme.md'),
-        links: _.assign({}, links, this.info.links),
-        options: this.info.options || {},
-        keywords: this.info.keywords || [],
-        files: this.info.files || [],
-        dependencies: this.info.deprecated
+        links: _.assign({}, links, info.links),
+        options: info.options || {},
+        keywords: info.keywords || [],
+        files: info.files || [],
+        dependencies: info.deprecated
           ? undefined
-          : parseDependencies(this.info.dependencies),
+          : parseDependencies(info.dependencies),
         version: VERSIONS[packageName] && VERSIONS[packageName].version,
         // gitHead: VERSIONS[packageName].gitHead,
       })
@@ -85,7 +88,12 @@ class Package {
       throw new Error(`${packageName} build error: ${error}`)
     }
 
+    this.info = info
     this.pkg = this.getPackageInfo()
+  }
+
+  async getInfo() {
+    return this.info
   }
 
   getPackageInfo() {
@@ -95,7 +103,7 @@ class Package {
       ...globalPackage.keywords,
       this.type,
       this.name,
-      this.info.name,
+      info.name,
       ...info.keywords,
     ])
 
@@ -172,7 +180,7 @@ class Package {
 
     distFile = path.join(this.dest, distFile)
     sourceFile = path.join(this.src, sourceFile)
-    mkdirp(path.dirname(distFile))
+    await mkdirp(path.dirname(distFile))
 
     try {
       return fs.writeFileSync(distFile, fs.readFileSync(sourceFile))
@@ -182,12 +190,13 @@ class Package {
   }
 
   async build() {
+    const info = await this.getInfo()
     await Promise.all(
-      ['index.js', ...this.info.files].map((file) => this.copyFile(file))
+      ['index.js', ...info.files].map((file) => this.copyFile(file))
     )
 
     this.writeFile('readme.md', template('readme.ejs')(this))
-    this.writeFile('license', readFile(path.join(__dirname, '..', 'license')))
+    this.writeFile('license', readFile(path.join(dirname, '..', 'license')))
 
     this.writeFile(
       'package.json',

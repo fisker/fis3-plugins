@@ -3,13 +3,14 @@ import {babel} from '@rollup/plugin-babel'
 import cjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 import prettier from 'rollup-plugin-prettier'
-// eslint-disable-next-line import/no-unresolved
 import json from '@rollup/plugin-json'
+import createEsmUtils from 'esm-utils'
 
-import {
+const {require} = createEsmUtils(import.meta)
+const {
   dependencies,
-  devDependencies as developmentDependencies,
-} from '../package.json'
+  devDependencies: developmentDependencies,
+} = require('../package.json')
 
 const external = [
   ...Object.keys(dependencies),
@@ -22,10 +23,8 @@ const plugins = [
     preferBuiltins: true,
   }),
   json(),
-  babel(),
-  prettier({
-    parser: 'babel',
-  }),
+  babel({babelHelpers: 'bundled'}),
+  prettier({parser: 'meriyah'}),
 ]
 
 const ignoreImportModules = new Set([

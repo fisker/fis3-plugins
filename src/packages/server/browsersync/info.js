@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   description: 'a browser sync server for fis3.',
   keywords: ['browser-sync', 'livereload'],
   dependencies: [

@@ -1,6 +1,6 @@
 import prettyhtml from '@starptech/prettyhtml'
 import exportPlugin from '../../../shared/export-plugin'
-import * as info from './info'
+import info from './info'
 
 function process(content, file, config) {
   content = prettyhtml(content, config).contents

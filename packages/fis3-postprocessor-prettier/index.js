@@ -8,30 +8,18 @@ function _interopDefaultLegacy(e) {
 
 var prettier__default = /*#__PURE__*/ _interopDefaultLegacy(prettier)
 
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true,
-    })
-  } else {
-    obj[key] = value
-  }
-
-  return obj
-}
-
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object)
 
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object)
-    if (enumerableOnly)
+
+    if (enumerableOnly) {
       symbols = symbols.filter(function (sym) {
         return Object.getOwnPropertyDescriptor(object, sym).enumerable
       })
+    }
+
     keys.push.apply(keys, symbols)
   }
 
@@ -62,6 +50,21 @@ function _objectSpread2(target) {
   return target
 }
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    })
+  } else {
+    obj[key] = value
+  }
+
+  return obj
+}
+
 function exportPlugin(process, _ref) {
   var options = _ref.options
   process.defaultOptions = options
@@ -77,11 +80,6 @@ var info = {
     prettier: 'https://github.com/prettier/prettier',
   },
 }
-
-var info$1 = /*#__PURE__*/ Object.freeze({
-  __proto__: null,
-  default: info,
-})
 
 function process(content, file, config) {
   var fileFakePath = file.realpathNoExt + file.rExt
@@ -106,4 +104,4 @@ function process(content, file, config) {
   return prettier__default['default'].format(content, prettierConfig)
 }
 
-module.exports = exportPlugin(process, info$1)
+module.exports = exportPlugin(process, info)

@@ -1,5 +1,5 @@
 import path from 'path'
-import * as info from './info'
+import info from './info'
 import exportPlugin from '../../../shared/export-plugin'
 
 const {fis} = global

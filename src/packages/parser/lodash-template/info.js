@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   description: 'a fis plugin to parse lodash template.',
   keywords: ['jst', 'html'],
   dependencies: ['lodash'],

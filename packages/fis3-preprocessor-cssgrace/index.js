@@ -18,13 +18,8 @@ var info = {
   },
 }
 
-var info$1 = /*#__PURE__*/ Object.freeze({
-  __proto__: null,
-  default: info,
-})
-
 function process(content, file, config) {
   return cssgraceLite.pack(content, config)
 }
 
-module.exports = exportPlugin(process, info$1)
+module.exports = exportPlugin(process, info)
