@@ -63,7 +63,7 @@
     "eslint": "7.28.0",
     "execa": "5.0.1",
     "fast-cartesian-product": "1.0.3",
-    "htmlhint": "0.14.2",
+    "htmlhint": "0.15.0",
     "js-beautify": "1.13.13",
     "lodash": "4.17.21",
     "lodash.merge": "4.6.2",
