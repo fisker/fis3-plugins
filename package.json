@@ -101,7 +101,7 @@
     "babel-plugin-transform-async-to-promises": "0.8.15",
     "core-js": "3.14.0",
     "cz-conventional-changelog": "3.3.0",
-    "del-cli": "3.0.1",
+    "del-cli": "4.0.0",
     "eslint": "7.28.0",
     "esm-utils": "1.1.0",
     "husky": "6.0.0",
