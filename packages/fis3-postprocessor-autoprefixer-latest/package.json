@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "autoprefixer": "10.2.6",
-    "postcss": "8.3.0"
+    "postcss": "8.3.5"
   },
   "publishConfig": {
     "access": "public",
