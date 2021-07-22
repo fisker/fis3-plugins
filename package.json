@@ -105,7 +105,7 @@
     "eslint": "7.31.0",
     "esm-utils": "1.1.0",
     "husky": "7.0.1",
-    "latest-version": "5.1.0",
+    "latest-version": "6.0.0",
     "lerna": "4.0.0",
     "lint-staged": "11.0.1",
     "listr": "0.14.3",
