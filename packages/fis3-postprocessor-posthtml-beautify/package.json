@@ -30,7 +30,7 @@
     "index.js"
   ],
   "dependencies": {
-    "posthtml": "0.16.4",
+    "posthtml": "0.16.5",
     "posthtml-beautify": "0.7.0",
     "promise-synchronizer": "3.0.0"
   },
