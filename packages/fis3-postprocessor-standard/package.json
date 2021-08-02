@@ -1,6 +1,6 @@
 {
   "name": "fis3-postprocessor-standard",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "a code formatter of fis3 based on standard.",
   "keywords": [
     "beautify",

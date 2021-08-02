@@ -1,6 +1,6 @@
 {
   "name": "fis3-parser-lodash-template",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "a fis plugin to parse lodash template.",
   "keywords": [
     "fis",
