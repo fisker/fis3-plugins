@@ -36,6 +36,8 @@ function getTerserOptions(file, config) {
       sourceMap.url = `${filename}.map`
     }
   }
+
+  return options
 }
 
 function deriveSourceMap(file, sourceMap) {

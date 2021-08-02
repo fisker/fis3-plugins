@@ -14,6 +14,7 @@ var info = {
     pug: 'https://pugjs.org/',
   },
 }
+var info$1 = info
 
 function exportPlugin(process, _ref) {
   var options = _ref.options
@@ -25,4 +26,4 @@ function process(content, file, config) {
   return content ? pug.render(content, config) : ''
 }
 
-module.exports = exportPlugin(process, info)
+module.exports = exportPlugin(process, info$1)

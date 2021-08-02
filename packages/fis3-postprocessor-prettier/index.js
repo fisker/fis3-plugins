@@ -80,6 +80,7 @@ var info = {
     prettier: 'https://github.com/prettier/prettier',
   },
 }
+var info$1 = info
 
 function process(content, file, config) {
   var fileFakePath = file.realpathNoExt + file.rExt
@@ -104,4 +105,4 @@ function process(content, file, config) {
   return prettier__default['default'].format(content, prettierConfig)
 }
 
-module.exports = exportPlugin(process, info)
+module.exports = exportPlugin(process, info$1)

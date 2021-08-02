@@ -10,7 +10,7 @@ const quotes = {
   '"': 'QUOTE_DOUBLE',
 }
 
-const rUrl = /(["']?)__relative___(QUOTE_(?:NONE|SINGLE|DOUBLE))-(.*?)___(\1)/g
+const rUrl = /(["']?)__relative___(QUOTE_(?:DOUBLE|NONE|SINGLE))-(.*?)___(\1)/g
 const rFile = /\.[^.]+$/
 
 function wrapPath(info) {

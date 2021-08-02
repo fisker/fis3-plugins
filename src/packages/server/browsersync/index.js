@@ -54,7 +54,7 @@ function start(opt, callback) {
     : path.join(__dirname, 'app.js')
   const logFile = path.join(opt.root, 'server.log')
 
-  const timeout = Math.max(opt.timeout * 1000, 60000)
+  const timeout = Math.max(opt.timeout * 1000, 60_000)
   let timeoutTimer
 
   const arguments_ = [

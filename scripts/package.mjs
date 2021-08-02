@@ -149,7 +149,7 @@ class Package {
 
   async writeFile(file, content) {
     file = path.join(this.dest, file)
-    if (/.(js|json|md)$/.test(file)) {
+    if (/.(?:js|json|md)$/.test(file)) {
       writePrettierFile(file, content)
     } else {
       writeFile(file, content)

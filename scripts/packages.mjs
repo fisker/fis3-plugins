@@ -28,4 +28,4 @@ const packages = pluginTypes.map((type) => {
   return directory.map((name) => new Package(type, name))
 })
 
-export default packages.reduce((all, packages) => [...all, ...packages], [])
+export default packages.flat()

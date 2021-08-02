@@ -25,6 +25,7 @@ var info = {
     autoprefixer: 'https://github.com/postcss/autoprefixer',
   },
 }
+var info$1 = info
 
 function process(content, file, config) {
   return postcss__default['default']([
@@ -34,4 +35,4 @@ function process(content, file, config) {
   }).css
 }
 
-module.exports = exportPlugin(process, info)
+module.exports = exportPlugin(process, info$1)

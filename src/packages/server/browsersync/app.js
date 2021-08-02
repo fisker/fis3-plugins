@@ -37,7 +37,7 @@ function watch(bs, root) {
     if (
       !relativePath ||
       relativePath === 'server.log' ||
-      /(^|[/\\])[._]./.test(relativePath)
+      /(?:^|[/\\])[._]./.test(relativePath)
     ) {
       return
     }

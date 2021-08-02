@@ -17,9 +17,10 @@ var info = {
     cssgrace: 'https://github.com/cssdream/cssgrace',
   },
 }
+var info$1 = info
 
 function process(content, file, config) {
   return cssgraceLite.pack(content, config)
 }
 
-module.exports = exportPlugin(process, info)
+module.exports = exportPlugin(process, info$1)

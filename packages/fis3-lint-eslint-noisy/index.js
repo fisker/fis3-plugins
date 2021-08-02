@@ -15,6 +15,7 @@ var info = {
     eslint: 'http://eslint.org/',
   },
 }
+var info$1 = info
 
 function exportPlugin(process, _ref) {
   var options = _ref.options
@@ -52,4 +53,4 @@ function process(content, file, config) {
   }
 }
 
-module.exports = exportPlugin(process, info)
+module.exports = exportPlugin(process, info$1)

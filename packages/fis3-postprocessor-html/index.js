@@ -38,9 +38,10 @@ var info = {
     'js-beautify': 'https://github.com/beautify-web/js-beautify',
   },
 }
+var info$1 = info
 
 function process(content, file, config) {
   return content ? jsBeautify.html(content, config) : ''
 }
 
-module.exports = exportPlugin(process, info)
+module.exports = exportPlugin(process, info$1)
