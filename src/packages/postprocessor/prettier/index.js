@@ -1,6 +1,6 @@
 import prettier from 'prettier'
-import exportPlugin from '../../../shared/export-plugin'
-import info from './info'
+import exportPlugin from '../../../shared/export-plugin.js'
+import info from './info.js'
 
 function process(content, file, config) {
   const fileFakePath = file.realpathNoExt + file.rExt

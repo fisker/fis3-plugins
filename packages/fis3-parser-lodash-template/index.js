@@ -1,14 +1,14 @@
 'use strict'
 
-var _ = require('lodash')
 var path = require('path')
+var _ = require('lodash')
 
 function _interopDefaultLegacy(e) {
   return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var ___default = /*#__PURE__*/ _interopDefaultLegacy(_)
 var path__default = /*#__PURE__*/ _interopDefaultLegacy(path)
+var ___default = /*#__PURE__*/ _interopDefaultLegacy(_)
 
 function ownKeys$2(object, enumerableOnly) {
   var keys = Object.keys(object)

@@ -1,6 +1,6 @@
 import {pack as cssgrace} from 'cssgrace-lite'
-import exportPlugin from '../../../shared/export-plugin'
-import info from './info'
+import exportPlugin from '../../../shared/export-plugin.js'
+import info from './info.js'
 
 function process(content, file, config) {
   return cssgrace(content, config)

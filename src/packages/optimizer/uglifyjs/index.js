@@ -1,6 +1,6 @@
 import {minify} from 'uglify-js'
-import exportPlugin from '../../../shared/export-plugin'
-import info from './info'
+import exportPlugin from '../../../shared/export-plugin.js'
+import info from './info.js'
 
 const {log} = global.fis
 

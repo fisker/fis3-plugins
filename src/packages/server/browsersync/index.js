@@ -1,8 +1,10 @@
 import path from 'path'
 import fs from 'fs'
+import {Buffer} from 'buffer'
+import process from 'process'
 import execa from 'execa'
 import yargs from 'yargs'
-import info from './info'
+import info from './info.js'
 
 const {fis} = global
 const util = fis.require('command-server/lib/util.js')

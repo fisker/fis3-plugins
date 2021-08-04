@@ -2,6 +2,12 @@
 
 var eslint = require('eslint')
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'a js linter plugin of fis3 based on eslint.',
   keywords: ['eslint', 'linter'],
@@ -16,12 +22,6 @@ var info = {
   },
 }
 var info$1 = info
-
-function exportPlugin(process, _ref) {
-  var options = _ref.options
-  process.defaultOptions = options
-  return process
-}
 
 var formatter = eslint.CLIEngine.getFormatter()
 var log = global.fis.log

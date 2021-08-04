@@ -4,6 +4,8 @@ Object.defineProperty(exports, '__esModule', {value: true})
 
 var path = require('path')
 var fs = require('fs')
+var buffer = require('buffer')
+var process$1 = require('process')
 var execa = require('execa')
 var yargs = require('yargs')
 
@@ -13,6 +15,7 @@ function _interopDefaultLegacy(e) {
 
 var path__default = /*#__PURE__*/ _interopDefaultLegacy(path)
 var fs__default = /*#__PURE__*/ _interopDefaultLegacy(fs)
+var process__default = /*#__PURE__*/ _interopDefaultLegacy(process$1)
 var execa__default = /*#__PURE__*/ _interopDefaultLegacy(execa)
 var yargs__default = /*#__PURE__*/ _interopDefaultLegacy(yargs)
 
@@ -127,9 +130,9 @@ var engineUserAgent = getBuiltIn$3('navigator', 'userAgent') || ''
 
 var global$7 = global$b
 var userAgent = engineUserAgent
-var process$1 = global$7.process
+var process = global$7.process
 var Deno = global$7.Deno
-var versions = (process$1 && process$1.versions) || (Deno && Deno.version)
+var versions = (process && process.versions) || (Deno && Deno.version)
 var v8 = versions && versions.v8
 var match, version
 
@@ -1676,7 +1679,7 @@ var _global = global,
 var util = fis.require('command-server/lib/util.js')
 
 var argv = yargs__default['default'].argv
-var CWD = process.cwd() // 每 0.2 秒读取子进程的输出文件。
+var CWD = process__default['default'].cwd() // 每 0.2 秒读取子进程的输出文件。
 //
 // 为什么不直接通过 child.stdout 读取？
 // 因为如果使用 stdio pipe 的方式去开启子进程，当 master 进程退出后，子进程再有输出就会导致程序莫名的崩溃。
@@ -1692,16 +1695,16 @@ function watchOnFile(file, callback) {
 
     if (stat.size !== lastIndex) {
       var fd = fs__default['default'].openSync(file, 'r')
-      var buffer = Buffer.alloc(stat.size - lastIndex)
+      var buffer$1 = buffer.Buffer.alloc(stat.size - lastIndex)
 
       try {
         fs__default['default'].readSync(
           fd,
-          buffer,
+          buffer$1,
           lastIndex,
           stat.size - lastIndex
         )
-        var content = buffer.toString('utf8')
+        var content = buffer$1.toString('utf8')
         lastIndex = stat.size
         callback(content)
       } catch (_unused) {
@@ -1740,16 +1743,22 @@ function start(opt, callback) {
     '--bs-config',
     argv.bsConfig || '',
   ]
-  process.stdout.write('\n Starting browser-sync server ...')
-  var server = execa__default['default'](process.execPath, arguments_, {
-    cwd: path__default['default'].dirname(script),
-    detached: opt.daemon,
-    stdio: [
-      0,
-      opt.daemon ? fs__default['default'].openSync(logFile, 'w') : 'pipe',
-      opt.daemon ? fs__default['default'].openSync(logFile, 'w+') : 'pipe',
-    ],
-  })
+  process__default['default'].stdout.write(
+    '\n Starting browser-sync server ...'
+  )
+  var server = execa__default['default'](
+    process__default['default'].execPath,
+    arguments_,
+    {
+      cwd: path__default['default'].dirname(script),
+      detached: opt.daemon,
+      stdio: [
+        0,
+        opt.daemon ? fs__default['default'].openSync(logFile, 'w') : 'pipe',
+        opt.daemon ? fs__default['default'].openSync(logFile, 'w+') : 'pipe',
+      ],
+    }
+  )
   var log = ''
   var started = false
   var error = false
@@ -1762,7 +1771,7 @@ function start(opt, callback) {
 
     chunk = chunk.toString('utf8')
     log += chunk
-    process.stdout.write('.')
+    process__default['default'].stdout.write('.')
 
     if (chunk.includes('Error')) {
       if (error) {
@@ -1770,7 +1779,7 @@ function start(opt, callback) {
       }
 
       error = true
-      process.stdout.write(' fail.\n')
+      process__default['default'].stdout.write(' fail.\n')
       var match = chunk.match(/error:?\s+([^\n\r]+)/i)
       var errorMessage = 'unknown'
 
@@ -1796,7 +1805,7 @@ function start(opt, callback) {
       }
 
       try {
-        process.kill(server.pid)
+        process__default['default'].kill(server.pid)
       } catch (_unused2) {}
     } else if (chunk.includes('Listening on')) {
       started = true
@@ -1806,7 +1815,9 @@ function start(opt, callback) {
       }
 
       clearTimeout(timeoutTimer)
-      process.stdout.write(' at port ['.concat(opt.port, ']\n'))
+      process__default['default'].stdout.write(
+        ' at port ['.concat(opt.port, ']\n')
+      )
       callback(null)
     }
   }
@@ -1817,7 +1828,7 @@ function start(opt, callback) {
 
     server.unref()
     timeoutTimer = setTimeout(function () {
-      process.stdout.write(' fail\n')
+      process__default['default'].stdout.write(' fail\n')
 
       if (log) {
         console.log(log)
@@ -1828,8 +1839,8 @@ function start(opt, callback) {
   } else {
     server.stdout.on('data', onData)
     server.stderr.on('data', onData)
-    server.stdout.pipe(process.stdout)
-    server.stderr.pipe(process.stderr)
+    server.stdout.pipe(process__default['default'].stdout)
+    server.stderr.pipe(process__default['default'].stderr)
   }
 }
 var defaultOptions = info$1.options

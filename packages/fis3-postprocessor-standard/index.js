@@ -1,11 +1,13 @@
 'use strict'
 
+var process$1 = require('process')
 var standard = require('standard')
 
 function _interopDefaultLegacy(e) {
   return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
+var process__default = /*#__PURE__*/ _interopDefaultLegacy(process$1)
 var standard__default = /*#__PURE__*/ _interopDefaultLegacy(standard)
 
 var commonjsGlobal =
@@ -143,9 +145,9 @@ var engineUserAgent = getBuiltIn$3('navigator', 'userAgent') || ''
 
 var global$9 = global$b
 var userAgent = engineUserAgent
-var process$1 = global$9.process
+var process = global$9.process
 var Deno = global$9.Deno
-var versions = (process$1 && process$1.versions) || (Deno && Deno.version)
+var versions = (process && process.versions) || (Deno && Deno.version)
 var v8 = versions && versions.v8
 var match, version
 
@@ -1568,7 +1570,7 @@ function format(content) {
     }).results[0].output
   } catch (error) {
     log.error(error)
-    process.exitCode = 1
+    process__default['default'].exitCode = 1
     throw new Error('standard lint error.')
   }
 

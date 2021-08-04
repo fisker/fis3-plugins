@@ -2,9 +2,9 @@ import path from 'path'
 import {pathToFileURL} from 'url'
 import {format} from 'util'
 import sass from 'sass'
-import exportPlugin from '../../../shared/export-plugin'
-import sassImportResolve from '../../../shared/sass-import-resolver'
-import info from './info'
+import exportPlugin from '../../../shared/export-plugin.js'
+import sassImportResolve from '../../../shared/sass-import-resolver.js'
+import info from './info.js'
 
 const {fis} = global
 const PROJECT_ROOT = fis.project.getProjectPath()

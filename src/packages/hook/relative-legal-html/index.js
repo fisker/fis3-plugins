@@ -1,6 +1,6 @@
 import path from 'path'
-import info from './info'
-import exportPlugin from '../../../shared/export-plugin'
+import exportPlugin from '../../../shared/export-plugin.js'
+import info from './info.js'
 
 const {fis} = global
 

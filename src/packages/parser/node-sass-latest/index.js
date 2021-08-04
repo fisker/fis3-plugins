@@ -1,8 +1,8 @@
 import path from 'path'
 import {format} from 'util'
-import exportPlugin from '../../../shared/export-plugin'
-import sassImportResolve from '../../../shared/sass-import-resolver'
-import info from './info'
+import exportPlugin from '../../../shared/export-plugin.js'
+import sassImportResolve from '../../../shared/sass-import-resolver.js'
+import info from './info.js'
 
 const sass = {}
 

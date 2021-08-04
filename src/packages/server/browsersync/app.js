@@ -1,7 +1,8 @@
 import path from 'path'
+import process from 'process'
 import browserSync from 'browser-sync'
 import yargs from 'yargs'
-import getBsConfig from './lib/browser-sync-config'
+import getBsConfig from './lib/browser-sync-config.js'
 
 const {argv} = yargs
 

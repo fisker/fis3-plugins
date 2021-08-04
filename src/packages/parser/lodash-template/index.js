@@ -1,7 +1,7 @@
-import _ from 'lodash'
 import path from 'path'
-import exportPlugin from '../../../shared/export-plugin'
-import info from './info'
+import _ from 'lodash'
+import exportPlugin from '../../../shared/export-plugin.js'
+import info from './info.js'
 
 const {fis} = global
 const PROJECT_ROOT = fis.project.getProjectPath()

@@ -5,6 +5,7 @@ var url = require('url')
 var util = require('util')
 var sass = require('sass')
 var fs = require('fs')
+var process$2 = require('process')
 var cartesianProduct = require('fast-cartesian-product')
 
 function _interopDefaultLegacy(e) {
@@ -14,6 +15,7 @@ function _interopDefaultLegacy(e) {
 var path__default = /*#__PURE__*/ _interopDefaultLegacy(path)
 var sass__default = /*#__PURE__*/ _interopDefaultLegacy(sass)
 var fs__default = /*#__PURE__*/ _interopDefaultLegacy(fs)
+var process__default = /*#__PURE__*/ _interopDefaultLegacy(process$2)
 var cartesianProduct__default =
   /*#__PURE__*/ _interopDefaultLegacy(cartesianProduct)
 
@@ -307,9 +309,9 @@ var engineUserAgent = getBuiltIn$b('navigator', 'userAgent') || ''
 
 var global$b = global$d
 var userAgent = engineUserAgent
-var process$2 = global$b.process
+var process$1 = global$b.process
 var Deno = global$b.Deno
-var versions = (process$2 && process$2.versions) || (Deno && Deno.version)
+var versions = (process$1 && process$1.versions) || (Deno && Deno.version)
 var v8 = versions && versions.v8
 var match, version
 
@@ -4631,7 +4633,7 @@ function resolveInDirectories(_ref5) {
     if (file[0] === '~') {
       files = [
         require.resolve(file.slice(1), {
-          paths: [process.cwd()],
+          paths: [process__default['default'].cwd()],
         }),
       ]
     } else {
@@ -4652,7 +4654,7 @@ function resolveInDirectories(_ref5) {
       files = getFiles(
         [path__default['default'].dirname(previous)].concat(
           _toConsumableArray(includePaths),
-          [process.cwd()]
+          [process__default['default'].cwd()]
         ),
         file
       )
@@ -4749,7 +4751,7 @@ function normalizeIncludePath(directories) {
       directories_.push(
         directory,
         path__default['default'].join(PROJECT_ROOT, directory),
-        path__default['default'].join(process$1.cwd(), directory)
+        path__default['default'].join(process.cwd(), directory)
       )
     }
 
@@ -4757,7 +4759,7 @@ function normalizeIncludePath(directories) {
   }, [])
 }
 
-function process$1(content, file, config) {
+function process(content, file, config) {
   if (file.basename[0] === '_') {
     return content
   }
@@ -4853,4 +4855,4 @@ function process$1(content, file, config) {
   return content
 }
 
-module.exports = exportPlugin(process$1, info$1)
+module.exports = exportPlugin(process, info$1)

@@ -1,14 +1,14 @@
 'use strict'
 
-var ejs = require('ejs')
 var path = require('path')
+var ejs = require('ejs')
 
 function _interopDefaultLegacy(e) {
   return e && typeof e === 'object' && 'default' in e ? e : {default: e}
 }
 
-var ejs__default = /*#__PURE__*/ _interopDefaultLegacy(ejs)
 var path__default = /*#__PURE__*/ _interopDefaultLegacy(path)
+var ejs__default = /*#__PURE__*/ _interopDefaultLegacy(ejs)
 
 function ownKeys$2(object, enumerableOnly) {
   var keys = Object.keys(object)

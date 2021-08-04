@@ -1,7 +1,7 @@
 import path from 'path'
 import merge from 'lodash.merge'
 import bsDefaultConfig from 'browser-sync/dist/default-config'
-import middleware from './middleware'
+import middleware from './middleware.js'
 
 const {mock, logger, directory} = middleware
 

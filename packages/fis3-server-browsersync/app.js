@@ -1,6 +1,7 @@
 'use strict'
 
 var path$2 = require('path')
+var process$2 = require('process')
 var browserSync = require('browser-sync')
 var yargs = require('yargs')
 var merge = require('lodash.merge')
@@ -23,6 +24,7 @@ function _interopDefaultLegacy(e) {
 }
 
 var path__default = /*#__PURE__*/ _interopDefaultLegacy(path$2)
+var process__default = /*#__PURE__*/ _interopDefaultLegacy(process$2)
 var browserSync__default = /*#__PURE__*/ _interopDefaultLegacy(browserSync)
 var yargs__default = /*#__PURE__*/ _interopDefaultLegacy(yargs)
 var merge__default = /*#__PURE__*/ _interopDefaultLegacy(merge)
@@ -6105,8 +6107,11 @@ function watch(bs, root) {
 }
 
 function signalTerminate(bs) {
-  process.on('SIGTERM', function () {
-    console.log('Recive quit signal in worker %s.', process.pid)
+  process__default['default'].on('SIGTERM', function () {
+    console.log(
+      'Recive quit signal in worker %s.',
+      process__default['default'].pid
+    )
     bs.exit()
   })
 }

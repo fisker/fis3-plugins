@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs'
+import process from 'process'
 import cartesianProduct from 'fast-cartesian-product'
 
 const isPartial = (file) => file[0] === '_'

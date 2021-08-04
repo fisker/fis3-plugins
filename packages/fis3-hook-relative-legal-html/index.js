@@ -1908,18 +1908,18 @@ fixRegExpWellKnownSymbolLogic(
   UNSUPPORTED_Y
 )
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'fis3 relative path support',
   keywords: ['relative'],
   options: {},
 }
 var info$1 = info
-
-function exportPlugin(process, _ref) {
-  var options = _ref.options
-  process.defaultOptions = options
-  return process
-}
 
 var _global = global,
   fis = _global.fis

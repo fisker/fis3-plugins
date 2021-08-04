@@ -1,8 +1,9 @@
 'use strict'
 
-var htmlhint = require('htmlhint')
 var fs = require('fs')
 var path = require('path')
+var process$1 = require('process')
+var htmlhint = require('htmlhint')
 
 function _interopDefaultLegacy(e) {
   return e && typeof e === 'object' && 'default' in e ? e : {default: e}
@@ -10,6 +11,7 @@ function _interopDefaultLegacy(e) {
 
 var fs__default = /*#__PURE__*/ _interopDefaultLegacy(fs)
 var path__default = /*#__PURE__*/ _interopDefaultLegacy(path)
+var process__default = /*#__PURE__*/ _interopDefaultLegacy(process$1)
 
 var commonjsGlobal =
   typeof globalThis !== 'undefined'
@@ -146,9 +148,9 @@ var engineUserAgent = getBuiltIn$2('navigator', 'userAgent') || ''
 
 var global$9 = global$b
 var userAgent = engineUserAgent
-var process$1 = global$9.process
+var process = global$9.process
 var Deno = global$9.Deno
-var versions = (process$1 && process$1.versions) || (Deno && Deno.version)
+var versions = (process && process.versions) || (Deno && Deno.version)
 var v8 = versions && versions.v8
 var match, version
 
@@ -1088,6 +1090,12 @@ $(
   }
 )
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'a html linter plugin of fis3 based on htmlhint.',
   keywords: ['linter', 'html'],
@@ -1099,12 +1107,6 @@ var info = {
 }
 var info$1 = info
 
-function exportPlugin(process, _ref) {
-  var options = _ref.options
-  process.defaultOptions = options
-  return process
-}
-
 var _global = global,
   _global$fis = _global.fis,
   fis = _global$fis === void 0 ? {} : _global$fis
@@ -1112,7 +1114,7 @@ var _fis$log = fis.log,
   log = _fis$log === void 0 ? console.log : _fis$log
 
 function readConfig(filename) {
-  var currentFolder = process.cwd()
+  var currentFolder = process__default['default'].cwd()
   var currentFile = ''
   var parentFolder = ''
 
@@ -1172,7 +1174,7 @@ function mainProcess(content, file, config) {
     )
 
     if (errorType === 'error') {
-      process.exitCode = 1
+      process__default['default'].exitCode = 1
       throw new Error('htmlhint error.')
     }
   }

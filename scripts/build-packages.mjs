@@ -1,3 +1,4 @@
+import process from 'node:process'
 import path from 'node:path'
 import lodash from 'lodash'
 import writePrettierFile from 'write-prettier-file'

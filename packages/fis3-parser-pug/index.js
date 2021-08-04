@@ -2,6 +2,12 @@
 
 var pug = require('pug')
 
+function exportPlugin(process, _ref) {
+  var options = _ref.options
+  process.defaultOptions = options
+  return process
+}
+
 var info = {
   description: 'a fis plugin to parse pug(aka jade).',
   keywords: ['jade', 'html'],
@@ -15,12 +21,6 @@ var info = {
   },
 }
 var info$1 = info
-
-function exportPlugin(process, _ref) {
-  var options = _ref.options
-  process.defaultOptions = options
-  return process
-}
 
 function process(content, file, config) {
   return content ? pug.render(content, config) : ''
