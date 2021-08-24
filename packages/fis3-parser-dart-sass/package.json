@@ -28,7 +28,7 @@
   ],
   "dependencies": {
     "fast-cartesian-product": "2.0.1",
-    "sass": "1.37.5"
+    "sass": "1.38.1"
   },
   "publishConfig": {
     "access": "public",
