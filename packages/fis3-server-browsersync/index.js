@@ -34,7 +34,7 @@ var check = function (it) {
   return it && it.Math == Math && it
 } // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 
-var global$b = // eslint-disable-next-line es/no-global-this -- safe
+var global$e = // eslint-disable-next-line es/no-global-this -- safe
   check(typeof globalThis == 'object' && globalThis) ||
   check(typeof window == 'object' && window) || // eslint-disable-next-line no-restricted-globals -- safe
   check(typeof self == 'object' && self) ||
@@ -46,34 +46,34 @@ var global$b = // eslint-disable-next-line es/no-global-this -- safe
 
 var shared$4 = {exports: {}}
 
-var global$a = global$b
+var global$d = global$e
 
 var setGlobal$3 = function (key, value) {
   try {
     // eslint-disable-next-line es/no-object-defineproperty -- safe
-    Object.defineProperty(global$a, key, {
+    Object.defineProperty(global$d, key, {
       value: value,
       configurable: true,
       writable: true,
     })
   } catch (error) {
-    global$a[key] = value
+    global$d[key] = value
   }
 
   return value
 }
 
-var global$9 = global$b
+var global$c = global$e
 var setGlobal$2 = setGlobal$3
 var SHARED = '__core-js_shared__'
-var store$3 = global$9[SHARED] || setGlobal$2(SHARED, {})
+var store$3 = global$c[SHARED] || setGlobal$2(SHARED, {})
 var sharedStore = store$3
 
 var store$2 = sharedStore
 ;(shared$4.exports = function (key, value) {
   return store$2[key] || (store$2[key] = value !== undefined ? value : {})
 })('versions', []).push({
-  version: '3.16.0',
+  version: '3.17.2',
   mode: 'global',
   copyright: '© 2021 Denis Pushkarev (zloirock.ru)',
 })
@@ -113,7 +113,7 @@ var uid$2 = function (key) {
   )
 }
 
-var global$8 = global$b
+var global$b = global$e
 
 var aFunction = function (variable) {
   return typeof variable == 'function' ? variable : undefined
@@ -121,17 +121,17 @@ var aFunction = function (variable) {
 
 var getBuiltIn$4 = function (namespace, method) {
   return arguments.length < 2
-    ? aFunction(global$8[namespace])
-    : global$8[namespace] && global$8[namespace][method]
+    ? aFunction(global$b[namespace])
+    : global$b[namespace] && global$b[namespace][method]
 }
 
 var getBuiltIn$3 = getBuiltIn$4
 var engineUserAgent = getBuiltIn$3('navigator', 'userAgent') || ''
 
-var global$7 = global$b
+var global$a = global$e
 var userAgent = engineUserAgent
-var process = global$7.process
-var Deno = global$7.Deno
+var process = global$a.process
+var Deno = global$a.Deno
 var versions = (process && process.versions) || (Deno && Deno.version)
 var v8 = versions && versions.v8
 var match, version
@@ -180,14 +180,14 @@ var NATIVE_SYMBOL$1 = nativeSymbol
 var useSymbolAsUid =
   NATIVE_SYMBOL$1 && !Symbol.sham && typeof Symbol.iterator == 'symbol'
 
-var global$6 = global$b
+var global$9 = global$e
 var shared$3 = shared$4.exports
 var has$5 = has$6
 var uid$1 = uid$2
 var NATIVE_SYMBOL = nativeSymbol
 var USE_SYMBOL_AS_UID$1 = useSymbolAsUid
 var WellKnownSymbolsStore = shared$3('wks')
-var Symbol$1 = global$6.Symbol
+var Symbol$1 = global$9.Symbol
 var createWellKnownSymbol = USE_SYMBOL_AS_UID$1
   ? Symbol$1
   : (Symbol$1 && Symbol$1.withoutSetter) || uid$1
@@ -234,9 +234,9 @@ var isObject$6 = function (it) {
   return typeof it === 'object' ? it !== null : typeof it === 'function'
 }
 
-var global$5 = global$b
+var global$8 = global$e
 var isObject$5 = isObject$6
-var document$1 = global$5.document // typeof document.createElement is 'object' in old IE
+var document$1 = global$8.document // typeof document.createElement is 'object' in old IE
 
 var EXISTS = isObject$5(document$1) && isObject$5(document$1.createElement)
 
@@ -401,9 +401,9 @@ if (typeof store$1.inspectSource != 'function') {
 
 var inspectSource$2 = store$1.inspectSource
 
-var global$4 = global$b
+var global$7 = global$e
 var inspectSource$1 = inspectSource$2
-var WeakMap$1 = global$4.WeakMap
+var WeakMap$1 = global$7.WeakMap
 var nativeWeakMap =
   typeof WeakMap$1 === 'function' &&
   /native code/.test(inspectSource$1(WeakMap$1))
@@ -419,7 +419,7 @@ var sharedKey$2 = function (key) {
 var hiddenKeys$4 = {}
 
 var NATIVE_WEAK_MAP = nativeWeakMap
-var global$3 = global$b
+var global$6 = global$e
 var isObject$1 = isObject$6
 var createNonEnumerableProperty$3 = createNonEnumerableProperty$4
 var objectHas = has$6
@@ -427,7 +427,7 @@ var shared$1 = sharedStore
 var sharedKey$1 = sharedKey$2
 var hiddenKeys$3 = hiddenKeys$4
 var OBJECT_ALREADY_INITIALIZED = 'Object already initialized'
-var WeakMap = global$3.WeakMap
+var WeakMap = global$6.WeakMap
 var set, get, has$4
 
 var enforce = function (it) {
@@ -494,7 +494,7 @@ var internalState = {
   getterFor: getterFor,
 }
 
-var global$2 = global$b
+var global$5 = global$e
 var createNonEnumerableProperty$2 = createNonEnumerableProperty$4
 var has$3 = has$6
 var setGlobal$1 = setGlobal$3
@@ -521,7 +521,7 @@ var TEMPLATE = String(String).split('String')
     }
   }
 
-  if (O === global$2) {
+  if (O === global$5) {
     if (simple) O[key] = value
     else setGlobal$1(key, value)
     return
@@ -912,7 +912,7 @@ var NATIVE = (isForced$1.NATIVE = 'N')
 var POLYFILL = (isForced$1.POLYFILL = 'P')
 var isForced_1 = isForced$1
 
-var global$1 = global$b
+var global$4 = global$e
 var getOwnPropertyDescriptor = objectGetOwnPropertyDescriptor.f
 var createNonEnumerableProperty$1 = createNonEnumerableProperty$4
 var redefine$1 = redefine$4.exports
@@ -941,11 +941,11 @@ var _export = function (options, source) {
   var FORCED, target, key, targetProperty, sourceProperty, descriptor
 
   if (GLOBAL) {
-    target = global$1
+    target = global$4
   } else if (STATIC) {
-    target = global$1[TARGET] || setGlobal(TARGET, {})
+    target = global$4[TARGET] || setGlobal(TARGET, {})
   } else {
-    target = (global$1[TARGET] || {}).prototype
+    target = (global$4[TARGET] || {}).prototype
   }
 
   if (target)
@@ -1092,18 +1092,15 @@ var NullProtoObjectViaIFrame = function () {
   var iframe = documentCreateElement('iframe')
   var JS = 'java' + SCRIPT + ':'
   var iframeDocument
+  iframe.style.display = 'none'
+  html.appendChild(iframe) // https://github.com/zloirock/core-js/issues/475
 
-  if (iframe.style) {
-    iframe.style.display = 'none'
-    html.appendChild(iframe) // https://github.com/zloirock/core-js/issues/475
-
-    iframe.src = String(JS)
-    iframeDocument = iframe.contentWindow.document
-    iframeDocument.open()
-    iframeDocument.write(scriptTag('document.F=Object'))
-    iframeDocument.close()
-    return iframeDocument.F
-  }
+  iframe.src = String(JS)
+  iframeDocument = iframe.contentWindow.document
+  iframeDocument.open()
+  iframeDocument.write(scriptTag('document.F=Object'))
+  iframeDocument.close()
+  return iframeDocument.F
 } // Check for document.domain and active x support
 // No need to use active x approach when document.domain is not set
 // see https://github.com/es-shims/es5-shim/issues/150
@@ -1120,9 +1117,11 @@ var NullProtoObject = function () {
   }
 
   NullProtoObject =
-    document.domain && activeXDocument
-      ? NullProtoObjectViaActiveX(activeXDocument) // old IE
-      : NullProtoObjectViaIFrame() || NullProtoObjectViaActiveX(activeXDocument) // WSH
+    typeof document != 'undefined'
+      ? document.domain && activeXDocument
+        ? NullProtoObjectViaActiveX(activeXDocument) // old IE
+        : NullProtoObjectViaIFrame()
+      : NullProtoObjectViaActiveX(activeXDocument) // WSH
 
   var length = enumBugKeys.length
 
@@ -1270,39 +1269,41 @@ $$1(
 
 var regexpStickyHelpers = {}
 
-var fails$3 = fails$b // babel-minify transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError,
+var fails$3 = fails$b
+var global$3 = global$e // babel-minify and Closure Compiler transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError
 
-var RE = function (s, f) {
-  return RegExp(s, f)
-}
-
+var $RegExp$2 = global$3.RegExp
 regexpStickyHelpers.UNSUPPORTED_Y = fails$3(function () {
-  var re = RE('a', 'y')
+  var re = $RegExp$2('a', 'y')
   re.lastIndex = 2
   return re.exec('abcd') != null
 })
 regexpStickyHelpers.BROKEN_CARET = fails$3(function () {
   // https://bugzilla.mozilla.org/show_bug.cgi?id=773687
-  var re = RE('^r', 'gy')
+  var re = $RegExp$2('^r', 'gy')
   re.lastIndex = 2
   return re.exec('str') != null
 })
 
 var fails$2 = fails$b
+var global$2 = global$e // babel-minify and Closure Compiler transpiles RegExp('.', 's') -> /./s and it causes SyntaxError
+
+var $RegExp$1 = global$2.RegExp
 var regexpUnsupportedDotAll = fails$2(function () {
-  // babel-minify transpiles RegExp('.', 's') -> /./s and it causes SyntaxError
-  var re = RegExp('.', (typeof '').charAt(0))
+  var re = $RegExp$1('.', 's')
   return !(re.dotAll && re.exec('\n') && re.flags === 's')
 })
 
 var fails$1 = fails$b
+var global$1 = global$e // babel-minify and Closure Compiler transpiles RegExp('(?<a>b)', 'g') -> /(?<a>b)/g and it causes SyntaxError
+
+var $RegExp = global$1.RegExp
 var regexpUnsupportedNcg = fails$1(function () {
-  // babel-minify transpiles RegExp('.', 'g') -> /./g and it causes SyntaxError
-  var re = RegExp('(?<a>b)', (typeof '').charAt(5))
+  var re = $RegExp('(?<a>b)', 'g')
   return re.exec('b').groups.a !== 'b' || 'b'.replace(re, '$<a>c') !== 'bc'
 })
 
-/* eslint-disable regexp/no-assertion-capturing-group, regexp/no-empty-group, regexp/no-lazy-ends -- testing */
+/* eslint-disable regexp/no-empty-capturing-group, regexp/no-empty-group, regexp/no-lazy-ends -- testing */
 
 /* eslint-disable regexp/no-useless-quantifier -- testing */
 
