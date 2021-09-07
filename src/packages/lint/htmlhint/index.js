@@ -57,7 +57,7 @@ function mainProcess(content, file, config) {
       '[%s] lint failed with %s: \n\n %s',
       file.id,
       errorType,
-      HTMLHint.format(results, {indent: 2}).join('\n')
+      HTMLHint.format(results, {indent: 2}).join('\n'),
     )
     if (errorType === 'error') {
       process.exitCode = 1

@@ -33,7 +33,7 @@ function mock(root) {
         function () {
           middleware(request, response, next)
         },
-      next
+      next,
     )()
   }
 }
@@ -54,7 +54,7 @@ export default {
   directory(root) {
     return getMiddleware('Server Directory', serveDirectory)(
       root,
-      serveDirectoryThemeOcticons
+      serveDirectoryThemeOcticons,
     )
   },
 }

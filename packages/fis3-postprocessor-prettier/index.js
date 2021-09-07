@@ -41,7 +41,7 @@ function _objectSpread2(target) {
         Object.defineProperty(
           target,
           key,
-          Object.getOwnPropertyDescriptor(source, key)
+          Object.getOwnPropertyDescriptor(source, key),
         )
       })
     }
@@ -91,15 +91,15 @@ function process(content, file, config) {
         {},
         prettier__default['default'].resolveConfig.sync(fileFakePath, {
           editorconfig: true,
-        })
+        }),
       ),
-      config
+      config,
     ),
     {},
     {
       filepath: fileFakePath,
       filename: undefined,
-    }
+    },
   )
 
   return prettier__default['default'].format(content, prettierConfig)

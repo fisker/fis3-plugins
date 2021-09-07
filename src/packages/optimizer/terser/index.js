@@ -46,7 +46,7 @@ function deriveSourceMap(file, sourceMap) {
   }
 
   const mapping = global.fis.file.wrap(
-    `${file.dirname}/${file.filename}${file.rExt}.map`
+    `${file.dirname}/${file.filename}${file.rExt}.map`,
   )
 
   mapping.setContent(sourceMap)

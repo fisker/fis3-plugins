@@ -30,7 +30,7 @@ function possibleFileNames(file) {
   return hasExtension(fileName)
     ? fileNames
     : cartesianProduct([fileNames, extensions]).map(
-        ([fileName, extension]) => fileName + extension
+        ([fileName, extension]) => fileName + extension,
       )
 }
 
@@ -39,7 +39,7 @@ function getFiles(directories, file) {
   const fileNames = possibleFileNames(file)
 
   const files = cartesianProduct([directories, fileNames]).map(
-    ([directory, fileName]) => path.join(directory, fileName)
+    ([directory, fileName]) => path.join(directory, fileName),
   )
 
   return unique(files)
@@ -73,7 +73,7 @@ function resolveInDirectories({includePaths, cache = {}, alias = {}}) {
 
       files = getFiles(
         [path.dirname(previous), ...includePaths, process.cwd()],
-        file
+        file,
       )
     }
 
@@ -94,7 +94,7 @@ function resolveInDirectories({includePaths, cache = {}, alias = {}}) {
       return new Error(
         `importing ${file} from ${previous}. It's not clear which file to import. \n found files:${results
           .map(({file}) => file)
-          .join('\n')}`
+          .join('\n')}`,
       )
     }
 
@@ -102,7 +102,7 @@ function resolveInDirectories({includePaths, cache = {}, alias = {}}) {
       return new Error(
         `importing ${file} from ${previous}. File to import not found or unreadable. \n tried files:${results
           .map(({file}) => file)
-          .join('\n')}`
+          .join('\n')}`,
       )
     }
 

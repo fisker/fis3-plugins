@@ -6,7 +6,7 @@ function npm(command, arguments_, options) {
   const {stdout} = execa.sync(
     'npm',
     [command, ...arguments_, '--registry=https://registry.npmjs.org/'],
-    options
+    options,
   )
   console.log(stdout)
 }

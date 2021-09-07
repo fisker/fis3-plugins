@@ -52,7 +52,7 @@ function _objectSpread2(target) {
         Object.defineProperty(
           target,
           key,
-          Object.getOwnPropertyDescriptor(source, key)
+          Object.getOwnPropertyDescriptor(source, key),
         )
       })
     }
@@ -164,13 +164,13 @@ function _arrayLikeToArray(arr, len) {
 
 function _nonIterableSpread() {
   throw new TypeError(
-    'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+    'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.',
   )
 }
 
 function _nonIterableRest() {
   throw new TypeError(
-    'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+    'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.',
   )
 }
 
@@ -234,7 +234,7 @@ var NASHORN_BUG =
     {
       1: 2,
     },
-    1
+    1,
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
@@ -562,7 +562,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$6
       if (has$8(O, P))
         return createPropertyDescriptor$3(
           !propertyIsEnumerableModule.f.call(O, P),
-          O[P]
+          O[P],
         )
     }
 
@@ -612,7 +612,7 @@ var createNonEnumerableProperty$6 = DESCRIPTORS$4
       return definePropertyModule$5.f(
         object,
         key,
-        createPropertyDescriptor$2(1, value)
+        createPropertyDescriptor$2(1, value),
       )
     }
   : function (object, key, value) {
@@ -986,7 +986,7 @@ var _export = function (options, source) {
 
       FORCED = isForced$1(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
-        options.forced
+        options.forced,
       ) // contained in target
 
       if (!FORCED && targetProperty !== undefined) {
@@ -1070,7 +1070,7 @@ var arrayMethodIsStrict$2 = function (METHOD_NAME, argument) {
           function () {
             throw 1
           },
-        1
+        1,
       )
     })
   )
@@ -1099,17 +1099,17 @@ $$t(
   },
   {
     reduce: function reduce(
-      callbackfn
+      callbackfn,
       /* , initialValue */
     ) {
       return $reduce(
         this,
         callbackfn,
         arguments.length,
-        arguments.length > 1 ? arguments[1] : undefined
+        arguments.length > 1 ? arguments[1] : undefined,
       )
     },
-  }
+  },
 )
 
 var $$s = _export
@@ -1131,10 +1131,10 @@ $$s(
     join: function join(separator) {
       return nativeJoin.call(
         toIndexedObject$4(this),
-        separator === undefined ? ',' : separator
+        separator === undefined ? ',' : separator,
       )
     },
-  }
+  },
 )
 
 var classof$5 = classofRaw$1 // `IsArray` abstract operation
@@ -1157,7 +1157,7 @@ var createProperty$2 = function (object, key, value) {
     definePropertyModule$3.f(
       object,
       propertyKey,
-      createPropertyDescriptor$1(0, value)
+      createPropertyDescriptor$1(0, value),
     )
   else object[propertyKey] = value
 }
@@ -1288,7 +1288,7 @@ $$r(
       A.length = n
       return A
     },
-  }
+  },
 )
 
 var aFunction$d = aFunction$f // optional / simple context binding
@@ -1438,16 +1438,16 @@ $$q(
   },
   {
     map: function map(
-      callbackfn
+      callbackfn,
       /* , thisArg */
     ) {
       return $map(
         this,
         callbackfn,
-        arguments.length > 1 ? arguments[1] : undefined
+        arguments.length > 1 ? arguments[1] : undefined,
       )
     },
-  }
+  },
 )
 
 var wellKnownSymbol$f = wellKnownSymbol$k
@@ -1465,7 +1465,7 @@ var CORRECT_ARGUMENTS =
   classofRaw(
     (function () {
       return arguments
-    })()
+    })(),
   ) == 'Arguments' // fallback for IE11 Script Access Denied error
 
 var tryGet = function (it, key) {
@@ -1570,13 +1570,13 @@ if (NOT_GENERIC || INCORRECT_NAME) {
           R instanceof RegExp &&
           !('flags' in RegExpPrototype$1)
           ? flags.call(R)
-          : rf
+          : rf,
       )
       return '/' + p + '/' + f
     },
     {
       unsafe: true,
-    }
+    },
   )
 }
 
@@ -1748,16 +1748,16 @@ $$p(
   },
   {
     includes: function includes(
-      el
+      el,
       /* , fromIndex = 0 */
     ) {
       return $includes(
         this,
         el,
-        arguments.length > 1 ? arguments[1] : undefined
+        arguments.length > 1 ? arguments[1] : undefined,
       )
     },
-  }
+  },
 ) // https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
 
 addToUnscopables$1('includes')
@@ -1823,15 +1823,15 @@ $$o(
   },
   {
     includes: function includes(
-      searchString
+      searchString,
       /* , position = 0 */
     ) {
       return !!~toString$7(requireObjectCoercible$4(this)).indexOf(
         toString$7(notARegExp$1(searchString)),
-        arguments.length > 1 ? arguments[1] : undefined
+        arguments.length > 1 ? arguments[1] : undefined,
       )
     },
-  }
+  },
 )
 
 var iterators = {}
@@ -1891,7 +1891,7 @@ if ([].keys) {
   if (!('next' in arrayIterator)) BUGGY_SAFARI_ITERATORS$1 = true
   else {
     PrototypeOfArrayIteratorPrototype = getPrototypeOf$1(
-      getPrototypeOf$1(arrayIterator)
+      getPrototypeOf$1(arrayIterator),
     )
     if (PrototypeOfArrayIteratorPrototype !== Object.prototype)
       IteratorPrototype$2 = PrototypeOfArrayIteratorPrototype
@@ -1980,7 +1980,7 @@ var objectSetPrototypeOf =
           // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
           setter = Object.getOwnPropertyDescriptor(
             Object.prototype,
-            '__proto__'
+            '__proto__',
           ).set
           setter.call(test, [])
           CORRECT_SETTER = test instanceof Array
@@ -2026,7 +2026,7 @@ var defineIterator$3 = function (
   next,
   DEFAULT,
   IS_SET,
-  FORCED
+  FORCED,
 ) {
   createIteratorConstructor(IteratorConstructor, NAME, next)
 
@@ -2074,7 +2074,7 @@ var defineIterator$3 = function (
 
   if (anyNativeIterator) {
     CurrentIteratorPrototype = getPrototypeOf(
-      anyNativeIterator.call(new Iterable())
+      anyNativeIterator.call(new Iterable()),
     )
 
     if (
@@ -2088,7 +2088,7 @@ var defineIterator$3 = function (
           createNonEnumerableProperty$1(
             CurrentIteratorPrototype,
             ITERATOR$3,
-            returnThis
+            returnThis,
           )
         }
       } // Set @@toStringTag to native iterators
@@ -2109,7 +2109,7 @@ var defineIterator$3 = function (
     createNonEnumerableProperty$1(
       IterablePrototype,
       ITERATOR$3,
-      defaultIterator
+      defaultIterator,
     )
   }
 
@@ -2138,7 +2138,7 @@ var defineIterator$3 = function (
           proto: true,
           forced: BUGGY_SAFARI_ITERATORS || INCORRECT_VALUES_NAME,
         },
-        methods
+        methods,
       )
   }
 
@@ -2206,7 +2206,7 @@ defineIterator$2(
       done: false,
     }
   },
-  'values'
+  'values',
 ) // argumentsList[@@iterator] is %ArrayProto_values%
 // https://tc39.es/ecma262/#sec-createunmappedargumentsobject
 // https://tc39.es/ecma262/#sec-createmappedargumentsobject
@@ -2348,7 +2348,7 @@ var enable = function () {
       },
       {
         getOwnPropertyNames: getOwnPropertyNamesExternalModule.f,
-      }
+      },
     )
   }
 }
@@ -2597,7 +2597,7 @@ var collection$1 = function (CONSTRUCTOR_NAME, wrapper, common) {
         : function set(key, value) {
             nativeMethod.call(this, key === 0 ? 0 : key, value)
             return this
-          }
+          },
     )
   }
 
@@ -2610,7 +2610,7 @@ var collection$1 = function (CONSTRUCTOR_NAME, wrapper, common) {
           !fails$6(function () {
             new NativeConstructor().entries().next()
           }))
-      )
+      ),
   )
 
   if (REPLACE) {
@@ -2619,7 +2619,7 @@ var collection$1 = function (CONSTRUCTOR_NAME, wrapper, common) {
       wrapper,
       CONSTRUCTOR_NAME,
       IS_MAP,
-      ADDER
+      ADDER,
     )
     InternalMetadataModule.enable()
   } else if (isForced(CONSTRUCTOR_NAME, true)) {
@@ -2654,7 +2654,7 @@ var collection$1 = function (CONSTRUCTOR_NAME, wrapper, common) {
         var that = inheritIfRequired(
           new NativeConstructor(),
           dummy,
-          Constructor
+          Constructor,
         )
         if (iterable != undefined)
           iterate$f(iterable, that[ADDER], {
@@ -2684,7 +2684,7 @@ var collection$1 = function (CONSTRUCTOR_NAME, wrapper, common) {
       global: true,
       forced: Constructor != NativeConstructor,
     },
-    exported
+    exported,
   )
   setToStringTag(Constructor, CONSTRUCTOR_NAME)
   if (!IS_WEAK) common.setStrong(Constructor, CONSTRUCTOR_NAME, IS_MAP)
@@ -2839,14 +2839,14 @@ var collectionStrong$1 = {
       // https://tc39.es/ecma262/#sec-map.prototype.foreach
       // https://tc39.es/ecma262/#sec-set.prototype.foreach
       forEach: function forEach(
-        callbackfn
+        callbackfn,
         /* , that = undefined */
       ) {
         var state = getInternalState(this)
         var boundFunction = bind$5(
           callbackfn,
           arguments.length > 1 ? arguments[1] : undefined,
-          3
+          3,
         )
         var entry
 
@@ -2885,7 +2885,7 @@ var collectionStrong$1 = {
             add: function add(value) {
               return define(this, (value = value === 0 ? 0 : value), value)
             },
-          }
+          },
     )
     if (DESCRIPTORS$1)
       defineProperty(C.prototype, 'size', {
@@ -2956,7 +2956,7 @@ var collectionStrong$1 = {
       },
       IS_MAP ? 'entries' : 'values',
       !IS_MAP,
-      true
+      true,
     ) // `{ Map, Set }.prototype[@@species]` accessors
     // https://tc39.es/ecma262/#sec-get-map-@@species
     // https://tc39.es/ecma262/#sec-get-set-@@species
@@ -2976,7 +2976,7 @@ collection(
       return init(this, arguments.length ? arguments[0] : undefined)
     }
   },
-  collectionStrong
+  collectionStrong,
 )
 
 var toInteger$1 = toInteger$4
@@ -3051,7 +3051,7 @@ defineIterator(
       value: point,
       done: false,
     }
-  }
+  },
 )
 
 var anObject$j = anObject$t
@@ -3084,7 +3084,7 @@ $$k(
     addAll: function addAll() {
       return collectionAddAll.apply(this, arguments)
     },
-  }
+  },
 )
 
 var anObject$i = anObject$t
@@ -3120,7 +3120,7 @@ $$j(
     deleteAll: function deleteAll() {
       return collectionDeleteAll.apply(this, arguments)
     },
-  }
+  },
 )
 
 var anObject$h = anObject$t
@@ -3163,7 +3163,7 @@ $$i(
       })
       return newSet
     },
-  }
+  },
 )
 
 var getSetIterator$7 = function (it) {
@@ -3188,7 +3188,7 @@ $$h(
   },
   {
     every: function every(
-      callbackfn
+      callbackfn,
       /* , thisArg */
     ) {
       var set = anObject$f(this)
@@ -3196,7 +3196,7 @@ $$h(
       var boundFunction = bind$4(
         callbackfn,
         arguments.length > 1 ? arguments[1] : undefined,
-        3
+        3,
       )
       return !iterate$c(
         iterator,
@@ -3206,10 +3206,10 @@ $$h(
         {
           IS_ITERATOR: true,
           INTERRUPTED: true,
-        }
+        },
       ).stopped
     },
-  }
+  },
 )
 
 var $$g = _export
@@ -3232,7 +3232,7 @@ $$g(
   },
   {
     filter: function filter(
-      callbackfn
+      callbackfn,
       /* , thisArg */
     ) {
       var set = anObject$e(this)
@@ -3240,7 +3240,7 @@ $$g(
       var boundFunction = bind$3(
         callbackfn,
         arguments.length > 1 ? arguments[1] : undefined,
-        3
+        3,
       )
       var newSet = new (speciesConstructor$5(set, getBuiltIn$5('Set')))()
       var adder = aFunction$8(newSet.add)
@@ -3251,11 +3251,11 @@ $$g(
         },
         {
           IS_ITERATOR: true,
-        }
+        },
       )
       return newSet
     },
-  }
+  },
 )
 
 var $$f = _export
@@ -3275,7 +3275,7 @@ $$f(
   },
   {
     find: function find(
-      callbackfn
+      callbackfn,
       /* , thisArg */
     ) {
       var set = anObject$d(this)
@@ -3283,7 +3283,7 @@ $$f(
       var boundFunction = bind$2(
         callbackfn,
         arguments.length > 1 ? arguments[1] : undefined,
-        3
+        3,
       )
       return iterate$a(
         iterator,
@@ -3293,10 +3293,10 @@ $$f(
         {
           IS_ITERATOR: true,
           INTERRUPTED: true,
-        }
+        },
       ).result
     },
-  }
+  },
 )
 
 var $$e = _export
@@ -3326,7 +3326,7 @@ $$e(
       })
       return newSet
     },
-  }
+  },
 )
 
 var $$d = _export
@@ -3354,10 +3354,10 @@ $$d(
         },
         {
           INTERRUPTED: true,
-        }
+        },
       ).stopped
     },
-  }
+  },
 )
 
 var anObject$a = anObject$t
@@ -3408,10 +3408,10 @@ $$c(
         {
           IS_ITERATOR: true,
           INTERRUPTED: true,
-        }
+        },
       ).stopped
     },
-  }
+  },
 )
 
 var $$b = _export
@@ -3439,10 +3439,10 @@ $$b(
         },
         {
           INTERRUPTED: true,
-        }
+        },
       ).stopped
     },
-  }
+  },
 )
 
 var $$a = _export
@@ -3471,7 +3471,7 @@ $$a(
       })
       return result.join(sep)
     },
-  }
+  },
 )
 
 var $$9 = _export
@@ -3494,7 +3494,7 @@ $$9(
   },
   {
     map: function map(
-      callbackfn
+      callbackfn,
       /* , thisArg */
     ) {
       var set = anObject$6(this)
@@ -3502,7 +3502,7 @@ $$9(
       var boundFunction = bind$1(
         callbackfn,
         arguments.length > 1 ? arguments[1] : undefined,
-        3
+        3,
       )
       var newSet = new (speciesConstructor$3(set, getBuiltIn$2('Set')))()
       var adder = aFunction$3(newSet.add)
@@ -3513,11 +3513,11 @@ $$9(
         },
         {
           IS_ITERATOR: true,
-        }
+        },
       )
       return newSet
     },
-  }
+  },
 )
 
 var $$8 = _export
@@ -3537,7 +3537,7 @@ $$8(
   },
   {
     reduce: function reduce(
-      callbackfn
+      callbackfn,
       /* , initialValue */
     ) {
       var set = anObject$5(this)
@@ -3557,13 +3557,13 @@ $$8(
         },
         {
           IS_ITERATOR: true,
-        }
+        },
       )
       if (noInitial)
         throw TypeError('Reduce of empty set with no initial value')
       return accumulator
     },
-  }
+  },
 )
 
 var $$7 = _export
@@ -3583,7 +3583,7 @@ $$7(
   },
   {
     some: function some(
-      callbackfn
+      callbackfn,
       /* , thisArg */
     ) {
       var set = anObject$4(this)
@@ -3591,7 +3591,7 @@ $$7(
       var boundFunction = bind(
         callbackfn,
         arguments.length > 1 ? arguments[1] : undefined,
-        3
+        3,
       )
       return iterate$2(
         iterator,
@@ -3601,10 +3601,10 @@ $$7(
         {
           IS_ITERATOR: true,
           INTERRUPTED: true,
-        }
+        },
       ).stopped
     },
-  }
+  },
 )
 
 var $$6 = _export
@@ -3634,7 +3634,7 @@ $$6(
       })
       return newSet
     },
-  }
+  },
 )
 
 var $$5 = _export
@@ -3662,7 +3662,7 @@ $$5(
       })
       return newSet
     },
-  }
+  },
 )
 
 var $$4 = _export
@@ -3715,7 +3715,7 @@ $$4(
       }
 
       result = new (Constructor === undefined ? Array : Constructor)(
-        max$1(fin - k, 0)
+        max$1(fin - k, 0),
       )
 
       for (n = 0; k < fin; k++, n++) if (k in O) createProperty(result, n, O[k])
@@ -3723,7 +3723,7 @@ $$4(
       result.length = n
       return result
     },
-  }
+  },
 )
 
 var DESCRIPTORS = descriptors
@@ -3774,7 +3774,7 @@ $$3(
     entries: function entries(O) {
       return $entries(O)
     },
-  }
+  },
 )
 
 var $$2 = _export
@@ -3805,20 +3805,20 @@ $$2(
   },
   {
     startsWith: function startsWith(
-      searchString
+      searchString,
       /* , position = 0 */
     ) {
       var that = toString$3(requireObjectCoercible$2(this))
       notARegExp(searchString)
       var index = toLength$2(
-        min$2(arguments.length > 1 ? arguments[1] : undefined, that.length)
+        min$2(arguments.length > 1 ? arguments[1] : undefined, that.length),
       )
       var search = toString$3(searchString)
       return $startsWith
         ? $startsWith.call(that, search, index)
         : that.slice(index, index + search.length) === search
     },
-  }
+  },
 )
 
 var regexpStickyHelpers = {}
@@ -3991,7 +3991,7 @@ $$1(
   },
   {
     exec: exec,
-  }
+  },
 )
 
 var redefine = redefine$7.exports
@@ -4075,7 +4075,7 @@ var fixRegexpWellKnownSymbolLogic = function (KEY, exec, FORCED, SHAM) {
         return {
           done: false,
         }
-      }
+      },
     )
     redefine(String.prototype, KEY, methods[0])
     redefine(RegExpPrototype, SYMBOL, methods[1])
@@ -4104,7 +4104,7 @@ var getSubstitution$1 = function (
   position,
   captures,
   namedCaptures,
-  replacement
+  replacement,
 ) {
   var tailPos = position + matched.length
   var m = captures.length
@@ -4169,7 +4169,7 @@ var regexpExecAbstract = function (R, S) {
 
     if (typeof result !== 'object') {
       throw TypeError(
-        'RegExp exec method returned something other than an Object or null'
+        'RegExp exec method returned something other than an Object or null',
       )
     }
 
@@ -4282,7 +4282,7 @@ fixRegExpWellKnownSymbolLogic$1(
             rx.lastIndex = advanceStringIndex$1(
               S,
               toLength$1(rx.lastIndex),
-              fullUnicode
+              fullUnicode,
             )
         }
 
@@ -4308,7 +4308,7 @@ fixRegExpWellKnownSymbolLogic$1(
             var replacerArgs = [matched].concat(captures, position, S)
             if (namedCaptures !== undefined) replacerArgs.push(namedCaptures)
             var replacement = toString$1(
-              replaceValue.apply(undefined, replacerArgs)
+              replaceValue.apply(undefined, replacerArgs),
             )
           } else {
             replacement = getSubstitution(
@@ -4317,7 +4317,7 @@ fixRegExpWellKnownSymbolLogic$1(
               position,
               captures,
               namedCaptures,
-              replaceValue
+              replaceValue,
             )
           }
 
@@ -4334,7 +4334,7 @@ fixRegExpWellKnownSymbolLogic$1(
   },
   !REPLACE_SUPPORTS_NAMED_GROUPS ||
     !REPLACE_KEEPS_$0 ||
-    REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE
+    REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE,
 )
 
 var $ = _export
@@ -4352,16 +4352,16 @@ $(
   },
   {
     filter: function filter(
-      callbackfn
+      callbackfn,
       /* , thisArg */
     ) {
       return $filter(
         this,
         callbackfn,
-        arguments.length > 1 ? arguments[1] : undefined
+        arguments.length > 1 ? arguments[1] : undefined,
       )
     },
-  }
+  },
 )
 
 var fixRegExpWellKnownSymbolLogic = fixRegexpWellKnownSymbolLogic
@@ -4481,7 +4481,7 @@ fixRegExpWellKnownSymbolLogic(
           rx,
           S,
           limit,
-          internalSplit !== nativeSplit
+          internalSplit !== nativeSplit,
         )
         if (res.done) return res.value
         var C = speciesConstructor(rx, RegExp)
@@ -4495,7 +4495,7 @@ fixRegExpWellKnownSymbolLogic(
 
         var splitter = new C(
           UNSUPPORTED_Y ? '^(?:' + rx.source + ')' : rx,
-          flags
+          flags,
         )
         var lim = limit === undefined ? MAX_UINT32 : limit >>> 0
         if (lim === 0) return []
@@ -4514,7 +4514,7 @@ fixRegExpWellKnownSymbolLogic(
             z === null ||
             (e = min(
               toLength(splitter.lastIndex + (UNSUPPORTED_Y ? q : 0)),
-              S.length
+              S.length,
             )) === p
           ) {
             q = advanceStringIndex(S, q, unicodeMatching)
@@ -4537,7 +4537,7 @@ fixRegExpWellKnownSymbolLogic(
     ]
   },
   !SPLIT_WORKS_WITH_OVERWRITTEN_EXEC,
-  UNSUPPORTED_Y
+  UNSUPPORTED_Y,
 )
 
 var isPartial = function isPartial(file) {
@@ -4587,7 +4587,7 @@ function possibleFileNames(file) {
             extension = _ref2[1]
 
           return fileName + extension
-        }
+        },
       )
 }
 
@@ -4654,9 +4654,9 @@ function resolveInDirectories(_ref5) {
       files = getFiles(
         [path__default['default'].dirname(previous)].concat(
           _toConsumableArray(includePaths),
-          [process__default['default'].cwd()]
+          [process__default['default'].cwd()],
         ),
-        file
+        file,
       )
     }
 
@@ -4679,7 +4679,7 @@ function resolveInDirectories(_ref5) {
           .concat(file, ' from ')
           .concat(
             previous,
-            ". It's not clear which file to import. \n found files:"
+            ". It's not clear which file to import. \n found files:",
           )
           .concat(
             results
@@ -4687,8 +4687,8 @@ function resolveInDirectories(_ref5) {
                 var file = _ref6.file
                 return file
               })
-              .join('\n')
-          )
+              .join('\n'),
+          ),
       )
     }
 
@@ -4698,7 +4698,7 @@ function resolveInDirectories(_ref5) {
           .concat(file, ' from ')
           .concat(
             previous,
-            '. File to import not found or unreadable. \n tried files:'
+            '. File to import not found or unreadable. \n tried files:',
           )
           .concat(
             results
@@ -4706,8 +4706,8 @@ function resolveInDirectories(_ref5) {
                 var file = _ref7.file
                 return file
               })
-              .join('\n')
-          )
+              .join('\n'),
+          ),
       )
     }
 
@@ -4751,7 +4751,7 @@ function normalizeIncludePath(directories) {
       directories_.push(
         directory,
         path__default['default'].join(PROJECT_ROOT, directory),
-        path__default['default'].join(process.cwd(), directory)
+        path__default['default'].join(process.cwd(), directory),
       )
     }
 
@@ -4773,7 +4773,7 @@ function process(content, file, config) {
     alias = _config$alias === void 0 ? {} : _config$alias
   includePaths = [path__default['default'].dirname(file.realpath)].concat(
     _toConsumableArray(normalizeIncludePath(includePaths)),
-    [PROJECT_ROOT]
+    [PROJECT_ROOT],
   )
   var sourceMapFile
 
@@ -4783,11 +4783,11 @@ function process(content, file, config) {
       ''
         .concat(file.dirname, '/')
         .concat(file.filename)
-        .concat(file.rExt, '.map')
+        .concat(file.rExt, '.map'),
     )
     sourceMap = sourceMapFile.getUrl(
       fis.compile.settings.hash,
-      fis.compile.settings.domain
+      fis.compile.settings.domain,
     )
   }
 
@@ -4797,7 +4797,7 @@ function process(content, file, config) {
       {
         '@/': PROJECT_ROOT,
       },
-      alias
+      alias,
     ),
   })
 
@@ -4822,7 +4822,7 @@ function process(content, file, config) {
       },
       sourceMap: sourceMap,
       sourceMapContents: sourceMapContents,
-    }
+    },
   )
 
   delete options.outFile
@@ -4837,8 +4837,8 @@ function process(content, file, config) {
         error.message,
         error.file,
         error.line,
-        error.column
-      )
+        error.column,
+      ),
     )
   }
 

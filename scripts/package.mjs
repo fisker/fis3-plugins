@@ -27,7 +27,7 @@ const links = {
 }
 
 const template = _.memoize((file) =>
-  _.template(readFile(path.join(SOURCE_DIR, 'templates', file)))
+  _.template(readFile(path.join(SOURCE_DIR, 'templates', file))),
 )
 
 function parseDependencies(pkgs) {
@@ -123,7 +123,7 @@ class Package {
 
     funding = funding.replace(
       '?sponsor=1',
-      `/tree/master/packages/${info.name}?sponsor=1`
+      `/tree/master/packages/${info.name}?sponsor=1`,
     )
 
     const package_ = _.assign(
@@ -142,7 +142,7 @@ class Package {
         scripts: info.scripts,
         files: _.uniq([...files, ...info.files]).sort(),
       },
-      _.pick(info, ['version', 'gitHead'])
+      _.pick(info, ['version', 'gitHead']),
     )
     return package_
   }
@@ -174,7 +174,7 @@ class Package {
     if (/\.js$/.test(distFile)) {
       return bundle(
         path.join(this.src, sourceFile),
-        path.join(this.dest, distFile)
+        path.join(this.dest, distFile),
       )
     }
 
@@ -192,7 +192,7 @@ class Package {
   async build() {
     const info = await this.getInfo()
     await Promise.all(
-      ['index.js', ...info.files].map((file) => this.copyFile(file))
+      ['index.js', ...info.files].map((file) => this.copyFile(file)),
     )
 
     this.writeFile('readme.md', template('readme.ejs')(this))
@@ -200,7 +200,7 @@ class Package {
 
     this.writeFile(
       'package.json',
-      JSON.stringify(sortPackageJson(this.pkg), null, 2)
+      JSON.stringify(sortPackageJson(this.pkg), null, 2),
     )
   }
 }

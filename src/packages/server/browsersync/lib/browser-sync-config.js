@@ -64,7 +64,7 @@ function parseMiddleware(middleware) {
 
 function getConfig(bs, argv) {
   const userConfig = getUserConfig(
-    path.resolve(argv.context, argv.bsConfig || bs.instance.config.userFile)
+    path.resolve(argv.context, argv.bsConfig || bs.instance.config.userFile),
   )
 
   const config = merge({}, defaultOptions, userConfig, overrideOptions, {
@@ -81,7 +81,7 @@ function getConfig(bs, argv) {
     // logger
     logger('short'),
     // mock
-    mock(argv.root)
+    mock(argv.root),
   )
 
   // serveDirectory

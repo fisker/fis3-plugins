@@ -68,7 +68,7 @@ var NASHORN_BUG =
     {
       1: 2,
     },
-    1
+    1,
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
@@ -394,7 +394,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$3
       if (has$4(O, P))
         return createPropertyDescriptor$2(
           !propertyIsEnumerableModule.f.call(O, P),
-          O[P]
+          O[P],
         )
     }
 
@@ -444,7 +444,7 @@ var createNonEnumerableProperty$4 = DESCRIPTORS$1
       return definePropertyModule$3.f(
         object,
         key,
-        createPropertyDescriptor$1(1, value)
+        createPropertyDescriptor$1(1, value),
       )
     }
   : function (object, key, value) {
@@ -818,7 +818,7 @@ var _export = function (options, source) {
 
       FORCED = isForced(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
-        options.forced
+        options.forced,
       ) // contained in target
 
       if (!FORCED && targetProperty !== undefined) {
@@ -854,7 +854,7 @@ var createProperty$1 = function (object, key, value) {
     definePropertyModule$1.f(
       object,
       propertyKey,
-      createPropertyDescriptor(0, value)
+      createPropertyDescriptor(0, value),
     )
   else object[propertyKey] = value
 }
@@ -984,7 +984,7 @@ $$1(
       A.length = n
       return A
     },
-  }
+  },
 )
 
 var isSymbol = isSymbol$3
@@ -1312,7 +1312,7 @@ $(
   },
   {
     exec: exec,
-  }
+  },
 )
 
 var redefine = redefine$2.exports
@@ -1396,7 +1396,7 @@ var fixRegexpWellKnownSymbolLogic = function (KEY, exec, FORCED, SHAM) {
         return {
           done: false,
         }
-      }
+      },
     )
     redefine(String.prototype, KEY, methods[0])
     redefine(RegExpPrototype, SYMBOL, methods[1])
@@ -1461,7 +1461,7 @@ var getSubstitution$1 = function (
   position,
   captures,
   namedCaptures,
-  replacement
+  replacement,
 ) {
   var tailPos = position + matched.length
   var m = captures.length
@@ -1526,7 +1526,7 @@ var regexpExecAbstract = function (R, S) {
 
     if (typeof result !== 'object') {
       throw TypeError(
-        'RegExp exec method returned something other than an Object or null'
+        'RegExp exec method returned something other than an Object or null',
       )
     }
 
@@ -1639,7 +1639,7 @@ fixRegExpWellKnownSymbolLogic$1(
             rx.lastIndex = advanceStringIndex$1(
               S,
               toLength$1(rx.lastIndex),
-              fullUnicode
+              fullUnicode,
             )
         }
 
@@ -1665,7 +1665,7 @@ fixRegExpWellKnownSymbolLogic$1(
             var replacerArgs = [matched].concat(captures, position, S)
             if (namedCaptures !== undefined) replacerArgs.push(namedCaptures)
             var replacement = toString$1(
-              replaceValue.apply(undefined, replacerArgs)
+              replaceValue.apply(undefined, replacerArgs),
             )
           } else {
             replacement = getSubstitution(
@@ -1674,7 +1674,7 @@ fixRegExpWellKnownSymbolLogic$1(
               position,
               captures,
               namedCaptures,
-              replaceValue
+              replaceValue,
             )
           }
 
@@ -1691,7 +1691,7 @@ fixRegExpWellKnownSymbolLogic$1(
   },
   !REPLACE_SUPPORTS_NAMED_GROUPS ||
     !REPLACE_KEEPS_$0 ||
-    REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE
+    REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE,
 )
 
 var isObject = isObject$8
@@ -1849,7 +1849,7 @@ fixRegExpWellKnownSymbolLogic(
           rx,
           S,
           limit,
-          internalSplit !== nativeSplit
+          internalSplit !== nativeSplit,
         )
         if (res.done) return res.value
         var C = speciesConstructor(rx, RegExp)
@@ -1863,7 +1863,7 @@ fixRegExpWellKnownSymbolLogic(
 
         var splitter = new C(
           UNSUPPORTED_Y ? '^(?:' + rx.source + ')' : rx,
-          flags
+          flags,
         )
         var lim = limit === undefined ? MAX_UINT32 : limit >>> 0
         if (lim === 0) return []
@@ -1882,7 +1882,7 @@ fixRegExpWellKnownSymbolLogic(
             z === null ||
             (e = min(
               toLength(splitter.lastIndex + (UNSUPPORTED_Y ? q : 0)),
-              S.length
+              S.length,
             )) === p
           ) {
             q = advanceStringIndex(S, q, unicodeMatching)
@@ -1905,7 +1905,7 @@ fixRegExpWellKnownSymbolLogic(
     ]
   },
   !SPLIT_WORKS_WITH_OVERWRITTEN_EXEC,
-  UNSUPPORTED_Y
+  UNSUPPORTED_Y,
 )
 
 function exportPlugin(process, _ref) {

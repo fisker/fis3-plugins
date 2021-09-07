@@ -72,7 +72,7 @@ var NASHORN_BUG =
     {
       1: 2,
     },
-    1
+    1,
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
@@ -398,7 +398,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$4
       if (has$5(O, P))
         return createPropertyDescriptor$1(
           !propertyIsEnumerableModule.f.call(O, P),
-          O[P]
+          O[P],
         )
     }
 
@@ -448,7 +448,7 @@ var createNonEnumerableProperty$4 = DESCRIPTORS$2
       return definePropertyModule$3.f(
         object,
         key,
-        createPropertyDescriptor(1, value)
+        createPropertyDescriptor(1, value),
       )
     }
   : function (object, key, value) {
@@ -822,7 +822,7 @@ var _export = function (options, source) {
 
       FORCED = isForced$1(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
-        options.forced
+        options.forced,
       ) // contained in target
 
       if (!FORCED && targetProperty !== undefined) {
@@ -1162,7 +1162,7 @@ $$1(
   },
   {
     exec: exec,
-  }
+  },
 )
 
 var redefine$3 = redefine$5.exports
@@ -1246,7 +1246,7 @@ var fixRegexpWellKnownSymbolLogic = function (KEY, exec, FORCED, SHAM) {
         return {
           done: false,
         }
-      }
+      },
     )
     redefine$3(String.prototype, KEY, methods[0])
     redefine$3(RegExpPrototype, SYMBOL, methods[1])
@@ -1311,7 +1311,7 @@ var getSubstitution$1 = function (
   position,
   captures,
   namedCaptures,
-  replacement
+  replacement,
 ) {
   var tailPos = position + matched.length
   var m = captures.length
@@ -1376,7 +1376,7 @@ var regexpExecAbstract = function (R, S) {
 
     if (typeof result !== 'object') {
       throw TypeError(
-        'RegExp exec method returned something other than an Object or null'
+        'RegExp exec method returned something other than an Object or null',
       )
     }
 
@@ -1489,7 +1489,7 @@ fixRegExpWellKnownSymbolLogic(
             rx.lastIndex = advanceStringIndex(
               S,
               toLength$1(rx.lastIndex),
-              fullUnicode
+              fullUnicode,
             )
         }
 
@@ -1515,7 +1515,7 @@ fixRegExpWellKnownSymbolLogic(
             var replacerArgs = [matched].concat(captures, position, S)
             if (namedCaptures !== undefined) replacerArgs.push(namedCaptures)
             var replacement = toString$1(
-              replaceValue.apply(undefined, replacerArgs)
+              replaceValue.apply(undefined, replacerArgs),
             )
           } else {
             replacement = getSubstitution(
@@ -1524,7 +1524,7 @@ fixRegExpWellKnownSymbolLogic(
               position,
               captures,
               namedCaptures,
-              replaceValue
+              replaceValue,
             )
           }
 
@@ -1541,7 +1541,7 @@ fixRegExpWellKnownSymbolLogic(
   },
   !REPLACE_SUPPORTS_NAMED_GROUPS ||
     !REPLACE_KEEPS_$0 ||
-    REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE
+    REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE,
 )
 
 var wellKnownSymbol$8 = wellKnownSymbol$c
@@ -1559,7 +1559,7 @@ var CORRECT_ARGUMENTS =
   classofRaw(
     (function () {
       return arguments
-    })()
+    })(),
   ) == 'Arguments' // fallback for IE11 Script Access Denied error
 
 var tryGet = function (it, key) {
@@ -1648,7 +1648,7 @@ var objectSetPrototypeOf =
           // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
           setter = Object.getOwnPropertyDescriptor(
             Object.prototype,
-            '__proto__'
+            '__proto__',
           ).set
           setter.call(test, [])
           CORRECT_SETTER = test instanceof Array
@@ -2061,7 +2061,7 @@ var Promise$1 = global$3.Promise // Node.js 11 shows ExperimentalWarning on gett
 
 var queueMicrotaskDescriptor = getOwnPropertyDescriptor(
   global$3,
-  'queueMicrotask'
+  'queueMicrotask',
 )
 var queueMicrotask = queueMicrotaskDescriptor && queueMicrotaskDescriptor.value
 var flush, head, last, notify$1, toggle, node, promise, then // modern engines have queueMicrotask method
@@ -2290,7 +2290,7 @@ var FORCED = isForced(PROMISE, function () {
       },
       function () {
         /* empty */
-      }
+      },
     )
   }
 
@@ -2460,7 +2460,7 @@ var internalResolve = function (state, value, unwrap) {
           then.call(
             value,
             bind(internalResolve, wrapper, state),
-            bind(internalReject, wrapper, state)
+            bind(internalReject, wrapper, state),
           )
         } catch (error) {
           internalReject(wrapper, error, state)
@@ -2477,7 +2477,7 @@ var internalResolve = function (state, value, unwrap) {
         done: false,
       },
       error,
-      state
+      state,
     )
   }
 } // constructor polyfill
@@ -2518,7 +2518,7 @@ if (FORCED) {
     then: function then(onFulfilled, onRejected) {
       var state = getInternalPromiseState(this)
       var reaction = newPromiseCapability(
-        speciesConstructor(this, PromiseConstructor)
+        speciesConstructor(this, PromiseConstructor),
       )
       reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true
       reaction.fail = typeof onRejected == 'function' && onRejected
@@ -2568,7 +2568,7 @@ if (FORCED) {
         },
         {
           unsafe: true,
-        }
+        },
       ) // makes sure that native promise-based APIs `Promise#catch` properly works with patched `Promise#then`
 
       redefine(
@@ -2577,7 +2577,7 @@ if (FORCED) {
         PromiseConstructorPrototype['catch'],
         {
           unsafe: true,
-        }
+        },
       )
     } // make `.constructor === Promise` work for native promise-based APIs
 
@@ -2601,7 +2601,7 @@ $(
   },
   {
     Promise: PromiseConstructor,
-  }
+  },
 )
 setToStringTag(PromiseConstructor, PROMISE, false)
 setSpecies(PROMISE)
@@ -2621,7 +2621,7 @@ $(
       capability.reject.call(undefined, r)
       return capability.promise
     },
-  }
+  },
 )
 $(
   {
@@ -2635,7 +2635,7 @@ $(
     resolve: function resolve(x) {
       return promiseResolve(this, x)
     },
-  }
+  },
 )
 $(
   {
@@ -2688,7 +2688,7 @@ $(
       if (result.error) reject(result.value)
       return capability.promise
     },
-  }
+  },
 )
 
 function exportPlugin(process, _ref) {
@@ -2749,24 +2749,24 @@ var runBeautify = sync__default['default'](
         .use(
           beautify__default['default']({
             rules: rules,
-          })
+          }),
         )
         .process(html),
       function (data) {
         return data.html
-      }
+      },
     )
-  })
+  }),
 )
 
 function process(content, file, config) {
   content = content.replace(
     /__relative\("(.*?)"\)/g,
-    '"__relative_fn1_start__$1__relative_fn1_end__"'
+    '"__relative_fn1_start__$1__relative_fn1_end__"',
   )
   content = content.replace(
     /__relative<<<"(.*?)">>>/g,
-    '"__relative_fn2_start__$1__relative_fn2_end__"'
+    '"__relative_fn2_start__$1__relative_fn2_end__"',
   )
 
   try {
@@ -2779,11 +2779,11 @@ function process(content, file, config) {
 
   content = content.replace(
     /"__relative_fn2_start__(.*?)__relative_fn2_end__"/g,
-    '__relative<<<"$1">>>'
+    '__relative<<<"$1">>>',
   )
   content = content.replace(
     /"__relative_fn1_start__(.*?)__relative_fn1_end__"/g,
-    '__relative("$1")'
+    '__relative("$1")',
   )
   return content
 }

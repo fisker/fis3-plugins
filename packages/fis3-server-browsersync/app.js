@@ -42,7 +42,7 @@ var require$$0__default$1 = /*#__PURE__*/ _interopDefaultLegacy(require$$0$1)
 var serveDirectory__default =
   /*#__PURE__*/ _interopDefaultLegacy(serveDirectory)
 var serveDirectoryThemeOcticons__default = /*#__PURE__*/ _interopDefaultLegacy(
-  serveDirectoryThemeOcticons
+  serveDirectoryThemeOcticons,
 )
 
 var commonjsGlobal =
@@ -60,7 +60,7 @@ function commonjsRequire(path) {
   throw new Error(
     'Could not dynamically require "' +
       path +
-      '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.'
+      '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.',
   )
 }
 
@@ -113,7 +113,7 @@ var NASHORN_BUG =
     {
       1: 2,
     },
-    1
+    1,
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
@@ -439,7 +439,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$3
       if (has$4(O, P))
         return createPropertyDescriptor$2(
           !propertyIsEnumerableModule.f.call(O, P),
-          O[P]
+          O[P],
         )
     }
 
@@ -489,7 +489,7 @@ var createNonEnumerableProperty$4 = DESCRIPTORS$1
       return definePropertyModule$3.f(
         object,
         key,
-        createPropertyDescriptor$1(1, value)
+        createPropertyDescriptor$1(1, value),
       )
     }
   : function (object, key, value) {
@@ -863,7 +863,7 @@ var _export = function (options, source) {
 
       FORCED = isForced(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
-        options.forced
+        options.forced,
       ) // contained in target
 
       if (!FORCED && targetProperty !== undefined) {
@@ -1203,7 +1203,7 @@ $$3(
   },
   {
     exec: exec,
-  }
+  },
 )
 
 var redefine$1 = redefine$3.exports
@@ -1287,7 +1287,7 @@ var fixRegexpWellKnownSymbolLogic = function (KEY, exec, FORCED, SHAM) {
         return {
           done: false,
         }
-      }
+      },
     )
     redefine$1(String.prototype, KEY, methods[0])
     redefine$1(RegExpPrototype, SYMBOL, methods[1])
@@ -1352,7 +1352,7 @@ var getSubstitution$1 = function (
   position,
   captures,
   namedCaptures,
-  replacement
+  replacement,
 ) {
   var tailPos = position + matched.length
   var m = captures.length
@@ -1417,7 +1417,7 @@ var regexpExecAbstract = function (R, S) {
 
     if (typeof result !== 'object') {
       throw TypeError(
-        'RegExp exec method returned something other than an Object or null'
+        'RegExp exec method returned something other than an Object or null',
       )
     }
 
@@ -1530,7 +1530,7 @@ fixRegExpWellKnownSymbolLogic(
             rx.lastIndex = advanceStringIndex(
               S,
               toLength$2(rx.lastIndex),
-              fullUnicode
+              fullUnicode,
             )
         }
 
@@ -1556,7 +1556,7 @@ fixRegExpWellKnownSymbolLogic(
             var replacerArgs = [matched].concat(captures, position, S)
             if (namedCaptures !== undefined) replacerArgs.push(namedCaptures)
             var replacement = toString$1(
-              replaceValue.apply(undefined, replacerArgs)
+              replaceValue.apply(undefined, replacerArgs),
             )
           } else {
             replacement = getSubstitution(
@@ -1565,7 +1565,7 @@ fixRegExpWellKnownSymbolLogic(
               position,
               captures,
               namedCaptures,
-              replaceValue
+              replaceValue,
             )
           }
 
@@ -1582,7 +1582,7 @@ fixRegExpWellKnownSymbolLogic(
   },
   !REPLACE_SUPPORTS_NAMED_GROUPS ||
     !REPLACE_KEEPS_$0 ||
-    REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE
+    REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE,
 )
 
 var fails$1 = fails$c
@@ -1599,7 +1599,7 @@ var arrayMethodIsStrict$2 = function (METHOD_NAME, argument) {
           function () {
             throw 1
           },
-        1
+        1,
       )
     })
   )
@@ -1624,10 +1624,10 @@ $$2(
     join: function join(separator) {
       return nativeJoin.call(
         toIndexedObject$1(this),
-        separator === undefined ? ',' : separator
+        separator === undefined ? ',' : separator,
       )
     },
-  }
+  },
 )
 
 var classof$3 = classofRaw$1 // `IsArray` abstract operation
@@ -1650,7 +1650,7 @@ var createProperty$1 = function (object, key, value) {
     definePropertyModule.f(
       object,
       propertyKey,
-      createPropertyDescriptor(0, value)
+      createPropertyDescriptor(0, value),
     )
   else object[propertyKey] = value
 }
@@ -1731,7 +1731,7 @@ $$1(
       }
 
       result = new (Constructor === undefined ? Array : Constructor)(
-        max(fin - k, 0)
+        max(fin - k, 0),
       )
 
       for (n = 0; k < fin; k++, n++) if (k in O) createProperty(result, n, O[k])
@@ -1739,7 +1739,7 @@ $$1(
       result.length = n
       return result
     },
-  }
+  },
 )
 
 var wellKnownSymbol$1 = wellKnownSymbol$7
@@ -1757,7 +1757,7 @@ var CORRECT_ARGUMENTS =
   classofRaw(
     (function () {
       return arguments
-    })()
+    })(),
   ) == 'Arguments' // fallback for IE11 Script Access Denied error
 
 var tryGet = function (it, key) {
@@ -2490,17 +2490,17 @@ $(
   },
   {
     reduceRight: function reduceRight(
-      callbackfn
+      callbackfn,
       /* , initialValue */
     ) {
       return $reduceRight(
         this,
         callbackfn,
         arguments.length,
-        arguments.length > 1 ? arguments[1] : undefined
+        arguments.length > 1 ? arguments[1] : undefined,
       )
     },
-  }
+  },
 )
 
 var httpProxy$3 = {exports: {}}
@@ -2780,7 +2780,7 @@ var eventemitter3 = {exports: {}}
     event,
     fn,
     context,
-    once
+    once,
   ) {
     var evt = prefix ? prefix + event : event
     if (!this._events[evt]) return this
@@ -2829,7 +2829,7 @@ var eventemitter3 = {exports: {}}
    */
 
   EventEmitter.prototype.removeAllListeners = function removeAllListeners(
-    event
+    event,
   ) {
     var evt
 
@@ -3116,7 +3116,7 @@ var requiresPort = function required(port, protocol) {
   common.rewriteCookieProperty = function rewriteCookieProperty(
     header,
     config,
-    property
+    property,
   ) {
     if (Array.isArray(header)) {
       return header.map(function (headerElement) {
@@ -3145,7 +3145,7 @@ var requiresPort = function required(port, protocol) {
           //remove value
           return ''
         }
-      }
+      },
     )
   }
   /**
@@ -3211,7 +3211,7 @@ var webOutgoing = {
     req,
     res,
     proxyRes,
-    options
+    options,
   ) {
     if (
       (options.hostRewrite || options.autoRewrite || options.protocolRewrite) &&
@@ -3262,7 +3262,7 @@ var webOutgoing = {
           header = common$3.rewriteCookieProperty(
             header,
             rewriteCookieDomainConfig,
-            'domain'
+            'domain',
           )
         }
 
@@ -3270,7 +3270,7 @@ var webOutgoing = {
           header = common$3.rewriteCookieProperty(
             header,
             rewriteCookiePathConfig,
-            'path'
+            'path',
           )
         }
 
@@ -3373,7 +3373,7 @@ var ms = function (val, options) {
 
   throw new Error(
     'val is not a non-empty string or a valid number. val=' +
-      JSON.stringify(val)
+      JSON.stringify(val),
   )
 }
 /**
@@ -3393,7 +3393,7 @@ function parse(str) {
 
   var match =
     /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
-      str
+      str,
     )
 
   if (!match) {
@@ -3657,7 +3657,7 @@ function setup(env) {
     const newDebug = createDebug(
       this.namespace +
         (typeof delimiter === 'undefined' ? ':' : delimiter) +
-        namespace
+        namespace,
     )
     newDebug.log = this.log
     return newDebug
@@ -3676,7 +3676,7 @@ function setup(env) {
     createDebug.skips = []
     let i
     const split = (typeof namespaces === 'string' ? namespaces : '').split(
-      /[\s,]+/
+      /[\s,]+/,
     )
     const len = split.length
 
@@ -3776,7 +3776,7 @@ function setup(env) {
 
   function destroy() {
     console.warn(
-      'Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.'
+      'Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.',
     )
   }
 
@@ -3804,7 +3804,7 @@ var common$2 = setup
       if (!warned) {
         warned = true
         console.warn(
-          'Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.'
+          'Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.',
         )
       }
     }
@@ -4160,7 +4160,7 @@ function supportsColor(stream) {
   if ('CI' in env) {
     if (
       ['TRAVIS', 'CIRCLECI', 'APPVEYOR', 'GITLAB_CI'].some(
-        (sign) => sign in env
+        (sign) => sign in env,
       ) ||
       env.CI_NAME === 'codeship'
     ) {
@@ -4323,7 +4323,7 @@ var supportsColor_1 = {
       const prefix = `  ${colorCode};1m${name} \u001B[0m`
       args[0] = prefix + args[0].split('\n').join('\n' + prefix)
       args.push(
-        colorCode + 'm+' + module.exports.humanize(this.diff) + '\u001B[0m'
+        colorCode + 'm+' + module.exports.humanize(this.diff) + '\u001B[0m',
       )
     } else {
       args[0] = getDate() + name + ' ' + args[0]
@@ -4457,21 +4457,21 @@ var eventHandlers = Object.create(null)
     eventHandlers[event] = function (arg1, arg2, arg3) {
       this._redirectable.emit(event, arg1, arg2, arg3)
     }
-  }
+  },
 ) // Error types with codes
 
 var RedirectionError = createErrorType('ERR_FR_REDIRECTION_FAILURE', '')
 var TooManyRedirectsError = createErrorType(
   'ERR_FR_TOO_MANY_REDIRECTS',
-  'Maximum number of redirects exceeded'
+  'Maximum number of redirects exceeded',
 )
 var MaxBodyLengthExceededError = createErrorType(
   'ERR_FR_MAX_BODY_LENGTH_EXCEEDED',
-  'Request body larger than maxBodyLength limit'
+  'Request body larger than maxBodyLength limit',
 )
 var WriteAfterEndError = createErrorType(
   'ERR_STREAM_WRITE_AFTER_END',
-  'write after end'
+  'write after end',
 ) // An HTTP(S) request that can be redirected
 
 function RedirectableRequest(options, responseCallback) {
@@ -4642,7 +4642,7 @@ RedirectableRequest.prototype.setTimeout = function (msecs, callback) {
     RedirectableRequest.prototype[method] = function (a, b) {
       return this._currentRequest[method](a, b)
     }
-  }
+  },
 ) // Proxy all public ClientRequest properties
 ;['aborted', 'connection', 'socket'].forEach(function (property) {
   Object.defineProperty(RedirectableRequest.prototype, property, {
@@ -4699,7 +4699,7 @@ RedirectableRequest.prototype._performRequest = function () {
 
   var request = (this._currentRequest = nativeProtocol.request(
     this._options,
-    this._onNativeResponse
+    this._onNativeResponse,
   ))
   this._currentUrl = url.format(this._options) // Set up event handlers
 
@@ -4836,7 +4836,7 @@ RedirectableRequest.prototype._processResponse = function (response) {
       this._performRequest()
     } catch (cause) {
       var error = new RedirectionError(
-        'Redirected request failed: ' + cause.message
+        'Redirected request failed: ' + cause.message,
       )
       error.cause = cause
       this.emit('error', error)
@@ -4896,7 +4896,7 @@ function wrap(protocols) {
           maxBodyLength: exports.maxBodyLength,
         },
         input,
-        options
+        options,
       )
       options.nativeProtocols = nativeProtocols
       assert.equal(options.protocol, protocol, 'protocol mismatch')
@@ -5091,7 +5091,7 @@ var webIncoming = {
       var forwardReq = (
         options.forward.protocol === 'https:' ? https : http
       ).request(
-        common$1.setupOutgoing(options.ssl || {}, options, req, 'forward')
+        common$1.setupOutgoing(options.ssl || {}, options, req, 'forward'),
       ) // error handler (e.g. ECONNRESET, ECONNREFUSED)
       // Handle errors on incoming request as well as it makes sense to
 
@@ -5264,7 +5264,7 @@ var wsIncoming = {
 
               return head
             },
-            [line]
+            [line],
           )
           .join('\r\n') + '\r\n\r\n'
       )
@@ -5292,8 +5292,8 @@ var wsIncoming = {
               res.statusCode +
               ' ' +
               res.statusMessage,
-            res.headers
-          )
+            res.headers,
+          ),
         )
         res.pipe(socket)
       }
@@ -5317,7 +5317,7 @@ var wsIncoming = {
       //
 
       socket.write(
-        createHttpHeader('HTTP/1.1 101 Switching Protocols', proxyRes.headers)
+        createHttpHeader('HTTP/1.1 101 Switching Protocols', proxyRes.headers),
       )
       proxySocket.pipe(socket).pipe(proxySocket)
       server.emit('open', proxySocket)
@@ -5367,7 +5367,7 @@ var wsIncoming = {
     return function (options) {
       return function (
         req,
-        res
+        res,
         /*, [head], [opts] */
       ) {
         var passes = type === 'ws' ? this.wsPasses : this.webPasses,
@@ -5405,7 +5405,7 @@ var wsIncoming = {
         if (!requestOptions.target && !requestOptions.forward) {
           return this.emit(
             'error',
-            new Error('Must provide a proper URL as target')
+            new Error('Must provide a proper URL as target'),
           )
         }
 
@@ -5745,7 +5745,7 @@ var rewrite = function (options) {
               escapeHtml(to) +
               '">' +
               escapeHtml(to) +
-              '</a>\n'
+              '</a>\n',
           )
           return
       }
@@ -5963,7 +5963,7 @@ var middleware = {
   directory: function directory(root) {
     return getMiddleware(
       'Server Directory',
-      serveDirectory__default['default']
+      serveDirectory__default['default'],
     )(root, serveDirectoryThemeOcticons__default['default'])
   },
 }
@@ -6033,8 +6033,8 @@ function getConfig(bs, argv) {
   var userConfig = getUserConfig(
     path__default['default'].resolve(
       argv.context,
-      argv.bsConfig || bs.instance.config.userFile
-    )
+      argv.bsConfig || bs.instance.config.userFile,
+    ),
   )
   var config = merge__default['default'](
     {},
@@ -6046,13 +6046,13 @@ function getConfig(bs, argv) {
         baseDir: argv.root,
       },
       port: argv.port, // https: argv.https
-    }
+    },
   )
   config.middleware = parseMiddleware(config.middleware)
   config.middleware.push(
     // logger
     logger('short'), // mock
-    mock(argv.root)
+    mock(argv.root),
   ) // serveDirectory
 
   if (config.server && config.server.directory) {
@@ -6084,7 +6084,7 @@ function onInit(config) {
     console.log(
       'Listening on %s://127.0.0.1:%d',
       config.https ? 'https' : 'http',
-      config.port
+      config.port,
     )
   }
 }
@@ -6110,7 +6110,7 @@ function signalTerminate(bs) {
   process__default['default'].on('SIGTERM', function () {
     console.log(
       'Recive quit signal in worker %s.',
-      process__default['default'].pid
+      process__default['default'].pid,
     )
     bs.exit()
   })
@@ -6120,7 +6120,7 @@ function replaceScriptTag(bs) {
   // replace scriptTag template with mine
   bs.instance.config.templates.scriptTag = path__default['default'].join(
     __dirname,
-    'templates/script-tags.tmpl'
+    'templates/script-tags.tmpl',
   )
 }
 

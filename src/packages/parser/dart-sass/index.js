@@ -18,7 +18,7 @@ function normalizeIncludePath(directories) {
       directories_.push(
         directory,
         path.join(PROJECT_ROOT, directory),
-        path.join(process.cwd(), directory)
+        path.join(process.cwd(), directory),
       )
     }
 
@@ -48,12 +48,12 @@ function process(content, file, config) {
   if (sourceMap) {
     sourceMapContents = true
     sourceMapFile = fis.file.wrap(
-      `${file.dirname}/${file.filename}${file.rExt}.map`
+      `${file.dirname}/${file.filename}${file.rExt}.map`,
     )
 
     sourceMap = sourceMapFile.getUrl(
       fis.compile.settings.hash,
-      fis.compile.settings.domain
+      fis.compile.settings.domain,
     )
   }
 
@@ -67,7 +67,7 @@ function process(content, file, config) {
   const options = {
     ...config,
     includePaths: includePaths.map(
-      (directory) => pathToFileURL(directory).href
+      (directory) => pathToFileURL(directory).href,
     ),
     file: file.realpath,
     data: content,
@@ -95,8 +95,8 @@ function process(content, file, config) {
         error.message,
         error.file,
         error.line,
-        error.column
-      )
+        error.column,
+      ),
     )
   }
 

@@ -11,7 +11,7 @@ const runBeautify = sync(async (html, rules) => {
     .use(
       beautify({
         rules,
-      })
+      }),
     )
     .process(html)
 
@@ -21,11 +21,11 @@ const runBeautify = sync(async (html, rules) => {
 function process(content, file, config) {
   content = content.replace(
     /__relative\("(.*?)"\)/g,
-    '"__relative_fn1_start__$1__relative_fn1_end__"'
+    '"__relative_fn1_start__$1__relative_fn1_end__"',
   )
   content = content.replace(
     /__relative<<<"(.*?)">>>/g,
-    '"__relative_fn2_start__$1__relative_fn2_end__"'
+    '"__relative_fn2_start__$1__relative_fn2_end__"',
   )
 
   try {
@@ -39,12 +39,12 @@ function process(content, file, config) {
 
   content = content.replace(
     /"__relative_fn2_start__(.*?)__relative_fn2_end__"/g,
-    '__relative<<<"$1">>>'
+    '__relative<<<"$1">>>',
   )
 
   content = content.replace(
     /"__relative_fn1_start__(.*?)__relative_fn1_end__"/g,
-    '__relative("$1")'
+    '__relative("$1")',
   )
 
   return content

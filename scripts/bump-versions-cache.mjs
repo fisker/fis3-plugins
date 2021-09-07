@@ -26,7 +26,7 @@ function getVersion(name) {
   } catch {}
 
   const {version = '0.0.0', gitHead = '0'.repeat(40)} = JSON.parse(
-    content.trim()
+    content.trim(),
   )
 
   return {

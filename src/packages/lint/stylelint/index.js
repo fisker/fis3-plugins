@@ -31,7 +31,7 @@ const runStylelint = sync(async (content, config, file) => {
         message.line ? `[${message.line}:${message.column}]` : '',
         // '[' + message.rule + ']',
         message.text,
-      ].join(' ')
+      ].join(' '),
     )
   }
 
@@ -42,7 +42,7 @@ const runStylelint = sync(async (content, config, file) => {
       [...warnMessage, ...errorMessage].join('\n'),
       warnMessage.length + errorMessage.length,
       errorMessage.length,
-      warnMessage.length
+      warnMessage.length,
     )
 
     if (errorMessage.length !== 0) {

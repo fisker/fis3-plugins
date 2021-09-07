@@ -27,7 +27,7 @@ function onInit(config) {
     console.log(
       'Listening on %s://127.0.0.1:%d',
       config.https ? 'https' : 'http',
-      config.port
+      config.port,
     )
   }
 }
@@ -58,7 +58,7 @@ function replaceScriptTag(bs) {
   // replace scriptTag template with mine
   bs.instance.config.templates.scriptTag = path.join(
     __dirname,
-    'templates/script-tags.tmpl'
+    'templates/script-tags.tmpl',
   )
 }
 

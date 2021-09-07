@@ -35,7 +35,7 @@ function _objectSpread2(target) {
         Object.defineProperty(
           target,
           key,
-          Object.getOwnPropertyDescriptor(source, key)
+          Object.getOwnPropertyDescriptor(source, key),
         )
       })
     }
@@ -119,7 +119,7 @@ var NASHORN_BUG =
     {
       1: 2,
     },
-    1
+    1,
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
@@ -445,7 +445,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$2
       if (has$4(O, P))
         return createPropertyDescriptor$2(
           !propertyIsEnumerableModule.f.call(O, P),
-          O[P]
+          O[P],
         )
     }
 
@@ -495,7 +495,7 @@ var createNonEnumerableProperty$3 = DESCRIPTORS
       return definePropertyModule$2.f(
         object,
         key,
-        createPropertyDescriptor$1(1, value)
+        createPropertyDescriptor$1(1, value),
       )
     }
   : function (object, key, value) {
@@ -869,7 +869,7 @@ var _export = function (options, source) {
 
       FORCED = isForced(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
-        options.forced
+        options.forced,
       ) // contained in target
 
       if (!FORCED && targetProperty !== undefined) {
@@ -905,7 +905,7 @@ var createProperty$1 = function (object, key, value) {
     definePropertyModule.f(
       object,
       propertyKey,
-      createPropertyDescriptor(0, value)
+      createPropertyDescriptor(0, value),
     )
   else object[propertyKey] = value
 }
@@ -1035,7 +1035,7 @@ $$1(
       A.length = n
       return A
     },
-  }
+  },
 )
 
 var aFunction$1 = function (it) {
@@ -1193,16 +1193,16 @@ $(
   },
   {
     map: function map(
-      callbackfn
+      callbackfn,
       /* , thisArg */
     ) {
       return $map(
         this,
         callbackfn,
-        arguments.length > 1 ? arguments[1] : undefined
+        arguments.length > 1 ? arguments[1] : undefined,
       )
     },
-  }
+  },
 )
 
 function exportPlugin(process, _ref) {
@@ -1259,7 +1259,10 @@ function deriveSourceMap(file, sourceMap) {
   }
 
   var mapping = global.fis.file.wrap(
-    ''.concat(file.dirname, '/').concat(file.filename).concat(file.rExt, '.map')
+    ''
+      .concat(file.dirname, '/')
+      .concat(file.filename)
+      .concat(file.rExt, '.map'),
   )
   mapping.setContent(sourceMap)
   file.extras = file.extras || {}

@@ -45,7 +45,7 @@ function _objectSpread2(target) {
         Object.defineProperty(
           target,
           key,
-          Object.getOwnPropertyDescriptor(source, key)
+          Object.getOwnPropertyDescriptor(source, key),
         )
       })
     }
@@ -122,7 +122,7 @@ function _createForOfIteratorHelper(o, allowArrayLike) {
     }
 
     throw new TypeError(
-      'Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+      'Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.',
     )
   }
 
@@ -212,7 +212,7 @@ var NASHORN_BUG =
     {
       1: 2,
     },
-    1
+    1,
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
@@ -538,7 +538,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$3
       if (has$5(O, P))
         return createPropertyDescriptor$2(
           !propertyIsEnumerableModule.f.call(O, P),
-          O[P]
+          O[P],
         )
     }
 
@@ -588,7 +588,7 @@ var createNonEnumerableProperty$3 = DESCRIPTORS$1
       return definePropertyModule$3.f(
         object,
         key,
-        createPropertyDescriptor$1(1, value)
+        createPropertyDescriptor$1(1, value),
       )
     }
   : function (object, key, value) {
@@ -962,7 +962,7 @@ var _export = function (options, source) {
 
       FORCED = isForced$1(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
-        options.forced
+        options.forced,
       ) // contained in target
 
       if (!FORCED && targetProperty !== undefined) {
@@ -992,7 +992,7 @@ var arrayMethodIsStrict$1 = function (METHOD_NAME, argument) {
           function () {
             throw 1
           },
-        1
+        1,
       )
     })
   )
@@ -1017,10 +1017,10 @@ $$2(
     join: function join(separator) {
       return nativeJoin.call(
         toIndexedObject(this),
-        separator === undefined ? ',' : separator
+        separator === undefined ? ',' : separator,
       )
     },
-  }
+  },
 )
 
 var classof$4 = classofRaw$1 // `IsArray` abstract operation
@@ -1043,7 +1043,7 @@ var createProperty$1 = function (object, key, value) {
     definePropertyModule$1.f(
       object,
       propertyKey,
-      createPropertyDescriptor(0, value)
+      createPropertyDescriptor(0, value),
     )
   else object[propertyKey] = value
 }
@@ -1173,7 +1173,7 @@ $$1(
       A.length = n
       return A
     },
-  }
+  },
 )
 
 var wellKnownSymbol$8 = wellKnownSymbol$d
@@ -1191,7 +1191,7 @@ var CORRECT_ARGUMENTS =
   classofRaw(
     (function () {
       return arguments
-    })()
+    })(),
   ) == 'Arguments' // fallback for IE11 Script Access Denied error
 
 var tryGet = function (it, key) {
@@ -1280,7 +1280,7 @@ var objectSetPrototypeOf =
           // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
           setter = Object.getOwnPropertyDescriptor(
             Object.prototype,
-            '__proto__'
+            '__proto__',
           ).set
           setter.call(test, [])
           CORRECT_SETTER = test instanceof Array
@@ -1696,7 +1696,7 @@ var Promise$1 = global$3.Promise // Node.js 11 shows ExperimentalWarning on gett
 
 var queueMicrotaskDescriptor = getOwnPropertyDescriptor(
   global$3,
-  'queueMicrotask'
+  'queueMicrotask',
 )
 var queueMicrotask = queueMicrotaskDescriptor && queueMicrotaskDescriptor.value
 var flush, head, last, notify$1, toggle, node, promise, then // modern engines have queueMicrotask method
@@ -1925,7 +1925,7 @@ var FORCED = isForced(PROMISE, function () {
       },
       function () {
         /* empty */
-      }
+      },
     )
   }
 
@@ -2095,7 +2095,7 @@ var internalResolve = function (state, value, unwrap) {
           then.call(
             value,
             bind(internalResolve, wrapper, state),
-            bind(internalReject, wrapper, state)
+            bind(internalReject, wrapper, state),
           )
         } catch (error) {
           internalReject(wrapper, error, state)
@@ -2112,7 +2112,7 @@ var internalResolve = function (state, value, unwrap) {
         done: false,
       },
       error,
-      state
+      state,
     )
   }
 } // constructor polyfill
@@ -2153,7 +2153,7 @@ if (FORCED) {
     then: function then(onFulfilled, onRejected) {
       var state = getInternalPromiseState(this)
       var reaction = newPromiseCapability(
-        speciesConstructor(this, PromiseConstructor)
+        speciesConstructor(this, PromiseConstructor),
       )
       reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true
       reaction.fail = typeof onRejected == 'function' && onRejected
@@ -2203,7 +2203,7 @@ if (FORCED) {
         },
         {
           unsafe: true,
-        }
+        },
       ) // makes sure that native promise-based APIs `Promise#catch` properly works with patched `Promise#then`
 
       redefine(
@@ -2212,7 +2212,7 @@ if (FORCED) {
         PromiseConstructorPrototype['catch'],
         {
           unsafe: true,
-        }
+        },
       )
     } // make `.constructor === Promise` work for native promise-based APIs
 
@@ -2236,7 +2236,7 @@ $(
   },
   {
     Promise: PromiseConstructor,
-  }
+  },
 )
 setToStringTag(PromiseConstructor, PROMISE, false)
 setSpecies(PROMISE)
@@ -2256,7 +2256,7 @@ $(
       capability.reject.call(undefined, r)
       return capability.promise
     },
-  }
+  },
 )
 $(
   {
@@ -2270,7 +2270,7 @@ $(
     resolve: function resolve(x) {
       return promiseResolve(this, x)
     },
-  }
+  },
 )
 $(
   {
@@ -2323,7 +2323,7 @@ $(
       if (result.error) reject(result.value)
       return capability.promise
     },
-  }
+  },
 )
 
 function exportPlugin(process, _ref) {
@@ -2383,7 +2383,7 @@ var runStylelint = sync__default['default'](
     return _await(
       postcss__default['default']([stylelint__default['default']]).process(
         content,
-        config
+        config,
       ),
       function (result) {
         var messages = result.messages || []
@@ -2405,7 +2405,7 @@ var runStylelint = sync__default['default'](
                   ? '['.concat(message.line, ':').concat(message.column, ']')
                   : '', // '[' + message.rule + ']',
                 message.text,
-              ].join(' ')
+              ].join(' '),
             )
           }
         } catch (err) {
@@ -2421,7 +2421,7 @@ var runStylelint = sync__default['default'](
             [].concat(warnMessage, errorMessage).join('\n'),
             warnMessage.length + errorMessage.length,
             errorMessage.length,
-            warnMessage.length
+            warnMessage.length,
           )
 
           if (errorMessage.length !== 0) {
@@ -2431,9 +2431,9 @@ var runStylelint = sync__default['default'](
         }
 
         return result && result.css ? result.css : ''
-      }
+      },
     )
-  })
+  }),
 )
 
 function process(content, file, config_) {
@@ -2449,7 +2449,7 @@ function process(content, file, config_) {
       files: file.realpath,
       extractStyleTagsFromHtml: false,
       from: config_.filename,
-    }
+    },
   )
 
   delete config.filename
@@ -2464,7 +2464,7 @@ function process(content, file, config_) {
     return runStylelint(content, config, file)
   } catch (error) {
     throw new Error(
-      '['.concat(file.id, '] lint failed with error: \n\n ').concat(error)
+      '['.concat(file.id, '] lint failed with error: \n\n ').concat(error),
     )
   }
 }

@@ -45,7 +45,7 @@ function _objectSpread2(target) {
         Object.defineProperty(
           target,
           key,
-          Object.getOwnPropertyDescriptor(source, key)
+          Object.getOwnPropertyDescriptor(source, key),
         )
       })
     }
@@ -432,7 +432,7 @@ var createNonEnumerableProperty$3 = DESCRIPTORS$2
       return definePropertyModule$2.f(
         object,
         key,
-        createPropertyDescriptor$1(1, value)
+        createPropertyDescriptor$1(1, value),
       )
     }
   : function (object, key, value) {
@@ -605,7 +605,7 @@ var CORRECT_ARGUMENTS =
   classofRaw(
     (function () {
       return arguments
-    })()
+    })(),
   ) == 'Arguments' // fallback for IE11 Script Access Denied error
 
 var tryGet = function (it, key) {
@@ -668,7 +668,7 @@ var NASHORN_BUG =
     {
       1: 2,
     },
-    1
+    1,
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
@@ -725,7 +725,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$1
       if (has$3(O, P))
         return createPropertyDescriptor(
           !propertyIsEnumerableModule.f.call(O, P),
-          O[P]
+          O[P],
         )
     }
 
@@ -943,7 +943,7 @@ var _export = function (options, source) {
 
       FORCED = isForced$1(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
-        options.forced
+        options.forced,
       ) // contained in target
 
       if (!FORCED && targetProperty !== undefined) {
@@ -999,7 +999,7 @@ var objectSetPrototypeOf =
           // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
           setter = Object.getOwnPropertyDescriptor(
             Object.prototype,
-            '__proto__'
+            '__proto__',
           ).set
           setter.call(test, [])
           CORRECT_SETTER = test instanceof Array
@@ -1415,7 +1415,7 @@ var Promise$1 = global$3.Promise // Node.js 11 shows ExperimentalWarning on gett
 
 var queueMicrotaskDescriptor = getOwnPropertyDescriptor(
   global$3,
-  'queueMicrotask'
+  'queueMicrotask',
 )
 var queueMicrotask = queueMicrotaskDescriptor && queueMicrotaskDescriptor.value
 var flush, head, last, notify$1, toggle, node, promise, then // modern engines have queueMicrotask method
@@ -1644,7 +1644,7 @@ var FORCED = isForced(PROMISE, function () {
       },
       function () {
         /* empty */
-      }
+      },
     )
   }
 
@@ -1814,7 +1814,7 @@ var internalResolve = function (state, value, unwrap) {
           then.call(
             value,
             bind(internalResolve, wrapper, state),
-            bind(internalReject, wrapper, state)
+            bind(internalReject, wrapper, state),
           )
         } catch (error) {
           internalReject(wrapper, error, state)
@@ -1831,7 +1831,7 @@ var internalResolve = function (state, value, unwrap) {
         done: false,
       },
       error,
-      state
+      state,
     )
   }
 } // constructor polyfill
@@ -1872,7 +1872,7 @@ if (FORCED) {
     then: function then(onFulfilled, onRejected) {
       var state = getInternalPromiseState(this)
       var reaction = newPromiseCapability(
-        speciesConstructor(this, PromiseConstructor)
+        speciesConstructor(this, PromiseConstructor),
       )
       reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true
       reaction.fail = typeof onRejected == 'function' && onRejected
@@ -1922,7 +1922,7 @@ if (FORCED) {
         },
         {
           unsafe: true,
-        }
+        },
       ) // makes sure that native promise-based APIs `Promise#catch` properly works with patched `Promise#then`
 
       redefine(
@@ -1931,7 +1931,7 @@ if (FORCED) {
         PromiseConstructorPrototype['catch'],
         {
           unsafe: true,
-        }
+        },
       )
     } // make `.constructor === Promise` work for native promise-based APIs
 
@@ -1955,7 +1955,7 @@ $(
   },
   {
     Promise: PromiseConstructor,
-  }
+  },
 )
 setToStringTag(PromiseConstructor, PROMISE, false)
 setSpecies(PROMISE)
@@ -1975,7 +1975,7 @@ $(
       capability.reject.call(undefined, r)
       return capability.promise
     },
-  }
+  },
 )
 $(
   {
@@ -1989,7 +1989,7 @@ $(
     resolve: function resolve(x) {
       return promiseResolve(this, x)
     },
-  }
+  },
 )
 $(
   {
@@ -2042,7 +2042,7 @@ $(
       if (result.error) reject(result.value)
       return capability.promise
     },
-  }
+  },
 )
 
 function exportPlugin(process, _ref) {
@@ -2084,13 +2084,13 @@ var postcssProcess = sync__default['default'](function (content, file, config) {
           {},
           {
             from: config.filename,
-          }
-        )
+          },
+        ),
       ),
       function (_ref2) {
         var css = _ref2.css
         return css
-      }
+      },
     )
   })
 })

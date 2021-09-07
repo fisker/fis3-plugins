@@ -11,7 +11,7 @@ const re = /^[./\\]/
 
 function cleanRequireCache() {
   for (const id of Object.keys(require.cache).filter((id) =>
-    path.normalize(id).startsWith(root)
+    path.normalize(id).startsWith(root),
   )) {
     delete require.cache[id]
   }

@@ -43,7 +43,7 @@ function _objectSpread2(target) {
         Object.defineProperty(
           target,
           key,
-          Object.getOwnPropertyDescriptor(source, key)
+          Object.getOwnPropertyDescriptor(source, key),
         )
       })
     }
@@ -120,7 +120,7 @@ function _createForOfIteratorHelper(o, allowArrayLike) {
     }
 
     throw new TypeError(
-      'Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+      'Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.',
     )
   }
 
@@ -210,7 +210,7 @@ var NASHORN_BUG =
     {
       1: 2,
     },
-    1
+    1,
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
@@ -536,7 +536,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$2
       if (has$4(O, P))
         return createPropertyDescriptor$1(
           !propertyIsEnumerableModule.f.call(O, P),
-          O[P]
+          O[P],
         )
     }
 
@@ -586,7 +586,7 @@ var createNonEnumerableProperty$3 = DESCRIPTORS
       return definePropertyModule$1.f(
         object,
         key,
-        createPropertyDescriptor(1, value)
+        createPropertyDescriptor(1, value),
       )
     }
   : function (object, key, value) {
@@ -960,7 +960,7 @@ var _export = function (options, source) {
 
       FORCED = isForced(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
-        options.forced
+        options.forced,
       ) // contained in target
 
       if (!FORCED && targetProperty !== undefined) {
@@ -1197,16 +1197,16 @@ $$2(
   },
   {
     filter: function filter(
-      callbackfn
+      callbackfn,
       /* , thisArg */
     ) {
       return $filter(
         this,
         callbackfn,
-        arguments.length > 1 ? arguments[1] : undefined
+        arguments.length > 1 ? arguments[1] : undefined,
       )
     },
-  }
+  },
 )
 
 var internalObjectKeys = objectKeysInternal
@@ -1239,7 +1239,7 @@ $$1(
     keys: function keys(it) {
       return nativeKeys(toObject(it))
     },
-  }
+  },
 )
 
 var isSymbol = isSymbol$3
@@ -1324,20 +1324,20 @@ $(
   },
   {
     startsWith: function startsWith(
-      searchString
+      searchString,
       /* , position = 0 */
     ) {
       var that = toString(requireObjectCoercible(this))
       notARegExp(searchString)
       var index = toLength(
-        min(arguments.length > 1 ? arguments[1] : undefined, that.length)
+        min(arguments.length > 1 ? arguments[1] : undefined, that.length),
       )
       var search = toString(searchString)
       return $startsWith
         ? $startsWith.call(that, search, index)
         : that.slice(index, index + search.length) === search
     },
-  }
+  },
 )
 
 function exportPlugin(process, _ref) {
@@ -1367,7 +1367,7 @@ function cleanRequireCache() {
   var _iterator = _createForOfIteratorHelper(
       Object.keys(require.cache).filter(function (id) {
         return path__default['default'].normalize(id).startsWith(root)
-      })
+      }),
     ),
     _step
 
@@ -1409,7 +1409,7 @@ function process(content, file, config) {
       __dirname: dirname,
       __filename: filename,
     },
-    config.data
+    config.data,
   )
 
   var options = config.options

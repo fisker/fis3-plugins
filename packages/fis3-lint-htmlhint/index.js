@@ -73,7 +73,7 @@ var NASHORN_BUG =
     {
       1: 2,
     },
-    1
+    1,
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
@@ -399,7 +399,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$2
       if (has$4(O, P))
         return createPropertyDescriptor$1(
           !propertyIsEnumerableModule.f.call(O, P),
-          O[P]
+          O[P],
         )
     }
 
@@ -449,7 +449,7 @@ var createNonEnumerableProperty$3 = DESCRIPTORS
       return definePropertyModule$1.f(
         object,
         key,
-        createPropertyDescriptor(1, value)
+        createPropertyDescriptor(1, value),
       )
     }
   : function (object, key, value) {
@@ -823,7 +823,7 @@ var _export = function (options, source) {
 
       FORCED = isForced(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
-        options.forced
+        options.forced,
       ) // contained in target
 
       if (!FORCED && targetProperty !== undefined) {
@@ -853,7 +853,7 @@ var arrayMethodIsStrict$2 = function (METHOD_NAME, argument) {
           function () {
             throw 1
           },
-        1
+        1,
       )
     })
   )
@@ -878,10 +878,10 @@ $$1(
     join: function join(separator) {
       return nativeJoin.call(
         toIndexedObject(this),
-        separator === undefined ? ',' : separator
+        separator === undefined ? ',' : separator,
       )
     },
-  }
+  },
 )
 
 var aFunction$1 = function (it) {
@@ -1078,16 +1078,16 @@ $(
   },
   {
     some: function some(
-      callbackfn
+      callbackfn,
       /* , thisArg */
     ) {
       return $some(
         this,
         callbackfn,
-        arguments.length > 1 ? arguments[1] : undefined
+        arguments.length > 1 ? arguments[1] : undefined,
       )
     },
-  }
+  },
 )
 
 function exportPlugin(process, _ref) {
@@ -1125,7 +1125,7 @@ function readConfig(filename) {
     if (fs__default['default'].existsSync(currentFile)) {
       try {
         return JSON.parse(
-          fs__default['default'].readFileSync(currentFile, 'utf8')
+          fs__default['default'].readFileSync(currentFile, 'utf8'),
         )
       } catch (_unused) {
         return {}
@@ -1170,7 +1170,7 @@ function mainProcess(content, file, config) {
       errorType,
       htmlhint.HTMLHint.format(results, {
         indent: 2,
-      }).join('\n')
+      }).join('\n'),
     )
 
     if (errorType === 'error') {

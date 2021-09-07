@@ -22,13 +22,13 @@ const SOURCE_DIR = path.join(dirname, '../src')
       title: 'miscellaneous',
       task() {
         const templateFile = readFile(
-          path.join(SOURCE_DIR, 'templates/npm-status.ejs')
+          path.join(SOURCE_DIR, 'templates/npm-status.ejs'),
         )
         const render = lodash.template(templateFile)
 
         return writePrettierFile(
           path.join(dirname, '../packages/readme.md'),
-          render({packages}).trim()
+          render({packages}).trim(),
         )
       },
     },

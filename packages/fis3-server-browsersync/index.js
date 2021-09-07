@@ -382,7 +382,7 @@ var createNonEnumerableProperty$4 = DESCRIPTORS$2
       return definePropertyModule$3.f(
         object,
         key,
-        createPropertyDescriptor$1(1, value)
+        createPropertyDescriptor$1(1, value),
       )
     }
   : function (object, key, value) {
@@ -555,7 +555,7 @@ var CORRECT_ARGUMENTS =
   classofRaw(
     (function () {
       return arguments
-    })()
+    })(),
   ) == 'Arguments' // fallback for IE11 Script Access Denied error
 
 var tryGet = function (it, key) {
@@ -660,13 +660,13 @@ if (NOT_GENERIC || INCORRECT_NAME) {
           R instanceof RegExp &&
           !('flags' in RegExpPrototype$1)
           ? flags.call(R)
-          : rf
+          : rf,
       )
       return '/' + p + '/' + f
     },
     {
       unsafe: true,
-    }
+    },
   )
 }
 
@@ -684,7 +684,7 @@ var NASHORN_BUG =
     {
       1: 2,
     },
-    1
+    1,
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
@@ -741,7 +741,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$1
       if (has$2(O, P))
         return createPropertyDescriptor(
           !propertyIsEnumerableModule.f.call(O, P),
-          O[P]
+          O[P],
         )
     }
 
@@ -959,7 +959,7 @@ var _export = function (options, source) {
 
       FORCED = isForced(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
-        options.forced
+        options.forced,
       ) // contained in target
 
       if (!FORCED && targetProperty !== undefined) {
@@ -989,7 +989,7 @@ var arrayMethodIsStrict$1 = function (METHOD_NAME, argument) {
           function () {
             throw 1
           },
-        1
+        1,
       )
     })
   )
@@ -1014,10 +1014,10 @@ $$3(
     join: function join(separator) {
       return nativeJoin.call(
         toIndexedObject(this),
-        separator === undefined ? ',' : separator
+        separator === undefined ? ',' : separator,
       )
     },
-  }
+  },
 )
 
 var internalObjectKeys = objectKeysInternal
@@ -1182,16 +1182,16 @@ $$2(
   },
   {
     includes: function includes(
-      el
+      el,
       /* , fromIndex = 0 */
     ) {
       return $includes(
         this,
         el,
-        arguments.length > 1 ? arguments[1] : undefined
+        arguments.length > 1 ? arguments[1] : undefined,
       )
     },
-  }
+  },
 ) // https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
 
 addToUnscopables('includes')
@@ -1257,15 +1257,15 @@ $$1(
   },
   {
     includes: function includes(
-      searchString
+      searchString,
       /* , position = 0 */
     ) {
       return !!~toString$3(requireObjectCoercible$2(this)).indexOf(
         toString$3(notARegExp(searchString)),
-        arguments.length > 1 ? arguments[1] : undefined
+        arguments.length > 1 ? arguments[1] : undefined,
       )
     },
-  }
+  },
 )
 
 var regexpStickyHelpers = {}
@@ -1437,7 +1437,7 @@ $(
   },
   {
     exec: exec,
-  }
+  },
 )
 
 var redefine = redefine$4.exports
@@ -1521,7 +1521,7 @@ var fixRegexpWellKnownSymbolLogic = function (KEY, exec, FORCED, SHAM) {
         return {
           done: false,
         }
-      }
+      },
     )
     redefine(String.prototype, KEY, methods[0])
     redefine(RegExpPrototype, SYMBOL, methods[1])
@@ -1585,7 +1585,7 @@ var regexpExecAbstract = function (R, S) {
 
     if (typeof result !== 'object') {
       throw TypeError(
-        'RegExp exec method returned something other than an Object or null'
+        'RegExp exec method returned something other than an Object or null',
       )
     }
 
@@ -1640,7 +1640,7 @@ fixRegExpWellKnownSymbolLogic(
             rx.lastIndex = advanceStringIndex(
               S,
               toLength(rx.lastIndex),
-              fullUnicode
+              fullUnicode,
             )
           n++
         }
@@ -1648,7 +1648,7 @@ fixRegExpWellKnownSymbolLogic(
         return n === 0 ? null : A
       },
     ]
-  }
+  },
 )
 
 var info = {
@@ -1702,7 +1702,7 @@ function watchOnFile(file, callback) {
           fd,
           buffer$1,
           lastIndex,
-          stat.size - lastIndex
+          stat.size - lastIndex,
         )
         var content = buffer$1.toString('utf8')
         lastIndex = stat.size
@@ -1744,7 +1744,7 @@ function start(opt, callback) {
     argv.bsConfig || '',
   ]
   process__default['default'].stdout.write(
-    '\n Starting browser-sync server ...'
+    '\n Starting browser-sync server ...',
   )
   var server = execa__default['default'](
     process__default['default'].execPath,
@@ -1757,7 +1757,7 @@ function start(opt, callback) {
         opt.daemon ? fs__default['default'].openSync(logFile, 'w') : 'pipe',
         opt.daemon ? fs__default['default'].openSync(logFile, 'w+') : 'pipe',
       ],
-    }
+    },
   )
   var log = ''
   var started = false
@@ -1816,7 +1816,7 @@ function start(opt, callback) {
 
       clearTimeout(timeoutTimer)
       process__default['default'].stdout.write(
-        ' at port ['.concat(opt.port, ']\n')
+        ' at port ['.concat(opt.port, ']\n'),
       )
       callback(null)
     }

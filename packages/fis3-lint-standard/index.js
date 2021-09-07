@@ -71,7 +71,7 @@ var NASHORN_BUG =
     {
       1: 2,
     },
-    1
+    1,
   ) // `Object.prototype.propertyIsEnumerable` method implementation
 // https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
 
@@ -397,7 +397,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$3
       if (has$4(O, P))
         return createPropertyDescriptor$1(
           !propertyIsEnumerableModule.f.call(O, P),
-          O[P]
+          O[P],
         )
     }
 
@@ -447,7 +447,7 @@ var createNonEnumerableProperty$4 = DESCRIPTORS$1
       return definePropertyModule$2.f(
         object,
         key,
-        createPropertyDescriptor(1, value)
+        createPropertyDescriptor(1, value),
       )
     }
   : function (object, key, value) {
@@ -821,7 +821,7 @@ var _export = function (options, source) {
 
       FORCED = isForced(
         GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key,
-        options.forced
+        options.forced,
       ) // contained in target
 
       if (!FORCED && targetProperty !== undefined) {
@@ -1161,7 +1161,7 @@ $(
   },
   {
     exec: exec,
-  }
+  },
 )
 
 var redefine = redefine$2.exports
@@ -1245,7 +1245,7 @@ var fixRegexpWellKnownSymbolLogic = function (KEY, exec, FORCED, SHAM) {
         return {
           done: false,
         }
-      }
+      },
     )
     redefine(String.prototype, KEY, methods[0])
     redefine(RegExpPrototype, SYMBOL, methods[1])
@@ -1310,7 +1310,7 @@ var getSubstitution$1 = function (
   position,
   captures,
   namedCaptures,
-  replacement
+  replacement,
 ) {
   var tailPos = position + matched.length
   var m = captures.length
@@ -1375,7 +1375,7 @@ var regexpExecAbstract = function (R, S) {
 
     if (typeof result !== 'object') {
       throw TypeError(
-        'RegExp exec method returned something other than an Object or null'
+        'RegExp exec method returned something other than an Object or null',
       )
     }
 
@@ -1488,7 +1488,7 @@ fixRegExpWellKnownSymbolLogic(
             rx.lastIndex = advanceStringIndex(
               S,
               toLength(rx.lastIndex),
-              fullUnicode
+              fullUnicode,
             )
         }
 
@@ -1514,7 +1514,7 @@ fixRegExpWellKnownSymbolLogic(
             var replacerArgs = [matched].concat(captures, position, S)
             if (namedCaptures !== undefined) replacerArgs.push(namedCaptures)
             var replacement = toString(
-              replaceValue.apply(undefined, replacerArgs)
+              replaceValue.apply(undefined, replacerArgs),
             )
           } else {
             replacement = getSubstitution(
@@ -1523,7 +1523,7 @@ fixRegExpWellKnownSymbolLogic(
               position,
               captures,
               namedCaptures,
-              replaceValue
+              replaceValue,
             )
           }
 
@@ -1540,7 +1540,7 @@ fixRegExpWellKnownSymbolLogic(
   },
   !REPLACE_SUPPORTS_NAMED_GROUPS ||
     !REPLACE_KEEPS_$0 ||
-    REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE
+    REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE,
 )
 
 function exportPlugin(process, _ref) {
@@ -1570,7 +1570,7 @@ function lint(content, file) {
   try {
     var _standard$lintTextSyn = standard__default['default'].lintTextSync(
       content,
-      {}
+      {},
     )
 
     results = _standard$lintTextSyn.results
