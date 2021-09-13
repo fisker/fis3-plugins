@@ -4,10 +4,6 @@ import browserSync from 'browser-sync'
 import yargs from 'yargs'
 import getBsConfig from './lib/browser-sync-config.js'
 
-const {argv} = yargs
-
-startServer(argv)
-
 function now() {
   const d = new Date()
   let string = [d.getHours(), d.getMinutes(), d.getSeconds()]
@@ -73,3 +69,5 @@ function startServer(argv) {
   replaceScriptTag(bs)
   signalTerminate(bs)
 }
+
+startServer(yargs.argv)

@@ -6064,9 +6064,6 @@ function getConfig(bs, argv) {
   return config
 }
 
-var argv = yargs__default['default'].argv
-startServer(argv)
-
 function now() {
   var d = new Date()
   var string = [d.getHours(), d.getMinutes(), d.getSeconds()]
@@ -6134,3 +6131,5 @@ function startServer(argv) {
   replaceScriptTag(bs)
   signalTerminate(bs)
 }
+
+startServer(yargs__default['default'].argv)
