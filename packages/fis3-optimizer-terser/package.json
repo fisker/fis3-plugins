@@ -1,6 +1,6 @@
 {
   "name": "fis3-optimizer-terser",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "js minifer for fis based on terser.",
   "keywords": [
     "fis",
