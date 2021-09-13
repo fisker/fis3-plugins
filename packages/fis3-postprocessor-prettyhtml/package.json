@@ -1,6 +1,6 @@
 {
   "name": "fis3-postprocessor-prettyhtml",
-  "version": "3.0.2",
+  "version": "3.0.1",
   "description": "a code formatter of fis3 based on prettyhtml.",
   "keywords": [
     "beautify",
