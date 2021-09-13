@@ -35,7 +35,7 @@
     "lodash.merge": "4.6.2",
     "morgan": "1.10.0",
     "serve-directory": "4.0.0",
-    "serve-directory-theme-octicons": "4.0.0",
+    "serve-directory-theme-octicons": "3.0.0",
     "yargs": "16.2.0",
     "yog-devtools": "0.1.1"
   },
