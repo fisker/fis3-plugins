@@ -418,7 +418,7 @@ var store$2 = sharedStore
 ;(shared$4.exports = function (key, value) {
   return store$2[key] || (store$2[key] = value !== undefined ? value : {})
 })('versions', []).push({
-  version: '3.17.2',
+  version: '3.17.3',
   mode: 'global',
   copyright: '© 2021 Denis Pushkarev (zloirock.ru)',
 })
@@ -433,7 +433,7 @@ var toObject$6 = function (argument) {
 var toObject$5 = toObject$6
 var hasOwnProperty = {}.hasOwnProperty
 
-var has$a =
+var has$9 =
   Object.hasOwn ||
   function hasOwn(it, key) {
     return hasOwnProperty.call(toObject$5(it), key)
@@ -453,7 +453,7 @@ var uid$3 = function (key) {
 
 var global$b = global$g
 var shared$3 = shared$4.exports
-var has$9 = has$a
+var has$8 = has$9
 var uid$2 = uid$3
 var NATIVE_SYMBOL = nativeSymbol
 var USE_SYMBOL_AS_UID = useSymbolAsUid
@@ -465,10 +465,10 @@ var createWellKnownSymbol = USE_SYMBOL_AS_UID
 
 var wellKnownSymbol$k = function (name) {
   if (
-    !has$9(WellKnownSymbolsStore, name) ||
+    !has$8(WellKnownSymbolsStore, name) ||
     !(NATIVE_SYMBOL || typeof WellKnownSymbolsStore[name] == 'string')
   ) {
-    if (NATIVE_SYMBOL && has$9(Symbol$1, name)) {
+    if (NATIVE_SYMBOL && has$8(Symbol$1, name)) {
       WellKnownSymbolsStore[name] = Symbol$1[name]
     } else {
       WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name)
@@ -542,7 +542,7 @@ var propertyIsEnumerableModule = objectPropertyIsEnumerable
 var createPropertyDescriptor$3 = createPropertyDescriptor$4
 var toIndexedObject$7 = toIndexedObject$8
 var toPropertyKey$2 = toPropertyKey$3
-var has$8 = has$a
+var has$7 = has$9
 var IE8_DOM_DEFINE$1 = ie8DomDefine // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
 
 var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor // `Object.getOwnPropertyDescriptor` method
@@ -559,7 +559,7 @@ objectGetOwnPropertyDescriptor.f = DESCRIPTORS$6
         } catch (error) {
           /* empty */
         }
-      if (has$8(O, P))
+      if (has$7(O, P))
         return createPropertyDescriptor$3(
           !propertyIsEnumerableModule.f.call(O, P),
           O[P],
@@ -654,16 +654,16 @@ var NATIVE_WEAK_MAP = nativeWeakMap
 var global$8 = global$g
 var isObject$8 = isObject$d
 var createNonEnumerableProperty$5 = createNonEnumerableProperty$6
-var objectHas = has$a
+var objectHas = has$9
 var shared$1 = sharedStore
 var sharedKey$2 = sharedKey$3
 var hiddenKeys$4 = hiddenKeys$5
 var OBJECT_ALREADY_INITIALIZED = 'Object already initialized'
 var WeakMap = global$8.WeakMap
-var set, get, has$7
+var set, get, has$6
 
 var enforce = function (it) {
-  return has$7(it) ? get(it) : set(it, {})
+  return has$6(it) ? get(it) : set(it, {})
 }
 
 var getterFor = function (TYPE) {
@@ -695,7 +695,7 @@ if (NATIVE_WEAK_MAP || shared$1.state) {
     return wmget.call(store, it) || {}
   }
 
-  has$7 = function (it) {
+  has$6 = function (it) {
     return wmhas.call(store, it)
   }
 } else {
@@ -713,7 +713,7 @@ if (NATIVE_WEAK_MAP || shared$1.state) {
     return objectHas(it, STATE) ? it[STATE] : {}
   }
 
-  has$7 = function (it) {
+  has$6 = function (it) {
     return objectHas(it, STATE)
   }
 }
@@ -721,14 +721,14 @@ if (NATIVE_WEAK_MAP || shared$1.state) {
 var internalState = {
   set: set,
   get: get,
-  has: has$7,
+  has: has$6,
   enforce: enforce,
   getterFor: getterFor,
 }
 
 var global$7 = global$g
 var createNonEnumerableProperty$4 = createNonEnumerableProperty$6
-var has$6 = has$a
+var has$5 = has$9
 var setGlobal$1 = setGlobal$3
 var inspectSource = inspectSource$2
 var InternalStateModule$3 = internalState
@@ -742,7 +742,7 @@ var TEMPLATE = String(String).split('String')
   var state
 
   if (typeof value == 'function') {
-    if (typeof key == 'string' && !has$6(value, 'name')) {
+    if (typeof key == 'string' && !has$5(value, 'name')) {
       createNonEnumerableProperty$4(value, 'name', key)
     }
 
@@ -839,7 +839,7 @@ var arrayIncludes = {
   indexOf: createMethod$4(false),
 }
 
-var has$5 = has$a
+var has$4 = has$9
 var toIndexedObject$5 = toIndexedObject$8
 var indexOf = arrayIncludes.indexOf
 var hiddenKeys$3 = hiddenKeys$5
@@ -850,10 +850,10 @@ var objectKeysInternal = function (object, names) {
   var result = []
   var key
 
-  for (key in O) !has$5(hiddenKeys$3, key) && has$5(O, key) && result.push(key) // Don't enum bug & hidden keys
+  for (key in O) !has$4(hiddenKeys$3, key) && has$4(O, key) && result.push(key) // Don't enum bug & hidden keys
 
   while (names.length > i)
-    if (has$5(O, (key = names[i++]))) {
+    if (has$4(O, (key = names[i++]))) {
       ~indexOf(result, key) || result.push(key)
     }
 
@@ -899,7 +899,7 @@ var ownKeys$1 =
     return getOwnPropertySymbols ? keys.concat(getOwnPropertySymbols(it)) : keys
   }
 
-var has$4 = has$a
+var has$3 = has$9
 var ownKeys = ownKeys$1
 var getOwnPropertyDescriptorModule = objectGetOwnPropertyDescriptor
 var definePropertyModule$4 = objectDefineProperty
@@ -911,7 +911,7 @@ var copyConstructorProperties$1 = function (target, source) {
 
   for (var i = 0; i < keys.length; i++) {
     var key = keys[i]
-    if (!has$4(target, key))
+    if (!has$3(target, key))
       defineProperty(target, key, getOwnPropertyDescriptor(source, key))
   }
 }
@@ -1846,7 +1846,7 @@ var correctPrototypeGetter = !fails$9(function () {
   return Object.getPrototypeOf(new F()) !== F.prototype
 })
 
-var has$3 = has$a
+var has$2 = has$9
 var toObject$1 = toObject$6
 var sharedKey = sharedKey$3
 var CORRECT_PROTOTYPE_GETTER = correctPrototypeGetter
@@ -1859,7 +1859,7 @@ var objectGetPrototypeOf = CORRECT_PROTOTYPE_GETTER
   ? Object.getPrototypeOf
   : function (O) {
       O = toObject$1(O)
-      if (has$3(O, IE_PROTO)) return O[IE_PROTO]
+      if (has$2(O, IE_PROTO)) return O[IE_PROTO]
 
       if (typeof O.constructor == 'function' && O instanceof O.constructor) {
         return O.constructor.prototype
@@ -1871,14 +1871,9 @@ var objectGetPrototypeOf = CORRECT_PROTOTYPE_GETTER
 var fails$8 = fails$j
 var getPrototypeOf$1 = objectGetPrototypeOf
 var createNonEnumerableProperty$2 = createNonEnumerableProperty$6
-var has$2 = has$a
 var wellKnownSymbol$a = wellKnownSymbol$k
 var ITERATOR$4 = wellKnownSymbol$a('iterator')
-var BUGGY_SAFARI_ITERATORS$1 = false
-
-var returnThis$2 = function () {
-  return this
-} // `%IteratorPrototype%` object
+var BUGGY_SAFARI_ITERATORS$1 = false // `%IteratorPrototype%` object
 // https://tc39.es/ecma262/#sec-%iteratorprototype%-object
 
 var IteratorPrototype$2, PrototypeOfArrayIteratorPrototype, arrayIterator
@@ -1907,8 +1902,10 @@ var NEW_ITERATOR_PROTOTYPE =
 if (NEW_ITERATOR_PROTOTYPE) IteratorPrototype$2 = {} // `%IteratorPrototype%[@@iterator]()` method
 // https://tc39.es/ecma262/#sec-%iteratorprototype%-@@iterator
 
-if (!has$2(IteratorPrototype$2, ITERATOR$4)) {
-  createNonEnumerableProperty$2(IteratorPrototype$2, ITERATOR$4, returnThis$2)
+if (typeof IteratorPrototype$2[ITERATOR$4] !== 'function') {
+  createNonEnumerableProperty$2(IteratorPrototype$2, ITERATOR$4, function () {
+    return this
+  })
 }
 
 var iteratorsCore = {
@@ -1917,7 +1914,7 @@ var iteratorsCore = {
 }
 
 var defineProperty$2 = objectDefineProperty.f
-var has$1 = has$a
+var has$1 = has$9
 var wellKnownSymbol$9 = wellKnownSymbol$k
 var TO_STRING_TAG = wellKnownSymbol$9('toStringTag')
 
@@ -2077,7 +2074,7 @@ var defineIterator$3 = function (
     )
 
     if (
-      IteratorPrototype !== Object.prototype &&
+      CurrentIteratorPrototype !== Object.prototype &&
       CurrentIteratorPrototype.next
     ) {
       if (getPrototypeOf(CurrentIteratorPrototype) !== IteratorPrototype) {
@@ -2252,7 +2249,7 @@ var freezing = !fails$7(function () {
 var $$m = _export
 var hiddenKeys = hiddenKeys$5
 var isObject$3 = isObject$d
-var has = has$a
+var has = has$9
 var defineProperty$1 = objectDefineProperty.f
 var getOwnPropertyNamesModule = objectGetOwnPropertyNames
 var getOwnPropertyNamesExternalModule = objectGetOwnPropertyNamesExternal
