@@ -29,7 +29,7 @@
   ],
   "dependencies": {
     "promise-synchronizer": "3.0.0",
-    "terser": "5.7.2"
+    "terser": "5.8.0"
   },
   "publishConfig": {
     "access": "public",
