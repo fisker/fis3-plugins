@@ -93,7 +93,7 @@
     "@fisker/eslint-config": "8.0.3",
     "@fisker/husky-config": "4.1.0",
     "@fisker/lint-staged-config": "3.1.0",
-    "@fisker/prettier-config": "5.0.0",
+    "@fisker/prettier-config": "5.0.1",
     "@rollup/plugin-babel": "5.3.0",
     "@rollup/plugin-commonjs": "20.0.0",
     "@rollup/plugin-json": "4.1.0",
