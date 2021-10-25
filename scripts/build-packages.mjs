@@ -10,31 +10,25 @@ import readFile from './utils/read-file.mjs'
 const {dirname} = createEsmUtils(import.meta)
 const SOURCE_DIR = path.join(dirname, '../src')
 
-;(async () => {
-  await Promise.all(packages.map((package_) => package_.getInfo()))
-  await new Listr([
-    ...packages.map((package_) => ({
-      title: `building package ${package_.info.name}`,
-      task: () => package_.build(),
-      skip: () => package_.info.deprecated,
-    })),
-    {
-      title: 'miscellaneous',
-      task() {
-        const templateFile = readFile(
-          path.join(SOURCE_DIR, 'templates/npm-status.ejs'),
-        )
-        const render = lodash.template(templateFile)
+await Promise.all(packages.map((package_) => package_.getInfo()))
+await new Listr([
+  ...packages.map((package_) => ({
+    title: `building package ${package_.info.name}`,
+    task: () => package_.build(),
+    skip: () => package_.info.deprecated,
+  })),
+  {
+    title: 'miscellaneous',
+    task() {
+      const templateFile = readFile(
+        path.join(SOURCE_DIR, 'templates/npm-status.ejs'),
+      )
+      const render = lodash.template(templateFile)
 
-        return writePrettierFile(
-          path.join(dirname, '../packages/readme.md'),
-          render({packages}).trim(),
-        )
-      },
+      return writePrettierFile(
+        path.join(dirname, '../packages/readme.md'),
+        render({packages}).trim(),
+      )
     },
-  ]).run()
-})().catch((error) => {
-  console.error(error)
-  // eslint-disable-next-line unicorn/no-process-exit
-  process.exit(1)
-})
+  },
+]).run()

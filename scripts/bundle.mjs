@@ -1,4 +1,3 @@
-import {rollup} from 'rollup'
 import {babel} from '@rollup/plugin-babel'
 import cjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
@@ -7,6 +6,7 @@ import json from '@rollup/plugin-json'
 import createEsmUtils from 'esm-utils'
 
 const {require} = createEsmUtils(import.meta)
+const {rollup} = require('rollup')
 const {
   dependencies,
   devDependencies: developmentDependencies,
