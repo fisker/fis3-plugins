@@ -27,7 +27,7 @@
     "index.js"
   ],
   "dependencies": {
-    "clean-css": "5.1.5"
+    "clean-css": "5.2.2"
   },
   "publishConfig": {
     "access": "public",
