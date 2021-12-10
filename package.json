@@ -54,7 +54,7 @@
   "dependencies": {
     "@starptech/prettyhtml": "0.10.0",
     "autoprefixer": "10.3.7",
-    "body-parser": "1.19.0",
+    "body-parser": "1.19.1",
     "browser-sync": "2.27.7",
     "clean-css": "5.2.2",
     "cssgrace": "3.0.0",
