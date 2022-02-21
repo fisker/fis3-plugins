@@ -19,7 +19,7 @@ function readConfig(filename) {
 
     if (fs.existsSync(currentFile)) {
       try {
-        return JSON.parse(fs.readFileSync(currentFile, 'utf8'))
+        return JSON.parse(fs.readFileSync(currentFile))
       } catch {
         return {}
       }
