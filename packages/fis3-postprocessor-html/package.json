@@ -29,7 +29,7 @@
     "index.js"
   ],
   "dependencies": {
-    "js-beautify": "1.14.0"
+    "js-beautify": "1.14.2"
   },
   "publishConfig": {
     "access": "public",
