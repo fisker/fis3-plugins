@@ -170,20 +170,20 @@ class Package {
     return content
   }
 
-  async copyFile(sourceFile, distFile = sourceFile) {
-    if (/\.js$/.test(distFile)) {
+  async copyFile(sourceFile, distributionFile = sourceFile) {
+    if (/\.js$/.test(distributionFile)) {
       return bundle(
         path.join(this.src, sourceFile),
-        path.join(this.dest, distFile),
+        path.join(this.dest, distributionFile),
       )
     }
 
-    distFile = path.join(this.dest, distFile)
+    distributionFile = path.join(this.dest, distributionFile)
     sourceFile = path.join(this.src, sourceFile)
-    await mkdirp(path.dirname(distFile))
+    await mkdirp(path.dirname(distributionFile))
 
     try {
-      return fs.writeFileSync(distFile, fs.readFileSync(sourceFile))
+      return fs.writeFileSync(distributionFile, fs.readFileSync(sourceFile))
     } catch {
       return false
     }
