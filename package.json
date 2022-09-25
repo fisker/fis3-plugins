@@ -68,7 +68,7 @@
     "lodash": "4.17.21",
     "lodash.merge": "4.6.2",
     "morgan": "1.10.0",
-    "postcss": "8.4.14",
+    "postcss": "8.4.16",
     "postcss-load-config": "4.0.1",
     "posthtml": "0.16.6",
     "posthtml-beautify": "0.7.0",
