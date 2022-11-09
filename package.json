@@ -104,7 +104,7 @@
     "del-cli": "5.0.0",
     "eslint": "8.27.0",
     "esm-utils": "4.1.0",
-    "husky": "8.0.1",
+    "husky": "8.0.2",
     "latest-version": "7.0.0",
     "lerna": "6.0.3",
     "lint-staged": "13.0.3",
