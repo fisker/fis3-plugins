@@ -78,7 +78,7 @@
     "sass": "1.51.0",
     "serve-directory": "4.0.0",
     "serve-directory-theme-octicons": "3.0.0",
-    "standard": "16.0.4",
+    "standard": "17.0.0",
     "stylelint": "14.15.0",
     "terser": "5.10.0",
     "uglify-js": "3.14.5",
