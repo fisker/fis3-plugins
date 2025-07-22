@@ -111,7 +111,7 @@
     "listr": "0.14.3",
     "make-dir": "3.1.0",
     "markdownlint-cli": "0.32.2",
-    "mkdirp": "1.0.4",
+    "mkdirp": "3.0.1",
     "npm-run-all": "4.1.5",
     "prettier": "2.6.2",
     "rollup": "3.3.0",
